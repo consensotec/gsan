@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.cobranca.parcelamento.ParcelamentoQuantidadePrestacaoSituacaoLigacaoAgua" table="cobranca.parcel_qtde_prest_sitlig">
+		<id name="id" type="java.lang.Integer" column="pqps_id">
+			<generator class="sequence">
+				<param name="sequence">cobranca.seq_parcel_qtde_prest_sitlig</param>
+			</generator>
+		</id>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="pqps_tmultimaalteracao" length="8" not-null="true"/>
+		
+		<!-- Associations -->
+		<!-- bi-directional many-to-one association to ParcelamentoQtdeReparcel -->
+		<many-to-one name="parcelamentoQuantidadePrestacao" class="gcom.cobranca.parcelamento.ParcelamentoQuantidadePrestacao" not-null="true">
+			<column name="pqtp_id"/>
+		</many-to-one>
+		<!-- bi-directional many-to-one association to ParcelamentoQtdeReparcel -->
+		<many-to-one name="ligacaoAguaSituacao" class="gcom.atendimentopublico.ligacaoagua.LigacaoAguaSituacao" not-null="true">
+			<column name="last_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

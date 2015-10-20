@@ -6,7 +6,7 @@
 			<display-name>BatchGerarCreditoARealizarPagamentoDuplicidadeVivaAguaMDB</display-name>
 			<ejb-name>BatchGerarCreditoARealizarPagamentoDuplicidadeVivaAguaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarCreditoARealizarPagamentoDuplicidadeVivaAguaMDB
+				gcom.batch.faturamento.BatchGerarCreditoARealizarPagamentoDuplicidadeVivaAguaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

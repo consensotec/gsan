@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoConsumoAguaMDB</display-name>
 			<ejb-name>BatchGerarResumoConsumoAguaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.cadastro.BatchGerarResumoConsumoAguaMDB
+				gcom.batch.gerencial.cadastro.BatchGerarResumoConsumoAguaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

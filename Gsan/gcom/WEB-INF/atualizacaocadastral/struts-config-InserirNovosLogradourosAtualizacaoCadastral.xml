@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="InserirNovosLogradourosAtualizacaoCadastralActionForm"
+			type="gcom.gui.atualizacaocadastral.InserirNovosLogradourosAtualizacaoCadastralActionForm" />
+	</form-beans>
+
+	<global-forwards />
+	
+	<action-mappings>
+
+		<action name="InserirNovosLogradourosAtualizacaoCadastralActionForm"
+			type="gcom.gui.atualizacaocadastral.ExibirInserirNovosLogradourosAtualizacaoCadastralAction"
+			validate="false" scope="session"
+			path="/exibirInserirNovosLogradourosAtualizacaoCadastralAction">
+	
+			<forward name="exibirInserirNovosLogradourosAtualizacaoCadastralAction"
+				path="/jsp/atualizacaocadastral/atualizacao_cadastral_novos_logradouros_incluir.jsp" />
+	
+			<forward name="exibirAtualizarLogradouroAtualizacaoCadastralPopUpAction"
+				path="/jsp/atualizacaocadastral/atualizacao_cadastral_logradouro_atualizar_popup.jsp" />
+	
+			<forward name="exibirImoveisPorLogradouroPopUpAction"
+				path="/jsp/atualizacaocadastral/imoveis_por_logradouro_popup.jsp" />
+		</action>
+			
+		<action name="InserirNovosLogradourosAtualizacaoCadastralActionForm"
+			type="gcom.gui.atualizacaocadastral.GerarRelatorioNovosLogradouros"
+			scope="session" path="/gerarRelatorioNovosLogradouros">
+		</action>
+		
+		<action name="InserirNovosLogradourosAtualizacaoCadastralActionForm"
+		 	type="gcom.gui.atualizacaocadastral.InserirNovosLogradourosAtualizacaoCadastralAction"
+		 	validate="false"
+		 	scope="session"
+		 	path="/inserirNovosLogradourosAtualizacaoCadastralAction">
+		 	
+		 	<forward name="exibirInserirNovosLogradourosAtualizacaoCadastralAction"
+			path="/jsp/atualizacaocadastral/atualizacao_cadastral_novos_logradouros_incluir.jsp" />
+			
+			<forward name="exibirAtualizarLogradouroAtualizacaoCadastralPopUpAction"
+				path="/jsp/atualizacaocadastral/atualizacao_cadastral_logradouro_atualizar_popup.jsp" />	
+			
+			<forward name="telaSucesso" path="/jsp/util/sucesso.jsp" />
+				
+		</action>
+		
+		<action name="PesquisarActionForm"
+			type="gcom.gui.atualizacaocadastral.ExibirImoveisPorLogradouroPopUpAction"
+			path="/exibirImoveisPorLogradouroPopUpAction">
+			
+			<forward name="exibirImoveisPorLogradouroPopUpAction"
+				path="/jsp/atualizacaocadastral/imoveis_por_logradouro_popup.jsp" />
+				
+		</action>		
+		
+	</action-mappings>
+	
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+	
+</struts-config>

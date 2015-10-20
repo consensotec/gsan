@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+
+    Created by the Middlegen Hibernate plugin 2.1
+
+
+
+    http://boss.bekk.no/boss/middlegen/
+
+    http://www.hibernate.org/
+
+-->
+	<class name="gcom.cadastro.VersaoSistemasAndroid" table="cadastro.versao_sistemas_android">
+		<id name="id" type="java.lang.Integer" column="vsan_id">
+			<generator class="sequence">
+				<param name="sequence">cadastro.seq_versao_sistemas_android</param>
+			</generator>
+		</id>
+		<property name="numeroVersao" type="java.lang.String" column="vsan_nnversao" not-null="true" length="10"/>
+		<property name="arquivoApk" type="binary" column="vsan_arquivopk" not-null="true" length="-1"/>
+		<property name="dataEnvio" type="java.sql.Timestamp" column="vsan_dtenvio" not-null="true" length="8"/>
+		<!-- bi-directional many-to-one association to UnidadeOrganizacional -->
+		<many-to-one name="sistemaAndroid" class="gcom.cadastro.SistemaAndroid">
+			<column name="sian_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

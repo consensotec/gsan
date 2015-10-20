@@ -13,7 +13,7 @@
 
 			<ejb-class>
 
-				gsan.batch.cobranca.spcserasa.BatchGerarResumoDiarioNegativacaoMDB
+				gcom.batch.cobranca.spcserasa.BatchGerarResumoDiarioNegativacaoMDB
 
 
 			</ejb-class>

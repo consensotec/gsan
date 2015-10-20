@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+	<class name="gcom.cadastro.ContaEmpresaSMS" table="cadastro.conta_empresa_sms">
+		<id name="id" type="java.lang.Integer" column="ctes_id">
+			<generator class="sequence">
+				<param name="sequence">cadastro.seq_conta_empresa_sms</param>
+			</generator>
+		</id>
+		<property name="senha" type="java.lang.String" column="ctes_dssenha" length="50"/>
+		<property name="urlWebService" type="java.lang.String" column="ctes_dsurlwebservice" length="100"/>
+		<property name="usuario" type="java.lang.String" column="ctes_dsusuario" length="20"/>
+		<property name="indicadorUso" type="java.lang.Short" column="ctes_icuso" length="2"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="ctes_dtultimaalteracao" length="8"/>
+		
+		<many-to-one name="empresa" class="gcom.cadastro.empresa.Empresa" not-null="true">
+			<column name="empr_id"/>
+		</many-to-one>
+				
+	</class>
+</hibernate-mapping>

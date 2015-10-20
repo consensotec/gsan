@@ -6,7 +6,7 @@
 			<display-name>BatchEncerrarOSVisitaCobrancaMDB</display-name>
 			<ejb-name>BatchEncerrarOSVisitaCobrancaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchEncerrarOSVisitaCobrancaMDB
+				gcom.batch.cobranca.BatchEncerrarOSVisitaCobrancaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

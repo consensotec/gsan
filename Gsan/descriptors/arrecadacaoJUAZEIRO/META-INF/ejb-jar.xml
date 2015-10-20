@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorArrecadacaoJUAZEIRO</display-name>
             <ejb-name>ControladorArrecadacaoJUAZEIRO</ejb-name>
-            <local-home>gsan.arrecadacao.ControladorArrecadacaoLocalHome</local-home>
-            <local>gsan.arrecadacao.ControladorArrecadacaoLocal</local>
-            <ejb-class>gsan.arrecadacao.ControladorArrecadacaoJUAZEIROSEJB</ejb-class>
+            <local-home>gcom.arrecadacao.ControladorArrecadacaoLocalHome</local-home>
+            <local>gcom.arrecadacao.ControladorArrecadacaoLocal</local>
+            <ejb-class>gcom.arrecadacao.ControladorArrecadacaoJUAZEIROSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

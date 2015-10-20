@@ -6,7 +6,7 @@
 			<display-name>BatchGerarCartasCampanhaSolidariedadeCriancaParaNegociacaoAVistaMDB</display-name>
 			<ejb-name>BatchGerarCartasCampanhaSolidariedadeCriancaParaNegociacaoAVistaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchGerarCartasCampanhaSolidariedadeCriancaParaNegociacaoAVistaMDB
+				gcom.batch.cobranca.BatchGerarCartasCampanhaSolidariedadeCriancaParaNegociacaoAVistaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

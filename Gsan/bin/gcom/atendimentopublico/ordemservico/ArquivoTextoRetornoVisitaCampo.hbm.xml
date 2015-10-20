@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+	<class name="gcom.atendimentopublico.ordemservico.ArquivoTextoRetornoVisitaCampo" table="atendimentopublico.arq_txt_ret_visita_campo">
+		<id name="id" type="java.lang.Integer" column="atrv_id">
+			<generator class="sequence">
+				<param name="sequence">atendimentopublico.seq_arq_txt_ret_visita_campo</param>
+			</generator>
+    	</id>
+
+	    <property name="descricaoAnormalidadeLeitura" type="java.lang.String" column="atrv_dsleituraanormalidade" length="25"/>
+	    <property name="indicadorNenhumaAcao" type="java.lang.Short" column="atrv_icnenhuma" not-null="true" length="1"/>
+	    <property name="dataUltimaAlteracao" type="java.sql.Timestamp" column="ATRV_TMULTIMAALTERACAO" not-null="true" length="25"/>
+	    <property name="dataRecebimento" type="java.sql.Timestamp" column="atrv_tmrecebimento" not-null="true" length="25"/>
+	    <property name="indicadorConferida" type="java.lang.Short" column="atrv_icconferida" not-null="true" length="1"/>
+	
+	    <!-- Associations -->
+	  
+	    <!-- bi-directional many-to-one association to Arquivo Texto Visita Campo -->
+	    <many-to-one name="arquivoTextoVisitaCampo" class="gcom.atendimentopublico.ordemservico.ArquivoTextoVisitaCampo" not-null="true">
+	        <column name="txvc_id" />
+	    </many-to-one>
+	    
+	    <!-- bi-directional many-to-one association to OrdemServico -->
+	    <many-to-one name="ordemServico" class="gcom.atendimentopublico.ordemservico.OrdemServico" not-null="true">
+	        <column name="orse_id" />
+	    </many-to-one>
+	    
+	    <!-- bi-directional many-to-one association to PavimentoRua -->
+	    <many-to-one name="pavimentoRua" class="gcom.cadastro.imovel.PavimentoRua" >
+	        <column name="prua_id" />
+	    </many-to-one>
+	    
+	    <!-- bi-directional many-to-one association to PavimentoCalcada -->
+	    <many-to-one name="pavimentoCalcada" class="gcom.cadastro.imovel.PavimentoCalcada" >
+	        <column name="pcal_id" />
+	    </many-to-one>
+	    
+	    <!-- bi-directional many-to-one association to LeituraAnormalidade -->
+	    <many-to-one name="leituraAnormalidade" class="gcom.micromedicao.leitura.LeituraAnormalidade">
+	        <column name="ltan_id" />
+	    </many-to-one>
+	    
+	    <!-- bi-directional many-to-one association to Usuario -->
+	    <many-to-one name="usuario" class="gcom.seguranca.acesso.usuario.Usuario" not-null="true">
+	        <column name="usur_id" />
+	    </many-to-one>
+	</class>
+</hibernate-mapping>

@@ -8,7 +8,7 @@
 			</display-name>
 			<ejb-name>BatchExecutarComandoNegativacaoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.spcserasa.BatchExecutarComandoNegativacaoMDB
+				gcom.batch.cobranca.spcserasa.BatchExecutarComandoNegativacaoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

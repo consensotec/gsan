@@ -13,7 +13,7 @@
 
 			<ejb-class>
 
-				gsan.batch.cobranca.spcserasa.BatchGerarMovimentoExclusaoNegativacaoMDB
+				gcom.batch.cobranca.spcserasa.BatchGerarMovimentoExclusaoNegativacaoMDB
 
 
 			</ejb-class>

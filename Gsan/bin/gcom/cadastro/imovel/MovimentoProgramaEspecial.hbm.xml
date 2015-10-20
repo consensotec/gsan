@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="gcom.cadastro.imovel.MovimentoProgramaEspecial" table="cadastro.progr_especial_movimento">
+		<id name="id" type="java.lang.Integer" column="pemv_id">
+			<generator class="sequence">
+	        	<param name="sequence">cadastro.seq_progr_especial_movimento</param>
+	        </generator>
+		</id>
+		<property name="nomeArquivo" type="java.lang.String" column="pemv_nmarquivo" not-null="true" length="30"/>
+		<property name="observacao" type="java.lang.String" column="pemv_dsobservacao" not-null="true" length="200"/>
+		<property name="indicadorCancelamentoItensFatura" type="short" column="pemv_iccancelaritensfatura" not-null="true" length="2"/>
+		<property name="indicadorRetirarContasProgramaEspecial" type="short" column="pemv_icretirarcontasprogespec" not-null="true" length="2"/>
+		<property name="indicadorRetiradaSitEspecialCobranca" type="short" column="pemv_icretirarsitespcobranca" not-null="true" length="2"/>
+		<property name="dataProcessamento" type="java.sql.Date" column="pemv_dtprocessamento" length="4" not-null="true"/>
+		<property name="indicadorTipoMovimento" type="java.lang.Short" column="pemv_ictipomovimento" length="2" not-null="true"/>
+		<property name="anoMesFaturamento" type="java.lang.Integer" column="pemv_amfaturamento" length="4"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="pemv_tmultimaalteracao" not-null="true" length="8"/>
+		
+		<property name="bytesArquivo" type="binary" column="pemv_artexto" not-null="true" length="-1" />
+		
+		<many-to-one name="usuario" class="gcom.seguranca.acesso.usuario.Usuario" not-null="true">
+			<column name="usur_id"/>
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

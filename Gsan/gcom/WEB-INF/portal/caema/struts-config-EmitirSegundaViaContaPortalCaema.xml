@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	
+	<form-beans>
+		<form-bean name="EmitirSegundaViaContaPortalCaemaActionForm"
+			type="gcom.gui.portal.caema.EmitirSegundaViaContaPortalCaemaActionForm" />
+	</form-beans>
+	
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="EmitirSegundaViaContaPortalCaemaActionForm"
+			type="gcom.gui.portal.caema.EmitirSegundaViaContaPortalCaemaAction"
+			validate="false" scope="session"
+			path="/emitirSegundaViaContaPortalCaemaAction">
+			<forward name="emitirSegundaViaContaPortalCaemaAction"
+				path="/jsp/portal/caema/emitir_segunda_via_conta_portal_caema.jsp"/>
+			<forward name="servicosPortalCaemaAction"
+				path="/jsp/portal/caema/servicos.jsp"/>
+			<forward name="matriculaSemDebito"
+				path="/jsp/portal/caema/servicos.jsp"/>
+			<forward name="erroSistemaPortal"
+				path="/jsp/portal/caema/emitir_segunda_via_conta_portal_caema.jsp"/>
+		</action>
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>
+

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="gcom.micromedicao.MovimentoRoteiroEmpresaFoto" table="micromedicao.movimento_rot_empr_foto">
+		<id name="id" type="java.lang.Integer" column="mref_id">
+			<generator class="sequence">
+				<param name="sequence">micromedicao.seq_movimento_rot_empr_foto</param>
+			</generator>
+		</id>
+		
+		<many-to-one name="imovel" class="gcom.cadastro.imovel.Imovel" not-null="true">
+			<column name="imov_id"/>
+		</many-to-one>
+		
+		<many-to-one name="leituraAnormalidade" class="gcom.micromedicao.leitura.LeituraAnormalidade">
+			<column name="ltan_id"/>
+		</many-to-one>
+		
+		<many-to-one name="consumoAnormalidade" class="gcom.micromedicao.consumo.ConsumoAnormalidade">
+			<column name="csan_id"/>
+		</many-to-one>
+		
+		<property name="anoMesReferencia" type="java.lang.Integer" column="mref_amreferencia" length="6" not-null="true" />
+		<property name="foto" type="binary" column="mref_imfoto" length="-1" not-null="true"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="mref_tmultimaalteracao" not-null="true" length="6"/>
+		
+		<!-- bi-directional many-to-one association to MedicaoTipo -->
+		<many-to-one name="medicaoTipo" class="gcom.micromedicao.medicao.MedicaoTipo" not-null="false">
+			<column name="medt_id"/>
+		</many-to-one>
+		
+		<many-to-one name="fotoSituacao" class="gcom.atendimentopublico.ordemservico.FotoSituacaoOrdemServico">
+			<column name="fsos_id"/>
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

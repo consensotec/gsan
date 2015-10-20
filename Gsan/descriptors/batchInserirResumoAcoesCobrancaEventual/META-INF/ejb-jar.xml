@@ -8,7 +8,7 @@
 			</display-name>
 			<ejb-name>BatchInserirResumoAcoesCobrancaEventualMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchInserirResumoAcoesCobrancaEventualMDB
+				gcom.batch.cobranca.BatchInserirResumoAcoesCobrancaEventualMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

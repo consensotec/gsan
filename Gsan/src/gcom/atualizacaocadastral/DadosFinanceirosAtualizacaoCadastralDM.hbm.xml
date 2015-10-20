@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="gcom.atualizacaocadastral.DadosFinanceirosAtualizacaoCadastralDM"
+		table="gerencial.fato_dados_fin_atlz_cad">
+		<id column="dfac_id" name="id" type="java.lang.Integer">
+			<generator class="sequence">
+				<param name="sequence">gerencial.dfac_seq</param>
+			</generator>
+		</id>
+
+		<property column="ptac_id" generated="never" lazy="false" name="comando" type="java.lang.Integer" />
+		<property column="imov_id" generated="never" lazy="false" name="matricula" type="java.lang.Integer" />
+		<property column="dfac_nmclienteantes" generated="never" lazy="false" name="nomeClienteAntes" type="java.lang.String" />
+		<property column="dfac_qteconomiaresantes" generated="never" lazy="false" name="qtdeEconomiaResAntes" type="java.lang.Integer" />
+		<property column="dfac_qteconomiacomantes" generated="never" lazy="false" name="qtdeEconomiaComAntes" type="java.lang.Integer" />
+		<property column="dfac_qteconomiaindantes" generated="never" lazy="false" name="qtdeEconomiaIndAntes" type="java.lang.Integer" />
+		<property column="dfac_qteconomiapubantes" generated="never" lazy="false" name="qtdeEconomiaPubAntes" type="java.lang.Integer" />
+		<property column="dfac_nnrgantes" generated="never" lazy="false" name="numRGAntes" type="java.lang.String" />
+		<property column="dfac_nncpfcnpjantes" generated="never" lazy="false" name="numCPFCNPJAntes" type="java.lang.String" />
+		<property column="dfac_nnhidrometroantes" generated="never" lazy="false" name="numHidrometroAntes" type="java.lang.String" />
+
+		<property column="dfac_nmclientedepois" generated="never" lazy="false" name="nomeClienteDepois" type="java.lang.String" />
+		<property column="dfac_qteconomiaresdepois" generated="never" lazy="false" name="qtdeEconomiaResDepois" type="java.lang.Integer" />
+		<property column="dfac_qteconomiacomdepois" generated="never" lazy="false" name="qtdeEconomiaComDepois" type="java.lang.Integer" />
+		<property column="dfac_qteconomiainddepois" generated="never" lazy="false" name="qtdeEconomiaIndDepois" type="java.lang.Integer" />
+		<property column="dfac_qteconomiapubdepois" generated="never" lazy="false" name="qtdeEconomiaPubDepois" type="java.lang.Integer" />
+		<property column="dfac_nnrgdepois" generated="never" lazy="false" name="numRGDepois" type="java.lang.String" />
+		<property column="dfac_nncpfcnpjdepois" generated="never" lazy="false" name="numCPFCNPJDepois" type="java.lang.String" />
+		<property column="dfac_nnhidrometrodepois" generated="never" lazy="false" name="numHidrometroDepois" type="java.lang.String" />
+
+		<property column="dfac_icimovelfinalizado" generated="never" lazy="false" name="icImovelFinalizado" type="java.lang.Short" />
+		<property column="dfac_dtalteracao" generated="never" lazy="false" name="dataAlteracao" type="java.sql.Date" />
+
+		<property column="dfac_icalteracaonome" generated="never" lazy="false" name="alteracaoNome" type="java.lang.Short" />
+		<property column="dfac_icalteracaoendereco" generated="never" lazy="false" name="alteracaoEndereco" type="java.lang.Short" />
+		<property column="dfac_icalteracaocategoria" generated="never" lazy="false" name="alteracaoCategoria" type="java.lang.Short" />
+		<property column="dfac_icalteracaosubcategoria" generated="never" lazy="false" name="alteracaoSubcategoria" type="java.lang.Short" />
+		<property column="dfac_icalteracaoeconomia" generated="never" lazy="false" name="alteracaoEconomia" type="java.lang.Short" />
+		<property column="dfac_icalteracaosituacaoagua" generated="never" lazy="false" name="alteracaoSituacaoAgua" type="java.lang.Short" />
+		<property column="dfac_icalteracaosituacaoesgoto" generated="never" lazy="false" name="alteracaoSituacaoEsgoto" type="java.lang.Short" />
+		<property column="dfac_icalteracaohidrometro" generated="never" lazy="false" name="alteracaoHidrometro" type="java.lang.Short" />
+		<property column="dfac_icalteracaorg" generated="never" lazy="false" name="rgAlterado" type="java.lang.Short" />
+		<property column="dfac_icinclusaorg" generated="never" lazy="false" name="rgIncluido" type="java.lang.Short" />
+		<property column="dfac_icalteracaocpfcnpj" generated="never" lazy="false" name="cpfCnpjAlterado" type="java.lang.Short" />
+		<property column="dfac_icinclusaocpfcnpj" generated="never" lazy="false" name="cpfCnpjIncluido" type="java.lang.Short" />
+		<property column="dfac_icexclusaocpfcnpj" generated="never" lazy="false" name="cpfCnpjExcluido" type="java.lang.Short" />
+
+		<property column="dfac_nnconsumoagua" generated="never" lazy="false" name="consumoAgua" type="java.lang.Integer" />
+		<property column="dfac_nnconsumoesgoto" generated="never" lazy="false" name="consumoEsgoto" type="java.lang.Integer" />
+		<property column="dfac_vlaguaantes" generated="never" lazy="false" name="valorAguaAntes" type="java.math.BigDecimal" />
+		<property column="dfac_vlaguadepois" generated="never" lazy="false" name="valorAguaDepois" type="java.math.BigDecimal" />
+		<property column="dfac_vlesgotoantes" generated="never" lazy="false" name="valorEsgotoAntes" type="java.math.BigDecimal" />
+		<property column="dfac_vlesgotodepois" generated="never" lazy="false" name="valorEsgotoDepois" type="java.math.BigDecimal" />
+		<property column="dfac_vlmulta" generated="never" lazy="false" name="valorMulta" type="java.math.BigDecimal" />
+		<property column="dfac_vlconsumofraudado" generated="never" lazy="false" name="valorConsumoFraudado" type="java.math.BigDecimal" />
+
+		<property column="dmlo_idantes" generated="never" lazy="false" name="idLocalizacaoAntes" type="java.lang.Integer" />
+		<property column="dmlo_iddepois" generated="never" lazy="false" name="idLocalizacaoDepois" type="java.lang.Integer" />
+		<property column="dmsa_idantes" generated="never" lazy="false" name="idSitAguaAntes" type="java.lang.Integer" />
+		<property column="dmsa_iddepois" generated="never" lazy="false" name="idSitAguaDepois" type="java.lang.Integer" />
+		<property column="dmse_idantes" generated="never" lazy="false" name="idSitEsgotoAntes" type="java.lang.Integer" />
+		<property column="dmse_iddepois" generated="never" lazy="false" name="idSitEsgotoDepois" type="java.lang.Integer" />
+		<property column="dmtp_id" generated="never" lazy="false" name="idTempo" type="java.lang.Integer" />
+		<property column="dmus_id" generated="never" lazy="false" name="idUsuario" type="java.lang.Integer" />
+		<property column="dmpt_id" generated="never" lazy="false" name="idTarifa" type="java.lang.Integer" />
+
+		<property column="dfac_dsligaguaantes" generated="never" lazy="false" name="descLigAguaAntes" type="java.lang.String" />
+		<property column="dfac_dsligaguadepois" generated="never" lazy="false" name="descLigAguaDepois" type="java.lang.String" />
+		<property column="dfac_dsligesgotoantes" generated="never" lazy="false" name="descLigEsgotoAntes" type="java.lang.String" />
+		<property column="dfac_dsligesgotodepois" generated="never" lazy="false" name="descLigEsgotoDepois" type="java.lang.String" />
+		<property column="dfac_dstarifa" generated="never" lazy="false" name="descTarifa" type="java.lang.String" />
+
+		<property column="dfac_tmultimaalteracao" generated="never" lazy="false" name="ultimaAlteracao" type="java.sql.Timestamp" />
+	</class>
+</hibernate-mapping>

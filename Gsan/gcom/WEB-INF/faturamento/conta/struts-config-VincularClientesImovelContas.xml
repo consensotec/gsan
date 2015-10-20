@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="ExibirAlterarVinculoClientesImovelContasActionForm" type="gcom.gui.faturamento.conta.ExibirAlterarVinculoClientesImovelContasActionForm" />						
+	</form-beans>
+
+	<!--******************* PAGINAS GLOBAIS *******************-->
+	<global-forwards />
+  <action-mappings>
+	   <action name="ExibirAlterarVinculoClientesImovelContasActionForm"
+			type="gcom.gui.faturamento.conta.ExibirAlterarVinculoClientesImovelContasAction"
+			scope="session" validate="true"
+			path="/exibirAlterarVinculoClientesImovelContasAction">
+			
+			<forward name="alterarVinculoClientesImovelContas"
+				path="/jsp/faturamento/conta/vinculo_clientes_imovel_contas_alterar.jsp" />
+		</action>
+		
+		<action name="ExibirAlterarVinculoClientesImovelContasActionForm"
+			type="gcom.gui.faturamento.conta.AlterarVinculoClientesImovelContasAction" scope="session"
+			validate="true" path="/alterarVinculoClientesImovelContaAction">
+		
+		</action>
+		
+		</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+
+</struts-config>

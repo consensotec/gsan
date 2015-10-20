@@ -6,7 +6,7 @@
 			<display-name>BatchParalisarFaturamentoMDB</display-name>
 			<ejb-name>BatchParalisarFaturamentoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchParalisarFaturamentoMDB
+				gcom.batch.faturamento.BatchParalisarFaturamentoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

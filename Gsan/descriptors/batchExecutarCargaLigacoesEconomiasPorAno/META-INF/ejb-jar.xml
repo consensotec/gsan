@@ -6,7 +6,7 @@
 			<display-name>BatchExecutarCargaLigacoesEconomiasPorAnoMDB</display-name>
 			<ejb-name>BatchExecutarCargaLigacoesEconomiasPorAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.arrecadacao.BatchExecutarCargaLigacoesEconomiasPorAnoMDB
+				gcom.batch.gerencial.arrecadacao.BatchExecutarCargaLigacoesEconomiasPorAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

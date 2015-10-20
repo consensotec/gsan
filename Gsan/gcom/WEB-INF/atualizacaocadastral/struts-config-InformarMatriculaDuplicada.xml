@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+
+	<form-beans>
+		<form-bean  name="InformarMatriculaDuplicadaPupupActionForm" 
+					type="gcom.gui.atualizacaocadastral.InformarMatriculaDuplicadaPupupActionForm" />
+	</form-beans>
+
+	<global-forwards />
+	
+	<action-mappings>
+	
+		<action name="InformarMatriculaDuplicadaPupupActionForm"
+			type="gcom.gui.atualizacaocadastral.ExibirInformarMatriculaDuplicadaPopupAction"
+			path="/exibirInformarMatriculaDuplicadaPopupAction">
+			
+			<forward name="exibirInformarMatriculaDuplicadaPopupAction"
+				path="/jsp/atualizacaocadastral/imovel_duplicado_selecionado_popup.jsp" />
+				
+		</action>
+		
+	</action-mappings>
+	
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+	
+</struts-config>

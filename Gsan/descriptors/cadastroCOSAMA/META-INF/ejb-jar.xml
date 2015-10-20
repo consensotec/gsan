@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorCadastroCOSAMA</display-name>
             <ejb-name>ControladorCadastroCOSAMA</ejb-name>
-            <local-home>gsan.cadastro.ControladorCadastroLocalHome</local-home>
-            <local>gsan.cadastro.ControladorCadastroLocal</local>
-            <ejb-class>gsan.cadastro.ControladorCadastroCOSAMASEJB</ejb-class>
+            <local-home>gcom.cadastro.ControladorCadastroLocalHome</local-home>
+            <local>gcom.cadastro.ControladorCadastroLocal</local>
+            <ejb-class>gcom.cadastro.ControladorCadastroCOSAMASEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

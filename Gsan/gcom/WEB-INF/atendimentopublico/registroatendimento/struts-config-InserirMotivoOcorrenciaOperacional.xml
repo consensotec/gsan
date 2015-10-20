@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+
+		<form-bean name="InserirMotivoOcorrenciaOperacionalActionForm"
+			type="gcom.gui.atendimentopublico.registroatendimento.InserirMotivoOcorrenciaOperacionalActionForm" />
+
+	</form-beans>
+	
+	<action-mappings>
+		<action name="InserirMotivoOcorrenciaOperacionalActionForm"
+		 type="gcom.gui.atendimentopublico.registroatendimento.ExibirInserirMotivoOcorrenciaOperacionalAction"
+		  path="/exibirInserirMotivoOcorrenciaOperacionalAction">
+		<forward name="exibirMotivoOcorrenciaOperacional"
+				path="/jsp/atendimentopublico/registroatendimento/motivo_ocorrencia_operacional_inserir.jsp" />
+		</action>
+		<action
+		 name="InserirMotivoOcorrenciaOperacionalActionForm"
+		 type="gcom.gui.atendimentopublico.registroatendimento.InserirMotivoOcorrenciaOperacionalAction"
+		 path="/inserirMotivoOcorrenciaOperacionalAction">
+		 </action>
+	</action-mappings>
+
+</struts-config>

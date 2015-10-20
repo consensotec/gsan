@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="gcom.micromedicao.TelemetriaLog" table="micromedicao.telemetria_log">
+		<id name="id" type="java.lang.Integer" column="tlog_id">
+			<generator class="sequence">
+				<param name="sequence">micromedicao.seq_telemetria_log</param>
+			</generator>
+		</id>
+
+		<property name="conteudoStringEnviada" type="java.lang.String" column="tlog_cnstringenviada" not-null="true"/>
+		<property name="indicadorLogErro" type="java.lang.Short" column="tlog_iclogerr" not-null="true"/>
+		<property name="indicadorRejeicaoParcial" type="java.lang.Short" column="tlog_icrejeicaoparcial" not-null="false"/>
+		<property name="recepcao" type="java.sql.Timestamp" column="tlog_tmrecepcao" not-null="true" length="8"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="tlog_tmultimaalteracao" not-null="true" length="8"/>
+	</class>
+</hibernate-mapping>

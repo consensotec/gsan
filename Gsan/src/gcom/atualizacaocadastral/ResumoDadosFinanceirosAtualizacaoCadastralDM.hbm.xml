@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="gcom.atualizacaocadastral.ResumoDadosFinanceirosAtualizacaoCadastralDM"
+		table="gerencial.fato_resumo_dados_fin_atlz_cad">
+		<id column="rfac_id" name="id" type="java.lang.Integer">
+			<generator class="sequence">
+				<param name="sequence">gerencial.rfac_seq</param>
+			</generator>
+		</id>
+
+		<property column="ptac_id" generated="never" lazy="false" name="comando" type="java.lang.Integer" />
+		<property column="rfac_qtimovelparavisita" generated="never" lazy="false" name="qtdeImovelParaVisita" type="java.lang.Integer" />
+		<property column="rfac_qtimovelavisitar" generated="never" lazy="false" name="qtdeImovelAVisitar" type="java.lang.Integer" />
+		<property column="rfac_qtimovelcompendencia" generated="never" lazy="false" name="qtdeImovelComPendencia" type="java.lang.Integer" />
+		<property column="rfac_qtimovelnovo" generated="never" lazy="false" name="qtdeImovelNovo" type="java.lang.Integer" />
+
+		<property column="rfac_qtimovelretornarcampo" generated="never" lazy="false" name="qtdeImovelRetornarCampo" type="java.lang.Integer" />
+		<property column="rfac_qtimovelsemalteracao" generated="never" lazy="false" name="qtdeImovelSemAlteracao" type="java.lang.Integer" />
+		<property column="rfac_qtimovelcomalterecao" generated="never" lazy="false" name="qtdeImovelComAlterecao" type="java.lang.Integer" />
+		<property column="rfac_qtalteracaonome" generated="never" lazy="false" name="qtdeAlteracaoNome" type="java.lang.Integer" />
+		<property column="rfac_qtalteracaoendereco" generated="never" lazy="false" name="qtdeAlteracaoEndereco" type="java.lang.Integer" />
+		<property column="rfac_qtalteracaocategoria" generated="never" lazy="false" name="qtdeAlteracaoCategoria" type="java.lang.Integer" />
+		<property column="rfac_qtalteracaosubcategoria" generated="never" lazy="false" name="qtdeAlteracaoSubcategoria" type="java.lang.Integer" />
+		<property column="rfac_qtalteracaoeconomia" generated="never" lazy="false" name="qtdeAlteracaoEconomia" type="java.lang.Integer" />
+		<property column="rfac_qtalteracaosituacaoagua" generated="never" lazy="false" name="qtdeAlteracaoSituacaoAgua" type="java.lang.Integer" />
+		<property column="rfac_qtalteracaosituacaoesgoto" generated="never" lazy="false" name="qtdeAlteracaoSituacaoEsgoto" type="java.lang.Integer" />
+		<property column="rfac_qtalteracaohidrometro" generated="never" lazy="false" name="qtdeAlteracaoHidrometro" type="java.lang.Integer" />
+		<property column="rfac_qtalteracaorg" generated="never" lazy="false" name="qtdeAlteracaoRg" type="java.lang.Integer" />
+		<property column="rfac_qtinclusaorg" generated="never" lazy="false" name="qtdeInclusaoRg" type="java.lang.Integer" />
+		<property column="rfac_qtalteracaocpfcnpj" generated="never" lazy="false" name="qtdeAlteracaoCpfCnpj" type="java.lang.Integer" />
+		<property column="rfac_qtinclusaocpfcnpj" generated="never" lazy="false" name="qtdeInclusaoCpfCnpj" type="java.lang.Integer" />
+		<property column="rfac_qtexclusaocpfcnpj" generated="never" lazy="false" name="qtdeExclusaoCpfCnpj" type="java.lang.Integer" />
+		<property column="rfac_qtimovelresantes" generated="never" lazy="false" name="qtdeImovelResAntes" type="java.lang.Integer" />
+		<property column="rfac_qtimovelresdepois" generated="never" lazy="false" name="qtdeImovelResDepois" type="java.lang.Integer" />
+		<property column="rfac_qtimovelcomantes" generated="never" lazy="false" name="qtdeImovelComAntes" type="java.lang.Integer" />
+		<property column="rfac_qtimovelcomdepois" generated="never" lazy="false" name="qtdeImovelComDepois" type="java.lang.Integer" />
+		<property column="rfac_qtimovelindantes" generated="never" lazy="false" name="qtdeImovelIndAntes" type="java.lang.Integer" />
+		<property column="rfac_qtimovelinddepois" generated="never" lazy="false" name="qtdeImovelIndDepois" type="java.lang.Integer" />
+		<property column="rfac_qtimovelpubantes" generated="never" lazy="false" name="qtdeImovelPubAntes" type="java.lang.Integer" />
+		<property column="rfac_qtimovelpubdepois" generated="never" lazy="false" name="qtdeImovelPubDepois" type="java.lang.Integer" />
+		<property column="rfac_qteconomiaresantes" generated="never" lazy="false" name="qtdeEconomiaResAntes" type="java.lang.Integer" />
+		<property column="rfac_qteconomiaresdepois" generated="never" lazy="false" name="qtdeEconomiaResDepois" type="java.lang.Integer" />
+		<property column="rfac_qteconomiacomantes" generated="never" lazy="false" name="qtdeEconomiaComAntes" type="java.lang.Integer" />
+		<property column="rfac_qteconomiacomdepois" generated="never" lazy="false" name="qtdeEconomiaComDepois" type="java.lang.Integer" />
+		<property column="rfac_qteconomiaindantes" generated="never" lazy="false" name="qtdeEconomiaIndAntes" type="java.lang.Integer" />
+		<property column="rfac_qteconomiainddepois" generated="never" lazy="false" name="qtdeEconomiaIndDepois" type="java.lang.Integer" />
+		<property column="rfac_qteconomiapubantes" generated="never" lazy="false" name="qtdeEconomiaPubAntes" type="java.lang.Integer" />
+		<property column="rfac_qteconomiapubdepois" generated="never" lazy="false" name="qtdeEconomiaPubDepois" type="java.lang.Integer" />
+		<property column="rfac_qtimovelpotaguaantes" generated="never" lazy="false" name="qtdeImovelPotAguaAntes" type="java.lang.Integer" />
+		<property column="rfac_qtimovelpotaguadepois" generated="never" lazy="false" name="qtdeImovelPotAguaDepois" type="java.lang.Integer" />
+		<property column="rfac_qtimovelfacaguaantes" generated="never" lazy="false" name="qtdeImovelFacAguaAntes" type="java.lang.Integer" />
+		<property column="rfac_qtimovelfacaguadepois" generated="never" lazy="false" name="qtdeImovelFacAguaDepois" type="java.lang.Integer" />
+		<property column="rfac_qtimovelligaguaantes" generated="never" lazy="false" name="qtdeImovelLigAguaAntes" type="java.lang.Integer" />
+		<property column="rfac_qtimovelligaguadepois" generated="never" lazy="false" name="qtdeImovelLigAguaDepois" type="java.lang.Integer" />
+		<property column="rfac_qtimovelcoraguaantes" generated="never" lazy="false" name="qtdeImovelCorAguaAntes" type="java.lang.Integer" />
+		<property column="rfac_qtimovelcoraguadepois" generated="never" lazy="false" name="qtdeImovelCorAguaDepois" type="java.lang.Integer" />
+		<property column="rfac_qtimovelsupaguaantes" generated="never" lazy="false" name="qtdeImovelSupAguaAntes" type="java.lang.Integer" />
+		<property column="rfac_qtimovelsupaguadepois" generated="never" lazy="false" name="qtdeImovelSupAguaDepois" type="java.lang.Integer" />
+		<property column="rfac_qtimovelpotesgotoantes" generated="never" lazy="false" name="qtdeImovelPotEsgotoAntes" type="java.lang.Integer" />
+		<property column="rfac_qtimovelpotesgotodepois" generated="never" lazy="false" name="qtdeImovelPotEsgotoDepois" type="java.lang.Integer" />
+		<property column="rfac_qtimovelfacesgotoantes" generated="never" lazy="false" name="qtdeImovelFacEsgotoAntes" type="java.lang.Integer" />
+		<property column="rfac_qtimovelfacesgotodepois" generated="never" lazy="false" name="qtdeImovelFacEsgotoDepois" type="java.lang.Integer" />
+		<property column="rfac_qtimovelligesgotoantes" generated="never" lazy="false" name="qtdeImovelLigEsgotoAntes" type="java.lang.Integer" />
+		<property column="rfac_qtimovelligesgotodepois" generated="never" lazy="false" name="qtdeImovelLigEsgotoDepois" type="java.lang.Integer" />
+		<property column="rfac_qtimovelsupesgotoantes" generated="never" lazy="false" name="qtdeImovelSupEsgotoAntes" type="java.lang.Integer" />
+		<property column="rfac_qtimovelsupesgotodepois" generated="never" lazy="false" name="qtdeImovelSupEsgotoDepois" type="java.lang.Integer" />
+		  
+		<property column="rfac_vlaguaantes" generated="never" lazy="false" name="valorAguaAntes" type="java.math.BigDecimal" />
+		<property column="rfac_vlaguadepois" generated="never" lazy="false" name="valorAguaDepois" type="java.math.BigDecimal" />
+		<property column="rfac_vlesgotoantes" generated="never" lazy="false" name="valorEsgotoAntes" type="java.math.BigDecimal" />
+		<property column="rfac_vlesgotodepois" generated="never" lazy="false" name="valorEsgotoDepois" type="java.math.BigDecimal" />
+		<property column="rfac_vlmulta" generated="never" lazy="false" name="valorMulta" type="java.math.BigDecimal" />
+		<property column="rfac_vlconsumofraudado" generated="never" lazy="false" name="valorConsumoFraudado" type="java.math.BigDecimal" />
+
+		<property column="dmlo_idantes" generated="never" lazy="false" name="idLocalizacaoAntes" type="java.lang.Integer" />
+		<property column="dmlo_iddepois" generated="never" lazy="false" name="idLocalizacaoDepois" type="java.lang.Integer" />
+		<property column="dmtp_id" generated="never" lazy="false" name="idTempo" type="java.lang.Integer" />
+		<property column="dmus_id" generated="never" lazy="false" name="idUsuario" type="java.lang.Integer" />
+
+		<property column="rfac_tmultimaalteracao" generated="never" lazy="false" name="ultimaAlteracao" type="java.sql.Timestamp" />
+	</class>
+</hibernate-mapping>

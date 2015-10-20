@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorGeograficoGCOM</display-name>
             <ejb-name>ControladorGeograficoGCOM</ejb-name>
-            <local-home>gsan.cadastro.geografico.ControladorGeograficoLocalHome</local-home>
-            <local>gsan.cadastro.geografico.ControladorGeograficoLocal</local>
-            <ejb-class>gsan.cadastro.geografico.ControladorGeograficoSEJB</ejb-class>
+            <local-home>gcom.cadastro.geografico.ControladorGeograficoLocalHome</local-home>
+            <local>gcom.cadastro.geografico.ControladorGeograficoLocal</local>
+            <ejb-class>gcom.cadastro.geografico.ControladorGeograficoSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

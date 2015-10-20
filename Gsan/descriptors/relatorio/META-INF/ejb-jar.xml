@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorRelatorioFaturamentoGCOM</display-name>
             <ejb-name>ControladorRelatorioFaturamentoGCOM</ejb-name>
-            <local-home>gsan.relatorio.faturamento.ControladorRelatorioFaturamentoLocalHome</local-home>
-            <local>gsan.relatorio.faturamento.ControladorRelatorioFaturamentoLocal</local>
-            <ejb-class>gsan.relatorio.faturamento.ControladorRelatorioFaturamentoSEJB</ejb-class>
+            <local-home>gcom.relatorio.faturamento.ControladorRelatorioFaturamentoLocalHome</local-home>
+            <local>gcom.relatorio.faturamento.ControladorRelatorioFaturamentoLocal</local>
+            <ejb-class>gcom.relatorio.faturamento.ControladorRelatorioFaturamentoSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

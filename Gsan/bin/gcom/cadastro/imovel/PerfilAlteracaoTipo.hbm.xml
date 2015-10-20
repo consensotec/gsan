@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="gcom.cadastro.imovel.PerfilAlteracaoTipo" table="cadastro.perfil_alteracao_tipo">
+		<id name="id" type="java.lang.Integer" column="peat_id">
+			<generator class="sequence">
+				<param name="sequence">cadastro.seq_perfil_alteracao_tipo</param>
+			</generator>
+		</id>		
+		
+		<property name="descricao" type="java.lang.String" column="peat_dstipoalteracaoperfil" length="20"/>
+		<property name="descricaoAbreviada" type="java.lang.String" column="peat_dsabvtipoalteracaoperfil" length="5"/>
+		<property name="indicadorUso" type="java.lang.Short" column="peat_icuso" length="2"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="peat_tmultimaalteracao" length="8"/>
+		<property name="constante" type="java.lang.String" column="peat_cdconstante" length="20"/>		
+				
+	</class>
+</hibernate-mapping>

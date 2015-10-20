@@ -6,7 +6,7 @@
 			<display-name>BatchGerarTaxaPercentualTarifaMinimaCortadoMDB</display-name>
 			<ejb-name>BatchGerarTaxaPercentualTarifaMinimaCortadoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarTaxaPercentualTarifaMinimaCortadoMDB
+				gcom.batch.faturamento.BatchGerarTaxaPercentualTarifaMinimaCortadoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

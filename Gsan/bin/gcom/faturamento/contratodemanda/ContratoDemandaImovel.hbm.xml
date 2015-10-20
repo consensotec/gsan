@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.faturamento.contratodemanda.ContratoDemandaImovel" table="faturamento.contrato_demanda_imovel">
+		<id name="id" type="java.lang.Integer" column="cdim_id">
+			<generator class="sequence">
+				<param name="sequence">faturamento.seq_contrato_demanda_imovel</param>
+			</generator>
+		</id>
+		<property name="numeroContrato" type="java.lang.String" column="cdim_nncontrato" not-null="true" length="10"/>
+		<many-to-one name="imovel" class="gcom.cadastro.imovel.Imovel" not-null="true">
+			<column name="imov_id"/>
+		</many-to-one>
+		<many-to-one name="cliente" class="gcom.cadastro.cliente.Cliente" not-null="true">
+			<column name="clie_id"/>
+		</many-to-one>
+		<property name="relacaoCliente" type="short" column="cdim_icsindico" not-null="true" length="2"/>
+		<property name="dataInicioContrato" type="java.sql.Timestamp" column="cdim_dtiniciocontrato" not-null="true" length="8"/>
+		<property name="dataFimContrato" type="java.sql.Timestamp" column="cdim_dtfimcontrato" not-null="true" length="8"/>
+		<property name="demandaMinimaContratada" type="java.lang.Integer" column="cdim_nndemandaminimaconsumo" not-null="true" length="4"/>
+		<many-to-one name="faixaConsumo" class="gcom.faturamento.contratodemanda.ContratoDemandaFaixaConsumo" not-null="true">
+			<column name="cdfc_id"/>
+		</many-to-one>
+		<many-to-one name="usuarioIncluiuContrato" class="gcom.seguranca.acesso.usuario.Usuario" not-null="true">
+			<column name="usur_idusuarioincluiucontrato"/>
+		</many-to-one>
+		<property name="dataInclusaoContrato" type="java.sql.Timestamp" column="cdim_dtinclusaocontrato" length="8" not-null="true"/>
+		<property name="dataEncerramentoContrato" type="java.sql.Timestamp" column="cdim_dtencerramentocontrato" length="8" />
+		<property name="dataSuspensaoContrato" type="java.sql.Timestamp" column="cdim_dtsuspensaocontrato" length="8" />
+		<many-to-one name="motivoEcenrramento" class="gcom.faturamento.contratodemanda.ContratoDemandaMotivoEncerramento" not-null="true">
+			<column name="cdme_id"/>
+		</many-to-one>
+		<many-to-one name="situacao" class="gcom.faturamento.contratodemanda.ContratoDemandaSituacao" not-null="true">
+			<column name="cdst_id"/>
+		</many-to-one>
+		<property name="descricaoObservacaoSuspensao" type="java.lang.String" column="cdim_dsobservacaosuspensao" length="400"/>
+		<property name="descricaoObservacaoEncerramento" type="java.lang.String" column="cdim_dsobservacaoencerramento" length="400"/>
+		<many-to-one name="usuarioEncerrouContrato" class="gcom.seguranca.acesso.usuario.Usuario">
+			<column name="usur_idusuarioencerroucontrato"/>
+		</many-to-one>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="cdim_tmultimaalteracao" length="8" not-null="true"/>
+	</class>
+</hibernate-mapping>

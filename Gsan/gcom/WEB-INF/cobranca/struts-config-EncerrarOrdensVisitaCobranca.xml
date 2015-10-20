@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="EncerrarOrdensVisitaCobrancaActionForm"
+			type="gcom.gui.cobranca.EncerrarOrdensVisitaCobrancaActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+		<action  name="EncerrarOrdensVisitaCobrancaActionForm"
+			type="gcom.gui.cobranca.ExibirEncerrarOrdensVisitaCobrancaAction"
+			validate="false" scope="session" path="/exibirEncerrarOrdensVisitaCobrancaAction">
+			<forward name="exibirEncerrarOrdens"
+				path="/jsp/cobranca/visita_cobranca_encerrar_ordens.jsp" />
+		</action>
+		
+		<action name="EncerrarOrdensVisitaCobrancaActionForm"
+			type="gcom.gui.cobranca.EncerrarOrdensVisitaCobrancaAction"
+			validate="false" scope="session" path="/encerrarOrdensVisitaCobrancaAction"/>
+			
+		
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>

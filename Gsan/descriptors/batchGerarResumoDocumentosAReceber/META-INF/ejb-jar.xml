@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoDocumentosAReceberMDB</display-name>
 			<ejb-name>BatchGerarResumoDocumentosAReceberMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.financeiro.BatchGerarResumoDocumentosAReceberMDB
+				gcom.batch.financeiro.BatchGerarResumoDocumentosAReceberMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

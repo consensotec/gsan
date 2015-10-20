@@ -6,7 +6,7 @@
 			<display-name>BatchGerarHistoricoParaEncerrarArrecadacaoMesMDB</display-name>
 			<ejb-name>BatchGerarHistoricoParaEncerrarArrecadacaoMesMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.arrecadacao.BatchGerarHistoricoParaEncerrarArrecadacaoMesMDB
+				gcom.batch.arrecadacao.BatchGerarHistoricoParaEncerrarArrecadacaoMesMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

@@ -6,7 +6,7 @@
 			<display-name>BatchRetirarContasRevisaoExtratoEntradaParcelamentoMDB</display-name>
 			<ejb-name>BatchRetirarContasRevisaoExtratoEntradaParcelamentoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchRetirarContasRevisaoExtratoEntradaParcelamentoMDB
+				gcom.batch.cobranca.BatchRetirarContasRevisaoExtratoEntradaParcelamentoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <!--
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+ <class name="gcom.cadastro.cliente.ClienteAtualizacaoCadastral" table="cadastro.cliente_atlz_cadastral">
+  <id column="clac_id" name="id" type="java.lang.Integer">
+   <generator class="sequence">
+    <param name="sequence">cadastro.seq_cliente_atlz_cadastral</param>
+   </generator>
+  </id>
+  <property column="clie_id" generated="never" lazy="false"
+   name="idCliente" type="java.lang.Integer"/>
+  <property column="imov_id" generated="never" lazy="false" length="4"
+   name="idImovel" type="java.lang.Integer"/>
+  <property column="clac_nmcliente" generated="never" lazy="false"
+   length="50" name="nomeCliente" type="java.lang.String"/>
+  <property column="cltp_id" generated="never" lazy="false" length="4"
+   name="idClienteTipo" type="java.lang.Integer"/>
+  <property column="clac_nnrg" generated="never" lazy="false"
+   length="13" name="rg" type="java.lang.String"/>
+  <property column="clac_dtrgemissao" generated="never" lazy="false"
+   length="4" name="dataEmissaoRg" type="java.sql.Date"/>
+  <property column="clac_dtnascimento" generated="never" lazy="false"
+   length="4" name="dataNascimento" type="java.sql.Date"/>
+  <property column="prof_id" generated="never" lazy="false" length="4"
+   name="idProfissao" type="java.lang.Integer"/>
+  <property column="psex_id" generated="never" lazy="false" length="4"
+   name="idPessoaSexo" type="java.lang.Integer"/>
+  <property column="clac_nncpfcnpj" generated="never" lazy="false"
+   length="14" name="cpfCnpj" type="java.lang.String"/>
+  <property column="clac_dsemail" generated="never" lazy="false"
+   length="40" name="email" type="java.lang.String"/>
+  <property column="clac_icuso" generated="never" lazy="false"
+   length="2" name="indicadorUso" type="java.lang.Short"/>
+  <property column="clac_tmultimaalteracao" generated="never"
+   lazy="false" length="8" name="ultimaAlteracao" not-null="true" type="java.sql.Timestamp"/>
+  <property column="clac_nnmae" generated="never" lazy="false"
+   length="50" name="nomeMae" type="java.lang.String"/>
+  <property column="edtp_id" generated="never" lazy="false" length="4"
+   name="idEnderecoTipo" type="java.lang.Integer"/>
+  <property column="logr_id" generated="never" lazy="false" length="4"
+   name="idLogradouro" type="java.lang.Integer"/>
+  <property column="clac_dslogradouro" generated="never" lazy="false"
+   length="60" name="descricaoLogradouro" type="java.lang.String"/>
+  <property column="clac_cdcep" generated="never" lazy="false"
+   length="4" name="codigoCep" type="java.lang.Integer"/>
+  <property column="bair_id" generated="never" lazy="false" length="4"
+   name="idBairro" type="java.lang.Integer"/>
+  <property column="clac_nmbairro" generated="never" lazy="false"
+   length="30" name="nomeBairro" type="java.lang.String"/>
+  <property column="edrf_id" generated="never" lazy="false" length="4"
+   name="idEnderecoReferencia" type="java.lang.Integer"/>
+  <property column="clac_nnimovel" generated="never" lazy="false"
+   length="5" name="numeroImovel" type="java.lang.String"/>
+  <property column="clac_dscomplementoendereco" generated="never"
+   lazy="false" length="25" name="complementoEndereco" type="java.lang.String"/>
+  <property column="clac_nncnae" generated="never" lazy="false"
+   length="7" name="cnae" type="java.lang.Integer"/>
+  <property column="crtp_id" generated="never" lazy="false" length="4"
+   name="idClienteRelacaoTipo" type="java.lang.Integer"/>
+  <property column="clac_dslogradourotitulo" generated="never"
+   lazy="false" length="25" name="dsLogradouroTitulo" type="java.lang.String"/>
+  <property column="clac_dslogradourotipo" generated="never"
+   lazy="false" length="20" name="dsLogradouroTipo" type="java.lang.String"/>
+  <property column="lgtt_id" generated="never" lazy="false" length="9"
+   name="idLogradouroTitulo" type="java.lang.Integer"/>
+  <property column="lgtp_id" generated="never" lazy="false" length="9"
+   name="idLogradouroTipo" type="java.lang.Integer"/>
+  <property column="muni_id" generated="never" lazy="false" length="4"
+   name="idMunicipio" type="java.lang.Integer"/>
+  <property column="clac_nmmunicipio" generated="never" lazy="false"
+   length="30" name="nomeMunicipio" type="java.lang.String"/>
+  <property column="unfe_id" generated="never" lazy="false" length="4"
+   name="idUinidadeFederacao" type="java.lang.Integer"/>
+  <property column="clac_dsufsiglamunicipio" generated="never"
+   lazy="false" length="2" name="dsUFSiglaMunicipio" type="java.lang.String"/>
+  <property column="clac_dsabreviadaoerg" generated="never" lazy="false"
+   length="6" name="dsAbreviadaOrgaoExpedidorRg" type="java.lang.String"/>
+  <property column="clac_dsufsiglaoerg" generated="never" lazy="false"
+   length="2" name="dsUFSiglaOrgaoExpedidorRg" type="java.lang.String"/>
+  <property column="ratv_id" generated="never" lazy="false" length="4"
+   name="idRamoAtividade" type="java.lang.Integer"/>
+
+
+  <many-to-one class="gcom.cadastro.imovel.ImovelAtualizacaoCadastral"
+   name="imovelAtualizacaoCadastral" not-null="false">
+   <column name="imac_id"/>
+  </many-to-one>
+
+   <many-to-one class="gcom.cadastro.ParametroTabelaAtualizacaoCadastro"
+   name="parametroTabelaAtualizacaoCadastro" not-null="true">
+   <column name="ptac_id"/>
+  </many-to-one>
+  
+ </class>
+</hibernate-mapping>

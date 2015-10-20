@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+	-->
+
+	<class name="gcom.atendimentopublico.ordemservico.CoordenadaPercursoEquipe" table="atendimentopublico.coordenada_percurso_eqpe">
+		<id name="id" type="java.lang.Integer" column="cpeq_id">
+			<generator class="sequence">
+				<param name="sequence">atendimentopublico.seq_coordenada_percurso_eqpe</param>
+			</generator>
+		</id>
+		
+		<property name="coordenadaX" type="java.math.BigDecimal" column="cpeq_nncoordenadax" not-null="true" length="16"/>
+		<property name="coordenadaY" type="java.math.BigDecimal" column="cpeq_nncoordenaday" not-null="true" length="16"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="cpeq_tmultimaalteracao" not-null="true" length="8"/>
+
+		<!-- Associations -->
+		<many-to-one name="arquivoTextoAcompanhamentoServico" class="gcom.atendimentopublico.ordemservico.ArquivoTextoAcompanhamentoServico" not-null="true">
+			<column name="txac_id"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

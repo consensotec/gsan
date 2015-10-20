@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE application PUBLIC "-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN" "http://java.sun.com/dtd/application_1_3.dtd">
 <application>
-	<display-name>gsan</display-name>
+	<display-name>gcom</display-name>
 	<module>
 		<ejb>ControladorAtendimentoPublicoGCOM.jar</ejb>
 	</module>
@@ -1111,12 +1111,32 @@
 	</module>
 	
 	<module>
-		<java>gsan.jar</java>
+		<ejb>BatchAtualizarPerfilImovelLoteMDB.jar</ejb>
+	</module>
+	
+	<module>
+		<ejb>BatchGerarDebitoACobrarDepreciacaoHidrometroMDB.jar</ejb>
+	</module>
+	
+	<module>
+		<ejb>BatchGerarRelatorioDebitosClientesMDB.jar</ejb>
+	</module>
+
+	<module>
+		<ejb>BatchGerarDadosFinanceirosAtualizacaoCadastralMDB.jar</ejb>
+	</module>
+	
+	<module>
+		<ejb>BatchGerarResumoDadosFinanceirosAtualizacaoCadastralMDB.jar</ejb>
+	</module>
+
+	<module>
+		<java>gcom.jar</java>
 	</module>
 	
 	<module>
 		<web>
-			<web-uri>gsan.war</web-uri>
+			<web-uri>gcom.war</web-uri>
 			<context-root>gsan</context-root>
 		</web>
 	</module>

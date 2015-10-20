@@ -6,7 +6,7 @@
 			<display-name>BatchAlterarInscricaoImovelMDB</display-name>
 			<ejb-name>BatchAlterarInscricaoImovelMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchAlterarInscricaoImovelMDB
+				gcom.batch.faturamento.BatchAlterarInscricaoImovelMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

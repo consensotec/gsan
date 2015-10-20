@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+<class name="gcom.atualizacaocadastral.AtributoAtualizacaoCadastralDM" 
+    table="atualizacaocadastral.atributo_atlz_cad_dm">
+
+    <id name="id" type="java.lang.Integer" column="atac_id">
+         <generator class="sequence">
+           <param name="sequence">cadastro.seq_atributo_atlz_cadastral</param>
+        </generator>
+    </id>
+
+    <property
+        name="nomeAtributo"
+        type="java.lang.String"
+        column="atac_nmatributo"
+        not-null="true"
+        length="4000"
+    />
+    <property
+        name="ultimaAlteracao"
+        type="java.sql.Timestamp"
+        column="atac_tmultimaalteracao"
+        not-null="true"
+        length="11"
+    />
+
+
+</class>
+</hibernate-mapping>

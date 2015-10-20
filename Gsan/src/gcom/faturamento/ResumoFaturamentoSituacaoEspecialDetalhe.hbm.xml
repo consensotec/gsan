@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+	<class name="gcom.faturamento.ResumoFaturamentoSituacaoEspecialDetalhe" table="faturamento.res_fat_sit_esp_detalhe">
+		<id name="id" type="java.lang.Integer" column="rfdt_id">
+			<generator class="sequence">
+				<param name="sequence">faturamento.seq_res_fatur_sit_especial</param>
+			</generator>
+		</id>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="rfdt_tmultimaalteracao" length="8"/>
+		
+		<!-- bi-directional many-to-one association to ResumoFaturamentoSituacaoEspecial -->
+		<many-to-one name="resumoFaturamentoSituacaoEspecial" class="gcom.faturamento.ResumoFaturamentoSituacaoEspecial" not-null="true">
+			<column name="rfse_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to Imovel -->
+		<many-to-one name="imovel" class="gcom.cadastro.imovel.Imovel" not-null="true">
+			<column name="imov_id"/>
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

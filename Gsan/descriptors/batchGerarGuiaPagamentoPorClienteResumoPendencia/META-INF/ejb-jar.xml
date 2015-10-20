@@ -6,7 +6,7 @@
 			<display-name>BatchGerarGuiaPagamentoPorClienteResumoPendenciaMDB</display-name>
 			<ejb-name>BatchGerarGuiaPagamentoPorClienteResumoPendenciaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.cobranca.BatchGerarGuiaPagamentoPorClienteResumoPendenciaMDB
+				gcom.batch.gerencial.cobranca.BatchGerarGuiaPagamentoPorClienteResumoPendenciaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

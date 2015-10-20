@@ -8,7 +8,7 @@
 			</display-name>
 			<ejb-name>BatchAtualizarDadosCadastraisImovelRecadastramentoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.atualizacaocadastral.BatchAtualizarDadosCadastraisImovelRecadastramentoMDB
+				gcom.batch.atualizacaocadastral.BatchAtualizarDadosCadastraisImovelRecadastramentoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

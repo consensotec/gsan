@@ -6,7 +6,7 @@
 			<display-name>BatchEmitirBoletimCadastroMDB</display-name>
 			<ejb-name>BatchEmitirBoletimCadastroMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cadastro.BatchEmitirBoletimCadastroMDB
+				gcom.batch.cadastro.BatchEmitirBoletimCadastroMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

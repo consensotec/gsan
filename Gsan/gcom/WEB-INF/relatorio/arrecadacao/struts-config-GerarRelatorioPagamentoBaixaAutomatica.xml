@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>	
+		<form-bean name="GerarRelatorioPagamentoBaixaAutomaticaActionForm"
+			type="gcom.gui.relatorio.arrecadacao.GerarRelatorioPagamentoBaixaAutomaticaActionForm" >			
+		</form-bean>
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+
+	<action-mappings>
+		<!--******************* PÁGINA PRINCIPAL *******************-->
+		<action name="GerarRelatorioPagamentoBaixaAutomaticaActionForm"
+			type="gcom.gui.relatorio.arrecadacao.ExibirGerarRelatorioPagamentoBaixaAutomaticaAction"			
+			validate="true"	
+			path="/exibirGerarRelatorioPagamentoBaixaAutomaticaAction">			
+			<forward name="exibirGerarRelatorioPagamentoBaixaAutomaticaAction"
+				path="/jsp/relatorio/arrecadacao/relatorio_pagamentos_baixa_automatica.jsp" />
+		</action>
+		<action name="GerarRelatorioPagamentoBaixaAutomaticaActionForm"
+			type="gcom.gui.relatorio.arrecadacao.GerarRelatorioPagamentoBaixaAutomaticaAction"
+			validate="true"						
+			path="/gerarRelatorioPagamentoBaixaAutomaticaAction" />				
+
+	</action-mappings>
+
+</struts-config>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+<class name="gcom.atualizacaocadastral.ParametroTabelaAtualizacaoCadastralDM" table="atualizacaocadastral.param_tab_atl_cad_dm">
+	<id column="ptac_id" name="id" type="java.lang.Integer">
+   		<generator class="sequence">
+    		<param name="sequence">atualizacaocadastral.seq_param_tab_atl_cad_dm</param>
+   		</generator>
+  	</id>
+  	  	
+  	<many-to-one class="gcom.cadastro.localidade.Localidade" name="localidade" 	not-null="false"> 
+  			<column name="loca_id"/>
+  	</many-to-one>  	
+  	
+  	<property column="ptac_cdsetorcomercial" generated="never"  lazy="false" length="4" name="codigoSetorComercial" type="java.lang.Integer"/>
+   		
+   	<property name="ultimaAlteracao" type="java.sql.Timestamp" column="ptac_tmultimaalteracao" length="8"/>   		
+  	
+  	<property name="indicadorFinalizado" type="java.lang.Short" column="ptac_icfinalizado" not-null="true"  length="22" />
+  	
+  	<many-to-one class="gcom.seguranca.acesso.usuario.Usuario" name="usuario" not-null="true">   		
+   		<column name="usur_id"/>
+  	</many-to-one>
+  	
+  	<many-to-one class="gcom.cadastro.empresa.Empresa" name="empresa" not-null="false">  		
+   		<column name="empr_id"/>
+  	</many-to-one>  
+  	  	  	
+ </class>
+</hibernate-mapping>

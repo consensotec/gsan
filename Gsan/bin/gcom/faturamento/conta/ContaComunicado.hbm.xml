@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+	<class name="gcom.faturamento.conta.ContaComunicado" table="faturamento.conta_comunicado">
+		<id name="id" type="java.lang.Integer" column="comu_id">
+			<generator class="sequence">
+				<param name="sequence">faturamento.seq_conta_comunicado</param>
+			</generator>
+		</id>
+		<property name="anoMesReferencia" type="java.lang.Integer" column="comu_amreferencia" length="4"/>
+
+		<property name="comunicado" type="java.lang.String" column="comu_dscomunicado" not-null="true"/>
+		<property name="titulo" type="java.lang.String" column="comu_dsTitulo" length="100" not-null="true"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="comu_tmultimaalteracao" length="8"/>
+		<property name="indicadorUso" type="java.lang.Short" column="comu_icuso" length="2"/>
+		
+		<!-- bi-directional many-to-one association to GerenciaRegional -->
+		<many-to-one name="gerenciaRegional" class="gcom.cadastro.localidade.GerenciaRegional" not-null="false">
+			<column name="greg_id"/>
+		</many-to-one>
+		<!-- bi-directional many-to-one association to Localidade -->
+		<many-to-one name="localidade" class="gcom.cadastro.localidade.Localidade" not-null="false">
+			<column name="loca_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

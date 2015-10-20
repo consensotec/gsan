@@ -6,7 +6,7 @@
 			<display-name>BatchRegistrarMovimentoArrecadadoresMDB</display-name>
 			<ejb-name>BatchRegistrarMovimentoArrecadadoresMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.arrecadacao.BatchRegistrarMovimentoArrecadadoresMDB
+				gcom.batch.arrecadacao.BatchRegistrarMovimentoArrecadadoresMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

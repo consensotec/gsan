@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoIndicadoresComercializacaoMDB</display-name>
 			<ejb-name>BatchGerarResumoIndicadoresComercializacaoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.cadastro.BatchGerarResumoIndicadoresComercializacaoMDB
+				gcom.batch.gerencial.cadastro.BatchGerarResumoIndicadoresComercializacaoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="GerarArquivoBancosCarteira17ActionForm"
+			type="gcom.gui.arrecadacao.GerarArquivoBancosCarteira17ActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+		<action  name="GerarArquivoBancosCarteira17ActionForm"
+			type="gcom.gui.arrecadacao.ExibirGerarArquivoBancosCarteira17Action"
+			validate="false" scope="session" path="/exibirGerarArquivoBancosCarteira17Action">
+			
+			<forward name="gerarArquivoBancosCarteira17"
+				path="/jsp/arrecadacao/gerar_arquivo_banco_carteira17.jsp" />
+		</action>
+		
+		<action  name="GerarArquivoBancosCarteira17ActionForm"
+			type="gcom.gui.arrecadacao.GerarArquivoBancosCarteira17Action"
+			validate="false" scope="session" path="/gerarArquivoBancosCarteira17Action">			
+		</action>				
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>

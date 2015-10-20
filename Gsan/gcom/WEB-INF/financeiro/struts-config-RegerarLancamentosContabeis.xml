@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="RegerarLancamentosContabeisActionForm"
+				   type="gcom.gui.financeiro.RegerarLancamentosContabeisActionForm" />
+	</form-beans>
+
+	<!--******************* P�GINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+		<action name="RegerarLancamentosContabeisActionForm"
+				type="gcom.gui.financeiro.ExibirRegerarLancamentosContabeisAction"
+				validate="false" 
+				scope="session"
+				path="/exibirRegerarLancamentosContabeisAction">
+			<forward name="exibirRegerarLancamentosContabeis" path="/jsp/finaceiro/regerar_lancamentos_contabeis.jsp" />
+		</action>		
+		<action name="RegerarLancamentosContabeisActionForm"
+				type="gcom.gui.financeiro.RegerarLancamentosContabeisAction"
+				validate="false" 
+				scope="session"
+				path="/regerarLancamentosContabeisAction">
+		</action>
+	</action-mappings>
+	<message-resources null="false" parameter="gcom.properties.application" />
+</struts-config>

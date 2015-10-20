@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorCadastroCAERN</display-name>
             <ejb-name>ControladorCadastroCAERN</ejb-name>
-            <local-home>gsan.cadastro.ControladorCadastroLocalHome</local-home>
-            <local>gsan.cadastro.ControladorCadastroLocal</local>
-            <ejb-class>gsan.cadastro.ControladorCadastroCAERNSEJB</ejb-class>
+            <local-home>gcom.cadastro.ControladorCadastroLocalHome</local-home>
+            <local>gcom.cadastro.ControladorCadastroLocal</local>
+            <ejb-class>gcom.cadastro.ControladorCadastroCAERNSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

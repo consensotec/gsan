@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoParcelamentoPorAnoMDB</display-name>
 			<ejb-name>BatchGerarResumoParcelamentoPorAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.cadastro.BatchGerarResumoParcelamentoPorAnoMDB
+				gcom.batch.gerencial.cadastro.BatchGerarResumoParcelamentoPorAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

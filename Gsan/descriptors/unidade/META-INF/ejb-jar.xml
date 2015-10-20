@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorUnidadeGCOM</display-name>
             <ejb-name>ControladorUnidadeGCOM</ejb-name>
-            <local-home>gsan.cadastro.unidade.ControladorUnidadeLocalHome</local-home>
-            <local>gsan.cadastro.unidade.ControladorUnidadeLocal</local>
-            <ejb-class>gsan.cadastro.unidade.ControladorUnidadeSEJB</ejb-class>
+            <local-home>gcom.cadastro.unidade.ControladorUnidadeLocalHome</local-home>
+            <local>gcom.cadastro.unidade.ControladorUnidadeLocal</local>
+            <ejb-class>gcom.cadastro.unidade.ControladorUnidadeSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

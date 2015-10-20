@@ -6,7 +6,7 @@
 			<display-name>BatchReligarImoveisCortadosComLeituraRealConsumoMDB</display-name>
 			<ejb-name>BatchReligarImoveisCortadosComLeituraRealConsumoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchReligarImoveisCortadosComLeituraRealConsumoMDB
+				gcom.batch.faturamento.BatchReligarImoveisCortadosComLeituraRealConsumoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

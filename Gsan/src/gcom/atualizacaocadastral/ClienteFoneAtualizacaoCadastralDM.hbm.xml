@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+	-->
+	<class name="gcom.atualizacaocadastral.ClienteFoneAtualizacaoCadastralDM" table="atualizacaocadastral.cliente_fone_atlz_cad_dm">
+		<id name="id" type="java.lang.Integer" column="cfac_id">
+			<generator class="sequence">
+				<param name="sequence">atualizacaocadastral.seq_cliente_fone_atlz_cad_dm</param>
+			</generator>
+		</id>
+		<property name="ddd" type="java.lang.String" column="cfac_cdddd" length="2"/>
+		<property name="telefone" type="java.lang.String" column="cfac_nnfone" length="9"/>
+		<property name="ramal" type="java.lang.String" column="cfac_nnfoneramal" length="14"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="cfac_tmultimaalteracao" not-null="true"/>
+		<property name="indicadorFonePadrao" type="java.lang.Short" column="cfac_icfonepadrao"/>
+		<property name="contato" type="java.lang.String" column="cfac_nmcontato" length="50"/>
+
+		<many-to-one name="clienteAtualizacaoCadastralDM" class="gcom.atualizacaocadastral.ClienteAtualizacaoCadastralDM" not-null="true">
+			<column name="clac_id"/>
+		</many-to-one>
+
+		<many-to-one name="foneTipo" class="gcom.cadastro.cliente.FoneTipo" not-null="true">
+			<column name="fnet_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

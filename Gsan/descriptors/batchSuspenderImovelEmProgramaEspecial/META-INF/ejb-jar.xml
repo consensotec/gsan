@@ -6,7 +6,7 @@
 			<display-name>BatchSuspenderImovelEmProgramaEspecialMDB</display-name>
 			<ejb-name>BatchSuspenderImovelEmProgramaEspecialMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cadastro.BatchSuspenderImovelEmProgramaEspecialMDB
+				gcom.batch.cadastro.BatchSuspenderImovelEmProgramaEspecialMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

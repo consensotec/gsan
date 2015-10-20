@@ -6,7 +6,7 @@
 			<display-name>BatchGerarArquivoTextoParaLeituristaMDB</display-name>
 			<ejb-name>BatchGerarArquivoTextoParaLeituristaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.micromedicao.BatchGerarArquivoTextoParaLeituristaMDB
+				gcom.batch.micromedicao.BatchGerarArquivoTextoParaLeituristaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

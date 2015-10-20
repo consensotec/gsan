@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorUsuarioGCOM</display-name>
             <ejb-name>ControladorUsuarioGCOM</ejb-name>
-            <local-home>gsan.seguranca.acesso.usuario.ControladorUsuarioLocalHome</local-home>
-            <local>gsan.seguranca.acesso.usuario.ControladorUsuarioLocal</local>
-            <ejb-class>gsan.seguranca.acesso.usuario.ControladorUsuarioSEJB</ejb-class>
+            <local-home>gcom.seguranca.acesso.usuario.ControladorUsuarioLocalHome</local-home>
+            <local>gcom.seguranca.acesso.usuario.ControladorUsuarioLocal</local>
+            <ejb-class>gcom.seguranca.acesso.usuario.ControladorUsuarioSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

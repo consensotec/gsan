@@ -24,7 +24,7 @@
 	<import value="net.sf.jasperreports.engine.data.*" />
 
 	<parameter name="SUBREPORT_DIR" isForPrompting="true" class="java.lang.String">
-		<defaultValueExpression ><![CDATA["C:\\jboss-4.0.1sp1\\server\\default\\deploy\\gsan.ear\\gsan.war\\WEB-INF\\classes\\"]]></defaultValueExpression>
+		<defaultValueExpression ><![CDATA["C:\\jboss-4.0.1sp1\\server\\default\\deploy\\gcom.ear\\gcom.war\\WEB-INF\\classes\\"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="imagem" isForPrompting="false" class="java.lang.String"/>
 	<parameter name="cnpjEmpresa" isForPrompting="false" class="java.lang.String"/>

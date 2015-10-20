@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="UploadVersaoSistemasAndroidActionForm"
+			type="gcom.gui.cadastro.dispositivomovel.UploadVersaoSistemasAndroidActionForm" />
+			
+	</form-beans>
+	
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+
+	<action-mappings>
+		<!--******************* PÁGINA PRINCIPAL *******************-->
+		<!-- [UC1308] Upload nova versão Sistemas Android Auhtor: Fernanda ALmeida Data:03/04/2012-->
+		<action name="UploadVersaoSistemasAndroidActionForm"
+			type="gcom.gui.cadastro.dispositivomovel.ExibirUploadVersaoSistemasAndroidAction"
+			validate="true" 
+			scope="session"
+			path="/exibirUploadVersaoSistemasAndroidAction">
+			
+			<forward name="exibirUploadVersaoSistemasAndroidAction"
+				path="/jsp/cadastro/dispositivomovel/upload_versao_sistemas_android.jsp" />
+		</action>
+		
+		<action 
+				type="gcom.gui.cadastro.dispositivomovel.UploadVersaoSistemasAndroidAction"
+				validate="true" scope="session"
+				path="/uploadVersaoSistemasAndroidAction">
+		</action>
+
+	</action-mappings>
+
+</struts-config>

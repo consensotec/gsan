@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="gcom.cadastro.imovel.ImovelHistoricoPerfil" table="cadastro.imovel_historico_perfil">
+		<id name="id" type="java.lang.Integer" column="ihpe_id">
+			<generator class="sequence">
+				<param name="sequence">cadastro.seq_imovel_historico_perfil</param>
+			</generator>
+		</id>
+				
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="ihpe_tmultimaalteracao" length="8"/>		
+		
+		<!-- bi-directional many-to-one association to Imovel -->
+		<many-to-one name="imovel" class="gcom.cadastro.imovel.Imovel" not-null="true">
+			<column name="imov_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to ImovelPerfil -->
+		<many-to-one name="imovelPerfilAnterior" class="gcom.cadastro.imovel.ImovelPerfil" not-null="true">
+			<column name="iper_idanterior"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to ImovelPerfil -->
+		<many-to-one name="imovelPerfilPosterior" class="gcom.cadastro.imovel.ImovelPerfil" not-null="true">
+			<column name="iper_idposterior"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to PerfilAlteracaoTipo -->
+		<many-to-one name="perfilAlteracaoTipo" class="gcom.cadastro.imovel.PerfilAlteracaoTipo" not-null="true">
+			<column name="peat_id"/>
+		</many-to-one>		
+		
+		<!-- bi-directional many-to-one association to Usuário -->
+		<many-to-one name="usuario" class="gcom.seguranca.acesso.usuario.Usuario" not-null="false">
+			<column name="usur_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to PerfilAlteracaoMotivo -->
+		<many-to-one name="perfilAlteracaoMotivo" class="gcom.cadastro.imovel.PerfilAlteracaoMotivo" not-null="true">
+			<column name="peam_id"/>
+		</many-to-one>		
+				
+	</class>
+</hibernate-mapping>

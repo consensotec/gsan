@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoIndicadoresCobrancaMDB</display-name>
 			<ejb-name>BatchGerarResumoIndicadoresCobrancaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.cobranca.BatchGerarResumoIndicadoresCobrancaMDB
+				gcom.batch.gerencial.cobranca.BatchGerarResumoIndicadoresCobrancaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

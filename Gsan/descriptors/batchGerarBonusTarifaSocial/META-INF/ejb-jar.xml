@@ -6,7 +6,7 @@
 			<display-name>BatchGerarBonusTarifaSocialMDB</display-name>
 			<ejb-name>BatchGerarBonusTarifaSocialMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarBonusTarifaSocialMDB
+				gcom.batch.faturamento.BatchGerarBonusTarifaSocialMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

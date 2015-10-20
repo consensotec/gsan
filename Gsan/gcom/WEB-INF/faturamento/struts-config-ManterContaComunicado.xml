@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="FiltraContaComunicadoActionForm"
+			type="gcom.gui.faturamento.conta.FiltrarContaComunidadeActionForm" />
+	</form-beans>
+	<form-beans>
+		<form-bean name="AtualizarContaComunicadoActionForm"
+			type="gcom.gui.faturamento.conta.AtualizarContaComunicadoActionForm" />
+	</form-beans>
+
+	<!--******************* P�GINAS GLOBAIS *******************-->
+	<global-forwards />
+
+	<action-mappings>
+		<!--******************* P�GINA PRINCIPAL *******************-->
+		<action name="FiltrarContaComunicadoActionForm"
+			type="gcom.gui.faturamento.conta.ExibirManterContaComunicadoAction"
+			validate="false" scope="session"
+			path="/exibirManterContaComunicadoAction">
+			<forward name="exibirManterContaComunicado"
+				path="/jsp/faturamento/conta/comunicado_conta_manter.jsp" />
+		</action>
+		
+		<action name="AtualizarContaComunicadoActionForm"
+			type="gcom.gui.faturamento.conta.ExibirAtualizarContaComunicadoAction"
+			validate="false" scope="session"
+			path="/exibirAtualizarContaComunicadoAction">
+			<forward name="atualizarContaComunicado"
+				path="/jsp/faturamento/conta/comunicado_conta_atualizar.jsp" />
+		</action>
+		<action name="AtualizarContaComunicadoActionForm"
+			type="gcom.gui.faturamento.conta.AtualizarContaComunicadoAction"
+			validate="true" scope="session"
+			path="/atualizarContaComunicadoAction">
+		</action>
+	
+		<action name="FiltrarContaComunicadoActionForm"
+			type="gcom.gui.relatorio.faturamento.conta.GerarRelatorioComunicadoContaAction"
+			validate="false" scope="session" path="/gerarRelatorioComunicadoContaAction"/>		
+
+	</action-mappings>
+
+</struts-config>

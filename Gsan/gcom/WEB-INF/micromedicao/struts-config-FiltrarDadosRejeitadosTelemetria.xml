@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="FiltrarDadosRejeitadosTelemetriaActionForm"
+			type="gcom.gui.micromedicao.leitura.FiltrarDadosRejeitadosTelemetriaActionForm" />
+		<form-bean name="ConsultarDadosRejeitadosTelemetriaActionForm"
+			type="gcom.gui.micromedicao.ConsultarDadosRejeitadosTelemetriaActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+		<action name="FiltrarDadosRejeitadosTelemetriaActionForm" 
+			type="gcom.gui.micromedicao.leitura.ExibirFiltrarDadosRejeitadosTelemetriaAction" 
+			validate="false" 
+			scope="session" 
+			path="/exibirFiltrarDadosRejeitadosTelemetriaAction">
+			
+			<forward name="filtrarDadosRejeitadosTelemetria"
+				path="/jsp/micromedicao/leitura/dados_rejeitados_telemetria_filtrar.jsp" />
+		</action>
+	
+		<action name="FiltrarDadosRejeitadosTelemetriaActionForm" 
+			type="gcom.gui.micromedicao.ExibirConsultarDadosRejeitadosTelemetriaAction" 
+			validate="false" 
+			scope="session" 
+			path="/exibirConsultarDadosRejeitadosTelemetriaAction">
+			
+			<forward name="exibirConsultarDadosRejeitadosTelemetria"
+				path="/jsp/micromedicao/leitura/dados_rejeitados_telemetria_consultar.jsp" />
+		</action>
+		
+		<action name="FiltrarDadosRejeitadosTelemetriaActionForm" 
+			type="gcom.gui.micromedicao.leitura.FiltrarDadosRejeitadosTelemetriaAction" 
+			validate="false" 
+			scope="session" 
+			path="/filtrarDadosRejeitadosTelemetriaAction">
+			
+		    <forward name="exibirConsultarDadosRejeitadosTelemetria" path="/exibirConsultarDadosRejeitadosTelemetriaAction.do" />
+		</action>
+		
+		<action name="ConsultarDadosRejeitadosTelemetriaActionForm" 
+			type="gcom.gui.micromedicao.ExibirDadosRejeitadosDetalhadoTelemetriaAction" 
+			validate="false" 
+			scope="session" 
+			path="/exibirConsultarDadosRejeitadosDetalhadoTelemetriaAction">
+			
+			<forward name="exibirDadosRejeitadosDetalhadoTelemetria"
+				path="/jsp/micromedicao/leitura/dados_rejeitados_detalhado_telemetria_consultar.jsp" />
+		</action>
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+		
+</struts-config>

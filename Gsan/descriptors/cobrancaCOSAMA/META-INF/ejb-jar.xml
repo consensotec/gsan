@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorCobrancaCOSAMA</display-name>
             <ejb-name>ControladorCobrancaCOSAMA</ejb-name>
-            <local-home>gsan.cobranca.ControladorCobrancaLocalHome</local-home>
-            <local>gsan.cobranca.ControladorCobrancaLocal</local>
-            <ejb-class>gsan.cobranca.ControladorCobrancaCOSAMASEJB</ejb-class>
+            <local-home>gcom.cobranca.ControladorCobrancaLocalHome</local-home>
+            <local>gcom.cobranca.ControladorCobrancaLocal</local>
+            <ejb-class>gcom.cobranca.ControladorCobrancaCOSAMASEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

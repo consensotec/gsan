@@ -6,7 +6,7 @@
 			<display-name>BatchPrescreverDebitosImoveisPublicosAutomaticoMDB</display-name>
 			<ejb-name>BatchPrescreverDebitosImoveisPublicosAutomaticoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchPrescreverDebitosImoveisPublicosAutomaticoMDB
+				gcom.batch.faturamento.BatchPrescreverDebitosImoveisPublicosAutomaticoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

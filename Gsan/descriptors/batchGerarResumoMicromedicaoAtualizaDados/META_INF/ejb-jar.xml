@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoMicromedicaoAtualizaDadosMDB</display-name>
 			<ejb-name>BatchGerarResumoMicromedicaoAtualizaDadosMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.micromedicao.BatchGerarResumoMicromedicaoAtualizaDadosMDB
+				gcom.batch.micromedicao.BatchGerarResumoMicromedicaoAtualizaDadosMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

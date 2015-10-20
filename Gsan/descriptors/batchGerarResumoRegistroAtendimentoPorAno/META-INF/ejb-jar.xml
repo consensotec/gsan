@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoRegistroAtendimentoPorAnoMDB</display-name>
 			<ejb-name>BatchGerarResumoRegistroAtendimentoPorAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.atendimentopublico.BatchGerarResumoRegistroAtendimentoPorAnoMDB
+				gcom.batch.atendimentopublico.BatchGerarResumoRegistroAtendimentoPorAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

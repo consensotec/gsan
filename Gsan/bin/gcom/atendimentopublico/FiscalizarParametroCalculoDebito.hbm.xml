@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+	<class name="gcom.atendimentopublico.FiscalizarParametroCalculoDebito" table="atendimentopublico.fiscaliz_param_calc_deb">
+		<id name="id" type="java.lang.Integer" column="dbac_id">
+			<generator class="assigned"/>
+		</id>
+
+    <property
+        name="anoMesApuracaoInicial"
+        type="int"
+        column="fpcd_amapuracaoinicial"
+        not-null="false"
+    />
+    
+    <property
+        name="anoMesApuracaoFinal"
+        type="int"
+        column="fpcd_amapuracaofinal"
+        not-null="false"
+    />
+    
+    <property
+        name="numeroMesesApurado"
+        type="int"
+        column="fpcd_nnmesesapurado"
+        not-null="false"
+    />
+    
+    <property
+        name="consumoAgua"
+        type="int"
+        column="fdcp_nnconsumoagua"
+        not-null="false"
+    />
+    
+    <property
+        name="consumoEsgoto"
+        type="int"
+        column="fdcp_nnconsumoesgoto"
+        not-null="false"
+    />
+    
+	<property
+        name="valorAguar"
+        type="java.math.BigDecimal"
+        column="fdcp_vlagua"
+        not-null="false"
+        length="13"
+    />
+    
+    <property
+        name="valorEsgoto"
+        type="java.math.BigDecimal"
+        column="fdcp_vlesgoto"
+        not-null="false"
+        length="13"
+    />
+    
+    <property
+        name="consumoMinimo"
+        type="int"
+        column="fdcp_nnconsumominimo"
+        not-null="false"
+        length="13"
+    />
+    
+    <property
+        name="percentualEsgoto"
+        type="java.math.BigDecimal"
+        column="fdcp_pcesgoto"
+        not-null="false"
+        length="5"
+    />
+    
+    <property
+        name="qtdEconomiaAutoInfracao"
+        type="int"
+        column="fdcp_qteconomiasautoinfracao"
+        not-null="false"
+    />
+    
+    <property
+        name="valorTarifaAutoInfracao"
+        type="java.math.BigDecimal"
+        column="fdcp_vltarifaautoinfracao"
+        not-null="false"
+    />
+    
+    <property
+        name="codCalculoConsumo"
+        type="int"
+        column="fscb_cdconsumocalculo"
+        not-null="false"
+    />
+    
+    <property
+        name="dataUltimaAlteracao"
+        type="java.sql.Timestamp"
+        column="fpcd_tmultimaalteracao"
+        not-null="true"
+        length="29"
+    />
+    
+    <property
+        name="fatorMultiplicador"
+        type="java.math.BigDecimal"
+        column="fdcp_nnfatormultiplicador"
+        not-null="false"
+        length="5"
+    />
+    
+   	<property
+        name="fatorReincidencia"
+        type="java.math.BigDecimal"
+        column="fdcp_nnfatorreincidencia"
+        not-null="false"
+        length="5"
+    />
+    
+    <property name="numeroMesesFatura" type="java.lang.Short" column="fpcd_nnmesesfatura" />
+    <property name="numeroMaximoMesesSancoes" type="java.lang.Short" column="fpcd_nnmaximomesessancoes" />
+    <property name="dataCorte" type="java.sql.Date" column="fpcd_dtcorte" />
+    <property name="dataSupressaoAgua" type="java.sql.Date" column="fpcd_dtsupressaoagua" />
+    <property name="dataGeracaoDebito" type="java.sql.Date" column="fpcd_dtgeracaodebito" />
+    
+
+    <!-- Associations -->
+  	
+  	<!-- 
+    <many-to-one
+        name="debitoACobrar"
+        class="gcom.faturamento.debito.DebitoACobrar"
+        not-null="true"
+    >
+    
+    	<column name="dbac_id" />
+    </many-to-one>
+    -->
+    
+    <many-to-one
+        name="categoria"
+        class="gcom.cadastro.imovel.Categoria"
+        not-null="true"
+    >
+    	<column name="catg_id" />
+    </many-to-one>
+    
+    <many-to-one
+        name="subcategoria"
+        class="gcom.cadastro.imovel.Subcategoria"
+        not-null="true"
+    >
+    	<column name="scat_id" />    
+    </many-to-one>
+    
+    <many-to-one name="ligacaoAguaSituacao" class="gcom.atendimentopublico.ligacaoagua.LigacaoAguaSituacao" not-null="true">
+			<column name="last_id"/>
+	</many-to-one>
+	
+</class>
+</hibernate-mapping>

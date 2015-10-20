@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <!-- 
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+ <class name="gcom.cadastro.imovel.CadastroOcorrencia" table="cadastro.cadastro_ocorrencia">
+  <id column="cocr_id" name="id" type="java.lang.Integer">
+   <generator class="sequence">
+    <param name="sequence">cadastro.seq_cadastro_ocorrencia</param>
+   </generator>
+  </id>
+  <property column="cocr_dscadastroocorrencia" generated="never"
+   lazy="false" length="25" name="descricao" type="java.lang.String"/>
+  <property column="cocr_icuso" generated="never" lazy="false"
+   length="2" name="indicadorUso" type="java.lang.Short"/>
+  <property column="cocr_tmultimaalteracao" generated="never"
+   lazy="false" length="8" name="ultimaAlteracao" type="java.sql.Timestamp"/>
+  <property column="cocr_icsuspendecontratodemanda" generated="never"
+   lazy="false" length="2" name="indicadorSuspenderContratoDemanda" type="java.lang.Short"/>
+  <property column="cocr_iccamposobrigtablet" length="2" name="indicadorCamposObrigatoriosTablet" type="java.lang.Short"/>
+   
+   
+   
+  <!-- associations 
+ bi-directional one-to-many association to Imovel 
+    <set
+        name="imovels"
+        lazy="true"
+        inverse="true"
+    >
+        <key>
+            <column name="cocr_id" />
+        </key>
+        <one-to-many 
+            class="gcom.cadastro.Imovel"
+        />
+    </set>
+    -->
+ </class>
+</hibernate-mapping>

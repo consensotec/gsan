@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="GerarRelatorioAcompanhamentoComandosCobrancaActionForm"
+			type="gcom.gui.cobranca.cobrancaporresultado.GerarRelatorioAcompanhamentoComandosCobrancaActionForm" />	
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+
+	<action-mappings>
+		<!--******************* PÁGINA PRINCIPAL *******************-->
+		<action name="GerarRelatorioAcompanhamentoComandosCobrancaActionForm"
+			type="gcom.gui.cobranca.cobrancaporresultado.ExibirGerarRelatorioAcompanhamentoComandosCobrancaAction"
+			validate="true" 
+			scope="session"
+			path="/exibirGerarRelatorioAcompanhamentoComandosCobrancaAction">
+	
+			<forward name="exibirGerarRelatorioAcompanhamentoComandosCobranca"
+				path="/jsp/cobranca/cobrancaporresultado/gerar_relatorio_acompanhamento_comandos_cobranca.jsp" />
+		</action>
+		
+		<action name="GerarRelatorioAcompanhamentoComandosCobrancaActionForm"
+			type="gcom.gui.cobranca.cobrancaporresultado.GerarRelatorioAcompanhamentoComandosCobrancaAction"
+			validate="true" 
+			scope="session"
+			path="/gerarRelatorioAcompanhamentoComandosCobrancaAction">
+		</action>
+		
+	</action-mappings>
+
+</struts-config>

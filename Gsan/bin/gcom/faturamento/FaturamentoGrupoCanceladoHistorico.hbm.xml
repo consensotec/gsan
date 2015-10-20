@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.faturamento.FaturamentoGrupoCanceladoHistorico" table="faturamento.faturamento_grp_can_hist">
+		<id name="id" type="java.lang.Integer" column="fgch_id">
+			<generator class="sequence">
+				<param name="sequence">faturamento.seq_faturamento_grp_can_hist</param>
+			</generator>
+		</id>
+		
+		<property name="anoMesReferencia" type="java.lang.Integer" column="fgch_amreferencia" not-null="true"/>
+		
+		<property name="qtdContasSituacaoNormal" type="java.lang.Integer" column="fgch_qtcontasnormais" not-null="false"/>
+		<property name="qtdContasSituacaoIncluida" type="java.lang.Integer" column="fgch_qtcontasincluidas" not-null="false"/>
+		<property name="qtdContasSituacaoCancelada" type="java.lang.Integer" column="fgch_qtcontascanceladas" not-null="false"/>
+		<property name="qtdContasSituacaoRetificada" type="java.lang.Integer" column="fgch_qtcontasretificadas" not-null="false"/>
+		<property name="qtdContasSituacaoPaga" type="java.lang.Integer" column="fgch_qtcontaspagas" not-null="false"/>
+		<property name="qtdContasSituacaoParceladas" type="java.lang.Integer" column="fgch_qtcontasparceladas" not-null="false"/>
+		<property name="qtdContasDocumentoCobranca" type="java.lang.Integer" column="fgch_qtcontasdocumentocobranca" not-null="false"/>
+		<property name="qtdContasFaturaItem" type="java.lang.Integer" column="fgch_qtcontasfaturaitem" not-null="false"/>
+		<property name="qtdContasExcluidas" type="java.lang.Integer" column="fgch_qtcontasexcluidas" not-null="false"/>
+		
+		
+		<property name="valorAguaFaturado" type="java.math.BigDecimal" column="fgch_vlaguafaturado" not-null="false"/>
+		<property name="valorEsgotoFaturado" type="java.math.BigDecimal" column="fgch_vlesgotofaturado" not-null="false"/>
+		<property name="valorDebitoFaturado" type="java.math.BigDecimal" column="fgch_vldebitosfaturado" not-null="false"/>
+		<property name="valorCreditoFaturado" type="java.math.BigDecimal" column="fgch_vlcreditosfaturado" not-null="false"/>
+		<property name="valorImpostosFaturado" type="java.math.BigDecimal" column="fgch_vlimpostosfaturado" not-null="false"/>
+		
+		<property name="dataCancelamento" type="java.sql.Timestamp" column="fgch_dtcancelamento" not-null="true" length="8"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="fgch_tmultimaalteracao" not-null="true" length="8"/>
+		
+		
+		<many-to-one name="usuario" class="gcom.seguranca.acesso.usuario.Usuario" not-null="true">
+			<column name="usur_id"/>
+		</many-to-one>
+		
+		<many-to-one name="contaMotivoCancelamento" class="gcom.faturamento.conta.ContaMotivoCancelamento" not-null="true">
+			<column name="cmcn_id"/>
+		</many-to-one>
+		
+		<many-to-one name="faturamentoGrupo" class="gcom.faturamento.FaturamentoGrupo" not-null="true">
+			<column name="ftgr_id"/>
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

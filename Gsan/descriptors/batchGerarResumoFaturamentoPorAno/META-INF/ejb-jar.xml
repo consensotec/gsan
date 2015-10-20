@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoFaturamentoPorAnoMDB</display-name>
 			<ejb-name>BatchGerarResumoFaturamentoPorAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarResumoFaturamentoPorAnoMDB
+				gcom.batch.faturamento.BatchGerarResumoFaturamentoPorAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoArrecadacaoPorAnoMDB</display-name>
 			<ejb-name>BatchGerarResumoArrecadacaoPorAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.arrecadacao.BatchGerarResumoArrecadacaoPorAnoMDB
+				gcom.batch.gerencial.arrecadacao.BatchGerarResumoArrecadacaoPorAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

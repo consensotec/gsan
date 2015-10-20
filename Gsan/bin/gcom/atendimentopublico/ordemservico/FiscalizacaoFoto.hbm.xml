@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.atendimentopublico.ordemservico.FiscalizacaoFoto" table="atendimentopublico.fiscalizacao_foto">
+		<id name="id" type="java.lang.Integer" column="fzft_id">
+			<generator class="sequence">
+				<param name="sequence">atendimentopublico.seq_fiscalizacao_foto</param>
+			</generator>
+		</id>
+		<property name="arquivo" type="binary" column="fzft_imdocumento" not-null="true" length="-1"/>
+		<property name="descricao" type="java.lang.String" column="fzft_dsdocumento" length="200"/>
+		<property name="extensao" type="java.lang.String" column="fzft_nmextensaodocumento" not-null="true" length="4"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="fzft_tmultimaalteracao" not-null="true" length="8"/>
+		<!-- Associations -->
+		<!-- bi-directional many-to-one association to RegistroAtendimento -->
+		<many-to-one name="ordemServico" class="gcom.atendimentopublico.ordemservico.OrdemServico" not-null="true">
+			<column name="orse_id"/>
+		</many-to-one>
+		
+		<many-to-one name="fotoTipo" class="gcom.atendimentopublico.ordemservico.FotoTipo" not-null="true">
+			<column name="fotp_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

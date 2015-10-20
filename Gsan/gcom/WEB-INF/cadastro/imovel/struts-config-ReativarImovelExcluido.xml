@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="ReativarImovelExcluidoActionForm"
+			type="gcom.gui.cadastro.imovel.ReativarImovelExcluidoActionForm" />			
+							
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+
+	<action-mappings>
+		<!--******************* PÁGINA PRINCIPAL *******************-->
+		
+		<action name="ReativarImovelExcluidoActionForm"
+			type="gcom.gui.cadastro.imovel.ExibirReativarImovelExcluidoAction"
+			validate="true" scope="session"
+			path="/exibirReativarImovelExcluido">
+			<forward name="exibirReativarImovelExcluido"
+				path="/jsp/cadastro/imovel/reativar_imovel_excluido_informar.jsp"/>
+		</action>
+		
+		<action name="ReativarImovelExcluidoActionForm"
+			type="gcom.gui.cadastro.imovel.ReativarImovelExcluidoAction"
+			validate="true" scope="session"
+			path="/reativarImovelExcluidoAction">
+		</action>		
+
+	</action-mappings>
+
+</struts-config>

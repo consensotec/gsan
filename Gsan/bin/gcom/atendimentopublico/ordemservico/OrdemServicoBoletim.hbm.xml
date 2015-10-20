@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+ <class name="gcom.atendimentopublico.ordemservico.OrdemServicoBoletim" table="atendimentopublico.ordem_servico_boletim">
+  <id column="orse_id" name="id" type="java.lang.Integer">
+   <generator class="assigned"/>
+  </id>
+  <property column="orbo_icpavimento" generated="never" lazy="false"
+   length="2" name="indicadorPavimento" not-null="true" type="java.lang.Short"/>
+  <property column="orbo_nnrepasfalto" generated="never" lazy="false"
+   length="13" name="numeroReposicaoAsfalto" type="java.math.BigDecimal"/>
+  <property column="orbo_nnrepparalelo" generated="never" lazy="false"
+   length="13" name="numeroReposicaoParalelo" type="java.math.BigDecimal"/>
+  <property column="orbo_nnrepcalcada" generated="never" lazy="false"
+   length="13" name="numeroReposicaoCalcada" type="java.math.BigDecimal"/>
+  <property column="orbo_tmultimaalteracao" generated="never"
+   lazy="false" length="8" name="ultimaAlteracao" not-null="true" type="java.sql.Timestamp"/>
+  <property column="orbo_iccalcada" generated="never" lazy="false"
+   length="2" name="indicadorExisteCalcada" type="java.lang.Short"/>
+  <property column="orbo_cdtipopavimento" generated="never" lazy="false"
+   length="2" name="codigotipoPavimento" type="java.lang.Short"/>
+  <!-- Associations -->
+  <one-to-one class="gcom.atendimentopublico.ordemservico.OrdemServico"
+   constrained="true" name="ordemServico"/>
+ </class>
+</hibernate-mapping>

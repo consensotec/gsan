@@ -6,7 +6,7 @@
 			<display-name>BatchGerarArquivoTextoPagamentosContasCobrancaEmpresaMDB</display-name>
 			<ejb-name>BatchGerarArquivoTextoPagamentosContasCobrancaEmpresaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchGerarArquivoTextoPagamentosContasCobrancaEmpresaMDB
+				gcom.batch.cobranca.BatchGerarArquivoTextoPagamentosContasCobrancaEmpresaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

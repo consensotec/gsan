@@ -6,7 +6,7 @@
 			<display-name>BatchExecutarCargaArrecadacaoGerencialAnoMDB</display-name>
 			<ejb-name>BatchExecutarCargaArrecadacaoGerencialAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.arrecadacao.BatchExecutarCargaArrecadacaoGerencialAnoMDB
+				gcom.batch.gerencial.arrecadacao.BatchExecutarCargaArrecadacaoGerencialAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

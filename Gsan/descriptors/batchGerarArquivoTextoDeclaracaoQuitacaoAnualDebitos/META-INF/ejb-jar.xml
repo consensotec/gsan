@@ -6,7 +6,7 @@
 			<display-name>BatchGerarArquivoTextoDeclaracaoQuitacaoAnualDebitosMDB</display-name>
 			<ejb-name>BatchGerarArquivoTextoDeclaracaoQuitacaoAnualDebitosMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarArquivoTextoDeclaracaoQuitacaoAnualDebitosMDB
+				gcom.batch.faturamento.BatchGerarArquivoTextoDeclaracaoQuitacaoAnualDebitosMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

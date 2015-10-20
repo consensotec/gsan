@@ -6,7 +6,7 @@
 			<display-name>BatchAtualizarCodigoDebitoAutomaticoMDB</display-name>
 			<ejb-name>BatchAtualizarCodigoDebitoAutomaticoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cadastro.BatchAtualizarCodigoDebitoAutomaticoMDB
+				gcom.batch.cadastro.BatchAtualizarCodigoDebitoAutomaticoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

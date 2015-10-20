@@ -11,8 +11,8 @@
 	<property name="dest" value="bin" />
 	<property name="descriptors" value="descriptors" />
 	<property name="Generated.Source" value="${dest}/Temporary_Files" />
-	<property name="nomeEAR" value="${JBossApplicationServer.3x.deploy}/gsan.ear" />
-	<property name="nomeWAR" value="${JBossApplicationServer.3x.deploy}/gsan.ear/gsan.war" />
+	<property name="nomeEAR" value="${JBossApplicationServer.3x.deploy}/gcom.ear" />
+	<property name="nomeWAR" value="${JBossApplicationServer.3x.deploy}/gcom.ear/gcom.war" />
 	<property name="JBossApplicationServer.3x.Client.home" value="${JBossApplicationServer.3x.home}/client" />
 	<property name="Struts.home" value="lib/Struts1.1" />
 	<property name="Servlet.home" value="lib/Servlet" />
@@ -22,14 +22,14 @@
 	<property name="JAF.home" value="lib/JAF" />
 	<property name="JavaMail.home" value="lib/Javamail" />
 	<property name="PostGreSQL7.4.home" value="lib/DriverPostGres/7.4" />
-	<property name="Properties.home" value="src/gsan" />
+	<property name="Properties.home" value="src/gcom" />
 	<property name="PagerTagLib.home" value="lib/PagerTagLib" />
 	<property name="JSTL.home" value="lib/JSTL 1.1" />
 	<property name="Quartz.home" value="lib/quartz-1.5.2" />
 	<property name="JavaHelp.home" value="lib/help" />
 	<property name="src" value="src" />
 	
-	<property name="cvs" value="pserver:marcio@200.249.204.254:/projetos/cvs/gsan" />
+	<property name="cvs" value="pserver:marcio@200.249.204.254:/projetos/cvs/gcom" />
 	<property name="cvs.password" value="segredo" />
 	<property name="cvs.destino" value="${cvsDestino}" />
 	
@@ -175,7 +175,7 @@
 			</jboss>
 		</ejbjar>
 
-		<delete file="${JBossApplicationServer.3x.deploy}/gsan.ear/null.jar" />
+		<delete file="${JBossApplicationServer.3x.deploy}/gcom.ear/null.jar" />
 
 	</target>
 	<!--	<target name="cleanup">
@@ -188,7 +188,7 @@
 	-->
 	<target depends="resource" name="war">
 		<!--jsp-->
-		<jar compress="false" destfile="gsan.jar">
+		<jar compress="false" destfile="gcom.jar">
 					<fileset dir="${dest}">
 						<include name="**/*.xml" />
 						<include name="**/*.properties" />
@@ -204,9 +204,9 @@
 						<include name="*.jar" />
 					</fileset>
 				</jar>
-		<war compress="true" destfile="gsan.war" webxml="gsan/WEB-INF/web.xml">
+		<war compress="true" destfile="gcom.war" webxml="gcom/WEB-INF/web.xml">
 
-			<classes dir="src/gsan/properties">
+			<classes dir="src/gcom/properties">
 				<include name="**/*.properties" />
 			</classes>
 			<classes dir="reports">
@@ -218,7 +218,7 @@
 			-->
 
 
-			<fileset dir="gsan">
+			<fileset dir="gcom">
 				<include name="**/*.aiff" />
 				<include name="**/*.asf" />
 				<include name="**/*.asp" />
@@ -262,7 +262,7 @@
 				<include name="**/*.hs" />
 				<exclude name="WEB-INF/" />
 			</fileset>
-			<fileset dir="gsan">
+			<fileset dir="gcom">
 				<exclude name="WEB-INF/web.xml" />
 				<include name="WEB-INF/**/*.*" />
 			</fileset>
@@ -297,8 +297,8 @@
 
 	<target depends="resource,war,ejb" name="ear">
 		<!--jsp-->
-		<ear appxml="META-INF/application.xml" compress="true" destfile="gsan.ear">
-			<fileset dir="gsan/WEB-INF">
+		<ear appxml="META-INF/application.xml" compress="true" destfile="gcom.ear">
+			<fileset dir="gcom/WEB-INF">
 				<include name="META-INF/*.*" />
 				<exclude name="META-INF/application.xml" />
 			</fileset>
@@ -307,10 +307,10 @@
 				<include name="Batch*.jar" />
 			</fileset>
 			<fileset dir=".">
-				<include name="gsan.war" />
+				<include name="gcom.war" />
 			</fileset>
 			<fileset dir=".">
-							<include name="gsan.jar" />
+							<include name="gcom.jar" />
 						</fileset>
 		</ear>
 	</target>
@@ -358,14 +358,14 @@
 
 	<target name="clean">
 		<delete dir="bin" />
-		<delete dir="${JBossApplicationServer.3x.deploy}/gsan.ear" />
+		<delete dir="${JBossApplicationServer.3x.deploy}/gcom.ear" />
 	</target>
 
 	<target name="alterardatasistema">
 		<replaceregexp byline="true">
 			<regexp pattern=":.*.*/td.*$" />
 			<substitution expression=": ${data} - ${horas} &lt;/td&gt;" />
-			<fileset dir="gsan">
+			<fileset dir="gcom">
 				<include name="**/rodape.jsp" />
 			</fileset>
 		</replaceregexp>
@@ -376,9 +376,9 @@
 			<fileset dir=".">
 				<include name="Batch*.jar" />
 				<include name="Controlador*.jar" />
-				<include name="gsan.war" />
+				<include name="gcom.war" />
 				<include name="null.jar" />
-				<include name="gsan.jar" />
+				<include name="gcom.jar" />
 			</fileset>
 		</delete>
 	</target>
@@ -387,7 +387,7 @@
 		<replaceregexp byline="true" encoding="iso8859-1" >
 			<regexp pattern="AgendadorTarefas." />
 			<substitution expression="//AgendadorTarefas." />
-			<fileset dir="src/gsan/gui">
+			<fileset dir="src/gcom/gui">
 				<include name="InicializadorSistema.java" />
 			</fileset>
 		</replaceregexp>
@@ -443,19 +443,19 @@
 			
 
 	<target name="envia-servidor">
-		<echo>Enviando gsan.ear para o servidor ${servidor1.deploy} ...</echo>
-		<scp file="${cvs.destino}/gsan.ear" 
+		<echo>Enviando gcom.ear para o servidor ${servidor1.deploy} ...</echo>
+		<scp file="${cvs.destino}/gcom.ear" 
 			trust="true"			
 			todir="${servidor1.deploy.dir}"/>
 
-		<echo>Enviando gsan.ear para o servidor ${servidor2.deploy} ...</echo>
-		<scp file="${cvs.destino}/gsan.ear" 
+		<echo>Enviando gcom.ear para o servidor ${servidor2.deploy} ...</echo>
+		<scp file="${cvs.destino}/gcom.ear" 
 			trust="true"			
 			todir="${servidor2.deploy.dir}"/>
 
 		<!--
-		<echo>Enviando gsan.ear para o servidor ${servidor3.deploy} ...</echo>
-		<scp file="${cvs.destino}/gsan.ear" 
+		<echo>Enviando gcom.ear para o servidor ${servidor3.deploy} ...</echo>
+		<scp file="${cvs.destino}/gcom.ear" 
 			trust="true"			
 			todir="${servidor3.deploy.dir}"/>-->
 				

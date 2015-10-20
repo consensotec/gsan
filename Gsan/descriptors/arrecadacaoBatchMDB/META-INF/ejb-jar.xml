@@ -6,7 +6,7 @@
 			<display-name>ControladorBatchArrecadacaoGCOM</display-name>
 			<ejb-name>ControladorBatchArrecadacaoGCOM</ejb-name>
 			<ejb-class>
-				gsan.arrecadacao.ControladorBatchArrecadacao
+				gcom.arrecadacao.ControladorBatchArrecadacao
 			</ejb-class>
 			<transaction-type>Bean</transaction-type>
 			<message-driven-destination>

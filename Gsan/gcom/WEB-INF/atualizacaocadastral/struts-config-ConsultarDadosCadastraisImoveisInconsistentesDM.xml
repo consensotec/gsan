@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="FiltrarDadosCadastraisImoveisInconsistentesDMActionForm"
+			type="gcom.gui.atualizacaocadastral.FiltrarDadosCadastraisImoveisInconsistentesDMActionForm" />
+	</form-beans>
+	
+	<global-forwards />
+	
+	<action-mappings>
+		
+		<action name="FiltrarDadosCadastraisImoveisInconsistentesDMActionForm"  
+			type="gcom.gui.atualizacaocadastral.ExibirFiltrarDadosCadastraisImoveisInconsistentesDMAction" 
+			validate="false"
+			scope="session"
+			path="/exibirFiltrarDadosCadastraisImoveisInconsistentesAction">
+
+			<forward name="exibirFiltrarDadosCadastraisImoveisInconsistentes"
+			path="/jsp/atualizacaocadastral/filtro_dados_cadastrais_imoveis_inconsistentes_consultar_dm.jsp" />
+		</action>
+		
+		<action name="FiltrarDadosCadastraisImoveisInconsistentesDMActionForm"  
+			type="gcom.gui.atualizacaocadastral.FiltrarDadosCadastraisImoveisInconsistentesDMAction" 
+			validate="false"
+			scope="session"
+			path="/filtrarDadosCadastraisImoveisInconsistentesDMAction">
+			
+			<forward name="filtrarDadosCadastraisImoveisInconsistentesMovimentoDM"
+			path="/jsp/atualizacaocadastral/resultado_filtro_dados_cadastrais_imoveis_inconsistentes_movimento_dm.jsp" />
+			
+			<forward name="filtrarDadosCadastraisImoveisInconsistentesImovelDM"
+			path="/jsp/atualizacaocadastral/resultado_filtro_dados_cadastrais_imoveis_inconsistentes_imovel_dm.jsp" />
+			
+		</action>
+		
+		<action name="FiltrarDadosCadastraisImoveisInconsistentesDMActionForm"  
+			type="gcom.gui.atualizacaocadastral.ExibirAtualizarDadosImoveisInconsistentesAction" 
+			validate="false"
+			scope="session"
+			path="/exibirAtualizarDadosImoveisInconsistentesAction">
+
+			<forward name="exibirAtualizarDadosImoveisInconsistentes"
+			path="/jsp/atualizacaocadastral/exibir_atualizar_dados_imoveis_inconsistentes_dm.jsp" />
+			
+		</action>
+		
+		<action name="FiltrarDadosCadastraisImoveisInconsistentesActionForm"
+			type="gcom.gui.atualizacaocadastral.AtualizarDadosCadastraisImoveisInconsistentesAction"
+			validate="true" 
+			scope="session"
+			path="/atualizarDadosCadastraisImoveisInconsistentesAction">
+		</action>
+	
+		<action name="FiltrarDadosCadastraisImoveisInconsistentesDMActionForm"
+		 	type="gcom.gui.atualizacaocadastral.GerarRelatorioImoveisInconsistentesMovimentoAction"
+		 	validate="false"
+		 	scope="session"
+		 	path="/gerarRelatorioImoveisInconsistentesMovimentoAction">
+		</action>
+		
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>
+

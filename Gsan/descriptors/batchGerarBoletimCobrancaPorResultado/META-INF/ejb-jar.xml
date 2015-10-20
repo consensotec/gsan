@@ -8,7 +8,7 @@
 			</display-name>
 			<ejb-name>BatchGerarBoletimCobrancaPorResultadoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchGerarBoletimCobrancaPorResultadoMDB
+				gcom.batch.cobranca.BatchGerarBoletimCobrancaPorResultadoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

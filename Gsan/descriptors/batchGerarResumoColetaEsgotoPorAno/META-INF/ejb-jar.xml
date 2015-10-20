@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoColetaEsgotoPorAnoMDB</display-name>
 			<ejb-name>BatchGerarResumoColetaEsgotoPorAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.cadastro.BatchGerarResumoColetaEsgotoPorAnoMDB
+				gcom.batch.gerencial.cadastro.BatchGerarResumoColetaEsgotoPorAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

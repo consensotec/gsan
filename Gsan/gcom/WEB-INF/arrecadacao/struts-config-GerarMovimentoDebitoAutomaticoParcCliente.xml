@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="GerarMovimentoDebitoAutomaticoParcClienteActionForm"
+			type="gcom.gui.arrecadacao.GerarMovimentoDebitoAutomaticoParcClienteActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+		<action  name="GerarMovimentoDebitoAutomaticoParcClienteActionForm"
+			type="gcom.gui.arrecadacao.ExibirGerarMovimentoDebitoAutomaticoParcClienteAction"
+			validate="false" scope="session" path="/exibirGerarMovimentoDebitoAutomaticoParcClienteAction">
+			<forward name="gerarMovimentoDebitoAutomaticoParcCliente"
+				path="/jsp/arrecadacao/gerar_debito_automatico_movimento_parc_cliente.jsp" />
+		</action>
+		<action  name="GerarMovimentoDebitoAutomaticoParcClienteActionForm"
+			type="gcom.gui.arrecadacao.GerarMovimentoDebitoAutomaticoParcClienteAction"
+			validate="false" scope="session" path="/gerarMovimentoDebitoAutomaticoParcClienteAction">
+			<!-- <forward name="resumoMovimentos"
+				path="/jsp/arrecadacao/debito_automatico_movimento_resumo.jsp" /> -->
+		</action>
+		<!-- <action type="gcom.gui.relatorio.arrecadacao.GerarRelatorioMovimentoDebitoAutomaticoBancoAction"
+			scope="session" path="/gerarRelatorioMovimentoDebitoAutomaticoBancoAction" /> -->
+		
+		
+		
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>

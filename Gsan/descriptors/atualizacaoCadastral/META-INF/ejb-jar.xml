@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorAtualizacaoCadastralGCOM</display-name>
             <ejb-name>ControladorAtualizacaoCadastralGCOM</ejb-name>
-            <local-home>gsan.atualizacaocadastral.ControladorAtualizacaoCadastralLocalHome</local-home> 
-            <local>gsan.atualizacaocadastral.ControladorAtualizacaoCadastralLocal</local>
-            <ejb-class>gsan.atualizacaocadastral.ControladorAtualizacaoCadastralSEJB</ejb-class>
+            <local-home>gcom.atualizacaocadastral.ControladorAtualizacaoCadastralLocalHome</local-home> 
+            <local>gcom.atualizacaocadastral.ControladorAtualizacaoCadastralLocal</local>
+            <ejb-class>gcom.atualizacaocadastral.ControladorAtualizacaoCadastralSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

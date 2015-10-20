@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="InformarPaginaAjudaFuncionalidadeActionForm"
+			type="gcom.gui.seguranca.InformarPaginaAjudaFuncionalidadeActionForm" /> 
+	</form-beans>
+
+	<global-forwards />
+
+	<action-mappings>
+		<action name="InformarPaginaAjudaFuncionalidadeActionForm"  
+			type="gcom.gui.seguranca.ExibirInformarPaginaAjudaFuncionalidadeAction" 
+			validate="true" scope="session"
+			path="/exibirInformarPaginaAjudaFuncionalidadeAction">
+			<forward name="exibirInserirPaginaAjudaFuncionalidade" path="/jsp/seguranca/informar_pagina_ajuda_funcionalidade.jsp" />
+		</action>
+
+		<action name="InformarPaginaAjudaFuncionalidadeActionForm"
+			type="gcom.gui.seguranca.InformarPaginaAjudaFuncionalidadeAction"
+			validate="true" scope="session"
+			path="/informarPaginaAjudaFuncionalidadeAction">
+		</action>
+ 
+	</action-mappings>
+
+	<message-resources null="false" parameter="gcom.properties.application" />
+</struts-config>

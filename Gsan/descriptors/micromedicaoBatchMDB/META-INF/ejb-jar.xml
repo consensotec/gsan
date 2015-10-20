@@ -8,7 +8,7 @@
 			</display-name>
 			<ejb-name>ControladorBatchMicromedicaoGCOM</ejb-name>
 			<ejb-class>
-				gsan.faturamento.ControladorBatchMicromedicao
+				gcom.faturamento.ControladorBatchMicromedicao
 			</ejb-class>
 			<transaction-type>Bean</transaction-type>
 			<message-driven-destination>

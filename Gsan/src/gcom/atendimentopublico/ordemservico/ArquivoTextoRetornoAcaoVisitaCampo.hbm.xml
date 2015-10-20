@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+	<class name="gcom.atendimentopublico.ordemservico.ArquivoTextoRetornoAcaoVisitaCampo" table="atendimentopublico.arq_txt_ret_acao_viscam">
+		<id name="id" type="java.lang.Integer" column="atra_id">
+			<generator class="sequence">
+				<param name="sequence">atendimentopublico.seq_arq_txt_ret_acao_viscam</param>
+			</generator>
+    	</id>
+
+	    <property name="indicadorOsGeradas" type="java.lang.Short" column="atra_icgerada" not-null="true" length="1"/>
+	    <property name="dataUltimaAlteracao" type="java.sql.Timestamp" column="ATRA_TMULTIMAALTERACAO" not-null="true" length="25"/>
+	
+	    <!-- Associations -->
+	  
+	    <!-- bi-directional many-to-one association to Arquivo Texto Visita Campo -->
+	    <many-to-one name="arquivoTextoRetornoVisitaCampo" class="gcom.atendimentopublico.ordemservico.ArquivoTextoRetornoVisitaCampo" not-null="true">
+	        <column name="atrv_id" />
+	    </many-to-one>
+	    
+	    <!-- bi-directional many-to-one association to OrdemServico -->
+	    <many-to-one name="ServicoTipo" class="gcom.atendimentopublico.ordemservico.ServicoTipo">
+	        <column name="svtp_id" />
+	    </many-to-one>
+	</class>
+</hibernate-mapping>

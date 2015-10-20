@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+
+-->
+	<class name="gcom.cobranca.DividaAtivaAnalitico" table="cobranca.divida_ativa_analitico">
+		<id name="id" type="java.lang.Integer" column="daan_id">
+			<generator class="sequence">
+				<param name="sequence">cobranca.seq_divida_ativa_analitico</param>
+			</generator>
+		</id>
+		<property name="dataVencimento" type="java.sql.Timestamp" column="daan_dtvencimento" length="8"/>
+		<property name="anoMesReferencia" type="java.lang.Integer" column="daan_amreferencia" length="6" not-null="false" />
+		<property name="valorDebitoOriginal" type="java.math.BigDecimal" column="daan_vldebitooriginal" length="13"/>
+		<property name="valorDebitoComCorrecao" type="java.math.BigDecimal" column="daan_vldebitocomcorrecao" length="13"/>
+		<property name="valorDebitoAmortizado" type="java.math.BigDecimal" column="daan_vldebitoamortizado" length="13"/>
+		<property name="indicadorIntra" type="short" column="daan_icintra" not-null="true" length="2"/>
+		<property name="anoMesDividaAtiva" type="java.lang.Integer" column="daan_amdividaativa" length="6" not-null="false" />
+		
+
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="daan_tmultimaalteracao" length="8"/>
+		
+		<!-- Associations -->
+		<!-- bi-directional many-to-one association to Imovel -->
+		<many-to-one name="imovel" class="gcom.cadastro.imovel.Imovel" not-null="true">
+			<column name="imov_id"/>
+		</many-to-one>
+		<!-- bi-directional one-to-many association to Imovel -->
+		<!-- bi-directional many-to-one association to Cliente -->
+		<many-to-one name="cliente" class="gcom.cadastro.cliente.Cliente">
+			<column name="clie_id"/>
+		</many-to-one>
+		<!-- bi-directional one-to-many association to Cliente -->
+		<!-- bi-directional many-to-one association to Conta -->
+		<many-to-one name="conta" class="gcom.faturamento.conta.Conta">
+			<column name="cnta_id"/>
+		</many-to-one>
+		<!-- bi-directional one-to-many association to Imovel -->
+		<!-- bi-directional many-to-one association to Parcelamento -->
+		<many-to-one name="parcelamento" class="gcom.cobranca.parcelamento.Parcelamento">
+			<column name="parc_id"/>
+		</many-to-one>
+		<!-- bi-directional one-to-many association to Parcelamento -->
+		<!-- bi-directional many-to-one association to Localidade -->
+		<many-to-one name="localidade" class="gcom.cadastro.localidade.Localidade"> 
+			<column name="loca_id"/>
+		</many-to-one>
+		<!-- bi-directional one-to-many association to Localidade -->
+	</class>
+</hibernate-mapping>

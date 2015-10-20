@@ -6,7 +6,7 @@
 			<display-name>BatchGerarTxtImpressaoContasBrailleMDB</display-name>
 			<ejb-name>BatchGerarTxtImpressaoContasBrailleMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarTxtImpressaoContasBrailleMDB
+				gcom.batch.faturamento.BatchGerarTxtImpressaoContasBrailleMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

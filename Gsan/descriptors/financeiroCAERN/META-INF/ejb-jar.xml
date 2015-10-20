@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorFinanceiroCAERN</display-name>
             <ejb-name>ControladorFinanceiroCAERN</ejb-name>
-            <local-home>gsan.financeiro.ControladorFinanceiroLocalHome</local-home>
-            <local>gsan.financeiro.ControladorFinanceiroLocal</local>
-            <ejb-class>gsan.financeiro.ControladorFinanceiroCAERNSEJB</ejb-class>
+            <local-home>gcom.financeiro.ControladorFinanceiroLocalHome</local-home>
+            <local>gcom.financeiro.ControladorFinanceiroLocal</local>
+            <ejb-class>gcom.financeiro.ControladorFinanceiroCAERNSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

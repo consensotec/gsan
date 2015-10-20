@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorGerencialeImovelGCOM</display-name>
             <ejb-name>ControladorGerencialImovelGCOM</ejb-name>
-            <local-home>gsan.gerencial.cadastro.imovel.ControladorGerencialImovelLocalHome</local-home>
-            <local>gsan.gerencial.cadastro.imovel.ControladorGerencialImovelLocal</local>
-            <ejb-class>gsan.gerencial.cadastro.imovel.ControladorGerencialImovelSEJB</ejb-class>
+            <local-home>gcom.gerencial.cadastro.imovel.ControladorGerencialImovelLocalHome</local-home>
+            <local>gcom.gerencial.cadastro.imovel.ControladorGerencialImovelLocal</local>
+            <ejb-class>gcom.gerencial.cadastro.imovel.ControladorGerencialImovelSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

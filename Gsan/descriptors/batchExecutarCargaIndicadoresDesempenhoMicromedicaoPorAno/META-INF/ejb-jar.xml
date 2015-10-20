@@ -6,7 +6,7 @@
 			<display-name>BatchExecutarCargaIndicadoresDesempenhoMicromedicaoPorAnoMDB</display-name>
 			<ejb-name>BatchExecutarCargaIndicadoresDesempenhoMicromedicaoPorAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.faturamento.BatchExecutarCargaIndicadoresDesempenhoMicromedicaoPorAnoMDB
+				gcom.batch.gerencial.faturamento.BatchExecutarCargaIndicadoresDesempenhoMicromedicaoPorAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

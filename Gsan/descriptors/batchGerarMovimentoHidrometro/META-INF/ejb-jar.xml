@@ -6,7 +6,7 @@
 			<display-name>BatchGerarMovimentoHidrometroMDB</display-name>
 			<ejb-name>BatchGerarMovimentoHidrometroMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.micromedicao.BatchGerarMovimentoHidrometroMDB
+				gcom.batch.micromedicao.BatchGerarMovimentoHidrometroMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

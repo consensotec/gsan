@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <!-- 
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+ <class name="gcom.cadastro.imovel.Categoria" table="cadastro.categoria">
+  <id column="catg_id" name="id" type="java.lang.Integer">
+   <generator class="sequence">
+    <param name="sequence">cadastro.seq_categoria</param>
+   </generator>
+  </id>
+  <property column="catg_dscategoria" generated="never" lazy="false"
+   length="15" name="descricao" not-null="true" type="java.lang.String"/>
+  <property column="catg_dsabreviado" generated="never" lazy="false"
+   length="3" name="descricaoAbreviada" not-null="true" type="java.lang.String"/>
+  <property column="catg_nnconsumominimo" generated="never" lazy="false"
+   length="4" name="consumoMinimo" type="java.lang.Integer"/>
+  <property column="catg_nnconsumoestouro" generated="never"
+   lazy="false" length="4" name="consumoEstouro" type="java.lang.Integer"/>
+  <property column="catg_nnvezesmediaestouro" generated="never"
+   lazy="false" length="3" name="vezesMediaEstouro" type="java.math.BigDecimal"/>
+  <property column="catg_nnmediabaixoconsumo" generated="never"
+   lazy="false" length="4" name="mediaBaixoConsumo" type="java.lang.Integer"/>
+  <property column="catg_pcmediabaixoconsumo" generated="never"
+   lazy="false" length="5" name="porcentagemMediaBaixoConsumo" type="java.math.BigDecimal"/>
+  <property column="catg_nnconsumoalto" generated="never" lazy="false"
+   length="4" name="consumoAlto" type="java.lang.Integer"/>
+  <property column="catg_nnvezesmediaaltoconsumo" generated="never"
+   lazy="false" length="3" name="vezesMediaAltoConsumo" type="java.math.BigDecimal"/>
+  <property column="catg_icuso" generated="never" lazy="false"
+   length="2" name="indicadorUso" type="java.lang.Short"/>
+  <property column="catg_tmultimaalteracao" generated="never"
+   lazy="false" length="8" name="ultimaAlteracao" type="java.sql.Timestamp"/>
+  <property column="catg_nnconsumomaximoec" generated="never"
+   lazy="false" length="4" name="numeroConsumoMaximoEc" not-null="true" type="java.lang.Integer"/>
+  <property column="catg_iccobrancaacrescimos" generated="never"
+   lazy="false" length="2" name="indicadorCobrancaAcrescimos"
+   not-null="true" type="java.lang.Short"/>
+  <property column="catg_nnmaxeconomiasvalidacao" generated="never"
+   lazy="false" length="4" name="consumoMaximoEconomiasValidacao" type="java.lang.Integer"/>
+  <property column="catg_nnfatoreconomias" generated="never"
+   lazy="false" length="2" name="fatorEconomias" type="java.lang.Short"/>
+  <property column="catg_icpermissaoespecial" generated="never"
+   lazy="false" length="2" name="indicadorPermissaoEspecial"
+   not-null="true" type="short"/>
+  <property column="catg_nnconsumolimite" generated="never" lazy="false"
+   length="5" name="limiteConsumo" type="java.lang.Integer"/>
+  <property column="catg_nnfatorconsumolimite" generated="never"
+   lazy="false" length="3" name="fatorLimiteConsumo" type="java.math.BigDecimal"/>
+   <property column="catg_qtdiasprimeirofaturamento" generated="never"
+   lazy="false" length="2" name="quantidadeDiasPrimeiroFaturamento" type="java.lang.Short"/>
+
+  <!-- bi-directional many-to-one association to Categoria Tipo -->
+  <many-to-one class="gcom.cadastro.imovel.CategoriaTipo"
+   name="categoriaTipo" not-null="true">
+   <column name="cgtp_id"/>
+  </many-to-one>
+  <!-- associations 
+ bi-directional one-to-many association to Subcategoria 
+    <set
+        name="subcategorias"
+        lazy="true"
+        inverse="true"
+    >
+        <key>
+            <column name="catg_id" />
+        </key>
+        <one-to-many 
+            class="gcom.cadastro.Subcategoria"
+        />
+    </set>
+    -->
+ </class>
+</hibernate-mapping>

@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoAnormalidadesMDB</display-name>
 			<ejb-name>BatchGerarResumoAnormalidadesMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.micromedicao.BatchGerarResumoAnormalidadesMDB
+				gcom.batch.gerencial.micromedicao.BatchGerarResumoAnormalidadesMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

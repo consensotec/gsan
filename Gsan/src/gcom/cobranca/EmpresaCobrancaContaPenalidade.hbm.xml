@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--
+		Created by the Middlegen Hibernate plugin
+		
+		http://boss.bekk.no/boss/middlegen/
+		http://hibernate.sourceforge.net/
+	-->
+	<class name="gcom.cobranca.EmpresaCobrancaContaPenalidade" table="cobranca.empr_conta_cobr_pena">
+		<!--  <id name="comandoEmpresaCobrancaConta" type="java.lang.Integer" column="cecc_id" />-->
+		<composite-id name="comandoEmpresaCobrancaConta" class="gcom.cobranca.ComandoEmpresaCobrancaConta">
+			<key-property name="id" column="cecc_id" type="java.lang.Integer" />
+		</composite-id>
+		<property name="qtdImoveisEnviados" type="java.lang.Integer" column="ecpe_qtimoveisenv" length="10" not-null="true"/>
+		<property name="qtdImovesOSGeradas" type="java.lang.Integer" column="ecpe_qtosgeradas" length="10" not-null="true"/>		
+		<property name="qtdOsEncerradasDercursoPrazo" type="java.lang.Integer" column="ecpe_qtosencdec" length="10" not-null="true"/>
+		<property name="qtdFaturasSelecionadasComando" type="java.lang.Integer" column="ecpe_qtfaturasenv" length="10" not-null="true"/>		
+		<property name="qtdFaturasSelecionadasPagtoGerado" type="java.lang.Integer" column="ecpe_qtfaturasneg" length="10" not-null="true"/>
+		<property name="vlTotalContasSelecionadasComando" type="java.math.BigDecimal" column="ecpe_vltotalenv" length="13" not-null="true"/>
+		<property name="vlTotalContasSelecionadasPagtoGerado" type="java.math.BigDecimal" column="ecpe_vltotalneg" length="13" not-null="true"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="ecpe_tmultimaalteracao" length="6" not-null="true"/>
+		
+	</class>
+</hibernate-mapping>

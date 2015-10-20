@@ -6,7 +6,7 @@
 			<display-name>BatchGerarArquivoCarteira17MDB</display-name>
 			<ejb-name>BatchGerarArquivoCarteira17MDB</ejb-name>
 			<ejb-class>
-				gsan.batch.arrecadacao.BatchGerarArquivoCarteira17MDB
+				gcom.batch.arrecadacao.BatchGerarArquivoCarteira17MDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

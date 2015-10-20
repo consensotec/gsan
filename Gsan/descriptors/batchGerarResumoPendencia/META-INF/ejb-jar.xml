@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoPendenciaMDB</display-name>
 			<ejb-name>BatchGerarResumoPendenciaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.cobranca.BatchGerarResumoPendenciaMDB
+				gcom.batch.gerencial.cobranca.BatchGerarResumoPendenciaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

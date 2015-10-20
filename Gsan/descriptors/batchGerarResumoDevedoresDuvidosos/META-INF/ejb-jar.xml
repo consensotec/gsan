@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoDevedoresDuvidososMDB</display-name>
 			<ejb-name>BatchGerarResumoDevedoresDuvidososMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.financeiro.BatchGerarResumoDevedoresDuvidososMDB
+				gcom.batch.financeiro.BatchGerarResumoDevedoresDuvidososMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

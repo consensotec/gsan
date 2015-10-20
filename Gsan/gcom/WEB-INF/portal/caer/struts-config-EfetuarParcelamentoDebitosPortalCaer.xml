@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	
+	<form-beans>
+		<form-bean name="EfetuarParcelamentoDebitosPortalCaerActionForm"
+			type="gcom.gui.portal.caer.EfetuarParcelamentoDebitosPortalCaerActionForm" />
+	</form-beans>
+	
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="EfetuarParcelamentoDebitosPortalCaerActionForm"
+			type="gcom.gui.portal.caer.ExibirEfetuarParcelamentoDebitosPortalCaerAction"
+			validate="false" scope="session" path="/exibirEfetuarParcelamentoDebitosPortalCaerAction">
+			<forward name="efetuarParcelamento"
+				path="/jsp/portal/caer/parcelamento_debitos_efetuar_portal_caer.jsp"/>
+			<forward name="voltarParaServicos"
+				path="/exibirServicosPortalCaerAction.do?method=servicos" />
+			<forward name="matriculaPossuiParcelamentoNaoQuitado"
+				path="/jsp/portal/caer/servicos.jsp"/>
+			<forward name="imovelSemDebitos"
+				path="/jsp/portal/caer/servicos.jsp"/>
+			<forward name="debitoParceladoMesCorrente"
+				path="/jsp/portal/caer/servicos.jsp"/>
+			<forward name="imovelNaoPossuiPerfilParcelamento"
+				path="/jsp/portal/caer/servicos.jsp"/>
+			<forward name="telaServico"
+				path="/jsp/portal/caer/servicos.jsp"/>				
+		</action>
+		
+		<action name="EfetuarParcelamentoDebitosPortalCaerActionForm"
+			type="gcom.gui.portal.caer.EfetuarParcelamentoDebitosPortalCaerAction"
+			validate="false" scope="session"
+			path="/efetuarParcelamentoDebitosPortalCaerAction">
+			
+			<forward name="recarregarPagina" path="/exibirEfetuarParcelamentoDebitosPortalCaerAction.do"/>
+			<forward name="gerarDocumentos" path="/gerarRelatorioDocumentosParcelamentoPortalCaerAction.do"/>	
+			<forward name="parcelamentoJaEfetuadoVoltarPaginaServicos" path="/jsp/portal/caer/servicos.jsp"/>
+		</action>
+		
+		<action name="EfetuarParcelamentoDebitosPortalCaerActionForm"
+			type="gcom.gui.portal.caer.GerarRelatorioDocumentosParcelamentoPortalCaerAction"
+			validate="false" scope="session"
+			path="/gerarRelatorioDocumentosParcelamentoPortalCaerAction">
+		</action>
+		
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>

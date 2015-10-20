@@ -8,7 +8,7 @@
 			</display-name>
 			<ejb-name>BatchIncluirDebitoACobrarEntradaParcelamentoNaoPagaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchIncluirDebitoACobrarEntradaParcelamentoNaoPagaMDB
+				gcom.batch.cobranca.BatchIncluirDebitoACobrarEntradaParcelamentoNaoPagaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

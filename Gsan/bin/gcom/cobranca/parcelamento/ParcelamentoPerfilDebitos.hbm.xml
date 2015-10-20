@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.cobranca.parcelamento.ParcelamentoPerfilDebitos" table="cobranca.parc_perfil_debitos">
+		
+		<id name="id" type="java.lang.Integer" column="ppde_id">
+			<generator class="sequence">
+				<param name="sequence">cobranca.seq_parc_perfil_debitos</param>
+			</generator>
+		</id>
+		
+
+		<property name="percentualDescontoAVista" type="java.math.BigDecimal" column="ppde_pcdescontoavista" length="5"/>
+		<property name="percentualDescontoParcelado" type="java.math.BigDecimal" column="ppde_pcdescontoparcelado" length="5"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="ppde_tmultimaalteracao" length="8"/>
+		
+		<!-- Associations -->
+		<!-- bi-directional many-to-one association to ParcelamentoPerfil -->
+		<many-to-one name="parcelamentoPerfil" class="gcom.cobranca.parcelamento.ParcelamentoPerfil" not-null="true">
+			<column name="pcpf_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to DebitoTipo -->
+		<many-to-one name="debitoTipo" class="gcom.faturamento.debito.DebitoTipo" not-null="true">
+			<column name="dbtp_id"/>
+		</many-to-one>
+		
+		
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+
+-->
+	<class name="gcom.cobranca.DividaAtivaDebito" table="cobranca.divida_ativa_debito">
+		<id name="id" type="java.lang.Integer" column="dade_id">
+			<generator class="sequence">
+				<param name="sequence">cobranca.seq_divida_ativa_debito</param>
+			</generator>
+		</id>
+		<property name="valorDebitoSemCorrecao" type="java.math.BigDecimal" column="dade_vldebitosemcorrecao" length="13"/>
+		<property name="valorDebitoComCorrecao" type="java.math.BigDecimal" column="dade_vldebitocomcorrecao" length="13"/>
+		<property name="valorDebitoAmortizado" type="java.math.BigDecimal" column="dade_vldebitoamortizado" length="13"/>
+		<property name="dataRetirada" type="java.sql.Timestamp" column="dade_dtretirada" length="8"/>
+		<property name="anoMesReferenciaDebito" type="java.lang.Integer" column="dade_amreferenciadebito" length="6" not-null="false" />
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="dade_tmultimaalteracao" length="8"/>
+		
+		<!-- Associations -->
+		<!-- bi-directional many-to-one association to DividaAtivaImovel -->
+		<many-to-one name="dividaAtivaImovel" class="gcom.cobranca.DividaAtivaImovel" not-null="true">
+			<column name="daim_id"/>
+		</many-to-one>
+		<!-- bi-directional one-to-many association to DividaAtivaImovel -->
+		<!-- bi-directional many-to-one association to Conta -->
+		<many-to-one name="conta" class="gcom.faturamento.conta.Conta">
+			<column name="cnta_id"/>
+		</many-to-one>
+		<!-- bi-directional one-to-many association to Imovel -->
+		<!-- bi-directional many-to-one association to Parcelamento -->
+		<many-to-one name="parcelamento" class="gcom.cobranca.parcelamento.Parcelamento">
+			<column name="parc_id"/>
+		</many-to-one>
+		<!-- bi-directional one-to-many association to Parcelamento -->
+	</class>
+</hibernate-mapping>

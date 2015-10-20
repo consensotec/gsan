@@ -6,7 +6,7 @@
 			<display-name>BatchExecutarComandoEncerramentoRAMDB</display-name>
 			<ejb-name>BatchExecutarComandoEncerramentoRAMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.atendimentopublico.BatchExecutarComandoEncerramentoRAMDB
+				gcom.batch.atendimentopublico.BatchExecutarComandoEncerramentoRAMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

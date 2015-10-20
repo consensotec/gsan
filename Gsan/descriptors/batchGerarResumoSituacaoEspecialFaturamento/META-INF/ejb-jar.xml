@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoSituacaoEspecialFaturamentoMDB</display-name>
 			<ejb-name>BatchGerarResumoSituacaoEspecialFaturamentoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarResumoSituacaoEspecialFaturamentoMDB
+				gcom.batch.faturamento.BatchGerarResumoSituacaoEspecialFaturamentoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

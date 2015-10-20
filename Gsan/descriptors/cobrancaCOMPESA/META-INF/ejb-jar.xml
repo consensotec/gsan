@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorCobrancaCOMPESA</display-name>
             <ejb-name>ControladorCobrancaCOMPESA</ejb-name>
-            <local-home>gsan.cobranca.ControladorCobrancaLocalHome</local-home>
-            <local>gsan.cobranca.ControladorCobrancaLocal</local>
-            <ejb-class>gsan.cobranca.ControladorCobrancaCOMPESASEJB</ejb-class>
+            <local-home>gcom.cobranca.ControladorCobrancaLocalHome</local-home>
+            <local>gcom.cobranca.ControladorCobrancaLocal</local>
+            <ejb-class>gcom.cobranca.ControladorCobrancaCOMPESASEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>
@@ -395,10 +395,10 @@
                 <ejb-name>ControladorCobrancaCOMPESA</ejb-name>
                 <method-name>emitirDocumentoCobranca</method-name>
             <method-params>
-               <method-param>gsan.cobranca.CobrancaAcaoAtividadeCronograma</method-param>
-               <method-param>gsan.cobranca.CobrancaAcaoAtividadeComando</method-param>
-               <method-param>gsan.cobranca.CobrancaAcao</method-param>
-               <method-param>gsan.cobranca.CobrancaCriterio</method-param>
+               <method-param>gcom.cobranca.CobrancaAcaoAtividadeCronograma</method-param>
+               <method-param>gcom.cobranca.CobrancaAcaoAtividadeComando</method-param>
+               <method-param>gcom.cobranca.CobrancaAcao</method-param>
+               <method-param>gcom.cobranca.CobrancaCriterio</method-param>
                <method-param>java.Util.Date</method-param>
                <method-param>int</method-param>
             </method-params>

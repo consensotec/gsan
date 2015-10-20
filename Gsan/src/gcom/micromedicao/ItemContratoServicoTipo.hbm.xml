@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="gcom.micromedicao.ItemContratoServicoTipo" table="micromedicao.item_contrato_servico_tipo">
+  <composite-id name="comp_id" class="gcom.micromedicao.ItemContratoServicoTipoPK">
+	   <key-property name="servicoTipoId" column="svtp_id" type="java.lang.Integer" length="4"/>
+	   <key-property name="itemContratoServicoId" column="itsc_id" type="java.lang.Integer" length="4"/>
+  </composite-id>
+  <property column="icst_tmultimaalteracao" generated="never"
+   lazy="false" length="8" name="ultimaAlteracao" not-null="true" type="java.sql.Timestamp"/>
+   
+   <many-to-one class="gcom.atendimentopublico.ordemservico.ServicoTipo" name="servicoTipo" not-null="true"
+		 insert="false" update="false">
+		<column name="svtp_id"/>
+	</many-to-one>
+	
+	<many-to-one class="gcom.micromedicao.ItemServicoContrato" name="itemContratoServico" not-null="true"
+		 insert="false" update="false">
+		<column name="itsc_id"/>
+	</many-to-one>
+   
+   
+ </class>
+</hibernate-mapping>

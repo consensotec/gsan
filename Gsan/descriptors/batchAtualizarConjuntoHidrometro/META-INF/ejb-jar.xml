@@ -6,7 +6,7 @@
 			<display-name>BatchAtualizarConjuntoHidrometroMDB</display-name>
 			<ejb-name>BatchAtualizarConjuntoHidrometroMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.micromedicao.BatchAtualizarConjuntoHidrometroMDB
+				gcom.batch.micromedicao.BatchAtualizarConjuntoHidrometroMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

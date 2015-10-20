@@ -6,7 +6,7 @@
 			<display-name>BatchReceitaLiquidaIndiretaDeAguaEEsgotoMDB</display-name>
 			<ejb-name>BatchReceitaLiquidaIndiretaDeAguaEEsgotoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchReceitaLiquidaIndiretaDeAguaEEsgotoMDB
+				gcom.batch.faturamento.BatchReceitaLiquidaIndiretaDeAguaEEsgotoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

@@ -6,7 +6,7 @@
 			<display-name>BatchSuspenderLeituraParaImovelComConsumoRealNaoSuperiorA10MDB</display-name>
 			<ejb-name>BatchSuspenderLeituraParaImovelComConsumoRealNaoSuperiorA10MDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchSuspenderLeituraParaImovelComConsumoRealNaoSuperiorA10MDB
+				gcom.batch.faturamento.BatchSuspenderLeituraParaImovelComConsumoRealNaoSuperiorA10MDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

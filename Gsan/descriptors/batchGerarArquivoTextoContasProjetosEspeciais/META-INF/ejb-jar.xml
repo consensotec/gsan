@@ -6,7 +6,7 @@
 			<display-name>BatchGerarArquivoTextoContasProjetosEspeciaisMDB</display-name>
 			<ejb-name>BatchGerarArquivoTextoContasProjetosEspeciaisMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarArquivoTextoContasProjetosEspeciaisMDB
+				gcom.batch.faturamento.BatchGerarArquivoTextoContasProjetosEspeciaisMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

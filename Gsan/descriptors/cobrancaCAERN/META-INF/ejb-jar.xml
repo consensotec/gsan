@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorCobrancaCAERN</display-name>
             <ejb-name>ControladorCobrancaCAERN</ejb-name>
-            <local-home>gsan.cobranca.ControladorCobrancaLocalHome</local-home>
-            <local>gsan.cobranca.ControladorCobrancaLocal</local>
-            <ejb-class>gsan.cobranca.ControladorCobrancaCAERNSEJB</ejb-class>
+            <local-home>gcom.cobranca.ControladorCobrancaLocalHome</local-home>
+            <local>gcom.cobranca.ControladorCobrancaLocal</local>
+            <ejb-class>gcom.cobranca.ControladorCobrancaCAERNSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

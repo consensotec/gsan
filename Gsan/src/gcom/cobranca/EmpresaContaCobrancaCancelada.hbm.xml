@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">    
+<hibernate-mapping>
+	<class name="gcom.cobranca.EmpresaContaCobrancaCancelada" table="cobranca.empr_conta_cobr_canc">
+		<id name="id" type="java.lang.Integer" column="eccc_id">
+			<generator class="sequence">
+				<param name="sequence">cobranca.seq_empr_conta_cobr_canc</param>
+			</generator>
+    	</id>
+    	
+    	<property name="valorCancelamento" type="java.math.BigDecimal" column="eccc_vlcancelamento" not-null="true" length="13"/>
+    	<property name="dataCancelamento" type="java.sql.Date" column="eccc_dtcacancelamento" not-null="true" length="4"/>
+    	<property name="dataUltimaAlteracao" type="java.sql.Timestamp" column="eccc_tmultimaalteracao" not-null="true" length="8"/>
+    	<property name="amRefArrecadacao" type="java.lang.Integer" column="eccc_amrefarrecadacao" not-null="true" length="6"/>
+    	
+    	<!-- bi-directional many-to-one association to Imovel -->
+		<many-to-one name="imovel" class="gcom.cadastro.imovel.Imovel" not-null="true">
+			<column name="imov_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to Conta Motivo Cancelamento -->
+		<many-to-one name="contaMotivoCancelamento" class="gcom.faturamento.conta.ContaMotivoCancelamento" not-null="false">
+			<column name="cmcn_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to Empresa Cobranca Conta -->
+		<many-to-one name="empresaCobrancaConta" class="gcom.cobranca.EmpresaCobrancaConta" not-null="false">
+			<column name="ecco_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="gcom.cadastro.MensagemEmailHistorico" table="cadastro.mensagem_email_historico">
+		<id name="id" type="java.lang.Integer" column="mehi_id">
+			<generator class="sequence">
+				<param name="sequence">cadastro.seq_mensagem_email_historico</param>
+			</generator>
+		</id>
+		<property name="descricaoMensagem" type="java.lang.String" column="mehi_dsmensagem" not-null="true"/>
+		<property name="emailDestino" type="java.lang.String" column="mehi_dsemaildestino" not-null="true" length="40"/>
+		<property name="dataPrevisaoEnvio" type="java.sql.Timestamp" column="mehi_dtprevistaenvio" length="8"/>
+		<property name="dataLimiteEnvio" type="java.sql.Timestamp" column="mehi_dtlimiteenvio" length="8"/>
+		<property name="dataEnvio" type="java.sql.Timestamp" column="mehi_dtenvio" length="8"/>
+		<property name="quantidadeTentativasEnvio" type="java.lang.Integer" column="mehi_qttentativasenvio" />
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="mehi_dtultimaalteracao" not-null="true" length="8"/>
+		<property name="anoMesReferenciaConta" type="java.lang.Integer" column="mehi_amreferenciaconta" />
+		
+		<many-to-one name="cliente" class="gcom.cadastro.cliente.Cliente">
+		    <column name="clie_id" />
+		</many-to-one>
+		<many-to-one name="parametroMensagemSMSEmail" class="gcom.cadastro.ParametrosMSGSMSEmail">
+		    <column name="pmse_id" />
+		</many-to-one>
+		<many-to-one name="acaoCobranca" class="gcom.cobranca.CobrancaAcao">
+		    <column name="cbac_id" />
+		</many-to-one>
+		<many-to-one name="conta" class="gcom.faturamento.conta.Conta">
+		    <column name="cnta_id" />
+		</many-to-one>
+		<many-to-one name="grupoFaturamento" class="gcom.faturamento.FaturamentoGrupo">
+		    <column name="ftgr_id" />
+		</many-to-one>
+		<many-to-one name="cobrancaAcaoAtividadeComando" class="gcom.cobranca.CobrancaAcaoAtividadeComando">
+			<column name="cacm_id"/>
+		</many-to-one>
+		<many-to-one name="cobrancaDocumento" class="gcom.cobranca.CobrancaDocumento" not-null="false">
+			<column name="cbdo_id"/>
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

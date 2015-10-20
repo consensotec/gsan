@@ -6,7 +6,7 @@
 			<display-name>BatchGerarRAOSAnormalidadeConsumoMDB</display-name>
 			<ejb-name>BatchGerarRAOSAnormalidadeConsumoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.micromedicao.BatchGerarRAOSAnormalidadeConsumo
+				gcom.batch.micromedicao.BatchGerarRAOSAnormalidadeConsumo
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

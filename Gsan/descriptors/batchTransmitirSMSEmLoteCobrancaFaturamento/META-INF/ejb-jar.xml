@@ -6,7 +6,7 @@
 			<display-name>BatchTransmitirSMSEmLoteCobrancaFaturamentoMDB</display-name>
 			<ejb-name>BatchTransmitirSMSEmLoteCobrancaFaturamentoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cadastro.BatchTransmitirSMSEmLoteCobrancaFaturamento
+				gcom.batch.cadastro.BatchTransmitirSMSEmLoteCobrancaFaturamento
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

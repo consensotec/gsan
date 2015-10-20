@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="gcom.micromedicao.hidrometro.HidrometroFaixaIdade" table="micromedicao.hidrometro_faixa_idade">
+		<id name="id" type="java.lang.Integer" column="hifi_id">
+			<generator class="sequence">
+				<param name="sequence">micromedicao.seq_hidrometro_faixa_idade</param>
+			</generator>
+		</id>	
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="hifi_tmultimaalteracao" length="8"/>	
+		<property name="descricao" type="java.lang.String" column="hifi_dsfaixa" not-null="true" length="80"/>
+		<property name="valorInicial" type="java.lang.Integer" column="hifi_nninicio"  not-null="true"/>
+		<property name="valorFinal" type="java.lang.Integer" column="hifi_nnfim"  not-null="true"/>
+	</class>
+</hibernate-mapping>

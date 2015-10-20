@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoInstalacoesHidrometrosPorAnoMDB</display-name>
 			<ejb-name>BatchGerarResumoInstalacoesHidrometrosPorAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.micromedicao.BatchGerarResumoInstalacoesHidrometrosPorAnoMDB
+				gcom.batch.gerencial.micromedicao.BatchGerarResumoInstalacoesHidrometrosPorAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

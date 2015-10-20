@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.cobranca.ColunasTextoSMSEmail" table="cadastro.colunas_texto_sms_email">
+		<id name="id" type="java.lang.Integer" column="ctse_id">
+			<generator class="sequence">
+				<param name="sequence">
+				cobranca.seq_colunas_texto_sms_email</param>
+			</generator>
+		</id>
+		<property name="nomeColuna" type="java.lang.String" column="ctse_nmcoluna" not-null="true" length="50"/>
+		<property name="descricaoColuna" type="java.lang.String" column="ctse_dscoluna" not-null="true" length="100"/>
+		<property name="tamanhoColuna" type="java.lang.Integer" column="ctse_nntamanhocoluna" not-null="true"/>
+		<property name="indicadorFaturamento" type="java.lang.Short" column="ctse_icfaturamento" not-null="true"/>
+		<property name="indicadorCobranca" type="java.lang.Short" column="ctse_iccobranca" not-null="true"/>
+		<property name="indicadorUso" type="java.lang.Short" column="ctse_icuso" not-null="true"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="ctse_tmultimaalteracao" not-null="true" length="8"/>
+	</class>
+</hibernate-mapping>

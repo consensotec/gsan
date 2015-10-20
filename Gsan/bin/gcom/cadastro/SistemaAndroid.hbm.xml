@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+
+    Created by the Middlegen Hibernate plugin 2.1
+
+
+
+    http://boss.bekk.no/boss/middlegen/
+
+    http://www.hibernate.org/
+
+-->
+	<class name="gcom.cadastro.SistemaAndroid" table="cadastro.sistema_android">
+		<id name="id" type="java.lang.Integer" column="sian_id">
+			<generator class="sequence">
+				<param name="sequence">cadastro.seq_sistema_android</param>
+			</generator>
+		</id>
+		<property name="descricaoSistema" type="java.lang.String" not-null="true" column="sian_dssistema" length="50"/>
+		<property name="indicadorUso" type="java.lang.Short" column="sian_icuso" not-null="true" length="2"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="sian_tmultimaalteracao" not-null="true" length="8"/>
+		
+	</class>
+</hibernate-mapping>

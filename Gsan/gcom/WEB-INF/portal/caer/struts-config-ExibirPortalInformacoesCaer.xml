@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="ExibirInformacoesPortalCaerActionForm"
+			type="gcom.gui.portal.caer.ExibirInformacoesPortalCaerActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="ExibirInformacoesPortalCaerActionForm"
+			type="gcom.gui.portal.caer.ExibirInformacoesPortalCaerAction"
+			validate="false" scope="session"
+			path="/exibirInformacoesPortalCaerAction">
+
+			<forward name="exibirInformacoesPortalCaerAction"
+				path="/jsp/portal/caer/informacoes_portal_caer.jsp" />
+
+			<forward name="exibirInformacoesParcelamentoDebitoPortalCaerAction"
+				path="/jsp/portal/caer/informacoes_parcelamento_debito_portal_caer.jsp" />
+			
+			<forward name="exibirValidarCertidaoNegativaDebitoPortalCaerAction"
+				path="/jsp/portal/caer/validar_certidao_negativa_debito_portal_caer.jsp" />
+			
+		</action>
+		
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>
+

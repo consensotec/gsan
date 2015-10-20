@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+	<!-- Created by the Middlegen Hibernate plugin http://boss.bekk.no/boss/middlegen/ 
+		http://hibernate.sourceforge.net/ -->
+
+	<class name="gcom.seguranca.ConsultarReceitaFederal" table="seguranca.consulta_receita_federal">
+
+		<id name="id" type="java.lang.Integer" column="CRFD_ID">
+			<generator class="sequence">
+				<param name="sequence">seguranca.seq_consulta_receita_federal</param>
+			</generator>
+		</id>
+
+
+		<property name="codigoDDDComercial" type="java.lang.String"
+			column="CRFD_NNDDDCOM" length="2" />
+
+		<property name="telefoneComercialCliente" type="java.lang.String"
+			column="CRFD_NNFONECOM" length="9" />
+
+		<property name="loginUsuario" type="java.lang.String" column="usur_nmlogin"
+			length="11" />
+			
+		<property name="cpfUsuario" type="java.lang.String" column="usur_nncpf"
+			length="11" />
+
+		<property name="acaoUsuario" type="java.lang.Short"
+			column="CRFD_CDACAO" length="3" not-null="true" />
+
+		<property name="ufCliente" type="java.lang.String" column="CRFD_DSUF"
+			length="2" />
+			
+		<property name="cepCliente" type="java.lang.Integer" column="CRFD_CDCEP" />
+		
+		<property name="cidadeCliente" type="java.lang.String"
+			column="CRFD_DSCIDADE" length="30" />
+
+		<property name="bairroCliente" type="java.lang.String"
+			column="CRFD_DSBAIRRO" length="30" />
+			
+		<property name="complementoEnderecoCliente" type="java.lang.String"
+			column="CRFD_DSCOMPLEMENTO" length="50" />	
+
+		<property name="logradouroCliente" type="java.lang.String"
+			column="CRFD_NMLOGRADOURO" length="50" />		
+
+		<property name="numeroFaxCliente" type="java.lang.String"
+			column="CRFD_NNFONEFAX" length="9" />
+
+		<property name="codigoDDDFaxCliente" type="java.lang.String" column="CRFD_NNDDDFAX"
+			length="2" />
+
+		<property name="codigoDDDCelularCliente" type="java.lang.String"
+			column="CRFD_NNDDDCEL" length="2" />
+			
+
+		<property name="numeroCelularCliente" type="java.lang.String"
+			column="CRFD_NNFONECEL" length="9" />
+		
+		<property name="codigoDDDTelefoneResidencialCliente" type="java.lang.String"
+			column="CRFD_NNDDDRES" length="2" />
+
+		<property name="numeroTelefoneResidencialCliente" type="java.lang.String"
+			column="CRFD_NNFONERES" length="9" />
+			
+		<property name="nomeCliente" type="java.lang.String" column="CRFD_NMCLIENTE"
+			length="50" not-null="true" />
+			
+		<property name="cpfCliente" type="java.lang.String" column="CRFD_NNCPF"
+			length="11" />
+
+		<property name="signoCliente" type="java.lang.String" column="CRFD_DSSIGNO"
+			length="50" />
+			
+		<property name="sexoCliente" type="java.lang.String" column="CRFD_DSSEXO" 
+			length="20" />
+			
+		<property name="tituloEleitorCliente" type="java.lang.String"
+			column="CRFD_NNTITULO" length="20" />
+			
+		<property name="numeroRGCliente" type="java.lang.String" column="CRFD_NNRG"
+			length="13" />	
+		
+		<property name="nomeDoPaiCliente" type="java.lang.String" column="CRFD_NMPAI"
+			length="50" />
+			
+		<property name="nomeDaMaeCliente" type="java.lang.String" column="CRFD_NMMAE"
+			length="50" />
+		
+		<property name="idade" type="java.lang.Integer"
+			column="CRFD_NNIDADE" />
+			
+		<property name="estadoCivil" type="java.lang.String" column="CRFD_DSESTADOCIVIL"
+			length="20" />	
+			
+		<property name="dataNascimento" type="java.sql.Timestamp"
+			column="CRFD_DTNASCIMENTO" length="8" />	
+			
+		<property name="situacaoRG" type="java.lang.String" column="CRFD_DSSITUACAORG"
+			length="50" />
+		
+		<property name="situacaoCPF" type="java.lang.String" column="CRFD_DSSITUACAOCPF"
+			length="50" />
+			
+		<property name="cnpjCliente" type="java.lang.String" column="CRFD_NNCNPJ"
+			length="14" />
+		
+ 		<property name="situacaoCNPJ" type="java.lang.String" column="CRFD_DSSITUACAOCNPJ"
+			length="50" />
+			
+		<property name="situacaoInscricaoEstadual" type="java.lang.String"
+			column="CRFD_DSSITUACAOINSCESTADUAL" length="50" />
+			
+		<property name="naturezaJuridica" type="java.lang.String"
+			column="CRFD_DSNATUREZAJURIDICA" length="50" />
+			
+		<property name="atividadeEconomicaPrincipal" type="java.lang.String"
+			column="CRFD_DSATIVPRINCIPAL" length="50" />
+			
+		<property name="atividadeEconomicaSecundaria" type="java.lang.String"
+			column="CRFD_DSATIVSECUNDARIA" length="50" />
+			
+		<property name="dataFundacao" type="java.sql.Timestamp"
+			column="CRFD_DTFUNDACAO" length="8" />
+			
+		<property name="inscricaoEstadual" type="java.lang.String"
+			column="CRFD_NNINSCRICAOESTADUAL" length="20" />
+			
+		<property name="nomeComercial" type="java.lang.String"
+			column="CRFD_NMCOMERCIAL" length="50" />
+			
+		<property name="numeroNIRENIEC" type="java.lang.String"
+			column="CRFD_NNNIRENIEC" length="30" />
+			
+		<property name="razaoSocial" type="java.lang.String" column="CRFD_DSRAZAOSOCIAL"
+			length="50" />
+			
+		<property name="razaoSocialAnterior" type="java.lang.String"
+			column="CRFD_DSRAZAOSOCIALANT" length="50" />
+			
+		<property name="valorCapitalSocial" type="java.math.BigDecimal"
+			column="CRFD_VLCAPITALSOCIAL" />
+			
+		<property name="dataUltimaAlteracaoConsulta" type="java.sql.Timestamp"
+			column="CRFD_TMULTIMAALTERACAO" length="8" />
+		
+		<property name="numeroEnderecoCliente" type="java.lang.String"
+			column="CRFD_NNIMOVEL" length="5" />	
+			
+		<property name="idLogConsulta" type="java.lang.Integer" 
+					column="CRFD_IDLOG" /> 
+					
+		<property name="ramoAtividade" type="java.lang.String" 
+					column="CRFD_RAMOATIVIDADE" length="50" /> 
+
+		<property name="codigoOrigemConsulta" type="java.lang.Short"
+			column="CRFD_CDORIGEMCONSULTA" length="3" not-null="true" />
+		
+		<property name="situacaoEspecial" type="java.lang.String" 
+					column="CRFD_DSSITUACAOESPECIAL" length="50" /> 	
+			
+
+		<!-- associations -->
+
+		<many-to-one name="usuarioSolicitante" class="gcom.seguranca.acesso.usuario.Usuario"
+			not-null="false">
+			<column name="usur_id" />
+		</many-to-one>
+
+		<many-to-one name="cliente" class="gcom.cadastro.cliente.Cliente"
+			not-null="false">
+			<column name="clie_id" />
+		</many-to-one>
+
+		<many-to-one name="funcionario" class="gcom.cadastro.funcionario.Funcionario"
+			not-null="false">
+			<column name="func_id" />
+		</many-to-one>
+		
+		<many-to-one name="mensagemRetornoReceitaFederal" class="gcom.cadastro.MensagemRetornoReceitaFederal"
+			not-null="false">
+			<column name="MRRF_ID" />
+		</many-to-one>
+
+	</class>
+</hibernate-mapping>

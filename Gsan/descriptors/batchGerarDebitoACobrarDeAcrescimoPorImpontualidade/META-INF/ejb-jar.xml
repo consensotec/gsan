@@ -6,7 +6,7 @@
 			<display-name>BatchGerarDebitoACobrarDeAcrescimoPorImpontualidadeMDB</display-name>
 			<ejb-name>BatchGerarDebitoACobrarDeAcrescimoPorImpontualidadeMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarDebitoACobrarDeAcrescimoPorImpontualidadeMDB
+				gcom.batch.faturamento.BatchGerarDebitoACobrarDeAcrescimoPorImpontualidadeMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

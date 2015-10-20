@@ -6,7 +6,7 @@
 			<display-name>BatchEnviarEMAILCobrancaFaturamentoMDB</display-name>
 			<ejb-name>BatchEnviarEMAILCobrancaFaturamentoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cadastro.BatchEnviarEMAILCobrancaFaturamentoMDB
+				gcom.batch.cadastro.BatchEnviarEMAILCobrancaFaturamentoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

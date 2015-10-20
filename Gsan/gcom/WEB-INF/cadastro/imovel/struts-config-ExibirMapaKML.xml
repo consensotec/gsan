@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+			<action type="gcom.gui.cadastro.imovel.ExibirMapaKMLAction"
+			validate="false" scope="session" path="/exibirMapaKMLAction">
+			<forward name="exibirMapaKML"
+				path="/jsp/cadastro/imovel/mapa_kml.jsp" />
+		</action>
+	</action-mappings>
+	
+	<action-mappings>
+		<action type="gcom.gui.cadastro.imovel.ExibirObterMapaKMLAction"
+			validate="false" scope="session" path="/exibirObterMapaKMLAction">
+		</action>
+	</action-mappings>
+	
+	<action-mappings>
+		<action type="gcom.gui.cadastro.imovel.ExibirObterMapaJSONAction"
+			validate="false" scope="session" path="/exibirObterMapaJSONAction">
+		</action>
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+		
+</struts-config>

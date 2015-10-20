@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<!--******************* PAGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+		
+		<action 
+			type="gcom.gui.portal.caema.ExibirConsultarRegulamentoServicosPortalCaemaAction"
+			validate="false" 
+			scope="session"
+			path="/exibirConsultarRegulamentoServicosPortalCaemaAction">
+			
+			<forward name="exibirConsultarRegulamentoServicosPortalCaemaAction"
+				path="/jsp/portal/caema/informacoes_regulamento_servicos_portal_caema.jsp" />
+				
+		</action>
+		
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>

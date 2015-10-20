@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoFaturamentoAguaEsgotoMDB</display-name>
 			<ejb-name>BatchGerarResumoFaturamentoAguaEsgotoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarResumoFaturamentoAguaEsgotoMDB
+				gcom.batch.faturamento.BatchGerarResumoFaturamentoAguaEsgotoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

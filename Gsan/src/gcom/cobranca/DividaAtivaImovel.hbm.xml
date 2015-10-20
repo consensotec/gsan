@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+
+-->
+	<class name="gcom.cobranca.DividaAtivaImovel" table="cobranca.divida_ativa_imovel">
+		<id name="id" type="java.lang.Integer" column="daim_id">
+			<generator class="sequence">
+				<param name="sequence">cobranca.seq_divida_ativa_imovel</param>
+			</generator>
+		</id>
+		<property name="valorTotalDebitoSemCorrecao" type="java.math.BigDecimal" column="daim_vltotaldebitosemcorrecao" length="13"/>
+		<property name="valorTotalDebitoComCorrecao" type="java.math.BigDecimal" column="daim_vltotaldebitocomcorrecao" length="13"/>
+		<property name="indicadorIntra" type="short" column="daim_icintra" not-null="true" length="2"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="daim_tmultimaalteracao" length="8"/>
+		
+		<!-- Associations -->
+		<!-- bi-directional many-to-one association to DividaAtivaCriterio -->
+		<many-to-one name="dividaAtivaCriterio" class="gcom.cobranca.DividaAtivaCriterio" not-null="true">
+			<column name="dacr_id"/>
+		</many-to-one>
+		<!-- bi-directional one-to-many association to DividaAtivaCriterio -->
+		<!-- bi-directional many-to-one association to Imovel -->
+		<many-to-one name="imovel" class="gcom.cadastro.imovel.Imovel" not-null="true">
+			<column name="imov_id"/>
+		</many-to-one>
+		<!-- bi-directional one-to-many association to Imovel -->
+		<!-- bi-directional many-to-one association to Cliente -->
+		<many-to-one name="cliente" class="gcom.cadastro.cliente.Cliente">
+			<column name="clie_id"/>
+		</many-to-one>
+		<!-- bi-directional one-to-many association to Cliente -->
+	</class>
+</hibernate-mapping>

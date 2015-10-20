@@ -13,7 +13,7 @@
 
 			<ejb-class>
 
-				gsan.batch.gerencial.cadastro.BatchGerarResumoConsumoAguaPorAnoMDB
+				gcom.batch.gerencial.cadastro.BatchGerarResumoConsumoAguaPorAnoMDB
 
 
 			</ejb-class>

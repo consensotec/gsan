@@ -6,13 +6,13 @@
 			<display-name>ControladorFaturamentoCOSAMA</display-name>
 			<ejb-name>ControladorFaturamentoCOSAMA</ejb-name>
 			<local-home>
-				gsan.faturamento.ControladorFaturamentoLocalHome
+				gcom.faturamento.ControladorFaturamentoLocalHome
 			</local-home>
 			<local>
-				gsan.faturamento.ControladorFaturamentoLocal
+				gcom.faturamento.ControladorFaturamentoLocal
 			</local>
 			<ejb-class>
-				gsan.faturamento.ControladorFaturamentoCOSAMASEJB
+				gcom.faturamento.ControladorFaturamentoCOSAMASEJB
 			</ejb-class>
 			<session-type>Stateless</session-type>
 			<transaction-type>Container</transaction-type>

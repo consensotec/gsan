@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorTarifaSocialGCOM</display-name>
             <ejb-name>ControladorTarifaSocialGCOM</ejb-name>
-            <local-home>gsan.cadastro.tarifasocial.ControladorTarifaSocialLocalHome</local-home>
-            <local>gsan.cadastro.tarifasocial.ControladorTarifaSocialLocal</local>
-            <ejb-class>gsan.cadastro.tarifasocial.ControladorTarifaSocialSEJB</ejb-class>
+            <local-home>gcom.cadastro.tarifasocial.ControladorTarifaSocialLocalHome</local-home>
+            <local>gcom.cadastro.tarifasocial.ControladorTarifaSocialLocal</local>
+            <ejb-class>gcom.cadastro.tarifasocial.ControladorTarifaSocialSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

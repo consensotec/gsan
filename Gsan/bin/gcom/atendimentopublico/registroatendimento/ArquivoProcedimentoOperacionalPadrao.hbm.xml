@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+	-->
+	<class name="gcom.atendimentopublico.registroatendimento.ArquivoProcedimentoOperacionalPadrao" table="atendimentopublico.sol_tipo_espec_arqui_pop">
+		<id name="id" type="java.lang.Integer" column="stea_id">
+			<generator class="sequence">
+				<param name="sequence">atendimentopublico.seq_sol_tipo_espec_arqui_pop</param>
+			</generator>
+		</id>
+		<property name="nomeArquivo" type="java.lang.String" column="stea_nmarquivopop" not-null="true" length="50"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="stea_ultimaalteracao" not-null="true" length="8"/>
+		<property name="bytesArquivo" type="binary" column="stea_arquivopop" not-null="true" length="-1" />
+		
+		
+		<!-- Associations -->
+		<!-- bi-directional many-to-one association to SolicitacaoTipoEspecificacao -->  
+		<many-to-one name="solicitacaoTipoEspecificacao" class="gcom.atendimentopublico.registroatendimento.SolicitacaoTipoEspecificacao" not-null="true">
+			<column name="step_id"/>
+		</many-to-one>
+		
+		
+	</class>
+</hibernate-mapping>

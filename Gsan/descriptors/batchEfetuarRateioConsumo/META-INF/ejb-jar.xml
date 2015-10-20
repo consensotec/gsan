@@ -6,7 +6,7 @@
 			<display-name>BatchEfetuarRateioConsumoMDB</display-name>
 			<ejb-name>BatchEfetuarRateioConsumoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.micromedicao.BatchEfetuarRateioConsumoMDB
+				gcom.batch.micromedicao.BatchEfetuarRateioConsumoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

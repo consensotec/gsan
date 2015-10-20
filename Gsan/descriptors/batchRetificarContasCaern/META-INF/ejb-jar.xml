@@ -6,7 +6,7 @@
 			<display-name>BatchRetificarContasCaernMDB</display-name>
 			<ejb-name>BatchRetificarContasCaernMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchRetificarContasCaernMDB
+				gcom.batch.faturamento.BatchRetificarContasCaernMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

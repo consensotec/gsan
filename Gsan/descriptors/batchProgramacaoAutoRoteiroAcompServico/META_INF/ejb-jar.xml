@@ -6,7 +6,7 @@
 			<display-name>BatchProgramacaoAutoRoteiroAcompServicoMDB</display-name>
 			<ejb-name>BatchProgramacaoAutoRoteiroAcompServicoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.atendimentopublico.BatchProgramacaoAutoRoteiroAcompServicoMDB
+				gcom.batch.atendimentopublico.BatchProgramacaoAutoRoteiroAcompServicoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

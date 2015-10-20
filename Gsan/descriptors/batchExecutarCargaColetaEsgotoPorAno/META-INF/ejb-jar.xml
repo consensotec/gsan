@@ -6,7 +6,7 @@
 			<display-name>BatchExecutarCargaColetaEsgotoPorAnoMDB</display-name>
 			<ejb-name>BatchExecutarCargaColetaEsgotoPorAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.faturamento.BatchExecutarCargaColetaEsgotoPorAnoMDB
+				gcom.batch.gerencial.faturamento.BatchExecutarCargaColetaEsgotoPorAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

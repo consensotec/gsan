@@ -13,7 +13,7 @@
 
 			<ejb-class>
 
-				gsan.batch.financeiro.BatchGerarResumoReceitaMDB
+				gcom.batch.financeiro.BatchGerarResumoReceitaMDB
 
 
 			</ejb-class>

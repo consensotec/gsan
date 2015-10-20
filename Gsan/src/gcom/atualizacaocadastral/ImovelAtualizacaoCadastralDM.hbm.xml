@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<class name="gcom.atualizacaocadastral.ImovelAtualizacaoCadastralDM" table="atualizacaocadastral.imovel_atlz_cadastral_dm">
+
+	  	<id column="imac_id" name="id" type="java.lang.Integer">
+   			<generator class="sequence">
+    			<param name="sequence">atualizacaocadastral.seq_imovel_atlz_cadastral_dm</param>
+   			</generator>
+  		</id>
+		
+		<property name="idImovel" column="imov_id" type="java.lang.Integer" lazy="false" />
+		<property name="idBairro" column="bair_id" type="java.lang.Integer" />
+		<property name="codigoSetorComercial" column="imac_cdsetorcomercial" type="java.lang.Integer" not-null="true" />
+		<property name="numeroQuadra" column="imac_nnquadra" type="java.lang.Integer" not-null="true" />
+		<property name="numeroLote" column="imac_nnlote" type="java.lang.Integer" not-null="true" />
+		<property name="numeroSubLote" column="imac_nnsublote" type="java.lang.Integer" not-null="true"/>
+		<property name="idLogradouro" column="logr_id" type="java.lang.Long" />
+		<property name="codigoLogradouroCep" column="imac_cdlogradourocep" type="java.lang.Integer" /> 
+		<property name="codigoLogradouroBairro" column="imac_cdlogradourobairro" type="java.lang.Integer" />
+		<property name="numeroImovel" column="imac_nnimovel" type="java.lang.String" not-null="true" length="5"/>
+		<property name="codigoCep" type="java.lang.Integer" column="imac_cdcep" />
+		<property name="complementoEndereco" type="java.lang.String" column="imac_dscomplementoendereco" length="25"/>
+		<property name="nomeBairro" type="java.lang.String" column="imac_nmbairro" length="30"/>
+		<property name="numeroMedidorEnergia" type="java.lang.String" column="imac_nnmedidorenergia" length="10"/>
+		<property name="numeroMorador" type="java.lang.Short" column="imac_nnmorador" length="2"/>
+		<property name="observacao" type="java.lang.String" column="imac_dsobservacao" length="400" not-null="false" />
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="imac_tmultimaalteracao" not-null="true" length="8"/>
+		<property column="imac_icatualizado" generated="never" lazy="false" length="2" name="indicadorAtualizado" not-null="true" type="java.lang.Short"/>  
+		<property column="imac_icpendente" generated="never" lazy="false" length="2" name="indicadorPendente" not-null="true" type="java.lang.Short"/>  
+		<property column="imac_icdadosretorno" generated="never" lazy="false" length="2" name="indicadorDadosRetorno" not-null="true" type="java.lang.Short"/>  
+		<property column="imac_dtrecebimentomovimento" not-null="false" length="8" name="dataRecebimentoMovimento" type="java.sql.Date"/>
+		<property name="dataVisita" type="java.sql.Timestamp" column="imac_tmvisita" not-null="false" length="8"/>
+		<property name="login" column="imac_nmlogin" not-null="false" type="java.lang.String" />
+		<property name="dsUFSiglaMunicipio" type="java.lang.String" column="imac_dsufsiglamunicipio" length="2"/>
+		<property column="imac_icresetorizado" lazy="false" length="2" name="indicadorResetorizado" not-null="true" type="java.lang.Short" />
+		<property column="imac_icimovelnovo"  lazy="false" length="2" name="indicadorImovelNovo" not-null="true" type="java.lang.Short" />
+		<property column="imac_icregistroexcluido"  lazy="false" length="2" name="indicadorRegistroExcluido" not-null="true" type="java.lang.Short" />
+		<property name="codigoSituacao" column="imac_cdsituacao" not-null="false" type="java.lang.Integer" />
+		<property name="codigoImovel" type="java.lang.String" column="imac_cdimovel"/>
+		<property name="coordenadaX" type="java.math.BigDecimal" column="imac_nncoordenadax" length="24"/>
+		<property name="coordenadaY" type="java.math.BigDecimal" column="imac_nncoordenaday" length="24"/>
+
+		<many-to-one class="gcom.atualizacaocadastral.ParametroTabelaAtualizacaoCadastralDM" name="parametroTabelaAtualizacaoCadastralDM" not-null="true">
+	    	<column name="ptac_id"/>
+	    </many-to-one>
+
+		<many-to-one name="empresa" class="gcom.cadastro.empresa.Empresa" not-null="false">
+			<column name="empr_id"></column>
+		</many-to-one>	
+		
+		<many-to-one name="imovelPerfil" class="gcom.cadastro.imovel.ImovelPerfil" not-null="false">
+			<column name="iper_id"></column>
+		</many-to-one>	
+		
+		<many-to-one name="unidadeFederacao" class="gcom.cadastro.geografico.UnidadeFederacao" not-null="false">
+			<column name="unfe_id"></column>
+		</many-to-one>	
+		
+		<many-to-one name="localidade" class="gcom.cadastro.localidade.Localidade" not-null="false">
+			<column name="loca_id"></column>
+		</many-to-one>	
+	    
+		<many-to-one name="enderecoReferencia" class="gcom.cadastro.endereco.EnderecoReferencia" not-null="false">
+			<column name="edrf_id"></column>
+		</many-to-one>	
+		
+		<many-to-one name="municipio" class="gcom.cadastro.geografico.Municipio" not-null="false">
+			<column name="muni_id"></column>
+		</many-to-one>	
+		
+		<many-to-one name="pavimentoRua" class="gcom.cadastro.imovel.PavimentoRua" not-null="false">
+			<column name="prua_id"></column>
+		</many-to-one>
+		
+		<many-to-one name="pavimentoCalcada" class="gcom.cadastro.imovel.PavimentoCalcada" not-null="false">
+			<column name="pcal_id"></column>
+		</many-to-one>
+		
+		<many-to-one name="fonteAbastecimento" class="gcom.cadastro.imovel.FonteAbastecimento" not-null="false">
+			<column name="ftab_id"></column>
+		</many-to-one>
+		
+		<many-to-one name="ligacaoAguaSituacao" class="gcom.atendimentopublico.ligacaoagua.LigacaoAguaSituacao" not-null="false">
+			<column name="last_id"></column>
+		</many-to-one>
+		
+		<many-to-one name="ligacaoEsgotoSituacao" class="gcom.atendimentopublico.ligacaoesgoto.LigacaoEsgotoSituacao" not-null="false">
+			<column name="lest_id"></column>
+		</many-to-one>
+		
+		<many-to-one name="ocorrenciaHidrometro" class="gcom.micromedicao.leitura.LeituraAnormalidade" not-null="false">
+			<column name="ltan_id"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

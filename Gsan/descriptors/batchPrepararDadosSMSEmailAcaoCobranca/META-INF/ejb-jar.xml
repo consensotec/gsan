@@ -6,7 +6,7 @@
 			<display-name>BatchPrepararDadosSMSEmailAcaoCobrancaMDB</display-name>
 			<ejb-name>BatchPrepararDadosSMSEmailAcaoCobrancaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchPrepararDadosSMSEmailAcaoCobrancaMDB
+				gcom.batch.cobranca.BatchPrepararDadosSMSEmailAcaoCobrancaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

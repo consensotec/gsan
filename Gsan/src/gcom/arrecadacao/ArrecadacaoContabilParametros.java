@@ -118,9 +118,18 @@ public class ArrecadacaoContabilParametros {
 		  
 	}
 
-	public ArrecadacaoContabilParametros(Integer id, String descricaoHistoricoCredito, String descricaoHistoricoDebito, Date ultimaAlteracao, RecebimentoTipo recebimentoTipo, LancamentoTipo lancamentoTipo, LancamentoItem lancamentoItem, LancamentoItemContabil lancamentoItemContabil, Categoria categoria, ContaContabil contaContabilDebito, ContaContabil contaContabilCredito) {
-
-		// TODO Auto-generated constructor stub
+	public ArrecadacaoContabilParametros(Integer id,
+			String descricaoHistoricoCredito,
+			String descricaoHistoricoDebito,
+			Date ultimaAlteracao,
+			RecebimentoTipo recebimentoTipo,
+			LancamentoTipo lancamentoTipo,
+			LancamentoItem lancamentoItem,
+			LancamentoItemContabil lancamentoItemContabil,
+			Categoria categoria,
+			ContaContabil contaContabilDebito,
+			ContaContabil contaContabilCredito) {
+		
 		this.id = id;
 		this.descricaoHistoricoCredito = descricaoHistoricoCredito;
 		this.descricaoHistoricoDebito = descricaoHistoricoDebito;

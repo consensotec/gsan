@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+	<class name="gcom.financeiro.PerdasTipo" table="financeiro.perdas_tipo">
+		<id name="id" type="java.lang.Integer" column="petp_id">
+			<generator class="assigned"/>
+		</id>
+		<property name="descricao" type="java.lang.String" column="petp_dsperdatipo" not-null="true" length="50"/>
+		<property name="descricaoAbreviada" type="java.lang.String" column="petp_dsabreviado" not-null="true" length="50"/>
+		<property name="indicadorUso" type="java.lang.Short" column="petp_icuso" length="2"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="petp_tmultimaalteracao" length="8"/>
+
+	</class>
+</hibernate-mapping>

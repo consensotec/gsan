@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+
+    Created by the Middlegen Hibernate plugin 2.1
+
+
+
+    http://boss.bekk.no/boss/middlegen/
+
+    http://www.hibernate.org/ MRRF_CDMENSAGEMRETORNO NUMBER
+ORNO
+
+-->
+	<class name="gcom.cadastro.MensagemRetornoReceitaFederal" table="cadastro.msg_ret_receita_federal">
+		<id name="id" type="java.lang.Integer" column="MRRF_ID">
+			<generator class="sequence">
+				<param name="sequence">cadastro.seq_msg_ret_receita_federal</param>
+			</generator>
+		</id>
+		<property name="codigoMensagemRetorno" type="java.lang.Integer" column="MRRF_CDMENSAGEMRETORNO" not-null="true" />
+		<property name="descricaoMensagemRetorno" type="java.lang.String" column="MRRF_DSMENSAGEMRETORNO" not-null="true" length="40"/>
+		<property name="dataUltimaAlteracao" type="java.sql.Timestamp" column="MRRF_TMULTIMAALTERACAO" not-null="true" length="8"/>
+		<!-- Associations -->
+	</class>
+</hibernate-mapping>

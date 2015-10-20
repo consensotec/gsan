@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorFinanceiroCOSAMA</display-name>
             <ejb-name>ControladorFinanceiroCOSAMA</ejb-name>
-            <local-home>gsan.financeiro.ControladorFinanceiroLocalHome</local-home>
-            <local>gsan.financeiro.ControladorFinanceiroLocal</local>
-            <ejb-class>gsan.financeiro.ControladorFinanceiroCOSAMASEJB</ejb-class>
+            <local-home>gcom.financeiro.ControladorFinanceiroLocalHome</local-home>
+            <local>gcom.financeiro.ControladorFinanceiroLocal</local>
+            <ejb-class>gcom.financeiro.ControladorFinanceiroCOSAMASEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

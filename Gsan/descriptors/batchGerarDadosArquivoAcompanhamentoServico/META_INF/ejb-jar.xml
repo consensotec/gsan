@@ -6,7 +6,7 @@
 			<display-name>BatchGerarDadosArquivoAcompanhamentoServicoMDB</display-name>
 			<ejb-name>BatchGerarDadosArquivoAcompanhamentoServicoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.atendimentopublico.BatchGerarDadosArquivoAcompanhamentoServicoMDB
+				gcom.batch.atendimentopublico.BatchGerarDadosArquivoAcompanhamentoServicoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

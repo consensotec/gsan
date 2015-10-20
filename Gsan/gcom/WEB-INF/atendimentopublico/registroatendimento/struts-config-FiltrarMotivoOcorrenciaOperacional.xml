@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+
+		<form-bean name="FiltrarMotivoOcorrenciaOperacionalActionForm"
+			type="gcom.gui.atendimentopublico.registroatendimento.FiltrarMotivoOcorrenciaOperacionalActionForm" />
+
+	</form-beans>
+	
+	<action-mappings>
+		<action name="FiltrarMotivoOcorrenciaOperacionalActionForm"
+		 type="gcom.gui.atendimentopublico.registroatendimento.ExibirFiltrarMotivoOcorrenciaOperacionalAction"
+		  scope="session"
+		  path="/exibirFiltrarMotivoOcorrenciaOperacionalAction">
+		<forward name="exibirFiltrarMotivoOcorrenciaOperacional"
+				path="/jsp/atendimentopublico/registroatendimento/motivo_ocorrencia_operacional_filtrar.jsp" />
+		</action>
+		<action
+		 path="/filtrarMotivoOcorrenciaOperacionalAction"
+		 type="gcom.gui.atendimentopublico.registroatendimento.FiltrarMotivoOcorrenciaOperacionalAction"
+		 name="FiltrarMotivoOcorrenciaOperacionalActionForm">
+		<forward name="exibirManterMotivoOcorrenciaOperacional" 
+			path="/exibirManterMotivoOcorrenciaOperacionalAction.do"/>
+		</action>
+	</action-mappings>
+
+</struts-config>

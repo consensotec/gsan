@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+	-->
+	<class name="gcom.atualizacaocadastral.ImovelSubcategoriaAtualizacaoCadastralDM" table="atualizacaocadastral.imovel_subca_atlz_cad_dm">
+		<id name="id" type="java.lang.Integer" column="isac_id">
+			<generator class="sequence">
+				<param name="sequence">atualizacaocadastral.seq_imovel_subca_atlz_cad_dm</param>
+			</generator>
+		</id>
+		<property name="quantidadeEconomias" type="java.lang.Short" column="isac_qteconomia" not-null="true"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="isac_tmultimaalteracao" not-null="true"/>
+
+	 	<many-to-one class="gcom.cadastro.imovel.Categoria" lazy="false" name="categoria">
+   			<column name="catg_id"/>
+  		</many-to-one>
+
+	 	<many-to-one class="gcom.cadastro.imovel.Subcategoria" lazy="false" name="subcategoria" not-null="true">
+   			<column name="scat_id"/>
+  		</many-to-one>
+
+	 	<many-to-one class="gcom.atualizacaocadastral.ImovelAtualizacaoCadastralDM" name="imovelAtualizacaoCadastralDM">
+   			<column name="imac_id"/>
+  		</many-to-one>
+
+	</class>
+</hibernate-mapping>

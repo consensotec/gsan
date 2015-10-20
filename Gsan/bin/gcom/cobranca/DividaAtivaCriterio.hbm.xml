@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.cobranca.DividaAtivaCriterio" table="cobranca.divida_ativa_criterio">
+		<id name="id" type="java.lang.Integer" column="dacr_id">
+			<generator class="sequence">
+				<param name="sequence">
+				cobranca.seq_divida_ativa_criterio</param>
+			</generator>
+		</id>
+		
+		<property name="dataMaximaVencimentoConta" type="java.sql.Date" column="dacr_dtmaximavencimentocnt" length="10" not-null="true" />
+		<property name="valorMinimoDebito" type="java.math.BigDecimal" column="dacr_vlminimodebito" length="13" not-null="false" />
+		<property name="valorMaximoDebito" type="java.math.BigDecimal" column="dacr_vlmaximodebito" length="13" not-null="false" />
+		<property name="anoMesArrecadacao" type="java.lang.Integer" column="dacr_amreferenciaarrecadacao" length="6" not-null="false" />
+		<property name="dataInscricao" type="java.sql.Date" column="dacr_dtinscricao" length="10" not-null="false" />
+		<property name="indicadorProcessado" type="java.lang.Short" column="dacr_icprocessado" length="2" not-null="true" />
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="dacr_tmultimaalteracao" length="8" not-null="true" />
+		
+		<!-- Associations -->
+		
+		<!-- bi-directional many-to-one association to CobrancaAtividade -->
+		<many-to-one name="usuario" class="gcom.seguranca.acesso.usuario.Usuario" not-null="false">
+			<column name="usur_id"/>
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

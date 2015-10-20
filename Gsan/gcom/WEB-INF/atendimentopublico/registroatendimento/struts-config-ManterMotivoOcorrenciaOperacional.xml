@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean 
+			name="AtualizarMotivoOcorrenciaOperacionalActionForm" 
+			type="gcom.gui.atendimentopublico.registroatendimento.AtualizarMotivoOcorrenciaOperacionalActionForm">
+		</form-bean>
+	</form-beans>
+	<action-mappings>
+		<action 
+			path="/exibirManterMotivoOcorrenciaOperacionalAction"
+			type="gcom.gui.atendimentopublico.registroatendimento.ExibirManterMotivoOcorrenciaOperacionalAction"
+			name="AtualizarMotivoOcorrenciaOperacionalActionForm">
+			<forward name="exibirAtualizarManterMotivoOcorrenciaOperacional" path="/exibirAtualizarMotivoOcorrenciaOperacionalAction.do"></forward>
+			<forward name="exibirSelecionarMotivoOcorrenciaOperacional" path="/jsp/atendimentopublico/registroatendimento/selecionar_motivo_ocorrencia_operacional.jsp"></forward>
+		</action>
+		<action 
+			path="/exibirAtualizarMotivoOcorrenciaOperacionalAction"
+			type="gcom.gui.atendimentopublico.registroatendimento.ExibirAtualizarMotivoOcorrenciaOperacionalAction"
+			scope="session"
+			name="AtualizarMotivoOcorrenciaOperacionalActionForm">
+			<forward name="atualizarMotivoOcorrenciaOperacional" path="/jsp/atendimentopublico/registroatendimento/motivo_ocorrencia_operacional_atualizar.jsp"></forward>	
+		</action>
+		<action 
+			path="/atualizarMotivoOcorrenciaOperacionalAction"
+			type="gcom.gui.atendimentopublico.registroatendimento.AtualizarMotivoOcorrenciaOperacionalAction"
+			name="AtualizarMotivoOcorrenciaOperacionalActionForm">
+		</action>
+		<action 
+			path="/removerMotivoOcorrenciaOperacionalAction"
+			type="gcom.gui.atendimentopublico.registroatendimento.RemoverMotivoOcorrenciaOperacionalAction"
+			name="AtualizarMotivoOcorrenciaOperacionalActionForm">
+		</action>
+	</action-mappings>
+</struts-config>

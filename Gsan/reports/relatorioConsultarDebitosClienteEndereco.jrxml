@@ -1785,7 +1785,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
 						<font fontName="Courier New" pdfFontName="Courier-Bold" size="12" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<text><![CDATA[DÉBITOS]]></text>
+				<text><![CDATA[DÉBITOS (99)]]></text>
 				</staticText>
 				<line direction="TopDown">
 					<reportElement

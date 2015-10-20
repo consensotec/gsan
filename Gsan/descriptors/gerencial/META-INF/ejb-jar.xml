@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorGerencialGCOM</display-name>
             <ejb-name>ControladorGerencialGCOM</ejb-name>
-            <local-home>gsan.gerencial.ControladorGerencialLocalHome</local-home>
-            <local>gsan.gerencial.ControladorGerencialLocal</local>
-            <ejb-class>gsan.gerencial.ControladorGerencialSEJB</ejb-class>
+            <local-home>gcom.gerencial.ControladorGerencialLocalHome</local-home>
+            <local>gcom.gerencial.ControladorGerencialLocal</local>
+            <ejb-class>gcom.gerencial.ControladorGerencialSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	
+	<form-beans>
+		<form-bean name="EfetuarParcelamentoDebitosPortalCaemaActionForm"
+			type="gcom.gui.portal.caema.EfetuarParcelamentoDebitosPortalCaemaActionForm" />
+	</form-beans>
+	
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="EfetuarParcelamentoDebitosPortalCaemaActionForm"
+			type="gcom.gui.portal.caema.ExibirEfetuarParcelamentoDebitosPortalCaemaAction"
+			validate="false" scope="session" path="/exibirEfetuarParcelamentoDebitosPortalCaemaAction">
+			<forward name="efetuarParcelamento"
+				path="/jsp/portal/caema/parcelamento_debitos_portal_caema_efetuar.jsp"/>
+			<forward name="voltarParaServicos"
+				path="/exibirServicosPortalCaemaAction.do?method=servicos" />
+			<forward name="matriculaPossuiParcelamentoNaoQuitado"
+				path="/jsp/portal/caema/servicos.jsp"/>
+			<forward name="imovelSemDebitos"
+				path="/jsp/portal/caema/servicos.jsp"/>
+			<forward name="debitoParceladoMesCorrente"
+				path="/jsp/portal/caema/servicos.jsp"/>
+			<forward name="imovelNaoPossuiPerfilParcelamento"
+				path="/jsp/portal/caema/servicos.jsp"/>
+			<forward name="telaServico"
+				path="/jsp/portal/caema/servicos.jsp"/>				
+		</action>
+		
+		<action name="EfetuarParcelamentoDebitosPortalCaemaActionForm"
+			type="gcom.gui.portal.EfetuarParcelamentoDebitosPortalCaemaAction"
+			validate="false" scope="session"
+			path="/efetuarParcelamentoDebitosPortalCaemaAction">
+			
+			<forward name="recarregarPagina" path="/exibirEfetuarParcelamentoDebitosPortalCaemaAction.do"/>
+			<forward name="gerarDocumentos" path="/gerarRelatorioDocumentosParcelamentoPortalCaemaAction.do"/>	
+			<forward name="parcelamentoJaEfetuadoVoltarPaginaServicos" path="/jsp/portal/caema/servicos.jsp"/>
+		</action>
+		
+		<action name="EfetuarParcelamentoDebitosPortalCaemaActionForm"
+			type="gcom.gui.portal.caema.GerarRelatorioDocumentosParcelamentoPortalCaemaAction"
+			validate="false" scope="session"
+			path="/gerarRelatorioDocumentosParcelamentoPortalCaemaAction">
+		</action>
+		
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="ExibirInformacoesPortalCaernActionForm"
+			type="gcom.gui.portal.caern.ExibirInformacoesPortalCaernActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="ExibirInformacoesPortalCaernActionForm"
+			type="gcom.gui.portal.caern.ExibirInformacoesPortalCaernAction"
+			validate="false" scope="session"
+			path="/exibirInformacoesPortalCaernAction">
+
+			<forward name="exibirInformacoesPortalCaernAction"
+				path="/jsp/portal/caern/informacoes_portal_caern.jsp" />
+
+			<forward name="exibirInformacoesParcelamentoDebitoPortalCaernAction"
+				path="/jsp/portal/caern/informacoes_negociacao_debitos_portal_caern.jsp" />
+			
+			<forward name="exibirValidarCertidaoNegativaDebitoPortalCaernAction"
+				path="/jsp/portal/caern/validar_certidao_negativa_debito_portal_caern.jsp" />
+
+			<forward name="exibirUsoRacionalAguaPortalCaernAction"
+				path="/jsp/portal/caern/informacoes_uso_racional_agua_portal_caern.jsp" />
+				
+			<forward name="exibirOrientacoesClientePortalCaernAction"
+				path="/jsp/portal/caern/informacoes_orientacoes_cliente_portal_caern.jsp" />
+
+			<forward name="exibirDebitoAutomaticoPortalCaernAction"
+				path="/jsp/portal/caern/informacoes_debito_automatico_portal_caern.jsp" />
+				
+			
+		</action>
+		
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>
+

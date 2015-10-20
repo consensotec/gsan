@@ -13,7 +13,7 @@
 
 			<ejb-class>
 
-				gsan.batch.cobranca.BatchEmitirCartasDeFinalDeAnoMDB
+				gcom.batch.cobranca.BatchEmitirCartasDeFinalDeAnoMDB
 
 
 			</ejb-class>

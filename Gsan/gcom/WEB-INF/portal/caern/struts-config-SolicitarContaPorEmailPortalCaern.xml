@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="InserirCadastroEmailClientePortalCaernActionForm"
+			type="gcom.gui.portal.caern.InserirCadastroEmailClientePortalCaernActionForm" />
+	</form-beans>
+
+	<!--******************* P�GINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+		<action name="InserirCadastroEmailClientePortalCaernActionForm"
+			type="gcom.gui.portal.caern.ExibirInserirCadastroEmailClientePortalCaernAction"
+			validate="false" scope="session"
+			path="/exibirInserirCadastroEmailClientePortalCaernAction">
+			<forward
+				name="exibirInserirCadastroEmailClientePortalCaernAction"
+				path="/jsp/portal/caern/cadastro_email_cliente_portal_caern_inserir.jsp" />
+		</action>
+
+		<action name="InserirCadastroEmailClientePortalCaernActionForm"
+			type="gcom.gui.portal.caern.InserirCadastroEmailClientePortalCaernAction"
+			validate="false" scope="session"
+			path="/inserirCadastroEmailClientePortalCaernAction">
+			<forward name="validarDados"
+				path="/jsp/portal/caern/cadastro_email_cliente_portal_caern_inserir.jsp" />
+			<forward name="emailCadastradoComSucesso"
+				path="/jsp/portal/caern/cadastro_email_cliente_portal_caern_inserir.jsp" />
+		</action>
+
+
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>

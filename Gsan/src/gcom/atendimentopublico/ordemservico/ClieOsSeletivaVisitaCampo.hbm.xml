@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.atendimentopublico.ordemservico.ClieOsSeletivaVisitaCampo" table="atendimentopublico.clie_os_visita_campo">
+		<id name="id" type="java.lang.Integer" column="covc_id">
+			<generator class="sequence">
+				<param name="sequence">atendimentopublico.seq_clie_os_visita_campo</param>
+			</generator>
+		</id>
+		
+		<property name="nomeCliente" type="java.lang.String" column="covc_nmcliente" not-null="true" length="100"/>
+		<property name="cpf" type="java.lang.String" column="covc_nncpf" length="11"/>
+		<property name="cnpj" type="java.lang.String" column="covc_nncnpj" length="14"/>
+		<property name="rg" type="java.lang.String" column="covc_nmrg" length="13"/>
+		<property name="dataUltimaAlteracao" type="java.sql.Timestamp" column="COVC_TMULTIMAALTERACAO" not-null="true" length="8"/>
+		
+		<!-- bi-directional many-to-one association to UnidadeOrganizaci onal -->
+		<many-to-one name="cliente" class="gcom.cadastro.cliente.Cliente" not-null="true">
+			<column name="clie_id"/>
+		</many-to-one>
+		<!-- bi-directional many-to-one association to UnidadeOrganizaci onal -->
+		<many-to-one name="osSeletivaVisitaCampo" class="gcom.atendimentopublico.ordemservico.OsSeletivaVisitaCampo" not-null="true">
+			<column name="osvc_id"/>
+		</many-to-one>
+		<!-- bi-directional many-to-one association to OrgaoExpedidorRg -->
+		<many-to-one name="orgaoExpedidorRg" class="gcom.cadastro.cliente.OrgaoExpedidorRg" not-null="true">
+			<column name="oerg_idrg"/>
+		</many-to-one>
+		<!-- bi-directional many-to-one association to OrgaoExpedidorRg -->
+		<many-to-one name="unidadeFederacaoRg" class="gcom.cadastro.geografico.UnidadeFederacao" not-null="true">
+			<column name="unfe_idrg"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

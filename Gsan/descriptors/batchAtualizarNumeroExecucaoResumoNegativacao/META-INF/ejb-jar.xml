@@ -13,7 +13,7 @@
 
 			<ejb-class>
 
-				gsan.batch.cobranca.spcserasa.BatchAtualizarNumeroExecucaoResumoNegativacaoMDB
+				gcom.batch.cobranca.spcserasa.BatchAtualizarNumeroExecucaoResumoNegativacaoMDB
 
 
 			</ejb-class>

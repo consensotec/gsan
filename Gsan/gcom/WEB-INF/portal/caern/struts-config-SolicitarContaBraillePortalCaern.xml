@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="InserirCadastroContaBraillePortalCaernActionForm"
+			type="gcom.gui.portal.caern.InserirCadastroContaBraillePortalCaernActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="InserirCadastroContaBraillePortalCaernActionForm"
+			type="gcom.gui.portal.caern.ExibirInserirCadastroContaBraillePortalCaernAction"
+			validate="false" 
+			scope="session"
+			path="/exibirInserirCadastroContaBraillePortalCaernAction">
+
+			<forward name="exibirInserirCadastroContaBraillePortalCaern"
+				path="/jsp/portal/caern/cadastro_conta_braille_portal_caern_inserir.jsp" />
+			<forward name="voltarParaServicos"
+				path="/exibirServicosPortalCaernAction" />
+		</action>
+
+		<action name="InserirCadastroContaBraillePortalCaernActionForm"
+			type="gcom.gui.portal.caern.InserirCadastroContaBraillePortalCaernAction"
+			validate="false"
+			scope="session"
+			path="/inserirCadastroContaBraillePortalCaernAction">
+			<forward name="validarDados"
+				path="/jsp/portal/caern/cadastro_conta_braille_portal_caern_inserir.jsp" />
+			<forward name="contaBrailleSolicitadaComSucesso"
+				path="/jsp/portal/caern/cadastro_conta_braille_portal_caern_inserir.jsp" />
+		</action>
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>

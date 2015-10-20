@@ -6,11 +6,11 @@
 			<display-name>ControladorCadastroCAEMA</display-name>
 			<ejb-name>ControladorCadastroCAEMA</ejb-name>
 			<local-home>
-				gsan.cadastro.ControladorCadastroLocalHome
+				gcom.cadastro.ControladorCadastroLocalHome
 			</local-home>
-			<local>gsan.cadastro.ControladorCadastroLocal</local>
+			<local>gcom.cadastro.ControladorCadastroLocal</local>
 			<ejb-class>
-				gsan.cadastro.ControladorCadastroCAEMASEJB
+				gcom.cadastro.ControladorCadastroCAEMASEJB
 			</ejb-class>
 			<session-type>Stateless</session-type>
 			<transaction-type>Container</transaction-type>

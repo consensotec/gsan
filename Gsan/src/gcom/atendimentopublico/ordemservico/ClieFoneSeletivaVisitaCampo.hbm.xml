@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.atendimentopublico.ordemservico.ClieFoneSeletivaVisitaCampo" table="atendimentopublico.clie_fone_visita_camp">
+		<id name="id" type="java.lang.Integer" column="cfvc_id">
+			<generator class="sequence">
+				<param name="sequence">atendimentopublico.seq_clie_fone_visita_camp</param>
+			</generator>
+		</id>
+		
+		<property name="dddFone" type="java.lang.String" column="cfvc_cdddd" length="2"/>
+		<property name="numeroFone" type="java.lang.String" column="cfvc_nnfone" length="9"/>
+		<property name="ramalFone" type="java.lang.String" column="cfvc_nnfoneramal" length="4"/>
+
+		<!-- bi-directional many-to-one association to UnidadeOrganizaci onal -->
+		<many-to-one name="clieOsSeletivaVisitaCampo" class="gcom.atendimentopublico.ordemservico.ClieOsSeletivaVisitaCampo" not-null="true">
+			<column name="covc_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

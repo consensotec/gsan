@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="FiltrarAcessoLojaVirtualActionForm"
+			type="gcom.gui.relatorio.atendimentopublico.FiltrarAcessoLojaVirtualActionForm" />
+
+
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	
+	<action-mappings>
+		<action name="FiltrarAcessoLojaVirtualActionForm"  
+			type="gcom.gui.relatorio.atendimentopublico.ExibirFiltrarAcessoLojaVirtualAction" 
+			validate="false"
+			scope="session"
+			path="/exibirFiltrarAcessoLojaVirtualAction">
+
+			<forward name="exibirFiltrarAcessoLojaVirtualAction"
+			path="/jsp/relatorio/atendimentopublico/quantidade_acesso_loja_virtual.jsp" />
+			
+		</action>
+		
+		
+		<action name="FiltrarAcessoLojaVirtualActionForm"  
+			type="gcom.gui.relatorio.atendimentopublico.ExibirAcessoLojaVirtualPopupAction" 
+			validate="false"
+			scope="session"
+			path="/exibirAcessoLojaVirtualPopupAction">
+
+			<forward name="exibirAcessoLojaVirtualPopupAction"
+			path="/jsp/relatorio/atendimentopublico/acesso_loja_virtual_popup.jsp" />
+
+		</action>
+		<action name="FiltrarAcessoLojaVirtualActionForm"
+			type="gcom.gui.relatorio.atendimentopublico.GerarRelatorioAcessoLojaVirtualAction"
+			validate="true" scope="session"
+			path="/gerarRelatorioAcessoLojaVirtualAction" />
+		
+	</action-mappings>
+	
+	<message-resources null="false"	parameter="gcom.properties.application" />
+</struts-config>

@@ -6,7 +6,7 @@
 			<display-name>BatchGerarArquivoTextoAtualizacaoCadastralMDB</display-name>
 			<ejb-name>BatchGerarArquivoTextoAtualizacaoCadastralMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cadastro.BatchGerarArquivoTextoAtualizacaoCadastralMDB
+				gcom.batch.cadastro.BatchGerarArquivoTextoAtualizacaoCadastralMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

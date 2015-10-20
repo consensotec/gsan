@@ -6,7 +6,7 @@
 			<display-name>BatchEmitirOrdemDeFiscalizacaoMDB</display-name>
 			<ejb-name>BatchEmitirOrdemDeFiscalizacaoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.atendimentopublico.BatchEmitirOrdemDeFiscalizacaoMDB
+				gcom.batch.atendimentopublico.BatchEmitirOrdemDeFiscalizacaoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

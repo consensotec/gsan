@@ -6,13 +6,13 @@
 			<display-name>ControladorFaturamentoCAER</display-name>
 			<ejb-name>ControladorFaturamentoCAER</ejb-name>
 			<local-home>
-				gsan.faturamento.ControladorFaturamentoLocalHome
+				gcom.faturamento.ControladorFaturamentoLocalHome
 			</local-home>
 			<local>
-				gsan.faturamento.ControladorFaturamentoLocal
+				gcom.faturamento.ControladorFaturamentoLocal
 			</local>
 			<ejb-class>
-				gsan.faturamento.ControladorFaturamentoCAERSEJB
+				gcom.faturamento.ControladorFaturamentoCAERSEJB
 			</ejb-class>
 			<session-type>Stateless</session-type>
 			<transaction-type>Container</transaction-type>

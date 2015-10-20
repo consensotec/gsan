@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.faturamento.conta.ContaEmissao2Via" table="faturamento.conta_emissao_segundavia">
+		<id name="id" type="java.lang.Integer" column="ctem_id">
+			<generator class="sequence">
+				<param name="sequence">faturamento.seq_conta_emissao_segundavia</param>
+			</generator>
+		</id>
+		
+		<property name="dataEmissao" type="java.sql.Timestamp" column="ctem_tmemissao" not-null="true" length="8"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="ctem_tmultimaalteracao" not-null="true" length="8"/>
+		<property name="indicadorClienteImovel" type="java.lang.Short" column="ctem_icclienteimovel" not-null="true" length="2"/>
+		<property name="indicadorEmissaoPresencial" type="java.lang.Short" column="ctem_icemissaopresencial" not-null="true" length="2" />
+		
+		<!-- Associations -->
+		<many-to-one name="contaGeral" class="gcom.faturamento.conta.ContaGeral" not-null="true">
+			<column name="cnta_id"/>
+		</many-to-one>
+		
+		<many-to-one name="usuario" class="gcom.seguranca.acesso.usuario.Usuario" not-null="true">
+			<column name="usur_id"/>
+		</many-to-one>
+		
+		<many-to-one name="imovel" class="gcom.cadastro.imovel.Imovel" not-null="true">
+			<column name="imov_id"/>
+		</many-to-one>
+		
+		<many-to-one name="cliente" class="gcom.cadastro.cliente.Cliente" not-null="false">
+			<column name="clie_id"/>
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<!--******************* PaGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="InformarVencimentoAlternativoActionForm"
+			type="gcom.gui.portal.caema.ExibirInformarVencimentoAlternativoPortalAction"
+			validate="false" scope="session"
+			path="/exibirInformarVencimentoAlternativoPortalAction">
+			<forward name="exibirInformarVencimentoAlternativoPortalAction"
+				path="/jsp/portal/caema/informar_vencimento_alternativo_portal.jsp" />
+				
+			<forward name="VencimentoAlteradoComSucesso"
+				path="/jsp/portal/caema/informar_vencimento_alternativo_portal.jsp" />
+			<forward name="numeroMesesMinimoVencimentoAlternativoSuperiorPermitido"
+				path="/jsp/portal/caema/servicos.jsp" />
+				
+		</action>
+
+		
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>
+

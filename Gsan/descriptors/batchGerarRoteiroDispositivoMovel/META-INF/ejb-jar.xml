@@ -6,7 +6,7 @@
 			<display-name>BatchGerarRoteiroDispositivoMovelMDB</display-name>
 			<ejb-name>BatchGerarRoteiroDispositivoMovelMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.atualizacaocadastral.BatchGerarRoteiroDispositivoMovelMDB
+				gcom.batch.atualizacaocadastral.BatchGerarRoteiroDispositivoMovelMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

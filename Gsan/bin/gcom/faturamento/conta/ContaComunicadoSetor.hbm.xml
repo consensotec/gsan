@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+	<class name="gcom.faturamento.conta.ContaComunicadoSetor" table="faturamento.conta_comunicado_setor">
+		<id name="id" type="java.lang.Integer" column="cost_id">
+			<generator class="sequence">
+				<param name="sequence">faturamento.seq_conta_comunicado_setor</param>
+			</generator>
+		</id>
+
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="cost_tmultimaalteracao" length="8"/>
+		
+		<!-- bi-directional many-to-one association to Setor -->
+		<many-to-one name="setorComercial" class="gcom.cadastro.localidade.SetorComercial" not-null="false">
+			<column name="stcm_id"/>
+		</many-to-one>
+		<!-- bi-directional many-to-one association to Conta Comunicado -->
+		<many-to-one name="contaComunicado" class="gcom.faturamento.conta.ContaComunicado" not-null="false">
+			<column name="comu_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

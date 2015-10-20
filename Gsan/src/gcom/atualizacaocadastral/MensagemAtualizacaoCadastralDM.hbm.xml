@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+<class name="gcom.atualizacaocadastral.MensagemAtualizacaoCadastralDM" 
+    table="atualizacaocadastral.mensagem_atlz_cad_dm">
+
+    <id name="id" type="java.lang.Integer" column="matc_id">
+        <generator class="sequence">
+           <param name="sequence">atualizacaocadastral.seq_mensagem_atlz_cad_dm</param>
+        </generator>
+    </id>
+
+    <property
+        name="mensagem"
+        type="java.lang.String"
+        column="matc_dsmensagem"
+        not-null="true"
+        length="100"
+    />
+     
+    <property
+        name="indicadorOpcaoAprovado"
+        type="java.lang.Short"
+        column="matc_icopcaoaprovado"
+        not-null="true"
+        length="22"
+    />
+    
+    <property
+        name="ultimaAlteracao"
+        type="java.sql.Timestamp"
+        column="matc_tmultimaalteracao"
+        not-null="true"
+        length="11"
+    />
+
+</class>
+</hibernate-mapping>

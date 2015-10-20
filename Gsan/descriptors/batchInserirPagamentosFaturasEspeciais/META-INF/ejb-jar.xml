@@ -13,7 +13,7 @@
 
 			<ejb-class>
 
-				gsan.batch.arrecadacao.BatchInserirPagamentosFaturasEspeciaisMDB
+				gcom.batch.arrecadacao.BatchInserirPagamentosFaturasEspeciaisMDB
 
 
 			</ejb-class>

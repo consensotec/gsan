@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorGerencialeMicromedicaoGCOM</display-name>
             <ejb-name>ControladorGerencialMicromedicaoGCOM</ejb-name>
-            <local-home>gsan.gerencial.micromedicao.ControladorGerencialMicromedicaoLocalHome</local-home>
-            <local>gsan.gerencial.micromedicao.ControladorGerencialMicromedicaoLocal</local>
-            <ejb-class>gsan.gerencial.micromedicao.ControladorGerencialMicromedicaoSEJB</ejb-class>
+            <local-home>gcom.gerencial.micromedicao.ControladorGerencialMicromedicaoLocalHome</local-home>
+            <local>gcom.gerencial.micromedicao.ControladorGerencialMicromedicaoLocal</local>
+            <ejb-class>gcom.gerencial.micromedicao.ControladorGerencialMicromedicaoSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorLigacaoAguaGCOM</display-name>
             <ejb-name>ControladorLigacaoAguaGCOM</ejb-name>
-            <local-home>gsan.atendimentopublico.ligacaoagua.ControladorLigacaoAguaLocalHome</local-home>
-            <local>gsan.atendimentopublico.ligacaoagua.ControladorLigacaoAguaLocal</local>
-            <ejb-class>gsan.atendimentopublico.ligacaoagua.ControladorLigacaoAguaSEJB</ejb-class>
+            <local-home>gcom.atendimentopublico.ligacaoagua.ControladorLigacaoAguaLocalHome</local-home>
+            <local>gcom.atendimentopublico.ligacaoagua.ControladorLigacaoAguaLocal</local>
+            <ejb-class>gcom.atendimentopublico.ligacaoagua.ControladorLigacaoAguaSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

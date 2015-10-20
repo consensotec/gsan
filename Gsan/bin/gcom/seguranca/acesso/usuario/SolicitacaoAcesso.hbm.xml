@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+ <class name="gcom.seguranca.acesso.usuario.SolicitacaoAcesso" table="seguranca.solicitacao_acesso">
+  <id column="soac_id" name="id" type="java.lang.Integer">
+   <generator class="sequence">
+    <param name="sequence">seguranca.seq_solicitacao_acesso</param>
+   </generator>
+  </id>
+  <property column="soac_icnotificarresponsavel" generated="never"
+   lazy="false" length="2" name="indicadorNotificarResponsavel" type="java.lang.Short"/>
+  <property column="soac_nmusuario" generated="never" lazy="false"
+   length="50" name="nomeUsuario" not-null="true" type="java.lang.String"/>
+  <property column="soac_nncpf" generated="never" lazy="false"
+   length="11" name="cpf" type="java.lang.String"/>
+  <property column="soac_dtnascimento" generated="never" lazy="false"
+   length="4" name="dataNascimento" type="java.sql.Date"/>
+  <property column="soac_nmlogin" generated="never" lazy="false"
+   length="11" name="login" not-null="true" type="java.lang.String"/>
+  <property column="soac_email" generated="never" lazy="false"
+   length="70" name="email" not-null="true" type="java.lang.String"/>
+  <property column="soac_dtinicioperiodo" generated="never" lazy="false"
+   length="4" name="periodoInicial" type="java.sql.Date"/>
+  <property column="soac_dtfimperiodo" generated="never" lazy="false"
+   length="4" name="periodoFinal" type="java.sql.Date"/>
+  <property column="soac_tmultimaalteracao" generated="never"
+   lazy="false" length="8" name="ultimaAlteracao" not-null="true" type="java.sql.Timestamp"/>
+  <property column="soac_dtautorizacao" generated="never" lazy="false"
+   length="4" name="dataAutorizacao" type="java.sql.Date"/>
+  <property column="soac_dtcadastramento" generated="never" lazy="false"
+   length="4" name="dataCadastramento" type="java.sql.Date"/>
+  <property column="soac_dtsolicitacao" generated="never" lazy="false"
+   length="4" name="dataSolicitacao" not-null="true" type="java.sql.Date"/>
+  <!-- bi-directional many-to-one association to Funcionario -->
+  <many-to-one class="gcom.cadastro.funcionario.Funcionario"
+   name="funcionarioSolicitante" not-null="true">
+   <column name="func_idsolicitante"/>
+  </many-to-one>
+  <!-- bi-directional many-to-one association to Funcionario -->
+  <many-to-one class="gcom.cadastro.funcionario.Funcionario"
+   name="funcionarioResponsavel" not-null="true">
+   <column name="func_idresponsavel"/>
+  </many-to-one>
+  <!-- bi-directional many-to-one association to Funcionario -->
+  <many-to-one class="gcom.cadastro.funcionario.Funcionario"
+   name="funcionario" not-null="true">
+   <column name="func_id"/>
+  </many-to-one>
+  <!-- bi-directional many-to-one association to UsuarioTipo -->
+  <many-to-one class="gcom.seguranca.acesso.usuario.UsuarioTipo"
+   name="usuarioTipo" not-null="true">
+   <column name="utip_id"/>
+  </many-to-one>
+  <!-- bi-directional many-to-one association to Empresa -->
+  <many-to-one class="gcom.cadastro.empresa.Empresa" name="empresa" not-null="true">
+   <column name="empr_id"/>
+  </many-to-one>
+  <!-- bi-directional many-to-one association to UnidadeOrganizacional -->
+  <many-to-one class="gcom.cadastro.unidade.UnidadeOrganizacional"
+   name="unidadeOrganizacional" not-null="true">
+   <column name="unid_id"/>
+  </many-to-one>
+  <!-- bi-directional many-to-one association to SolicitacaoAcessoSituacao -->
+  <many-to-one
+   class="gcom.seguranca.acesso.usuario.SolicitacaoAcessoSituacao"
+   name="solicitacaoAcessoSituacao" not-null="true">
+   <column name="sast_id"/>
+  </many-to-one>
+  <many-to-one class="gcom.seguranca.acesso.usuario.UsuarioAbrangencia"
+   name="usuarioAbrangencia" not-null="true">
+   <column name="usab_id"/>
+  </many-to-one>
+  <many-to-one class="gcom.cadastro.localidade.GerenciaRegional"
+   name="gerenciaRegional" not-null="true">
+   <column name="greg_id"/>
+  </many-to-one>
+  <many-to-one class="gcom.cadastro.localidade.UnidadeNegocio"
+   name="unidadeNegocio" not-null="true">
+   <column name="uneg_id"/>
+  </many-to-one>
+  <many-to-one class="gcom.cadastro.localidade.Localidade"
+   name="localidade" not-null="true">
+   <column name="loca_id"/>
+  </many-to-one>
+  <many-to-one class="gcom.cadastro.localidade.Localidade"
+   name="localidadeElo" not-null="true">
+   <column name="loca_cdelo"/>
+  </many-to-one>
+ </class>
+</hibernate-mapping>

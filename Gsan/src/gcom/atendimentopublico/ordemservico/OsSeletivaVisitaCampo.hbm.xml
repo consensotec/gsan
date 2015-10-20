@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">        
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+	<class name="gcom.atendimentopublico.ordemservico.OsSeletivaVisitaCampo" table="atendimentopublico.os_seletiva_visita_campo">
+		<id name="id" type="java.lang.Integer" column="osvc_id">
+			<generator class="sequence">
+				<param name="sequence">atendimentopublico.seq_os_seletiva_visita_campo</param>
+			</generator>
+		</id>
+
+	    <property name="dataProgramacao" type="java.sql.Date" column="osvc_dtprogramacao" length="13"/>
+	    <property name="sequencialProgramacao" type="java.lang.Integer" column="osvc_nnseqprogramacao" length="10"/>
+	    <property name="inscricaoImovel" type="java.lang.String" column="osvc_inscricao" length="20"/>
+	    <property name="descricaoEndereco" type="java.lang.String" column="osvc_dsendereco" length="100"/>
+	    <property name="descricaoCategoria" type="java.lang.String" column="osvc_dscategoria" length="30"/>
+	    <property name="quantidadeEconomias" type="java.lang.Integer" column="osvc_qtdeconomias" length="11"/>
+	    <property name="descricaoPerfilImovel" type="java.lang.String" column="osvc_dsimovelperfil" length="20"/>
+	    <property name="descricaoLigacaoEsgotoSituacao" type="java.lang.String" column="osvc_dsligacaoesgotosituacao" length="20"/>
+	    <property name="descricaoLigacaoAguaSituacao" type="java.lang.String" column="osvc_dsligacaoaguasituacao" length="20"/>
+	    <property name="descricaoFaturamentoGrupo" type="java.lang.String" column="osvc_dsfaturamentogrupo" length="25"/>
+	    <property name="consumoMedio" type="java.lang.Integer" column="osvc_nnconsumomedio" length="10"/>
+	    <property name="consumoFixo" type="java.lang.Integer" column="osvc_nnconsumofixo" length="10"/>
+	    <property name="indicadorAtualizado" type="java.lang.Short" column="osvc_icatualizado" length="1"/>
+	    <property name="descricaoAnormalidadeRegistrada" type="java.lang.String" column="osvc_dsanormalidaderegistrada" length="25"/>
+	    <property name="dataUltimaAlteracao" type="java.sql.Timestamp" column="osvc_tmultimaalteracao" not-null="true" length="29"/>
+	    <property name="numeroHidrometroAgua" type="java.lang.String" column="osvc_nnhidrometroagua" length="11"/>
+	    <property name="numeroHidrometroPoco" type="java.lang.String" column="osvc_nnhidrometropoco" length="11"/>
+	     
+	    <!-- Associations -->
+	  
+	    <!-- bi-directional many-to-one association to ServicoTipo -->
+	    <many-to-one name="arquivoTextoVisitaCampo" class="gcom.atendimentopublico.ordemservico.ArquivoTextoVisitaCampo" not-null="true">
+	        <column name="txvc_id" />
+	    </many-to-one>
+	    
+	    <!-- bi-directional many-to-one association to OrdemServicoSituacao -->
+	    <many-to-one name="ordemServico" class="gcom.atendimentopublico.ordemservico.OrdemServico" not-null="true">
+	        <column name="orse_id" />
+	    </many-to-one>
+	    
+	    <!-- bi-directional many-to-one association to Imovel -->
+	    <many-to-one name="imovel" class="gcom.cadastro.imovel.Imovel" not-null="false">
+	        <column name="imov_id" />
+	    </many-to-one>
+	</class>
+</hibernate-mapping>

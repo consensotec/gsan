@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+<class name="gcom.atualizacaocadastral.RetornoAtualizacaoCadastralDM"
+    table="atualizacaocadastral.retorno_atlz_cad_dm">
+
+    <id name="id" type="java.lang.Integer" column="reat_id">
+        <generator class="sequence">
+           <param name="sequence">atualizacaocadastral.seq_retorno_atlz_cad_dm</param>
+        </generator>
+    </id>
+
+    <property name="codigoSituacao" type="java.lang.Short" column="reat_cdsituacao" not-null="true" length="22"/>
+    <property name="ultimaAlteracao" type="java.sql.Timestamp" column="reat_tmultimaalteracao" not-null="true" length="11"/>
+	<property name="codigoAlteracao" type="java.lang.Short" column="reat_cdopcaoalteracao" not-null="false" length="22"/>
+    <property name="dataAtualizacao" type="java.sql.Date" column="reat_dtatualizacao" length="11"/>
+    
+    <many-to-one name="mensagemAtualizacaoCadastralDM" class="gcom.atualizacaocadastral.MensagemAtualizacaoCadastralDM" not-null="true">
+        <column name="matc_id" />
+    </many-to-one>
+
+    <many-to-one name="parametroTabelaAtualizacaoCadastroDM" class="gcom.atualizacaocadastral.ParametroTabelaAtualizacaoCadastralDM" not-null="true">
+        <column name="ptac_id" />
+    </many-to-one>
+
+    <many-to-one name="atributoAtualizacaoCadastralDM" class="gcom.atualizacaocadastral.AtributoAtualizacaoCadastralDM" not-null="true">
+        <column name="atac_id" />
+    </many-to-one>
+
+    <many-to-one name="cliente" class="gcom.cadastro.cliente.Cliente" not-null="true">
+        <column name="clie_id" />
+    </many-to-one>
+    
+    <many-to-one name="imovelAtualizacaoCadastralDM" class="gcom.atualizacaocadastral.ImovelAtualizacaoCadastralDM" not-null="true">
+        <column name="imac_id" />
+    </many-to-one>
+
+    <many-to-one name="imovel" class="gcom.cadastro.imovel.Imovel" not-null="true">
+        <column name="imov_id" />
+    </many-to-one>
+
+	<many-to-one name="usuario" class="gcom.seguranca.acesso.usuario.Usuario" not-null="false">
+		<column name="usur_id"/>
+	</many-to-one>
+
+</class>
+</hibernate-mapping>

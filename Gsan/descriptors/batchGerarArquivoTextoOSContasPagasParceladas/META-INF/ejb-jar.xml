@@ -6,7 +6,7 @@
 			<display-name>BatchGerarArquivoTextoOSContasPagasParceladasMDB</display-name>
 			<ejb-name>BatchGerarArquivoTextoOSContasPagasParceladasMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchGerarArquivoTextoOSContasPagasParceladasMDB
+				gcom.batch.cobranca.BatchGerarArquivoTextoOSContasPagasParceladasMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

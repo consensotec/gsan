@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="gcom.cadastro.imovel.PerfilAlteracaoMotivo" table="cadastro.perfil_alteracao_motivo">
+		<id name="id" type="java.lang.Integer" column="peam_id">
+			<generator class="sequence">
+				<param name="sequence">cadastro.seq_perfil_alteracao_motivo</param>
+			</generator>
+		</id>				
+		<property name="descricao" type="java.lang.String" column="peam_dsmotivoalteracaoperfil" length="20"/>		
+		<property name="descricaoAbreviada" type="java.lang.String" column="peam_dsabvmotivoalterperfil" length="20"/>		
+		<property name="indicadorUso" type="java.lang.Short" column="peam_icuso" length="2"/>		
+		<property name="constante" type="java.lang.String" column="peam_cdconstante" length="20"/>				
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="peam_tmultimaalteracao" length="8"/>				
+	</class>
+</hibernate-mapping>

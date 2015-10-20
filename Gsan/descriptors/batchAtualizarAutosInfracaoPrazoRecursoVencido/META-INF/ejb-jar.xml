@@ -6,7 +6,7 @@
 			<display-name>BatchAtualizarAutosInfracaoPrazoRecursoVencidoMDB</display-name>
 			<ejb-name>BatchAtualizarAutosInfracaoPrazoRecursoVencidoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.atendimentopublico.BatchAtualizarAutosInfracaoPrazoRecursoVencidoMDB
+				gcom.batch.atendimentopublico.BatchAtualizarAutosInfracaoPrazoRecursoVencidoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

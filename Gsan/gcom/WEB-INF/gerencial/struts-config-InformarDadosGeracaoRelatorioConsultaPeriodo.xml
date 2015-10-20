@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+
+	<form-beans>
+		<form-bean name="InformarDadosGeracaoRelatorioConsultaPeriodoActionForm"
+			type="gcom.gui.gerencial.InformarDadosGeracaoRelatorioConsultaPeriodoActionForm" />
+	</form-beans>
+
+	<!--******************* PAGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+		
+		<action name="InformarDadosGeracaoRelatorioConsultaPeriodoActionForm" 
+			type="gcom.gui.gerencial.ExibirInformarDadosGeracaoRelatorioConsultaPeriodoAction"
+			validate="true" path="/exibirInformarDadosGeracaoRelatorioConsultaPeriodoAction">
+			<forward name="exibirInformarDadosGeracaoRelatorioConsultaPeriodo"
+				path="/jsp/gerencial/dados_geracao_relatorio_consulta_periodo_informar.jsp" />
+		</action>
+
+		<action name="InformarDadosGeracaoRelatorioConsultaPeriodoActionForm" 
+			type="gcom.gui.gerencial.InformarDadosGeracaoRelatorioConsultaPeriodoAction"
+			validate="false" path="/informarDadosGeracaoRelatorioConsultaPeriodoAction">
+			<forward name="exibirInformarDadosGeracaoRelatorioConsultaPeriodo"
+				path="/jsp/gerencial/dados_geracao_relatorio_consulta_periodo_informar.jsp" />
+			<forward name="informarConsultarResumoAnormalidade"
+				path="/consultarResumoAnormalidadeAction.do" />
+			<forward name="informarConsultarResumoPendencia"
+				path="/consultarResumoPendenciaAction.do" />
+			<forward name="informarConsultarResumoLigacoesEconomia"
+				path="/consultarResumoLigacoesEconomiasAction.do" />
+			<forward name="informarConsultarResumoAnaliseFaturamento"
+				path="/consultarResumoAnaliseFaturamentoPeriodoAction.do" />				
+			<forward name="consultarComparativoResumosFaturamentoArrecadacaoPendencia"
+				path="/consultarComparativoResumosFaturamentoArrecadacaoPendenciaAction.do" />
+			<forward name="consultarResumoAcaoCobrancaParametros"
+				path="/consultarResumoAcaoCobrancaPeriodoWizardAction.do?action=exibirDadosGeracaoConsultaPeriodoAction" />					
+		</action>
+		
+	</action-mappings>
+
+	
+</struts-config>

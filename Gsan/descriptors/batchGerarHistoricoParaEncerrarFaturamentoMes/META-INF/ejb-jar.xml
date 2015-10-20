@@ -6,7 +6,7 @@
 			<display-name>BatchGerarHistoricoParaEncerrarFaturamentoMesMDB</display-name>
 			<ejb-name>BatchGerarHistoricoParaEncerrarFaturamentoMesMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarHistoricoParaEncerrarFaturamentoMesMDB
+				gcom.batch.faturamento.BatchGerarHistoricoParaEncerrarFaturamentoMesMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

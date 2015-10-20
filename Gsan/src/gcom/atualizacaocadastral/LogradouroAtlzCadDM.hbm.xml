@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/03/2013 15:40:14 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="gcom.atualizacaocadastral.LogradouroAtlzCadDM" table="atualizacaocadastral.logradouro_atlz_cad_dm">
+		<id name="id" type="java.lang.Integer" column="loac_id">       
+			<generator class="sequence">
+				<param name="sequence">atualizacaocadastral.seq_logradouro_atlz_cad_dm</param>
+			</generator>
+		</id>
+		
+		<property name="codigo" type="java.lang.String" column="loac_cdlogradouro" not-null="true" length="40" />
+        <property name="nome" type="java.lang.String" column="loac_nmlogradouro" not-null="true" length="40" />
+        <property name="nomePopular" type="java.lang.String" column="loac_nmpopular" length="30" not-null="false"/>
+        <property name="nomeLoteamento" type="java.lang.String" column="loac_nmloteamento" length="30" not-null="false"/>
+        <property name="indicadorAtualizado" type="java.lang.Short" column="loac_icatualizado" length="2" not-null="true"/>
+        <property name="ultimaAlteracao" type="java.sql.Timestamp" column="loac_tmultimaalteracao" length="8"/>
+
+		<!-- bi-directional many-to-one association to Municipio -->
+		<many-to-one name="municipio" class="gcom.cadastro.geografico.Municipio" not-null="true">
+			<column name="muni_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to LogradouroTitulo -->
+		<many-to-one name="logradouroTitulo" class="gcom.cadastro.endereco.LogradouroTitulo" not-null="false">
+			<column name="lgtt_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to LogradouroTipo -->
+		<many-to-one name="logradouroTipo" class="gcom.cadastro.endereco.LogradouroTipo" not-null="true">
+			<column name="lgtp_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to Localidade -->
+		<many-to-one name="localidade" class="gcom.cadastro.localidade.Localidade" not-null="true">
+			<column name="loca_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to Empresa -->
+		<many-to-one name="empresa" class="gcom.cadastro.empresa.Empresa" not-null="true">
+			<column name="empr_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to Logradouro -->
+		<many-to-one name="logradouro" class="gcom.cadastro.endereco.Logradouro" not-null="false">
+			<column name="logr_id"/>
+		</many-to-one>
+		
+    </class>
+</hibernate-mapping>

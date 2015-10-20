@@ -29,6 +29,9 @@
 	<parameter name="imoveisComando" isForPrompting="false" class="java.lang.Integer"/>
 	<parameter name="imoveisGeraramDocumento" isForPrompting="false" class="java.lang.Integer"/>
 	<parameter name="imoveisNaoGeraramDocumento" isForPrompting="false" class="java.lang.Integer"/>
+	<parameter name="cobrancaAcao" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="dataComando" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="dataRealizacao" isForPrompting="false" class="java.lang.Object"/>
 
 	<field name="getDescricaoMotivo" class="java.lang.String"/>
 	<field name="getQuantidadeImoveisPorMotivo" class="java.lang.Integer"/>
@@ -86,7 +89,7 @@
 						x="0"
 						y="0"
 						width="782"
-						height="73"
+						height="90"
 						key="rectangle-3"/>
 					<graphicElement stretchType="NoStretch"/>
 				</rectangle>
@@ -94,7 +97,7 @@
 					<reportElement
 						mode="Transparent"
 						x="695"
-						y="19"
+						y="30"
 						width="68"
 						height="13"
 						forecolor="#000000"
@@ -135,7 +138,7 @@
 						x="78"
 						y="0"
 						width="0"
-						height="73"
+						height="90"
 						key="line-3"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
@@ -143,7 +146,7 @@
 					<reportElement
 						mode="Opaque"
 						x="705"
-						y="47"
+						y="58"
 						width="47"
 						height="13"
 						forecolor="#000000"
@@ -163,7 +166,7 @@
 					<reportElement
 						mode="Transparent"
 						x="698"
-						y="33"
+						y="44"
 						width="63"
 						height="13"
 						forecolor="#000000"
@@ -184,14 +187,14 @@
 						x="680"
 						y="1"
 						width="0"
-						height="72"
+						height="88"
 						key="line-20"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
 				<staticText>
 					<reportElement
 						x="740"
-						y="4"
+						y="15"
 						width="7"
 						height="13"
 						key="staticText-76"/>
@@ -209,7 +212,7 @@
 					<reportElement
 						mode="Opaque"
 						x="747"
-						y="4"
+						y="15"
 						width="29"
 						height="13"
 						forecolor="#000000"
@@ -229,7 +232,7 @@
 					<reportElement
 						mode="Opaque"
 						x="711"
-						y="4"
+						y="15"
 						width="29"
 						height="13"
 						forecolor="#000000"
@@ -249,7 +252,7 @@
 					<reportElement
 						mode="Opaque"
 						x="686"
-						y="4"
+						y="15"
 						width="25"
 						height="13"
 						forecolor="#000000"
@@ -309,7 +312,7 @@
 						key="staticText-97"/>
 					<box></box>
 					<textElement textAlignment="Center">
-						<font fontName="Courier New" pdfFontName="Courier" size="10" isBold="true"/>
+						<font fontName="Courier New" pdfFontName="Courier-Bold" size="10" isBold="true"/>
 					</textElement>
 				<text><![CDATA[Imóveis no Comando:]]></text>
 				</staticText>
@@ -485,6 +488,84 @@
 						key="line-33"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
+				<staticText>
+					<reportElement
+						x="80"
+						y="59"
+						width="109"
+						height="12"
+						key="staticText-103"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Courier New" pdfFontName="Courier-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Ação de cobrança:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="189"
+						y="59"
+						width="491"
+						height="12"
+						key="textField-96"/>
+					<box></box>
+					<textElement>
+						<font fontName="Courier New" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{cobrancaAcao}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="80"
+						y="74"
+						width="107"
+						height="12"
+						key="staticText-104"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Courier New" pdfFontName="Courier-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Data do Comando:relatorioMotivoNaoGeracaoDocumentoCobrancaSintetico]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="401"
+						y="74"
+						width="125"
+						height="12"
+						key="staticText-105"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Courier New" pdfFontName="Courier-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Data de Realização:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="191"
+						y="74"
+						width="198"
+						height="12"
+						key="textField-97"/>
+					<box></box>
+					<textElement>
+						<font fontName="Courier New" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{dataComando}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="526"
+						y="74"
+						width="152"
+						height="12"
+						key="textField-98"/>
+					<box></box>
+					<textElement>
+						<font fontName="Courier New" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[""+$P{dataRealizacao}]]></textFieldExpression>
+				</textField>
 			</band>
 		</pageHeader>
 		<columnHeader>

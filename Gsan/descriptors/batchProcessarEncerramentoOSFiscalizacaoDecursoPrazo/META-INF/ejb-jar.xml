@@ -6,7 +6,7 @@
 			<display-name>BatchProcessarEncerramentoOSFiscalizacaoDecursoPrazoMDB</display-name>
 			<ejb-name>BatchProcessarEncerramentoOSFiscalizacaoDecursoPrazoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.atendimentopublico.BatchProcessarEncerramentoOSFiscalizacaoDecursoPrazoMDB
+				gcom.batch.atendimentopublico.BatchProcessarEncerramentoOSFiscalizacaoDecursoPrazoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

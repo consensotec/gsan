@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="ExibirInformacoesPortalCaemaActionForm"
+			type="gcom.gui.portal.caema.ExibirInformacoesPortalCaemaActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="ExibirInformacoesPortalCaemaActionForm"
+			type="gcom.gui.portal.caema.ExibirInformacoesPortalCaemaAction"
+			validate="false" scope="session"
+			path="/exibirInformacoesPortalCaemaAction">
+
+			<forward name="exibirInformacoesPortalCaemaAction"
+				path="/jsp/portal/caema/informacoes_portal_caema.jsp" />
+
+			<forward
+				name="exibirInformacoesParcelamentoDebitoPortalCaemaAction"
+				path="/jsp/portal/caema/informacoes_parcelamento_debito_portal_caema.jsp" />
+			<!--
+			<forward name="exibirConsultarRegulamentoServicosPortalCaemaAction"
+				path="/jsp/portal/caema/informacoes_regulamento_servicos_portal_caema.jsp" />
+			-->
+			
+			<forward name="exibirInformacoesVivaAguaPortalCaemaAction"
+				path="/jsp/portal/caema/informacoes_viva_agua_portal_caema.jsp" />
+				
+			<forward name="exibirInformacoesTabelaServicosPortalCaemaAction"
+				path="/jsp/portal/caema/informacoes_tabela_servicos_portal_caema.jsp" />
+			
+			<forward name="exibirInformacoesLigacaoAguaEsgotoPortalCaemaAction"
+				path="/jsp/portal/caema/informacoes_ligacao_agua_esgoto_portal_caema.jsp" />
+				
+			<forward name="exibirInformacoesDebitoAutomaticoPortalCaemaAction"
+				path="/jsp/portal/caema/informacoes_debito_automatico_portal_caema.jsp" />
+
+			<forward name="exibirInformacoesOrientacoesClientePortalCaemaAction"
+				path="/jsp/portal/caema/informacoes_orientacoes_cliente_portal_caema.jsp" />
+				
+			<forward name="exibirConsultarPagamentoFaturaPortalCaemaAction"
+				path="/jsp/portal/caema/informacoes_pagar_fatura_portal_caema.jsp" />
+
+			<forward name="exibirValidarCertidaoNegativaDebitoPortalCaemaAction"
+				path="/jsp/portal/caema/validar_certidao_negativa_debito_portal_caema.jsp" />
+		</action>
+		
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>
+

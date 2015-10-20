@@ -6,7 +6,7 @@
 			<display-name>BatchGerarTabelasTemporariasAtualizacaoCadastralMDB</display-name>
 			<ejb-name>BatchGerarTabelasTemporariasAtualizacaoCadastralMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cadastro.BatchGerarTabelasTemporariasAtualizacaoCadastralMDB
+				gcom.batch.cadastro.BatchGerarTabelasTemporariasAtualizacaoCadastralMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

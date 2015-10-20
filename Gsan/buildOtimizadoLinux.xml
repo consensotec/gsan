@@ -6,8 +6,8 @@
 	<property name="dest" value="bin" />
 	<property name="descriptors" value="descriptors" />
 	<property name="Generated.Source" value="${dest}/Temporary_Files" />
-	<property name="nomeEAR" value="${JBossApplicationServer.3x.deploy}/gsan.ear" />
-	<property name="nomeWAR" value="${JBossApplicationServer.3x.deploy}/gsan.ear/gsan.war" />
+	<property name="nomeEAR" value="${JBossApplicationServer.3x.deploy}/gcom.ear" />
+	<property name="nomeWAR" value="${JBossApplicationServer.3x.deploy}/gcom.ear/gcom.war" />
 	<property name="JBossApplicationServer.3x.Client.home" value="${JBossApplicationServer.3x.home}/client" />
 	<property name="Struts.home" value="lib/Struts1.1" />
 	<property name="Servlet.home" value="lib/Servlet" />
@@ -17,7 +17,7 @@
 	<property name="JAF.home" value="lib/JAF" />
 	<property name="JavaMail.home" value="lib/Javamail" />
 	<property name="PostGreSQL7.4.home" value="lib/DriverPostGres/7.4" />
-	<property name="Properties.home" value="src/gsan" />
+	<property name="Properties.home" value="src/gcom" />
 	<property name="PagerTagLib.home" value="lib/PagerTagLib" />
 	<property name="JSTL.home" value="lib/JSTL 1.1" />
 	<property name="Quartz.home" value="lib/quartz-1.5.2" />
@@ -145,11 +145,11 @@
 			<dtd publicid="-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN" location="${JBossApplicationServer.3x.home}/docs/dtd/ejb-jar_2_0.dtd" />
 			<dtd publicid="-//JBoss//DTD JBOSS 4.0//EN" location="${JBossApplicationServer.3x.home}/docs/dtd/jboss_4_0.dtd" />
 
-			<jboss destdir="${JBossApplicationServer.3x.deploy}/gsan.ear">
+			<jboss destdir="${JBossApplicationServer.3x.deploy}/gcom.ear">
 			</jboss>
 		</ejbjar>
 
-		<delete file="${JBossApplicationServer.3x.deploy}/gsan.ear/null.jar" />
+		<delete file="${JBossApplicationServer.3x.deploy}/gcom.ear/null.jar" />
 
 	</target>
 	<!--	<target name="cleanup">
@@ -168,7 +168,7 @@
 		<mkdir dir="${nomeWAR}/WEB-INF/lib" />
 
 		<copy todir="${nomeWAR}">
-			<fileset dir="gsan">
+			<fileset dir="gcom">
 				<include name="**/*" />
 				<exclude name="html" />
 			</fileset>
@@ -180,9 +180,9 @@
 		</copy>-->
 		<copy todir="${nomeWAR}/WEB-INF/classes">
 		<!--	<fileset dir="${dest}">
-				<include name="gsan/**/*.*" />
+				<include name="gcom/**/*.*" />
 			</fileset>-->
-			<fileset dir="src/gsan/properties">
+			<fileset dir="src/gcom/properties">
 				<include name="*.properties" />
 			</fileset>
 			<fileset dir="reports">
@@ -220,7 +220,7 @@
 			</fileset>
 		</copy>
 
-		<jar compress="false" update="false" destfile="gsan.jar">
+		<jar compress="false" update="false" destfile="gcom.jar">
 			<fileset dir="${dest}">
 				<include name="**/*.xml" />
 				<include name="**/*.properties" />
@@ -270,7 +270,7 @@
 		</copy>
 		<copy todir="${nomeEAR}">
 			<fileset dir=".">
-				<include name="gsan.jar" />
+				<include name="gcom.jar" />
 			</fileset>
 		</copy>
 		
@@ -300,11 +300,11 @@
 	</target>
 
 	<target name="clean">
-		<delete dir="${JBossApplicationServer.3x.deploy}/gsan.ear" />
+		<delete dir="${JBossApplicationServer.3x.deploy}/gcom.ear" />
 	</target>
 
 	<target name="update-ear">
-		<touch file="${JBossApplicationServer.3x.deploy}/gsan.ear/META-INF/application.xml" />
+		<touch file="${JBossApplicationServer.3x.deploy}/gcom.ear/META-INF/application.xml" />
 	</target>
 
 

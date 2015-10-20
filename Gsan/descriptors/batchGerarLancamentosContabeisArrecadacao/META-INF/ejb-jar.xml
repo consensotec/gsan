@@ -6,7 +6,7 @@
 			<display-name>BatchGerarLancamentosContabeisArrecadacaoMDB</display-name>
 			<ejb-name>BatchGerarLancamentosContabeisArrecadacaoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.financeiro.BatchGerarLancamentosContabeisArrecadacaoMDB
+				gcom.batch.financeiro.BatchGerarLancamentosContabeisArrecadacaoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

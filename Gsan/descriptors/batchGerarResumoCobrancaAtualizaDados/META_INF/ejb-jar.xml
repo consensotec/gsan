@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoCobrancaAtualizaDadosMDB</display-name>
 			<ejb-name>BatchGerarResumoCobrancaAtualizaDadosMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchGerarResumoCobrancaAtualizaDadosMDB
+				gcom.batch.cobranca.BatchGerarResumoCobrancaAtualizaDadosMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

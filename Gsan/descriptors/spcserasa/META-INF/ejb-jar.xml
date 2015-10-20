@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorSpcSerasaGCOM</display-name>
             <ejb-name>ControladorSpcSerasaGCOM</ejb-name>
-            <local-home>gsan.spcserasa.ControladorSpcSerasaLocalHome</local-home>
-            <local>gsan.spcserasa.ControladorSpcSerasaLocal</local>
-            <ejb-class>gsan.spcserasa.ControladorSpcSerasaSEJB</ejb-class>
+            <local-home>gcom.spcserasa.ControladorSpcSerasaLocalHome</local-home>
+            <local>gcom.spcserasa.ControladorSpcSerasaLocal</local>
+            <ejb-class>gcom.spcserasa.ControladorSpcSerasaSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

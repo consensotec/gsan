@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="GerarRelatorioDemonstrativoDividaAtivaActionForm"
+			type="gcom.gui.cobranca.GerarRelatorioDemonstrativoDividaAtivaActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	
+	<action-mappings>
+	
+		<action  name="GerarRelatorioDemonstrativoDividaAtivaActionForm"
+			type="gcom.gui.cobranca.ExibirGerarRelatorioDemonstrativoDividaAtivaAction"
+			validate="false" scope="session" path="/exibirGerarRelatorioDemonstrativoDividaAtivaAction">
+			
+			<forward name="exibirGerarRelatorioDemonstrativoDividaAtivaAction"
+				path="/jsp/cobranca/relatorio_demonstrativo_divida_ativa_gerar.jsp" />
+		</action>
+		
+		<action name="GerarRelatorioDemonstrativoDividaAtivaActionForm"
+			type="gcom.gui.cobranca.GerarRelatorioDemonstrativoDividaAtivaAction"
+			validate="true" 
+			path="/gerarRelatorioDemonstrativoDividaAtivaAction" />
+			
+	</action-mappings>
+	
+	<message-resources null="false"	parameter="gcom.properties.application" />
+</struts-config>

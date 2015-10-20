@@ -13,7 +13,7 @@
 
 			<ejb-class>
 
-				gsan.batch.cobranca.spcserasa.BatchAcompanharPagamentoDoParcelamentoMDB
+				gcom.batch.cobranca.spcserasa.BatchAcompanharPagamentoDoParcelamentoMDB
 
 
 			</ejb-class>

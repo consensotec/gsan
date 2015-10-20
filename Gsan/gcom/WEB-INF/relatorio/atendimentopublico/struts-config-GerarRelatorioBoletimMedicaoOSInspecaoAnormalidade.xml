@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="GerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeActionForm"
+			type="gcom.gui.relatorio.atendimentopublico.GerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeActionForm" />
+
+		<form-bean name="GerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeActionForm2"
+			type="gcom.gui.relatorio.atendimentopublico.GerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeActionForm2" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+
+	<action-mappings>
+		<!--******************* PÁGINA PRINCIPAL *******************-->
+		<action name="GerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeActionForm"
+			type="gcom.gui.relatorio.atendimentopublico.ExibirGerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeAction"
+			input="/exibirGerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeAction.do"
+			path="/exibirGerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeAction"
+			validate="true" scope="session">
+			<forward name="exibirGerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeAction"
+				path="/jsp/relatorio/atendimentopublico/ordem_servico_inspecao_anormalidade_gerar_relatorio.jsp" />
+			<forward name="exibirGerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeAction2" 
+				path="/exibirGerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeAction2.do"/>	
+		</action>
+		
+		<action name="GerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeActionForm2"
+			type="gcom.gui.relatorio.atendimentopublico.ExibirGerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeAction2"
+			input="/exibirGerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeAction2.do"
+			path="/exibirGerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeAction2"
+			validate="true" scope="session">
+			<forward name="exibirGerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeAction2" 
+				path="/jsp/relatorio/atendimentopublico/ordem_servico_inspecao_anormalidade_gerar_relatorio2.jsp" />	
+		</action>
+		
+		<action name="GerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeActionForm2"
+			type="gcom.gui.relatorio.atendimentopublico.GerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeAction"
+			path="/gerarRelatorioBoletimMedicaoOrdemServicoInspecaoAnormalidadeAction" 
+			validate="true" scope="session"/>
+	</action-mappings>
+</struts-config>

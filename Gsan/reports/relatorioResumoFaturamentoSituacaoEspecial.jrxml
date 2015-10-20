@@ -27,6 +27,7 @@
 	<parameter name="nomeRelatorio" isForPrompting="false" class="java.lang.String"/>
 	<parameter name="imagem" isForPrompting="false" class="java.lang.String"/>
 	<parameter name="numeroRelatorio" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="mesAnoReferenciaFaturamento" isForPrompting="false" class="java.lang.String"/>
 
 	<field name="getGerenciaRegional" class="java.lang.String"/>
 	<field name="getLocalidade" class="java.lang.String"/>
@@ -70,13 +71,13 @@
 		<group  name="gerenciaRegionalQuebra" isStartNewPage="true" isReprintHeaderOnEachPage="true" >
 			<groupExpression><![CDATA[$F{getGerenciaRegional}]]></groupExpression>
 			<groupHeader>
-			<band height="97"  isSplitAllowed="true" >
+			<band height="111"  isSplitAllowed="true" >
 				<rectangle>
 					<reportElement
 						x="0"
 						y="0"
 						width="782"
-						height="63"
+						height="74"
 						key="rectangle-5"/>
 					<graphicElement stretchType="NoStretch"/>
 				</rectangle>
@@ -125,7 +126,7 @@
 						x="78"
 						y="0"
 						width="0"
-						height="63"
+						height="74"
 						key="line-18"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
@@ -154,7 +155,7 @@
 						x="688"
 						y="0"
 						width="0"
-						height="63"
+						height="74"
 						key="line-19"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
@@ -162,7 +163,7 @@
 					<reportElement
 						mode="Opaque"
 						x="0"
-						y="67"
+						y="79"
 						width="782"
 						height="28"
 						forecolor="#000000"
@@ -176,7 +177,7 @@
 					<reportElement
 						mode="Opaque"
 						x="366"
-						y="81"
+						y="94"
 						width="70"
 						height="11"
 						forecolor="#000000"
@@ -196,7 +197,7 @@
 					<reportElement
 						mode="Opaque"
 						x="282"
-						y="81"
+						y="94"
 						width="70"
 						height="11"
 						forecolor="#000000"
@@ -216,7 +217,7 @@
 					<reportElement
 						mode="Opaque"
 						x="448"
-						y="81"
+						y="94"
 						width="89"
 						height="11"
 						forecolor="#000000"
@@ -236,7 +237,7 @@
 					<reportElement
 						mode="Opaque"
 						x="550"
-						y="81"
+						y="94"
 						width="78"
 						height="11"
 						forecolor="#000000"
@@ -256,7 +257,7 @@
 					<reportElement
 						mode="Opaque"
 						x="638"
-						y="81"
+						y="94"
 						width="56"
 						height="11"
 						forecolor="#000000"
@@ -276,7 +277,7 @@
 					<reportElement
 						mode="Opaque"
 						x="701"
-						y="81"
+						y="94"
 						width="77"
 						height="11"
 						forecolor="#000000"
@@ -296,7 +297,7 @@
 					<reportElement
 						mode="Opaque"
 						x="60"
-						y="68"
+						y="81"
 						width="107"
 						height="11"
 						forecolor="#000000"
@@ -315,7 +316,7 @@
 				<line direction="TopDown">
 					<reportElement
 						x="276"
-						y="67"
+						y="79"
 						width="0"
 						height="28"
 						key="line-20"/>
@@ -325,7 +326,7 @@
 					<reportElement
 						mode="Opaque"
 						x="88"
-						y="81"
+						y="94"
 						width="107"
 						height="11"
 						forecolor="#000000"
@@ -344,7 +345,7 @@
 				<line direction="TopDown">
 					<reportElement
 						x="442"
-						y="68"
+						y="80"
 						width="0"
 						height="27"
 						key="line-26"/>
@@ -353,7 +354,7 @@
 				<line direction="TopDown">
 					<reportElement
 						x="359"
-						y="67"
+						y="79"
 						width="0"
 						height="28"
 						key="line-27"/>
@@ -362,7 +363,7 @@
 				<line direction="TopDown">
 					<reportElement
 						x="698"
-						y="67"
+						y="79"
 						width="0"
 						height="28"
 						key="line-28"/>
@@ -371,7 +372,7 @@
 				<line direction="TopDown">
 					<reportElement
 						x="544"
-						y="68"
+						y="80"
 						width="0"
 						height="27"
 						key="line-29"/>
@@ -380,7 +381,7 @@
 				<line direction="TopDown">
 					<reportElement
 						x="634"
-						y="68"
+						y="80"
 						width="0"
 						height="27"
 						key="line-30"/>
@@ -501,8 +502,8 @@
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Opaque"
-						x="178"
-						y="31"
+						x="203"
+						y="46"
 						width="208"
 						height="11"
 						forecolor="#000000"
@@ -520,9 +521,9 @@
 				</textField>
 				<staticText>
 					<reportElement
-						x="82"
-						y="31"
-						width="96"
+						x="91"
+						y="46"
+						width="112"
 						height="11"
 						key="staticText-236"/>
 					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -530,7 +531,7 @@
 					<bottomPen lineWidth="0.0" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 </box>
-					<textElement verticalAlignment="Middle">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Courier New" pdfFontName="Courier-Bold" size="8" isBold="true"/>
 					</textElement>
 				<text><![CDATA[Gerência Regional:]]></text>
@@ -538,9 +539,9 @@
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Opaque"
-						x="478"
-						y="31"
-						width="208"
+						x="510"
+						y="46"
+						width="174"
 						height="11"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -557,8 +558,8 @@
 				</textField>
 				<staticText>
 					<reportElement
-						x="390"
-						y="31"
+						x="422"
+						y="46"
 						width="88"
 						height="11"
 						key="staticText-237"/>
@@ -574,9 +575,9 @@
 				</staticText>
 				<staticText>
 					<reportElement
-						x="117"
-						y="45"
-						width="61"
+						x="91"
+						y="60"
+						width="112"
 						height="11"
 						key="staticText-238"/>
 					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -584,7 +585,7 @@
 					<bottomPen lineWidth="0.0" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 </box>
-					<textElement verticalAlignment="Middle">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Courier New" pdfFontName="Courier-Bold" size="8" isBold="true"/>
 					</textElement>
 				<text><![CDATA[Localidade:]]></text>
@@ -592,8 +593,8 @@
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Opaque"
-						x="178"
-						y="45"
+						x="203"
+						y="60"
 						width="208"
 						height="11"
 						forecolor="#000000"
@@ -611,8 +612,8 @@
 				</textField>
 				<staticText>
 					<reportElement
-						x="390"
-						y="45"
+						x="422"
+						y="60"
 						width="88"
 						height="11"
 						key="staticText-239"/>
@@ -629,9 +630,9 @@
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Opaque"
-						x="478"
-						y="45"
-						width="208"
+						x="510"
+						y="60"
+						width="174"
 						height="11"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -650,7 +651,7 @@
 					<reportElement
 						mode="Opaque"
 						x="0"
-						y="79"
+						y="92"
 						width="782"
 						height="0"
 						forecolor="#000000"
@@ -680,6 +681,54 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$P{numeroRelatorio}]]></textFieldExpression>
 				</textField>
+				<subreport  isUsingCache="true">
+					<reportElement
+						mode="Opaque"
+						x="116"
+						y="99"
+						width="0"
+						height="0"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="subreport-1"/>
+				</subreport>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Opaque"
+						x="203"
+						y="33"
+						width="208"
+						height="11"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-277"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
+						<font fontName="Courier New" pdfFontName="Courier" size="8" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{mesAnoReferenciaFaturamento}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="91"
+						y="33"
+						width="112"
+						height="11"
+						key="staticText-242"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Courier New" pdfFontName="Courier-Bold" size="8" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Mês/Ano de Faturamento:]]></text>
+				</staticText>
 			</band>
 			</groupHeader>
 			<groupFooter>
@@ -1013,17 +1062,6 @@
 			<groupExpression><![CDATA[$F{getLocalidade}]]></groupExpression>
 			<groupHeader>
 			<band height="0"  isSplitAllowed="true" >
-				<subreport  isUsingCache="true">
-					<reportElement
-						mode="Opaque"
-						x="116"
-						y="-10"
-						width="0"
-						height="0"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="subreport-1"/>
-				</subreport>
 			</band>
 			</groupHeader>
 			<groupFooter>

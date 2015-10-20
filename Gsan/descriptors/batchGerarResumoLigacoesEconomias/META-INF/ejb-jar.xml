@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoLigacoesEconomiasMDB</display-name>
 			<ejb-name>BatchGerarResumoLigacoesEconomiasMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cadastro.BatchGerarResumoLigacoesEconomiasMDB
+				gcom.batch.cadastro.BatchGerarResumoLigacoesEconomiasMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

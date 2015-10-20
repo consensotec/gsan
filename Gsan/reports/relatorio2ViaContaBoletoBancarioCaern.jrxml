@@ -62,6 +62,12 @@
 	<field name="numeroNitrato" class="java.lang.String"/>
 	<field name="numeroPH" class="java.lang.String"/>
 	<field name="numeroCarteira" class="java.lang.String"/>
+	<field name="pisBaseCalculo" class="java.lang.String"/>
+	<field name="cofinsBaseCalculo" class="java.lang.String"/>
+	<field name="pisPercentual" class="java.lang.String"/>
+	<field name="cofinsPercentual" class="java.lang.String"/>
+	<field name="pisValorImposto" class="java.lang.String"/>
+	<field name="cofinsValorImposto" class="java.lang.String"/>
 
 
 		<group  name="Conta" isStartNewPage="true" >
@@ -84,7 +90,7 @@
 						x="-1"
 						y="3"
 						width="535"
-						height="124"
+						height="76"
 						key="rectangle-1"/>
 					<graphicElement stretchType="NoStretch"/>
 				</rectangle>
@@ -113,9 +119,9 @@
 				<subreport  isUsingCache="true">
 					<reportElement
 						x="3"
-						y="10"
+						y="16"
 						width="527"
-						height="112"
+						height="62"
 						key="subreport-1"/>
 					<subreportParameter  name="arrayJRDetailBoleto">
 						<subreportParameterExpression><![CDATA[$F{arrayJRDetailBoleto}]]></subreportParameterExpression>
@@ -447,7 +453,7 @@
 						x="417"
 						y="14"
 						width="0"
-						height="113"
+						height="65"
 						key="line-9"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
@@ -456,7 +462,7 @@
 						x="266"
 						y="14"
 						width="0"
-						height="113"
+						height="65"
 						key="line-10"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
@@ -1907,6 +1913,270 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{numeroCarteira}]]></textFieldExpression>
 				</textField>
+				<rectangle radius="4" >
+					<reportElement
+						x="-1"
+						y="82"
+						width="535"
+						height="42"
+						key="rectangle-12">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<graphicElement stretchType="NoStretch"/>
+				</rectangle>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="426"
+						y="112"
+						width="90"
+						height="9"
+						key="textField-31">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font fontName="Courier New" pdfFontName="Courier" size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{cofinsValorImposto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="426"
+						y="101"
+						width="90"
+						height="9"
+						key="textField-32">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font fontName="Courier New" pdfFontName="Courier" size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{pisValorImposto}]]></textFieldExpression>
+				</textField>
+				<rectangle radius="2" >
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="83"
+						width="533"
+						height="16"
+						forecolor="#CCCCCC"
+						backcolor="#CCCCCC"
+						key="rectangle-13">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<graphicElement stretchType="NoStretch"/>
+				</rectangle>
+				<staticText>
+					<reportElement
+						x="287"
+						y="86"
+						width="72"
+						height="11"
+						key="staticText-76">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Courier New" pdfFontName="Courier-Bold" size="7" isBold="true"/>
+					</textElement>
+				<text><![CDATA[PERCENTUAL(%)]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="112"
+						width="72"
+						height="9"
+						key="textField-33">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Courier New" pdfFontName="Courier" size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{cofinsPercentual}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="101"
+						width="72"
+						height="9"
+						key="textField-34">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Courier New" pdfFontName="Courier" size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{pisPercentual}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="139"
+						y="101"
+						width="72"
+						height="9"
+						key="textField-35">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font fontName="Courier New" pdfFontName="Courier" size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{pisBaseCalculo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="139"
+						y="112"
+						width="72"
+						height="9"
+						key="textField-36">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font fontName="Courier New" pdfFontName="Courier" size="7"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{cofinsBaseCalculo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="139"
+						y="86"
+						width="72"
+						height="11"
+						key="staticText-77">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Courier New" pdfFontName="Courier-Bold" size="7" isBold="true"/>
+					</textElement>
+				<text><![CDATA[BASE DE CÁLCULO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="24"
+						y="101"
+						width="46"
+						height="10"
+						key="staticText-78">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Courier New" pdfFontName="Courier" size="7"/>
+					</textElement>
+				<text><![CDATA[PIS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="24"
+						y="112"
+						width="46"
+						height="10"
+						key="staticText-79">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement verticalAlignment="Top">
+						<font fontName="Courier New" pdfFontName="Courier" size="7"/>
+					</textElement>
+				<text><![CDATA[COFINS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="426"
+						y="86"
+						width="90"
+						height="11"
+						key="staticText-81">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Courier New" pdfFontName="Courier-Bold" size="7" isBold="true"/>
+					</textElement>
+				<text><![CDATA[VALOR DO IMPOSTO]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="99"
+						width="534"
+						height="0"
+						key="line-33">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="24"
+						y="86"
+						width="72"
+						height="11"
+						key="staticText-82">
+							<printWhenExpression><![CDATA[new Boolean($F{indicadorPrimeiraPaginaBoleto}.equals("1"))]]></printWhenExpression>
+						</reportElement>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Courier New" pdfFontName="Courier-Bold" size="7" isBold="true"/>
+					</textElement>
+				<text><![CDATA[TRIBUTOS]]></text>
+				</staticText>
 			</band>
 			</groupHeader>
 			<groupFooter>

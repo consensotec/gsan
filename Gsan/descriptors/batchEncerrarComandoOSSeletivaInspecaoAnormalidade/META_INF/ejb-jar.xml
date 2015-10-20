@@ -6,7 +6,7 @@
 			<display-name>BatchEncerrarComandoOSSeletivaInspecaoAnormalidadeMDB</display-name>
 			<ejb-name>BatchEncerrarComandoOSSeletivaInspecaoAnormalidadeMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.atendimentopublico.BatchEncerrarComandoOSSeletivaInspecaoAnormalidadeMDB
+				gcom.batch.atendimentopublico.BatchEncerrarComandoOSSeletivaInspecaoAnormalidadeMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

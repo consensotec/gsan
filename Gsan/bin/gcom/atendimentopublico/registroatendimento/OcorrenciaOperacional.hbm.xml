@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class
+  name="gcom.atendimentopublico.registroatendimento.OcorrenciaOperacional" table="atendimentopublico.ocorrencia_operacional">
+  <id column="ocop_id" name="id" type="java.lang.Integer">
+   <generator class="sequence">
+    <param name="sequence">atendimentopublico.seq_ocorrencia_operacional</param>
+   </generator>
+  </id>
+  <property column="ocop_dsocorrencia" generated="never" lazy="false"
+   length="200" name="descricao" not-null="true" type="java.lang.String"/>
+  <property column="ocop_dsareasafetadas" generated="never" lazy="false"
+   length="200" name="areasAfetadas" not-null="true" type="java.lang.String"/>
+  <property column="ocop_dtprevisao" generated="never" lazy="false"
+   length="4" name="dataPrevisao" type="java.sql.Date"/>
+  <property column="ocop_dtreprogramacao" generated="never" lazy="false"
+   length="4" name="dataReprogramacao" type="java.sql.Date"/>
+  <property column="ocop_dtconclusao" generated="never" lazy="false"
+   length="4" name="dataConclusao" type="java.sql.Date"/>
+  <property column="ocop_cdperiodoprevisao" generated="never"
+   lazy="false" length="2" name="codigoPeriodoPrevisao" type="short"/>
+  <property column="ocop_cdperiodoreprogramacao" generated="never"
+   lazy="false" length="2" name="codigoPeriodoReprogramacao" type="short"/>
+  <property column="ocop_cdperiodoconclusao" generated="never"
+   lazy="false" length="2" name="codigoPeriodoConclusao" type="short"/>
+  <property column="ocop_dsobservacao" generated="never" lazy="false"
+   length="200" name="observacao" type="java.lang.String"/>
+  <property column="ocop_tmocorrencia" generated="never" lazy="false"
+   length="8" name="dataOcorrencia" not-null="true" type="java.sql.Timestamp"/>
+  <property column="ocop_tmultimaalteracao" generated="never"
+   lazy="false" length="8" name="ultimaAlteracao" not-null="true" type="java.sql.Timestamp"/>
+  <many-to-one class="gcom.cadastro.geografico.Municipio"
+   name="municipio" not-null="true">
+   <column name="muni_id"/>
+  </many-to-one>
+  <many-to-one class="gcom.cadastro.localidade.Localidade"
+   name="localidade" not-null="true">
+   <column name="loca_id"/>
+  </many-to-one>
+  <many-to-one class="gcom.cadastro.geografico.Bairro" name="bairro" not-null="true">
+   <column name="bair_id"/>
+  </many-to-one>
+  <many-to-one
+   class="gcom.atendimentopublico.registroatendimento.OcorrenciaOperacionalTipo"
+   name="ocorrenciaOperacionalTipo" not-null="true">
+   <column name="ootp_id"/>
+  </many-to-one>
+  <many-to-one
+   class="gcom.atendimentopublico.registroatendimento.OcorrenciaOperacionalMotivo"
+   name="ocorrenciaOperacionalMotivo" not-null="true">
+   <column name="oomt_id"/>
+  </many-to-one>
+ </class>
+</hibernate-mapping>

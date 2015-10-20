@@ -6,7 +6,7 @@
 			<display-name>BatchClassificarPagamentosDevolucoesMDB</display-name>
 			<ejb-name>BatchClassificarPagamentosDevolucoesMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.arrecadacao.BatchClassificarPagamentosDevolucoesMDB
+				gcom.batch.arrecadacao.BatchClassificarPagamentosDevolucoesMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

@@ -8,7 +8,7 @@
 			</display-name>
 			<ejb-name>BatchAtualizarLigacaoAguaLigadoAnaliseParaLigadoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.arrecadacao.BatchAtualizarLigacaoAguaLigadoAnaliseParaLigadoMDB
+				gcom.batch.arrecadacao.BatchAtualizarLigacaoAguaLigadoAnaliseParaLigadoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

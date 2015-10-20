@@ -6,7 +6,7 @@
 			<display-name>BatchProcessarComandoGeradoMDB</display-name>
 			<ejb-name>BatchProcessarComandoGeradoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cadastro.BatchProcessarComandoGeradoMDB
+				gcom.batch.cadastro.BatchProcessarComandoGeradoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

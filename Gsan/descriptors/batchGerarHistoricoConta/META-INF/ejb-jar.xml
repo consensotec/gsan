@@ -6,7 +6,7 @@
 			<display-name>BatchGerarHistoricoContaMDB</display-name>
 			<ejb-name>BatchGerarHistoricoContaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.arrecadacao.BatchGerarHistoricoContaMDB
+				gcom.batch.arrecadacao.BatchGerarHistoricoContaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

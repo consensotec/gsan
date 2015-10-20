@@ -6,7 +6,7 @@
 			<display-name>BatchGerarMovimentoExtensaoContasCobrancaPorEmpresaMDB</display-name>
 			<ejb-name>BatchGerarMovimentoExtensaoContasCobrancaPorEmpresaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchGerarMovimentoExtensaoContasCobrancaPorEmpresaMDB
+				gcom.batch.cobranca.BatchGerarMovimentoExtensaoContasCobrancaPorEmpresaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

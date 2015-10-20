@@ -6,7 +6,7 @@
 			<display-name>BatchGerarCartaTarifaSocialMDB</display-name>
 			<ejb-name>BatchGerarCartaTarifaSocialMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cadastro.BatchGerarCartaTarifaSocialMDB
+				gcom.batch.cadastro.BatchGerarCartaTarifaSocialMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

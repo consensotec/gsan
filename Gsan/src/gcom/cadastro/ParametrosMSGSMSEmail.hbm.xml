@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="gcom.cadastro.ParametrosMSGSMSEmail" table="cadastro.parametros_msg_sms_email">
+		<id name="id" type="java.lang.Integer" column="pmse_id">
+			<generator class="sequence">
+				<param name="sequence">cadastro.seq_parametros_msg_sms_email</param>
+			</generator>
+		</id>
+		<property name="anoMesReferencia" type="java.lang.Integer" column="pmse_amreferencia"/>
+		<property name="valorMinimoConta" type="java.math.BigDecimal" column="pmse_vlminimoconta"/>
+		
+		<property name="indicadorResidencial" type="java.lang.Short" column="pmse_icresidencial"/>
+		<property name="indicadorComercial" type="java.lang.Short" column="pmse_iccomercial"/>
+		<property name="indicadorIndustrial" type="java.lang.Short" column="pmse_icindustrial"/>
+		<property name="indicadorPublico" type="java.lang.Short" column="pmse_icpublico"/>
+		
+		<property name="descricaoTextoSMS" type="java.lang.String" column="pmse_dstextosms"/>
+		<property name="descricaoTextoEmail" type="java.lang.String" column="pmse_dstextoemail"/>
+		
+		<property name="dataRetirada" type="java.sql.Date" column="pmse_dtretirada"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="pmse_tmultimaalteracao"/>		
+		<property name="quantidadeDiasAntesVencimento" type="java.lang.Integer" column="pmse_qtdiasantesvencimento"/>
+		<property name="quantidadeTentativasEnvio" type="java.lang.Integer" column="pmse_qttentativasenvio"/>
+	</class>
+</hibernate-mapping>

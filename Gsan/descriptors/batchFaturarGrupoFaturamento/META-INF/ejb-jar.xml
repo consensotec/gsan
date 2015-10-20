@@ -6,7 +6,7 @@
 			<display-name>BatchFaturarGrupoFaturamentoMDB</display-name>
 			<ejb-name>BatchFaturarGrupoFaturamentoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchFaturarGrupoFaturamentoMDB
+				gcom.batch.faturamento.BatchFaturarGrupoFaturamentoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

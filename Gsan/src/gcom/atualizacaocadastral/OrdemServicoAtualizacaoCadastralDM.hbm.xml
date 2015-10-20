@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class
+  name="gcom.atualizacaocadastral.OrdemServicoAtualizacaoCadastralDM" table="atualizacaocadastral.ordem_servico_atl_cad_dm">
+  <id column="osac_id" name="id" type="java.lang.Integer">
+   <generator class="sequence">
+    <param name="sequence">atualizacaocadastral.seq_ordem_servico_atl_cad_dm</param>
+   </generator>
+  </id>
+  <property column="osac_tmultimaalteracao" generated="never" lazy="false" length="8" name="ultimaAlteracao" not-null="true" type="java.sql.Timestamp"/>
+  
+  <many-to-one
+   class="gcom.atualizacaocadastral.ImovelAtualizacaoCadastralDM"
+   name="imovelAtualizacaoCadastralDM" not-null="true">
+   <column name="imac_id"/>
+  </many-to-one>
+  
+  <many-to-one class="gcom.atendimentopublico.ordemservico.OrdemServico"
+   name="ordemServico" not-null="true">
+   <column name="orse_id"/>
+  </many-to-one>
+  
+  <many-to-one class="gcom.micromedicao.consumo.LigacaoTipo"
+   name="ligacaoTipo" not-null="true">
+   <column name="lgti_id"/>
+  </many-to-one>
+ 
+ </class>
+</hibernate-mapping>

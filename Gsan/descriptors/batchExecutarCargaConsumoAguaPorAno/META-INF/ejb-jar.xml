@@ -6,7 +6,7 @@
 			<display-name>BatchExecutarCargaConsumoAguaPorAnoMDB</display-name>
 			<ejb-name>BatchExecutarCargaConsumoAguaPorAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.faturamento.BatchExecutarCargaConsumoAguaPorAnoMDB
+				gcom.batch.gerencial.faturamento.BatchExecutarCargaConsumoAguaPorAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

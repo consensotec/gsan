@@ -6,7 +6,7 @@
 			<display-name>BatchBaixaAutomaticaPagamentosNaoClassificadosMDB</display-name>
 			<ejb-name>BatchBaixaAutomaticaPagamentosNaoClassificadosMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.arrecadacao.BatchBaixaAutomaticaPagamentosNaoClassificadosMDB
+				gcom.batch.arrecadacao.BatchBaixaAutomaticaPagamentosNaoClassificadosMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

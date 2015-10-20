@@ -6,7 +6,7 @@
 			<display-name>BatchAutomatizarCargaPentahoMDB</display-name>
 			<ejb-name>BatchAutomatizarCargaPentahoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchAutomatizarCargaPentahoMDB
+				gcom.batch.faturamento.BatchAutomatizarCargaPentahoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

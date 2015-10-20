@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+<class name="gcom.cadastro.ParametroTabelaAtualizacaoCadastro" table="cadastro.param_tab_atualiz_cadast">
+	<id column="ptac_id" name="id" type="java.lang.Integer">
+   		<generator class="sequence">
+    		<param name="sequence">cadastro.seq_param_tab_atualiz_cadast</param>
+   		</generator>
+  	</id>
+  	
+  	<many-to-one class="gcom.cadastro.localidade.Localidade"
+   		name="localidadeInicial" 
+   		not-null="false">
+   		<column name="loca_idinicial"/>
+  	</many-to-one>
+  	
+  	<many-to-one class="gcom.cadastro.localidade.Localidade"
+   		name="localidadeFinal" 
+   		not-null="false">
+   		
+   		<column name="loca_idfinal"/>
+  	</many-to-one>
+  	
+  	<property column="ptac_cdsetorcomercialinicial" 
+  		generated="never"
+   		lazy="false" 
+   		length="4" 
+   		name="codigoSetorComercialInicial" 
+   		type="java.lang.Integer"/>
+   		
+  	<property column="ptac_cdsetorcomercialFinal" 
+  		generated="never"
+   		lazy="false" 
+   		length="4" 
+   		name="codigoSetorComercialFinal" 
+   		type="java.lang.Integer"/>
+   		
+  	<property column="ptac_nnquadrainicial" 
+  		generated="never" 
+  		lazy="false"
+   		length="4" 
+   		name="numeroQuadraInicial" 
+   		type="java.lang.Integer"/>
+   		
+  	<property column="ptac_nnquadrafinal" 
+  		generated="never" 
+  		lazy="false"
+   		length="4" 
+   		name="numeroQuadraFinal" 
+   		type="java.lang.Integer"/>
+
+
+  	<property column="ptac_nnrotainicial" 
+  		generated="never" 
+  		lazy="false"
+   		length="4" 
+   		name="codigoRotaInicial" 
+   		type="java.lang.Integer"/>
+   		
+  	<property column="ptac_nnrotafinal" 
+  		generated="never" 
+  		lazy="false"
+   		length="4" 
+   		name="codigoRotaFinal" 
+   		type="java.lang.Integer"/>
+   		
+  	<!-- Associations -->
+  	<many-to-one class="gcom.seguranca.acesso.usuario.Usuario"
+   		name="usuario" 
+   		not-null="true">
+   		
+   		<column name="usur_id"/>
+  	</many-to-one>
+  	
+  	<many-to-one class="gcom.cadastro.empresa.Empresa" 
+  		name="empresa" 
+  		not-null="true">
+  		
+   		<column name="empr_id"/>
+  	</many-to-one>
+  	
+  	<many-to-one class="gcom.cadastro.imovel.Imovel" 
+  		name="imovel" 
+  		not-null="false">
+  		
+   		<column name="imov_id"/>
+  	</many-to-one>
+  	
+ </class>
+</hibernate-mapping>

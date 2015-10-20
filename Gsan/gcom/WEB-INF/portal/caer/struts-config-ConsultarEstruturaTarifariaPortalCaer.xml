@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action 
+			type="gcom.gui.portal.caer.ExibirConsultarEstruturaTarifariaPortalCaerAction"
+			validate="false" scope="session"
+			path="/exibirConsultarEstruturaTarifariaPortalCaerAction">
+			<forward name="exibirConsultarEstruturaTarifariaPortalCaerAction"
+				path="/jsp/portal/caer/informacoes_estrutura_tarifaria_portal_caer_consultar.jsp" />
+				
+		</action>
+		
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>
+

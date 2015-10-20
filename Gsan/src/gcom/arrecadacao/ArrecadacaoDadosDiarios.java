@@ -222,7 +222,26 @@ public class ArrecadacaoDadosDiarios implements Serializable {
 	}
 
 	/** full constructor */
-    public ArrecadacaoDadosDiarios(Integer id, Integer anoMesReferenciaArrecadacao, Integer codigoSetorComercial, Integer numeroQuadra, Short indicadorHidrometro, Date dataPagamento, Integer quantidadePagamentos, BigDecimal valorPagamentos, Rota rota, Arrecadador arrecadador, SetorComercial setorComercial, ArrecadacaoForma arrecadacaoForma, LigacaoEsgotoSituacao ligacaoEsgotoSituacao, DocumentoTipo documentoTipo, EsferaPoder esferaPoder, ImovelPerfil imovelPerfil, Quadra quadra, GerenciaRegional gerenciaRegional, Localidade localidade, LigacaoAguaSituacao ligacaoAguaSituacao, Categoria categoria, UnidadeNegocio unidadeNegocio) {
+    public ArrecadacaoDadosDiarios(Integer id,
+    		Integer anoMesReferenciaArrecadacao,
+    		Integer codigoSetorComercial, 
+    		Integer numeroQuadra, Short indicadorHidrometro,
+    		Date dataPagamento,
+    		Integer quantidadePagamentos,
+    		BigDecimal valorPagamentos,
+    		Rota rota, Arrecadador arrecadador,
+    		SetorComercial setorComercial,
+    		ArrecadacaoForma arrecadacaoForma,
+    		LigacaoEsgotoSituacao ligacaoEsgotoSituacao, 
+    		DocumentoTipo documentoTipo,
+    		EsferaPoder esferaPoder,
+    		ImovelPerfil imovelPerfil,
+    		Quadra quadra,
+    		GerenciaRegional gerenciaRegional,
+    		Localidade localidade,
+    		LigacaoAguaSituacao ligacaoAguaSituacao,
+    		Categoria categoria,
+    		UnidadeNegocio unidadeNegocio) {
         this.id = id;
         this.anoMesReferenciaArrecadacao = anoMesReferenciaArrecadacao;
         this.codigoSetorComercial = codigoSetorComercial;
@@ -252,7 +271,23 @@ public class ArrecadacaoDadosDiarios implements Serializable {
     }
 
     /** minimal constructor */
-    public ArrecadacaoDadosDiarios(Integer id, Integer codigoSetorComercial, Integer numeroQuadra, Rota rota, Arrecadador arrecadador, SetorComercial setorComercial, ArrecadacaoForma arrecadacaoForma, LigacaoEsgotoSituacao ligacaoEsgotoSituacao, DocumentoTipo documentoTipo, EsferaPoder esferaPoder, ImovelPerfil imovelPerfil, Quadra quadra, GerenciaRegional gerenciaRegional, Localidade localidade, LigacaoAguaSituacao ligacaoAguaSituacao, Categoria categoria, UnidadeNegocio unidadeNegocio) {
+    public ArrecadacaoDadosDiarios(Integer id,
+    		Integer codigoSetorComercial,
+    		Integer numeroQuadra,
+    		Rota rota, 
+    		Arrecadador arrecadador,
+    		SetorComercial setorComercial,
+    		ArrecadacaoForma arrecadacaoForma,
+    		LigacaoEsgotoSituacao ligacaoEsgotoSituacao,
+    		DocumentoTipo documentoTipo,
+    		EsferaPoder esferaPoder,
+    		ImovelPerfil imovelPerfil,
+    		Quadra quadra,
+    		GerenciaRegional gerenciaRegional,
+    		Localidade localidade, 
+    		LigacaoAguaSituacao ligacaoAguaSituacao, 
+    		Categoria categoria,
+    		UnidadeNegocio unidadeNegocio) {
         this.id = id;
         this.codigoSetorComercial = codigoSetorComercial;
         this.numeroQuadra = numeroQuadra;

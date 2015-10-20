@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+	<class name="gcom.financeiro.ParametrosPerdasSocietarias" table="financeiro.param_perdas_societarias">
+		<id name="id" type="java.lang.Integer" column="ppso_id">
+			<generator class="sequence">
+				<param name="sequence">financeiro.seq_param_perdas_societarias</param>
+			</generator>
+		</id>
+		
+		<property name="anoMesReferenciaContabil" type="java.lang.Integer" column="ppso_amrefenciacontabil" length="7"/>
+
+		<property name="anoMesReferenciaBaixaInicial" type="java.lang.Integer" column="ppso_amreferenciabaixainicial" length="7"/>
+
+		<property name="anoMesReferenciaBaixaFinal" type="java.lang.Integer" column="ppso_amreferenciabaixafinal" length="7"/>
+
+		<property name="numeroMesesReferenciaInferior" type="java.lang.Integer" column="ppso_nnmesesreferenciainferior" length="7"/>
+
+		<property name="indicadorGeracaoReal" type="java.lang.Short" column="ppso_icgeracaoreal" length="2"/>
+
+		<property name="indicadorCategoriaResidencial" type="java.lang.Short" column="ppso_iccategoriaresidencial" length="2"/>
+
+		<property name="indicadorCategoriaComercial" type="java.lang.Short" column="ppso_iccategoriacomercial" length="2"/>
+
+		<property name="indicadorCategoriaIndustrial" type="java.lang.Short" column="ppso_iccategoriaindustrial" length="2"/>
+
+		<property name="indicadorCategoriaPublica" type="java.lang.Short" column="ppso_iccategoriapublica" length="2"/>
+
+		<property name="indicadorEsferaParticular" type="java.lang.Short" column="ppso_icesferaparticular" length="2"/>
+
+		<property name="indicadorEsferaMunicipal" type="java.lang.Short" column="ppso_icesferamunicipal" length="2"/>
+
+		<property name="indicadorEsferaEstadual" type="java.lang.Short" column="ppso_icesferaestadual" length="2"/>
+
+		<property name="indicadorEsferaFederal" type="java.lang.Short" column="ppso_icesferafederal" length="2"/>
+
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="ppsp_tmultimaalteracao" length="20"/>
+
+	</class>
+</hibernate-mapping>

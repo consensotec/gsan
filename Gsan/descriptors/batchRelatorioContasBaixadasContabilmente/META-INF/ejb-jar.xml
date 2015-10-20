@@ -8,7 +8,7 @@
 			</display-name>
 			<ejb-name>BatchRelatorioContasBaixadasContabilmenteMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.financeiro.BatchRelatorioContasBaixadasContabilmenteMDB
+				gcom.batch.financeiro.BatchRelatorioContasBaixadasContabilmenteMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

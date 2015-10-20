@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.atendimentopublico.registroatendimento.AtendimentoMotivoEncAcaoCobranca" table="atendimentopublico.atend_mot_enc_acao_cobr">
+		<composite-id name="comp_id" class="gcom.atendimentopublico.registroatendimento.AtendimentoMotivoEncAcaoCobrancaPK">
+			<key-property name="atendimentoMotivoEncerramentoId" column="amen_id" type="java.lang.Integer" length="4"/>
+			<key-property name="cobrancaAcaoId" column="cbac_id" type="java.lang.Integer" length="4"/>
+		</composite-id>
+		
+		<property name="indicadorGeraPagamento" type="java.lang.Short" column="amea_icgerapagamento" length="2"/>
+		<property name="indicadorGeraSucessor" type="java.lang.Short" column="amea_icgerasucessor" length="2"/>
+		<property name="indicadorExibeDocumento" type="java.lang.Short" column="amea_icexibedocumento" length="2"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" not-null="true" column="amea_tmultimaalteracao" length="8"/>
+		
+		<many-to-one name="atendimentoMotivoEncerramento" class="gcom.atendimentopublico.registroatendimento.AtendimentoMotivoEncerramento" not-null="true"
+			 insert="false" update="false">
+			<column name="amen_id"/>
+		</many-to-one>
+		
+		<many-to-one name="cobrancaAcao" class="gcom.cobranca.CobrancaAcao" not-null="true"
+			 insert="false" update="false">
+			<column name="cbac_id"/>
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

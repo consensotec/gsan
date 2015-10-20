@@ -6,7 +6,7 @@
 			<display-name>BatchSuspenderLeituraParaImovelComHidrometroRetiradoMDB</display-name>
 			<ejb-name>BatchSuspenderLeituraParaImovelComHidrometroRetiradoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchSuspenderLeituraParaImovelComHidrometroRetiradoMDB
+				gcom.batch.faturamento.BatchSuspenderLeituraParaImovelComHidrometroRetiradoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

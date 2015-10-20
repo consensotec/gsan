@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorLigacaoEsgotoGCOM</display-name>
             <ejb-name>ControladorLigacaoEsgotoGCOM</ejb-name>
-            <local-home>gsan.atendimentopublico.ligacaoesgoto.ControladorLigacaoEsgotoLocalHome</local-home>
-            <local>gsan.atendimentopublico.ligacaoesgoto.ControladorLigacaoEsgotoLocal</local>
-            <ejb-class>gsan.atendimentopublico.ligacaoesgoto.ControladorLigacaoEsgotoSEJB</ejb-class>
+            <local-home>gcom.atendimentopublico.ligacaoesgoto.ControladorLigacaoEsgotoLocalHome</local-home>
+            <local>gcom.atendimentopublico.ligacaoesgoto.ControladorLigacaoEsgotoLocal</local>
+            <ejb-class>gcom.atendimentopublico.ligacaoesgoto.ControladorLigacaoEsgotoSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

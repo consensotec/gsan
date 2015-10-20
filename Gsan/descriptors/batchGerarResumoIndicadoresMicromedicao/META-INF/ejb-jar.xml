@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoIndicadoresMicromedicaoMDB</display-name>
 			<ejb-name>BatchGerarResumoIndicadoresMicromedicaoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.micromedicao.BatchGerarResumoIndicadoresMicromedicaoMDB
+				gcom.batch.gerencial.micromedicao.BatchGerarResumoIndicadoresMicromedicaoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

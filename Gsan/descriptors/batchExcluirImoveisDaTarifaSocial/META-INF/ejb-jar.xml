@@ -6,7 +6,7 @@
 			<display-name>BatchExcluirImoveisDaTarifaSocialMDB</display-name>
 			<ejb-name>BatchExcluirImoveisDaTarifaSocialMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cadastro.BatchExcluirImoveisDaTarifaSocialMDB
+				gcom.batch.cadastro.BatchExcluirImoveisDaTarifaSocialMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

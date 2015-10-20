@@ -9,7 +9,7 @@
 <project name="Middlegen Hibernate" default="compile" basedir=".">
    <property file="./build.properties"/>
    <property name="hibernate.cascade"    value="all" />
-   <property name="package"              value="gsan" />
+   <property name="package"              value="gcom" />
    <property name="gen.xdoclet-tag"      value="false" />
    <property name="gui"                  value="true" />
    <property name="jdbc.jar"             value="C:\base\CVSROOT\Gcom\lib\DriverPostGres\8.1\postgresql-8.1-405.jdbc3.jar" />
@@ -79,7 +79,7 @@
    <target name="gen-hbm" depends="init">
 
     <middlegen
-         appname="gsan"
+         appname="gcom"
          prefsdir="."
          gui="${gui}"
          databaseurl="${database.url}"

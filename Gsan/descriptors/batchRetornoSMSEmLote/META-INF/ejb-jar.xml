@@ -6,7 +6,7 @@
 			<display-name>BatchRetornoSMSEmLoteMDB</display-name>
 			<ejb-name>BatchRetornoSMSEmLoteMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cadastro.BatchRetornoSMSEmLoteMDB
+				gcom.batch.cadastro.BatchRetornoSMSEmLoteMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

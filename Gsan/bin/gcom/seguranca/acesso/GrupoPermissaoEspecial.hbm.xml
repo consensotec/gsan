@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+	-->
+	<class name="gcom.seguranca.acesso.GrupoPermissaoEspecial" table="seguranca.grupo_permissao_especial">
+		
+		<composite-id name="comp_id" class="gcom.seguranca.acesso.GrupoPermissaoEspecialPK">
+			<key-property name="grupoId" column="grup_id" type="java.lang.Integer" length="4"/>
+			<key-property name="permissaoEspecialId" column="pmep_id" type="java.lang.Integer" length="4"/>
+		</composite-id>
+				
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" 
+			column="gpes_tmultimaalteracao" length="8" />
+		
+		<!-- Associations -->
+		<many-to-one name="grupo" class="gcom.seguranca.acesso.Grupo" update="false" insert="false">
+			<column name="grup_id"/>
+		</many-to-one>
+		
+		<many-to-one name="permissaoEspecial" class="gcom.seguranca.acesso.PermissaoEspecial" update="false" insert="false">
+			<column name="pmep_id"/>
+		</many-to-one>
+	    
+	</class>
+</hibernate-mapping>

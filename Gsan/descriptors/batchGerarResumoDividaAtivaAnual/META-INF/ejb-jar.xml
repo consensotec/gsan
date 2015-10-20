@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoDividaAtivaAnualMDB</display-name>
 			<ejb-name>BatchGerarResumoDividaAtivaAnualMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchGerarResumoDividaAtivaAnualMDB
+				gcom.batch.cobranca.BatchGerarResumoDividaAtivaAnualMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

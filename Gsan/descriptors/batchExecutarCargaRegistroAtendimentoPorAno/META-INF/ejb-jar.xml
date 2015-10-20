@@ -6,7 +6,7 @@
 			<display-name>BatchExecutarCargaRegistroAtendimentoPorAnoMDB</display-name>
 			<ejb-name>BatchExecutarCargaRegistroAtendimentoPorAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.faturamento.BatchExecutarCargaRegistroAtendimentoPorAnoMDB
+				gcom.batch.gerencial.faturamento.BatchExecutarCargaRegistroAtendimentoPorAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

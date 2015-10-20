@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+
+	<form-beans>
+		<form-bean name="GerarRelatorioHidrometroPorIdadeActionForm"
+			type="gcom.gui.relatorio.micromedicao.GerarRelatorioHidrometroPorIdadeActionForm" />
+			<form-bean name="AdicionarFaixaIdadeActionForm"
+			type="gcom.gui.relatorio.micromedicao.AdicionarFaixaIdadeActionForm" />		
+	</form-beans>
+
+	<!--******************* PAGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+		
+		<action name="GerarRelatorioHidrometroPorIdadeActionForm"
+			type="gcom.gui.relatorio.micromedicao.ExibirGerarRelatorioHidrometroPorIdadeAction"
+			validate="false" 
+			scope="session"
+			path="/exibirGerarRelatorioHidrometroPorIdadeAction">
+			
+			<forward name="exibirGerarRelatorioHidrometroPorIdadeAction" 
+				path="/jsp/relatorio/micromedicao/relatorio_hidrometro_por_idade_gerar.jsp" />
+				
+		</action>
+		<action name="GerarRelatorioHidrometroPorIdadeActionForm"
+			type="gcom.gui.relatorio.micromedicao.GerarRelatorioHidrometroPorIdadeAction"
+			validate="false" 
+			scope="session"
+			path="/gerarRelatorioHidrometroPorIdadeAction"/>		
+	
+		<action name="AdicionarFaixaIdadeActionForm"
+			type="gcom.gui.relatorio.micromedicao.ExibirAdicionarFaixaIdadeAction"
+			validate="false" 
+			scope="session"
+			path="/exibirAdicionarFaixaIdadeAction">
+			
+			<forward name="exibirAdicionarFaixaIdadeAction" 
+				path="/jsp/relatorio/micromedicao/hidrometro_faixa_idade_adicionar.jsp" />
+				
+		</action>
+		
+		<action name="AdicionarFaixaIdadeActionForm"
+				type="gcom.gui.relatorio.micromedicao.AdicionarFaixaIdadeAction"
+				validate="true" scope="request" path="/adicionarFaixaIdadeAction">
+		
+				<forward name="adicionarFaixaIdadeAction" path="/exibirAdicionarFaixaIdadeAction.do" />
+		</action>
+		
+		
+		<action name="AdicionarFaixaIdadeActionForm"
+				type="gcom.gui.relatorio.micromedicao.RemoverHidrometroFaixaAction"
+				validate="true" scope="session" path="/removerHidrometroFaixaAction">	
+				
+				<forward name="removerFaixaIdadeAction" 
+				path="/jsp/relatorio/micromedicao/relatorio_hidrometro_por_idade_gerar.jsp" />
+		</action>
+	</action-mappings>
+
+</struts-config>

@@ -6,7 +6,7 @@
 			<display-name>BatchEncerrarArrecadacaoMesMDB</display-name>
 			<ejb-name>BatchEncerrarArrecadacaoMesMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.arrecadacao.BatchEncerrarArrecadacaoMesMDB
+				gcom.batch.arrecadacao.BatchEncerrarArrecadacaoMesMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

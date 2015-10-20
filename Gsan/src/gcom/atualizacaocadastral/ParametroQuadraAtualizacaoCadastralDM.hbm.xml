@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="gcom.atualizacaocadastral.ParametroQuadraAtualizacaoCadastralDM" table="ATUALIZACAOCADASTRAL.PAR_TAB_ATLZ_CAD_QDRA_DM">
+    	<id name="id" type="java.lang.Integer" column="ptqd_id">
+			<generator class="sequence">
+				<param name="sequence">atualizacaocadastral.seq_par_tab_atlz_cad_qdra_dm</param>
+			</generator>
+		</id>
+		
+		<property name="numeroQuadra" type="int" column="ptqd_nnquadra" not-null="true" />
+		
+		<!-- bi-directional many-to-one association to ParametroTabelaAtualizacaoCadastro -->
+		<many-to-one name="parametroTabelaAtualizacaoCadastralDM" class="gcom.atualizacaocadastral.ParametroTabelaAtualizacaoCadastralDM" not-null="true">
+			<column name="ptac_id"/>
+		</many-to-one>
+
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="ptqd_tmultimaalteracao" length="8" not-null="true"/>
+    </class>
+</hibernate-mapping>

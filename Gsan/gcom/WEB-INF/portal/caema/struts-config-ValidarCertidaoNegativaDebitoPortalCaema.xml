@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="ValidarCertidaoNegativaDebitoPortalCaemaActionForm"
+			type="gcom.gui.portal.caema.ValidarCertidaoNegativaDebitoPortalCaemaActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+		<action name="ValidarCertidaoNegativaDebitoPortalCaemaActionForm"
+			type="gcom.gui.portal.caema.ExibirValidarCertidaoNegativaDebitoPortalCaemaAction"
+			validate="false" scope="session"
+			path="/exibirValidarCertidaoNegativaDebitoPortalCaemaAction">
+			<forward
+				name="exibirValidarCertidaoNegativaDebitoPortalCaemaAction"
+				path="/jsp/portal/caema/validar_certidao_negativa_debito_portal_caema.jsp" />
+		</action>
+
+		<action name="ValidarCertidaoNegativaDebitoPortalCaemaActionForm"
+			type="gcom.gui.portal.caema.ValidarCertidaoNegativaDebitoPortalCaemaAction"
+			validate="false" scope="session"
+			path="/validarCertidaoNegativaDebitoPortalCaemaAction">
+			<forward name="validarDados"
+				path="/jsp/portal/caema/validar_certidao_negativa_debito_portal_caema.jsp" />
+			<forward name="validarCertidaoNegativa"
+				path="/jsp/portal/caema/validar_certidao_negativa_debito_portal_caema.jsp" />
+		</action>
+
+
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="GerarRelatorioImoveisContasRetiradosEmpresasCobrancaActionForm"
+			type="gcom.gui.cobranca.cobrancaporresultado.GerarRelatorioImoveisContasRetiradosEmpresasCobrancaActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	
+	<action-mappings>
+		
+		
+		<action name="GerarRelatorioImoveisContasRetiradosEmpresasCobrancaActionForm"
+			type="gcom.gui.cobranca.cobrancaporresultado.ExibirGerarRelatorioImoveisContasRetiradosEmpresasCobrancaAction"
+			validate="false" 
+			scope="session"
+			path="/exibirGerarRelatorioImoveisContasRetiradosEmpresasCobrancaAction">
+			<forward name="exibirGerarRelatorio"
+				path="/jsp/cobranca/cobrancaporresultado/empresa_cobranca_relatorio_imoveis_retirados.jsp" />
+		</action>
+
+		<action name="GerarRelatorioImoveisContasRetiradosEmpresasCobrancaActionForm"
+			type="gcom.gui.cobranca.cobrancaporresultado.GerarRelatorioImoveisContasRetiradosEmpresasCobrancaAction"
+			validate="false"
+			scope="session"
+			path="/gerarRelatorioImoveisContasRetiradosEmpresasCobrancaAction">
+		</action>
+		
+</action-mappings>	
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>

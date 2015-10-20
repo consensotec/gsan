@@ -6,7 +6,7 @@
 			<display-name>BatchProcessarArquivoTxtEncerramentoOSCobrancaMDB</display-name>
 			<ejb-name>BatchProcessarArquivoTxtEncerramentoOSCobrancaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.cobrancaporresultado.BatchProcessarArquivoTxtEncerramentoOSCobrancaMDB
+				gcom.batch.cobranca.cobrancaporresultado.BatchProcessarArquivoTxtEncerramentoOSCobrancaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

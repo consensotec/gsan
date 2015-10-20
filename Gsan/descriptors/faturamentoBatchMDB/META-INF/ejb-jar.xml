@@ -6,7 +6,7 @@
 			<display-name>ControladorBatchFaturamentoGCOM</display-name>
 			<ejb-name>ControladorBatchFaturamentoGCOM</ejb-name>
 			<ejb-class>
-				gsan.faturamento.ControladorBatchFaturamento
+				gcom.faturamento.ControladorBatchFaturamento
 			</ejb-class>
 			<transaction-type>Bean</transaction-type>
 			<message-driven-destination>

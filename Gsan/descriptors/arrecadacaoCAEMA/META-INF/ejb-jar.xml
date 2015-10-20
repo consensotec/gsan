@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorArrecadacaoCAEMA</display-name>
             <ejb-name>ControladorArrecadacaoCAEMA</ejb-name>
-            <local-home>gsan.arrecadacao.ControladorArrecadacaoLocalHome</local-home>
-            <local>gsan.arrecadacao.ControladorArrecadacaoLocal</local>
-            <ejb-class>gsan.arrecadacao.ControladorArrecadacaoCAEMASEJB</ejb-class>
+            <local-home>gcom.arrecadacao.ControladorArrecadacaoLocalHome</local-home>
+            <local>gcom.arrecadacao.ControladorArrecadacaoLocal</local>
+            <ejb-class>gcom.arrecadacao.ControladorArrecadacaoCAEMASEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

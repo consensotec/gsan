@@ -6,7 +6,7 @@
 			<display-name>BatchGerarDebitoACobrarContratoDemandaImovelResidencialMDB</display-name>
 			<ejb-name>BatchGerarDebitoACobrarContratoDemandaImovelResidencialMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.arrecadacao.BatchGerarDebitoACobrarContratoDemandaImovelResidencialMDB
+				gcom.batch.arrecadacao.BatchGerarDebitoACobrarContratoDemandaImovelResidencialMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

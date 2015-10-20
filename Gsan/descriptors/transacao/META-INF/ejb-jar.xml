@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorTransacaoGCOM</display-name>
             <ejb-name>ControladorTransacaoGCOM</ejb-name>
-            <local-home>gsan.seguranca.transacao.ControladorTransacaoLocalHome</local-home>
-            <local>gsan.seguranca.transacao.ControladorTransacaoLocal</local>
-            <ejb-class>gsan.seguranca.transacao.ControladorTransacaoSEJB</ejb-class>
+            <local-home>gcom.seguranca.transacao.ControladorTransacaoLocalHome</local-home>
+            <local>gcom.seguranca.transacao.ControladorTransacaoLocal</local>
+            <ejb-class>gcom.seguranca.transacao.ControladorTransacaoSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

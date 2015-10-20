@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+
+	<form-beans>
+		<form-bean name="SimularCobrancaServicoActionForm"
+			type="gcom.gui.atendimentopublico.SimularCobrancaServicoActionForm" />
+	</form-beans>
+
+	<global-forwards />
+	<action-mappings>
+		
+		<action name="SimularCobrancaServicoActionForm" 
+			type="gcom.gui.atendimentopublico.ExibirSimularCobrancaServicosAction"
+			validate="true" 
+			path="/exibirSimularCobrancaServicosAction">
+			
+			<forward name="exibirSimularCobrancaServicosAction" 
+				path="/jsp/atendimentopublico/simular_cobranca_servicos.jsp"/>
+				
+		</action>
+		 
+	</action-mappings>
+
+</struts-config>

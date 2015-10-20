@@ -6,7 +6,7 @@
 			<display-name>BatchExecutarCargaLeituraAnormalidadePorAnoMDB</display-name>
 			<ejb-name>BatchExecutarCargaLeituraAnormalidadePorAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.faturamento.BatchExecutarCargaLeituraAnormalidadePorAnoMDB
+				gcom.batch.gerencial.faturamento.BatchExecutarCargaLeituraAnormalidadePorAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

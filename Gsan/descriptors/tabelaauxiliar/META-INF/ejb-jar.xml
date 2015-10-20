@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorTabelaAuxiliarGCOM</display-name>
             <ejb-name>ControladorTabelaAuxiliarGCOM</ejb-name>
-            <local-home>gsan.util.tabelaauxiliar.ControladorTabelaAuxiliarLocalHome</local-home>
-            <local>gsan.util.tabelaauxiliar.ControladorTabelaAuxiliarLocal</local>
-            <ejb-class>gsan.util.tabelaauxiliar.ControladorTabelaAuxiliarSEJB</ejb-class>
+            <local-home>gcom.util.tabelaauxiliar.ControladorTabelaAuxiliarLocalHome</local-home>
+            <local>gcom.util.tabelaauxiliar.ControladorTabelaAuxiliarLocal</local>
+            <ejb-class>gcom.util.tabelaauxiliar.ControladorTabelaAuxiliarSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

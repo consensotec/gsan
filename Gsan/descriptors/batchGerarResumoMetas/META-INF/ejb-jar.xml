@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoMetasMDB</display-name>
 			<ejb-name>BatchGerarResumoMetasMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.cadastro.BatchGerarResumoMetasMDB
+				gcom.batch.gerencial.cadastro.BatchGerarResumoMetasMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

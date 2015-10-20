@@ -1,0 +1,156 @@
+/*
+* Copyright (C) 2007-2007 the GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
+*
+* This file is part of GSAN, an integrated service management system for Sanitation
+*
+* GSAN is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License.
+*
+* GSAN is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
+*/
+
+/*
+* GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
+* Copyright (C) <2007> 
+* Adriano Britto Siqueira
+* Alexandre Santos Cabral
+* Ana Carolina Alves Breda
+* Ana Maria Andrade Cavalcante
+* Aryed Lins de Araújo
+* Bruno Leonardo Rodrigues Barros
+* Carlos Elmano Rodrigues Ferreira
+* Cláudio de Andrade Lira
+* Denys Guimarães Guenes Tavares
+* Eduardo Breckenfeld da Rosa Borges
+* Erivan Nogueira de Sousa
+* Fabíola Gomes de Araújo
+* Flávio Leonardo Cavalcanti Cordeiro
+* Francisco do Nascimento Júnior
+* Homero Sampaio Cavalcanti
+* Ivan Sérgio da Silva Júnior
+* José Edmar de Siqueira
+* José Thiago Tenório Lopes
+* Kássia Regina Silvestre de Albuquerque
+* Leonardo Luiz Vieira da Silva
+* Márcio Roberto Batista da Silva
+* Maria de Fátima Sampaio Leite
+* Micaela Maria Coelho de Araújo
+* Nelson Mendonça de Carvalho
+* Newton Morais e Silva
+* Pedro Alexandre Santos da Silva Filho
+* Rafael Corrêa Lima e Silva
+* Rafael Francisco Pinto
+* Rafael Koury Monteiro
+* Rafael Palermo de Araújo
+* Raphael Veras Rossiter
+* Roberto Sobreira Barbalho
+* Rodrigo Avellar Silveira
+* Rosana Carvalho Barbosa
+* Sávio Luiz de Andrade Cavalcante
+* Tai Mu Shih
+* Thiago Augusto Souza do Nascimento
+* Tiago Moreno Rodrigues
+* Vivianne Barbosa Sousa
+*
+* Este programa é software livre; você pode redistribuí-lo e/ou
+* modificá-lo sob os termos de Licença Pública Geral GNU, conforme
+* publicada pela Free Software Foundation; versão 2 da
+* Licença.
+* Este programa é distribuído na expectativa de ser útil, mas SEM
+* QUALQUER GARANTIA; sem mesmo a garantia implícita de
+* COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+* PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+* detalhes.
+* Você deve ter recebido uma cópia da Licença Pública Geral GNU
+* junto com este programa; se não, escreva para Free Software
+* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+* 02111-1307, USA.
+*/  
+package gcom.gui.financeiro;
+
+import gcom.fachada.Fachada;
+import gcom.financeiro.FiltroLancamentoOrigem;
+import gcom.financeiro.bean.OpcaoSelectHelper;
+import gcom.financeiro.lancamento.LancamentoOrigem;
+import gcom.gui.ActionServletException;
+import gcom.gui.GcomAction;
+import gcom.util.ConstantesSistema;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+
+/**
+ * Gerar integração para contabilidade.
+ *
+ * @author Erivan Nogueira
+ * @date 27/01/2012
+ */
+public class ExibirGerarArquivoEfdPisConfinsAction extends GcomAction {
+	/**
+	 * Description of the Method
+	 * 
+	 * @param actionMapping
+	 *            Description of the Parameter
+	 * @param actionForm
+	 *            Description of the Parameter
+	 * @param httpServletRequest
+	 *            Description of the Parameter
+	 * @param httpServletResponse
+	 *            Description of the Parameter
+	 * @return Description of the Return Value
+	 */
+	public ActionForward execute(ActionMapping actionMapping,
+			ActionForm actionForm, 
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse) {
+
+		//seta o retorno para a página de gerar integração para a contabilidade
+		ActionForward retorno = actionMapping.findForward("exibirGerarArquivoEfdPisConfins");
+
+		//recupera a sessão do usuário
+		HttpSession sessao = httpServletRequest.getSession(false);
+		
+		
+		sessao.setAttribute("colecaoTipoRegistro", gerarOpcoesSelect());
+		
+		return retorno;
+	}
+	
+	/**
+	 * Retorna colecao com registros para campo select
+	 * 
+	 * @author Erivan Sousa
+	 * @return Collection
+	 * @date 27/01/2012
+	 */
+	private Collection<OpcaoSelectHelper> gerarOpcoesSelect(){
+//		Cria colecao com opções de tipo de arquivo apartir das constantes em ContantesSistema.
+		Collection<OpcaoSelectHelper> opcoesSelect = new ArrayList<OpcaoSelectHelper>();
+		
+		opcoesSelect.add(new OpcaoSelectHelper(ConstantesSistema.TIPO_C600, "C600"));
+		opcoesSelect.add(new OpcaoSelectHelper(ConstantesSistema.TIPO_F100, "F100"));
+		opcoesSelect.add(new OpcaoSelectHelper(ConstantesSistema.TIPO_F600, "F600"));
+		opcoesSelect.add(new OpcaoSelectHelper(ConstantesSistema.TIPO_M230, "M230"));
+		opcoesSelect.add(new OpcaoSelectHelper(ConstantesSistema.TIPO_M630, "M630"));
+		
+		
+		return opcoesSelect;
+	}
+}

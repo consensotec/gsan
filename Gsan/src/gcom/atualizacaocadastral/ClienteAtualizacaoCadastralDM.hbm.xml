@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="gcom.atualizacaocadastral.ClienteAtualizacaoCadastralDM"
+		table="atualizacaocadastral.cliente_atlz_cadastral_dm">
+		<id column="clac_id" name="id" type="java.lang.Integer">
+			<generator class="sequence">
+				<param name="sequence">atualizacaocadastral.seq_cliente_atlz_cadastral_dm</param>
+			</generator>
+		</id>
+
+		<property column="clie_id" generated="never" lazy="false"
+			name="idCliente" type="java.lang.Integer" />
+		<property column="clac_nncpfcnpj" generated="never" lazy="false"
+			length="14" name="cpfCnpj" type="java.lang.String" />
+		<property column="clac_nmcliente" generated="never" lazy="false"
+			length="100" name="nomeCliente" type="java.lang.String" />
+		<property column="clac_nmmae" generated="never" lazy="false"
+			length="50" name="nomeMae" type="java.lang.String" />
+		<property column="clac_dtnascimento" generated="never" lazy="false"
+			length="4" name="dataNascimento" type="java.sql.Date" />
+		<property column="clac_nnrg" generated="never" lazy="false"
+			length="13" name="rg" type="java.lang.String" />
+		<property column="clac_dtrgemissao" generated="never" lazy="false"
+			length="4" name="dataEmissaoRg" type="java.sql.Date" />
+		<property column="clac_tmultimaalteracao" generated="never"
+			lazy="false" length="8" name="ultimaAlteracao" not-null="true"
+			type="java.sql.Timestamp" />
+
+		<property column="clac_icresponsavel" generated="never" length="2" name="indicadorResponsavel" not-null="true" type="java.lang.Short"/>
+		<property column="clac_icdocumentacao" generated="never" length="2" name="indicadorDocumentacao" not-null="true" type="java.lang.Short"/>
+		<property column="clac_icproprietario" generated="never" length="2" name="indicadorProprietario" not-null="true" type="java.lang.Short"/>
+
+		<many-to-one class="gcom.atualizacaocadastral.ImovelAtualizacaoCadastralDM"
+			name="imovelAtualizacaoCadastralDM" not-null="true">
+			<column name="imac_id" />
+		</many-to-one>
+		
+		<!-- <property column="crtp_id" generated="never" lazy="false" length="4" name="idClienteRelacaoTipo" type="java.lang.Integer" /> -->
+		<many-to-one class="gcom.cadastro.cliente.ClienteRelacaoTipo"
+			name="clienteRelacaoTipo" not-null="true">
+			<column name="crtp_id" />
+		</many-to-one>
+		
+		<many-to-one class="gcom.cadastro.cliente.OrgaoExpedidorRg"
+			name="orgaoExpedidorRG" not-null="false">
+			<column name="oerg_id" />
+		</many-to-one>
+		
+		<!-- <property column="cltp_id" generated="never" lazy="false" length="4" name="idClienteTipo" type="java.lang.Integer" /> -->
+		<many-to-one class="gcom.cadastro.cliente.ClienteTipo"
+			name="clienteTipo" not-null="false">
+			<column name="cltp_id" />
+		</many-to-one>
+
+		<!-- <property column="psex_id" generated="never" lazy="false" length="4" name="idPessoaSexo" type="java.lang.Integer" /> -->
+		<many-to-one class="gcom.cadastro.cliente.PessoaSexo"
+			name="sexo" not-null="false">
+			<column name="psex_id" />
+		</many-to-one>
+	
+		<!-- <property column="unfe_id" generated="never" lazy="false" length="4" name="idUinidadeFederacao" type="java.lang.Integer" /> -->
+		<many-to-one class="gcom.cadastro.geografico.UnidadeFederacao"
+			name="unidadeFederacao" not-null="false">
+			<column name="unfe_id" />
+		</many-to-one>
+	
+	</class>
+</hibernate-mapping>

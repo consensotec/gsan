@@ -8,13 +8,13 @@
 			</display-name>
 			<ejb-name>ControladorGerencialCobrancaGCOM</ejb-name>
 			<local-home>
-				gsan.gerencial.cobranca.ControladorGerencialCobrancaLocalHome
+				gcom.gerencial.cobranca.ControladorGerencialCobrancaLocalHome
 			</local-home>
 			<local>
-				gsan.gerencial.cobranca.ControladorGerencialCobrancaLocal
+				gcom.gerencial.cobranca.ControladorGerencialCobrancaLocal
 			</local>
 			<ejb-class>
-				gsan.gerencial.cobranca.ControladorGerencialCobrancaSEJB
+				gcom.gerencial.cobranca.ControladorGerencialCobrancaSEJB
 			</ejb-class>
 			<session-type>Stateless</session-type>
 			<transaction-type>Container</transaction-type>

@@ -6,7 +6,7 @@
 			<display-name>BatchGerarContasMDB</display-name>
 			<ejb-name>BatchGerarContasMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarContasMDB
+				gcom.batch.faturamento.BatchGerarContasMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

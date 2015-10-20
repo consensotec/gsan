@@ -6,7 +6,7 @@
 			<display-name>BatchGerarDebitoACobrarDoacaoMDB</display-name>
 			<ejb-name>BatchGerarDebitoACobrarDoacaoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarDebitoACobrarDoacaoMDB
+				gcom.batch.faturamento.BatchGerarDebitoACobrarDoacaoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

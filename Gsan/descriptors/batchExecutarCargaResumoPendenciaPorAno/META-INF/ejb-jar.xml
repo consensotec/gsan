@@ -6,7 +6,7 @@
 			<display-name>BatchExecutarCargaResumoPendenciaPorAnoMDB</display-name>
 			<ejb-name>BatchExecutarCargaResumoPendenciaPorAnoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.arrecadacao.BatchExecutarCargaResumoPendenciaPorAnoMDB
+				gcom.batch.gerencial.arrecadacao.BatchExecutarCargaResumoPendenciaPorAnoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

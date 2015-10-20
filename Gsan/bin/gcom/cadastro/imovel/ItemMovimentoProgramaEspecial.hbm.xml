@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="gcom.cadastro.imovel.ItemMovimentoProgramaEspecial" table="cadastro.progr_especial_mov_item">
+		<id name="id" type="java.lang.Integer" column="pemi_id">
+			<generator class="sequence">
+	        	<param name="sequence">cadastro.seq_progr_especial_mov_item</param>
+	        </generator>
+		</id>
+
+		<many-to-one name="movimentoProgramaEspecial" class="gcom.cadastro.imovel.MovimentoProgramaEspecial" not-null="false">
+			<column name="pemv_id"/>
+		</many-to-one>
+		
+		<many-to-one name="imovel" class="gcom.cadastro.imovel.Imovel" not-null="false">
+			<column name="imov_id"/>
+		</many-to-one>
+		
+		<property name="indicadorAtualizacao" type="java.lang.Short" column="pemi_icatualizacao" length="2"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="pemi_tmultimaalteracao" length="8"/>
+				
+	</class>
+</hibernate-mapping>

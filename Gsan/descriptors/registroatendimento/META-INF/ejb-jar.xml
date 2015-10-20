@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorRegistroAtendimentoGCOM</display-name>
             <ejb-name>ControladorRegistroAtendimentoGCOM</ejb-name>
-            <local-home>gsan.atendimentopublico.registroatendimento.ControladorRegistroAtendimentoLocalHome</local-home>
-            <local>gsan.atendimentopublico.registroatendimento.ControladorRegistroAtendimentoLocal</local>
-            <ejb-class>gsan.atendimentopublico.registroatendimento.ControladorRegistroAtendimentoSEJB</ejb-class>
+            <local-home>gcom.atendimentopublico.registroatendimento.ControladorRegistroAtendimentoLocalHome</local-home>
+            <local>gcom.atendimentopublico.registroatendimento.ControladorRegistroAtendimentoLocal</local>
+            <ejb-class>gcom.atendimentopublico.registroatendimento.ControladorRegistroAtendimentoSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

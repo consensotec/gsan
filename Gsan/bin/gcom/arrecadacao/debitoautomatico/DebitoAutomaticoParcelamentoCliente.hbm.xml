@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+	<class name="gcom.arrecadacao.debitoautomatico.DebitoAutomaticoParcelamentoCliente" table="arrecadacao.debito_aut_parc_cliente">
+		<id name="id" type="java.lang.Integer" column="dapc_id">
+			<generator class="sequence">
+				<param name="sequence">arrecadacao.seq_debito_aut_parc_cliente</param>
+			</generator>
+		</id>
+		<property name="identificacaoClienteBanco" type="java.lang.String" column="dapc_dsidentificacaoclientebco" length="14"/>
+		<property name="dataOpcao" type="java.sql.Date" column="dapc_dtopcao" length="4"/>
+		<property name="dataInclusao" type="java.sql.Date" column="dapc_dtinclusao" length="4"/>
+		<property name="dataExclusao" type="java.sql.Date" column="dapc_dtexclusao" length="4"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="dapc_tmultimaalteracao" length="8" not-null="true"/>
+		<!-- associations -->
+		<!-- bi-directional many-to-one association to Agencia -->
+		<many-to-one name="agencia" class="gcom.arrecadacao.banco.Agencia" not-null="true">
+			<column name="agen_id"/>
+		</many-to-one>
+		<!-- bi-directional many-to-one association to ContratoParcelamento -->
+		<many-to-one name="contratoParcelamento" class="gcom.cobranca.contratoparcelamento.ContratoParcelamento" not-null="true">
+			<column name="cpar_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

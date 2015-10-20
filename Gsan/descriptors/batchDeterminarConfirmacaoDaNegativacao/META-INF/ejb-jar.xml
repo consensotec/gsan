@@ -13,7 +13,7 @@
 
 			<ejb-class>
 
-				gsan.batch.cobranca.spcserasa.BatchDeterminarConfirmacaoDaNegativacaoMDB
+				gcom.batch.cobranca.spcserasa.BatchDeterminarConfirmacaoDaNegativacaoMDB
 
 
 			</ejb-class>

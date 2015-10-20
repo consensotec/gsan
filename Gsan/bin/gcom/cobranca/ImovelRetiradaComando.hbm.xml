@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">    
+<hibernate-mapping>
+	<class name="gcom.cobranca.ImovelRetiradaComando" table="cobranca.imovel_retirada_comando">
+		<composite-id name="pk" class="gcom.cobranca.ImovelRetiradaComandoPK">
+			<key-property name="idComando" column="cecc_id" type="java.lang.Integer" length="4"/>
+			<key-property name="idImovel" column="imov_id" type="java.lang.Integer" length="4"/>
+		</composite-id>	
+    	
+    	<property name="ultimaAlteracao" type="java.sql.Timestamp" column="imrc_tmultimaalteracao" not-null="true" length="8"/>
+    	<property name="dataRetirada" type="java.util.Date" column="imrc_dtretirada" not-null="true" length="8"/>
+    	
+    	<many-to-one name="comando" class="gcom.cobranca.ComandoEmpresaCobrancaConta" not-null="true"
+			 insert="false" update="false">
+			<column name="cecc_id"/>
+		</many-to-one>
+		
+		<many-to-one name="imovel" class="gcom.cadastro.imovel.Imovel" not-null="true"
+			 insert="false" update="false">
+			<column name="imov_id"/>
+		</many-to-one>
+		<many-to-one name="motivoRetirada" class="gcom.cadastro.MotivoRetiradaCobranca" not-null="true">
+			<column name="mrcb_id"/>
+		</many-to-one>
+    	
+	</class>
+</hibernate-mapping>

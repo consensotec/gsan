@@ -6,7 +6,7 @@
 			<display-name>BatchGerarContasAReceberContabilAnaliticoTabelaAuxiliarMDB</display-name>
 			<ejb-name>BatchGerarContasAReceberContabilAnaliticoTabelaAuxiliarMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.financeiro.BatchGerarContasAReceberContabilAnaliticoTabelaAuxiliarMDB
+				gcom.batch.financeiro.BatchGerarContasAReceberContabilAnaliticoTabelaAuxiliarMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

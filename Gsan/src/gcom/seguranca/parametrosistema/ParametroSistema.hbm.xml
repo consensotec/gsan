@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<!--
+Created by the Middlegen Hibernate plugin 2.1
+
+http://boss.bekk.no/boss/middlegen/
+http://www.hibernate.org/
+
+-->
+<class name="gcom.seguranca.parametrosistema.ParametroSistema" table="seguranca.parametro_sistema">
+		<id name="id" type="java.lang.Integer" column="pasi_id ">
+		<generator class="assigned"/>
+		</id>
+		<property name="nome" type="java.lang.String" column="pasi_nmparametro" not-null="true" length="100"/>
+		<property name="descricao" type="java.lang.String" column="pasi_dsparametro" not-null="true" length="500"/>
+		<property name="codigoConstante" type="java.lang.String" column="pasi_cdconstante" not-null="true"/>		
+		<property name="valorParametro" type="java.lang.String" column="pasi_vlparametro" not-null="false" length="500"/>
+		<property name="indicadorParametroRestrito" type="java.lang.Short" column="pasi_icparametrorestrito" not-null="true" length="2"/>
+		<property name="indicadorUso" type="java.lang.Short" column="pasi_icuso" not-null="true" length="2"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="pasi_tmultimaalteracao" not-null="true" length="8"/>
+		
+		
+		<many-to-one name="parametroTipo" class="gcom.seguranca.parametrosistema.ParametroTipo" not-null="true">
+			<column name="pmtp_id"/>
+		</many-to-one>
+		
+		
+		<many-to-one name="modulo" class="gcom.seguranca.acesso.Modulo" not-null="true">
+			<column name="modu_id"/>
+		</many-to-one>
+	</class>
+	
+	
+</hibernate-mapping>

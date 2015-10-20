@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>	
+		<form-bean name="GerarRelatorioClienteCpfCnpjValidadosActionForm"
+			type="gcom.gui.relatorio.cadastro.GerarRelatorioClienteCpfCnpjValidadosActionForm" >			
+		</form-bean>
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+
+	<action-mappings>
+		<!--******************* PÁGINA PRINCIPAL *******************-->
+		<action name="GerarRelatorioClienteCpfCnpjValidadosActionForm"
+			type="gcom.gui.relatorio.cadastro.ExibirGerarRelatorioClienteCpfCnpjValidadosAction"			
+			validate="true"	
+			path="/exibirGerarRelatorioClienteCpfCnpjValidadosAction">			
+			<forward name="exibirGerarRelatorioClienteCpfCnpjValidadosAction"
+				path="/jsp/relatorio/cadastro/relatorio_cliente_cpfCnpj_validados_gsan_mobile.jsp" />
+		</action>
+		<action name="GerarRelatorioClienteCpfCnpjValidadosActionForm"
+			type="gcom.gui.relatorio.cadastro.GerarRelatorioClienteCpfCnpjValidadosAction"
+			validate="true"						
+			path="/gerarRelatorioClienteCpfCnpjValidadosAction" />
+	</action-mappings>
+	
+</struts-config>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+ <class name="gcom.cobranca.CobrancaForma" table="cobranca.cobranca_forma">
+  <id column="cbfm_id" name="id" type="java.lang.Integer">
+   <generator class="sequence">
+    <param name="sequence">cobranca.seq_cobranca_forma</param>
+   </generator>
+  </id>
+  <property column="cbfm_dscobrancaforma" generated="never" lazy="false"
+   length="40" name="descricao" type="java.lang.String"/>
+  <property column="cbfm_dsabreviado" generated="never" lazy="false"
+   length="20" name="descricaoAbreviada" type="java.lang.String"/>
+  <property column="cbfm_icuso" generated="never" lazy="false"
+   length="2" name="indicadorUso" type="java.lang.Short"/>
+  <property column="cbfm_tmultimaalteracao" generated="never"
+   lazy="false" length="8" name="ultimaAlteracao" type="java.sql.Timestamp"/>
+  <property column="CBFM_ICUSOCONTPARCELCLIENTE" generated="never"
+   lazy="false" length="2"
+   name="indicadorUsoContratoParcelamentoCliente" type="java.lang.Short"/>
+  <property column="cbfm_icguiacarneparcel" generated="never"
+   lazy="false" length="2" name="indicadorGuiaCarneParcelamento" type="java.lang.Short"/>
+  <!-- Associations 
+ bi-directional one-to-many association to DebitoACobrarHistorico 
+
+    <set
+        name="debitoACobrarHistoricos"
+        lazy="true"
+        inverse="true"
+		cascade="all"
+    >
+        <key>
+            <column name="cbfm_id" />
+        </key>
+        <one-to-many 
+            class="gcom.DebitoACobrarHistorico"
+        />
+    </set>
+    <set
+        name="debitoACobrars"
+        lazy="true"
+        inverse="true"
+		cascade="all"
+    >
+        <key>
+            <column name="cbfm_id" />
+        </key>
+        <one-to-many 
+            class="gcom.DebitoACobrar"
+        />
+    </set> -->
+ </class>
+</hibernate-mapping>

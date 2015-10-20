@@ -6,7 +6,7 @@
 			<display-name>BatchGerarDadosDiariosArrecadacaoMDB</display-name>
 			<ejb-name>BatchGerarDadosDiariosArrecadacaoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.arrecadacao.BatchGerarDadosDiariosArrecadacaoMDB
+				gcom.batch.arrecadacao.BatchGerarDadosDiariosArrecadacaoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

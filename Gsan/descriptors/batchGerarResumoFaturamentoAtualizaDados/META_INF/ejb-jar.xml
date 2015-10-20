@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoFaturamentoAtualizaDadosMDB</display-name>
 			<ejb-name>BatchGerarResumoFaturamentoAtualizaDadosMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarResumoFaturamentoAtualizaDadosMDB
+				gcom.batch.faturamento.BatchGerarResumoFaturamentoAtualizaDadosMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

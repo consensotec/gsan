@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+	<class name="gcom.arrecadacao.DebitoCarteiraMovimento" table="arrecadacao.debito_cart_movimento">
+		<id name="id" type="java.lang.Integer" column="dcmv_id">
+			<generator class="sequence">
+				<param name="sequence">arrecadacao.seq_debito_cart_movimento</param>
+			</generator>
+		</id>
+		
+		<property name="numeroCarteira" type="java.lang.Integer" column="dcmv_nncarteira" length="3"/>
+		<property name="dataVencimento" type="java.sql.Date" column="dcmv_dtvencimento" length="8"/>
+		<property name="valorDebito" type="java.math.BigDecimal" column="dcmv_vldebito" length="13"/>
+		<property name="dataProcessamento" type="java.sql.Timestamp" column="dcmv_tmprocessamento" length="8"/>
+		<property name="dataEnvioBanco" type="java.sql.Timestamp" column="dcmv_tmenviobanco" length="8"/>
+		<property name="dataRetornoBanco" type="java.sql.Timestamp" column="dcmv_tmretornobanco" length="8"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="dcmv_tmultimaalteracao" length="8"/>
+		<property name="numeroSequenciaArquivoEnviado" type="java.lang.Integer" column="dcmv_nnnsaenvio" length="4"/>
+		<property name="numeroSequenciaArquivoRecebido" type="java.lang.Integer" column="dcmv_nnnsaretorno" length="4"/>
+		<!-- associations -->
+		
+		<!-- bi-directional many-to-one association to Conta -->
+		<many-to-one name="conta" class="gcom.faturamento.conta.ContaGeral" not-null="true">
+			<column name="cnta_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to FaturamentoGrupo -->
+		<many-to-one name="faturamentoGrupo" class="gcom.faturamento.FaturamentoGrupo" not-null="true">
+			<column name="ftgr_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to DebitoAutomaticoRetornoCodigo -->
+		<many-to-one name="debitoAutomaticoRetornoCodigo" class="gcom.arrecadacao.debitoautomatico.DebitoAutomaticoRetornoCodigo" not-null="true">
+			<column name="durc_id"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to Conta Geral-->
+		<many-to-one name="banco" class="gcom.arrecadacao.banco.Banco">
+			<column name="bnco_id"/>
+		</many-to-one>
+	
+	</class>
+</hibernate-mapping>

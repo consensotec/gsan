@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="ManterContratoDemandaCondominiosResidenciaisActionForm" 
+			type="gcom.gui.faturamento.contratodemanda.ManterContratoDemandaCondominiosResidenciaisActionForm" />
+		<form-bean name="FiltrarContratoDemandaCondominiosResidenciaisActionForm"
+			type="gcom.gui.faturamento.contratodemanda.FiltrarContratoDemandaCondominiosResidenciaisActionForm" />
+		<form-bean name="AtualizarContratoDemandaCondominiosResidenciaisActionForm"
+			type="gcom.gui.faturamento.contratodemanda.AtualizarContratoDemandaCondominiosResidenciaisActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+
+	<action-mappings>
+	
+		<action name="FiltrarContratoDemandaCondominiosResidenciaisActionForm"
+			type="gcom.gui.faturamento.contratodemanda.ExibirFiltrarContratoDemandaCondominiosResidenciaisAction"
+			validate="false" scope="session" path="/exibirFiltrarContratoDemandaCondominiosResidenciaisAction">
+			<forward name="filtrarContratoDemandaCondominiosResidenciais" 
+				path="/jsp/faturamento/contratodemanda/contrato_demanda_condominios_filtrar.jsp" />
+		</action>
+		
+		<action name="FiltrarContratoDemandaCondominiosResidenciaisActionForm"
+			type="gcom.gui.faturamento.contratodemanda.FiltrarContratoDemandaCondominiosResidenciaisAction"
+			validate="false" scope="session" path="/filtrarContratoDemandaCondominiosResidenciaisAction">
+			<forward name="manterContratoDemandaCondominiosResidenciais" 
+				path="/exibirManterContratoDemandaCondominiosResidenciaisAction.do" />
+			<forward name="atualizarContratoDemandaCondominiosResidenciais" 
+				path="/exibirAtualizarContratoDemandaCondominiosResidenciaisAction.do" />	
+		</action>	
+		
+		<action name="ManterContratoDemandaCondominiosResidenciaisActionForm"
+			type="gcom.gui.faturamento.contratodemanda.ExibirManterContratoDemandaCondominiosResidenciaisAction"
+			validate="false" scope="session"
+			path="/exibirManterContratoDemandaCondominiosResidenciaisAction">
+			<forward name="exibirContratoDemandaCondominiosResidenciais"
+				path="/jsp/faturamento/contratodemanda/contrato_demanda_condominios_manter.jsp" />
+			<forward name="exibirAtualizarContratoDemandaCondominiosResidenciaisAction" 
+				path="/exibirAtualizarContratoDemandaCondominiosResidenciaisAction.do"/>	
+			<forward name="exibirFiltrarContratoDemandaCondominiosResidenciais" 
+				path="/exibirFiltrarContratoDemandaCondominiosResidenciaisAction.do?voltar=sim"/>	
+		</action>
+		
+		<action name="AtualizarContratoDemandaCondominiosResidenciaisActionForm"
+			type="gcom.gui.faturamento.contratodemanda.ExibirAtualizarContratoDemandaCondominiosResidenciaisAction"
+			validate="false" scope="session"
+			path="/exibirAtualizarContratoDemandaCondominiosResidenciaisAction">
+			<forward name="exibirAtualizarContratoDemandaCondominiosResidenciaisAction"
+				path="/jsp/faturamento/contratodemanda/contrato_demanda_condominios_atualizar.jsp" />
+		</action>
+		
+		<action name="AtualizarContratoDemandaCondominiosResidenciaisActionForm"
+			type="gcom.gui.faturamento.contratodemanda.AtualizarContratoDemandaCondominiosResidenciaisAction"
+			validate="false" scope="session"
+			path="/atualizarContratoDemandaCondominiosResidenciaisAction">
+		</action>
+	</action-mappings>
+</struts-config>

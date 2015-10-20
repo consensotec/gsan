@@ -6,7 +6,7 @@
 			<display-name>BatchAtualizarPagamentosContasCobrancaMDB</display-name>
 			<ejb-name>BatchAtualizarPagamentosContasCobrancaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchAtualizarPagamentosContasCobrancaMDB
+				gcom.batch.cobranca.BatchAtualizarPagamentosContasCobrancaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

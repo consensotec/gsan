@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorIntegracaoGCOM</display-name>
             <ejb-name>ControladorIntegracaoGCOM</ejb-name>
-            <local-home>gsan.integracao.ControladorIntegracaoLocalHome</local-home>
-            <local>gsan.integracao.ControladorIntegracaoLocal</local>
-            <ejb-class>gsan.integracao.ControladorIntegracaoSEJB</ejb-class>
+            <local-home>gcom.integracao.ControladorIntegracaoLocalHome</local-home>
+            <local>gcom.integracao.ControladorIntegracaoLocal</local>
+            <ejb-class>gcom.integracao.ControladorIntegracaoSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

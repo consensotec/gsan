@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="ConsultarRoteiroDispositivoMovelActionForm"
+			type="gcom.gui.atualizacaocadastral.ConsultarRoteiroDispositivoMovelActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	
+	<action-mappings>
+		<action name="ConsultarRoteiroDispositivoMovelActionForm"
+			type="gcom.gui.atualizacaocadastral.ExibirConsultarRoteiroDispositivoMovelAction"
+			validate="false" scope="session" path="/exibirConsultarRoteiroDispositivoMovelAction">
+
+			<forward name="consultarRoteiroDispositivoMovel"
+				path="/jsp/atualizacaocadastral/roteiro_dispositivo_movel_consultar.jsp" />
+				
+			<forward name="exibirQuadrasSelecionadasPopUpAction"
+				path="/jsp/atualizacaocadastral/quadras_selecionadas_popup.jsp" />
+			
+			<forward name="exibirImoveisSelecionadosPopUpAction"
+				path="/jsp/atualizacaocadastral/imoveis_selecionados_popup.jsp" />	
+					
+		</action>
+		
+		<action name="ConsultarRoteiroDispositivoMovelActionForm"
+			type="gcom.gui.atualizacaocadastral.ConsultarRoteiroDispositivoMovelAction"
+			validate="false" scope="session" path="/consultarRoteiroDispositivoMovelAction">
+			
+			<forward name="consultarRoteiroDispositivoMovel"
+				path="/jsp/atualizacaocadastral/roteiro_dispositivo_movel_consultar.jsp" />
+		</action>
+		
+		<action name="ConsultarRoteiroDispositivoMovelActionForm" 
+			type="gcom.gui.atualizacaocadastral.TransmitirAtualizacaoCadastralArquivoTextoAction"
+			validate="false" scope="session" path="/transmitirAtualizacaoCadastralArquivoTextoAction">
+			
+		</action>
+		
+		<action name="ConsultarRoteiroDispositivoMovelActionForm" 
+			type="gcom.gui.atualizacaocadastral.ExibirAlterarLeituristaRoteiroDispositivoMovelAction"
+			validate="false" scope="session" path="/exibirAlterarLeituristaRoteiroDispositivoMovelAction">
+			
+			<forward name="exibirAlterarLeituristaRoteiroDispositivoMovelPopup"
+				path="/jsp/atualizacaocadastral/roteiro_dispositivo_movel_alterar_leiturista_popup.jsp" />
+		</action>
+		
+		<action name="ConsultarRoteiroDispositivoMovelActionForm"
+			type="gcom.gui.atualizacaocadastral.ValidarAtualizacaoCadastralArquivoTextoAction" 
+			validate="false" scope="session" path="/validarAtualizacaoCadastralArquivoTextoAction">
+			
+		</action>
+		
+		<action name="PesquisarActionForm"
+			type="gcom.gui.atualizacaocadastral.ExibirDadosCadastradorSelecionadosPopUpAction"
+			path="/exibirDadosCadastradorSelecionadosPopUpAction">
+			
+			<forward name="exibirDadosCadastradorSelecionadosPopUpAction"
+				path="/jsp/atualizacaocadastral/dados_cadastrador_selecionados_popup.jsp" />
+				
+		</action>
+		
+	</action-mappings>
+	
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>

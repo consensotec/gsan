@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.atendimentopublico.registroatendimento.OcorrenciaOperacionalMotivo" table="atendimentopublico.ocorrencia_operac_motivo">
+		<id name="id" type="java.lang.Integer" column="oomt_id">
+			<generator class="sequence">
+				<param name="sequence">atendimentopublico.seq_ocorrencia_operac_motivo</param>
+			</generator>
+		</id>
+		<property name="descricao" type="java.lang.String" column="oomt_dsmotivoocorrenciaoperac" not-null="true" length="50"/>
+		<property name="descricaoAbreviada" type="java.lang.String" column="oomt_dsabreviado" length="10"/>
+		<many-to-one name="ocorrenciaOperacionalTipo" class="gcom.atendimentopublico.registroatendimento.OcorrenciaOperacionalTipo" not-null="true">
+			<column name="ootp_id"/>
+		</many-to-one>
+		<property name="indicadorUso" type="short" column="oomt_icuso" not-null="true" length="2"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="oomt_tmultimaalteracao" not-null="true"/>
+	</class>
+</hibernate-mapping>

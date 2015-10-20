@@ -6,7 +6,7 @@
 			<display-name>BatchRetirarImovelTarifaSocialMDB</display-name>
 			<ejb-name>BatchRetirarImovelTarifaSocialMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cadastro.BatchRetirarImovelTarifaSocialMDB
+				gcom.batch.cadastro.BatchRetirarImovelTarifaSocialMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

@@ -6,7 +6,7 @@
 			<display-name>BatchExecutarCargaIndicadoresDesempenhoFaturamentoVariosAnosMDB</display-name>
 			<ejb-name>BatchExecutarCargaIndicadoresDesempenhoFaturamentoVariosAnosMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.faturamento.BatchExecutarCargaIndicadoresDesempenhoFaturamentoVariosAnosMDB
+				gcom.batch.gerencial.faturamento.BatchExecutarCargaIndicadoresDesempenhoFaturamentoVariosAnosMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

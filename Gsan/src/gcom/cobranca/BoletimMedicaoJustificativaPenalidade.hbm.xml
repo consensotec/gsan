@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">    
+<hibernate-mapping>
+	<class name="gcom.cobranca.BoletimMedicaoJustificativaPenalidade" table="cobranca.bol_med_ac_pen_just">
+		<id name="id" type="java.lang.Integer" column="bmpj_id">
+			<generator class="sequence">
+				<param name="sequence">cobranca.seq_bol_med_ac_pen_just</param>
+			</generator>
+    	</id>
+    		    
+	    <property name="justificativa" type="java.lang.String" column="bmpj_dsjustificativa" length="150"/>
+	    <property name="ultimaAlteracao" type="java.sql.Timestamp" column="bmpj_tmultimaalteracao" not-null="true" length="29"/>
+	
+	    <!-- Associations -->	  
+	    <many-to-one name="cobrancaAcaoCronograma" class="gcom.cobranca.CobrancaAcaoCronograma" not-null="true">
+	    	<column name="cbcr_id" />
+	    </many-to-one>
+	    <many-to-one name="cobrancaBoletimMedicao" class="gcom.cobranca.CobrancaBoletimMedicao" not-null="false">
+	    	<column name="cobm_id" />
+	    </many-to-one>	  
+	</class>
+</hibernate-mapping>

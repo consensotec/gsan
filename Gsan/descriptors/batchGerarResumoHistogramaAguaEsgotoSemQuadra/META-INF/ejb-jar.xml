@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoHistogramaAguaEsgotoSemQuadraMDB</display-name>
 			<ejb-name>BatchGerarResumoHistogramaAguaEsgotoSemQuadraMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.cadastro.BatchGerarResumoHistogramaAguaEsgotoSemQuadraMDB
+				gcom.batch.gerencial.cadastro.BatchGerarResumoHistogramaAguaEsgotoSemQuadraMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

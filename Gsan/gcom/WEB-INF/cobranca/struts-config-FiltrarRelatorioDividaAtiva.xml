@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="FiltrarRelatorioDividaAtivaActionForm"
+			type="gcom.gui.cobranca.FiltrarRelatorioDividaAtivaActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	
+	<action-mappings>
+	
+		<action  name="FiltrarRelatorioDividaAtivaActionForm"
+			type="gcom.gui.cobranca.ExibirFiltrarRelatorioDividaAtivaAction"
+			validate="false" scope="session" path="/exibirFiltrarRelatorioDividaAtivaAction">
+			
+			<forward name="exibirFiltrarRelatorioDividaAtiva"
+				path="/jsp/cobranca/relatorio_divida_ativa_filtrar.jsp" />
+		</action>
+		
+		<action name="FiltrarRelatorioDividaAtivaActionForm"
+			type="gcom.gui.cobranca.GerarRelatorioDividaAtivaAmortizadaAction"
+			validate="true" 
+			path="/gerarRelatorioDividaAtivaAmortizadaAction" />
+			
+		<action name="FiltrarRelatorioDividaAtivaActionForm"
+			type="gcom.gui.cobranca.GerarRelatorioDividaAtivaParceladaAction"
+			validate="true" 
+			path="/gerarRelatorioDividaAtivaParceladaAction" />		
+		
+	</action-mappings>
+
+	<message-resources null="false"	parameter="gcom.properties.application" />
+</struts-config>

@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoHidrometroMDB</display-name>
 			<ejb-name>BatchGerarResumoHidrometroMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.micromedicao.BatchGerarResumoHidrometroMDB
+				gcom.batch.gerencial.micromedicao.BatchGerarResumoHidrometroMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

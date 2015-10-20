@@ -8,7 +8,7 @@
 			</display-name>
 			<ejb-name>BatchAtualizaQuantidadeParcelaPagaConsecutivaParcelaBonusMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchAtualizaQuantidadeParcelaPagaConsecutivaParcelaBonusMDB
+				gcom.batch.faturamento.BatchAtualizaQuantidadeParcelaPagaConsecutivaParcelaBonusMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

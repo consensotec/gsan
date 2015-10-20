@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+ 
+	<form-beans>
+		<form-bean name="ResumoAcaoCobrancaActionForm"
+			type="gcom.gui.gerencial.cobranca.ResumoAcaoCobrancaActionForm" />
+		<form-bean name="InformarDadosGeracaoResumoAcaoConsultaPeriodoActionForm"
+			type="gcom.gui.gerencial.cobranca.InformarDadosGeracaoResumoAcaoConsultaPeriodoActionForm" />
+	</form-beans>
+	
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	
+	<action-mappings>
+	   	<action name="InformarDadosGeracaoResumoAcaoConsultaPeriodoActionForm" 
+			type="gcom.gui.gerencial.cobranca.ExibirInformarDadosGeracaoResumoAcaoConsultaPeriodoAction"
+			validate="true" path="/exibirInformarDadosGeracaoResumoAcaoConsultaPeriodoAction">
+			<forward name="exibirInformarDadosGeracaoResumoAcaoConsulta"
+				path="/jsp/cobranca/dados_geracao_resummo_acao_consulta_informar.jsp" />
+		</action>
+		
+		<action name="InformarDadosGeracaoResumoAcaoConsultaPeriodoActionForm" 
+			type="gcom.gui.gerencial.cobranca.InformarDadosGeracaoResumoAcaoConsultaPeriodoAction"
+			validate="false" path="/informarDadosGeracaoResumoAcaoConsultaPeriodoAction">
+			<forward name="consultarResumoAcaoCobrancaParametros"
+				path="/consultarResumoAcaoCobrancaPeriodoWizardAction.do?action=exibirDadosGeracaoConsultaPeriodoAction" />					
+		</action>
+		
+		
+	    <action name="InformarDadosGeracaoResumoAcaoConsultaPeriodoActionForm"
+			type="gcom.gui.gerencial.cobranca.ConsultarResumoAcaoCobrancaPeriodoWizardAction"
+			validate="true" parameter="action" scope="session"
+			path="/consultarResumoAcaoCobrancaPeriodoWizardAction">
+			<forward name="exibirDadosGeracaoConsulta"
+				path="/jsp/gerencial/cobranca/cobranca_acoes_resumo_parametros_consultar.jsp" />
+			<forward name="exibirConsultarResumoAcaoCobranca"
+				path="/jsp/gerencial/cobranca/cobranca_acoes_resumo_consultar.jsp" />		
+		</action>
+		
+		<action 
+			type="gcom.gui.gerencial.cobranca.CancelarConsultarResumoAcaoCobrancaPeriodoAction"
+			validate="false"
+			path="/cancelarConsultarResumoAcaoCobrancaPeriodoAction" >
+		</action>
+	</action-mappings>
+
+	<message-resources null="false" parameter="gcom.properties.application" />
+</struts-config>

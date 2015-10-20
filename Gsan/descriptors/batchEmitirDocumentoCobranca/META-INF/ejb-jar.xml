@@ -8,7 +8,7 @@
 			</display-name>
 			<ejb-name>BatchEmitirDocumentoCobrancaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchEmitirDocumentoCobrancaMDB
+				gcom.batch.cobranca.BatchEmitirDocumentoCobrancaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

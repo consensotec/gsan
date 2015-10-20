@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorEnderecoGCOM</display-name>
             <ejb-name>ControladorEnderecoGCOM</ejb-name>
-            <local-home>gsan.cadastro.endereco.ControladorEnderecoLocalHome</local-home>
-            <local>gsan.cadastro.endereco.ControladorEnderecoLocal</local>
-            <ejb-class>gsan.cadastro.endereco.ControladorEnderecoSEJB</ejb-class>
+            <local-home>gcom.cadastro.endereco.ControladorEnderecoLocalHome</local-home>
+            <local>gcom.cadastro.endereco.ControladorEnderecoLocal</local>
+            <ejb-class>gcom.cadastro.endereco.ControladorEnderecoSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

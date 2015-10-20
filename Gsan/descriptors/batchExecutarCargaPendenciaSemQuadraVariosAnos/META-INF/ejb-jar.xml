@@ -6,7 +6,7 @@
 			<display-name>BatchExecutarCargaPendenciaSemQuadraVariosAnosMDB</display-name>
 			<ejb-name>BatchExecutarCargaPendenciaSemQuadraVariosAnosMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.arrecadacao.BatchExecutarCargaPendenciaSemQuadraVariosAnosMDB
+				gcom.batch.gerencial.arrecadacao.BatchExecutarCargaPendenciaSemQuadraVariosAnosMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

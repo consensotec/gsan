@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.atendimentopublico.ordemservico.ArquivoTextoRetornoClienteVisitaCampo" table="atendimentopublico.arq_txt_ret_clie_viscamp">
+		<id name="id" type="java.lang.Integer" column="atcv_id">
+			<generator class="sequence">
+				<param name="sequence">atendimentopublico.seq_arq_txt_ret_clie_viscamp</param>
+			</generator>
+		</id>
+		
+		<property name="nomeCliente" type="java.lang.String" column="atcv_nmcliente" not-null="true" length="55"/>
+		<property name="cpf" type="java.lang.String" column="atcv_nncpf" length="11"/>
+		<property name="cnpj" type="java.lang.String" column="atcv_nncnpj" length="14"/>
+		<property name="rg" type="java.lang.String" column="atcv_nnrg" length="13"/>
+		<property name="indicadorAtualizado" type="java.lang.Short" column="atcv_icatualizado" not-null="true" length="1"/>
+		<property name="mensagemAtualizacao" type="java.lang.String" column="atcv_dsmensatualizacao" not-null="true" length="50"/>
+		<property name="dataUltimaAlteracao" type="java.sql.Timestamp" column="ATCV_TMULTIMAALTERACAO" not-null="true" />
+		
+		<!-- bi-directional many-to-one association to Arquivo Texto Visita Campo -->
+	    <many-to-one name="arquivoTextoRetornoVisitaCampo" class="gcom.atendimentopublico.ordemservico.ArquivoTextoRetornoVisitaCampo" not-null="true">
+	        <column name="atrv_id" />
+	    </many-to-one>
+		
+		<!-- bi-directional many-to-one association to OrgaoExpedidorRg -->
+		<many-to-one name="orgaoExpedidorRg" class="gcom.cadastro.cliente.OrgaoExpedidorRg" not-null="true">
+			<column name="oerg_idrg"/>
+		</many-to-one>
+		
+		<!-- bi-directional many-to-one association to OrgaoExpedidorRg -->
+		<many-to-one name="unidadeFederacaoRg" class="gcom.cadastro.geografico.UnidadeFederacao" not-null="true">
+			<column name="unfe_idrg"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

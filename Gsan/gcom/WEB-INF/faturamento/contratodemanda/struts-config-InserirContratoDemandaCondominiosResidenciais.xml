@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	
+	<form-beans>
+		<form-bean name="InserirContratoDemandaCondominiosResidenciaisActionForm"
+			type="gcom.gui.faturamento.contratodemanda.InserirContratoDemandaCondominiosResidenciaisActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="InserirContratoDemandaCondominiosResidenciaisActionForm"
+			type="gcom.gui.faturamento.contratodemanda.ExibirInserirContratoDemandaCondominiosResidenciaisAction"
+			validate="true" scope="session"
+			path="/exibirInserirContratoDemandaCondominiosResidenciaisAction">
+			<forward name="exibirInserirContratoDemandaCondominiosResidenciaisAction"
+				path="/jsp/faturamento/contratodemanda/contrato_demanda_condominios_inserir.jsp" />
+		</action>
+
+		<action name="InserirContratoDemandaCondominiosResidenciaisActionForm"
+			type="gcom.gui.faturamento.contratodemanda.InserirContratoDemandaCondominiosResidenciaisAction"
+			path="/inserirContratoDemandaCondominiosResidenciaisAction" 
+			validate="true" scope="session"/>
+
+	</action-mappings>
+	<message-resources null="false" parameter="gcom.properties.application" />
+</struts-config>

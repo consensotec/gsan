@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorGerencialArrecadacaoGCOM</display-name>
             <ejb-name>ControladorGerencialArrecadacaoGCOM</ejb-name>
-            <local-home>gsan.gerencial.arrecadacao.ControladorGerencialArrecadacaoLocalHome</local-home>
-            <local>gsan.gerencial.arrecadacao.ControladorGerencialArrecadacaoLocal</local>
-            <ejb-class>gsan.gerencial.arrecadacao.ControladorGerencialArrecadacaoSEJB</ejb-class>
+            <local-home>gcom.gerencial.arrecadacao.ControladorGerencialArrecadacaoLocalHome</local-home>
+            <local>gcom.gerencial.arrecadacao.ControladorGerencialArrecadacaoLocal</local>
+            <ejb-class>gcom.gerencial.arrecadacao.ControladorGerencialArrecadacaoSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

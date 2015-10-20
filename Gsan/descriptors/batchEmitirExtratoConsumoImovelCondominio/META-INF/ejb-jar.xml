@@ -6,7 +6,7 @@
 			<display-name>BatchEmitirExtratoConsumoImovelCondominioMDB</display-name>
 			<ejb-name>BatchEmitirExtratoConsumoImovelCondominioMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchEmitirExtratoConsumoImovelCondominioMDB
+				gcom.batch.faturamento.BatchEmitirExtratoConsumoImovelCondominioMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

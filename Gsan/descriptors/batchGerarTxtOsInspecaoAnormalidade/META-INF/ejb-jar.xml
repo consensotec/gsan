@@ -6,7 +6,7 @@
 			<display-name>BatchGerarTxtOsInspecaoAnormalidadeMDB</display-name>
 			<ejb-name>BatchGerarTxtOsInspecaoAnormalidadeMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.atendimentopublico.BatchGerarTxtOsInspecaoAnormalidadeMDB
+				gcom.batch.atendimentopublico.BatchGerarTxtOsInspecaoAnormalidadeMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

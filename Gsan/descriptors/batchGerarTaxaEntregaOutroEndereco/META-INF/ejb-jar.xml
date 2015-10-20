@@ -6,7 +6,7 @@
 			<display-name>BatchGerarTaxaEntregaOutroEnderecoMDB</display-name>
 			<ejb-name>BatchGerarTaxaEntregaOutroEnderecoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarTaxaEntregaOutroEnderecoMDB
+				gcom.batch.faturamento.BatchGerarTaxaEntregaOutroEnderecoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

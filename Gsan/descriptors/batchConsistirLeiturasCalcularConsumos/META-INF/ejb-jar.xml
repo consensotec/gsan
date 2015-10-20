@@ -6,7 +6,7 @@
 			<display-name>BatchConsistirLeiturasCalcularConsumosMDB</display-name>
 			<ejb-name>BatchConsistirLeiturasCalcularConsumosMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.micromedicao.BatchConsistirLeiturasCalcularConsumosMDB
+				gcom.batch.micromedicao.BatchConsistirLeiturasCalcularConsumosMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

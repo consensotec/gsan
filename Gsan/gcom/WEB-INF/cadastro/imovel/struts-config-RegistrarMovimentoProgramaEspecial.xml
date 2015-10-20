@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="RegistrarMovimentoProgramaEspecialActionForm"
+			type="gcom.gui.cadastro.imovel.RegistrarMovimentoProgramaEspecialActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	
+	<action-mappings>
+		<action name="RegistrarMovimentoProgramaEspecialActionForm"
+			type="gcom.gui.cadastro.imovel.ExibirRegistrarMovimentoProgramaEspecialAction"
+			validate="false" scope="session" path="/exibirRegistrarMovimentoProgramaEspecialAction">
+			<forward name="registrarMovimento" path="/jsp/cadastro/imovel/imovel_registrar_movimento_prog_especial.jsp" />
+		</action>
+		<action name="RegistrarMovimentoProgramaEspecialActionForm"
+			type="gcom.gui.cadastro.imovel.RegistrarMovimentoProgramaEspecialAction"
+			validate="false" scope="session" path="/registrarMovimentoProgramaEspecialAction">
+			<forward name="telaSucesso" path="/jsp/util/sucesso.jsp" />
+		</action>
+		
+		<action name="RegistrarMovimentoProgramaEspecialActionForm"
+			type="gcom.gui.cadastro.imovel.GerarRelatorioMovimentoProgramaEspecial"
+			validate="false" scope="session" path="/gerarRelatorioMovimentoProgramaEspecial">
+			<forward name="telaSucesso" path="/jsp/util/sucesso.jsp" />
+		</action>
+		
+	</action-mappings>
+
+</struts-config>

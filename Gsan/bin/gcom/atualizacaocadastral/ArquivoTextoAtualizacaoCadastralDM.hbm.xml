@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+	-->
+	<class name="gcom.atualizacaocadastral.ArquivoTextoAtualizacaoCadastralDM" table="atualizacaocadastral.arquivo_txt_atlz_cad_dm">
+		<id name="id" type="java.lang.Integer" column="atac_id">
+			<generator class="sequence">
+				<param name="sequence">atualizacaocadastral.seq_arquivo_txt_atlz_cad_dm</param>
+							
+			</generator>
+		</id>
+		<property name="descricaoArquivo" type="java.lang.String" column="atac_dsarquivotexto" not-null="true" length="50"/>
+		<property name="quantidadeImovel" type="java.lang.Integer" column="atac_qtdimovel" not-null="true"/>
+		<property name="arquivoTexto" type="binary" column="atac_artexto" not-null="true"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="atac_tmultimaalteracao" not-null="true"/>
+		<property name="dataArquivoLiberado" type="java.sql.Date" column="atac_dtarqliberado"/>
+		<property name="dataFinalizacaoArquivo" type="java.sql.Date" column="atac_dtarqfinalizado"/>
+
+		<many-to-one name="parametroTabelaAtualizacaoCadastralDM" class="gcom.atualizacaocadastral.ParametroTabelaAtualizacaoCadastralDM" not-null="true">
+			<column name="ptac_id"/>
+		</many-to-one>
+
+		<many-to-one name="leiturista" class="gcom.micromedicao.Leiturista" not-null="true">
+			<column name="leit_id"/>
+		</many-to-one>
+
+		<many-to-one name="situacaoTransmissao" class="gcom.atualizacaocadastral.SituacaoTransmissaoAtualizacaoCadastralDM" not-null="true">
+			<column name="stac_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

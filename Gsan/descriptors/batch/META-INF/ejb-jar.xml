@@ -6,10 +6,10 @@
 			<display-name>ControladorBatchGCOM</display-name>
 			<ejb-name>ControladorBatchGCOM</ejb-name>
 			<local-home>
-				gsan.batch.ControladorBatchLocalHome
+				gcom.batch.ControladorBatchLocalHome
 			</local-home>
-			<local>gsan.batch.ControladorBatchLocal</local>
-			<ejb-class>gsan.batch.ControladorBatchSEJB</ejb-class>
+			<local>gcom.batch.ControladorBatchLocal</local>
+			<ejb-class>gcom.batch.ControladorBatchSEJB</ejb-class>
 			<session-type>Stateless</session-type>
 			<transaction-type>Container</transaction-type>
 		</session>

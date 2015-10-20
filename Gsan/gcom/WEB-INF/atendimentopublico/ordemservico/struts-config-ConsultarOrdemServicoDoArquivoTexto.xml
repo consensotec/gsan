@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean 
+			name="ConsultarOrdemServicoDoArquivoTextoActionForm" 
+			type="gcom.gui.atendimentopublico.ordemservico.ConsultarOrdemServicoDoArquivoTextoActionForm" /> 
+		<form-bean 
+			name="ConsultarDadosOrdemServicoVisitaActionForm" 
+			type="gcom.gui.atendimentopublico.ordemservico.ConsultarDadosOrdemServicoVisitaActionForm" /> 
+	</form-beans>
+	<global-forwards />
+	<action-mappings>
+		<action 
+			name="ConsultarOrdemServicoDoArquivoTextoActionForm"  
+			type="gcom.gui.atendimentopublico.ordemservico.ExibirConsultarOrdemServicoDoArquivoTextoAction" 
+			validate="true"
+			scope="session"
+			path="/exibirConsultarOrdemServicoDoArquivoTextoAction">
+			<forward 
+				name="exibirConsultarOrdemServicoDoArquivoTexto"
+				path="/jsp/atendimentopublico/ordemservico/arquivo_texto_ordens_servico_consultar.jsp" />
+		</action>
+		
+		<action name="ConsultarOrdemServicoDoArquivoTextoActionForm"
+			type="gcom.gui.atendimentopublico.ordemservico.ConsultarOrdemServicoDoArquivoTextoAction"
+			validate="true" scope="session"
+			path="/consultarOrdemServicoDoArquivoTextoAction">
+			<forward 
+				name="consultarOrdemServicoDoArquivoTexto"
+				path="/jsp/atendimentopublico/ordemservico/arquivo_texto_ordens_servico_consultar.jsp" />
+		</action>
+		
+		<action	name="ConsultarDadosOrdemServicoVisitaActionForm"
+			type="gcom.gui.atendimentopublico.ordemservico.ExibirConsultarDadosOrdemServicoVisitaAction"
+			validate="false" 
+			input="/exibirConsultarDadosOrdemServicoVisitaAction.do"
+			scope="session" 
+			path="/exibirConsultarDadosOrdemServicoVisitaAction">
+			
+			<forward name="consultarDadosOrdemServicoVisita"
+				     path="/consultarDadosOrdemServicoVisitaWizardAction.do?action=exibirConsultarDadosOrdemServicoVisitaAnormalidadeAction" />
+				
+		</action>
+		
+		<action name="ConsultarDadosOrdemServicoVisitaActionForm"
+			    type="gcom.gui.atendimentopublico.ordemservico.ConsultarDadosOrdemServicoVisitaWizardAction"
+			    validate="true" 
+			    parameter="action" 
+			    scope="session"
+			    path="/consultarDadosOrdemServicoVisitaWizardAction">
+			
+			<forward name="consultarDadosOrdemServicoVisitaAnormalidade"
+				     path="/jsp/atendimentopublico/ordemservico/ordem_servico_visita_anormalidade_consultar.jsp" />
+				
+			<forward name="consultarDadosOrdemServicoVisitaFotos"
+				     path="/jsp/atendimentopublico/ordemservico/ordem_servico_visita_fotos_consultar.jsp" />
+				     
+			<forward name="consultarDadosOSVisitaAnormalidade"
+				     path="/consultarDadosOrdemServicoVisitaWizardAction.do?action=consultarDadosOrdemServicoVisitaAnormalidadeAction" />
+				     
+			<forward name="consultarDadosOrdemServicoVisitaAction"
+				     path="/consultarDadosOrdemServicoVisitaAction" />
+				
+		</action>
+		
+		<action	name="ConsultarDadosOrdemServicoVisitaActionForm"
+			type="  gcom.gui.atendimentopublico.ordemservico.ExibirConsultarDadosOrdemServicoVisitaAnormalidadeAction"
+			validate="false" scope="session" 
+			path="/exibirConsultarDadosOrdemServicoVisitaAnormalidadeAction">
+		
+			<forward name="consultarDadosOSVisitaAnormalidade"
+				     path="/consultarDadosOrdemServicoVisitaWizardAction.do?action=consultarDadosOrdemServicoVisitaAnormalidadeAction" />
+				
+		</action>
+		
+		<action	name="ConsultarDadosOrdemServicoVisitaActionForm"
+			type="gcom.gui.atendimentopublico.ordemservico.ConsultarDadosOrdemServicoVisitaAction"
+			validate="false" scope="session" 
+			path="/consultarDadosOrdemServicoVisitaAction">
+		
+		</action>
+			
+	</action-mappings>
+	
+	<message-resources null="false" parameter="gcom.properties.application" />	
+		
+</struts-config>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="GerarRelatorioEnquadramentoDesenquadramentoGrandeClienteActionForm"
+			type="gcom.gui.relatorio.cadastro.imovel.GerarRelatorioEnquadramentoDesenquadramentoGrandeClienteActionForm" />
+
+
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="GerarRelatorioEnquadramentoDesenquadramentoGrandeClienteActionForm"
+			type="gcom.gui.relatorio.cadastro.imovel.ExibirGerarRelatorioEnquadramentoDesenquadramentoGrandeClienteAction"
+			validate="false" scope="session" path="/exibirGerarRelatorioEnquadramentoDesenquadramentoGrandeClienteAction">
+			
+			<forward name="gerarRelatorioEnquadramentoDesenquadramentoGrandeCliente"
+				path="/jsp/relatorio/cadastro/relatorio_enquadramento_desenquadramento_grande_cliente_gerar.jsp" />
+		</action>
+
+		<action name="GerarRelatorioEnquadramentoDesenquadramentoGrandeClienteActionForm"
+			type="gcom.gui.relatorio.cadastro.imovel.GerarRelatorioEnquadramentoDesenquadramentoGrandeClienteAction"
+			validate="false" scope="session" path="/gerarRelatorioEnquadramentoDesenquadramentoGrandeClienteAction">
+		</action>
+
+	</action-mappings>
+	<message-resources null="false" parameter="gcom.properties.application" />
+</struts-config>

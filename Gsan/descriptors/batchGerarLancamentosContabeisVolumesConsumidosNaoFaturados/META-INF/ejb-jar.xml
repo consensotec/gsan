@@ -6,7 +6,7 @@
 			<display-name>BatchGerarLancamentosContabeisVolumesConsumidosNaoFaturadosMDB</display-name>
 			<ejb-name>BatchGerarLancamentosContabeisVolumesConsumidosNaoFaturadosMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.financeiro.BatchGerarLancamentosContabeisVolumesConsumidosNaoFaturadosMDB
+				gcom.batch.financeiro.BatchGerarLancamentosContabeisVolumesConsumidosNaoFaturadosMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

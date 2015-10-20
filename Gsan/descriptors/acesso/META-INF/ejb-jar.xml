@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorAcessoGCOM</display-name>
             <ejb-name>ControladorAcessoGCOM</ejb-name>
-            <local-home>gsan.seguranca.acesso.ControladorAcessoLocalHome</local-home>
-            <local>gsan.seguranca.acesso.ControladorAcessoLocal</local>
-            <ejb-class>gsan.seguranca.acesso.ControladorAcessoSEJB</ejb-class>
+            <local-home>gcom.seguranca.acesso.ControladorAcessoLocalHome</local-home>
+            <local>gcom.seguranca.acesso.ControladorAcessoLocal</local>
+            <ejb-class>gcom.seguranca.acesso.ControladorAcessoSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

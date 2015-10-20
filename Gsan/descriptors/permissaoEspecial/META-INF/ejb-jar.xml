@@ -8,13 +8,13 @@
 			</display-name>
 			<ejb-name>ControladorPermissaoEspecialGCOM</ejb-name>
 			<local-home>
-				gsan.seguranca.ControladorPermissaoEspecialLocalHome
+				gcom.seguranca.ControladorPermissaoEspecialLocalHome
 			</local-home>
 			<local>
-				gsan.seguranca.ControladorPermissaoEspecialLocal
+				gcom.seguranca.ControladorPermissaoEspecialLocal
 			</local>
 			<ejb-class>
-				gsan.seguranca.ControladorPermissaoEspecialSEJB
+				gcom.seguranca.ControladorPermissaoEspecialSEJB
 			</ejb-class>
 			<session-type>Stateless</session-type>
 			<transaction-type>Container</transaction-type>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="gcom.atualizacaocadastral.MapaAtualizacaoCadastralDM" table="atualizacaocadastral.mapa_atlz_cad_dm">
+		<id name="id" type="java.lang.Integer" column="macd_id">
+			<generator class="sequence">
+				<param name="sequence">atualizacaocadastral.seq_mapa_atlz_cad_dm</param>
+			</generator>
+		</id>
+		<property name="arquivoKml" type="binary" column="macd_armapakmz" not-null="true"/>
+		<property name="arquivoMap" type="binary" column="macd_armapamap" not-null="true"/>
+		<property name="arquivoJson" type="binary" column="macd_arjson" not-null="true"/>
+		<property name="coordenadaX" type="java.lang.Double" column="macd_nncoordenadax" not-null="true"/>
+		<property name="coordenadaY" type="java.lang.Double" column="macd_nncoordenaday" not-null="true"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="macd_tmultimaalteracao" not-null="true"/>
+
+		<many-to-one name="localidade" class="gcom.cadastro.localidade.Localidade" not-null="true">
+			<column name="loca_id"/>
+		</many-to-one>
+
+		<many-to-one name="setorComercial" class="gcom.cadastro.localidade.SetorComercial" not-null="true">
+			<column name="stcm_id"/>
+		</many-to-one>
+
+		<many-to-one name="quadra" class="gcom.cadastro.localidade.Quadra" not-null="true">
+			<column name="qdra_id"/>
+		</many-to-one>
+
+		<many-to-one name="usuario" class="gcom.seguranca.acesso.usuario.Usuario" not-null="true">
+			<column name="usur_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

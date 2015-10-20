@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.seguranca.acesso.usuario.UsuarioBanco" table="seguranca.usuario_banco">
+		<id name="id" type="java.lang.Integer" column="usdb_id">
+			<generator class="sequence">
+				<param name="sequence">seguranca.seq_usuario_banco</param>
+			</generator>
+		</id>
+		<property name="login" type="java.lang.String" column="usdb_nmlogin" not-null="true"/>
+		<property name="senha" type="java.lang.String" column="usdb_nmsenha"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="usdb_tmultimaalteracao"/>
+		
+		<!-- bi-directional many-to-one association to UsuarioSituacao -->
+		<many-to-one name="usuario" class="gcom.seguranca.acesso.usuario.Usuario" not-null="true">
+			<column name="usur_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

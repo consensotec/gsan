@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoAtendimentoPublicoAtualizaDadosMDB</display-name>
 			<ejb-name>BatchGerarResumoAtendimentoPublicoAtualizaDadosMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.atendimentopublico.BatchGerarResumoAtendimentoPublicoAtualizaDadosMDB
+				gcom.batch.atendimentopublico.BatchGerarResumoAtendimentoPublicoAtualizaDadosMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

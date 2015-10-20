@@ -6,7 +6,7 @@
 			<display-name>BatchProcessarAmortizacaoDividaAtivaArrecadacaoMDB</display-name>
 			<ejb-name>BatchProcessarAmortizacaoDividaAtivaArrecadacaoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.cobranca.BatchProcessarAmortizacaoDividaAtivaArrecadacaoMDB
+				gcom.batch.cobranca.BatchProcessarAmortizacaoDividaAtivaArrecadacaoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

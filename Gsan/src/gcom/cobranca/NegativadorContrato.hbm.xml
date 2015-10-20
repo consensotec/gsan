@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <!-- 
+
+    Created by the Middlegen Hibernate plugin 2.1
+
+
+
+    http://boss.bekk.no/boss/middlegen/
+
+    http://www.hibernate.org/
+
+-->
+ <class name="gcom.cobranca.NegativadorContrato" table="cobranca.negativador_contrato">
+  <id column="ngcn_id" name="id" type="java.lang.Integer">
+   <generator class="sequence">
+    <param name="sequence">cobranca.seq_negativador_contrato</param>
+   </generator>
+  </id>
+  <property column="ngcn_nncontrato" generated="never" lazy="false"
+   length="10" name="numeroContrato" not-null="true" type="java.lang.String"/>
+  <property column="ngcn_cdconvenio" generated="never" lazy="false"
+   length="20" name="codigoConvenio" type="java.lang.String"/>
+  <property column="ngcn_dtcontratoinicio" generated="never"
+   lazy="false" length="4" name="dataContratoInicio" type="java.sql.Date"/>
+  <property column="ngcn_dtcontratofim" generated="never" lazy="false"
+   length="4" name="dataContratoFim" type="java.sql.Date"/>
+  <property column="ngcn_dtcontratoencerramento" generated="never"
+   lazy="false" length="4" name="dataContratoEncerramento" type="java.sql.Date"/>
+  <property column="ngcn_dsemailenvioarquivo" generated="never"
+   lazy="false" length="40" name="descricaoEmailEnvioArquivo" type="java.lang.String"/>
+  <property column="ngcn_nnnsaenvio" generated="never" lazy="false"
+   length="4" name="numeroSequencialEnvio" not-null="true" type="int"/>
+  <property column="ngcn_nnnsaretorno" generated="never" lazy="false"
+   length="4" name="numeroSequencialRetorno" not-null="true" type="int"/>
+  <property column="ngcn_vlcontrato" generated="never" lazy="false"
+   length="15" name="valorContrato" not-null="true" type="java.math.BigDecimal"/>
+  <property column="ngcn_vltarifainclusao" generated="never"
+   lazy="false" length="15" name="valorTarifaInclusao" type="java.math.BigDecimal"/>
+  <property column="ngcn_nninclusoescontratadas" generated="never"
+   lazy="false" length="4" name="numeroInclusoesContratadas" type="java.lang.Integer"/>
+  <property column="ngcn_nninclusoesenviadas" generated="never"
+   lazy="false" length="4" name="numeroInclusoesEnviadas" type="java.lang.Integer"/>
+  <property column="ngcn_nnexclusoesenviadas" generated="never"
+   lazy="false" length="4" name="numeroExclusoesEnviadas" type="java.lang.Integer"/>
+  <property column="ngcn_nntamregmovimento" generated="never"
+   lazy="false" length="4" name="numeroTamanhoRegistroMovimento"
+   not-null="true" type="int"/>
+  <property column="ngcn_nnprazoinclusao" generated="never" lazy="false"
+   length="2" name="numeroPrazoInclusao" not-null="true" type="short"/>
+  <property column="ngcn_iccontrolensaretorno" generated="never"
+   lazy="false" length="2" name="indicadorObriControSequeRetorno"
+   not-null="true" type="short"/>
+  <property column="ngcn_tmultimaalteracao" generated="never"
+   lazy="false" length="8" name="ultimaAlteracao" not-null="true" type="java.sql.Timestamp"/>
+  <property column="ngcn_nnentidade" generated="never" lazy="false"
+   length="5" name="numeroEntidade" type="java.lang.Integer"/>
+  <property column="ngcn_nnassociado" generated="never" lazy="false"
+   length="8" name="numeroAssociado" type="java.lang.Integer"/>
+  <!-- Associations 
+ bi-directional many-to-one association to Negativador -->
+  <many-to-one class="gcom.cobranca.Negativador" name="negativador" not-null="true">
+   <column name="negt_id"/>
+  </many-to-one>
+  <!-- bi-directional many-to-one association to ContratoMotivoCancelamento -->
+  <many-to-one class="gcom.arrecadacao.ContratoMotivoCancelamento"
+   name="contratoMotivoCancelamento" not-null="false">
+   <column name="ctcn_id"/>
+  </many-to-one>
+ </class>
+</hibernate-mapping>

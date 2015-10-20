@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="ParametrosPerdasFiscaisActionForm"
+			type="gcom.gui.financeiro.ParametrosPerdasFiscaisActionForm" />	
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+
+	<action-mappings>
+		<!--******************* PÁGINA PRINCIPAL *******************-->
+		<action name="ParametrosPerdasFiscaisActionForm"
+			type="gcom.gui.financeiro.ExibirManterParametrosPerdasFiscaisAction"
+			validate="true" 
+			scope="session"
+			path="/exibirManterParametrosPerdasFiscaisAction">
+			
+			<forward name="exibirManterParametrosPerdasFiscais"
+				path="/jsp/finaceiro/parametros_perdas_fiscais_manter.jsp"/>
+		</action>
+		
+		<action name="ParametrosPerdasFiscaisActionForm"
+			type="gcom.gui.financeiro.ManterParametrosPerdasFiscaisAction"
+			validate="true" 
+			scope="session"
+			path="/manterParametrosPerdasFiscaisAction">
+			
+			<forward name="exibirManterParametrosPerdasFiscais"
+				path="/jsp/finaceiro/parametros_perdas_fiscais_manter.jsp"/>
+		</action>
+		
+	</action-mappings>
+	
+
+</struts-config>		
+			
+

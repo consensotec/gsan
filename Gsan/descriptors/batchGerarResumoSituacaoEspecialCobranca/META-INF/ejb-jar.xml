@@ -6,7 +6,7 @@
 			<display-name>BatchGerarResumoSituacaoEspecialCobrancaMDB</display-name>
 			<ejb-name>BatchGerarResumoSituacaoEspecialCobrancaMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.cobranca.BatchGerarResumoSituacaoEspecialCobrancaMDB
+				gcom.batch.gerencial.cobranca.BatchGerarResumoSituacaoEspecialCobrancaMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

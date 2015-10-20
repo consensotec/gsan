@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorMicromedicaoCAERN</display-name>
             <ejb-name>ControladorMicromedicaoCAERN</ejb-name>
-            <local-home>gsan.micromedicao.ControladorMicromedicaoLocalHome</local-home>
-            <local>gsan.micromedicao.ControladorMicromedicaoLocal</local>
-            <ejb-class>gsan.micromedicao.ControladorMicromedicaoCAERNSEJB</ejb-class>
+            <local-home>gcom.micromedicao.ControladorMicromedicaoLocalHome</local-home>
+            <local>gcom.micromedicao.ControladorMicromedicaoLocal</local>
+            <ejb-class>gcom.micromedicao.ControladorMicromedicaoCAERNSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

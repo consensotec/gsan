@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorContratoParcelamentoGCOM</display-name>
             <ejb-name>ControladorContratoParcelamentoGCOM</ejb-name>
-            <local-home>gsan.cobranca.contratoparcelamento.ControladorContratoParcelamentoLocalHome</local-home>
-            <local>gsan.cobranca.contratoparcelamento.ControladorContratoParcelamentoLocal</local>
-            <ejb-class>gsan.cobranca.contratoparcelamento.ControladorContratoParcelamentoSEJB</ejb-class>
+            <local-home>gcom.cobranca.contratoparcelamento.ControladorContratoParcelamentoLocalHome</local-home>
+            <local>gcom.cobranca.contratoparcelamento.ControladorContratoParcelamentoLocal</local>
+            <ejb-class>gcom.cobranca.contratoparcelamento.ControladorContratoParcelamentoSEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

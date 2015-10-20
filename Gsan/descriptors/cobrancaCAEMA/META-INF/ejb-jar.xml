@@ -5,9 +5,9 @@
         <session>
             <display-name>ControladorCobrancaCAEMA</display-name>
             <ejb-name>ControladorCobrancaCAEMA</ejb-name>
-            <local-home>gsan.cobranca.ControladorCobrancaLocalHome</local-home>
-            <local>gsan.cobranca.ControladorCobrancaLocal</local>
-            <ejb-class>gsan.cobranca.ControladorCobrancaCAEMASEJB</ejb-class>
+            <local-home>gcom.cobranca.ControladorCobrancaLocalHome</local-home>
+            <local>gcom.cobranca.ControladorCobrancaLocal</local>
+            <ejb-class>gcom.cobranca.ControladorCobrancaCAEMASEJB</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

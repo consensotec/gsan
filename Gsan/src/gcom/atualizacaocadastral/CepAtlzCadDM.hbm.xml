@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/03/2013 15:40:14 by Hibernate Tools 3.4.0.CR1 -->
+<!--  <id name="id" type="java.lang.String" column="ceac_id"></id> -->
+<hibernate-mapping>
+	<class name="gcom.atualizacaocadastral.CepAtlzCadDM" table="atualizacaocadastral.cep_atlz_cadastral_dm">																
+	
+		<id name="id" type="java.lang.String" column="ceac_id"></id>
+		
+		<property name="codigoCep" type="java.lang.Integer" column="ceac_cdcep" length="4"/>
+		
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="ceac_tmultimaalteracao" length="8"/>		
+	</class>
+</hibernate-mapping>

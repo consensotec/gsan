@@ -6,7 +6,7 @@
 			<display-name>BatchGerarDadosParaLeituraMDB</display-name>
 			<ejb-name>BatchGerarDadosParaLeituraMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.micromedicao.BatchGerarDadosParaLeituraMDB
+				gcom.batch.micromedicao.BatchGerarDadosParaLeituraMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

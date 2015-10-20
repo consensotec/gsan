@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="gcom.cadastro.SMSSequenciaEnvio" table="cadastro.sms_sequencia_envio">
+		<id name="id" type="java.lang.Integer" column="smss_id">
+			<generator class="sequence">
+				<param name="sequence">cadastro.seq_sms_sequencia_envio</param>
+			</generator>
+		</id>
+		<property name="quantidadeInvalidado" type="java.lang.Integer" column="smss_qtinvalidado" />
+		<property name="quantidadeErroEnvio" type="java.lang.Integer" column="smss_qterroenvio" />
+		<property name="quantidadeEnvio" type="java.lang.Integer" column="smss_qtenviados" />
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="smss_tmultimaalteracao" not-null="true"/>
+		<property name="dataEnvio" type="java.sql.Timestamp" column="smss_tmenviolote" not-null="true"/>
+	</class>
+</hibernate-mapping>

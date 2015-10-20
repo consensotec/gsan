@@ -6,7 +6,7 @@
 			<display-name>BatchEmitirContasOrgaoPublicoMDB</display-name>
 			<ejb-name>BatchEmitirContasOrgaoPublicoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchEmitirContasOrgaoPublicoMDB
+				gcom.batch.faturamento.BatchEmitirContasOrgaoPublicoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

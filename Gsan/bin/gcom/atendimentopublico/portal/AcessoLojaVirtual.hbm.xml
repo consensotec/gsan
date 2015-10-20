@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.atendimentopublico.portal.AcessoLojaVirtual" table="atendimentopublico.acesso_loja_virtual">
+		<id name="id" type="java.lang.Integer" column="aclj_id">
+			<generator class="sequence">
+				<param name="sequence">atendimentopublico.seq_acesso_loja_virtual</param>
+			</generator>
+		</id>
+		<property name="numeroCodigoAtendimento" type="java.lang.String" column="aclj_nncodigoatendimento" length="11"/>
+		<property name="ipAcesso" type="java.lang.String" column="aclj_ipacesso" length="11"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="aclj_tmultimaalteracao" not-null="true" length="8"/>
+		<property name="indicadorServicoExecutado" type="short" column="aclj_icservicoexecutado" not-null="true" length="8"/>
+		
+	</class>
+</hibernate-mapping>

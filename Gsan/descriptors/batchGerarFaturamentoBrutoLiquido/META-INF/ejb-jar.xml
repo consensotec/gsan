@@ -6,7 +6,7 @@
 			<display-name>BatchGerarFaturamentoBrutoLiquidoMDB</display-name>
 			<ejb-name>BatchGerarFaturamentoBrutoLiquidoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.gerencial.BatchGerarFaturamentoBrutoLiquidoMDB
+				gcom.batch.gerencial.BatchGerarFaturamentoBrutoLiquidoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

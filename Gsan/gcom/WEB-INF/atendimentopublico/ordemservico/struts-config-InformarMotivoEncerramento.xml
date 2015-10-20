@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="InformarMotivoEncerramentoAtendimentoActionForm"
+	type="gcom.gui.atendimentopublico.ordemservico.InformarMotivoEncerramentoAtendimentoActionForm" />
+		<form-bean name="InformarAssociacaoMotivoEncerramentoActionForm"
+	type="gcom.gui.atendimentopublico.ordemservico.InformarAssociacaoMotivoEncerramentoActionForm" />
+		
+	</form-beans>
+
+	<!--******************* PAGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+		<action name="InformarMotivoEncerramentoAtendimentoActionForm"
+			type="gcom.gui.atendimentopublico.ordemservico.ExibirInformarMotivoEncerramentoAtendimentoAction"
+			validate="false" scope="session"
+			path="/exibirInformarMotivoEncerramentoAtendimentoAction">
+			<forward name="informarMotivoEncerramentoAtendimento"
+				path="/jsp/atendimentopublico/ordemservico/motivo_encerramento_atendimento_informar.jsp" />
+		</action>
+		
+		<action name="InformarMotivoEncerramentoAtendimentoActionForm"
+			type="gcom.gui.atendimentopublico.ordemservico.InformarMotivoEncerramentoAtendimentoAction"
+			validate="false" scope="session"
+			path="/informarMotivoEncerramentoAtendimentoAction" />
+			
+		<action name="InformarAssociacaoMotivoEncerramentoActionForm"
+			type="gcom.gui.atendimentopublico.ordemservico.ExibirInformarAssociacaoMotivoEncerramentoAction"
+			validate="false" scope="session"
+			path="/exibirInformarAssociacaoMotivoEncerramentoAction">
+			<forward name="exibirInformarAssociacaoMotivoEncerramento"
+				path="/jsp/atendimentopublico/ordemservico/motivo_encerramento_atendimento_associacao.jsp" />
+		</action>
+			
+		<action name="InformarAssociacaoMotivoEncerramentoActionForm"
+			type="gcom.gui.atendimentopublico.ordemservico.InformarAssociacaoMotivoEncerramentoAction"
+			validate="false" scope="session"
+			path="/informarAssociacaoMotivoEncerramentoAction">
+			<forward name="exibirInformarAssociacaoMotivoEncerramentoAction"
+				path="/jsp/atendimentopublico/ordemservico/motivo_encerramento_atendimento_associacao.jsp" />
+		</action>
+		
+
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>

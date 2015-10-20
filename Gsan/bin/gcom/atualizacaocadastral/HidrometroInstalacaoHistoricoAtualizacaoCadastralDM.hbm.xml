@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+	-->
+	<class name="gcom.atualizacaocadastral.HidrometroInstalacaoHistoricoAtualizacaoCadastralDM" table="atualizacaocadastral.hid_inst_hist_atl_cad_dm">
+		<id name="id" type="java.lang.Integer" column="hiac_id">
+			<generator class="sequence">
+				<param name="sequence">atualizacaocadastral.seq_hid_inst_hist_atl_cad_dm</param>
+			</generator>
+		</id>
+		<property name="numeroHidrometro" type="java.lang.String" column="hiac_nnhidrometro"/>
+		<property name="dataInstalacaoHidrometro" type="java.sql.Date" column="hiac_dtinstalacaohidrometro"/>
+		<property name="numeroInstalacaoHidrometro" type="java.lang.Integer" column="hiac_nninstalacaohidmt"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="hiac_tmultimaalteracao" not-null="true"/>
+
+		<many-to-one name="medicaoTipo" class="gcom.micromedicao.medicao.MedicaoTipo">
+			<column name="medt_id"/>
+		</many-to-one>
+
+		<many-to-one name="hidrometroLocalInstalacao" class="gcom.micromedicao.hidrometro.HidrometroLocalInstalacao">
+			<column name="hili_id"/>
+		</many-to-one>
+
+		<many-to-one name="hidrometroProtecao" class="gcom.micromedicao.hidrometro.HidrometroProtecao">
+			<column name="hipr_id"/>
+		</many-to-one>
+
+		<many-to-one name="imovelAtualizacaoCadastralDM" class="gcom.atualizacaocadastral.ImovelAtualizacaoCadastralDM" not-null="true">
+			<column name="imac_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -6,7 +6,7 @@
 			<display-name>BatchCancelarGrupoFaturamentoMDB</display-name>
 			<ejb-name>BatchCancelarGrupoFaturamentoMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchCancelarGrupoFaturamentoMDB
+				gcom.batch.faturamento.BatchCancelarGrupoFaturamentoMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>

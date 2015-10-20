@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean 
+			name="FiltrarFiscalizarOSAcompanhamentoServicoActionForm"
+			type="gcom.gui.atendimentopublico.ordemservico.FiltrarFiscalizarOSAcompanhamentoServicoActionForm" />
+	</form-beans>
+	<global-forwards />
+	<action-mappings>
+		<action 
+			name="FiltrarFiscalizarOSAcompanhamentoServicoActionForm"
+			type="gcom.gui.atendimentopublico.ordemservico.ExibirFiltrarFiscalizarOSAcompanhamentoServicoAction"
+			validate="true" 
+			scope="session"
+			path="/exibirFiltrarFiscalizarOSAcompanhamentoServicoAction">
+			<forward 
+				name="exibirFiltrarFiscalizarOSAcompanhamentoServico"
+				path="/jsp/atendimentopublico/ordemservico/fiscalizar_os_acompanhamento_servico_filtrar.jsp" />
+		</action>
+		
+		<action name="FiltrarFiscalizarOSAcompanhamentoServicoActionForm"
+			type="gcom.gui.atendimentopublico.ordemservico.AtualizarFiscalizarOSAcompanhamentoServicoAction"
+			validate="true" scope="session"
+			path="/atualizarFiscalizarOSAcompanhamentoServicoAction">
+			<forward name="/exibirFiltrarFiscalizarOSAcompanhamentoServicoAction"
+				path="/jsp/atendimentopublico/ordemservico/fiscalizar_os_acompanhamento_servico_filtrar.jsp" />
+		</action>
+		
+		<action 
+			name="FiltrarFiscalizarOSAcompanhamentoServicoActionForm"
+			type="gcom.gui.atendimentopublico.ordemservico.FiltrarOSEncerradaAcompanhamentoServicoAction"
+			validate="true" 
+			scope="session"
+			path="/filtrarOSEncerradaAcompanhamentoServicoAction">
+			
+			<forward name="fotos" 
+				path="/jsp/atendimentopublico/ordemservico/fiscalizar_os_acompanhamento_servico_fotos_popup.jsp" />
+			
+			<forward 
+				name="exibirFiltrarFiscalizarOSAcompanhamentoServico"
+				path="/jsp/atendimentopublico/ordemservico/fiscalizar_os_acompanhamento_servico_filtrar.jsp" />
+		</action>
+		
+	</action-mappings>
+	<message-resources null="false" parameter="gcom.properties.application" />
+</struts-config>

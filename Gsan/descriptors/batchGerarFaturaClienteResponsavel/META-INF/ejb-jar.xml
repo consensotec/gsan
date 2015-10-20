@@ -6,7 +6,7 @@
 			<display-name>BatchGerarFaturaClienteResponsavelMDB</display-name>
 			<ejb-name>BatchGerarFaturaClienteResponsavelMDB</ejb-name>
 			<ejb-class>
-				gsan.batch.faturamento.BatchGerarFaturaClienteResponsavelMDB
+				gcom.batch.faturamento.BatchGerarFaturaClienteResponsavelMDB
 			</ejb-class>
 			<transaction-type>Container</transaction-type>
 			<message-driven-destination>
