@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2007-2007 the GSAN - Sistema Integrado de Gestï¿½o de Serviï¿½os de Saneamento
+* Copyright (C) 2007-2007 the GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
 *
 * This file is part of GSAN, an integrated service management system for Sanitation
 *
@@ -18,7 +18,7 @@
 */
 
 /*
-* GSAN - Sistema Integrado de Gestï¿½o de Serviï¿½os de Saneamento
+* GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
 * Copyright (C) <2007> 
 * Adriano Britto Siqueira
 * Alexandre Santos Cabral
@@ -27,51 +27,51 @@
 * Aryed Lins de Araï¿½jo
 * Bruno Leonardo Rodrigues Barros
 * Carlos Elmano Rodrigues Ferreira
-* Clï¿½udio de Andrade Lira
-* Denys Guimarï¿½es Guenes Tavares
+* Cláudio de Andrade Lira
+* Denys Guimarães Guenes Tavares
 * Eduardo Breckenfeld da Rosa Borges
-* Fabï¿½ola Gomes de Araï¿½jo
-* Flï¿½vio Leonardo Cavalcanti Cordeiro
-* Francisco do Nascimento Jï¿½nior
+* Fabíola Gomes de Araújo
+* Flávio Leonardo Cavalcanti Cordeiro
+* Francisco do Nascimento Júnior
 * Homero Sampaio Cavalcanti
-* Ivan Sï¿½rgio da Silva Jï¿½nior
-* Josï¿½ Edmar de Siqueira
-* Josï¿½ Thiago Tenï¿½rio Lopes
-* Kï¿½ssia Regina Silvestre de Albuquerque
+* Ivan Sérgio da Silva Júnior
+* José Edmar de Siqueira
+* José Thiago Tenório Lopes
+* Kássia Regina Silvestre de Albuquerque
 * Leonardo Luiz Vieira da Silva
-* Mï¿½rcio Roberto Batista da Silva
-* Maria de Fï¿½tima Sampaio Leite
-* Micaela Maria Coelho de Araï¿½jo
-* Nelson Mendonï¿½a de Carvalho
+* Márcio Roberto Batista da Silva
+* Maria de Fátima Sampaio Leite
+* Micaela Maria Coelho de Araújo
+* Nelson Mendonça de Carvalho
 * Newton Morais e Silva
 * Pedro Alexandre Santos da Silva Filho
-* Rafael Corrï¿½a Lima e Silva
+* Rafael Corrêa Lima e Silva
 * Rafael Francisco Pinto
 * Rafael Koury Monteiro
-* Rafael Palermo de Araï¿½jo
+* Rafael Palermo de Araújo
 * Raphael Veras Rossiter
 * Roberto Sobreira Barbalho
 * Rodrigo Avellar Silveira
 * Rosana Carvalho Barbosa
-* Sï¿½vio Luiz de Andrade Cavalcante
+* Sívio Luiz de Andrade Cavalcante
 * Tai Mu Shih
 * Thiago Augusto Souza do Nascimento
 * Tiago Moreno Rodrigues
 * Vivianne Barbosa Sousa
 *
-* Este programa ï¿½ software livre; vocï¿½ pode redistribuï¿½-lo e/ou
-* modificï¿½-lo sob os termos de Licenï¿½a Pï¿½blica Geral GNU, conforme
-* publicada pela Free Software Foundation; versï¿½o 2 da
-* Licenï¿½a.
-* Este programa ï¿½ distribuï¿½do na expectativa de ser ï¿½til, mas SEM
-* QUALQUER GARANTIA; sem mesmo a garantia implï¿½cita de
-* COMERCIALIZAï¿½ï¿½O ou de ADEQUAï¿½ï¿½O A QUALQUER PROPï¿½SITO EM
-* PARTICULAR. Consulte a Licenï¿½a Pï¿½blica Geral GNU para obter mais
+* Este programa é software livre; você pode redistribuí-lo e/ou
+* modificá-lo sob os termos de Licença Pública Geral GNU, conforme
+* publicada pela Free Software Foundation; versão 2 da
+* Licença.
+* Este programa é distribuído na expectativa de ser útil, mas SEM
+* QUALQUER GARANTIA; sem mesmo a garantia implícita de
+* COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+* PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
 * detalhes.
-* Vocï¿½ deve ter recebido uma cï¿½pia da Licenï¿½a Pï¿½blica Geral GNU
-* junto com este programa; se nï¿½o, escreva para Free Software
+* Você deve ter recebido uma cópia da Licença Pública Geral GNU
+* junto com este programa; se não, escreva para Free Software
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
-* 02111-1307, USA.
+* 02111-1307, USA
 */  
 package gcom.faturamento;
 
@@ -155,48 +155,48 @@ import java.util.Map;
 
 
 /**
- * < <Descriï¿½ï¿½o da Interface>>
+ * < <Descrição da Interface>>
  * 
  * @author Administrador 
  */
 public interface IRepositorioFaturamento {
 
 	/**
-	 * Mï¿½todo responsï¿½vel por verificar se existe no banco um determinado ID na tabela de 
-	 * faturamento_grupo - caso exista o id passado como parï¿½metro na tabela, retorna true, caso
-	 * contrï¿½rio retorna false
+	 * método responsável por verificar se existe no banco um determinado ID na tabela de 
+	 * faturamento_grupo - caso exista o id passado como parâmetro na tabela, retorna true, caso
+	 * contrário retorna false
 	 * 
 	 * @param Integer id - id de um FaturamentoGrupo  
-	 * @return boolean - true para existir o id na tabela, false para nï¿½o existir
+	 * @return boolean - true para existir o id na tabela, false para não existir
 	 * @exception ErroRepositorioException
 	 */
 	public boolean verificarExistenciaIdGrupoFaturamento(Integer id) throws ErroRepositorioException;
 	/**
-	 * < <Descriï¿½ï¿½o do mï¿½todo>>
+	 * < <Descrição do método>>
 	 * 
 	 * @param imovel
-	 *            Descriï¿½ï¿½o do parï¿½metro
+	 *            Descrição do parâmetro
 	 * @param anoMesReferencia
-	 *            Descriï¿½ï¿½o do parï¿½metro
-	 * @return Descriï¿½ï¿½o do retorno
+	 *            Descrição do parâmetro
+	 * @return Descrição do retorno
 	 * @exception ErroRepositorioException
-	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
+	 *                Descrição da exceção
 	 */
 	public Integer pesquisarExistenciaConta(Imovel imovel, int anoMesReferencia)
 			throws ErroRepositorioException;
 
 	/**
-	 * < <Descriï¿½ï¿½o do mï¿½todo>>
+	 * < <Descrição do método>>
 	 * 
 	 * @param faturamentoGrupo
-	 *            Descriï¿½ï¿½o do parï¿½metro
+	 *            Descrição do parâmetro
 	 * @param anoMesReferencia
-	 *            Descriï¿½ï¿½o do parï¿½metro
+	 *            Descrição do parâmetro
 	 * @param faturamentoAtividade
-	 *            Descriï¿½ï¿½o do parï¿½metro
-	 * @return Descriï¿½ï¿½o do retorno
+	 *            Descrição do parâmetro
+	 * @return Descrição do retorno
 	 * @exception ErroRepositorioException
-	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
+	 *                Descrição da exceção
 	 */
 	public Object[] obterDataPrevistaRealizadaFaturamentoAtividadeCronograma(
 			FaturamentoGrupo faturamentoGrupo, int anoMesReferencia,
@@ -215,7 +215,7 @@ public interface IRepositorioFaturamento {
 	/**
 	 * [UC0104] Manter Comando Atividade de Faturamento
 	 * 
-	 * @return uma lista de atividades de faturamento comandadas e ainda nï¿½o
+	 * @return uma lista de atividades de faturamento comandadas e ainda não
 	 *         realizadas
 	 * @throws ErroRepositorioException
 	 */
@@ -229,7 +229,7 @@ public interface IRepositorioFaturamento {
 	 * [UC0104] Manter Comando Atividade de Faturamento
 	 * 
 	 * Retorna o count do resultado da pesquisa de Faturamento Atividade
-	 * Cronograma nï¿½o realizadas
+	 * Cronograma não realizadas
 	 * 
 	 * buscarAtividadeComandadaNaoRealizadaCount
 	 * 
@@ -246,7 +246,7 @@ public interface IRepositorioFaturamento {
 	/**
 	 * [UC0104] Manter Comando Atividade de Faturamento
 	 * 
-	 * @return uma coleï¿½ï¿½o de FATURAMENTO_ATIVIDADE_CRONOGRAMA
+	 * @return uma coleção de FATURAMENTO_ATIVIDADE_CRONOGRAMA
 	 * @throws ErroRepositorioException
 	 */
 	public Collection buscarFaturamentoAtividadeCronograma(String ids)
@@ -256,7 +256,7 @@ public interface IRepositorioFaturamento {
 	 * [UC0150] - Retificar Conta Author: Raphael Rossiter Data: 26/12/2005
 	 * 
 	 * @param conta
-	 * @return uma coleï¿½ï¿½o com os dï¿½bitos cobrados de uma conta
+	 * @return uma coleção com os débitos cobrados de uma conta
 	 * @throws ControladorException
 	 */
 	public Collection buscarDebitosCobradosConta(Conta conta)
@@ -266,7 +266,7 @@ public interface IRepositorioFaturamento {
 	 * [UC0150] - Retificar Conta Author: Raphael Rossiter Data: 28/12/2005
 	 * 
 	 * @param conta
-	 * @return uma coleï¿½ï¿½o com os crï¿½ditos realizados de uma conta
+	 * @return uma coleção com os Créditos realizados de uma conta
 	 * @throws ControladorException
 	 */
 	public Collection buscarCreditosRealizadosConta(Conta conta)
@@ -289,11 +289,11 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0120] - Calcular Valores de ï¿½gua e/ou Esgoto
+	 * [UC0120] - Calcular Valores de água e/ou Esgoto
 	 *  
 	 * Retorna a faixa de consumo de acordo com a tarifa da categoria e o consumo
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 13/07/2009
 	 * 
 	 * @param consumoTarifaCategoria
@@ -305,7 +305,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0168] - Inserir Tarifa de Consumo Retorna a date de vigï¿½ncia em vigor
+	 * [UC0168] - Inserir Tarifa de Consumo Retorna a date de vigência em vigor
 	 * de uma tarifa de consumo
 	 * 
 	 * @param consumoTarifa
@@ -316,7 +316,7 @@ public interface IRepositorioFaturamento {
 			ConsumoTarifa consumoTarifa) throws ErroRepositorioException;
 
 	/**
-	 * [UC0168] - Inserir Tarifa de Consumo Retorna a date de vigï¿½ncia em vigor
+	 * [UC0168] - Inserir Tarifa de Consumo Retorna a date de vigência em vigor
 	 * de uma tarifa de consumo Pesquisa a Data de Vigencia da Consumo Tarifa e
 	 * da Consumo Tarifa Vigencia
 	 * 
@@ -333,7 +333,7 @@ public interface IRepositorioFaturamento {
 	/**
 	 * [UC0145] - Inserir Conta Author: Raphael Rossiter Data: 13/01/2006
 	 * 
-	 * Seleciona a partir da tabela CLIENTE_IMOVEL para IMOV_ID=Id do imï¿½vel e
+	 * Seleciona a partir da tabela CLIENTE_IMOVEL para IMOV_ID=Id do imóvel e
 	 * CLIM_DTRELACAOFIM com o valor correspondente a nulo
 	 * 
 	 * @param IMOVEL
@@ -366,8 +366,8 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Consulta ResumoFaturamento para a geraï¿½ï¿½o do relatï¿½rio '[UC0173] Gerar
-	 * Relatï¿½rio de Resumo Faturamento' de acordo com a opï¿½ï¿½o de totalizaï¿½ï¿½o.
+	 * Consulta ResumoFaturamento para a geração do relatório '[UC0173] Gerar
+	 * Relatório de Resumo Faturamento' de acordo com a opção de totalização.
 	 * 
 	 * @author Rodrigo Silveira, Diogo Peixoto
 	 * @created 18/01/2006, 27/04/2011
@@ -382,8 +382,8 @@ public interface IRepositorioFaturamento {
 			int anoMesReferencia, Collection<Integer> idsPerfilImovel, String opcaoRelatorio, boolean estadoMunicipio) throws ErroRepositorioException;
 
 	/**
-	 * Consulta ResumoFaturamento para a geraï¿½ï¿½o do relatï¿½rio '[UC0173] Gerar
-	 * Relatï¿½rio de Resumo Faturamento' de acordo com a opï¿½ï¿½o de totalizaï¿½ï¿½o.
+	 * Consulta ResumoFaturamento para a geração do relatório '[UC0173] Gerar
+	 * Relatório de Resumo Faturamento' de acordo com a opção de totalização.
 	 * 
 	 * @author Rodrigo Silveira
 	 * @created 18/01/2006
@@ -396,8 +396,8 @@ public interface IRepositorioFaturamento {
 			int anoMesReferencia, Collection<Integer> idsPerfilImovel, String opcaoRelatorio) throws ErroRepositorioException;
 
 	/**
-	 * Consulta ResumoFaturamento para a geraï¿½ï¿½o do relatï¿½rio '[UC0173] Gerar
-	 * Relatï¿½rio de Resumo Faturamento' de acordo com a opï¿½ï¿½o de totalizaï¿½ï¿½o.
+	 * Consulta ResumoFaturamento para a geração do relatório '[UC0173] Gerar
+	 * Relatório de Resumo Faturamento' de acordo com a opção de totalização.
 	 * 
 	 * @author Rodrigo Silveira
 	 * @created 18/01/2006
@@ -410,8 +410,8 @@ public interface IRepositorioFaturamento {
 			int anoMesReferencia, Collection<Integer> idsPerfilImovel, String opcaoRelatorio) throws ErroRepositorioException;
 	
 	/**
-	 * Consulta ResumoFaturamento para a geraï¿½ï¿½o do relatï¿½rio '[UC0173] Gerar
-	 * Relatï¿½rio de Resumo Faturamento' de acordo com a opï¿½ï¿½o de totalizaï¿½ï¿½o.
+	 * Consulta ResumoFaturamento para a geração do relatório '[UC0173] Gerar
+	 * Relatório de Resumo Faturamento' de acordo com a opção de totalização.
 	 * 
 	 * @author Diogo Peixoto
 	 * @created 25/04/2011
@@ -426,8 +426,8 @@ public interface IRepositorioFaturamento {
 			int anoMesReferencia, Collection<Integer> idsPerfilImovel, String opcaoRelatorio) throws ErroRepositorioException;
 
 	/**
-	 * Consulta ResumoFaturamento para a geraï¿½ï¿½o do relatï¿½rio '[UC0173] Gerar
-	 * Relatï¿½rio de Resumo Faturamento' de acordo com a opï¿½ï¿½o de totalizaï¿½ï¿½o.
+	 * Consulta ResumoFaturamento para a geração do relatório '[UC0173] Gerar
+	 * Relatório de Resumo Faturamento' de acordo com a opção de totalizção.
 	 * 
 	 * @author Rodrigo Silveira
 	 * @created 18/01/2006
@@ -442,8 +442,8 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Consulta ResumoFaturamento para a geraï¿½ï¿½o do relatï¿½rio '[UC0173] Gerar
-	 * Relatï¿½rio de Resumo Faturamento' de acordo com a opï¿½ï¿½o de totalizaï¿½ï¿½o.
+	 * Consulta ResumoFaturamento para a geração do relatório '[UC0173] Gerar
+	 * Relatório de Resumo Faturamento' de acordo com a opção de totalizaï¿½ï¿½o.
 	 * 
 	 * @author Rodrigo Silveira
 	 * @created 18/01/2006
@@ -458,8 +458,8 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Consulta ResumoFaturamento para a geraï¿½ï¿½o do relatï¿½rio '[UC0173] Gerar
-	 * Relatï¿½rio de Resumo Faturamento' de acordo com a opï¿½ï¿½o de totalizaï¿½ï¿½o.
+	 * Consulta ResumoFaturamento para a geração do relatório '[UC0173] Gerar
+	 * Relatório de Resumo Faturamento' de acordo com a opção de totalização.
 	 * 
 	 * @author Rodrigo Silveira
 	 * @created 18/01/2006
@@ -474,8 +474,8 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Consulta ResumoFaturamento para a geraï¿½ï¿½o do relatï¿½rio '[UC0173] Gerar
-	 * Relatï¿½rio de Resumo Faturamento' de acordo com a opï¿½ï¿½o de totalizaï¿½ï¿½o.
+	 * Consulta ResumoFaturamento para a geração do relatóio '[UC0173] Gerar
+	 * Relatório de Resumo Faturamento' de acordo com a opção de totalização.
 	 * 
 	 * @author Diogo Peixoto
 	 * @created 25/04/2011
@@ -492,7 +492,7 @@ public interface IRepositorioFaturamento {
 	/**
 	 * [UC0146] - Manter Conta Author: Raphael Rossiter Data: 21/01/2006
 	 * 
-	 * Obtï¿½m as contas de um imï¿½vel que poderï¿½o ser mantidas
+	 * Obtém as contas de um imóvel que poderão ser mantidas
 	 * 
 	 * @param imovel
 	 * @param situacaoNormal
@@ -506,10 +506,10 @@ public interface IRepositorioFaturamento {
 			Integer situacaoRetificada) throws ErroRepositorioException;
 
 	/**
-	 * [UC0302] - Gerar Debitos a Cobrar de Acrï¿½scimos por Impontualidade
+	 * [UC0302] - Gerar Debitos a Cobrar de Acréscimos por Impontualidade
 	 * Author: Fernanda Paiva Data: 24/04/2006
 	 * 
-	 * Obtï¿½m as contas de um imï¿½vel com ano/mes da data de vencimento menor ou
+	 * Obtém as contas de um imóvel com ano/mes da data de vencimento menor ou
 	 * igual ao ano/mes de referencia da arrecadacao corrente e com situacao
 	 * atual correspondente a normal, retificada ou incluida.
 	 * 
@@ -527,10 +527,10 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0302] - Gerar Debitos a Cobrar de Acrï¿½scimos por Impontualidade
+	 * [UC0302] - Gerar Debitos a Cobrar de Acréscimos por Impontualidade
 	 * Author: Fernanda Paiva Data: 24/04/2006
 	 * 
-	 * Obtï¿½m as guias de pagamento de um imï¿½vel com ano/mes da data de
+	 * Obtém as guias de pagamento de um imóvel com ano/mes da data de
 	 * vencimento menor ou igual ao ano/mes de referencia da arrecadacao
 	 * corrente e com situacao atual correspondente a normal, retificada ou
 	 * incluida.
@@ -569,7 +569,7 @@ public interface IRepositorioFaturamento {
 			Conta conta) throws ErroRepositorioException;
 
 	/**
-	 * [UC0148] - Colocar Conta Revisï¿½o Author: Raphael Rossiter Data:
+	 * [UC0148] - Colocar Conta Revisão Author: Raphael Rossiter Data:
 	 * 23/01/2006
 	 * 
 	 * @param conta
@@ -579,7 +579,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0149] - Retirar Conta Revisï¿½o Author: Raphael Rossiter Data:
+	 * [UC0149] - Retirar Conta Revisão Author: Raphael Rossiter Data:
 	 * 23/01/2006
 	 * 
 	 * @param conta
@@ -630,7 +630,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Metï¿½do responsï¿½vel por inserir um
+	 * [UC0155] - Encerrar Faturamento do Mês Metódo responsável por inserir um
 	 * objeto de ResumoFaturamento no sistema
 	 * 
 	 * @param resumoFaturamento
@@ -643,17 +643,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 01 Retorna o valor de ï¿½gua
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a localiade, a
-	 * categoria e a situaï¿½ï¿½o da conta igual a normal
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 01 Retorna o valor de água
+	 * acumulado, de acordo com o ano/mês de referência, a localiade, a
+	 * categoria e a situação da conta igual a normal
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no Hibernate
 	 */
@@ -662,17 +662,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 02 Retorna o valor de esgoto
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a localiade, a
-	 * categoria e a situaï¿½ï¿½o da conta igual a normal
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 02 Retorna o valor de esgoto
+	 * acumulado, de acordo com o ano/mês de referência, a localiade, a
+	 * categoria e a situação da conta igual a normal
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no Hibernate
 	 */
@@ -681,19 +681,19 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 03 e 04 Retorna uma coleï¿½ï¿½o
-	 * de dï¿½bitos a cobrar por ano e mï¿½s de referï¿½ncia, por gerï¿½ncia regional,
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 03 e 04 Retorna uma coleção
+	 * de débitos a cobrar por ano e mês de referência, por gerência regional,
 	 * localidade e categoria
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
+	 *            Código da categoria
 	 * @param idLancamentoItemContabil
-	 *            Cï¿½digo do itemde lanï¿½amento contï¿½bil
-	 * @return retorna a coleï¿½ï¿½o pesquisada de acordo com os parï¿½metros
+	 *            Código do itemde lançamento contábil
+	 * @return retorna a coleção pesquisada de acordo com os parâmetros
 	 *         informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
@@ -703,17 +703,17 @@ public interface IRepositorioFaturamento {
 			Integer idLancamentoItemContabil) throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 05 Retorna o valor de guia
-	 * de pagamento acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o
-	 * da conta igual a normal e o tipo de financiamento igual a serviï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 05 Retorna o valor de guia
+	 * de pagamento acumulado, de acordo com o ano/mês de referência, a situação
+	 * da conta igual a normal e o tipo de financiamento igual a serviço
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -722,19 +722,19 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 07 e 08 Retorna uma coleï¿½ï¿½o
-	 * de dï¿½bitos a cobrar por ano e mï¿½s de referï¿½ncia, por gerï¿½ncia regional,
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 07 e 08 Retorna uma coleção
+	 * de débitos a cobrar por ano e mês de referência, por gerência regional,
 	 * localidade e categoria
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
+	 *            Código da categoria
 	 * @param idLancamentoItemContabil
-	 *            Cï¿½digo de lanï¿½amento de item contï¿½bil
-	 * @return retorna a coleï¿½ï¿½o pesquisada de acordo com os parï¿½metros
+	 *            Código de lançamento de item contábil
+	 * @return retorna a coleção pesquisada de acordo com os parâmetros
 	 *         informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
@@ -744,17 +744,17 @@ public interface IRepositorioFaturamento {
 			Integer idLancamentoItemContabil) throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 09 Retorna o valor de ï¿½gua
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o da conta
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 09 Retorna o valor de água
+	 * acumulado, de acordo com o ano/mês de referência, a situação da conta
 	 * igual a cancelada
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -763,17 +763,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 10 Retorna o valor de esgoto
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o da conta
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 10 Retorna o valor de esgoto
+	 * acumulado, de acordo com o ano/mês de referência, a situação da conta
 	 * igual a cancelada
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -782,17 +782,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 11 Retorna o valor de dï¿½bito
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o da conta
-	 * igual a cancelada e o tipo de financiamento igual a serviï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 11 Retorna o valor de débito
+	 * acumulado, de acordo com o ano/mês de referência, a situação da conta
+	 * igual a cancelada e o tipo de financiamento igual a serviço
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -801,17 +801,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 12 Retorna o valor de dï¿½bito
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o da conta
-	 * igual a cancelada e o tipo de financiamento igual a parcelamento de ï¿½gua
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 12 Retorna o valor de débito
+	 * acumulado, de acordo com o ano/mês de referência, a situação da conta
+	 * igual a cancelada e o tipo de financiamento igual a parcelamento de água
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -820,18 +820,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 13 Retorna o valor de dï¿½bito
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o da conta
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 13 Retorna o valor de débito
+	 * acumulado, de acordo com o ano/mês de referência, a situação da conta
 	 * igual a cancelada e o tipo de financiamento igual a parcelamento de
 	 * esgoto
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -840,18 +840,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 14 Retorna o valor de dï¿½bito
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o da conta
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 14 Retorna o valor de débito
+	 * acumulado, de acordo com o ano/mês de referência, a situação da conta
 	 * igual a cancelada e o tipo de financiamento igual a parcelamento de
-	 * serviï¿½o
+	 * serviço
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -860,17 +860,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 15 Retorna o valor de dï¿½bito
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o da conta
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 15 Retorna o valor de débito
+	 * acumulado, de acordo com o ano/mês de referência, a situação da conta
 	 * igual a cancelada e o tipo de financiamento igual a juros de parcelamento
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -879,17 +879,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 16 Retorna o valor de ï¿½gua
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o da conta
-	 * igual a incluï¿½da
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 16 Retorna o valor de água
+	 * acumulado, de acordo com o ano/mês de referência, a situação da conta
+	 * igual a incluída
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -898,17 +898,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 17 Retorna o valor de esgoto
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o da conta
-	 * igual a incluï¿½da
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 17 Retorna o valor de esgoto
+	 * acumulado, de acordo com o ano/mês de referência, a situação da conta
+	 * igual a incluída
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -918,18 +918,18 @@ public interface IRepositorioFaturamento {
 
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 20 Retorna o valor de
-	 * categoria de dï¿½bito acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a
-	 * situaï¿½ï¿½o da conta igual a normal e o tipo de financiamento igual a
-	 * serviï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 20 Retorna o valor de
+	 * categoria de débito acumulado, de acordo com o ano/mês de referência, a
+	 * situação da conta igual a normal e o tipo de financiamento igual a
+	 * serviço
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -938,18 +938,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 21 Retorna o valor de
-	 * categoria de dï¿½bito acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a
-	 * situaï¿½ï¿½o da conta igual a normal e o tipo de financiamento igual a
-	 * serviï¿½o, quando o nï¿½mero de prestaï¿½ï¿½es cobradas for maior que 11(onze)
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 21 Retorna o valor de
+	 * categoria de débito acumulado, de acordo com o ano/mês de referência, a
+	 * situação da conta igual a normal e o tipo de financiamento igual a
+	 * serviço, quando o número de prestaï¿½ï¿½es cobradas for maior que 11(onze)
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -958,17 +958,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 22 e 23 Retorna uma coleï¿½ï¿½o
-	 * de dï¿½bito a cobrar , de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 22 e 23 Retorna uma coleção
+	 * de débito a cobrar , de acordo com o ano/mês de referência, a situação
 	 * igual a normal e o grupo de parcelamento igual a documentos emitidos
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -977,18 +977,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 24 e 25 Retorna uma coleï¿½ï¿½o
-	 * de dï¿½bito a cobrar , de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 24 e 25 Retorna uma coleção
+	 * de débito a cobrar , de acordo com o ano/mês de referência, a situação
 	 * igual a normal e o grupo de parcelamento igual a financiamentos a cobrar
 	 * de curto prazo
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -997,17 +997,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 26 e 27 Retorna uma coleï¿½ï¿½o
-	 * de dï¿½bito a cobrar de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 26 e 27 Retorna uma coleção
+	 * de débito a cobrar de acordo com o ano/mês de referência, a situação
 	 * igual a normal e o grupo de parcelamento igual a financiamentos a cobrar
 	 * de longo prazo
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
+	 *            Código da categoria
 	 * @return
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
@@ -1017,17 +1017,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 28 e 29 Retorna uma coleï¿½ï¿½o
-	 * de dï¿½bito a cobrar, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 28 e 29 Retorna uma coleção
+	 * de débito a cobrar, de acordo com o ano/mês de referência, a situação
 	 * igual a normal e o grupo de parcelamento igual a parcelamentos a cobrar
 	 * de curto prazo
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
+	 *            Código da categoria
 	 * @return
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
@@ -1037,18 +1037,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 30 e 31 Retorna uma coleï¿½ï¿½o
-	 * de dï¿½bito a cobrar, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 30 e 31 Retorna uma coleção
+	 * de débito a cobrar, de acordo com o ano/mês de referência, a situação
 	 * igual a normal e o grupo de parcelamento igual a parcelamentos a cobrar a
 	 * longo prazo
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1057,16 +1057,16 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 32 e 33 Retorna uma coleï¿½ï¿½o
-	 * de dï¿½bitos a cobrar, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 32 e 33 Retorna uma coleção
+	 * de débitos a cobrar, de acordo com o ano/mês de referência, a situação
 	 * igual a normal e o grupo de parcelamento igual a juros cobrados
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
+	 *            Código da categoria
 	 * @return
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
@@ -1076,17 +1076,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 34 e 35 Retorna uma coleï¿½ï¿½o
-	 * de dï¿½bito a cobrar, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 34 e 35 Retorna uma coleção
+	 * de débito a cobrar, de acordo com o ano/mês de referência, a situação
 	 * igual a cancelado por parcelamento e o grupo de parcelamento igual a
 	 * juros cobrados
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
+	 *            Código da categoria
 	 * @return
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
@@ -1096,14 +1096,14 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 36 Retorna o valor de dï¿½bito
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o igual a
-	 * normal e o tipo de financiamento igual a arrasto de ï¿½gua ou arrasto de
-	 * esgoto ou arrasto de serviï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 36 Retorna o valor de débito
+	 * acumulado, de acordo com o ano/mês de referência, a situação igual a
+	 * normal e o tipo de financiamento igual a arrasto de água ou arrasto de
+	 * esgoto ou arrasto de serviço
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Ano e mês de referência do faturamento
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1111,16 +1111,16 @@ public interface IRepositorioFaturamento {
 			int anoMesReferencia, Integer idLocalidade) throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 37 e 38 Retorna uma coleï¿½ï¿½o
-	 * de dï¿½bito a cobrar, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o
-	 * igual a cancelado e o tipo de financiamento igual a parcelamento de ï¿½gua
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 37 e 38 Retorna uma coleção
+	 * de débito a cobrar, de acordo com o ano/mês de referência, a situação
+	 * igual a cancelado e o tipo de financiamento igual a parcelamento de água
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
+	 *            Código da categoria
 	 * @return
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
@@ -1130,18 +1130,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 39 e 40 Retorna uma coleï¿½ï¿½o
-	 * de dï¿½bito a cobrar, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 39 e 40 Retorna uma coleção
+	 * de débito a cobrar, de acordo com o ano/mês de referência, a situação
 	 * igual a cancelado e o tipo de financiamento igual a parcelamento de
 	 * esgoto
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1150,17 +1150,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 41 e 42 Retorna uma coleï¿½ï¿½o
-	 * de dï¿½bito a cobrar acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a
-	 * situaï¿½ï¿½o igual a cancelado e o tipo de financiamento igual a parcelamento
-	 * de serviï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 41 e 42 Retorna uma coleção
+	 * de débito a cobrar acumulado, de acordo com o ano/mês de referência, a
+	 * situação igual a cancelado e o tipo de financiamento igual a parcelamento
+	 * de serviço
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
+	 *            Código da categoria
 	 * @return
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
@@ -1170,16 +1170,16 @@ public interface IRepositorioFaturamento {
 			Integer idLancamentoItemContabil) throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 43 e 44 Retorna uma coleï¿½ï¿½o
-	 * de dï¿½bito a cobrar, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 43 e 44 Retorna uma coleção
+	 * de débito a cobrar, de acordo com o ano/mês de referência, a situação
 	 * igual a cancelado e o tipo de financiamento igual a juros de parcelamento
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
+	 *            Código da categoria
 	 * @return
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
@@ -1189,18 +1189,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 45 Retorna o valor de
-	 * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o igual a normal e o tipo de financiamento igual a
-	 * parcelamento de ï¿½gua
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 45 Retorna o valor de
+	 * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+	 * referência, a situação igual a normal e o tipo de financiamento igual a
+	 * parcelamento de água
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1209,18 +1209,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 46 Retorna o valor de
-	 * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o igual a normal e o tipo de financiamento igual a
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 46 Retorna o valor de
+	 * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+	 * referência, a situação igual a normal e o tipo de financiamento igual a
 	 * parcelamento de esgoto
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1229,18 +1229,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 47 Retorna o valor de
-	 * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o igual a normal e o tipo de financiamento igual a
-	 * parcelamento de serviï¿½os
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 47 Retorna o valor de
+	 * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+	 * referência, a situação igual a normal e o tipo de financiamento igual a
+	 * parcelamento de serviços
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1249,18 +1249,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 48 Retorna o valor de
-	 * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o igual a normal e o tipo de financiamento igual a
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 48 Retorna o valor de
+	 * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+	 * referência, a situação igual a normal e o tipo de financiamento igual a
 	 * juros de parcelamento
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1269,18 +1269,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 49 Retorna o valor de
-	 * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o igual a normal e o tipo de financiamento igual a
-	 * juros de parcelamento e a diferenï¿½a de prestaï¿½ï¿½es maior que 11(onze)
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 49 Retorna o valor de
+	 * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+	 * referência, a situação igual a normal e o tipo de financiamento igual a
+	 * juros de parcelamento e a diferençaa de prestações maior que 11(onze)
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1289,18 +1289,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 50 Retorna o valor de
-	 * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o igual a normal e o tipo de financiamento igual a
-	 * arrasto de ï¿½gua
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 50 Retorna o valor de
+	 * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+	 * referência, a situação igual a normal e o tipo de financiamento igual a
+	 * arrasto de água
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1309,18 +1309,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 51 Retorna o valor de
-	 * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o igual a normal e o tipo de financiamento igual a
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 51 Retorna o valor de
+	 * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+	 * referência, a situação igual a normal e o tipo de financiamento igual a
 	 * arrasto de esgoto
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1329,18 +1329,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 52 Retorna o valor de
-	 * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o igual a normal e o tipo de financiamento igual a
-	 * arrasto de serviï¿½o
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 52 Retorna o valor de
+	 * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+	 * referência, a situação igual a normal e o tipo de financiamento igual a
+	 * arrasto de serviço
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1349,18 +1349,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 53 Retorna o valor de
-	 * categoria de credito realizado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o igual a normal e a origem do crï¿½dito igual a
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 53 Retorna o valor de
+	 * categoria de credito realizado acumulado, de acordo com o ano/mês de
+	 * referência, a situação igual a normal e a origem do Crédito igual a
 	 * contas pagas em duplicidade ou em excesso
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1369,18 +1369,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 54 Retorna o valor de
-	 * categoria de crï¿½dito realizado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o de conta igual a normal e a origem do crï¿½dito
-	 * igual a devoluï¿½ï¿½o de tarifa de ï¿½gua
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 54 Retorna o valor de
+	 * categoria de Crédito realizado acumulado, de acordo com o ano/mês de
+	 * referência, a situação de conta igual a normal e a origem do Crédito
+	 * igual a devolução de tarifa de água
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1389,18 +1389,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 55 Retorna o valor de
-	 * categoria de crï¿½dito realizado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o de conta igual a normal e a origem do crï¿½dito
-	 * igual a devoluï¿½ï¿½o de tarifa de esgoto
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 55 Retorna o valor de
+	 * categoria de Crédito realizado acumulado, de acordo com o ano/mês de
+	 * referência, a situação de conta igual a normal e a origem do Crédito
+	 * igual a devolução de tarifa de esgoto
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1409,18 +1409,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 56 Retorna o valor de
-	 * categoria de crï¿½dito realizado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o de conta igual a normal e a origem do crï¿½dito
-	 * igual a serviï¿½os indiretos pagos indevidamente
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 56 Retorna o valor de
+	 * categoria de Crédito realizado acumulado, de acordo com o ano/mês de
+	 * referência, a situação de conta igual a normal e a origem do Crédito
+	 * igual a serviços indiretos pagos indevidamente
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1429,18 +1429,18 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 57 Retorna o valor de
-	 * categoria de crï¿½dito realizado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o de conta igual a normal e a origem do crï¿½dito
-	 * igual a devoluï¿½ï¿½o de juros de parcelamento
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 57 Retorna o valor de
+	 * categoria de Crédito realizado acumulado, de acordo com o ano/mês de
+	 * referência, a situação de conta igual a normal e a origem do Crédito
+	 * igual a devolução de juros de parcelamento
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1449,13 +1449,13 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 59 Retorna o valor de
-	 * imposto de renda acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a
-	 * situaï¿½ï¿½o de conta igual a normal e a categoria igual a pï¿½blica
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 59 Retorna o valor de
+	 * imposto de renda acumulado, de acordo com o ano/mês de referência, a
+	 * situação de conta igual a normal e a categoria igual a pï¿½blica
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Ano e mês de referência do faturamento
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1463,13 +1463,13 @@ public interface IRepositorioFaturamento {
 			int anoMesReferencia,Integer idLocalidade, Integer idCategoria) throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 60 Retorna o valor de cofins
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o de conta
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 60 Retorna o valor de cofins
+	 * acumulado, de acordo com o ano/mês de referência, a situação de conta
 	 * igual a normal e a categoria igual a pï¿½blica
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Ano e mês de referência do faturamento
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1477,13 +1477,13 @@ public interface IRepositorioFaturamento {
 			int anoMesReferencia,Integer idLocalidade, Integer idCategoria) throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 61 Retorna o valor de csll
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o de conta
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 61 Retorna o valor de csll
+	 * acumulado, de acordo com o ano/mês de referência, a situação de conta
 	 * igual a normal e a categoria igual a pï¿½blica
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Ano e mês de referência do faturamento
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1491,13 +1491,13 @@ public interface IRepositorioFaturamento {
 			int anoMesReferencia,Integer idLocalidade, Integer idCategoria) throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Linha 62 Retorna o valor de pis e
-	 * pasep acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o de
+	 * [UC0155] - Encerrar Faturamento do Mês Linha 62 Retorna o valor de pis e
+	 * pasep acumulado, de acordo com o ano/mês de referência, a situação de
 	 * conta igual a normal e a categoria igual a pï¿½blica
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Ano e mês de referência do faturamento
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1505,17 +1505,17 @@ public interface IRepositorioFaturamento {
 			int anoMesReferencia,Integer idLocalidade, Integer idCategoria) throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s [SB0001] - acumula o valor de
-	 * dï¿½bito cobrado para situaï¿½ï¿½o de conta igual a cancelada por retificaï¿½ï¿½o
-	 * de acordo com o ano/mï¿½s de referï¿½ncia
+	 * [UC0155] - Encerrar Faturamento do Mês [SB0001] - acumula o valor de
+	 * débito cobrado para situação de conta igual a cancelada por retificaï¿½ï¿½o
+	 * de acordo com o ano/mês de referência
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1524,17 +1524,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s [SB0001] - acumula o valor de
-	 * dï¿½bito cobrado para situaï¿½ï¿½o de conta igual a retificada de acordo com o
-	 * ano/mï¿½s de referï¿½ncia
+	 * [UC0155] - Encerrar Faturamento do Mês [SB0001] - acumula o valor de
+	 * débito cobrado para situação de conta igual a retificada de acordo com o
+	 * ano/mês de referência
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1543,19 +1543,19 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s [SB0001] - acumula o valor de
-	 * dï¿½bito cobrado para situaï¿½ï¿½o de conta igual a cancelada por retificaï¿½ï¿½o
-	 * de acordo com o ano/mï¿½s de referï¿½ncia
+	 * [UC0155] - Encerrar Faturamento do Mês [SB0001] - acumula o valor de
+	 * débito cobrado para situação de conta igual a cancelada por retificaï¿½ï¿½o
+	 * de acordo com o ano/mês de referência
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
+	 *            Código da categoria
 	 * @param tipoFinanciamento
 	 *            Tipo de Financiamento
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1564,19 +1564,19 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s [SB0001] - acumula o valor de
-	 * dï¿½bito cobrado para situaï¿½ï¿½o de conta igual a retificada de acordo com o
-	 * ano/mï¿½s de referï¿½ncia
+	 * [UC0155] - Encerrar Faturamento do Mês [SB0001] - acumula o valor de
+	 * débito cobrado para situação de conta igual a retificada de acordo com o
+	 * ano/mês de referência
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
+	 *            Código da categoria
 	 * @param tipoFinanciamento
 	 *            Tipo de Financiamento
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1585,21 +1585,21 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s [SB0001] - acumula o valor de guia
-	 * de pagamento para situaï¿½ï¿½o de conta igual a cancelada de acordo com o
-	 * ano/mï¿½s de referï¿½ncia
+	 * [UC0155] - Encerrar Faturamento do Mês [SB0001] - acumula o valor de guia
+	 * de pagamento para situação de conta igual a cancelada de acordo com o
+	 * ano/mês de referência
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
+	 *            Código da categoria
 	 * @param tipoFinanciamento
 	 *            Tipo de Financiamento
 	 * @param itemContabil
 	 *            Item Contï¿½bil
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1608,17 +1608,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s [SB0001] - pesquisar a soma do
-	 * valor de ï¿½gua para situaï¿½ï¿½o de conta igual a cancelada por retificaï¿½ï¿½o de
-	 * acordo com o ano/mï¿½s de referï¿½ncia
+	 * [UC0155] - Encerrar Faturamento do Mês [SB0001] - pesquisar a soma do
+	 * valor de água para situação de conta igual a cancelada por retificaï¿½ï¿½o de
+	 * acordo com o ano/mês de referência
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1633,17 +1633,17 @@ public interface IRepositorioFaturamento {
 
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s [SB0001] - pesquisar a soma do
-	 * valor de esgoto para situaï¿½ï¿½o de conta igual a retificada de acordo com o
-	 * ano/mï¿½s de referï¿½ncia
+	 * [UC0155] - Encerrar Faturamento do Mês [SB0001] - pesquisar a soma do
+	 * valor de esgoto para situação de conta igual a retificada de acordo com o
+	 * ano/mês de referência
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1654,11 +1654,11 @@ public interface IRepositorioFaturamento {
 
 	// item 4
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Item 04 - atualizar situaï¿½ï¿½o de
-	 * imï¿½vel com faturamento finalizado
+	 * [UC0155] - Encerrar Faturamento do Mês Item 04 - atualizar situação de
+	 * imóvel com faturamento finalizado
 	 * 
 	 * @param anoMesFaturamento
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1667,11 +1667,11 @@ public interface IRepositorioFaturamento {
 
 	// item 5
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Item 05 - pesquisar contas
+	 * [UC0155] - Encerrar Faturamento do Mês Item 05 - pesquisar contas
 	 * canceladas
 	 * 
 	 * @param anoMesReferenciaContabil
-	 *            Ano e mï¿½s de referï¿½ncia contabil
+	 *            Ano e mês de referência contabil
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1679,13 +1679,13 @@ public interface IRepositorioFaturamento {
 			int anoMesReferenciaContabil, Integer idLocalidade) throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Item 05 - pesquisar debitos
+	 * [UC0155] - Encerrar Faturamento do Mês Item 05 - pesquisar debitos
 	 * cobrados de contas canceladas
 	 * 
 	 * @param anoMesReferenciaContabil
-	 *            Ano e mï¿½s de referï¿½ncia contabil
+	 *            Ano e mês de referência contabil
 	 * @param idConta
-	 *            Cï¿½digo da conta
+	 *            Código da conta
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1694,13 +1694,13 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Item 05 - pesquisar crï¿½ditos
+	 * [UC0155] - Encerrar Faturamento do Mês Item 05 - pesquisar Créditos
 	 * realizados de contas canceladas
 	 * 
 	 * @param anoMesReferenciaContabil
-	 *            Ano e mï¿½s de referï¿½ncia contabil
+	 *            Ano e mês de referência contabil
 	 * @param idConta
-	 *            Cï¿½digo da conta
+	 *            Código da conta
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1712,11 +1712,11 @@ public interface IRepositorioFaturamento {
 
 	// item 6
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Item 06 - pesquisar dï¿½bitos a
+	 * [UC0155] - Encerrar Faturamento do Mês Item 06 - pesquisar débitos a
 	 * cobrar cancelados
 	 * 
 	 * @param anoMesReferenciaContabil
-	 *            Ano e mï¿½s de referï¿½ncia contabil
+	 *            Ano e mês de referência contabil
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1725,11 +1725,11 @@ public interface IRepositorioFaturamento {
 
 	// item 7
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Item 07 - pesquisar crï¿½ditos a
+	 * [UC0155] - Encerrar Faturamento do Mês Item 07 - pesquisar Créditos a
 	 * realizar cancelados
 	 * 
 	 * @param anoMesReferenciaContabil
-	 *            Ano e mï¿½s de referï¿½ncia contabil
+	 *            Ano e mês de referência contabil
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1738,13 +1738,13 @@ public interface IRepositorioFaturamento {
 
 	// item 8
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Item 08 - atualizar ano mï¿½s de
-	 * referï¿½ncia do faturamento de acordo com o ano/mï¿½s de referï¿½ncia
+	 * [UC0155] - Encerrar Faturamento do Mês Item 08 - atualizar ano mês de
+	 * referência do faturamento de acordo com o ano/mês de referência
 	 * 
 	 * @param anoMesFaturamentoAtual
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento atual
+	 *            Ano e mês de referência do faturamento atual
 	 * @param anoMesFaturamentoNovo
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento anterior
+	 *            Ano e mês de referência do faturamento anterior
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1752,11 +1752,11 @@ public interface IRepositorioFaturamento {
 			int anoMesFaturamentoNovo) throws ErroRepositorioException;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s Pesquisa uma coleï¿½ï¿½o de resumos
-	 * defaturamento por ano e mï¿½s de referï¿½ncia
+	 * [UC0155] - Encerrar Faturamento do Mês Pesquisa uma coleção de resumos
+	 * defaturamento por ano e mês de referência
 	 * 
 	 * @param anoMesReferenciaContabil
-	 *            Ano e mï¿½s de referï¿½ncia contabil
+	 *            Ano e mês de referência contabil
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -1837,7 +1837,7 @@ public interface IRepositorioFaturamento {
 	/**
 	 * [UC0113] - Faturar Grupo de Faturamento
 	 *
-	 * Retorna o cï¿½digo do dï¿½bito automï¿½tico. 
+	 * Retorna o cï¿½digo do débito automï¿½tico. 
 	 *
 	 * @author Rafael Santos, Pedro Alexandre
 	 * @date 16/02/2006,18/09/2006
@@ -1849,7 +1849,7 @@ public interface IRepositorioFaturamento {
 	public Integer obterDebitoAutomatico(Integer idImovel) throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa os dados do imï¿½vel que serï¿½ faturado
+	 * Pesquisa os dados do imóvel que serï¿½ faturado
 	 * 
 	 * [UC0113] - Faturar Grupo Faturamento
 	 * 
@@ -1879,7 +1879,7 @@ public interface IRepositorioFaturamento {
 			Short relacaoTipo) throws ErroRepositorioException;
 
 	/**
-	 * [UC0242] - Registrar Movimento de Arrecadadores Author: Sï¿½vio Luiz Data:
+	 * [UC0242] - Registrar Movimento de Arrecadadores Author: Sílvio Luiz Data:
 	 * 01/02/2006
 	 * 
 	 * retorna o objeto debito automatico movimento
@@ -1896,23 +1896,23 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0242] - Registrar Movimento de Arrecadadores Author: Sï¿½vio Luiz Data:
+	 * [UC0242] - Registrar Movimento de Arrecadadores Author: Sílvio Luiz Data:
 	 * 01/02/2006
 	 * 
 	 * @param imovel
-	 *            Descriï¿½ï¿½o do parï¿½metro
+	 *            Descrição do parâmetro
 	 * @param anoMesReferencia
-	 *            Descriï¿½ï¿½o do parï¿½metro
-	 * @return Descriï¿½ï¿½o do retorno
+	 *            Descrição do parâmetro
+	 * @return Descrição do retorno
 	 * @exception ErroRepositorioException
-	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
+	 *                Descrição da exceção
 	 */
 	public Integer pesquisarExistenciaContaComSituacaoAtual(Imovel imovel,
 			int anoMesReferencia) throws ErroRepositorioException;
 
 	/**
-	 * [UC0259] - Processar Pagamento com Cï¿½digo de Barras [SF0003] - Processar
-	 * Pagamento de Documento de Cobranï¿½a Author: Sï¿½vio Luiz Data: 01/02/2006
+	 * [UC0259] - Processar Pagamento com Código de Barras [SF0003] - Processar
+	 * Pagamento de Documento de cobrança Author: Sílvio Luiz Data: 01/02/2006
 	 * 
 	 * retorna o objeto debito automatico movimento
 	 * 
@@ -1927,11 +1927,11 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0259] - Processar Pagamento com Cï¿½digo de Barras
+	 * [UC0259] - Processar Pagamento com Código de Barras
 	 * 
-	 * [SF0003] - Processar Pagamento de Documento de Cobranï¿½a
+	 * [SF0003] - Processar Pagamento de Documento de cobrança
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @created 16/02/2006
 	 * 
 	 * @param matriculaImovel
@@ -1944,11 +1944,11 @@ public interface IRepositorioFaturamento {
 			BigDecimal valordebito) throws ErroRepositorioException;
 
 	/**
-	 * Atualiza o ano mes de faturamento de faturamento situaï¿½ï¿½o historico
+	 * Atualiza o ano mes de faturamento de faturamento situação historico
 	 * 
 	 * [UC0156] Informar Situacao Especial Faturamento
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 17/03/2006
 	 * 
 	 * @param situacaoEspecialFaturamentoHelper
@@ -1962,9 +1962,9 @@ public interface IRepositorioFaturamento {
 
 	/**
 	 * O sistema seleciona as atividades que foram previamente comandadas e
-	 * ainda nï¿½o realizadas (a partir da tabela FATURAMENTO_ATIVIDADE_CRONOGRAMA
+	 * ainda não realizadas (a partir da tabela FATURAMENTO_ATIVIDADE_CRONOGRAMA
 	 * com FTCM_ID = FTCM_ID da tabela FATURAMENTO_GRUPO_CRONOGRAMA_MENSAL e
-	 * FTAC_TMCOMANDO preenchido e FTAC_TMREALIZACAO nï¿½o preenchido ou com um
+	 * FTAC_TMCOMANDO preenchido e FTAC_TMREALIZACAO não preenchido ou com um
 	 * valor anterior ï¿½ FTAC_TMCOMANDO)
 	 * 
 	 * @author Raphael Rossiter
@@ -1998,7 +1998,7 @@ public interface IRepositorioFaturamento {
 
 	/**
 	 * 
-	 * Mï¿½todo que retorna todos os imï¿½veis que tenham cliente responsï¿½vel e
+	 * método que retorna todos os Imóveis que tenham cliente responsável e
 	 * indicacao de conta a ser entregue em outro endereï¿½o e que estejam nas
 	 * quadras pertencentes ï¿½s rotas passadas
 	 * 
@@ -2076,12 +2076,12 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Metodo que retorna o id debito a cobrar, o id do imï¿½vel, o id do
-	 * debito tipo e o ano/mï¿½s de referï¿½ncia do dï¿½bito
+	 * Metodo que retorna o id debito a cobrar, o id do imóvel, o id do
+	 * debito tipo e o ano/mês de referência do débito
 	 * 
 	 * Utilizado pelo [UC029] Gerar Taxa de Entrega de Conta em Outro Endereï¿½o.
 	 * 
-	 * @author Rafael Corrï¿½a e Leonardo Vieira
+	 * @author Rafael Corrêa e Leonardo Vieira
 	 * @date 24/08/2006
 	 * 
 	 * @param idImovel, idDebitoTipo, anoMesReferenciaDebito
@@ -2093,11 +2093,11 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Metodo que deleta os dï¿½bitos a cobrar categoria de um respectivo dï¿½bito a cobrar
+	 * Metodo que deleta os débitos a cobrar categoria de um respectivo débito a cobrar
 	 * 
 	 * Utilizado pelo [UC029] Gerar Taxa de Entrega de Conta em Outro Endereï¿½o.
 	 * 
-	 * @author Rafael Corrï¿½a e Leonardo Vieira
+	 * @author Rafael Corrêa e Leonardo Vieira
 	 * @date 24/08/2006
 	 * 
 	 * @param idDebitoACobrar
@@ -2108,11 +2108,11 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Metodo que insere ou atualiza os dï¿½bitos a cobrar 
+	 * Metodo que insere ou atualiza os débitos a cobrar 
 	 * 
 	 * Utilizado pelo [UC029] Gerar Taxa de Entrega de Conta em Outro Endereï¿½o.
 	 * 
-	 * @author Rafael Corrï¿½a, Leonardo Vieira, Pedro Alexandre
+	 * @author Rafael Corrêa, Leonardo Vieira, Pedro Alexandre
 	 * @date 24/08/2006
 	 * 
 	 * @param colecaoDebitosACobrar
@@ -2122,7 +2122,7 @@ public interface IRepositorioFaturamento {
 	public Collection<DebitoACobrar> insereOuAtualizaDebitoACobrar(Collection colecaoDebitosACobrar) throws ErroRepositorioException;
 	
 	/**
-	 * <Breve descriï¿½ï¿½o sobre o caso de uso>
+	 * <Breve Descrição sobre o caso de uso>
 	 *
 	 * [UC0209] Gerar Taxa de Entrega de Conta em Outro Endereï¿½o
 	 *
@@ -2136,9 +2136,9 @@ public interface IRepositorioFaturamento {
 
 	/**
 	 * 
-	 * Metodo que retorna os imï¿½veis das quadras pertencentes ï¿½s rotas
+	 * Metodo que retorna os Imóveis das quadras pertencentes ï¿½s rotas
 	 * 
-	 * Utilizado pelo [UC0302] Gerar Dï¿½bitos a Cobrar de Acrï¿½scimos por
+	 * Utilizado pelo [UC0302] Gerar Débitos a Cobrar de Acréscimos por
 	 * Impontualidade
 	 * 
 	 * @author fernanda paiva, Raphael Rossiter
@@ -2151,7 +2151,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0302] - Gerar Debitos a Cobrar de Acrï¿½scimos por Impontualidade
+	 * [UC0302] - Gerar Debitos a Cobrar de Acréscimos por Impontualidade
 	 * Author: Fernanda Paiva Data: 25/04/2006
 	 * 
 	 * Obtï¿½m os pagamentos da conta que contem a menor data de pagamento
@@ -2163,14 +2163,14 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0302] Gerar Dï¿½bito a Cobrar de Acrescimos por Impontualidade [SB0001]
-	 * Gerar Dï¿½bito a Cobrar
+	 * [UC0302] Gerar Débito a Cobrar de Acrescimos por Impontualidade [SB0001]
+	 * Gerar Débito a Cobrar
 	 * 
 	 * @author Fernanda Paiva
 	 * @created 25/04/2006
 	 * 
 	 * @param valor
-	 *            da multa/juros/atualizaï¿½ï¿½o monetaria
+	 *            da multa/juros/atualização monetaria
 	 * @param ano/mes
 	 *            referencia
 	 * @param tipo
@@ -2182,7 +2182,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0302] - Gerar Debitos a Cobrar de Acrï¿½scimos por Impontualidade
+	 * [UC0302] - Gerar Debitos a Cobrar de Acréscimos por Impontualidade
 	 * Author: Fernanda Paiva Data: 26/04/2006
 	 * 
 	 * Obtï¿½m os pagamentos da conta que contem a menor data de pagamento
@@ -2194,7 +2194,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0302] - Gerar Debitos a Cobrar de Acrï¿½scimos por Impontualidade
+	 * [UC0302] - Gerar Debitos a Cobrar de Acréscimos por Impontualidade
 	 * Author: Fernanda Paiva Data: 27/04/2006
 	 * 
 	 * Atualiza o indicador de cobranca de multa na tabela de Conta
@@ -2207,7 +2207,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0302] - Gerar Debitos a Cobrar de Acrï¿½scimos por Impontualidade
+	 * [UC0302] - Gerar Debitos a Cobrar de Acréscimos por Impontualidade
 	 * Author: Fernanda Paiva Data: 27/04/2006
 	 * 
 	 * Atualiza o indicador de cobranca de multa na tabela de Guia Pagamento
@@ -2220,10 +2220,10 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Seleciona os relacionamentos entre o cliente e os imï¿½veis de acordo com o
-	 * cï¿½digo do cliente responsï¿½vel
+	 * Seleciona os relacionamentos entre o cliente e os Imóveis de acordo com o
+	 * código do cliente responsável
 	 * 
-	 * [UC0320] Gerar Fatura de Cliente Responsï¿½vel
+	 * [UC0320] Gerar Fatura de Cliente responsável
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 25/04/2006
@@ -2236,10 +2236,10 @@ public interface IRepositorioFaturamento {
 
 	/**
 	 * Pesquisa todos os clientes responsï¿½veis na tabela de ClienteImovel para
-	 * tipo de relaï¿½ï¿½o igual a responsï¿½vel e data de fim de relaï¿½ï¿½o iguala a
+	 * tipo de relação igual a responsável e data de fim de relação iguala a
 	 * nula
 	 * 
-	 * [UC0320] Gerar Fatura de Cliente Responsï¿½vel
+	 * [UC0320] Gerar Fatura de Cliente responsável
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 25/04/2006
@@ -2251,13 +2251,13 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa todos os clientes responsï¿½veis na tabela de ClienteImovel para
-	 * tipo de relaï¿½ï¿½o igual a responsï¿½vel e data de fim de relaï¿½ï¿½o igual a
+	 * Pesquisa todos os clientes responsáveis na tabela de ClienteImovel para
+	 * tipo de relação igual a responsável e data de fim de relação igual a
 	 * nula e com indicador faturas agrupadas igual a 1
 	 * 
-	 * [UC0320] Gerar Fatura de Cliente Responsï¿½vel
+	 * [UC0320] Gerar Fatura de Cliente responsável
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 04/02/2009
 	 * 
 	 * @return
@@ -2267,11 +2267,11 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa a coleï¿½ï¿½o de contas para os imï¿½veis do cliente responsï¿½vel para
-	 * o ano/mï¿½s de referï¿½ncia igual ao ano/mï¿½s de referï¿½ncia corrente e a
-	 * situaï¿½ï¿½o da conta igual a Normal ou Retificada ou Incluï¿½da
+	 * Pesquisa a coleção de contas para os Imóveis do cliente responsável para
+	 * o ano/mês de referência igual ao ano/mês de referência corrente e a
+	 * situação da conta igual a Normal ou Retificada ou Incluï¿½da
 	 * 
-	 * [UC0320] Gerar Fatura de Cliente Responsï¿½vel
+	 * [UC0320] Gerar Fatura de Cliente responsável
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 25/04/2006
@@ -2289,9 +2289,9 @@ public interface IRepositorioFaturamento {
 	 * Retorna um Object contendo um array de object com trï¿½s posiï¿½ï¿½es contendo
 	 * na primeira posiï¿½ï¿½o a soma do valor total das contas na segunda posiï¿½ï¿½o a
 	 * maior data de vencimento das contas e na terceira posiï¿½ï¿½oa maior data de
-	 * validade das contas esses dados sï¿½o necessï¿½rios para gerar a fatura
+	 * validade das contas esses dados são necessários para gerar a fatura
 	 * 
-	 * [UC0320] Gerar Fatura de Cliente Responsï¿½vel
+	 * [UC0320] Gerar Fatura de Cliente responsável
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 25/04/2006
@@ -2306,10 +2306,10 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa os items da fatura informada com o cï¿½digo da fatura igua ao
-	 * cï¿½digo da fatura dos items para emitir a fatura do cliente responsï¿½vel
+	 * Pesquisa os items da fatura informada com o código da fatura igua ao
+	 * código da fatura dos items para emitir a fatura do cliente responsável
 	 * 
-	 * [UC0321] Emitir Fatura de Cliente Responsï¿½vel
+	 * [UC0321] Emitir Fatura de Cliente responsável
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 28/04/2006
@@ -2322,7 +2322,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0329] - Restabelecer Situaï¿½ï¿½o Anterior da Conta Author: Fernanda Paiva
+	 * [UC0329] - Restabelecer situação Anterior da Conta Author: Fernanda Paiva
 	 * Date: 05/05/2006
 	 * 
 	 * Atualiza a situacao anterior da conta de situacao atual cancelada
@@ -2335,7 +2335,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0329] - Restabelecer Situaï¿½ï¿½o Anterior da Conta Author: Fernanda Paiva
+	 * [UC0329] - Restabelecer situação Anterior da Conta Author: Fernanda Paiva
 	 * Date: 05/05/2006
 	 * 
 	 * Atualiza a situacao anterior da conta de situacao atual cancelada
@@ -2348,7 +2348,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0329] - Alterar as Situaï¿½ï¿½o Anterior e atual da Conta Author: Fernanda
+	 * [UC0329] - Alterar as situação Anterior e atual da Conta Author: Fernanda
 	 * Paiva Date: 05/05/2006
 	 * 
 	 * Atualiza a situacao anterior da conta de situacao atual da conta
@@ -2368,9 +2368,9 @@ public interface IRepositorioFaturamento {
 	 * 
 	 * [UC0113] - Faturar Grupo de Faturaumetno
 	 * 
-	 * Determinar VAlores para Faturamento de ï¿½gua e/ou Esgoto
+	 * Determinar VAlores para Faturamento de água e/ou Esgoto
 	 * 
-	 * [SF0002] - Determinar VAlores para Faturamento de ï¿½gua e/ou Esgoto
+	 * [SF0002] - Determinar VAlores para Faturamento de água e/ou Esgoto
 	 * 
 	 * @author Rafael Santos
 	 * @date 26/04/2006
@@ -2386,7 +2386,7 @@ public interface IRepositorioFaturamento {
 			Integer anoMesReferencia) throws ErroRepositorioException;
 
 	/**
-	 * Atualizar Debito a Cobrar Campo numero de prestaï¿½ï¿½es cobradas
+	 * Atualizar Debito a Cobrar Campo numero de prestações cobradas
 	 * 
 	 * [UC00113] - Faturar Grupo de Faturamento
 	 * 
@@ -2400,7 +2400,7 @@ public interface IRepositorioFaturamento {
 	public void atualizarDebitoAcobrar(DebitoACobrar debitoACobrar) throws ErroRepositorioException;
 
 	/**
-	 * Atualizar Debito a Cobrar Campo numero de prestaï¿½ï¿½es cobradas
+	 * Atualizar Debito a Cobrar Campo numero de prestações cobradas
 	 * 
 	 * [UC00113] - Faturar Grupo de Faturamento
 	 *
@@ -2414,7 +2414,7 @@ public interface IRepositorioFaturamento {
 
 		
 	/**
-	 * Atualizar Credito a Realizar Campo numero de prestaï¿½ï¿½es cobradas
+	 * Atualizar Credito a Realizar Campo numero de prestações cobradas
 	 * 
 	 * [UC00113] - Faturar Grupo de Faturamento
 	 * 
@@ -2445,7 +2445,7 @@ public interface IRepositorioFaturamento {
 	 * Recupera as contas com estouro de consumo ou com baixo consumo [UC0348] -
 	 * Emitir Contas
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 15/05/2006
 	 * 
 	 * @return
@@ -2458,9 +2458,9 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Recupera as contas com debito automï¿½tico [UC0348] - Emitir Contas
+	 * Recupera as contas com debito automático [UC0348] - Emitir Contas
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 15/05/2006
 	 * 
 	 * @return
@@ -2470,10 +2470,10 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Recupera as contas com entrega para o cliente responsï¿½vel [UC0348] -
+	 * Recupera as contas com entrega para o cliente responsável [UC0348] -
 	 * Emitir Contas
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 15/05/2006
 	 * 
 	 * @return
@@ -2487,7 +2487,7 @@ public interface IRepositorioFaturamento {
 	/**
 	 * Recupera as contas normais [UC0348] - Emitir Contas
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 15/05/2006
 	 * 
 	 * @return
@@ -2497,9 +2497,9 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Recupera o nome do cliente usuï¿½rio pela conta [UC0348] - Emitir Contas
+	 * Recupera o nome do cliente usuário pela conta [UC0348] - Emitir Contas
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 15/05/2006
 	 * 
 	 * @return
@@ -2509,9 +2509,9 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	  * Recupera o id do cliente responsï¿½vel pela conta [UC0348] - Emitir Contas
+	  * Recupera o id do cliente responsável pela conta [UC0348] - Emitir Contas
 	  * 
-	  * @author Sï¿½vio Luiz
+	  * @author Sílvio Luiz
 	  * @date 15/05/2006
 	  * 
 	  * @return
@@ -2521,13 +2521,13 @@ public interface IRepositorioFaturamento {
 	   throws ErroRepositorioException;
 
 	/**
-	 * Mï¿½todo que retorna uma colecao de categorias
+	 * método que retorna uma colecao de categorias
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
 	 * [SB0007] Obter Quantidade de Economias da Conta
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 19/05/2006
 	 * 
 	 * 
@@ -2539,13 +2539,13 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Mï¿½todo que retorna uma colecao de conta categoria
+	 * método que retorna uma colecao de conta categoria
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
 	 * [SB0011] Obter Quantidade de Economias da Conta
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 19/05/2006
 	 * 
 	 * 
@@ -2557,13 +2557,13 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Mï¿½todo que retorna uma colecao de conta categoria
+	 * método que retorna uma colecao de conta categoria
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
 	 * [SB0011] Obter Quantidade de Economias da Conta
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 19/05/2006
 	 * 
 	 * 
@@ -2575,15 +2575,15 @@ public interface IRepositorioFaturamento {
 			Integer idCategoria) throws ErroRepositorioException;
 
 	/**
-	 * Mï¿½todo que retorna uma arrey de object com a soma do valor dos debitos
+	 * método que retorna uma arrey de object com a soma do valor dos debitos
 	 * cobrados de parcelamento,o numero da prestacao e o numero total de
-	 * prestaï¿½ï¿½es
+	 * prestações
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
-	 * [SB0013] Gerar Linhas dos Dï¿½bitos Cobrados
+	 * [SB0013] Gerar Linhas dos Débitos Cobrados
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 19/05/2006
 	 * 
 	 * 
@@ -2595,15 +2595,15 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Mï¿½todo que retorna uma arrey de object do debito ordenado pelo tipo de
+	 * método que retorna uma arrey de object do debito ordenado pelo tipo de
 	 * debito
 	 * 
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
-	 * [SB0013] Gerar Linhas dos Dï¿½bitos Cobrados
+	 * [SB0013] Gerar Linhas dos Débitos Cobrados
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 19/05/2006
 	 * 
 	 * 
@@ -2615,15 +2615,15 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Mï¿½todo que retorna uma arrey de object do crï¿½dito realizado ordenado pelo
-	 * tipo de crï¿½dito
+	 * método que retorna uma arrey de object do Crédito realizado ordenado pelo
+	 * tipo de Crédito
 	 * 
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
-	 * [SB0013] Gerar Linhas dos Dï¿½bitos Cobrados
+	 * [SB0013] Gerar Linhas dos Débitos Cobrados
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 19/05/2006
 	 * 
 	 * 
@@ -2635,15 +2635,15 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Mï¿½todo que retorna uma arrey de object do conta mensagem ordenado pelo
-	 * tipo de crï¿½dito
+	 * método que retorna uma arrey de object do conta mensagem ordenado pelo
+	 * tipo de Crédito
 	 * 
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
-	 * [SB0013] Gerar Linhas dos Dï¿½bitos Cobrados
+	 * [SB0013] Gerar Linhas dos Débitos Cobrados
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 19/05/2006
 	 * 
 	 * 
@@ -2657,12 +2657,12 @@ public interface IRepositorioFaturamento {
 			Integer idSetorComercial) throws ErroRepositorioException;
 
 	/**
-	 * Mï¿½todo que retorna uma array de object de qualidade de agua
+	 * método que retorna uma array de object de qualidade de agua
 	 * 
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 25/05/2006
 	 * 
 	 * 
@@ -2675,13 +2675,13 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Mï¿½todo que retorna uma array de object do conta impostos deduzidos
+	 * método que retorna uma array de object do conta impostos deduzidos
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
 	 * [SB0015] Gerar Linhas dos Impostos Deduzidos
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 19/05/2006
 	 * 
 	 * 
@@ -2696,7 +2696,7 @@ public interface IRepositorioFaturamento {
 	 * Pesquisa todas as contas para testar o batch
 	 * 
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 02/06/2006
 	 * 
 	 * 
@@ -2873,7 +2873,7 @@ public interface IRepositorioFaturamento {
 			Integer faturamentoGrupoId, Integer anoMesReferencia) throws ErroRepositorioException;
 
 	/**
-	 * [UC0168] - Inserir Tarifa de Consumo Retorna a date de vigï¿½ncia em vigor
+	 * [UC0168] - Inserir Tarifa de Consumo Retorna a date de vigência em vigor
 	 * de uma tarifa de consumo Pesquisa a Data de Vigencia da Consumo Tarifa e
 	 * da Consumo Tarifa Vigencia
 	 * 
@@ -2888,7 +2888,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0168] - Inserir Tarifa de Consumo Retorna a date de vigï¿½ncia em vigor
+	 * [UC0168] - Inserir Tarifa de Consumo Retorna a date de vigência em vigor
 	 * de uma tarifa de consumo Pesquisa a Data de Vigencia da Consumo Tarifa e
 	 * da Consumo Tarifa Vigencia
 	 * 
@@ -2903,9 +2903,9 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0168] - Inserir Tarifa de Consumo Retorna a date de vigï¿½ncia em vigor
+	 * [UC0168] - Inserir Tarifa de Consumo Retorna a date de vigência em vigor
 	 * de uma tarifa de consumo Pesuisar a Maior Menor data de todas as
-	 * vigï¿½ncias do Consumo Tarifa
+	 * vigências do Consumo Tarifa
 	 * 
 	 * @author Rafael Santos
 	 * @since 12/07/2006
@@ -2917,11 +2917,11 @@ public interface IRepositorioFaturamento {
 			ConsumoTarifa consumoTarifa) throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso calcula a tarifa minï¿½ma de ï¿½gua para um imï¿½vel
+	 * Este caso de uso calcula a tarifa miníma de água para um imóvel
 	 * 
-	 * [UC0451] Obter Tarifa Minï¿½ma de ï¿½gua para um Imï¿½vel
+	 * [UC0451] Obter Tarifa Miníma de água para um imóvel
 	 * 
-	 * Para cada categoria e maior data de vigï¿½ncia retorna o valor da tarifa
+	 * Para cada categoria e maior data de vigência retorna o valor da tarifa
 	 * minima
 	 * 
 	 * pesquisarTarifaMinimaCategoriaVigencia
@@ -2944,8 +2944,8 @@ public interface IRepositorioFaturamento {
 	 * [UC0111] - Iniciar Processo
 	 * 
 	 * Este subfluxo tem o papel de iniciar um processo de faturamento
-	 * comandado, neste mï¿½todo ï¿½ feita uma busca para obter as atividades
-	 * comandadas e nï¿½o realizadas
+	 * comandado, neste método ï¿½ feita uma busca para obter as atividades
+	 * comandadas e não realizadas
 	 * 
 	 * [SB0001] - Iniciar Processo de Faturamento Comandado
 	 * 
@@ -2965,8 +2965,8 @@ public interface IRepositorioFaturamento {
 	 * [UC0111] - Iniciar Processo
 	 * 
 	 * Este subfluxo tem o papel de iniciar um processo de faturamento
-	 * comandado, neste mï¿½todo ï¿½ feita uma busca para obter as atividades
-	 * comandadas e nï¿½o realizadas
+	 * comandado, neste método é feita uma busca para obter as atividades
+	 * comandadas e não realizadas
 	 * 
 	 * [SB0001] - Iniciar Processo de Faturamento Comandado
 	 * 
@@ -2984,12 +2984,12 @@ public interface IRepositorioFaturamento {
 	 * Pesquisa a existencia de uma conta pelo id da conta e pela data da ultima alteracao
 	 * 
 	 * @param id
-	 *          Descriï¿½ï¿½o do parï¿½metro
+	 *          Descrição do parâmetro
 	 * @param ultimaAlteracao
-	 *          Descriï¿½ï¿½o do parï¿½metro
-	 * @return Descriï¿½ï¿½o do retorno
+	 *          Descrição do parâmetro
+	 * @return Descrição do retorno
 	 * @exception ErroRepositorioException
-	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
+	 *                Descrição da exceção
 	 */
 	public Integer pesquisarExistenciaContaParaConcorrencia(String idConta, 
 			String ultimaAlteracao) throws ErroRepositorioException;
@@ -2998,10 +2998,10 @@ public interface IRepositorioFaturamento {
 	 * Pesquisa a existencia de um debito tipo pelo id 
 	 * 
 	 * @param id
-	 *          Descriï¿½ï¿½o do parï¿½metro
-	 * @return Descriï¿½ï¿½o do retorno
+	 *          Descrição do parâmetro
+	 * @return Descrição do retorno
 	 * @exception ErroRepositorioException
-	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
+	 *                Descrição da exceção
 	 */
 	public Integer verificarExistenciaDebitoTipo(
 			Integer idDebitoTipo) throws ErroRepositorioException;
@@ -3024,7 +3024,7 @@ public interface IRepositorioFaturamento {
 	/**
 	 * [UC00113] - Faturar Grupo de Faturamento
 	 *
-	 * Recupera o percentual de esgoto para o imï¿½vel informado.
+	 * Recupera o percentual de esgoto para o imóvel informado.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 18/09/2006
@@ -3038,7 +3038,7 @@ public interface IRepositorioFaturamento {
 	/**
 	 * [UC0352] Emitir Contas
 	 *
-	 * Este caso de uso permite a emissï¿½o de uma ou mais contas.
+	 * Este caso de uso permite a emissão de uma ou mais contas.
 	 *
 	 * @author Pedro Alexandre
 	 * @date 19/09/2006
@@ -3053,7 +3053,7 @@ public interface IRepositorioFaturamento {
      /**
      * [UC0352] Emitir Contas
      * 
-     * Este caso de uso permite a emissï¿½o de uma ou mais contas.
+     * Este caso de uso permite a emissão de uma ou mais contas.
      * 
      * @author Pedro Alexandre
      * @date 24/10/2006
@@ -3079,8 +3079,8 @@ public interface IRepositorioFaturamento {
 	public BigDecimal pesquisarValorMultasCobradas(int idConta) throws ErroRepositorioException ;
 	
 	/**
-	 * Recupera os dados da conta p emitir a 2ï¿½ via
-	 * [UC0482]Emitir 2ï¿½ Via  de Conta
+	 * Recupera os dados da conta p emitir a 2a via
+	 * [UC0482]Emitir 2a Via  de Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 15/09/2006
@@ -3092,10 +3092,10 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0209] Gerar Taxa de Entrega de Conta em Outro Endereï¿½o 
+	 * [UC0209] Gerar Taxa de Entrega de Conta em Outro Endereço 
 	 *
-	 * Atualiza os dados do dï¿½bito a cobrar e a data de ï¿½ltima atualizaï¿½ï¿½o
-	 * do dï¿½bito a cobrar geral. 
+	 * Atualiza os dados do débito a cobrar e a data de última atualização
+	 * do débito a cobrar geral. 
 	 *
 	 * @author Pedro Alexandre
 	 * @date 20/09/2006
@@ -3109,7 +3109,7 @@ public interface IRepositorioFaturamento {
 	 * [UC0351 - Calcular Impostos Deduzidos da Conta] Author: Rafael Santos Data: 21/09/2006
 	 * 
 	 * @param idImovel
-	 *            Id do Imï¿½vel
+	 *            Id do imóvel
 	 * @return cliente responsavel pelo imovel
 	 */
 	public Integer pesquisarClienteResponsavelImovel(Integer idImovel)
@@ -3121,7 +3121,7 @@ public interface IRepositorioFaturamento {
 	 * @param idImpostoTipo 
 	 *            Id do ImpostoTipo
 	 * @param anoMesReferencia 
-	 *            Ano Mï¿½s de Referï¿½ncia
+	 *            Ano Mês de Referência
 	 * @return aliquotas do imposto
 	 */
 	public ImpostoTipoAliquota pesquisarAliquotaImposto(Integer idImpostoTipo, Integer anoMesReferencia)
@@ -3149,7 +3149,7 @@ public interface IRepositorioFaturamento {
      /**
      * [UC0113] Faturar Grupo de Faturamento
      *
-     * Atualiza a data e hora da realizaï¿½ï¿½o da atividade.
+     * Atualiza a data e hora da realização da atividade.
      *
      * @author Pedro Alexandre 
      * @date 27/09/2006
@@ -3164,7 +3164,7 @@ public interface IRepositorioFaturamento {
     /**
      * [UC0113] Faturar Grupo de Faturamento
      *
-     * Atualiza o ano/mï¿½s de referï¿½ncia do faturamento para o mï¿½s seguinte.
+     * Atualiza o ano/mês de referência do faturamento para o mês seguinte.
      *
      * @author Pedro Alexandre
      * @date 27/09/2006
@@ -3176,29 +3176,29 @@ public interface IRepositorioFaturamento {
     public void atualizarAnoMesReferenciaFaturamentoGrupo(Integer idFaturamentoGrupo, Integer anoMesReferencia) throws ErroRepositorioException ;
     
 	/**
-	 * Permite inserir DebitoACobrarGeral contidos numa coleï¿½ï¿½o
-	 * [UC0394] Gerar Dï¿½bitos a Cobrar de Doaï¿½ï¿½es
+	 * Permite inserir DebitoACobrarGeral contidos numa coleção
+	 * [UC0394] Gerar Débitos a Cobrar de Doações
 	 * @author  Cï¿½sar Araï¿½jo
 	 * @date    05/08/2006
-	 * @param   Collection<DebitoACobrarGeral> colecaoDebitosACobrarGeral - Coleï¿½ï¿½o de DebitoACobrarGeral 
+	 * @param   Collection<DebitoACobrarGeral> colecaoDebitosACobrarGeral - Coleção de DebitoACobrarGeral 
 	 * @throws  ErroRepositorioException
 	**/
 	public Integer inserirDebitoACobrarGeral(DebitoACobrarGeral debitoACobrarGeral)throws ErroRepositorioException;
 	
 	/**
-	 * Permite inserir DebitoACobrar contidos numa coleï¿½ï¿½o
-	 * [UC0394] Gerar Dï¿½bitos a Cobrar de Doaï¿½ï¿½es
-	 * @author  Cï¿½sar Araï¿½jo
+	 * Permite inserir DebitoACobrar contidos numa coleção
+	 * [UC0394] Gerar Débitos a Cobrar de Doações
+	 * @author  César Araújo
 	 * @date    05/08/2006
-	 * @param   Collection<DebitoACobrarGeral> colecaoDebitosACobrarGeral - Coleï¿½ï¿½o de DebitoACobrarGeral 
+	 * @param   Collection<DebitoACobrarGeral> colecaoDebitosACobrarGeral - Coleção de DebitoACobrarGeral 
 	 * @throws  ErroRepositorioException
 	**/
 	public void inserirDebitoACobrar(DebitoACobrar debitoACobrar)throws ErroRepositorioException;
 
      /**
-     * [UC0155] - Encerrar Faturamento do Mï¿½s - Item 05
+     * [UC0155] - Encerrar Faturamento do Mês - Item 05
      *
-     * Atualiza a situaï¿½ï¿½o de imï¿½vel com cobranï¿½a finalizada
+     * Atualiza a situação de imóvel com cobrança finalizada
      *
      * @author Pedro Alexandre
      * @date 07/10/2006
@@ -3209,9 +3209,9 @@ public interface IRepositorioFaturamento {
     public void atualizarImoveisSituacaoEspecialCobrancaFinalizada(int anoMesFaturamento, Integer idSetorComercial) throws ErroRepositorioException ;
 
     /**
-     * [UC0155] Encerrar Faturamento do Mï¿½s
+     * [UC0155] Encerrar Faturamento do Mês
      *
-     * Pesquisa os dï¿½bitos cobrados por categoria 
+     * Pesquisa os débitos cobrados por categoria 
      *
      * @author Pedro Alexandre
      * @date 09/10/2006
@@ -3223,7 +3223,7 @@ public interface IRepositorioFaturamento {
     public Collection pesquisarDebitoCobradoCategoria(Integer idDebitoCobrado) throws ErroRepositorioException ;
 
     /**
-     * [UC0155] Encerrar Faturamento do Mï¿½s
+     * [UC0155] Encerrar Faturamento do Mês
      *
      * Pesquisa os credios realizados por categoria 
      *
@@ -3238,9 +3238,9 @@ public interface IRepositorioFaturamento {
 
 
     /**
-     * [UC0155] Encerrar Faturamento do Mï¿½s
+     * [UC0155] Encerrar Faturamento do Mês
      *
-     * Pesquisa os dï¿½bitos a cobrar por categoria.
+     * Pesquisa os débitos a cobrar por categoria.
      *
      * @author Pedro Alexandre 
      * @date 09/10/2006
@@ -3252,9 +3252,9 @@ public interface IRepositorioFaturamento {
     public Collection pesquisarDebitosACobrarCategoria(DebitoACobrar debitoACobrar) throws ErroRepositorioException ;
 
     /**
-     * [UC0155] Encerrar Faturamento do Mï¿½s
+     * [UC0155] Encerrar Faturamento do Mês
      *
-     * Pesquisa os crï¿½ditos a realizar por categoria.
+     * Pesquisa os Créditos a realizar por categoria.
      *
      * @author Pedro Alexandre
      * @date 09/10/2006
@@ -3266,7 +3266,7 @@ public interface IRepositorioFaturamento {
     public Collection pesquisarCreditoARealizarCategoria(CreditoARealizar creditoARealizar) throws ErroRepositorioException ;
 
     /**
-     * [UC0155] Encerrar Faturamento do Mï¿½s
+     * [UC0155] Encerrar Faturamento do Mês
      *
      * Pesquisa os impostos deduzidos da conta.
      *
@@ -3280,7 +3280,7 @@ public interface IRepositorioFaturamento {
     public Collection pesquisarContaImpostosDeduzidos(Integer idConta) throws ErroRepositorioException ;
 
     /**
-     * [UC0155] Encerrar Faturamento do Mï¿½s
+     * [UC0155] Encerrar Faturamento do Mês
      *
      * Pesquisa as conta categoria consumo de faixa.
      *
@@ -3294,10 +3294,10 @@ public interface IRepositorioFaturamento {
     public Collection pesquisarContaCategoriaConsumoFaixa(Integer idConta) throws ErroRepositorioException ;
 
     /**
-     * [UC0155] Encerrar Faturamento do Mï¿½s
+     * [UC0155] Encerrar Faturamento do Mês
      *
-     * Para cada conta transferida para o histï¿½rico, atualiza o indicador 
-     * de que a conta estï¿½ no histï¿½rico na tabela ContaGeral.
+     * Para cada conta transferida para o histórico, atualiza o indicador 
+     * de que a conta está no histórico na tabela ContaGeral.
      *
      * @author Pedro Alexandre 
      * @date 11/10/2006
@@ -3308,10 +3308,10 @@ public interface IRepositorioFaturamento {
     public void atualizarIndicadorContaNoHistorico(Collection idsContas)throws ErroRepositorioException ;
 
     /**
-     * [UC0155] Encerrar Faturamento do Mï¿½s
+     * [UC0155] Encerrar Faturamento do Mês
      *
-     * Para cada dï¿½bito a cobrar transferido para o histï¿½rico, atualiza o indicador 
-     * de que o dï¿½bito a cobrar estï¿½ no histï¿½rico na tabela DebitoACobrarGeral.
+     * Para cada débito a cobrar transferido para o histórico, atualiza o indicador 
+     * de que o débito a cobrar estï¿½ no histórico na tabela DebitoACobrarGeral.
      *
      * @author Pedro Alexandre 
      * @date 11/10/2006
@@ -3322,10 +3322,10 @@ public interface IRepositorioFaturamento {
     public void atualizarIndicadorDebitoACobrarNoHistorico(Collection idsDebitosACobrar)throws ErroRepositorioException ;
 
     /**
-     * [UC0155] Encerrar Faturamento do Mï¿½s
+     * [UC0155] Encerrar Faturamento do Mês
      *
-     * Para cada crï¿½dito a realizar transferido para o histï¿½rico, atualiza o indicador 
-     * de que o crï¿½dito a realizar estï¿½ no histï¿½rico na tabela CreditoARealizarGeral.
+     * Para cada Crédito a realizar transferido para o histórico, atualiza o indicador 
+     * de que o Crédito a realizar estï¿½ no histórico na tabela CreditoARealizarGeral.
      *
      * @author Pedro Alexandre 
      * @date 11/10/2006
@@ -3336,9 +3336,9 @@ public interface IRepositorioFaturamento {
     public void atualizarIndicadorCreditoARealizarNoHistorico(Collection idsCreditoARealizar)throws ErroRepositorioException ;
 
     /**
-     * [UC0155] Encerrar Faturamento do Mï¿½s
+     * [UC0155] Encerrar Faturamento do Mês
      *
-     * Verifica se todos os grupos jï¿½ foram faturados
+     * Verifica se todos os grupos já foram faturados
      *
      * @author Pedro Alexandre
      * @date 07/10/2006
@@ -3351,7 +3351,7 @@ public interface IRepositorioFaturamento {
 
     
     /**
-     * [UC0155] Encerrar Faturamento do Mï¿½s
+     * [UC0155] Encerrar Faturamento do Mês
      *
      * Pesquisa os relacionamentos entre cliente e conta.
      *
@@ -3378,7 +3378,7 @@ public interface IRepositorioFaturamento {
 	public Object[] pesquisarContaRetificacao(Integer idConta) throws ErroRepositorioException ;
 	
 	/**
-	 * Seleciona as contaas agrupando por imï¿½vel
+	 * Seleciona as contaas agrupando por imóvel
 	 *
 	 * [UC0485] - Gerar Resumo dos Devedores Duvidosos
 	 *
@@ -3410,12 +3410,12 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0488] Informar Retorno Ordem de Fiscalizaï¿½ï¿½o
+	 * [UC0488] Informar Retorno Ordem de Fiscalização
 	 * 
-	 * [SB0004] - Calcular Valor de ï¿½gua e/ou Esgoto
+	 * [SB0004] - Calcular Valor de água e/ou Esgoto
 	 * 
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 04/12/2006
 	 * 
 	 * @param idOS
@@ -3426,12 +3426,12 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0488] Informar Retorno Ordem de Fiscalizaï¿½ï¿½o
+	 * [UC0488] Informar Retorno Ordem de Fiscalização
 	 * 
-	 * [SB0004] - Calcular Valor de ï¿½gua e/ou Esgoto
+	 * [SB0004] - Calcular Valor de água e/ou Esgoto
 	 * 
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 04/12/2006
 	 * 
 	 * @param idOS
@@ -3446,9 +3446,9 @@ public interface IRepositorioFaturamento {
 	
 	
 	/**
-	 * Recupera o id do cliente responsï¿½vel pela conta [UC0348] - Emitir Contas
+	 * Recupera o id do cliente responsável pela conta [UC0348] - Emitir Contas
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 05/12/2006
 	 * 
 	 * @return
@@ -3462,7 +3462,7 @@ public interface IRepositorioFaturamento {
 	 * 
 	 * Pesquisa a conta digitada
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 07/12/2006
 	 * 
 	 * @param idImovel
@@ -3479,7 +3479,7 @@ public interface IRepositorioFaturamento {
 	 * Data: 12/12/2006
 	 * 
 	 * @param idImovel
-	 *            Id do Imï¿½vel
+	 *            Id do imóvel
 	 * @return cliente responsavel 
 	 */
 	public Object pesquisarClienteResponsavel(Integer idImovel)
@@ -3500,7 +3500,7 @@ public interface IRepositorioFaturamento {
 	 * Author: Rafael Santos
 	 * Data: 27/12/2006
 	 * 
-	 * Pesquisar o Resumo Faturamento Simulaï¿½ï¿½o
+	 * Pesquisar o Resumo Faturamento Simulação
 	 * 
 	 */
 	public ResumoFaturamentoSimulacao pesquisarResumoFaturamentoSimulacao(ResumoFaturamentoSimulacao resumoFaturamentoSimulacao)
@@ -3664,8 +3664,8 @@ public interface IRepositorioFaturamento {
 	/**
 	 * [UC113] Faturar Grupo Faturamento
 	 * 
-	 * Retorna a quantidade de contas existentes para uma rota em um determinado anoMï¿½s de referï¿½ncia e
-	 * de acordo com a situaï¿½ï¿½o atual recebida.  
+	 * Retorna a quantidade de contas existentes para uma rota em um determinado anoMês de referência e
+	 * de acordo com a situação atual recebida.  
 	 * 
 	 * @author Rafael Santos, Raphael Rossiter
 	 * @date 02/01/2007, 24/03/2008
@@ -3681,9 +3681,9 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
     
     /**
-     * [UC0320] Gerar Fatura de Cliente Responsï¿½vel
+     * [UC0320] Gerar Fatura de Cliente responsável
      *
-     * Deleta as faturas e os items da fatura por cliente responsï¿½vel e ano/mï¿½s de referï¿½ncia.
+     * Deleta as faturas e os items da fatura por cliente responsável e ano/mês de referência.
      *
      * @author Pedro Alexandre
      * @date 04/01/2007
@@ -3697,10 +3697,10 @@ public interface IRepositorioFaturamento {
     public void removerFaturamentoGrupoAtividades(Integer idFaturamentoGrupoMensal) throws ErroRepositorioException;
     
     /**
-     * [UC0155] Encerrar Faturamento do Mï¿½s
+     * [UC0155] Encerrar Faturamento do Mês
      *
-     * Pesquisar os ids das localidades para encerrar o faturamento do ano/mï¿½s de 
-     * referï¿½ncia corrente.
+     * Pesquisar os ids das localidades para encerrar o faturamento do ano/mês de 
+     * referência corrente.
      *
      * @author Pedro Alexandre
      * @date 05/01/2007
@@ -3711,7 +3711,7 @@ public interface IRepositorioFaturamento {
     public Collection<Integer> pesquisarIdsLocalidadeParaEncerrarFaturamento() throws ErroRepositorioException ;
     
     /**
-     * Pesquisar os ids das localidades para gerar o resumo das ligaï¿½ï¿½es/economias.
+     * Pesquisar os ids das localidades para gerar o resumo das ligações/economias.
      *
      * @author Rodrigo Silveira
      * @date 17/01/2007
@@ -3722,7 +3722,7 @@ public interface IRepositorioFaturamento {
     public Collection pesquisarIdsLocalidadeParaGerarResumoLigacoesEconomias() throws ErroRepositorioException;
     
     /**
-	 * Recupera os dados da conta p emitir a 2ï¿½ via [UC0482]Emitir 2ï¿½ Via de
+	 * Recupera os dados da conta p emitir a 2ï¿½ via [UC0482]Emitir 2a Via de
 	 * Conta
 	 * 
 	 * @author Vivianne Sousa
@@ -3735,7 +3735,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	   /**
-     * [UC0532] Gerar Relatï¿½rio de Faturamento das Ligaï¿½ï¿½es com Mediï¿½ï¿½o Individualizada
+     * [UC0532] Gerar Relatório de Faturamento das Ligaï¿½ï¿½es com Medição Individualizada
      * 
      * @author Vivianne Sousa
      * @date 09/01/2007
@@ -3750,7 +3750,7 @@ public interface IRepositorioFaturamento {
 			String anoMesfaturamentoGrupo) throws ErroRepositorioException;
 	
     /**
-     * [UC0532] Gerar Relatï¿½rio de Faturamento das Ligaï¿½ï¿½es com Mediï¿½ï¿½o Individualizada
+     * [UC0532] Gerar Relatório de Faturamento das Ligaï¿½ï¿½es com Medição Individualizada
      * 
      * @author Vivianne Sousa
      * @date 09/01/2007
@@ -3763,9 +3763,9 @@ public interface IRepositorioFaturamento {
 			String anoMesfaturamentoGrupo) throws ErroRepositorioException;
     
     /**
-	 * [UC0493] Emitir de Extrato de Consumo de Imï¿½vel Condomï¿½nio
+	 * [UC0493] Emitir de Extrato de Consumo de imóvel Condomínio
 	 * 
-	 * Flï¿½vio Cordeiro
+	 * Flávio Cordeiro
 	 * 08/01/2007
 	 * @throws ErroRepositorioException
 	 * idsRotas string formatada com valores separados por virgula. Ex: 1,2,5,6
@@ -3777,9 +3777,9 @@ public interface IRepositorioFaturamento {
 	
 	/**
 	 * soma dos consumos dos imoveis associados
-	 * [UC0493] Emitir de Extrato de Consumo de Imï¿½vel Condomï¿½nio
+	 * [UC0493] Emitir de Extrato de Consumo de imóvel Condomï¿½nio
 	 * 
-	 * Flï¿½vio Cordeiro
+	 * Flávio Cordeiro
 	 * 12/01/2007
 	 * @throws ErroRepositorioException
 	 */
@@ -3787,16 +3787,16 @@ public interface IRepositorioFaturamento {
 	
 	/**
 	 * quantidade de imoveis associados
-	 * [UC0493] Emitir de Extrato de Consumo de Imï¿½vel Condomï¿½nio
+	 * [UC0493] Emitir de Extrato de Consumo de imóvel Condomï¿½nio
 	 * 
-	 * Flï¿½vio Cordeiro
+	 * Flávio Cordeiro
 	 * 12/01/2007
 	 * @throws ErroRepositorioException
 	 */
 	public Integer quantidadeImoveisAssociados(Integer idImovel, String anoMes) throws ErroRepositorioException;
 	
 	/**
-     * [UC0173] Gerar Relatï¿½rio de Resumo do Faturamento
+     * [UC0173] Gerar Relatório de Resumo do Faturamento
      * 
      * @author Vivianne Sousa, Diogo Peixoto
      * @created 24/01/2007, 25/04/2011
@@ -3836,7 +3836,7 @@ public interface IRepositorioFaturamento {
 	 * 
 	 * atualiza o sequencial de conta impressï¿½o
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 29/01/2007
 	 * 
 	 * @return
@@ -3845,7 +3845,7 @@ public interface IRepositorioFaturamento {
 	public void atualizarSequencialContaImpressao(Map<Integer, Integer> mapAtualizaSequencial) throws ErroRepositorioException;
 	
 	/**
-     * [UC] Gerar Relatï¿½rio de Contas Emitidas
+     * [UC] Gerar Relatório de Contas Emitidas
      * 
      * @author Vivianne Sousa
      * @created 30/01/2007
@@ -3857,7 +3857,7 @@ public interface IRepositorioFaturamento {
     		Collection esferaPoder) throws ErroRepositorioException;
     
     /**
-     * [UC] Gerar Relatï¿½rio de Contas Emitidas
+     * [UC] Gerar Relatório de Contas Emitidas
      * 
      * @author Vivianne Sousa
      * @created 02/02/2007
@@ -3868,7 +3868,7 @@ public interface IRepositorioFaturamento {
     public Integer consultarQtdeContasEmitidasRelatorio(int anoMesReferencia,Integer grupoFaturamento,
     		Collection esferaPoder) throws ErroRepositorioException ;
     
-//  retorna o anoMes do faturamento grupo do imï¿½vel passado
+//  retorna o anoMes do faturamento grupo do imóvel passado
     public Integer retornaAnoMesFaturamentoGrupo(Integer idImovel)
 		throws ErroRepositorioException;
     
@@ -3877,7 +3877,7 @@ public interface IRepositorioFaturamento {
      * Monta a colecao de resultdos apartir da tbela conta impressao para geracao 
      * do relatorio de MAPA DE CONTROLE DAS CONTAS EMITIDAS 
      *
-     * @author Flï¿½vio Cordeiro
+     * @author Flávio Cordeiro
      * @date 13/02/2007
      *
      * @param idGrupoFaturamento
@@ -3894,7 +3894,7 @@ public interface IRepositorioFaturamento {
      * Monta a colecao de resultdos apartir da tabela conta impressao para geracao 
      * do relatorio de RESUMO CONTAS EMITIDAS POR LOCALIDADE NO GRUPO
      *
-     * @author Flï¿½vio Cordeiro
+     * @author Flávio Cordeiro
      * @date 13/02/2007
      *
      * @param idGrupoFaturamento
@@ -3936,7 +3936,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * <Breve descriï¿½ï¿½o sobre o caso de uso>
+	 * <Breve Descrição sobre o caso de uso>
 	 *
 	 * <Identificador e nome do caso de uso>
 	 *
@@ -3954,7 +3954,7 @@ public interface IRepositorioFaturamento {
 			Integer anoMesReferenciaConta, Integer anoMesReferenciaAtual) throws ErroRepositorioException ;
 
 	/**
-	 * <Breve descriï¿½ï¿½o sobre o caso de uso>
+	 * <Breve Descrição sobre o caso de uso>
 	 *
 	 * <Identificador e nome do caso de uso>
 	 *
@@ -3973,11 +3973,11 @@ public interface IRepositorioFaturamento {
 
 
 	/**
-	 * Obtï¿½m as contas de um imï¿½vel com ano/mes da data de vencimento menor ou
+	 * Obtém as contas de um imóvel com ano/mes da data de vencimento menor ou
 	 * igual ao ano/mes de referencia da arrecadacao corrente e com situacao
 	 * atual correspondente a normal, retificada ou incluida.
 	 * 
-	 * [UC0302] - Gerar Debitos a Cobrar de Acrï¿½scimos por Impontualidade
+	 * [UC0302] - Gerar Debitos a Cobrar de Acréscimos por Impontualidade
 	 * 
 	 * @author Fernanda Paiva, Pedro Alexandre
 	 * @date 24/04/2006,15/03/2007
@@ -4000,7 +4000,7 @@ public interface IRepositorioFaturamento {
 	 * 
 	 * [UC0544] - Gerar Arquivo Texto do Faturamento
 	 *
-	 * @author Flï¿½vio Cordeiro
+	 * @author Flávio Cordeiro
 	 * @date 23/03/2007
 	 *
 	 * @param anoMes
@@ -4014,17 +4014,17 @@ public interface IRepositorioFaturamento {
 	public Collection gerarArquivoTextoFaturamentoImpostos(int anoMes, Integer idCliente, Integer imovelId)throws ErroRepositorioException;
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
-	 * Linha 63 Retorna o valor de categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o igual a normal e o tipo de financiamento igual a doaï¿½ï¿½es.
+	 * [UC0155] - Encerrar Faturamento do Mês 
+	 * Linha 63 Retorna o valor de categoria de débito cobrado acumulado, de acordo com o ano/mês de
+	 * referência, a situação igual a normal e o tipo de financiamento igual a doações.
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -4033,7 +4033,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * Recupera as contas do conjunto de imovï¿½is
+	 * Recupera as contas do conjunto de imovéis
 	 * 
 	 * @author Ana Maria
 	 * @date 19/03/2007
@@ -4047,7 +4047,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Recupera as contas em revisï¿½o do Conjunto de Imï¿½veis
+	 * Recupera as contas em revisão do Conjunto de Imóveis
 	 * 
 	 * @author Ana Maria
 	 * @date 19/03/2007
@@ -4059,7 +4059,7 @@ public interface IRepositorioFaturamento {
 			Collection idsImovel, Date dataVencimentoContaInicio,
 			Date dataVencimentoContaFim, Integer anoMesFim, String indicadorContaPaga) throws ErroRepositorioException;	
 	/**
-	 * Recupera as contas do Conjunto de Imï¿½veis
+	 * Recupera as contas do Conjunto de Imóveis
 	 * 
 	 * @author Ana Maria
 	 * @date 19/03/2007
@@ -4072,7 +4072,7 @@ public interface IRepositorioFaturamento {
 			Integer anoMesFim, String indicadorContaPaga) throws ErroRepositorioException;	
 	
 	/**
-	 * Recupera as contas do Conjunto de Imï¿½veis
+	 * Recupera as contas do Conjunto de Imóveis
 	 * 
 	 * @author Ana Maria
 	 * @date 19/03/2007
@@ -4085,10 +4085,10 @@ public interface IRepositorioFaturamento {
 			Integer anoMesFim, String indicadorContaPaga) throws ErroRepositorioException;
 
 	/**
-	 * Recupera o maior valor do sequï¿½ncial de impressï¿½o e soma 
+	 * Recupera o maior valor do sequêncial de impressão e soma 
 	 * 10 ao valor maximo retornado 
 	 *
-	 * [UC0155] Encerrar Faturamento do Mï¿½s
+	 * [UC0155] Encerrar Faturamento do Mês
 	 *
 	 * @author Pedro 
 	 * @date 27/03/2007
@@ -4100,9 +4100,9 @@ public interface IRepositorioFaturamento {
 	
 	   /**
      * Remove o id da conta dos pagamentos referentes a conta
-     * para poder mandar a conta para o histï¿½rico.
+     * para poder mandar a conta para o histórico.
      *
-     * [UC0000] Gerar Histï¿½rco para encerrar Faturamento
+     * [UC0000] Gerar Histórco para encerrar Faturamento
      *
      * @author Pedro Alexandre
      * @date 01/04/2007
@@ -4115,8 +4115,8 @@ public interface IRepositorioFaturamento {
 
  
     /**
-     * Remove o id do dï¿½bito a cobrar dos pagamentos referentes a conta
-     * para poder mandar o dï¿½bito a cobrar para o histï¿½rico.
+     * Remove o id do débito a cobrar dos pagamentos referentes a conta
+     * para poder mandar o débito a cobrar para o histórico.
      *
      * [UC0000] Gerar Histï¿½rco para encerrar Faturamento
      *
@@ -4130,7 +4130,7 @@ public interface IRepositorioFaturamento {
     public void apagarIdDebitoACobrarPagamentos(Integer idDebitoACobrar) throws ErroRepositorioException ;
 
 	/**
-	 * Pesquisa as contas canceladas por localidade com paginaï¿½ï¿½o
+	 * Pesquisa as contas canceladas por localidade com paginação
 	 *
 	 * [UC0000] Gerar Historico para Encerrar Faturamento
 	 *
@@ -4153,7 +4153,7 @@ public interface IRepositorioFaturamento {
 	 * 
 	 *retorna o nome do cliente usuario da conta
 	 *
-	 * @author Flï¿½vio Cordeiro
+	 * @author Flávio Cordeiro
 	 * @date 09/04/2007
 	 *
 	 * @param idConta
@@ -4164,10 +4164,10 @@ public interface IRepositorioFaturamento {
 	
 
 	/**
-	 * [UC0XXX] Emitir Aviso de Cobranï¿½a
+	 * [UC0XXX] Emitir Aviso de cobrança
 	 * 
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 09/04/2007
 	 * 
 	 */
@@ -4177,7 +4177,7 @@ public interface IRepositorioFaturamento {
 	/**
 	 * Pesquisa a soma dos valores das multas cobradas para a conta.
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 13/04/2007
 	 * 
 	 * @param idConta
@@ -4190,9 +4190,9 @@ public interface IRepositorioFaturamento {
 
 	
 	/**
-	 * Este caso de uso calcula a tarifa minï¿½ma de ï¿½gua para um imï¿½vel (SUBCATEGORIA)
+	 * Este caso de uso calcula a tarifa minï¿½ma de água para um imóvel (SUBCATEGORIA)
 	 * 
-	 * [UC0451] Obter Tarifa Minï¿½ma de ï¿½gua para um Imï¿½vel
+	 * [UC0451] Obter Tarifa Miníma de água para um imóvel
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 14/04/2007
@@ -4208,29 +4208,29 @@ public interface IRepositorioFaturamento {
 	
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] - Encerrar Faturamento do Mês 
 	 * pesquisar debitos cobrados de contas 
 	 * 
-	 * @param idConta Cï¿½digo da conta
+	 * @param idConta Código da conta
 	 * @throws ErroRepositorioException Erro no hibernate
 	 */
 	public Collection<DebitoCobrado> pesquisarDebitosCobrados(Integer idConta) throws ErroRepositorioException ;
 
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
-	 * Pesquisar crï¿½ditos realizados de contas canceladas
+	 * [UC0155] - Encerrar Faturamento do Mês 
+	 * Pesquisar Créditos realizados de contas canceladas
 	 * 
-	 * @param idConta      Cï¿½digo da conta
+	 * @param idConta      Código da conta
 	 * @throws ErroRepositorioException      Erro no hibernate
 	 */
 	public Collection<CreditoRealizado> pesquisarCreditosRealizados(Integer idConta) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0251] Gerar Atividade de Aï¿½ï¿½o de Cobranï¿½a [SB0004] Verificar Critï¿½rio
-	 * de Cobranï¿½a para Imï¿½vel Pesquisa a soma dos imoveis com parcelamento.
+	 * [UC0251] Gerar Atividade de Ação de cobrança [SB0004] Verificar Critï¿½rio
+	 * de Cobrança para imóvel Pesquisa a soma dos imoveis com parcelamento.
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 13/04/2007
 	 * 
 	 * @param idConta
@@ -4242,7 +4242,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Recupera os ids das contas do Conjunto de Imï¿½veis
+	 * Recupera os ids das contas do Conjunto de Imóveis
 	 * 
 	 * @author Ana Maria
 	 * @date 19/04/2007
@@ -4282,7 +4282,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * Mï¿½todo que retorna uma colecao de conta categoria
+	 * método que retorna uma colecao de conta categoria
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
@@ -4312,11 +4312,11 @@ public interface IRepositorioFaturamento {
 			int anoMesReferenciaConta) throws ErroRepositorioException;
 	
 	/**
-	 * Gera credito a realizar para os imï¿½veis de determinados grupos
+	 * Gera credito a realizar para os Imóveis de determinados grupos
 	 * 
-	 * BATCH PARA CORREï¿½ï¿½O DA BASE
+	 * BATCH PARA CORREÇÃO DA BASE
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 02/05/2007
 	 * 
 	 */
@@ -4326,9 +4326,9 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Mï¿½todo que retorna uma colecao de conta categoria
+	 * método que retorna uma colecao de conta categoria
 	 * 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * [UC0482]Emitir 2a Via de Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 02/05/2007
@@ -4342,7 +4342,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna as contas para impressao
+	 * método que retorna as contas para impressao
 	 * 
 	 * Pesquisar Contas Emitir Caern
 	 * 
@@ -4373,11 +4373,11 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0394] - Gerar Dï¿½bitos a Cobrar de Doaï¿½ï¿½es
+	 * [UC0394] - Gerar Débitos a Cobrar de Doaï¿½ï¿½es
 	 * 
 	 * Pesquisas os debitos para serem removidos
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 09/05/2007
 	 * 
 	 * @param colecaoRotas, Integer anoMesReferenciaDebito
@@ -4389,11 +4389,11 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0394] - Gerar Dï¿½bitos a Cobrar de Doaï¿½ï¿½es
+	 * [UC0394] - Gerar Débitos a Cobrar de Doações
 	 * 
-	 * Deleta as categorias do dï¿½bito a cobrar
+	 * Deleta as categorias do débito a cobrar
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 09/05/2007
 	 * 
 	 * @param colecaoRotas,
@@ -4405,12 +4405,12 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0394] - Gerar Dï¿½bitos a Cobrar de Doaï¿½ï¿½es
+	 * [UC0394] - Gerar Débitos a Cobrar de Doações
 	 * 
 	 * Deleta os debitos a cobrar e os debitos a cobrar geral para o ano e mes
-	 * de faturamento. Esse caso ï¿½ quando um faturamento ï¿½ rodado mais de 1 vez.
+	 * de faturamento. Esse caso é quando um faturamento é rodado mais de 1 vez.
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 09/05/2007
 	 * 
 	 * @param colecaoRotas,
@@ -4422,11 +4422,11 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0XXX] - Gerar Relatï¿½rio Tarifa de Consumo 
+	 * [UC0XXX] - Gerar Relatório Tarifa de Consumo 
 	 * 
 	 * Pesquisas as tarifas de consumo para o relatï¿½rio
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 11/05/2007
 	 * 
 	 * @param descricao,
@@ -4439,11 +4439,11 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0XXX] - Gerar Relatï¿½rio de Tarifa de Consumo
+	 * [UC0XXX] - Gerar Relatório de Tarifa de Consumo
 	 * 
 	 * Pesquisas a data final de validade de uma tarifa de consumo
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 11/05/2007
 	 * 
 	 * @param Integer idConsumoTarifa
@@ -4522,7 +4522,7 @@ public interface IRepositorioFaturamento {
 			Date dataVencimentoContaFim, Integer anoMesFim) throws ErroRepositorioException;
 	
 	/**
-	 * Recupera id de conta(s) sem revisï¿½o ou em revisï¿½o por aï¿½ï¿½o do usuï¿½rio
+	 * Recupera id de conta(s) sem revisão ou em revisão por ação do usuário
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 14/05/2007
@@ -4534,8 +4534,8 @@ public interface IRepositorioFaturamento {
 		throws ErroRepositorioException;
 	
 	/**
-	 * Recupera os dados da conta historico p emitir a 2ï¿½ via 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * Recupera os dados da conta historico p emitir a 2ª via 
+	 * [UC0482]Emitir 2º Via de Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 16/05/2007
@@ -4547,8 +4547,8 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Recupera o id do cliente responsï¿½vel pela conta historico 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * Recupera o id do cliente responsável pela conta historico 
+	 * [UC0482]Emitir 2º Via de Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 16/05/2007
@@ -4560,9 +4560,9 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna a soma de quantidade economia
+	 * método que retorna a soma de quantidade economia
 	 * 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * [UC0482]Emitir 2º Via de Conta
 	 * 
 	 * [SB0007] Obter Quantidade de Economias da Conta Historico
 	 * 
@@ -4578,7 +4578,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa as contas do cliente responsï¿½vel para todos os grupos de faturamento.
+	 * Pesquisa as contas do cliente responsável para todos os grupos de faturamento.
 	 *
 	 * [UC0348] Emitir Contas
 	 *
@@ -4596,9 +4596,9 @@ public interface IRepositorioFaturamento {
 			Integer anoMesReferencia, Short indicadorEmissaoExtratoFaturamento,
 			Integer anoMesReferenciaFaturamentoAntecipado,Integer imovelContaEnvio) throws ErroRepositorioException ;
 	/**
-	 * Mï¿½todo que retorna uma colecao de conta categoria
+	 * método que retorna uma colecao de conta categoria
 	 * 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * [UC0482]Emitir 2º Via de Conta
 	 * 
 	 * [SB0011] Obter Quantidade de Economias da Conta
 	 * 
@@ -4614,9 +4614,9 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna uma colecao de conta categoria
+	 * método que retorna uma colecao de conta categoria
 	 * 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * [UC0482]Emitir 2º Via de Conta
 	 * 
 	 * [SB0011] Obter Quantidade de Economias da Conta
 	 * 
@@ -4632,9 +4632,9 @@ public interface IRepositorioFaturamento {
 			Integer idCategoria) throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna uma array de object do conta impostos deduzidos
+	 * método que retorna uma array de object do conta impostos deduzidos
 	 * 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * [UC0482]Emitir 2º Via de Conta
 	 * 
 	 * [SB0015] Gerar Linhas dos Impostos Deduzidos
 	 * 
@@ -4650,13 +4650,13 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * Mï¿½todo que retorna uma array de object com a soma do valor dos debitos
+	 * método que retorna uma array de object com a soma do valor dos debitos
 	 * cobrados de parcelamento,o numero da prestacao e o numero total de
-	 * prestaï¿½ï¿½es
+	 * prestações
 	 * 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * [UC0482]Emitir 2º Via de Conta
 	 * 
-	 * [SB0013] Gerar Linhas dos Dï¿½bitos Cobrados
+	 * [SB0013] Gerar Linhas dos Débitos Cobrados
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 16/05/2007
@@ -4670,13 +4670,13 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna uma array de object do debito cobrado ordenado pelo
+	 * método que retorna uma array de object do debito cobrado ordenado pelo
 	 * tipo de debito
 	 * 
 	 * 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * [UC0482]Emitir 2º Via de Conta
 	 * 
-	 * [SB0013] Gerar Linhas dos Dï¿½bitos Cobrados
+	 * [SB0013] Gerar Linhas dos Débitos Cobrados
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 16/05/2007
@@ -4690,11 +4690,11 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna uma array de object do crï¿½dito realizado ordenado pelo
-	 * tipo de crï¿½dito
+	 * método que retorna uma array de object do Crédito realizado ordenado pelo
+	 * tipo de Crédito
 	 * 
 	 * 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * [UC0482]Emitir 2º Via de Conta
 	 * 
 	 * [SB0014] Gerar Linhas dos Creditos Realizados
 	 * 
@@ -4713,9 +4713,9 @@ public interface IRepositorioFaturamento {
 	 * 
 	 * Este caso de uso permite gerar um ralatorio analitico do faturamento
 	 *
-	 * [UC0xxx]Gerar Relatï¿½rio Analï¿½tico do Faturamento
+	 * [UC0xxx]Gerar Relatório Analítico do Faturamento
 	 *
-	 * @author Flï¿½vio Cordeiro
+	 * @author Flávio Cordeiro
 	 * @date 18/05/2007
 	 *
 	 * @param anoMesFaturamento
@@ -4735,9 +4735,9 @@ public interface IRepositorioFaturamento {
 	/**
 	 * retorno o id do imvel com 
 	 * FNTP_ID da tabela DEBITO_A_COBRAR com o valor correspondente a 
-	 * parcelamento de ï¿½gua (2), parcelamento de esgoto (3), ou parcelamento de serviï¿½o(4) 
+	 * parcelamento de água (2), parcelamento de esgoto (3), ou parcelamento de serviço(4) 
 	 * 
-	 * [UC0259] - Processar Pagamento com cï¿½digo de Barras
+	 * [UC0259] - Processar Pagamento com código de Barras
 	 * 
 	 * [SB0012] - Verifica Pagamento de Debito a Cobrar de Parcelamento
 	 *
@@ -4758,7 +4758,7 @@ public interface IRepositorioFaturamento {
 	 * DCST_IDATUAL com o valor correspondente a normal (0) 
 	 * e FNTP_ID com o valor correspondente a juros de parcelamento (8)
 	 * 
-	 * [UC0259] - Processar Pagamento com cï¿½digo de Barras
+	 * [UC0259] - Processar Pagamento com código de Barras
 	 * 
 	 * [SB0012] - Verifica Pagamento de Debito a Cobrar de Parcelamento
 	 *
@@ -4776,10 +4776,10 @@ public interface IRepositorioFaturamento {
 	
 	
 	/**
-	 * [UC0302] - Gerar Debitos a Cobrar de Acrï¿½scimos por Impontualidade
+	 * [UC0302] - Gerar Debitos a Cobrar de Acréscimos por Impontualidade
 	 * Author: Raphael Rossiter Data: 31/05/2007
 	 * 
-	 * Obtï¿½m os pagamentos da conta que contem a menor data de pagamento
+	 * Obtém os pagamentos da conta que contem a menor data de pagamento
 	 * 
 	 * @param Integer conta, Integer idImovel, Integer anoMesReferenciaConta
 	 * @return Object[]
@@ -4790,8 +4790,8 @@ public interface IRepositorioFaturamento {
 
 	
 	/**
-	 * Consulta ResumoFaturamento para a geraï¿½ï¿½o do relatï¿½rio '[UC0173] Gerar
-	 * Relatï¿½rio de Resumo Faturamento' de acordo com a opï¿½ï¿½o de totalizaï¿½ï¿½o.
+	 * Consulta ResumoFaturamento para a geração do relatório '[UC0173] Gerar
+	 * Relatório de Resumo Faturamento' de acordo com a opção de totalizaï¿½ï¿½o.
 	 * 
 	 * @author Vivianne Sousa
 	 * @created 31/05/2007
@@ -4804,8 +4804,8 @@ public interface IRepositorioFaturamento {
 			int anoMesReferencia, Collection<Integer> idsPerfilImovel, String opcaoRelatorio) throws ErroRepositorioException;
 	
 	/**
-	 * Consulta ResumoFaturamento para a geraï¿½ï¿½o do relatï¿½rio '[UC0173] Gerar
-	 * Relatï¿½rio de Resumo Faturamento' de acordo com a opï¿½ï¿½o de totalizaï¿½ï¿½o.
+	 * Consulta ResumoFaturamento para a geração do relatório '[UC0173] Gerar
+	 * Relatório de Resumo Faturamento' de acordo com a opção de totalização.
 	 * 
 	 * @author Vivianne Sousa
 	 * @created 31/05/2007
@@ -4818,12 +4818,12 @@ public interface IRepositorioFaturamento {
 			int anoMesReferencia, Integer unidadeNegocio, Collection<Integer> idsPerfilImovel, String opcaoRelatorio) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0600] Emitir Histograma de ï¿½gua
+	 * [UC0600] Emitir Histograma de água
 	 * 
 	 * [SB0014] Selecionar por Indicador de Consumo
 	 * [SB0015] Selecionar por Indicador de Medido
-	 * [SB0016] Selecionar por Indicador de Poï¿½o
-	 * [SB0017] Selecionar por Indicador de Volume Fixo de ï¿½gua
+	 * [SB0016] Selecionar por Indicador de Poço
+	 * [SB0017] Selecionar por Indicador de Volume Fixo de água
 	 * 
 	 * @author Rafael Pinto
 	 * @date 01/06/2007
@@ -4837,7 +4837,7 @@ public interface IRepositorioFaturamento {
 		throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0600] Emitir Histograma de ï¿½gua - Volume Faturado Ligacao Estimado
+	 * [UC0600] Emitir Histograma de água - Volume Faturado Ligacao Estimado
 	 * 
 	 * 
 	 * @author Rafael Pinto
@@ -4855,12 +4855,12 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0600] Emitir Histograma de ï¿½gua - Total Geral
+	 * [UC0600] Emitir Histograma de água - Total Geral
 	 * 
 	 * [SB0014] Selecionar por Indicador de Consumo
 	 * [SB0015] Selecionar por Indicador de Medido
-	 * [SB0016] Selecionar por Indicador de Poï¿½o
-	 * [SB0017] Selecionar por Indicador de Volume Fixo de ï¿½gua
+	 * [SB0016] Selecionar por Indicador de Poço
+	 * [SB0017] Selecionar por Indicador de Volume Fixo de água
 	 * 
 	 * @author Rafael Pinto
 	 * @date 01/06/2007
@@ -4874,7 +4874,7 @@ public interface IRepositorioFaturamento {
 		throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0605] Emitir Histograma de ï¿½gua por Economia
+	 * [UC0605] Emitir Histograma de água por Economia
 	 * 
 	 * @author Rafael Pinto
 	 * @date 14/06/2007
@@ -4888,7 +4888,7 @@ public interface IRepositorioFaturamento {
 		throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0605] Emitir Histograma de ï¿½gua por Economia
+	 * [UC0605] Emitir Histograma de água por Economia
 	 * 
 	 * Monta as quebras que serï¿½o necessarias para o relatorio
 	 * 
@@ -4905,7 +4905,7 @@ public interface IRepositorioFaturamento {
 		throws ErroRepositorioException ;
 
 	/**
-	 * [UC0120] - Calcular Valores de ï¿½gua e/ou Esgoto
+	 * [UC0120] - Calcular Valores de água e/ou Esgoto
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 29/06/2007
@@ -4930,8 +4930,8 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Recupera os dados da conta p emitir a 2ï¿½ via 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * Recupera os dados da conta p emitir a 2º via 
+	 * [UC0482]Emitir 2º Via de Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 21/06/2007
@@ -4943,9 +4943,9 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna uma colecao de conta categoria
+	 * método que retorna uma colecao de conta categoria
 	 * 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * [UC0482]Emitir 2º Via de Conta
 	 * 
 	 * [SB0011] Obter Quantidade de Economias da Conta
 	 * 
@@ -4961,9 +4961,9 @@ public interface IRepositorioFaturamento {
 			Integer idCategoria, Integer idSubCategoria) throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna uma colecao de conta categoria
+	 * método que retorna uma colecao de conta categoria
 	 * 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * [UC0482]Emitir 2º Via de Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 21/06/2007
@@ -5005,7 +5005,7 @@ public interface IRepositorioFaturamento {
 	
 	/**
 	 * 
-	 * Metodo que retorna a data de revisï¿½o da conta
+	 * Metodo que retorna a data de revisão da conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 06/07/2007
@@ -5037,7 +5037,7 @@ public interface IRepositorioFaturamento {
 	 * DCST_IDATUAL com o valor correspondente a normal (0) 
 	 * e CROG_ID com o valor correspondente a descontos concedidos no parcelamento (6)
 	 * 
-	 * [UC0259] - Processar Pagamento com cï¿½digo de Barras
+	 * [UC0259] - Processar Pagamento com código de Barras
 	 * 
 	 * [SB0012] - Verifica Pagamento de Debito a Cobrar de Parcelamento
 	 *
@@ -5055,7 +5055,7 @@ public interface IRepositorioFaturamento {
 	/**
 	 * [UC0146] - Manter Conta Author: Raphael Rossiter Data: 21/01/2006
 	 * 
-	 * Obtï¿½m as contas de um imï¿½vel que poderï¿½o ser mantidas
+	 * Obtém as contas de um imóvel que poderão ser mantidas
 	 * 
 	 * @param imovel
 	 * @param situacaoNormal
@@ -5067,9 +5067,9 @@ public interface IRepositorioFaturamento {
 	public Collection obterIdsContasImovel(Integer idImovel) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0623] - Gerar Resumo de Metas CAERN Author: Sï¿½vio Luiz Data: 20/07/2007
+	 * [UC0623] - Gerar Resumo de Metas CAERN Author: Sílvio Luiz Data: 20/07/2007
 	 * 
-	 * Obtï¿½m as contas de um imï¿½vel que poderï¿½o ser mantidas
+	 * Obtï¿½m as contas de um imóvel que poderão ser mantidas
 	 * 
 	 * @param imovel
 	 * @param situacaoNormal
@@ -5083,7 +5083,7 @@ public interface IRepositorioFaturamento {
 	/**
 	 * [UC0485] Gerar Resumo dos Devedores Duvidosos
 	 *
-	 * verifica se a conta informada possui cliente responsï¿½vel 
+	 * verifica se a conta informada possui cliente responsável 
 	 * com esfera de poder de tipo de cliente igual a municipal,
 	 * estadual ou federal.
 	 *
@@ -5097,10 +5097,10 @@ public interface IRepositorioFaturamento {
 	public boolean verificarExistenciaClienteResponsavelConta(int idConta) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0623] - Gerar Resumo de Metas CAERN Author: Sï¿½vio Luiz Data:
+	 * [UC0623] - Gerar Resumo de Metas CAERN Author: Sílvio Luiz Data:
 	 * 20/07/2007
 	 * 
-	 * Obtï¿½m as contas de um imï¿½vel que poderï¿½o ser mantidas
+	 * Obtï¿½m as contas de um imóvel que poderão ser mantidas
 	 * 
 	 * @param imovel
 	 * @param situacaoNormal
@@ -5113,10 +5113,10 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0623] - Gerar Resumo de Metas CAERN Author: Sï¿½vio Luiz Data:
+	 * [UC0623] - Gerar Resumo de Metas CAERN Author: Sílvio Luiz Data:
 	 * 20/07/2007
 	 * 
-	 * Obtï¿½m as contas de um imï¿½vel que poderï¿½o ser mantidas
+	 * Obtém as contas de um imóvel que poderão ser mantidas
 	 * 
 	 * @param imovel
 	 * @param situacaoNormal
@@ -5212,7 +5212,7 @@ public interface IRepositorioFaturamento {
 
 	
 	/**
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
+	 * [UC0482]Emitir 2º Via de Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 20/08/2007
@@ -5224,9 +5224,9 @@ public interface IRepositorioFaturamento {
 	public Integer pesquisarTipoConta(Integer idConta) throws ErroRepositorioException;
 
 	/**
-	 * Metodo temporario para correï¿½ï¿½o da base de dados
+	 * Metodo temporario para correção da base de dados
 	 *
-	 * Gerar Crï¿½dito a Realizar para os imï¿½veis com contas com vencimento em 
+	 * Gerar Crédito a Realizar para os Imóveis com contas com vencimento em 
 	 * 14/08/2007 com multa da conta 06/2007 cobrada na conta 07/2007 e que 
 	 * pagaram em 17/07/2007
 	 *
@@ -5271,7 +5271,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0259] - Processar Pagamento com Cï¿½digo de Barras
+	 * [UC0259] - Processar Pagamento com Código de Barras
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 30/09/2007
@@ -5283,7 +5283,7 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0259] - Processar Pagamento com Cï¿½digo de Barras
+	 * [UC0259] - Processar Pagamento com Código de Barras
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 30/09/2007
@@ -5296,11 +5296,11 @@ public interface IRepositorioFaturamento {
 	
 	
 	/**
-	 * [UC0259] - Processar Pagamento com Cï¿½digo de Barras
+	 * [UC0259] - Processar Pagamento com Código de Barras
 	 * 
-	 * [SF0003] - Processar Pagamento de Documento de Cobranï¿½a
+	 * [SF0003] - Processar Pagamento de Documento de Cobrança
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @created 16/02/2006
 	 * 
 	 * @param matriculaImovel
@@ -5312,11 +5312,11 @@ public interface IRepositorioFaturamento {
 	
 	
 	/**
-	 * Pesquisa os dados necessï¿½rio para a geraï¿½ï¿½o do relatï¿½rio
+	 * Pesquisa os dados necessï¿½rio para a geração do relatório
 	 * 
-	 * [UC0637] - Gerar Relatï¿½rios Volumes Faturados
+	 * [UC0637] - Gerar Relatórios Volumes Faturados
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @created 11/09/2007
 	 * 
 	 * @exception ErroRepositorioException
@@ -5328,11 +5328,11 @@ public interface IRepositorioFaturamento {
 			Integer anoMes6) throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa os dados necessï¿½rio para a geraï¿½ï¿½o do relatï¿½rio resumido
+	 * Pesquisa os dados necessï¿½rio para a geração do relatï¿½rio resumido
 	 * 
-	 * [UC0637] - Gerar Relatï¿½rios Volumes Faturados
+	 * [UC0637] - Gerar Relatórios Volumes Faturados
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @created 13/09/2007
 	 * 
 	 * @exception ErroRepositorioException
@@ -5344,11 +5344,11 @@ public interface IRepositorioFaturamento {
 			Integer anoMes6) throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa os dados necessï¿½rio para a geraï¿½ï¿½o do relatï¿½rio
+	 * Pesquisa os dados necessário para a geração do relatório
 	 * 
-	 * [UC0635] - Gerar Relatï¿½rios de Contas em Revisï¿½o
+	 * [UC0635] - Gerar Relatórios de Contas em Revisão
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @created 20/09/2007
 	 * 
 	 * @exception ErroRepositorioException
@@ -5362,11 +5362,11 @@ public interface IRepositorioFaturamento {
 			Integer referenciaFinal, Integer idCategoria, Integer idEsferaPoder) throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa os dados necessï¿½rio para a geraï¿½ï¿½o do relatï¿½rio resumido
+	 * Pesquisa os dados necessário para a geração do relatório resumido
 	 * 
-	 * [UC0635] - Gerar Relatï¿½rios de Contas em Revisï¿½o
+	 * [UC0635] - Gerar Relatórios de Contas em Revisão
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @created 20/09/2007
 	 * 
 	 * @exception ErroRepositorioException
@@ -5407,9 +5407,9 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa os Valores das Faixas de Dï¿½bitos
+	 * Pesquisa os Valores das Faixas de Débitos
 	 * 
-	 * @author Ivan Sï¿½rgio
+	 * @author Ivan Sérgio
 	 * @created 14/09/2007
 	 * 
 	 * @exception ErroRepositorioException
@@ -5422,10 +5422,10 @@ public interface IRepositorioFaturamento {
 	
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
-	 * Retorna o valor de crï¿½dito a realizar 
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia contï¿½bil, a situaï¿½ï¿½o atual 
-	 * e a origem de crï¿½dito informados.
+	 * [UC0155] - Encerrar Faturamento do Mês 
+	 * Retorna o valor de Crédito a realizar 
+	 * acumulado, de acordo com o ano/mês de referência contábil, a situação atual 
+	 * e a origem de Crédito informados.
 	 * 
 	 * @param anoMesReferenciaContabil
 	 * @param idLocalidade
@@ -5437,11 +5437,11 @@ public interface IRepositorioFaturamento {
 	public Collection acumularValorCreditoARealizarPorOrigemCredito(int anoMesReferenciaContabil, Integer idLocalidade, Integer idOrigemCredito, Integer idSituacaoAtual)	throws ErroRepositorioException ;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] - Encerrar Faturamento do Mês 
 	 * Retorna o valor de
-	 * categoria de credito realizado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o atual, situaï¿½ï¿½o anterior 
-	 * e a origem do crï¿½dito informados.
+	 * categoria de credito realizado acumulado, de acordo com o ano/mês de
+	 * referência, a situação atual, situação anterior 
+	 * e a origem do Crédito informados.
 	 * 
 	 * @param anoMesReferencia
 	 * @param idLocalidade
@@ -5458,12 +5458,12 @@ public interface IRepositorioFaturamento {
 	
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] - Encerrar Faturamento do Mês 
 	 * Retorna o valor de
-	 * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o atual, tipo de financiamento e 
-	 * pelo lanï¿½amento item contï¿½bil 
-	 * com o ano/mï¿½s de referï¿½ncia da baixa contï¿½bil da conta preenchido
+	 * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+	 * referência, a situação atual, tipo de financiamento e 
+	 * pelo lançamento item contábil 
+	 * com o ano/mês de referência da baixa contábil da conta preenchido
 	 * 
 	 * @param anoMesReferencia
 	 * @param idLocalidade
@@ -5477,12 +5477,12 @@ public interface IRepositorioFaturamento {
 	public Collection<ResumoFaturamento> acumularValorCategoriaDebitoCobradoCategoriaPorTipoFinanciamentoComBaixaContabilPreenchida(int anoMesReferencia, int idLocalidade, int idCategoria, Integer idFinanciamentoTipo, Integer idSituacaoAtual, Integer idLancamentoItemContabil) throws ErroRepositorioException ;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] - Encerrar Faturamento do Mês 
 	 * Retorna o valor de
-	 * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o atual, tipo de financiamento e 
-	 * pelo lanï¿½amento item contï¿½bil 
-	 * com o ano/mï¿½s de referï¿½ncia da baixa contï¿½bil da conta nï¿½o preenchido
+	 * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+	 * referência, a situação atual, tipo de financiamento e 
+	 * pelo lançamento item contábil 
+	 * com o ano/mês de referência da baixa contábil da conta não preenchido
 	 * 
 	 * @param anoMesReferencia
 	 * @param idLocalidade
@@ -5499,9 +5499,9 @@ public interface IRepositorioFaturamento {
 
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] - Encerrar Faturamento do Mês 
 	 * Retorna o valor do imposto acumulado
-	 * de acordo com o ano/mï¿½s de referï¿½ncia cntï¿½bil da conta, as
+	 * de acordo com o ano/mês de referência cntábil da conta, as
 	 * situaï¿½ï¿½es atuais da conta e o tipo de imposto. 
 	 * 
 	 * @param anoMesReferencia
@@ -5517,10 +5517,10 @@ public interface IRepositorioFaturamento {
 
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] - Encerrar Faturamento do Mês 
 	 * Retorna o valor do imposto acumulado
-	 * de acordo com o ano/mï¿½s de referï¿½ncia contï¿½bil da conta, a
-	 * situaï¿½ï¿½o atual da conta e o tipo de imposto. 
+	 * de acordo com o ano/mês de referência contábil da conta, a
+	 * situação atual da conta e o tipo de imposto. 
 	 * 
 	 * @param anoMesReferencia
 	 * @param idLocalidade
@@ -5535,10 +5535,10 @@ public interface IRepositorioFaturamento {
 
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] - Encerrar Faturamento do Mês 
 	 * Retorna o valor do imposto acumulado
-	 * de acordo com o ano/mï¿½s de referï¿½ncia contï¿½bil da conta, a
-	 * situaï¿½ï¿½o atual e anterior da conta e o tipo de imposto. 
+	 * de acordo com o ano/mês de referência contábil da conta, a
+	 * situação atual e anterior da conta e o tipo de imposto. 
 	 * 
 	 * @param anoMesReferencia
 	 * @param idLocalidade
@@ -5553,10 +5553,10 @@ public interface IRepositorioFaturamento {
 	public BigDecimal acumularValorImpostoPorTipoImpostoESituacaoAtualConta(int anoMesReferencia, Integer idLocalidade, Integer idCategoria,Integer idImpostoTipo, Integer idSituacaoAtual, Integer idSituacaoAnterior)	throws ErroRepositorioException ;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
-	 * Retorna o valor de crï¿½dito a realizar 
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia contï¿½bil, a situaï¿½ï¿½o atual 
-	 * ou anterior e a origem de crï¿½dito informados.
+	 * [UC0155] - Encerrar Faturamento do Mês 
+	 * Retorna o valor de Crédito a realizar 
+	 * acumulado, de acordo com o ano/mês de referência contábil, a situação atual 
+	 * ou anterior e a origem de Crédito informados.
 	 * 
 	 * @param anoMesReferenciaContabil
 	 * @param idLocalidade
@@ -5569,10 +5569,10 @@ public interface IRepositorioFaturamento {
 	public Collection acumularValorCreditoARealizarPorOrigemCredito(int anoMesReferenciaContabil, Integer idLocalidade, Integer[] idsOrigemCredito, Integer idSituacaoAtual, Integer idSituacaoAnterior)	throws ErroRepositorioException ;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
-	 * Retorna o valor de crï¿½dito a realizar 
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia contï¿½bil, a situaï¿½ï¿½o atual 
-	 * ou anterior e a origem de crï¿½dito informados.
+	 * [UC0155] - Encerrar Faturamento do Mês 
+	 * Retorna o valor de Crédito a realizar 
+	 * acumulado, de acordo com o ano/mês de referência contábil, a situação atual 
+	 * ou anterior e a origem de Crédito informados.
 	 * 
 	 * @param anoMesReferenciaContabil
 	 * @param idLocalidade
@@ -5584,10 +5584,10 @@ public interface IRepositorioFaturamento {
 	public Collection acumularValorCreditoARealizarPorOrigemCredito(int anoMesReferenciaContabil, Integer idLocalidade, Integer[] idsOrigemCredito, Integer idSituacaoAtual)	throws ErroRepositorioException ;
 
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
-	 * Retorna uma coleï¿½ï¿½o
-	 * de crï¿½dito a realizar, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o
-	 * atual, a situaï¿½ï¿½o anterior e origem de crï¿½dito informados.
+	 * [UC0155] - Encerrar Faturamento do Mês 
+	 * Retorna uma coleção
+	 * de Crédito a realizar, de acordo com o ano/mês de referência, a situação
+	 * atual, a situação anterior e origem de Crédito informados.
 	 * 
 	 * @param anoMesReferencia
 	 * @param idLocalidade
@@ -5603,11 +5603,11 @@ public interface IRepositorioFaturamento {
 
 	
 	/**
-	 * Pesquisa os dados necessï¿½rio para a geraï¿½ï¿½o do relatï¿½rio
+	 * Pesquisa os dados necessï¿½rio para a geração do relatï¿½rio
 	 * 
-	 * [UC0638] - Gerar Relatï¿½rios Anormalidade Consumo
+	 * [UC0638] - Gerar Relatórios Anormalidade Consumo
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @created 15/10/2007
 	 * 
 	 * @exception ErroRepositorioException
@@ -5630,8 +5630,8 @@ public interface IRepositorioFaturamento {
 	 * 
 	 * [SB0014] Selecionar por Indicador de Consumo 
 	 * [SB0015] Selecionar por Indicador de Medido 
-	 * [SB0016] Selecionar por Indicador de Poï¿½o 
-	 * [SB0017] Selecionar por Indicador de Volume Fixo de ï¿½gua
+	 * [SB0016] Selecionar por Indicador de Poço 
+	 * [SB0017] Selecionar por Indicador de Volume Fixo de água
 	 * 
 	 * @author Rafael Pinto
 	 * @date 05/11/2007
@@ -5650,8 +5650,8 @@ public interface IRepositorioFaturamento {
 	 * 
 	 * [SB0014] Selecionar por Indicador de Consumo 
 	 * [SB0015] Selecionar por Indicador de Medido 
-	 * [SB0016] Selecionar por Indicador de Poï¿½o 
-	 * [SB0017] Selecionar por Indicador de Volume Fixo de ï¿½gua
+	 * [SB0016] Selecionar por Indicador de Poço 
+	 * [SB0017] Selecionar por Indicador de Volume Fixo de água
 	 * 
 	 * @author Rafael Pinto
 	 * @date 05/11/2007
@@ -5722,7 +5722,7 @@ public interface IRepositorioFaturamento {
 	 * Recupera as contas com estouro de consumo ou com baixo consumo [UC0348] -
 	 * Emitir Contas
 	 * 
-	 * @author Sï¿½vio Luiz, Vivianne Sousa
+	 * @author Sílvio Luiz, Vivianne Sousa
 	 * @date 15/05/2006, 20/11/2007
 	 * 
 	 * @return
@@ -5737,7 +5737,7 @@ public interface IRepositorioFaturamento {
 	 * Recupera as contas com estouro de consumo ou com baixo consumo [UC0348] -
 	 * Emitir Contas
 	 * 
-	 * @author Sï¿½vio Luiz, Vivianne Sousa
+	 * @author Sílvio Luiz, Vivianne Sousa
 	 * @date 15/05/2006, 20/11/2007
 	 * 
 	 * @return
@@ -5749,10 +5749,10 @@ public interface IRepositorioFaturamento {
 			Integer imovelContaEnvio) throws ErroRepositorioException ;
 
 	/**
-	 * Recupera as contas com entrega para o cliente responsï¿½vel [UC0348] -
+	 * Recupera as contas com entrega para o cliente responsável [UC0348] -
 	 * Emitir Contas
 	 * 
-	 * @author Sï¿½vio Luiz, Vivianne Sousa
+	 * @author Sílvio Luiz, Vivianne Sousa
 	 * @date 15/05/2006, 20/11/2007
 	 * 
 	 * @return
@@ -5764,10 +5764,10 @@ public interface IRepositorioFaturamento {
 			Integer anoMesReferenciaFaturamentoAntecipado,Integer imovelContaEnvio)
 			throws ErroRepositorioException ;
 	/**
-	 * Recupera as contas com entrega para o cliente responsï¿½vel [UC0348] -
+	 * Recupera as contas com entrega para o cliente responsável [UC0348] -
 	 * Emitir Contas
 	 * 
-	 * @author Sï¿½vio Luiz, Vivianne Sousa
+	 * @author Sílvio Luiz, Vivianne Sousa
 	 * @date 15/05/2006, 20/11/2007
 	 * 
 	 * @return
@@ -5781,7 +5781,7 @@ public interface IRepositorioFaturamento {
 			
 
 	/**
-	 * Pesquisa as contas do cliente responsï¿½vel para todos os grupos de
+	 * Pesquisa as contas do cliente responsável para todos os grupos de
 	 * faturamento.
 	 * 
 	 * [UC0348] Emitir Contas
@@ -5802,7 +5802,7 @@ public interface IRepositorioFaturamento {
 			Integer imovelContaEnvio)throws ErroRepositorioException ;
 	
 	/**
-	 * Pesquisa as contas do cliente responsï¿½vel para todos os grupos de
+	 * Pesquisa as contas do cliente responsável para todos os grupos de
 	 * faturamento.
 	 * 
 	 * [UC0348] Emitir Contas
@@ -5823,9 +5823,9 @@ public interface IRepositorioFaturamento {
 			Integer imovelContaEnvio)throws ErroRepositorioException ;
 	
 	 /**
-	 * [UC0626] Gerar Resumo de Metas Acumulado no Mï¿½s (CAERN)
+	 * [UC0626] Gerar Resumo de Metas Acumulado no Mês (CAERN)
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @data 28/11/2007
 	 * 
 	 * @param idConta
@@ -5845,17 +5845,17 @@ public interface IRepositorioFaturamento {
      * Data: 26/11/2007
      * 
      * @param idConta
-     * @return Descriï¿½ï¿½o do retorno
+     * @return Descrição do retorno
      * @exception ErroRepositorioException
-     *                Descriï¿½ï¿½o da exceï¿½ï¿½o
+     *                Descrição da exceção
      */
     public Conta pesquisarExistenciaContaComSituacaoAtual(Integer idConta) 
     throws ErroRepositorioException;
     
     /**
      * 
-     * atualiza o sequencial de conta impressï¿½o 
-     * e o indicador de fichaCompensaï¿½ï¿½o
+     * atualiza o sequencial de conta impressão 
+     * e o indicador de fichaCompensação
      * 
      * @author Vivianne Sousa
      * @date 02/12/2007
@@ -5869,7 +5869,7 @@ public interface IRepositorioFaturamento {
     
     
     /**
-	 * [UC0120] - Calcular Valores de ï¿½gua e/ou Esgoto CAER
+	 * [UC0120] - Calcular Valores de água e/ou Esgoto CAER
 	 * 
 	 * @author Raphael Rossiter
 	 * 
@@ -5881,7 +5881,7 @@ public interface IRepositorioFaturamento {
 			Integer idConsumoTarifa) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC00730] Gerar Relatï¿½rio de Imï¿½veis com Faturas Recentes em Dia e Faturas Antigas em Atraso
+	 * [UC00730] Gerar Relatório de Imóveis com Faturas Recentes em Dia e Faturas Antigas em Atraso
 	 * 
 	 * @author Rafael Pinto
 	 * @date 10/01/2008
@@ -5896,7 +5896,7 @@ public interface IRepositorioFaturamento {
 	
 	
 	/**
-	 * [UC00730] Gerar Relatï¿½rio de Imï¿½veis com Faturas Recentes em Dia e Faturas Antigas em Atraso
+	 * [UC00730] Gerar Relatório de Imóveis com Faturas Recentes em Dia e Faturas Antigas em Atraso
 	 * 
 	 * @author Rafael Pinto
 	 * @date 10/01/2008
@@ -5910,7 +5910,7 @@ public interface IRepositorioFaturamento {
 		throws ErroRepositorioException ;
 	
 	/**
-	 * [UC00730] Gerar Relatï¿½rio de Imï¿½veis com Faturas Recentes em Dia e Faturas Antigas em Atraso
+	 * [UC00730] Gerar Relatório de Imóveis com Faturas Recentes em Dia e Faturas Antigas em Atraso
 	 * 
 	 * @author Rafael Pinto
 	 * @date 10/01/2008
@@ -5926,10 +5926,10 @@ public interface IRepositorioFaturamento {
     /**
      * [UC0737] Atualiza Quantidade de Parcela Paga Consecutiva e Parcela Bï¿½nus
      * 
-     * Retorna id e data vencimento da conta que tem serviï¿½o de parcelamento cobrado  
+     * Retorna id e data vencimento da conta que tem serviço de parcelamento cobrado  
      * DEBITO_COBRADO com CNTA_ID da tabela CONTA e 
      * FNTP_ID com valor correspodente a parcelamento de agua, 
-     * esgoto ou serviï¿½os da tabela FINANCIAMENTO_TIPO
+     * esgoto ou serviços da tabela FINANCIAMENTO_TIPO
      * 
      * @author Vivianne Sousa
      * @date 28/12/2007
@@ -5945,7 +5945,7 @@ public interface IRepositorioFaturamento {
      * 
      * Recupera o percentual alternativo e 
      * o numero de consumo do percentual alternativo 
-     * para o imï¿½vel informado.
+     * para o imóvel informado.
      * 
      * @author Vivianne Sousa
      * @date 24/01/2008
@@ -5958,20 +5958,20 @@ public interface IRepositorioFaturamento {
             throws ErroRepositorioException;
     
     /**
-     * [UC0724] - Processar Pagamento com Ficha de Compensaï¿½ï¿½o 
+     * [UC0724] - Processar Pagamento com Ficha de Compensação
      * Author: Vivianne Sousa 
      * Data: 28/01/2008
      * 
      * @param idConta
-     * @return Descriï¿½ï¿½o do retorno
+     * @return Descrição do retorno
      * @exception ErroRepositorioException
-     *                Descriï¿½ï¿½o da exceï¿½ï¿½o
+     *                Descrição da exceção
      */
     public ContaHistorico pesquisarExistenciaContaHistorico(Integer idConta) 
     throws ErroRepositorioException;
     
     /**
-     * [UC0254] - Efetuar Anï¿½lise do Movimento dos Arrecadadores
+     * [UC0254] - Efetuar Análise do Movimento dos Arrecadadores
      * 
      * obtem imovel, localidade e conta atraves do id da conta
      * 
@@ -5987,7 +5987,7 @@ public interface IRepositorioFaturamento {
             throws ErroRepositorioException;
     
     /**
-     * [UC0254] - Efetuar Anï¿½lise do Movimento dos Arrecadadores
+     * [UC0254] - Efetuar Análise do Movimento dos Arrecadadores
      * 
      * obtem imovel, localidade e contaHistorico atraves do id da conta historico
      * 
@@ -6003,7 +6003,7 @@ public interface IRepositorioFaturamento {
             throws ErroRepositorioException;
     
     /**
-     * [UC0737] - Atualiza Quantidade de Parcela Paga Consecutiva e Parcela Bï¿½nus
+     * [UC0737] - Atualiza Quantidade de Parcela Paga Consecutiva e Parcela Bônus
      * 
      * @author Vivianne Sousa
      * @date 07/02/2008
@@ -6015,7 +6015,7 @@ public interface IRepositorioFaturamento {
     public void adicionaUmNNParcelaBonusDebitoAcobrar(Integer idParcelamento) throws ErroRepositorioException ;
     
     /**
-     * [UC0737] - Atualiza Quantidade de Parcela Paga Consecutiva e Parcela Bï¿½nus
+     * [UC0737] - Atualiza Quantidade de Parcela Paga Consecutiva e Parcela Bônus
      * 
      * @author Vivianne Sousa
      * @date 07/02/2008
@@ -6027,7 +6027,7 @@ public interface IRepositorioFaturamento {
     public void adicionaUmNNParcelaBonusCreditoARealizar(Integer idParcelamento) throws ErroRepositorioException;
     
     /**
-     * [UC0216] - Calcular Acrï¿½scimos por Impontualidade
+     * [UC0216] - Calcular Acréscimos por Impontualidade
      * 
      * @author Raphael Rossiter
      * @date 12/02/2008
@@ -6042,10 +6042,10 @@ public interface IRepositorioFaturamento {
     
     
     /**
-     * [UC0000] - Prï¿½-Faturar Grupo de Faturamento
+     * [UC0000] - Pré-Faturar Grupo de Faturamento
      *
-     * Obter o registro da tabela FaturamentoAtivCronRota referente a rota que estï¿½ sendo
-     * prï¿½-faturada
+     * Obter o registro da tabela FaturamentoAtivCronRota referente a rota que está sendo
+     * pré-faturada
      *
      * @author Raphael Rossiter
      * @date 09/04/2008
@@ -6062,10 +6062,10 @@ public interface IRepositorioFaturamento {
     	throws ErroRepositorioException ;
     
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
-	 * Retorna o valor de guia de devoluï¿½ï¿½o
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia contï¿½bil, a situaï¿½ï¿½o atual 
-	 * e lanï¿½amento item contï¿½bil.
+	 * [UC0155] - Encerrar Faturamento do Mês 
+	 * Retorna o valor de guia de devolução
+	 * acumulado, de acordo com o ano/mês de referência contábil, a situação atual 
+	 * e lançamento item contábil.
 	 * 
 	 * @param anoMesReferencia
 	 * @param idLocalidade
@@ -6078,10 +6078,10 @@ public interface IRepositorioFaturamento {
 
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
-	 * Retorna o valor de guia de devoluï¿½ï¿½o
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia contï¿½bil, a situaï¿½ï¿½o atual,
-	 * a situaï¿½ï¿½o anterior e lanï¿½amento item contï¿½bil.
+	 * [UC0155] - Encerrar Faturamento do Mês 
+	 * Retorna o valor de guia de devolução
+	 * acumulado, de acordo com o ano/mês de referência contábil, a situação atual,
+	 * a situação anterior e lançamento item contábil.
 	 * 
 	 * @param anoMesReferencia
 	 * @param idLocalidade
@@ -6094,19 +6094,19 @@ public interface IRepositorioFaturamento {
 	public Collection acumularValorGuiaDevolucaoPorLancamentoItemContabil(int anoMesReferencia, Integer idLocalidade, Integer idSituacaoAtual, Integer idSituacaoAnterior,Integer idLancamentoItemContabil)	throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] - Encerrar Faturamento do Mês 
 	 * Linha 01 
-	 * Retorna o valor de ï¿½gua
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a localiade, a
-	 * categoria e a situaï¿½ï¿½o da conta igual a normal
+	 * Retorna o valor de água
+	 * acumulado, de acordo com o ano/mês de referência, a localiade, a
+	 * categoria e a situação da conta igual a normal
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no Hibernate
 	 */
@@ -6121,10 +6121,10 @@ public interface IRepositorioFaturamento {
 
 
 	/**
-	 * Pesquisa os valores de curto e longo prazo dos dï¿½bitos a cobrar da
+	 * Pesquisa os valores de curto e longo prazo dos débitos a cobrar da
 	 * localidade informada por tipo de financiamento.
 	 *
-	 * [UC0155] Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] Encerrar Faturamento do Mês 
 	 *
 	 * @author Pedro Alexandre
 	 * @date 06/03/2008
@@ -6149,19 +6149,19 @@ public interface IRepositorioFaturamento {
 			int idSituacaoAnterior) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] - Encerrar Faturamento do Mês 
 	 * Linha 10 
-	 * Retorna o valor de dï¿½bito
-	 * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o da conta
-	 * igual a incluï¿½da e o tipo de financiamento igual a serviï¿½o
+	 * Retorna o valor de débito
+	 * acumulado, de acordo com o ano/mês de referência, a situação da conta
+	 * igual a incluída e o tipo de financiamento igual a serviço
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -6178,9 +6178,9 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * Acumula o valor de dï¿½bito cobrado por tipo de financiamento.
+	 * Acumula o valor de débito cobrado por tipo de financiamento.
 	 * 
-	 * [UC0155] Encerrar Faturamento do Mï¿½s
+	 * [UC0155] Encerrar Faturamento do Mês
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 07/03/2008
@@ -6200,10 +6200,10 @@ public interface IRepositorioFaturamento {
 	
 	/**
 	 * Retorna o valor de categoria de credito realizado acumulado, de acordo
-	 * com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o atual, o item de lanï¿½amento
-	 * contï¿½bil e a origem do crï¿½dito informados.
+	 * com o ano/mês de referência, a situação atual, o item de lançamento
+	 * contábil e a origem do Crédito informados.
 	 * 
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s
+	 * [UC0155] - Encerrar Faturamento do Mês
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 06/03/2008
@@ -6225,10 +6225,10 @@ public interface IRepositorioFaturamento {
 	
 	/**
 	 * Retorna o valor de categoria de credito realizado acumulado, de acordo
-	 * com o ano/mï¿½s de referï¿½ncia, a situaï¿½ï¿½o atual, o item de lanï¿½amento
-	 * contï¿½bil e a origem do crï¿½dito informados.
+	 * com o ano/mês de referência, a situação atual, o item de lançamento
+	 * contábil e a origem do Crédito informados.
 	 * 
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s
+	 * [UC0155] - Encerrar Faturamento do Mês
 	 * 
 	 * @author Rafael Pinto
 	 * @date 21/07/2011
@@ -6247,10 +6247,10 @@ public interface IRepositorioFaturamento {
 		throws ErroRepositorioException ;
 	
 	/**
-	 * Pesquisa os valores de curto e longo prazo dos dï¿½bitos a cobrar da
+	 * Pesquisa os valores de curto e longo prazo dos débitos a cobrar da
 	 * localidade informada por tipo de financiamento.
 	 *
-	 * [UC0155] Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] Encerrar Faturamento do Mês 
 	 *
 	 * @author Pedro Alexandre
 	 * @date 06/03/2008
@@ -6277,7 +6277,7 @@ public interface IRepositorioFaturamento {
 	/**
 	 * Acumula o valor das guias de pagamento por tipo de financiamento.
 	 *
-	 * [UC0155] Encerrar Faturamento do Mï¿½s
+	 * [UC0155] Encerrar Faturamento do Mês
 	 *
 	 * @author Pedro Alexandre
 	 * @date 07/03/2008
@@ -6301,17 +6301,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s [SB0001] - acumula o valor de
-	 * dï¿½bito cobrado para situaï¿½ï¿½o de conta igual a cancelada por retificaï¿½ï¿½o
-	 * de acordo com o ano/mï¿½s de referï¿½ncia
+	 * [UC0155] - Encerrar Faturamento do Mês [SB0001] - acumula o valor de
+	 * débito cobrado para situação de conta igual a cancelada por retificaï¿½ï¿½o
+	 * de acordo com o ano/mês de referência
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -6324,17 +6324,17 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s [SB0001] - acumula o valor de
-	 * dï¿½bito cobrado para situaï¿½ï¿½o de conta igual a retificada de acordo com o
-	 * ano/mï¿½s de referï¿½ncia
+	 * [UC0155] - Encerrar Faturamento do Mês [SB0001] - acumula o valor de
+	 * débito cobrado para situação de conta igual a retificada de acordo com o
+	 * ano/mês de referência
 	 * 
 	 * @param anoMesReferencia
-	 *            Ano e mï¿½s de referï¿½ncia do faturamento
+	 *            Ano e mês de referência do faturamento
 	 * @param idLocalidade
-	 *            Cï¿½digo da localidade
+	 *            Código da localidade
 	 * @param idCategoria
-	 *            Cï¿½digo da categoria
-	 * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+	 *            Código da categoria
+	 * @return retorna o valor acumulado de acordo com os parâmetros informados
 	 * @throws ErroRepositorioException
 	 *             Erro no hibernate
 	 */
@@ -6347,12 +6347,12 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] - Encerrar Faturamento do Mês 
 	 * Retorna o valor de
-	 * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o atual, tipo de financiamento e 
-	 * pelo lanï¿½amento item contï¿½bil 
-	 * com o ano/mï¿½s de referï¿½ncia da baixa contï¿½bil da conta preenchido
+	 * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+	 * referência, a situação atual, tipo de financiamento e 
+	 * pelo lançamento item contábil 
+	 * com o ano/mês de referência da baixa contábil da conta preenchido
 	 * 
 	 * @param anoMesReferencia
 	 * @param idLocalidade
@@ -6367,12 +6367,12 @@ public interface IRepositorioFaturamento {
 	
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] - Encerrar Faturamento do Mês 
 	 * Retorna o valor de
-	 * categoria de credito realizado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o atual, o item de financiamento contï¿½bil
-	 * e a origem do crï¿½dito informados
-	 * e com o ano/mï¿½s da baixa contï¿½bil preenchida.
+	 * categoria de credito realizado acumulado, de acordo com o ano/mês de
+	 * referência, a situação atual, o item de financiamento contábil
+	 * e a origem do Crédito informados
+	 * e com o ano/mês da baixa contábil preenchida.
 	 * 
 	 * @param anoMesReferencia
 	 * @param idLocalidade
@@ -6386,12 +6386,12 @@ public interface IRepositorioFaturamento {
 	public ResumoFaturamento acumularValorCategoriaCreditoRealizadoCategoriaPorOrigemCreditoComBaixaContabilPreenchida(int anoMesReferencia, int idLocalidade, int idCategoria, Integer[] idsCreditoOrigem, Integer idSituacaoAtual, Integer idLancamentoItemContabil)	throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] - Encerrar Faturamento do Mês 
 	 * Retorna o valor de
-	 * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o atual, tipo de financiamento e 
-	 * pelo lanï¿½amento item contï¿½bil 
-	 * com o ano/mï¿½s de referï¿½ncia da baixa contï¿½bil da conta nï¿½o preenchido
+	 * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+	 * referência, a situação atual, tipo de financiamento e 
+	 * pelo lançamento item contábil 
+	 * com o ano/mês de referência da baixa contábil da conta não preenchido
 	 * 
 	 * @param anoMesReferencia
 	 * @param idLocalidade
@@ -6405,12 +6405,12 @@ public interface IRepositorioFaturamento {
 	public Collection<Object[]> acumularValorCategoriaDebitoCobradoCategoriaPorTipoFinanciamentoComBaixaContabilNaoPreenchida(int anoMesReferencia, int idLocalidade, int idCategoria, Integer[] idsFinanciamentoTipo, Integer idSituacaoAtual, Integer idLancamentoItemContabil)	throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] - Encerrar Faturamento do Mês 
 	 * Retorna o valor de
-	 * categoria de credito realizado acumulado, de acordo com o ano/mï¿½s de
-	 * referï¿½ncia, a situaï¿½ï¿½o atual, o item de financiamento contï¿½bil
-	 * e a origem do crï¿½dito informados
-	 * e com o ano/mï¿½s da baixa contï¿½bil nï¿½o preenchida.
+	 * categoria de credito realizado acumulado, de acordo com o ano/mês de
+	 * referência, a situação atual, o item de financiamento contábil
+	 * e a origem do Crédito informados
+	 * e com o ano/mês da baixa contábil não preenchida.
 	 * 
 	 * @param anoMesReferencia
 	 * @param idLocalidade
@@ -6431,9 +6431,9 @@ public interface IRepositorioFaturamento {
 	
 	/**
 	 * Acumula o valor das guias de pagamentos por tipo de financiamento 
-	 * agrupando por lanï¿½amento item contï¿½bil. 
+	 * agrupando por lançamento item contábil. 
 	 *
-	 * [UC0155] Encerrar Faturamento do Mï¿½s 
+	 * [UC0155] Encerrar Faturamento do Mês 
 	 *
 	 * @author Pedro Alexandre
 	 * @date 11/03/2008
@@ -6457,9 +6457,9 @@ public interface IRepositorioFaturamento {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * Acumula o valor de ï¿½gua por situaï¿½ï¿½o da conta 
+	 * Acumula o valor de água por situação da conta 
 	 *
-	 * [UC0155] Encerrar Faturamento do Mï¿½s
+	 * [UC0155] Encerrar Faturamento do Mês
 	 *
 	 * @author Pedro Alexandre
 	 * @date 11/03/2008
@@ -6474,9 +6474,9 @@ public interface IRepositorioFaturamento {
 	public BigDecimal acumularValorAguaPorSituacaoConta(int anoMesReferencia, int idLocalidade, int idCategoria, int idSituacaoAtual) throws ErroRepositorioException ;
 	
 	/**
-	 * Acumula o valor de ï¿½gua por situaï¿½ï¿½o da conta 
+	 * Acumula o valor de água por situação da conta 
 	 *
-	 * [UC0155] Encerrar Faturamento do Mï¿½s
+	 * [UC0155] Encerrar Faturamento do Mês
 	 *
 	 * @author Pedro Alexandre
 	 * @date 11/03/2008
@@ -6493,9 +6493,9 @@ public interface IRepositorioFaturamento {
 
 	
 	/**
-	 * Acumula o valor de esgoto por situaï¿½ï¿½o da conta 
+	 * Acumula o valor de esgoto por situação da conta 
 	 *
-	 * [UC0155 Encerrar Faturamentodo Mï¿½s] 
+	 * [UC0155 Encerrar Faturamentodo Mês] 
 	 *
 	 * @author Pedro Alexandre
 	 * @date 11/03/2008
@@ -6517,9 +6517,9 @@ public interface IRepositorioFaturamento {
 
 
 	/**
-	 * Acumula o valor de esgoto por situaï¿½ï¿½o da conta 
+	 * Acumula o valor de esgoto por situação da conta 
 	 *
-	 * [UC0155 Encerrar Faturamentodo Mï¿½s] 
+	 * [UC0155 Encerrar Faturamentodo Mês] 
 	 *
 	 * @author Pedro Alexandre
 	 * @date 11/03/2008
@@ -6542,11 +6542,11 @@ public interface IRepositorioFaturamento {
 	
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Retorna o valor de
- * categoria de credito realizado acumulado, de acordo com o ano/mï¿½s de
- * referï¿½ncia, a situaï¿½ï¿½o atual, 
- * e a origem do crï¿½dito informados.
+ * categoria de credito realizado acumulado, de acordo com o ano/mês de
+ * referência, a situação atual, 
+ * e a origem do Crédito informados.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -6565,11 +6565,11 @@ public BigDecimal acumularValorCategoriaCreditoRealizadoCategoriaPorOrigemCredit
 
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Retorna o valor de
- * categoria de credito realizado acumulado, de acordo com o ano/mï¿½s de
- * referï¿½ncia, a situaï¿½ï¿½o atual, a situaï¿½ï¿½o anterior
- * e a origem do crï¿½dito informados.
+ * categoria de credito realizado acumulado, de acordo com o ano/mês de
+ * referência, a situação atual, a situação anterior
+ * e a origem do Crédito informados.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -6587,9 +6587,9 @@ public BigDecimal acumularValorCategoriaCreditoRealizadoCategoriaPorOrigemCredit
 		Integer[] idsCreditoOrigem) throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s Retorna o valor de categoria de
- * credito realizado acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a
- * situaï¿½ï¿½o atual, e a origem do crï¿½dito informados.
+ * [UC0155] - Encerrar Faturamento do Mês Retorna o valor de categoria de
+ * credito realizado acumulado, de acordo com o ano/mês de referência, a
+ * situação atual, e a origem do Crédito informados.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -6606,10 +6606,10 @@ public BigDecimal acumularValorCategoriaCreditoRealizadoCategoriaPorOrigemCredit
 
 
 /**
- * Pesquisa os valores de curto e longo prazo dos dï¿½bitos a cobrar da
+ * Pesquisa os valores de curto e longo prazo dos débitos a cobrar da
  * localidade informada por tipo de financiamento.
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s 
+ * [UC0155] Encerrar Faturamento do Mês 
  *
  * @author Pedro Alexandre
  * @date 06/03/2008
@@ -6632,9 +6632,9 @@ public Object[] pesquisarValorLongoECurtoPrazoDebitoACobrarPorTipoFinanciamento(
 
 
 /**
- * Acumula o valor de dï¿½bito cobrado por tipo de financiamento.
+ * Acumula o valor de débito cobrado por tipo de financiamento.
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s
+ * [UC0155] Encerrar Faturamento do Mês
  *
  * @author Pedro Alexandre
  * @date 07/03/2008
@@ -6656,9 +6656,9 @@ public BigDecimal acumularValorDebitoCobradoPorTipoFinanciamentoCanceladaPorReti
 
 
 /**
- * Acumula o valor de dï¿½bito cobrado por tipo de financiamento.
+ * Acumula o valor de débito cobrado por tipo de financiamento.
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s
+ * [UC0155] Encerrar Faturamento do Mês
  *
  * @author Pedro Alexandre
  * @date 07/03/2008
@@ -6682,20 +6682,20 @@ public BigDecimal acumularValorDebitoCobradoPorTipoFinanciamento(
 
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Linha 41 
  * Retorna o valor de
- * categoria de dï¿½bito acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a
- * situaï¿½ï¿½o da conta igual a normal e o tipo de financiamento igual a
- * serviï¿½o, quando o nï¿½mero de prestaï¿½ï¿½es cobradas for maior que 11(onze)
+ * categoria de débito acumulado, de acordo com o ano/mês de referência, a
+ * situação da conta igual a normal e o tipo de financiamento igual a
+ * serviço, quando o número de prestaï¿½ï¿½es cobradas for maior que 11(onze)
  * 
  * @param anoMesReferencia
- *            Ano e mï¿½s de referï¿½ncia do faturamento
+ *            Ano e mês de referência do faturamento
  * @param idLocalidade
- *            Cï¿½digo da localidade
+ *            Código da localidade
  * @param idCategoria
- *            Cï¿½digo da categoria
- * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+ *            Código da categoria
+ * @return retorna o valor acumulado de acordo com os parâmetros informados
  * @throws ErroRepositorioException
  *             Erro no hibernate
  */
@@ -6709,20 +6709,20 @@ public BigDecimal acumularValorCategoriaDebitoTipoFinanciamentoServicoSituacaoNo
 		throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Linha 42 
  * Retorna o valor de
- * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
- * referï¿½ncia, a situaï¿½ï¿½o igual a normal e o tipo de financiamento igual a
+ * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+ * referência, a situação igual a normal e o tipo de financiamento igual a
  * juros de parcelamento e a diferenï¿½a de prestaï¿½ï¿½es maior que 11(onze)
  * 
  * @param anoMesReferencia
- *            Ano e mï¿½s de referï¿½ncia do faturamento
+ *            Ano e mês de referência do faturamento
  * @param idLocalidade
- *            Cï¿½digo da localidade
+ *            Código da localidade
  * @param idCategoria
- *            Cï¿½digo da categoria
- * @return retorna o valor acumulado de acordo com os parï¿½metros informados
+ *            Código da categoria
+ * @return retorna o valor acumulado de acordo com os parâmetros informados
  * @throws ErroRepositorioException
  *             Erro no hibernate
  */
@@ -6737,10 +6737,10 @@ public ResumoFaturamento acumularValorCategoriaDebitoCobradoCategoriaTipoFinanci
 
 
 /**
- * Pesquisa os valores de curto e longo prazo dos dï¿½bitos a cobrar da
+ * Pesquisa os valores de curto e longo prazo dos débitos a cobrar da
  * localidade informada por grupo de parcelamento.
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s 
+ * [UC0155] Encerrar Faturamento do Mês 
  *
  * @author Pedro Alexandre
  * @date 06/03/2008
@@ -6766,9 +6766,9 @@ public Object[] pesquisarValorLongoECurtoPrazoDebitoACobrarPorGrupoParcelamento(
 
 /**
  * Acumula o valor de curto e longo prazo para creditos a realizar
- * por origem de crï¿½dito.
+ * por origem de Crédito.
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s
+ * [UC0155] Encerrar Faturamento do Mês
  *
  * @author Pedro Alexandre
  * @date 13/03/2008
@@ -6792,10 +6792,10 @@ public Object[] pesquisarValorLongoECurtoPrazoCreditoARealizarPorOrigemCredito(
 
 
 /**
- * Acumula o valor do dï¿½bito cobrado por tipo de financiamento
- * agrupando por lanï¿½amento item contï¿½bil.
+ * Acumula o valor do débito cobrado por tipo de financiamento
+ * agrupando por lançamento item contábil.
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s 
+ * [UC0155] Encerrar Faturamento do Mês 
  *
  * @author Pedro Alexandre
  * @date 13/03/2008
@@ -6820,9 +6820,9 @@ public Collection acumularValorDebitoCobradoPorTipoFinanciamentoAgrupandoPorLanc
 
 
 /**
- * Acumula o valor de dï¿½bito cobrado por tipo de financiamento.
+ * Acumula o valor de débito cobrado por tipo de financiamento.
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s
+ * [UC0155] Encerrar Faturamento do Mês
  *
  * @author Pedro Alexandre
  * @date 07/03/2008
@@ -6848,7 +6848,7 @@ public BigDecimal acumularValorDebitoCobradoPorTipoFinanciamentoPorReferenciaCon
 /**
  * Acumula valor do imposto por tipo de imposto.
  *
- * [UC155] Encerrar Faturamento do Mï¿½s 
+ * [UC155] Encerrar Faturamento do Mês 
  *
  * @author Pedro Alexandre
  * @date 14/03/2008
@@ -6872,10 +6872,10 @@ public BigDecimal acumularValorContaCategoriaPorTipoImposto(
 		throws ErroRepositorioException ;
 
 /**
- * Acumula o valor de crï¿½dito realizado por origem de crï¿½dito
- * e pela referï¿½ncia da conta.
+ * Acumula o valor de Crédito realizado por origem de Crédito
+ * e pela referência da conta.
  *
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  *
  * @author Pedro Alexandre
  * @date 14/03/2008
@@ -6898,10 +6898,10 @@ public BigDecimal acumularValorCategoriaCreditoRealizadoCategoriaPorOrigemCredit
 		int idSituacaoAnterior) throws ErroRepositorioException ;
 
 /**
- * Acumula o valor de crï¿½dito realizado po origem de crï¿½dito 
- * agrupando por lanï¿½amento item contï¿½bil.
+ * Acumula o valor de Crédito realizado po origem de Crédito 
+ * agrupando por lançamento item contábil.
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s
+ * [UC0155] Encerrar Faturamento do Mês
  *
  * @author Pedro Alexandre
  * @date 17/03/2008
@@ -6926,7 +6926,7 @@ public Collection acumularValorCreditoRealizadoCategoriaPorOrigemCreditoAgrupand
 /**
  * Acumula o valor de imposto por tipo de imposto.
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s
+ * [UC0155] Encerrar Faturamento do Mês
  *
  * @author Pedro Alexandre
  * @date 17/03/2008
@@ -6949,9 +6949,9 @@ public BigDecimal acumularValorContaCategoriaPorTipoImposto(
 
 /**
  * Acumula o valor do imposto por tipo de imposto
- * por referï¿½ncia contï¿½bil.
+ * por referência contábil.
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s
+ * [UC0155] Encerrar Faturamento do Mês
  *
  * @author Pedro Alexandre
  * @date 17/03/2008
@@ -6975,11 +6975,11 @@ public BigDecimal acumularValorContaCategoriaPorTipoImpostoReferenciaContabil(
 		throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
- * Retorna o valor de ï¿½guae o de esgoto
- * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a localiade, a
- * categoria e a situaï¿½ï¿½o da conta igual aos ids informados
- * com ano/mï¿½s da baixa contï¿½bil preenchida
+ * [UC0155] - Encerrar Faturamento do Mês 
+ * Retorna o valor de águae o de esgoto
+ * acumulado, de acordo com o ano/mês de referência, a localiade, a
+ * categoria e a situação da conta igual aos ids informados
+ * com ano/mês da baixa contábil preenchida
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -6996,11 +6996,11 @@ public Object[] acumularValorAguaEsgotoPorSituacaoContaComBaixaContabilPreenchid
 		throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Retorna o valor de
- * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
- * referï¿½ncia, a(s) situaï¿½ï¿½o(ï¿½es) atual(ais)  
- * com o ano/mï¿½s de referï¿½ncia da baixa contï¿½bil da conta preenchido.
+ * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+ * referência, a(s) situação(ï¿½es) atual(ais)  
+ * com o ano/mês de referência da baixa contábil da conta preenchido.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -7017,11 +7017,11 @@ public BigDecimal acumularValorCategoriaDebitoCobradoCategoriaComBaixaContabilPr
 
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
- * Retorna o valor de ï¿½guae o de esgoto
- * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia, a localiade, a
- * categoria e a situaï¿½ï¿½o da conta igual aos ids informados
- * com ano/mï¿½s da baixa contï¿½bil nï¿½o preenchida
+ * [UC0155] - Encerrar Faturamento do Mês 
+ * Retorna o valor de águae o de esgoto
+ * acumulado, de acordo com o ano/mês de referência, a localiade, a
+ * categoria e a situação da conta igual aos ids informados
+ * com ano/mês da baixa contábil não preenchida
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -7039,11 +7039,11 @@ public Object[] acumularValorAguaEsgotoPorSituacaoContaComBaixaContabilNaoPreenc
 
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Retorna o valor de
- * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
- * referï¿½ncia, a situaï¿½ï¿½o atual e o tipo de financiamento 
- * com o ano/mï¿½s de referï¿½ncia da baixa contï¿½bil da conta preenchido.
+ * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+ * referência, a situação atual e o tipo de financiamento 
+ * com o ano/mês de referência da baixa contábil da conta preenchido.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -7061,12 +7061,12 @@ public BigDecimal acumularValorCategoriaDebitoCobradoCategoriaPorTipoFinanciamen
 		Integer idSituacaoAtual)	throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Retorna o valor de
- * categoria de credito realizado acumulado, de acordo com o ano/mï¿½s de
- * referï¿½ncia, a situaï¿½ï¿½o atual
- * e a origem do crï¿½dito informados
- * e com o ano/mï¿½s da baixa contï¿½bil preenchida.
+ * categoria de credito realizado acumulado, de acordo com o ano/mês de
+ * referência, a situação atual
+ * e a origem do Crédito informados
+ * e com o ano/mês da baixa contábil preenchida.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -7085,11 +7085,11 @@ public BigDecimal acumularValorCategoriaCreditoRealizadoCategoriaPorOrigemCredit
 
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Retorna o valor do imposto acumulado
- * de acordo com o ano/mï¿½s de referï¿½ncia da conta, a
- * situaï¿½ï¿½o atual da conta e o tipo de imposto 
- * e com o ano/mï¿½s da baixa contï¿½bil da conta preenchido.
+ * de acordo com o ano/mês de referência da conta, a
+ * situação atual da conta e o tipo de imposto 
+ * e com o ano/mês da baixa contábil da conta preenchido.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -7109,11 +7109,11 @@ public BigDecimal acumularValorImpostoPorTipoImpostoESituacaoContaComBaixaContab
 		throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Retorna o valor de
- * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
- * referï¿½ncia, a situaï¿½ï¿½o atual e o tipo de financiamento 
- * com o ano/mï¿½s de referï¿½ncia da baixa contï¿½bil da conta nï¿½o preenchido.
+ * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+ * referência, a situação atual e o tipo de financiamento 
+ * com o ano/mês de referência da baixa contábil da conta não preenchido.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -7132,12 +7132,12 @@ public BigDecimal acumularValorCategoriaDebitoCobradoCategoriaPorTipoFinanciamen
 
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Retorna o valor de
- * categoria de credito realizado acumulado, de acordo com o ano/mï¿½s de
- * referï¿½ncia, a situaï¿½ï¿½o atual
- * e a origem do crï¿½dito informados
- * e com o ano/mï¿½s da baixa contï¿½bil nï¿½o preenchida.
+ * categoria de credito realizado acumulado, de acordo com o ano/mês de
+ * referência, a situação atual
+ * e a origem do Crédito informados
+ * e com o ano/mês da baixa contábil não preenchida.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -7156,11 +7156,11 @@ public ResumoFaturamento acumularValorCategoriaCreditoRealizadoCategoriaPorOrige
 
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Retorna o valor do imposto acumulado
- * de acordo com o ano/mï¿½s de referï¿½ncia da conta, a
- * situaï¿½ï¿½o atual da conta e o tipo de imposto 
- * e com o ano/mï¿½s da baixa contï¿½bil da conta nï¿½o preenchido.
+ * de acordo com o ano/mês de referência da conta, a
+ * situação atual da conta e o tipo de imposto 
+ * e com o ano/mês da baixa contábil da conta não preenchido.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -7180,11 +7180,11 @@ public BigDecimal acumularValorImpostoPorTipoImpostoESituacaoContaComBaixaContab
 		throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  *
- * Retorna o valor de crï¿½dito a realizar 
- * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia contï¿½bil, a situaï¿½ï¿½o atual 
- * ou anterior e a origem de crï¿½dito informados.
+ * Retorna o valor de Crédito a realizar 
+ * acumulado, de acordo com o ano/mês de referência contábil, a situação atual 
+ * ou anterior e a origem de Crédito informados.
  *
  * @author Pedro Alexandre, Raphael Rossiter
  * @date 00/00/0000, 24/03/2009
@@ -7206,11 +7206,11 @@ public Collection acumularValorCreditoARealizarPorOrigemCredito(
 
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s
+ * [UC0155] - Encerrar Faturamento do Mês
  *
- * Retorna o valor de crï¿½dito a realizar 
- * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia contï¿½bil, a situaï¿½ï¿½o atual 
- * e a origem de crï¿½dito informados.
+ * Retorna o valor de Crédito a realizar 
+ * acumulado, de acordo com o ano/mês de referência contábil, a situação atual 
+ * e a origem de Crédito informados.
  *
  * @author Pedro Alexandre, Raphael Rossiter
  * @date 00/00/0000, 24/03/2009
@@ -7231,10 +7231,10 @@ public BigDecimal acumularValorCreditoARealizarPorOrigemCredito(
 		Categoria categoria)	throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
- * Retorna o valor de crï¿½dito a realizar 
- * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia contï¿½bil, a situaï¿½ï¿½o atual 
- * ou anterior e a origem de crï¿½dito informados.
+ * [UC0155] - Encerrar Faturamento do Mês 
+ * Retorna o valor de Crédito a realizar 
+ * acumulado, de acordo com o ano/mês de referência contábil, a situação atual 
+ * ou anterior e a origem de Crédito informados.
  * 
  * @param anoMesReferenciaContabil
  * @param idLocalidade
@@ -7254,10 +7254,10 @@ public Collection acumularValorCreditoARealizarPorOrigemCredito(
 		Categoria categoria)	throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
- * Retorna o valor de crï¿½dito a realizar 
- * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia contï¿½bil, a situaï¿½ï¿½o atual 
- * ou anterior e a origem de crï¿½dito informados.
+ * [UC0155] - Encerrar Faturamento do Mês 
+ * Retorna o valor de Crédito a realizar 
+ * acumulado, de acordo com o ano/mês de referência contábil, a situação atual 
+ * ou anterior e a origem de Crédito informados.
  * 
  * @param anoMesReferenciaContabil
  * @param idLocalidade
@@ -7278,9 +7278,9 @@ public BigDecimal acumularValorCreditoARealizarPorOrigemCredito(
 
 
 /**
- * Acumula o valor do dï¿½bito a cobrar por tipo de financiamento
+ * Acumula o valor do débito a cobrar por tipo de financiamento
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s
+ * [UC0155] Encerrar Faturamento do Mês
  *
  * @author Pedro Alexandre
  * @date 24/03/2008
@@ -7304,10 +7304,10 @@ public BigDecimal acumularValorDebitoACobrarCategoriaPorTipoFinanciamento(
 		throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
- * Retorna o valor de crï¿½dito a realizar 
- * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia contï¿½bil, a situaï¿½ï¿½o atual 
- * ou anterior e a origem de crï¿½dito informados.
+ * [UC0155] - Encerrar Faturamento do Mês 
+ * Retorna o valor de Crédito a realizar 
+ * acumulado, de acordo com o ano/mês de referência contábil, a situação atual 
+ * ou anterior e a origem de Crédito informados.
  * 
  * @param anoMesReferenciaContabil
  * @param idLocalidade
@@ -7326,11 +7326,11 @@ public BigDecimal acumularValorCreditoARealizarPorOrigemCredito(
 		Integer idSituacaoAnterior)	throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s
+ * [UC0155] - Encerrar Faturamento do Mês
  *
- * Retorna o valor de crï¿½dito a realizar 
- * acumulado, de acordo com o ano/mï¿½s de referï¿½ncia contï¿½bil, a situaï¿½ï¿½o atual 
- * e a origem de crï¿½dito informados.
+ * Retorna o valor de Crédito a realizar 
+ * acumulado, de acordo com o ano/mês de referência contábil, a situação atual 
+ * e a origem de Crédito informados.
  *
  * @author Pedro Alexandre, Raphael Rossiter
  * @date 00/00/0000, 24/03/2009
@@ -7352,9 +7352,9 @@ public BigDecimal acumularValorCreditoARealizarPorOrigemCredito(
 
 
 /**
- * Acumula o valor de dï¿½bito cobrado por tipo de financiamento.
+ * Acumula o valor de débito cobrado por tipo de financiamento.
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s
+ * [UC0155] Encerrar Faturamento do Mês
  *
  * @author Pedro Alexandre
  * @date 07/03/2008
@@ -7375,11 +7375,11 @@ public BigDecimal acumularValorDebitoCobradoPorTipoFinanciamentoRetificada(
 		int idFinanciamentoTipo) throws ErroRepositorioException ;
 
 /**
- * Pesquisa os valores de curto e longo prazo dos dï¿½bitos a cobrar da
+ * Pesquisa os valores de curto e longo prazo dos débitos a cobrar da
  * localidade informada por tipo de financiamento agrupando por 
- * lanï¿½amento item contï¿½bil. 
+ * lançamento item contábil. 
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s 
+ * [UC0155] Encerrar Faturamento do Mês 
  *
  * @author Pedro Alexandre
  * @date 16/04/2008
@@ -7400,11 +7400,11 @@ public Collection<Object[]> pesquisarValorLongoECurtoPrazoDebitoACobrarPorTipoFi
 		int idSituacaoAtual) throws ErroRepositorioException ;
 
 /**
- * Pesquisa os valores de curto e longo prazo dos dï¿½bitos a cobrar da
+ * Pesquisa os valores de curto e longo prazo dos débitos a cobrar da
  * localidade informada por tipo de financiamento e
- * agrupando por lanï¿½amento item contï¿½bil.
+ * agrupando por lançamento item contábil.
  *
- * [UC0155] Encerrar Faturamento do Mï¿½s 
+ * [UC0155] Encerrar Faturamento do Mês 
  *
  * @author Pedro Alexandre
  * @date 16/04/2008
@@ -7427,13 +7427,13 @@ public Collection<Object[]> pesquisarValorLongoECurtoPrazoDebitoACobrarPorTipoFi
 		int idSituacaoAnterior) throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Retorna o valor de
- * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
- * referï¿½ncia, a situaï¿½ï¿½o atual, tipo de financiamento e 
- * pelo lanï¿½amento item contï¿½bil 
- * com o ano/mï¿½s de referï¿½ncia da baixa contï¿½bil da conta nï¿½o preenchido
- * agrupando por lanï¿½amento item contï¿½bil.
+ * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+ * referência, a situação atual, tipo de financiamento e 
+ * pelo lançamento item contábil 
+ * com o ano/mês de referência da baixa contábil da conta não preenchido
+ * agrupando por lançamento item contábil.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -7451,13 +7451,13 @@ public Collection<Object[]> acumularValorCategoriaDebitoCobradoCategoriaPorTipoF
 		Integer idSituacaoAtual) throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Retorna o valor de
- * categoria de dï¿½bito cobrado acumulado, de acordo com o ano/mï¿½s de
- * referï¿½ncia, a situaï¿½ï¿½o atual, tipo de financiamento e 
- * pelo lanï¿½amento item contï¿½bil 
- * com o ano/mï¿½s de referï¿½ncia da baixa contï¿½bil da conta preenchido
- * agrupando por lanï¿½amento item contï¿½bil.
+ * categoria de débito cobrado acumulado, de acordo com o ano/mês de
+ * referência, a situação atual, tipo de financiamento e 
+ * pelo lançamento item contábil 
+ * com o ano/mês de referência da baixa contábil da conta preenchido
+ * agrupando por lançamento item contábil.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -7475,12 +7475,12 @@ public Collection<Object[]> acumularValorCategoriaDebitoCobradoCategoriaPorTipoF
 		Integer idSituacaoAtual)	throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Retorna o valor de
- * categoria de credito realizado acumulado, de acordo com o ano/mï¿½s de
- * referï¿½ncia, a situaï¿½ï¿½o atual, o item de financiamento contï¿½bil
- * e a origem do crï¿½dito informados
- * e com o ano/mï¿½s da baixa contï¿½bil nï¿½o preenchida.
+ * categoria de credito realizado acumulado, de acordo com o ano/mês de
+ * referência, a situação atual, o item de financiamento contábil
+ * e a origem do Crédito informados
+ * e com o ano/mês da baixa contábil não preenchida.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -7498,12 +7498,12 @@ public Collection<Object[]> acumularValorCategoriaCreditoRealizadoCategoriaPorOr
 		Integer idSituacaoAtual)	throws ErroRepositorioException ;
 
 /**
- * [UC0155] - Encerrar Faturamento do Mï¿½s 
+ * [UC0155] - Encerrar Faturamento do Mês 
  * Retorna o valor de
- * categoria de credito realizado acumulado, de acordo com o ano/mï¿½s de
- * referï¿½ncia, a situaï¿½ï¿½o atual, o item de financiamento contï¿½bil
- * e a origem do crï¿½dito informados
- * e com o ano/mï¿½s da baixa contï¿½bil preenchida.
+ * categoria de credito realizado acumulado, de acordo com o ano/mês de
+ * referência, a situação atual, o item de financiamento contábil
+ * e a origem do Crédito informados
+ * e com o ano/mês da baixa contábil preenchida.
  * 
  * @param anoMesReferencia
  * @param idLocalidade
@@ -7522,10 +7522,10 @@ public Collection<Object[]> acumularValorCategoriaCreditoRealizadoCategoriaPorOr
 
 
 /**
- * Pesquisa para cada imï¿½vel da rota informada 
+ * Pesquisa para cada imóvel da rota informada 
  * a principal categoria.
  *
- * [UC0302] - Gerar Dï¿½bitos a Cobrar de Acrï¿½scimos por Impontualidade
+ * [UC0302] - Gerar Débitos a Cobrar de Acréscimos por Impontualidade
  *
  * @author Pedro Alexandre
  * @date 05/05/2008
@@ -7539,11 +7539,11 @@ public Collection<Object[]> pesquisarPrincipalCategoriaImovelPorRota(Short codig
 
 
 /**
- * Pesquisa as contas parao imï¿½vel com situaï¿½ï¿½o 
+ * Pesquisa as contas parao imóvel com situação 
  * igual a norma, retificada ou incluida
  * que tenha pagamento.
  *
- * [UC0302] - Gerar Dï¿½bitos a Cobrar de Acrï¿½scimos por Impontualidade
+ * [UC0302] - Gerar Débitos a Cobrar de Acréscimos por Impontualidade
  *
  * @author Pedro Alexandre
  * @date 08/05/2008
@@ -7568,7 +7568,7 @@ public Collection obterContasImovelComPagamento(
 /**
  * Retorna as contas com o indicador de pagamento para a conta.
  *
- * [UC0302] - Gerar Dï¿½bitos a Cobrar de Acrï¿½scimos por Impontualidade
+ * [UC0302] - Gerar Débitos a Cobrar de Acréscimos por Impontualidade
  *
  * @author Pedro Alexandre
  * @date 08/05/2008
@@ -7585,9 +7585,9 @@ public Collection<Integer> obterIndicadorPagamentosClassificadosContaReferenciaM
 
 
 /**
- * pesquisa o indicado de acrï¿½scimo para o cliente do imï¿½vel.
+ * pesquisa o indicado de acrï¿½scimo para o cliente do imóvel.
  *
- * [UC0302]-Gerar Dï¿½bito a cobrar de Acrï¿½scimos por Impontualidade
+ * [UC0302]-Gerar Débito a cobrar de Acréscimos por Impontualidade
  *
  * @author Pedro Alexandre
  * @date 09/05/2008
@@ -7644,7 +7644,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 /**
  * [UC0745] - Gerar Arquivo Texto para Faturamento
  * 
- * [FS0002] - Verificar Situaï¿½ï¿½o Especial de Faturamento
+ * [FS0002] - Verificar situação Especial de Faturamento
  *
  * @author Raphael Rossiter
  * @date 17/04/2008
@@ -7690,7 +7690,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 *
-	 * [SB0002] - Obter dados dos serviï¿½os de parcelamento
+	 * [SB0002] - Obter dados dos serviços de parcelamento
 	 *
 	 * @author Raphael Rossiter
 	 * @date 25/04/2008
@@ -7705,7 +7705,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 *
-	 * [SB0002] - Obter dados dos serviï¿½os de parcelamento
+	 * [SB0002] - Obter dados dos serviços de parcelamento
 	 *
 	 * @author Raphael Rossiter
 	 * @date 25/04/2008
@@ -7720,7 +7720,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 *
-	 * [SB0003] - Obter dados dos crï¿½ditos realizados 
+	 * [SB0003] - Obter dados dos Créditos realizados 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 29/04/2008
@@ -7745,7 +7745,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Object[] pesquisarIntervaloNumeroQuadraPorRota(Integer idRota) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0259] - Processar Pagamento com Cï¿½digo de Barras - LEGADO
+	 * [UC0259] - Processar Pagamento com Código de Barras - LEGADO
 	 *
 	 * [SB0014] - Processar Pagamento Legado CAEMA
 	 *
@@ -7765,7 +7765,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0147] - Cancelar Conta
 	 *
-	 * Atualizar a conta que estï¿½ sendo cancelada com o ra que estï¿½ autorizando o cancelamento da mesma.
+	 * Atualizar a conta que estï¿½ sendo cancelada com o ra que está autorizando o cancelamento da mesma.
 	 *
 	 * @author Raphael Rossiter
 	 * @date 17/06/2008
@@ -7809,9 +7809,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0641] - Emitir TXT de Fatura de Cliente Responsï¿½vel
+	 * [UC0641] - Emitir TXT de Fatura de Cliente responsável
 	 *
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 10/07/2008
 	 *
 	 * @throws ErroRepositorioException
@@ -7820,9 +7820,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0641] - Emitir TXT de Fatura de Cliente Responsï¿½vel
+	 * [UC0641] - Emitir TXT de Fatura de Cliente responsável
 	 *
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 10/07/2008
 	 *
 	 * @throws ErroRepositorioException
@@ -7831,11 +7831,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0352] - Emitir TXT de Fatura de Cliente Responsï¿½vel
+	 * [UC0352] - Emitir TXT de Fatura de Cliente responsável
 	 * 
-	 * Pesquisa a quantidade de itens de faturas para o cliente responsï¿½vel 
+	 * Pesquisa a quantidade de itens de faturas para o cliente responsável 
 	 *
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 12/07/2008
 	 *
 	 * @throws ErroRepositorioException
@@ -7844,11 +7844,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0641] - Emitir TXT de Fatura de Cliente Responsï¿½vel
+	 * [UC0641] - Emitir TXT de Fatura de Cliente responsável
 	 * 
 	 * Pesquisa os clientes associados as faturas de uma determinada esfera de porder 
 	 *
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 21/01/2009
 	 *
 	 * @throws ErroRepositorioException
@@ -7856,11 +7856,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Collection pesquisarClientesFaturas(Integer idEsferaPoder) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0352] - Emitir TXT de Fatura de Cliente Responsï¿½vel
+	 * [UC0352] - Emitir TXT de Fatura de Cliente responsável
 	 * 
 	 * Pesquisa o percentual de retenï¿½ï¿½o
 	 *
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 12/07/2008
 	 *
 	 * @throws ErroRepositorioException
@@ -7869,9 +7869,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UCXXXX] - Relatï¿½rio de Protocolo de Entrega de Faturas
+	 * [UCXXXX] - Relatório de Protocolo de Entrega de Faturas
 	 *
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 12/11/2008
 	 *
 	 * @throws ErroRepositorioException
@@ -7880,11 +7880,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0153] - Apresentar Dados Para Anï¿½lise da Mediï¿½ï¿½o e Consumo
+	 * [UC0153] - Apresentar Dados Para Análise da Medição e Consumo
 	 * 
-	 * Pesquisa a situaï¿½ï¿½o especial de faturamento vigente do mï¿½s/ano informada
+	 * Pesquisa a situação especial de faturamento vigente do mês/ano informada
 	 *
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 11/08/2008
 	 *
 	 * @param idImovel
@@ -7902,7 +7902,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	 *
 	 * Pesquisa as faixas da subcategoria
 	 *
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 03/07/2008
 	 *
 	 * @param idSubcategoria
@@ -7914,9 +7914,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0194] Inserir Credito a Realizar
 	 * 
-	 * Pesquisa a quantidade de contas e contas histï¿½rico para um imï¿½vel em uma referï¿½ncia
+	 * Pesquisa a quantidade de contas e contas histórico para um imóvel em uma referência
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 14/08/2008
 	 * 
 	 * @param idImovel
@@ -7928,11 +7928,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer referenciaConta) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0857] - Gerar Relatï¿½rio de Arrecadaï¿½ï¿½o das Multas de Autos de Infraï¿½ï¿½o
+	 * [UC0857] - Gerar Relatório de Arrecadação das Multas de Autos de Infração
 	 * 
-	 * Pesquisa os dados necessï¿½rios para geraï¿½ï¿½o do relatï¿½rio
+	 * Pesquisa os dados necessários para geração do relatório
 	 *
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 10/09/2008
 	 *
 	 * @param idUnidadeNegocio, idFuncionario, dataPagamentoInicial, dataPagamentoFinal
@@ -7944,10 +7944,10 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Exclui resumo faturamento do ano/mï¿½s de faturamento corrente
+	 * Exclui resumo faturamento do ano/mês de faturamento corrente
 	 * por localidade
 	 * 
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s
+	 * [UC0155] - Encerrar Faturamento do Mês
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 11/08/2008
@@ -7961,21 +7961,21 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0866] Gerar Comando Contas em Cobranï¿½a por Empresa
+	 * [UC0866] Gerar Comando Contas em Cobrança por Empresa
 	 * 
 	 * Pesquisa a quantidade de contas
 	 * 
-	 * @author: Rafael Corrï¿½a
+	 * @author: Rafael Corrêa
 	 * @date: 27/10/2008
 	 */
 	public Collection pesquisarQuantidadeContas(ComandoEmpresaCobrancaContaHelper comandoEmpresaCobrancaContaHelper) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0870] Gerar Movimento de Contas em Cobranï¿½a por Empresa
+	 * [UC0870] Gerar Movimento de Contas em Cobrança por Empresa
 	 * 
-	 * Pesquisa os imï¿½veis das contas
+	 * Pesquisa os Imóveis das contas
 	 * 
-	 * @author: Rafael Corrï¿½a
+	 * @author: Rafael Corrêa
 	 * @date: 28/10/2008
 	 */
 	public Collection<Integer> pesquisarImoveisInformarContasEmCobranca(ComandoEmpresaCobrancaContaHelper comandoEmpresaCobrancaContaHelper, 
@@ -7984,7 +7984,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
     /**
      * [????] Informar Subdivisï¿½es de Rota
      * 
-     * Verifica se esse grupo de Faturamento jï¿½ estï¿½ comandado para a atividade Gerar Arquivo de Leitura
+     * Verifica se esse grupo de Faturamento já estï¿½ comandado para a atividade Gerar Arquivo de Leitura
      * 
      * @author: Victor Cisneiros
      * @date: 30/09/2008
@@ -7994,7 +7994,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
     
     /**
 	 *
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 24/10/2008
 	 *
 	 * @param conta
@@ -8046,7 +8046,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	throws ErroRepositorioException ;
 
 	/**
-	 * [UC0193] - Consultar Histï¿½rico de Faturamento
+	 * [UC0193] - Consultar Histórico de Faturamento
 	 *
 	 * @author Vivianne Sousa
 	 * @date 11/11/2008
@@ -8056,7 +8056,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
     public Collection obterDebitoACobrarImovel(Integer imovelID) throws ErroRepositorioException;
     
     /**
-	 * [UC0193] - Consultar Histï¿½rico de Faturamento
+	 * [UC0193] - Consultar Histórico de Faturamento
 	 *
 	 * @author Vivianne Sousa
 	 * @date 11/11/2008
@@ -8066,7 +8066,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
     public Collection obterDebitoACobrarHistoricoImovel(Integer imovelID) throws ErroRepositorioException;
     
     /**
-	 * [UC0193] - Consultar Histï¿½rico de Faturamento
+	 * [UC0193] - Consultar Histórico de Faturamento
 	 *
 	 * @author Vivianne Sousa
 	 * @date 11/11/2008
@@ -8076,7 +8076,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
     public Collection obterCreditoARealizarImovel(Integer imovelID) throws ErroRepositorioException;
     
     /**
-	 * [UC0193] - Consultar Histï¿½rico de Faturamento
+	 * [UC0193] - Consultar Histórico de Faturamento
 	 *
 	 * @author Vivianne Sousa
 	 * @date 11/11/2008
@@ -8086,7 +8086,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
     public Collection obterCreditoARealizarHistoricoImovel(Integer imovelID) throws ErroRepositorioException;
     
     /**
-	 * [UC0193] - Consultar Histï¿½rico de Faturamento
+	 * [UC0193] - Consultar Histórico de Faturamento
 	 *
 	 * @author Vivianne Sousa
 	 * @date 12/11/2008
@@ -8096,7 +8096,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
     public Collection obterGuiaPagamentoImovel(Integer imovelID) throws ErroRepositorioException ;
     
     /**
-	 * [UC0193] - Consultar Histï¿½rico de Faturamento
+	 * [UC0193] - Consultar Histórico de Faturamento
 	 *
 	 * @author Vivianne Sousa
 	 * @date 12/11/2008
@@ -8138,9 +8138,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0113] Faturar Grupo de Faturamento
 	 *
-	 * ï¿½ necessï¿½rio colocar a query abaixo no processo de faturar grupo como uma funcionalidade 
+	 * ï¿½ necessário colocar a query abaixo no processo de faturar grupo como uma funcionalidade 
 	 * (Antes de rodar o faturar), para atender uma necessidade de uma localidade (Petrolina), onde existe uma 
-	 * cobranï¿½a diferenciada de esgoto. CRC771 - Socorro Oliveira
+	 * cobrança diferenciada de esgoto. CRC771 - Socorro Oliveira
 	 *
 	 * @author Raphael Rossiter
 	 * @date 22/12/2008
@@ -8169,7 +8169,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * Pesquisar categoria por tarifa consumo
 	 * 
-	 * @author Rï¿½mulo Aurï¿½lio
+	 * @author Rómulo Aurélio
 	 * @date 19/12/2008
 	 * 
 	 * @return Collection
@@ -8182,7 +8182,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0877] EmitirGuiaPagamentoEmAtraso
 	 *
-	 * @author Flï¿½vio Leonardo
+	 * @author Flávio Leonardo
 	 * @date 27/01/2009
 	 */
 	public Collection pesquisarDadosRelatorioGuiaPagamentoEmAtraso(FiltroGuiaPagamento filtro)
@@ -8191,7 +8191,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * Emitir Contas CAERN
 	 *
-	 * Obter dados dos crï¿½ditos realizados Referente a Aï¿½ï¿½o Judicial da CAERN (50% de Agua)
+	 * Obter dados dos Créditos realizados Referente a Ação Judicial da CAERN (50% de Agua)
 	 *
 	 * @author Tiago Moreno
 	 * @date 23/01/2009
@@ -8203,7 +8203,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public CreditoRealizado pesquisarCreditoRealizadoNitrato(Conta conta) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0871] Manter Fatura de Cliente Responsï¿½vel
+	 * [UC0871] Manter Fatura de Cliente responsável
 	 */
 	public BigDecimal somarValorFaturasItemFatura(Fatura fatura) throws ErroRepositorioException;
 	
@@ -8214,14 +8214,14 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Date vencimentoFaturasItemFatura(Fatura fatura) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0871] Manter Fatura de Cliente Responsï¿½vel
+	 * [UC0871] Manter Fatura de Cliente responsável
 	 * @param fatura
 	 * @throws ErroRepositorioException
 	 */
 	public void alterarVencimentoFaturaFaturaItem(Fatura fatura) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0876] - Gerar Crï¿½dito Situaï¿½ï¿½o Especial Faturamento
+	 * [UC0876] - Gerar Crédito situação Especial Faturamento
 	 *
 	 * @author Raphael Rossiter
 	 * @date 27/01/2009
@@ -8236,7 +8236,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idCreditoTipo)throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0876] - Gerar Crï¿½dito Situaï¿½ï¿½o Especial Faturamento
+	 * [UC0876] - Gerar Crédito situação Especial Faturamento
 	 *
 	 * @author Raphael Rossiter
 	 * @date 27/01/2009
@@ -8248,7 +8248,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 		throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0876] - Gerar Crï¿½dito Situaï¿½ï¿½o Especial Faturamento
+	 * [UC0876] - Gerar Crédito situação Especial Faturamento
 	 *
 	 * @author Raphael Rossiter
 	 * @date 27/01/2009
@@ -8260,7 +8260,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 		throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0876] - Gerar Crï¿½dito Situaï¿½ï¿½o Especial Faturamento
+	 * [UC0876] - Gerar Crédito situação Especial Faturamento
 	 *
 	 * @author Raphael Rossiter
 	 * @date 27/01/2009
@@ -8272,7 +8272,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 		throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0876] - Gerar Crï¿½dito Situaï¿½ï¿½o Especial Faturamento
+	 * [UC0876] - Gerar Crédito situação Especial Faturamento
 	 *
 	 * @author Raphael Rossiter
 	 * @date 27/01/2009
@@ -8286,7 +8286,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0819] Gerar Historico do Encerramento do Faturamento
 	 * 
-	 * Verifica se existe ocorrï¿½ncia na tabela RESUMO_FATURAMENTO
+	 * Verifica se existe ocorrência na tabela RESUMO_FATURAMENTO
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 10/02/2009
@@ -8312,7 +8312,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 		throws ErroRepositorioException;
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s
+	 * [UC0155] - Encerrar Faturamento do Mês
 	 * 
 	 * [SB0005] - Obter Valor do Parcelamento Concedido como Bonus
 	 *
@@ -8333,7 +8333,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idCategoria) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0155] - Encerrar Faturamento do Mï¿½s
+	 * [UC0155] - Encerrar Faturamento do Mês
 	 * 
 	 * [SB0005] - Obter Valor do Parcelamento Concedido como Bonus
 	 *
@@ -8357,7 +8357,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * Pesquisa a soma dos valores das multas cobradas para a conta.
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 31/03/2009
 	 * 
 	 * @param idConta
@@ -8373,9 +8373,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 		throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa o valor da ï¿½gua da conta.
+	 * Pesquisa o valor da água da conta.
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 11/05/2009
 	 * 
 	 * @param idConta
@@ -8388,9 +8388,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 *  
-	 * Calcula os dados do consumo tarifa de vigï¿½ncia 
+	 * Calcula os dados do consumo tarifa de vigência 
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 02/07/2009
 	 * 
 	 * @param consumoTarifa
@@ -8404,9 +8404,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 *  
-	 * Calcula os dados do consumo tarifa de vigï¿½ncia 
+	 * Calcula os dados do consumo tarifa de vigência 
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 02/07/2009
 	 * 
 	 * @param consumoTarifa
@@ -8420,9 +8420,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 *  
-	 * Calcula os dados do consumo tarifa de vigï¿½ncia 
+	 * Calcula os dados do consumo tarifa de vigência 
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 02/07/2009
 	 * 
 	 * @param consumoTarifa
@@ -8436,9 +8436,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 *  
-	 * Calcula os dados do consumo tarifa de vigï¿½ncia 
+	 * Calcula os dados do consumo tarifa de vigência 
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 02/07/2009
 	 * 
 	 * @param consumoTarifa
@@ -8465,7 +8465,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 *
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 15/07/2009
 	 *
 	 * @param imovel
@@ -8477,7 +8477,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	
 	/**
-	 * [UC0184] - Manter dï¿½bito a Cobrar
+	 * [UC0184] - Manter débito a Cobrar
 	 *
 	 * @author Hugo Amorim
 	 * @date 17/07/2009
@@ -8488,7 +8488,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 
 	
 	/**
-	 * [UC0184] - Manter dï¿½bito a Cobrar
+	 * [UC0184] - Manter débito a Cobrar
 	 *
 	 * @author Hugo Amorim
 	 * @date 17/07/2009
@@ -8516,7 +8516,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 		throws ErroRepositorioException;
 	
 	/**
-	 * [UC0927] ï¿½ Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito 
+	 * [UC0927] ï¿½ Confirmar Cartï¿½o de Crédito/Débito 
 	 *
 	 * @author Hugo Amorim, Raphael Rossiter
 	 * @date 30/07/2009, 14/01/2010
@@ -8530,7 +8530,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UCXXXX] - Gerar Conta
 	 *
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 22/07/2009
 	 *
 	 * @param anoMes
@@ -8574,7 +8574,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa os dados do imï¿½vel que serï¿½ faturado
+	 * Pesquisa os dados do imóvel que serï¿½ faturado
 	 * 
 	 * [UC0113] - Faturar Grupo Faturamento
 	 * 
@@ -8594,7 +8594,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * 
-	 * Mï¿½todo que retorna todos os imï¿½veis que tenham cliente responsï¿½vel e
+	 * método que retorna todos os Imóveis que tenham cliente responsável e
 	 * indicacao de conta a ser entregue em outro endereï¿½o e que estejam nas
 	 * quadras pertencentes ï¿½s rotas passadas
 	 * 
@@ -8611,9 +8611,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idRota) throws ErroRepositorioException ;
 	
 	/**
-	 * Metodo que retorna os imï¿½veis das quadras pertencentes ï¿½s rotas
+	 * Metodo que retorna os Imóveis das quadras pertencentes as rotas
 	 * 
-	 * Utilizado pelo [UC0302] Gerar Dï¿½bitos a Cobrar de Acrï¿½scimos por
+	 * Utilizado pelo [UC0302] Gerar Débitos a Cobrar de Acréscimos por
 	 * Impontualidade
 	 * 
 	 * @author Raphael Rossiter
@@ -8626,38 +8626,38 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException ;
 	
 	/**
-	 * Permite pesquisar imï¿½vel doaï¿½ï¿½o baseando-se em rotas [UC0394] Gerar
-	 * Dï¿½bitos a Cobrar de Doaï¿½ï¿½es
+	 * Permite pesquisar imóvel doaï¿½ï¿½o baseando-se em rotas [UC0394] Gerar
+	 * Débitos a Cobrar de Doaï¿½ï¿½es
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 26/08/2008
 	 * 
 	 * @param idRota
-	 * @return Collection<ImovelCobrarDoacaoHelper> - Coleï¿½ï¿½o de
-	 *         ImovelCobrarDoacaoHelper jï¿½ com as informaï¿½ï¿½es necessï¿½rias para
-	 *         registro da cobranï¿½a
+	 * @return Collection<ImovelCobrarDoacaoHelper> - Coleção de
+	 *         ImovelCobrarDoacaoHelper já com as informações necessï¿½rias para
+	 *         registro da cobrança
 	 * @throws ErroRepositorioException
 	 */
 	public Collection<ImovelCobrarDoacaoHelper> pesquisarImovelDoacaoPorRota(
 			Integer idRota) throws ErroRepositorioException ;
 	
 	/**
-	 * Permite pesquisar imï¿½vel doaï¿½ï¿½o baseando-se em rotas [UC0394] Gerar
-	 * Dï¿½bitos a Cobrar de Doaï¿½ï¿½es
+	 * Permite pesquisar imóvel doaï¿½ï¿½o baseando-se em rotas [UC0394] Gerar
+	 * Débitos a Cobrar de Doaï¿½ï¿½es
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 26/08/2008
 	 * 
 	 * @param idRota
-	 * @return Collection<ImovelCobrarDoacaoHelper> - Coleï¿½ï¿½o de
-	 *         ImovelCobrarDoacaoHelper jï¿½ com as informaï¿½ï¿½es necessï¿½rias para
-	 *         registro da cobranï¿½a
+	 * @return Collection<ImovelCobrarDoacaoHelper> - Coleção de
+	 *         ImovelCobrarDoacaoHelper já com as informações necessárias para
+	 *         registro da cobrança
 	 * @throws ErroRepositorioException
 	 */
 	public Collection<ImovelCobrarDoacaoHelper> pesquisarImovelDoacaoPorRotaAlternativa(
 			Integer idRota) throws ErroRepositorioException ;
 	/**
-	 *[UC0928 ] - Manter Situaï¿½ï¿½o Especial de Faturamento 
+	 *[UC0928 ] - Manter situação Especial de Faturamento 
 	 *[SB ] -
 	 *[FS ] -
 	 *
@@ -8670,7 +8670,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 
 	
 	/**
-	 *[UC0928 ] - Manter Situaï¿½ï¿½o Especial de Faturamento 
+	 *[UC0928 ] - Manter situação Especial de Faturamento 
 	 *[SB ] -
 	 *[FS ] -
 	 *
@@ -8682,9 +8682,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Collection<FaturamentoSituacaoComando> pesquisarSituacaoEspecialFaturamento(FaturamentoSituacaoComando comando,Integer numeroPaginasPesquisa)throws ErroRepositorioException;
 	
 	/**
-	 * [UC0320] Gerar Fatura de Cliente Responsï¿½vel
+	 * [UC0320] Gerar Fatura de Cliente responsável
 	 * 
-	 * Verifica se todos os grupos jï¿½ foram faturados
+	 * Verifica se todos os grupos já foram faturados
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 17/08/2009
@@ -8708,12 +8708,12 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Collection pesquisarVencimentoConta(Integer idImovel, Integer anoMesReferencia) throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna uma array de object do debito cobrado ordenado pelo
+	 * método que retorna uma array de object do debito cobrado ordenado pelo
 	 * tipo de debito
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 06/09/2009
 	 * 
 	 * @param idConta
@@ -8735,10 +8735,10 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 
 	
 	/**
-	 * Pesquisa para cada imï¿½vel da rota informada 
+	 * Pesquisa para cada imóvel da rota informada 
 	 * a principal categoria.
 	 *
-	 * [UC0302] - Gerar Dï¿½bitos a Cobrar de Acrï¿½scimos por Impontualidade
+	 * [UC0302] - Gerar Débitos a Cobrar de Acréscimos por Impontualidade
 	 *
 	 * @author Raphael Rossiter
 	 * @date 01/09/2009
@@ -8752,9 +8752,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 		throws ErroRepositorioException ;
 	
 	/**
-	 * pesquisa o indicado de acrï¿½scimo para o cliente do imï¿½vel.
+	 * pesquisa o indicado de acrï¿½scimo para o cliente do imóvel.
 	 *
-	 * [UC0302]-Gerar Dï¿½bito a cobrar de Acrï¿½scimos por Impontualidade
+	 * [UC0302]-Gerar Débito a cobrar de Acréscimos por Impontualidade
 	 *
 	 * @author Raphael Rossiter
 	 * @date 01/09/2009
@@ -8836,11 +8836,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Short indicadorHistorico) throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna o tipo de cï¿½lculo da conta
+	 * método que retorna o tipo de cï¿½lculo da conta
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 21/09/2009
 	 * 
 	 * 
@@ -8851,11 +8851,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Integer pesquisarTipoCalculoConta(Integer idConta) throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna o tipo de cï¿½lculo da conta no histï¿½rico
+	 * método que retorna o tipo de cálculo da conta no histórico
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 21/09/2009
 	 * 
 	 * 
@@ -8868,8 +8868,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	
 	/**
-	 * Pesquisa a quantidade de dados do relatï¿½rio
-	 * [UC0635] - Gerar Relatï¿½rios de Contas em Revisï¿½o
+	 * Pesquisa a quantidade de dados do relatório
+	 * [UC0635] - Gerar Relatórios de Contas em Revisão
 	 * @author Arthur Carvalho
 	 * @created 14/09/2009
 	 * @exception ErroRepositorioException
@@ -8882,8 +8882,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer referenciaFinal, Integer idCategoria, Integer idEsferaPoder) throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa a quantidade de dados do relatï¿½rio
-	 * [UC0635] - Gerar Relatï¿½rio Acompanhamento Faturamento
+	 * Pesquisa a quantidade de dados do relatório
+	 * [UC0635] - Gerar Relatório Acompanhamento Faturamento
 	 * @author Arthur Carvalho
 	 * @created 23/09/2009
 	 * @exception ErroRepositorioException
@@ -8918,7 +8918,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			String numeroMoradoresFinal, String idAreaConstruidaFaixa) throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna as contas para impressao
+	 * método que retorna as contas para impressao
 	 * 
 	 * Pesquisar Contas Emitir COSANPA
 	 * 
@@ -8931,7 +8931,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idFaturamentoGrupo) throws ErroRepositorioException;
 	
 	/**
-	 *[UC0958] - Gerar Relatï¿½rio de juros, Multas e Dï¿½bitos Cancelados
+	 *[UC0958] - Gerar Relatório de juros, Multas e Débitos Cancelados
 	 *
 	 *@since 13/10/2009
 	 *@author Marlon Patrick
@@ -8940,13 +8940,13 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
      * [UC0113] - Faturar Grupo Faturamento 
-     * Author:Sï¿½vio Luiz  
+     * Author:Sílvio Luiz  
      * Data:27/10/2009 Consultar os Creï¿½ditos a Realizar do Imovel
      * 
      * @param imovelId
      *            Id do Imovel
      * @param debitoCreditoSituacaoAtualId
-     *            Id do Debito Credito Situaï¿½ï¿½o
+     *            Id do Debito Credito situação
      * @return Coleï¿½ï¿½o de Creditos a Realizar
      * @exception ErroRepositorioException
      */
@@ -8954,12 +8954,12 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
             throws ErroRepositorioException;
 
     /**
-	 * Metodo que deleta os creditos realizados categoria de um respectivo dï¿½bito a
+	 * Metodo que deleta os creditos realizados categoria de um respectivo débito a
 	 * cobrar
 	 * 
 	 * Utilizado pelo [UC0745] .
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 24/08/2006
 	 * 
 	 * @param idDebitoACobrar
@@ -8970,7 +8970,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna as contas para impressao
+	 * método que retorna as contas para impressao
 	 * 
 	 * Pesquisar Contas Emitir CAEMA
 	 * 
@@ -8990,7 +8990,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	 * Recupera as contas com estouro de consumo ou com baixo consumo [UC0348] -
 	 * Emitir Contas
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 15/05/2006
 	 * 
 	 * @return
@@ -9003,10 +9003,10 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	
 	/**
-	 * Recupera as contas com entrega para o cliente responsï¿½vel [UC0348] -
+	 * Recupera as contas com entrega para o cliente responsável [UC0348] -
 	 * Emitir Contas
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 15/05/2006
 	 * 
 	 * @return
@@ -9018,7 +9018,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 		throws ErroRepositorioException ;
 	
 	/**
-	 * Pesquisa as contas do cliente responsï¿½vel para todos os grupos de
+	 * Pesquisa as contas do cliente responsável para todos os grupos de
 	 * faturamento.
 	 * 
 	 * [UC0348] Emitir Contas
@@ -9096,8 +9096,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	
 	/**
-	 * Recupera as contas dos imï¿½veis selecionados que tenham o mï¿½s ano de referï¿½ncia e que
-	 * estejam com a situaï¿½ï¿½o atual igual a normal ou situaï¿½ï¿½o anterior igual a normal
+	 * Recupera as contas dos Imóveis selecionados que tenham o mês ano de referência e que
+	 * estejam com a situação atual igual a normal ou situação anterior igual a normal
 	 * 
 	 * @author Fernando Fontelles Filho
 	 * @date 20/01/2010
@@ -9111,7 +9111,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * Recupera as contas que foram impressas do grupo de faturamento e que sejam para envio de email.
-	 * [UC0394] - Gerar Dï¿½bitos a Cobrar de Doaï¿½ï¿½es
+	 * [UC0394] - Gerar Débitos a Cobrar de Doações
 	 *
 	 * @author Raphael Rossiter
 	 * @date 23/02/2010
@@ -9178,7 +9178,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			String imovelId, String rotaId) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1001] Emitir declaraï¿½ï¿½o de quitaï¿½ï¿½o anual de dï¿½bitos
+	 * [UC1001] Emitir declaração de quitação anual de débitos
 	 * 
 	 * Pesquisa das contas.
 	 * 
@@ -9194,7 +9194,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 				throws ErroRepositorioException;
 	
 	/**
-	 * [UC1001] Emitir declaraï¿½ï¿½o de quitaï¿½ï¿½o anual de dï¿½bitos
+	 * [UC1001] Emitir declaração de quitação anual de débitos
 	 * 
 	 * Pesquisa das contas.
 	 * 
@@ -9205,7 +9205,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			String ano, Date dataVerificacaoPagamentos) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1001] Emitir declaraï¿½ï¿½o de quitaï¿½ï¿½o anual de dï¿½bitos
+	 * [UC1001] Emitir declaração de quitação anual de débitos
 	 * 
 	 * Pesquisa das contas.
 	 * 
@@ -9216,7 +9216,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			String ano, Date dataVerificacaoPagamentos) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1001] Emitir declaraï¿½ï¿½o de quitaï¿½ï¿½o anual de dï¿½bitos
+	 * [UC1001] Emitir declaração de quitação anual de débitos
 	 * 
 	 * Pesquisa das contas.
 	 * 
@@ -9227,7 +9227,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			String ano, Date dataVerificacaoPagamentos) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1001] Emitir declaraï¿½ï¿½o de quitaï¿½ï¿½o anual de dï¿½bitos
+	 * [UC1001] Emitir declaração de quitação anual de débitos
 	 * 
 	 * Pesquisa das contas.
 	 * 
@@ -9238,9 +9238,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			String ano, Date dataVerificacaoPagamentos) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1008] Gerar TXT declaraï¿½ï¿½o de quitaï¿½ï¿½o anual de dï¿½bitos
+	 * [UC1008] Gerar TXT declaração de quitação anual de débitos
 	 * 
-	 * 	Este caso de uso permite a geraï¿½ï¿½o do TXT da declaraï¿½ï¿½o de quitaï¿½ï¿½o de dï¿½bitos.
+	 * 	Este caso de uso permite a geração do TXT da declaração de quitação de débitos.
 	 * 
 	 * @author Hugo Amorim
 	 * @date 23/03/2010
@@ -9248,9 +9248,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Collection<Integer> pesquisarAnosParaGerarArquivoTextoDeclaracaoQuitacaoAnualDebitos()
 			throws ErroRepositorioException;
 	/**
-	 * [UC1008] Gerar TXT declaraï¿½ï¿½o de quitaï¿½ï¿½o anual de dï¿½bitos
+	 * [UC1008] Gerar TXT declaração de quitação anual de débitos
 	 * 
-	 * 	Este caso de uso permite a geraï¿½ï¿½o do TXT da declaraï¿½ï¿½o de quitaï¿½ï¿½o de dï¿½bitos.
+	 * 	Este caso de uso permite a geração do TXT da declaração de quitação de débitos.
 	 * 
 	 * @author Hugo Amorim
 	 * @date 23/03/2010
@@ -9259,9 +9259,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer ano, int empresaId, int quantidadeMaxima, Integer idGrupoFaturamento) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1008] Gerar TXT declaraï¿½ï¿½o de quitaï¿½ï¿½o anual de dï¿½bitos
+	 * [UC1008] Gerar TXT declaração de quitação anual de débitos
 	 * 
-	 * 	Este caso de uso permite a geraï¿½ï¿½o do TXT da declaraï¿½ï¿½o de quitaï¿½ï¿½o de dï¿½bitos.
+	 * 	Este caso de uso permite a geração do TXT da declaração de quitação de débitos.
 	 * 
 	 * @author Hugo Amorim
 	 * @date 23/03/2010
@@ -9270,7 +9270,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer id)throws ErroRepositorioException;
 	
 	/**
-	 * [UC0394] - Gerar Dï¿½bitos a Cobrar de Doaï¿½ï¿½es
+	 * [UC0394] - Gerar Débitos a Cobrar de Doaï¿½ï¿½es
 	 *
 	 * @author Hugo Amorim
 	 * @date 07/04/2010
@@ -9285,8 +9285,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	
 	/**
-	 * [SB0002] ï¿½ Replicar os dï¿½bitos existentes para uma nova vigï¿½ncia e valor.
-	 * Pesquisa a ï¿½ltima vigï¿½ncia de cada dï¿½bito tipo, e retorna uma coleï¿½ï¿½o com limite de 10 registros. 
+	 * [SB0002] ï¿½ Replicar os débitos existentes para uma nova vigência e valor.
+	 * Pesquisa a ï¿½ltima vigência de cada débito tipo, e retorna uma coleção com limite de 10 registros. 
 	 * 
 	 * @author Josenildo Neves
 	 * @date 22/02/2010
@@ -9295,8 +9295,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer numeroPagina) throws ErroRepositorioException;
 	
 	/**
-	 * [SB0002] ï¿½ Replicar os dï¿½bitos existentes para uma nova vigï¿½ncia e valor.
-	 * Pesquisa a ï¿½ltima vigï¿½ncia de cada tipo dï¿½bito, e retorna o total.   
+	 * [SB0002] ï¿½ Replicar os débitos existentes para uma nova vigência e valor.
+	 * Pesquisa a ï¿½ltima vigência de cada tipo débito, e retorna o total.   
 	 * 
 	 * @author Josenildo Neves
 	 * @date 22/02/2010
@@ -9305,8 +9305,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [SB0002] ï¿½ Replicar os dï¿½bitos existentes para uma nova vigï¿½ncia e valor.
-	 * Pesquisa a ï¿½ltima vigï¿½ncia de cada tipo dï¿½bito, e retorna uma coleï¿½ï¿½o.   
+	 * [SB0002] ï¿½ Replicar os débitos existentes para uma nova vigência e valor.
+	 * Pesquisa a ï¿½ltima vigência de cada tipo débito, e retorna uma coleção.   
 	 * 
 	 * @author Josenildo Neves
 	 * @date 22/02/2010
@@ -9315,9 +9315,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC1008] Gerar TXT declaraï¿½ï¿½o de quitaï¿½ï¿½o anual de dï¿½bitos
+	 * [UC1008] Gerar TXT declaração de quitação anual de débitos
 	 * 
-	 * 	Este caso de uso permite a geraï¿½ï¿½o do TXT da declaraï¿½ï¿½o de quitaï¿½ï¿½o de dï¿½bitos.
+	 * 	Este caso de uso permite a geração do TXT da declaração de quitação de débitos.
 	 * 
 	 * @author Hugo Amorim
 	 * @date 23/03/2010
@@ -9329,7 +9329,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0820] Atualizar Faturamento do Movimento Celular
      * 
-     * Mï¿½todo criado para atualizar apenas os campos necessï¿½rios para
+     * método criado para atualizar apenas os campos necessï¿½rios para
      * Conta.
      * 	 
      * @author Bruno Barros
@@ -9343,7 +9343,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0820] Atualizar Faturamento do Movimento Celular
      * 
-     * Mï¿½todo criado para atualizar apenas os campos necessï¿½rios para
+     * método criado para atualizar apenas os campos necessários para
      * Conta Categoria.
      * 	 
      * @author Bruno Barros
@@ -9357,7 +9357,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0820] Atualizar Faturamento do Movimento Celular
      * 
-     * Mï¿½todo criado para atualizar apenas os campos necessï¿½rios para
+     * método criado para atualizar apenas os campos necessários para
      * Conta Impostos Deduzidos.
      * 	 
      * @author Bruno Barros
@@ -9372,7 +9372,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0820] Atualizar Faturamento do Movimento Celular
      * 
-     * Mï¿½todo criado para atualizar apenas os campos necessï¿½rios para
+     * método criado para atualizar apenas os campos necessários para
      * Movimento Conta Prefaturada.
      * 	 
      * @author Bruno Barros
@@ -9386,7 +9386,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0820] Atualizar Faturamento do Movimento Celular
      * 
-     * Mï¿½todo criado para atualizar apenas os campos necessï¿½rios para
+     * método criado para atualizar apenas os campos necessários para
      * Conta.
      * 	 
      * @author Bruno Barros
@@ -9397,9 +9397,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public void zerarValoresContaPassarDebitoCreditoSituacaoAtualPreFaturadaMOBILE( Conta conta ) 
 		throws ErroRepositorioException;
 	/**
-	 * [UC0982] Inserir tipo de Dï¿½bito com Vigï¿½ncia.
+	 * [UC0982] Inserir tipo de Débito com vigência.
 	 * 
-	 * Verificar se existe vigï¿½ncia jï¿½ cadastrada para o tipo de dï¿½bito.
+	 * Verificar se existe vigência já cadastrada para o tipo de débito.
 	 * 
 	 * @author Hugo Leonardo
 	 * @param dataVigenciaInicial
@@ -9412,10 +9412,10 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 		throws ErroRepositorioException;
 	
 	/** 
-	 *  4.1.1.	Atravï¿½s do DBTP_ID relacionar com o DBTP_ID da tabela DEBITO_TIPO_VIGENCIA.
-	 *   Selecionar a ï¿½ltima vigï¿½ncia (maior data DBTV_DTVIGENCIAFINAL) para o tipo de dï¿½bito 
+	 *  4.1.1.	Através do DBTP_ID relacionar com o DBTP_ID da tabela DEBITO_TIPO_VIGENCIA.
+	 *   Selecionar a última vigência (maior data DBTV_DTVIGENCIAFINAL) para o tipo de débito 
 	 *   o valor DBTV_VLDEBITO correspondente. 
-	 *	4.1.2.	Caso nï¿½o seja encontrado para uma vigï¿½ncia e tipo de dï¿½bito na tabela 
+	 *	4.1.2.	Caso não seja encontrado para uma vigência e tipo de débito na tabela 
 	 *	DEBITO_TIPO_VIGENCIA, deverï¿½ selecionar o valor sugerido (DBTP_VLSUGERIDO<>0) 
 	 *	correspondente a constante 22 na tabela DEBITO_TIPO e utilizar este valor. 
 	 *
@@ -9429,9 +9429,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idDebitoTipo) throws ErroRepositorioException;
 	
 //	/**
-//	 * [UC1008] Gerar TXT declaraï¿½ï¿½o de quitaï¿½ï¿½o anual de dï¿½bitos
+//	 * [UC1008] Gerar TXT declaração de quitação anual de débitos
 //	 * 
-//	 * 	Este caso de uso permite a geraï¿½ï¿½o do TXT da declaraï¿½ï¿½o de quitaï¿½ï¿½o de dï¿½bitos.
+//	 * 	Este caso de uso permite a geração do TXT da declaração de quitação de débitos.
 //	 * 
 //	 * @author Hugo Amorim
 //	 * @date 23/03/2010
@@ -9467,9 +9467,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 
 	
 	 /**
-	 * [UC0876] - Gerar Crï¿½dito Situaï¿½ï¿½o Especial Faturamento 
+	 * [UC0876] - Gerar Crédito situação Especial Faturamento 
 	 *
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 10/06/2010
 	 *
 	 * @param colecaoFaturamentoAtividadeCronogramaRota
@@ -9483,12 +9483,12 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Atualizar Credito a Realizar Campo numero de prestaï¿½ï¿½es realizadas e
-	 * valor do crï¿½dito
+	 * Atualizar Credito a Realizar Campo numero de prestações realizadas e
+	 * valor do Crédito
 	 * 
 	 * [UC0840] - Atualizar Faturamento do Movimento Celular 
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 11/06/2010
 	 * 
 	 * @param idDebitoAcobrar
@@ -9499,11 +9499,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Atualizar Credito a Realizar Categoria Campo valor do crï¿½dito por categoria
+	 * Atualizar Credito a Realizar Categoria Campo valor do Crédito por categoria
 	 * 
 	 * [UC0840] - Atualizar Faturamento do Movimento Celular 
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 11/06/2010
 	 * 
 	 * @param idDebitoAcobrar
@@ -9514,12 +9514,12 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Atualizar Credito a Realizar Campo numero de prestaï¿½ï¿½es realizadas e
-	 * valor do crï¿½dito
+	 * Atualizar Credito a Realizar Campo numero de prestaçõs realizadas e
+	 * valor do Crédito
 	 * 
 	 * [UC0840] - Atualizar Faturamento do Movimento Celular 
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 11/06/2010
 	 * 
 	 * @param idDebitoAcobrar
@@ -9530,11 +9530,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Atualizar Credito a Realizar Categoria Campo valor do crï¿½dito por categoria
+	 * Atualizar Credito a Realizar Categoria Campo valor do Crédito por categoria
 	 * 
 	 * [UC0840] - Atualizar Faturamento do Movimento Celular 
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 11/06/2010
 	 * 
 	 * @param idDebitoAcobrar
@@ -9545,9 +9545,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0391] Inserir valor de cobranï¿½a de serviï¿½o.
+	 * [UC0391] Inserir valor de cobrança de serviço.
 	 * 
-	 * Verificar se existe valor de cobranï¿½a de serviï¿½o jï¿½ cadastrada.
+	 * Verificar se existe valor de cobrança de serviço já cadastrada.
 	 * 
 	 * @author Hugo Amorim
 	 * @throws ControladorException
@@ -9563,7 +9563,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	 * 
 	 * [UC0840] - Atualizar Faturamento do Movimento Celular 
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 11/06/2010
 	 * 
 	 * @param idDebitoAcobrar
@@ -9577,14 +9577,14 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	
 	/**
-	 * Mï¿½todo que retorna uma array de object com a soma do valor dos debitos
-	 * cobrados de parcelamento(parcelamento de ï¿½gua,parcelamento de esgoto,
-	 * parcelamento de serviï¿½os e juros de parcelamento),o numero da prestacao 
+	 * método que retorna uma array de object com a soma do valor dos debitos
+	 * cobrados de parcelamento(parcelamento de água,parcelamento de esgoto,
+	 * parcelamento de serviços e juros de parcelamento),o numero da prestacao 
 	 * e o numero total de prestaï¿½ï¿½es
 	 * 
 	 * [UC0348] Emitir Contas
 	 * 
-	 * [SB0013] Gerar Linhas dos Dï¿½bitos Cobrados
+	 * [SB0013] Gerar Linhas dos Débitos Cobrados
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 11/06/2010
@@ -9597,14 +9597,14 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna uma array de object com a soma do valor dos debitos
-	 * cobrados de parcelamento(parcelamento de ï¿½gua,parcelamento de esgoto,
-	 * parcelamento de serviï¿½os e juros de parcelamento),o numero da prestacao 
+	 * método que retorna uma array de object com a soma do valor dos debitos
+	 * cobrados de parcelamento(parcelamento de água,parcelamento de esgoto,
+	 * parcelamento de serviços e juros de parcelamento),o numero da prestacao 
 	 * e o numero total de prestaï¿½ï¿½es
 	 * 
 	 * [UC0482]Emitir 2ï¿½ Via de Conta
 	 * 
-	 * [SB0013] Gerar Linhas dos Dï¿½bitos Cobrados
+	 * [SB0013] Gerar Linhas dos serviçosCobrados
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 11/06/2010
@@ -9617,11 +9617,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idConta) throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna uma array de object do debito cobrado ordenado pelo
+	 * método que retorna uma array de object do debito cobrado ordenado pelo
 	 * tipo de debito
 	 * 
 	 * [UC0348] Emitir Contas
-	 * [SB0013] Gerar Linhas dos Dï¿½bitos Cobrados
+	 * [SB0013] Gerar Linhas dos Débitos Cobrados
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 16/01/2007
@@ -9634,11 +9634,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna uma array de object do debito cobrado ordenado pelo
+	 * método que retorna uma array de object do debito cobrado ordenado pelo
 	 * tipo de debito
 	 * 
-	 * [UC0482]Emitir 2ï¿½ Via de Conta
-	 * [SB0013] Gerar Linhas dos Dï¿½bitos Cobrados
+	 * [UC0482]Emitir 2a Via de Conta
+	 * [SB0013] Gerar Linhas dos Débitos Cobrados
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 11/06/2010
@@ -9653,7 +9653,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 * 
-	 * [SB0002] - Obter dados dos serviï¿½os de parcelamento
+	 * [SB0002] - Obter dados dos serviços de parcelamento
 	 * 
 	 * @author Raphael Rossiter,Vivianne Sousa
 	 * @date 25/04/2008,14/06/2010
@@ -9668,7 +9668,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 * 
-	 * [SB0002] - Obter dados dos serviï¿½os de parcelamento
+	 * [SB0002] - Obter dados dos serviços de parcelamento
 	 * 
 	 * @author Raphael Rossiter,Vivianne Sousa
 	 * @date 25/04/2008,14/06/2010
@@ -9695,7 +9695,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 
 	
 	/**
-	 * [UC] Gerar Relatï¿½rio de Contas Emitidas
+	 * [UC] Gerar Relatório de Contas Emitidas
 	 * 
 	 * @author Hugo Amorim
 	 * @created 16/06/2010
@@ -9726,7 +9726,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC1001] 
 	 * 
-	 * [SB0047] Exibir mensagem quitaï¿½ï¿½o de dï¿½bitos
+	 * [SB0047] Exibir mensagem quitação de débitos
 	 * 
 	 * @author Hugo Amorim
 	 * @created 21/06/2010
@@ -9737,7 +9737,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Integer pesquisarMesagemExtrato(Integer anoMesReferencia,Integer idImovel)throws ErroRepositorioException;
 	
 	/**
-	 * @author Rï¿½mulo Aurï¿½lio
+	 * @author Rómulo Aurélio
 	 * @throws ControladorException
 	 * @data 22/06/2010
 	 */
@@ -9762,9 +9762,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 
 	/**
-	 * [UC0014] Manter Imï¿½vel
+	 * [UC0014] Manter imóvel
 	 * 
-	 * [FS0037] Verificar Imï¿½vel em Processo de Faturamento 
+	 * [FS0037] Verificar imóvel em Processo de Faturamento 
 	 * 
 	 * @author Hugo Amorim
 	 * @created 02/07/2010
@@ -9777,7 +9777,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idImovel) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1041] Gerar Taxa Percentual da Tarifa Mï¿½nima para Cortado 
+	 * [UC1041] Gerar Taxa Percentual da Tarifa Mínima para Cortado 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 09/07/2010
@@ -9793,7 +9793,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC1041] Gerar Taxa Percentual da Tarifa Mï¿½nima para Cortado 
+	 * [UC1041] Gerar Taxa Percentual da Tarifa Mínima para Cortado 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 09/07/2010
@@ -9809,9 +9809,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0014] Manter Imï¿½vel
+	 * [UC0014] Manter imóvel
 	 * 
-	 * [FS0002] - Verificar existï¿½ncia de dï¿½bito a cobrar de Tarifa de Cortado ativo para o imï¿½vel
+	 * [FS0002] - Verificar existéncia de débito a cobrar de Tarifa de Cortado ativo para o imóvel
 	 *
 	 * @author Raphael Rossiter
 	 * @date 12/07/2010
@@ -9826,7 +9826,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
    
     /**
-     * [UC1042] Verificar Farturamento dos Imï¿½veis Cortados
+     * [UC1042] Verificar Farturamento dos Imóveis Cortados
      * 
      * Apaga todos os debitos a cobrar, debitos a cobrar categoria
      * e debito a cobrar geral, para o imovel/anoMes informado, com
@@ -9844,7 +9844,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
         throws ErroRepositorioException;
 	
 	/**
-	 * [UC1035] Efetivar Alterar Inscriï¿½ï¿½o de Imï¿½vel
+	 * [UC1035] Efetivar Alterar Inscrição de imóvel
 	 * 
 	 * @author Hugo Amorim
 	 * @throws ControladorException
@@ -9856,7 +9856,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
     
     /**
      * 
-     * [UC1042] Verificar Farturamento dos Imï¿½veis Cortados
+     * [UC1042] Verificar Farturamento dos Imóveis Cortados
      * 
      * Atualizar o indicador de faturamento do consumo historo
      * 
@@ -9869,7 +9869,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 
     
     /**
-	 * [UC1042] Verificar Farturamento dos Imï¿½veis Cortados 
+	 * [UC1042] Verificar Farturamento dos Imóveis Cortados 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 13/07/2010
@@ -9885,7 +9885,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer anoMesFaturamento, int numeroPaginas, int quantidadeRegistros) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC1042] Verificar Farturamento dos Imï¿½veis Cortados 
+	 * [UC1042] Verificar Farturamento dos Imóveis Cortados 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 13/07/2010
@@ -9901,7 +9901,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer anoMesFaturamento, int numeroPaginas, int quantidadeRegistros) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0214] Efetuar Parcelamento de Dï¿½bitos
+	 * [UC0214] Efetuar Parcelamento de Débitos
 	 *
 	 * @author Vivianne Sousa
 	 * @date 21/07/2010
@@ -9909,14 +9909,14 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Conta pesquisarUltimaContaDoImovel(Integer idImovel) throws ErroRepositorioException;
 	
 	/**
-     * [UC1042] Verificar Farturamento dos Imï¿½veis Cortados
+     * [UC1042] Verificar Farturamento dos Imóveis Cortados
      * 
      * Apaga todos os debitos a cobrar, debitos a cobrar categoria
      * e debito a cobrar geral, para o imovel/anoMes informado, com
      * debito tipo = DebitoTipo.TARIFA_CORTADO e debito tipo situacao
      * atual = DebitoCreditoSituacao.NORMAL 
      * 
-     * @autor Sï¿½vio Luiz
+     * @autor Sílvio Luiz
      * @date 13/07/2010
      *  
      * @param idImovel
@@ -9927,14 +9927,14 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException ;
 	
 	/**
-     * [UC1042] Verificar Farturamento dos Imï¿½veis Cortados
+     * [UC1042] Verificar Farturamento dos Imóveis Cortados
      * 
      * Apaga todos os debitos a cobrar, debitos a cobrar categoria
      * e debito a cobrar geral, para o imovel/anoMes informado, com
      * debito tipo = DebitoTipo.TARIFA_CORTADO e debito tipo situacao
      * atual = DebitoCreditoSituacao.NORMAL 
      * 
-     * @autor Sï¿½vio Luiz
+     * @autor Sílvio Luiz
      * @date 13/07/2010
      *  
      * @param idImovel
@@ -10004,7 +10004,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	
 	/**
-	 * [UC1051] Gerar Relatï¿½rio de Amostragem das Anormalidades Informadas
+	 * [UC1051] Gerar Relatório de Amostragem das Anormalidades Informadas
 	 * 
 	 * @author Hugo Leonardo
 	 * @date 09/08/2010
@@ -10027,7 +10027,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idCategoria, Integer limite) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1051] Gerar Relatï¿½rio de Amostragem das Anormalidades Informadas
+	 * [UC1051] Gerar Relatório de Amostragem das Anormalidades Informadas
 	 * 
 	 * @author Hugo Leonardo
 	 * @date 09/08/2010
@@ -10053,7 +10053,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
     /**
      *  [UC0820] - Atualizar Faturamento do Movimento Celular
      *  
-     * Verifica se a quantidade de imï¿½veis que chegaram 
+     * Verifica se a quantidade de Imóveis que chegaram 
      * ï¿½ a esperada.
      * 
      * @author bruno
@@ -10086,7 +10086,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * 
-	 * Pesquisa os imï¿½veis que ja foram enviados para uma
+	 * Pesquisa os Imóveis que ja foram enviados para uma
 	 * determinada rota em impressï¿½o simultanea
 	 * 
 	 * @autor Bruno Barros.
@@ -10094,7 +10094,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	 * 
 	 * @param idRota - Id da rota a ser pesquisada
 	 * 
-	 * @return Collection<Integer> - Matriculas dos imï¿½veis que ja foram processados
+	 * @return Collection<Integer> - Matriculas dos Imóveis que ja foram processados
 	 */
 	public Collection<Integer> pesquisarImoveisJaProcessadosBufferImpressaoSimultanea( Integer idRota )
 		throws ErroRepositorioException;
@@ -10111,7 +10111,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public FaturamentoGrupo recuperaGrupoFaturamentoDoImovel(Integer idImovel)throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0488] Informar Retorno Ordem de Fiscalizaï¿½ï¿½o
+	 * [UC0488] Informar Retorno Ordem de Fiscalização
 	 *
 	 * @author Vivianne Sousa
 	 * @date 18/08/2010
@@ -10123,7 +10123,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idOrdemServico) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0488] Informar Retorno Ordem de Fiscalizaï¿½ï¿½o
+	 * [UC0488] Informar Retorno Ordem de Fiscalização
 	 *
 	 * @author Vivianne Sousa
 	 * @date 18/08/2010
@@ -10135,7 +10135,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idOrdemServico) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0488] Informar Retorno Ordem de Fiscalizaï¿½ï¿½o
+	 * [UC0488] Informar Retorno Ordem de Fiscalização
 	 *
 	 * @author Vivianne Sousa
 	 * @date 24/08/2010
@@ -10147,7 +10147,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idAutoInfracao) throws ErroRepositorioException;
 	
 	/**
-	 * Obter o nï¿½mero de retificaï¿½ï¿½es da Conta
+	 * Obter o número de retificaï¿½ï¿½es da Conta
 	 * 
 	 * @author Hugo Leonardo
 	 * @date 10/08/2010
@@ -10159,7 +10159,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idConta) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1073] ï¿½ Religar Imï¿½veis Cortados com Consumo Real
+	 * [UC1073] ï¿½ Religar Imóveis Cortados com Consumo Real
 	 * 
 	 * Data: 13/09/2010
 	 * @author Vivianne Sousa
@@ -10168,9 +10168,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idLocalidade)throws ErroRepositorioException;
 	
 	/**
-	 * [UC0014] Manter Imï¿½vel
+	 * [UC0014] Manter imóvel
 	 * 
-	 * Verifica se o mesmo cliente estï¿½ associado ao Imï¿½vel em ClienteImovel.
+	 * Verifica se o mesmo cliente estï¿½ associado ao imóvel em ClienteImovel.
 	 * 
 	 * Autor: Hugo Leonardo
 	 * Data: 03/09/2010
@@ -10191,7 +10191,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 
 
 	/**
-	 * [UC1010] Emitir 2ï¿½ via de declaraï¿½ï¿½o anual de quitaï¿½ï¿½o de dï¿½bitos
+	 * [UC1010] Emitir 2ï¿½ via de declaração anual de quitação de débitos
 	 *
 	 * @Author Daniel Alves
 	 * @Date 14/09/2010
@@ -10201,7 +10201,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 
 	/**
-	 * [UC1073] ï¿½ Religar Imï¿½veis Cortados com Consumo Real
+	 * [UC1073] ï¿½ Religar Imóveis Cortados com Consumo Real
 	 * 
 	 * Data: 13/09/2010
 	 * @author Vivianne Sousa
@@ -10213,7 +10213,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer ligacaoTipo) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1073] ï¿½ Religar Imï¿½veis Cortados com Consumo Real
+	 * [UC1073] ï¿½ Religar Imóveis Cortados com Consumo Real
 	 * 
 	 * Data: 15/09/2010
 	 * @author Vivianne Sousa
@@ -10223,7 +10223,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * [UC0352] Emitir Contas e Cartas
-	 * [SB0005] - Obter Dados da Mediï¿½ï¿½o da Conta 
+	 * [SB0005] - Obter Dados da Medição da Conta 
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 20/09/2010
@@ -10235,7 +10235,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * [UC0352] Emitir Contas e Cartas
-	 * [SB0005] - Obter Dados da Mediï¿½ï¿½o da Conta 
+	 * [SB0005] - Obter Dados da Medição da Conta 
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 20/09/2010
@@ -10246,7 +10246,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idConta) throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna as contas para impressao
+	 * método que retorna as contas para impressao
 	 * 
 	 * Pesquisar Contas Emitir(Ficha de Compensaï¿½ï¿½o)Caern
 	 * 
@@ -10260,7 +10260,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			BigDecimal valorContaFichaComp) throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo que retorna as contas para impressao
+	 * método que retorna as contas para impressao
 	 * 
 	 * Pesquisar Contas Emitir(Ficha de Compensaï¿½ï¿½o)Caern
 	 * 
@@ -10276,7 +10276,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * 
-	 * [UC1083] Prescrever Dï¿½bitos de Imï¿½veis Pï¿½blicos Manual
+	 * [UC1083] Prescrever Débitos de Imóveis Públicos Manual
 	 * 
 	 * @author Hugo Leonardo
 	 * @date 18/10/2010
@@ -10289,7 +10289,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * 
-	 * [UC1083] Prescrever Dï¿½bitos de Imï¿½veis Pï¿½blicos Automï¿½tico
+	 * [UC1083] Prescrever Débitos de Imóveis Públicos Automático
 	 * 
 	 * @author Hugo Leonardo
 	 * @date 19/10/2010
@@ -10300,7 +10300,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * 
-	 * [UC1083] Prescrever Dï¿½bitos de Imï¿½veis Pï¿½blicos Automï¿½tico
+	 * [UC1083] Prescrever Débitos de Imóveis Públicos Automático
 	 * 
 	 * @author Hugo Leonardo
 	 * @date 19/10/2010
@@ -10321,7 +10321,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	 * 
 	 * [UC0113] Faturar Grupo de Faturamento
 	 * 
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 03/12/2010
 	 * 
 	 * @throws ErroRepositorioException
@@ -10330,7 +10330,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * 
-	 * Verifica a quantidade de imï¿½veis
+	 * Verifica a quantidade de Imóveis
 	 * que estï¿½o em movimento conta pre faturada para
 	 * um ano mes e rota
 	 * 
@@ -10347,7 +10347,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * [RM-4643 (COMPESA)] 
-	 * Verificamos se o imï¿½vel sofreu alteraï¿½ï¿½es 
+	 * Verificamos se o imóvel sofreu alteraï¿½ï¿½es 
 	 * depois de ter sido mandado para o GSAN a primeira vez
 	 * 
 	 * @author Bruno Barros
@@ -10382,8 +10382,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer anoMesReferencia) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0651] Inserir Comando de Negativaï¿½ï¿½o
-	 * [FS0031] ï¿½ Verificar existï¿½ncia de conta em nome do cliente
+	 * [UC0651] Inserir Comando de Negativação
+	 * [FS0031] ï¿½ Verificar existência de conta em nome do cliente
 	 * 
 	 * Pesquisa os relacionamentos entre cliente e conta.
 	 * 
@@ -10399,9 +10399,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * 
-	 * Retificaï¿½ï¿½o de um conjunto de contas que foram pagas e que o pagamento nï¿½o estava o dï¿½bito e/ou crï¿½dito (Conta paga via Impressï¿½o Simultï¿½nea) 
+	 * Retificação de um conjunto de contas que foram pagas e que o pagamento não estava o débito e/ou Crédito (Conta paga via Impressï¿½o Simultï¿½nea) 
 	 *
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 27/12/2010
 	 * 
 	 * @throws ErroRepositorioException
@@ -10410,9 +10410,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * 
-	 * Retificaï¿½ï¿½o de um conjunto de contas que foram pagas e que o pagamento nï¿½o estava o dï¿½bito e/ou crï¿½dito (Conta paga via Impressï¿½o Simultï¿½nea) 
+	 * Retificação de um conjunto de contas que foram pagas e que o pagamento não estava o débito e/ou Crédito (Conta paga via Impressï¿½o Simultï¿½nea) 
 	 *
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 28/12/2010
 	 * 
 	 * @throws ErroRepositorioException
@@ -10421,10 +10421,10 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Inserir Dï¿½bitos para as contas impressas via Impressï¿½o Simultï¿½nea de Contas que sairam com o valor da conta errada (Alguns grupos com tarifa proporcional
-	 *  que nï¿½o estava levando em consideraï¿½ï¿½o a quantidade de economias)
+	 * Inserir Débitos para as contas impressas via Impressão Simultânea de Contas que sairam com o valor da conta errada (Alguns grupos com tarifa proporcional
+	 *  que não estava levando em consideração a quantidade de economias)
 	 *
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 12/01/2011
 	 * 
 	 * @throws ErroRepositorioException
@@ -10460,7 +10460,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 * 
-	 * [FS0002] - Verificar Situaï¿½ï¿½o Especial de Faturamento
+	 * [FS0002] - Verificar situação Especial de Faturamento
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 17/04/2008
@@ -10477,7 +10477,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0204] Consultar Conta
 	 * 
-	 * Pesquisa o consumo faturado do imï¿½vel
+	 * Pesquisa o consumo faturado do imóvel
 	 * 
 	 * @author Mariana Victor
 	 * @date 06/01/2011
@@ -10490,9 +10490,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0473] Consultar Dados Complementares do Imï¿½vel
+	 * [UC0473] Consultar Dados Complementares do imóvel
 	 * 
-	 * Pesquisa as matrï¿½culas associadas ï¿½ mesma tarifa de consumo do imï¿½vel.
+	 * Pesquisa as matrículas associadas ï¿½ mesma tarifa de consumo do imóvel.
 	 * 
 	 * @author Mariana Victor
 	 * @date 06/01/2011
@@ -10524,7 +10524,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
     /**
 	 * [UC0366] Inserir Registro de Atendimento
 	 * 
-	 * [FS0048] ï¿½ Verificar existï¿½ncia da conta.
+	 * [FS0048] ï¿½ Verificar existência da conta.
 	 * 
 	 * @author Mariana Victor
 	 * @date 27/01/2011
@@ -10571,7 +10571,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC1122] Automatizar Perfis de Grandes Consumidores
 	 * 
-	 * Pesquisa o consumo faturado do imï¿½vel
+	 * Pesquisa o consumo faturado do imóvel
 	 * 
 	 * @author Mariana Victor
 	 * @date 06/01/2011
@@ -10603,7 +10603,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0352] Emitir Contas e Cartas
 	 * 
-	 * Retorna o cliente usuï¿½rio 
+	 * Retorna o cliente usuário 
 	 * 
 	 * @author Mariana Victor
 	 * @date 11/03/2011
@@ -10615,7 +10615,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC1129] Gerar Relatï¿½rio Devoluï¿½ï¿½o dos Pagamentos em Duplicidade
+	 * [UC1129] Gerar Relatório Devolução dos Pagamentos em Duplicidade
 	 * 
 	 * @author Hugo Leonardo
 	 * @date 10/03/2011
@@ -10651,7 +10651,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idImovel,Integer anoMesCobrancaCredito) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC1157] Seleciona Comando para Retirar Imï¿½vel da Tarifa Social
+	 * [UC1157] Seleciona Comando para Retirar imóvel da Tarifa Social
 	 * [SB0003] Excluir Comando Selecionado 
 	 * 
 	 * @author Vivianne Sousa
@@ -10675,7 +10675,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
     /**
 	 * [UC0352] Emitir Contas e Cartas
 	 * 
-	 * [SB0031] Obter Representaï¿½ï¿½o numï¿½rica do Nosso Nï¿½mero da Ficha de Compensaï¿½ï¿½o
+	 * [SB0031] Obter Representaï¿½ï¿½o numï¿½rica do Nosso número da Ficha de Compensaï¿½ï¿½o
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 10/03/2011
@@ -10685,7 +10685,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
     public Integer pesquisarSequencialContaBoleto(Integer idConta)throws ErroRepositorioException ;
     
     /**
-	 * [UC0724] - Processar Pagamento com Ficha de Compensaï¿½ï¿½o 
+	 * [UC0724] - Processar Pagamento com Ficha de Compensação 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 15/03/2011
@@ -10698,7 +10698,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0724] - Processar Pagamento com Ficha de Compensaï¿½ï¿½o 
+	 * [UC0724] - Processar Pagamento com Ficha de Compensação 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 15/03/2011
@@ -10724,7 +10724,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0724] - Processar Pagamento com Ficha de Compensaï¿½ï¿½o 
+	 * [UC0724] - Processar Pagamento com Ficha de Compensação 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 15/03/2011
@@ -10737,7 +10737,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0724] - Processar Pagamento com Ficha de Compensaï¿½ï¿½o 
+	 * [UC0724] - Processar Pagamento com Ficha de Compensação 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 15/03/2011
@@ -10750,7 +10750,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0724] - Processar Pagamento com Ficha de Compensaï¿½ï¿½o 
+	 * [UC0724] - Processar Pagamento com Ficha de Compensação 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 15/03/2011
@@ -10789,9 +10789,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idImovel,Integer anoMesCredito) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0866] Gerar Comando Contas em Cobranï¿½a por Empresa
+	 * [UC0866] Gerar Comando Contas em cobrança por Empresa
 	 * 
-	 * Pesquisa a quantidade de contas, agrupando por imï¿½vel
+	 * Pesquisa a quantidade de contas, agrupando por imóvel
 	 * 
 	 * @author: Mariana Victor
 	 * @date: 07/04/2011
@@ -10911,7 +10911,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC1166]  Gerar  txt para impressï¿½o de contas no formato braille
+	 * [UC1166]  Gerar  txt para impressão de contas no formato braille
 	 * @author Vivianne Sousa
 	 * @date 25/04/2011
 	 * 
@@ -10923,7 +10923,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC1166]  Gerar  txt para impressï¿½o de contas no formato braille
+	 * [UC1166]  Gerar  txt para impressão de contas no formato braille
 	 * @author Vivianne Sousa
 	 * @date 25/04/2011
 	 * 
@@ -10934,7 +10934,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer anoMesReferencia,Integer anoMesReferenciaFaturamentoAntecipado)throws ErroRepositorioException;
 	
 	/**
-	 * [UC1166]  Gerar  txt para impressï¿½o de contas no formato braille
+	 * [UC1166]  Gerar  txt para impressão de contas no formato braille
 	 * @author Vivianne Sousa
 	 * @date 20/04/2011
 	 */
@@ -10965,9 +10965,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer anoMesReferencia) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC1169] Movimentar Ordens de Serviï¿½o de Cobranï¿½a por Resultado
+	 * [UC1169] Movimentar Ordens de Serviï¿½o de cobrança por Resultado
 	 * 
-	 * Pesquisa a quantidade de contas, agrupando por imï¿½vel
+	 * Pesquisa a quantidade de contas, agrupando por imóvel
 	 * 
 	 * @author: Mariana Victor
 	 * @date: 12/05/2011
@@ -10977,7 +10977,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC1169] Movimentar Ordens de Serviï¿½o de Cobranï¿½a por Resultado
+	 * [UC1169] Movimentar Ordens de Serviço de cobrança por Resultado
 	 * 
 	 * Pesquisa a quantidade de contas
 	 * 
@@ -10989,9 +10989,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC1169] Movimentar Ordens de Serviï¿½o de Cobranï¿½a por Resultado
+	 * [UC1169] Movimentar Ordens de Serviço de cobrança por Resultado
 	 * 
-	 * Pesquisa as ordens de serviï¿½o selecionadas
+	 * Pesquisa as ordens de serviço selecionadas
 	 * 
 	 * @author: Mariana Victor
 	 * @date: 19/05/2011
@@ -11001,9 +11001,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC1173] Informar Consumo por Parï¿½metros
+	 * [UC1173] Informar Consumo por parâmetros
 	 * 
-	 * [FS0005] ï¿½ Validar mï¿½s ano maior ou igual 
+	 * [FS0005] ï¿½ Validar mês ano maior ou igual 
 	 * 
 	 * @author Mariana Victor
 	 * @date 20/05/2011
@@ -11015,7 +11015,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Integer pesquisarAnoMesReferenciaMenorAnoMesReferenciaFaturamentoGrupo(
 			int anoMesReferenciaInformado) throws ErroRepositorioException;	
 	/**
-	 * [UC0488] Informar Retorno Ordem de Fiscalizaï¿½ï¿½o
+	 * [UC0488] Informar Retorno Ordem de Fiscalização
 	 * 
 	 * 
 	 * @author Rafael Pinto
@@ -11033,7 +11033,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	
 	/**
-	 * UC 8xx - Relatï¿½rio das Multas de Autos de Infraï¿½ï¿½o Pendentes
+	 * UC 8xx - Relatório das Multas de Autos de Infração Pendentes
 	 * 
 	 * @author Hugo Azevedo
 	 * @date 11/06/2011
@@ -11045,7 +11045,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	
 	/**
-	 * [UC0713] Emitir Ordem de Serviï¿½o Seletiva
+	 * [UC0713] Emitir Ordem de Serviço Seletiva
 	 * [SB0002] Gerar TXT 
 	 * 
 	 * @author Vivianne Sousa
@@ -11055,9 +11055,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Acumula o valor de agua cancelado por retificaï¿½ï¿½o
+	 * Acumula o valor de agua cancelado por retificação
 	 * 
-	 * [UC0155] Encerrar Faturamento do Mï¿½s
+	 * [UC0155] Encerrar Faturamento do Mês
 	 * 
 	 * @author Rafael Pinto
 	 * @date 20/07/2011
@@ -11094,9 +11094,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	
 	/**
-	 * Acumula o valor de esgoto cancelado por retificaï¿½ï¿½o
+	 * Acumula o valor de esgoto cancelado por retificação
 	 * 
-	 * [UC0155] Encerrar Faturamento do Mï¿½s
+	 * [UC0155] Encerrar Faturamento do Mês
 	 * 
 	 * @author Rafael Pinto
 	 * @date 20/07/2011
@@ -11113,7 +11113,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * Acumula o valor de esgoto incluido por retificacao
 	 * 
-	 * [UC0155] Encerrar Faturamento do Mï¿½s
+	 * [UC0155] Encerrar Faturamento do Mês
 	 * 
 	 * @author Rafael Pinto
 	 * @date 20/07/2011
@@ -11169,10 +11169,10 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer idConsumoHistoricoImovelCondominio, Integer consumoImovelVinculadosCondominio, boolean isImovelCondominio) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC1194] Consultar Estrutura Tarifï¿½ria Loja Virtual
-	 * [SB0001]  Pesquisar Tarifa Social ou Tarifa Mï¿½nima
+	 * [UC1194] Consultar Estrutura Tarifária Loja Virtual
+	 * [SB0001]  Pesquisar Tarifa Social ou Tarifa Mínima
 	 * 
-	 * Mï¿½todo que vai retornar um Helper que possui o consumo
+	 * método que vai retornar um Helper que possui o consumo
 	 * da tarifa mï¿½nima e da tarifa social e seus respectivos
 	 * valores.
 	 * 
@@ -11190,7 +11190,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * Acumula o valor de agua incluido por retificacao
 	 * 
-	 * [UC0155] Encerrar Faturamento do Mï¿½s
+	 * [UC0155] Encerrar Faturamento do Mês
 	 * 
 	 * @author Rafael Pinto
 	 * @date 20/07/2011
@@ -11208,7 +11208,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	 * [UC1194] Consultar Estrutura Tarifï¿½ria Loja Virtual
 	 * [SB0001]  Pesquisar Tarifa Normal
 	 * 
-	 * Mï¿½todo que vai retornar um Helper que possui o consumo
+	 * método que vai retornar um Helper que possui o consumo
 	 * da tarifa normal e seus respectivos valores.
 	 * 
 	 * @author Diogo Peixoto
@@ -11224,9 +11224,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Collection<Object[]> pesquisarTarifaNormal(Integer idTarifa, Integer idCategoria, Integer idSubcategoria) throws ErroRepositorioException;
 
 	/**
-	 * [UC1194] Consultar Estrutura Tarifï¿½ria Loja Virtual 
+	 * [UC1194] Consultar Estrutura Tarifária Loja Virtual 
 	 * 
-	 * Mï¿½todo que vai retornar um Helper que possui o consumo nï¿½o medido
+	 * método que vai retornar um Helper que possui o consumo não medido
 	 * de chafariz pï¿½blico.
 	 * 
 	 * @author Diogo Peixoto
@@ -11237,7 +11237,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Collection<Object[]> pesquisarEstruturaTarifariaChafarizPublico() throws ErroRepositorioException;
 	
 	/**
-	 * [UC1187] Colocar Dï¿½bito a Cobrar em Revisï¿½o
+	 * [UC1187] Colocar Débito a Cobrar em Revisão
 	 * 
 	 * @author Mariana Victor
 	 * @date 21/07/2011
@@ -11248,7 +11248,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public void colocarRevisaoDebitoACobrar(DebitoACobrar debitoACobrar) throws ErroRepositorioException;
 
 	/**
-	 * [UC1188] Retirar Dï¿½bito A Cobrar de Revisï¿½o
+	 * [UC1188] Retirar Débito A Cobrar de Revisão
 	 * 
 	 * @author Mariana Victor
 	 * @date 21/07/2011
@@ -11335,9 +11335,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Collection pesquisarItensParcelamentosNivel2(Integer idDebACobrar) throws ErroRepositorioException;
 
 	/**
-	 * [UC1214] Informar Acerto Documentos Nï¿½o Aceitos
+	 * [UC1214] Informar Acerto Documentos não Aceitos
 	 * 
-	 * [SB0002] ? Selecionar Dï¿½bitos Pagos
+	 * [SB0002] ? Selecionar Débitos Pagos
 	 * 
 	 * @author Mariana Victor
 	 * @date 23/08/2011
@@ -11364,9 +11364,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Integer pesquisarMovimentoContaPrefaturadaArquivoTextoFaturamento(Integer idImovelMacro, Integer anoMesReferencia)
 			throws ErroRepositorioException ;
 	/**
-	 * [UC1216] Suspender Leitura para Imï¿½vel com Hidrï¿½metro Retirado
+	 * [UC1216] Suspender Leitura para imóvel com Hidrômetro Retirado
 	 * 
-	 * [SB0001] ï¿½ Selecionar Imï¿½veis com Hidrï¿½metro Retirado
+	 * [SB0001] ï¿½ Selecionar Imóveis com Hidrômetro Retirado
 	 *
 	 * @author Vivianne Sousa
 	 * @date 23/08/2011
@@ -11379,8 +11379,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer grupofaturamento,Integer idRota )throws ErroRepositorioException;
 	
 	/**
-	 * [UC1216] Suspender Leitura para Imï¿½vel com Hidrï¿½metro Retirado
-	 * [SB0003] ï¿½ Incluir Imï¿½vel na Situaï¿½ï¿½o Especial de Faturamento
+	 * [UC1216] Suspender Leitura para imóvel com Hidrômetro Retirado
+	 * [SB0003] ï¿½ Incluir imóvel na situação Especial de Faturamento
 	 *
 	 * @author Vivianne Sousa
 	 * @date 23/08/2011
@@ -11392,7 +11392,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC1218] Suspender Leitura para Imï¿½vel com Consumo Real nï¿½o Superior a 10m3
+	 * [UC1218] Suspender Leitura para imóvel com Consumo Real não Superior a 10m3
 	 *
 	 * @author Vivianne Sousa
 	 * @date 26/08/2011
@@ -11405,8 +11405,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer grupofaturamento,Integer idRota , 
 			Integer numeroMesesReinicioSitEspFaturamento)throws ErroRepositorioException ;
 	/**
-	 * [UC0457] - Encerrar Ordem de Serviï¿½o
-	 * [SB0009 - Verificar Situaï¿½ï¿½o Especial de Faturamento]
+	 * [UC0457] - Encerrar Ordem de Serviço
+	 * [SB0009 - Verificar situação Especial de Faturamento]
 	 * 
 	 * @param idImovel
 	 * @return FaturamentoSituacaoHistorico
@@ -11416,8 +11416,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	
 	/**
-	 * [UC0457] - Encerrar Ordem de Serviï¿½o
-	 * [SB0009 - Verificar Situaï¿½ï¿½o Especial de Faturamento]
+	 * [UC0457] - Encerrar Ordem de Serviço
+	 * [SB0009 - Verificar situação Especial de Faturamento]
 	 * 
 	 * @param faturamentoSituacaoHistorico
 	 * @throws ErroRepositorioException
@@ -11426,11 +11426,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 		throws ErroRepositorioException;
 	
 	/**
-	 * [UC1226] Inserir Contrato de Demanda Condomï¿½nios Residenciais
-	 * [FS0002] ï¿½ Validar Matrï¿½cula
+	 * [UC1226] Inserir Contrato de Demanda Condomínios Residenciais
+	 * [FS0002] ï¿½ Validar Matrícula
 	 * 
-	 * Mï¿½todo que verifica se existe um contrato de demanda ativo ou suspenso para o imï¿½vel
-	 * passado no parï¿½metro.
+	 * método que verifica se existe um contrato de demanda ativo ou suspenso para o imóvel
+	 * passado no parâmetro.
 	 * 
 	 * @author Diogo Peixoto
 	 * @since 20/09/2011
@@ -11442,10 +11442,10 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public boolean existeContratoDemandaAtivoSuspenso(Integer idImovel) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1226] Inserir Contrato de Demanda Condomï¿½nios Residenciais
-	 * [FS0002] ï¿½ Validar Matrï¿½cula
+	 * [UC1226] Inserir Contrato de Demanda Condomínios Residenciais
+	 * [FS0002] ï¿½ Validar Matrícula
 	 * 
-	 * Mï¿½todo que Verifica se o imï¿½vel ï¿½ exclusivamente da categoria residencial
+	 * método que Verifica se o imóvel ï¿½ exclusivamente da categoria residencial
 	 * 
 	 * @author Diogo Peixoto
 	 * @since 20/09/2011
@@ -11457,25 +11457,25 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public boolean imovelExclusivoCategoriaResidencial(Integer idImovel) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1226] Inserir Contrato de Demanda Condomï¿½nios Residenciais
-	 * [FS0000] ï¿½ Verificar Nï¿½mero Contrato
+	 * [UC1226] Inserir Contrato de Demanda Condomínios Residenciais
+	 * [FS0000] ï¿½ Verificar número Contrato
 	 * 
-	 * Mï¿½todo que Verifica se jï¿½ eixste um nï¿½mero de contrato passado no parï¿½metro.
+	 * método que Verifica se já eixste um número de contrato passado no parâmetro.
 	 * 
 	 * @author Diogo Peixoto
 	 * @since 21/09/2011
 	 * 
 	 * @param idImovel
-	 * @return boolean - existe nï¿½mero contrato
+	 * @return boolean - existe número contrato
 	 * @throws ErroRepositorioException
 	 */
 	public boolean existeNumeroContratoDemandaCondominiosResidenciais(String numeroContrato) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1226] Inserir Contrato de Demanda Condomï¿½nios Residenciais
+	 * [UC1226] Inserir Contrato de Demanda Condomínios Residenciais
 	 * [FS0005] ï¿½ Validar Demanda
 	 * 
-	 * Mï¿½todo que retorna o menor consumo inicial do contrato de demanda
+	 * método que retorna o menor consumo inicial do contrato de demanda
 	 * condominios residenciais.
 	 * 
 	 * @author Diogo Peixoto
@@ -11487,7 +11487,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Integer pesquisarMenorConsumoInicialContratoDemandaCondominiosResidenciais() throws ErroRepositorioException;
 	
 	/**
-	 * [UC1226] Inserir Contrato de Demanda Condomï¿½nios Residenciais
+	 * [UC1226] Inserir Contrato de Demanda Condomínios Residenciais
 	 *
 	 * Metï¿½do que recebe uma demanda informada e retorna qual a faixa de consumo
 	 * que a demanda informada pertence.
@@ -11502,10 +11502,10 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public ContratoDemandaFaixaConsumo pesquisarFaixaConsumo(Integer demanda) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1229] - Manter Contrato de Demanda Condomï¿½nios Residenciais
+	 * [UC1229] - Manter Contrato de Demanda Condomínios Residenciais
 	 *
 	 * Metï¿½do que recebe um helper e retorna as contratos de demanda condomï¿½nios
-	 * residenciais que nï¿½o foram encerrados (cdst_id != 3)
+	 * residenciais que não foram encerrados (cdst_id != 3)
 	 * 
 	 * @author Diogo Peixoto
 	 * @since 23/09/2011
@@ -11518,9 +11518,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC1230] Atualizar Contrato de Demanda Condomï¿½nios Residenciais
+	 * [UC1230] Atualizar Contrato de Demanda Condomínios Residenciais
 	 * 
-	 * Mï¿½todo que recebe o nï¿½mero do contrato do imï¿½vel e retorna
+	 * método que recebe o número do contrato do imóvel e retorna
 	 * o contrato.
 	 * 
 	 * @author Diogo Peixoto
@@ -11533,7 +11533,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public ContratoDemandaImovel pesquisarContratoDemandaImovel(String numeroContrato) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1230] Atualizar Contrato de Demanda Condomï¿½nios Residenciais
+	 * [UC1230] Atualizar Contrato de Demanda Condomínios Residenciais
 	 * 
 	 * @author Diogo Peixoto
 	 * @since 26/09/2011
@@ -11553,7 +11553,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public String[] obterContaMensagemImovel (Integer imovelId,Integer amRef) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1236] Gerar Crï¿½dito a Realizar Contrato de Demanda Imï¿½vel Residencial
+	 * [UC1236] Gerar Crédito a Realizar Contrato de Demanda imóvel Residencial
 	 * [SB001] - Selecionar Contratos
 	 *
 	 * @author Rafael Pinto
@@ -11580,7 +11580,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC1235] Pesquisar Contrato Demanda
 	 *
-	 * Metï¿½do que recebe uma matricula de imï¿½vel e retorna o 
+	 * Metï¿½do que recebe uma matricula de imóvel e retorna o 
 	 * consumo mï¿½nimo e o percentual de desconto.
 	 * 
 	 * @author Erivan Sousa
@@ -11592,7 +11592,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Collection pesquisarContratoDemanda(String matricula) throws ErroRepositorioException;
 	
 	/**
-	 * Metodo responsavel por pesquisar as informaï¿½ï¿½es do Grupo Faturado
+	 * Metodo responsavel por pesquisar as informações do Grupo Faturado
 	 * @author Arthur Carvalho
 	 * @date 17/10/2011
 	 */
@@ -11647,7 +11647,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * [UC1242] - Cancelar Faturamento Grupo
-	 * [SB0004]- Excluir Conta Impressï¿½o     
+	 * [SB0004]- Excluir Conta Impressão     
 	 * 
 	 * @author Arthur Carvalho
 	 * @date 19/10/2011
@@ -11680,7 +11680,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * [UC1242] - Cancelar Faturamento Grupo
-	 * [SB0007]- Excluir Dï¿½bito Automï¿½tico Movimento
+	 * [SB0007]- Excluir Débito Automático Movimento
 	 * 
 	 * @author Arthur Carvalho
 	 * @date 19/10/2011
@@ -11692,7 +11692,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * [UC1242] - Cancelar Faturamento Grupo
-	 * [SB0008]- Atualizar Dï¿½bito A Cobrar
+	 * [SB0008]- Atualizar Débito A Cobrar
 	 * 
 	 * @author Arthur Carvalho
 	 * @date 19/10/2011
@@ -11705,7 +11705,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * [UC1242] - Cancelar Faturamento Grupo
-	 * [SB0009]- Excluir Dï¿½bito Cobrado Categoria
+	 * [SB0009]- Excluir Débito Cobrado Categoria
 	 * 
 	 * @author Arthur Carvalho
 	 * @date 19/10/2011
@@ -11715,7 +11715,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public void excluirDebitoCobradoCategoria(Integer idFaturamentoGrupo , Integer anoMesReferencia) throws ErroRepositorioException ;
     /**
 	 * [UC1242] - Cancelar Faturamento Grupo
-	 * [SB0010]- Excluir Dï¿½bito Cobrado
+	 * [SB0010]- Excluir Débito Cobrado
 	 * 
 	 * @author Arthur Carvalho
 	 * @date 19/10/2011
@@ -11727,7 +11727,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * 
 	 * [UC1242] - Cancelar Faturamento Grupo
-	 * [SB0011]- Atualizar Crï¿½dito a Realizar
+	 * [SB0011]- Atualizar Crédito a Realizar
 	 * 
 	 * @author Arthur Carvalho
 	 * @date 19/10/2011
@@ -11738,7 +11738,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	 /**
 	 * [UC1242] - Cancelar Faturamento Grupo
-	 * [SB0012]- Excluir Crï¿½dito Realizado Categoria
+	 * [SB0012]- Excluir Crédito Realizado Categoria
 	 * 
 	 * @author Arthur Carvalho
 	 * @date 19/10/2011
@@ -11749,7 +11749,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	 /**
 	 * [UC1242] - Cancelar Faturamento Grupo
-	 * [SB0013]- Excluir Crï¿½dito Realizado
+	 * [SB0013]- Excluir Crédito Realizado
 	 * 
 	 * @author Arthur Carvalho
 	 * @date 19/10/2011
@@ -11792,7 +11792,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * [UC1242] - Cancelar Faturamento Grupo
-	 * [SB0017]- Atualizar Ano/Mï¿½s Referï¿½ncia do Grupo
+	 * [SB0017]- Atualizar Ano/Mês Referência do Grupo
 	 * 
 	 * @author Arthur Carvalho
 	 * @date 19/10/2011
@@ -11802,9 +11802,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * [UC1242] - Cancelar Faturamento Grupo
-	 * [SB0018]- Excluir Resumo Faturamento Simulaï¿½ï¿½o
+	 * [SB0018]- Excluir Resumo Faturamento Simulação
 	 * 
-	 *           Exclui os dï¿½bitos
+	 *           Exclui os débitos
 	 *             
 	 * @author Arthur Carvalho
 	 * @date 19/10/2011
@@ -11816,7 +11816,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * [UC1242] - Cancelar Faturamento Grupo
-	 * [SB0018]- Excluir Resumo Faturamento Simulaï¿½ï¿½o
+	 * [SB0018]- Excluir Resumo Faturamento Simulação
 	 * 
 	 *           Exclui os Creditos
 	 *             
@@ -11829,7 +11829,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 
 	/**
 	 * [UC1242] - Cancelar Faturamento Grupo
-	 * [SB0018]- Excluir Resumo Faturamento Simulaï¿½ï¿½o
+	 * [SB0018]- Excluir Resumo Faturamento Simulação
 	 * 
 	 * @author Arthur Carvalho
 	 * @date 19/10/2011
@@ -11877,7 +11877,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 *  
 	 *
-	 * @author Sï¿½vio Luiz
+	 * @author Sílvio Luiz
 	 * @date 14/12/2011
 	 * 
 	 * @throws ErroRepositorioException
@@ -11886,7 +11886,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0153] Apresentar Dados Para Anï¿½lise da Mediï¿½ï¿½o e Consumo
+	 * [UC0153] Apresentar Dados Para Análise da Medição e Consumo
 	 * @author Arthur Carvalho
 	 * @date 10/11/2011
 	 * 
@@ -11898,9 +11898,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Object[] verificaImovelPossuiOSFiscalizacao(Integer idImovel, Date dataLeituraAtualFaturamento ) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0866] Gerar Comando Contas em Cobranï¿½a por Empresa
+	 * [UC0866] Gerar Comando Contas em cobrança por Empresa
 	 * 
-	 * Pesquisa a quantidade de contas por imï¿½vel
+	 * Pesquisa a quantidade de contas por imóvel
 	 * 
 	 * @author: Mariana Victor
 	 * @date: 03/05/2011
@@ -11910,7 +11910,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Inserir Situaï¿½ï¿½o Especial de Faturamento para paralisaï¿½ï¿½o mensal
+	 * Inserir situação Especial de Faturamento para paralisação mensal
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 22/12/2011
@@ -11926,11 +11926,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC0113] Faturar Grupo de Faturamento
 	 *
-	 * [RM5773] - Nï¿½o colocar na tabela conta impressï¿½o as contas com anormalidade informada que 
-	 *            tinha indicador de nï¿½o imprimir conta (ltan_icnaoimprimirconta) igual a 1 (SIM).
-	 * Analista: Sï¿½vio Cavalcante
+	 * [RM5773] - não colocar na tabela conta impressï¿½o as contas com anormalidade informada que 
+	 *            tinha indicador de não imprimir conta (ltan_icnaoimprimirconta) igual a 1 (SIM).
+	 * Analista: Sílvio Cavalcante
 	 * 
-	 * @author Thï¿½lio Araï¿½jo
+	 * @author Thúlio Araújo
 	 * @date 20/12/2011
 	 *
 	 * @param idImovel
@@ -11942,11 +11942,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer anoMesReferencia) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1263] Relatï¿½rio de Contas Nï¿½o Impressas
+	 * [UC1263] Relatório de Contas não Impressas
 	 * 
 	 * Pesquisa o Total Registro
 	 * 
-	 * @author Thï¿½lio Araï¿½jo 
+	 * @author Thúlio Araújo
 	 * @date 22/12/2011
 	 * 
 	 * @param FiltrarRelatorioContasNaoImpressasHelper
@@ -11993,7 +11993,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * Inserir Pagamentos
 	 * 
-	 * @author Rafael Corrï¿½a, Raphael Rossiter
+	 * @author Rafael Corrêa, Raphael Rossiter
 	 * @date 07/12/2006, 05/03/2012
 	 * 
 	 * @param idImovel
@@ -12077,7 +12077,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 
 	
 	/**
-	 * [UC0876] - Gerar Crï¿½dito Situaï¿½ï¿½o Especial Faturamento
+	 * [UC0876] - Gerar Crédito situação Especial Faturamento
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 27/01/2009
@@ -12090,7 +12090,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0876] - Gerar Crï¿½dito Situaï¿½ï¿½o Especial Faturamento
+	 * [UC0876] - Gerar Crédito situação Especial Faturamento
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 27/01/2009
@@ -12137,7 +12137,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC1369] Gerar Itens Receita Liquida Indireta Agua Esgoto
 	 * 
-	 * [SB0001] Apagar registros jï¿½ processados
+	 * [SB0001] Apagar registros já processados
 	 *  
 	 * @author Anderson Cabral
 	 * @created 10/08/2012
@@ -12230,7 +12230,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * 
 	 * [UC1367] Registrar Movimento do Programa Especial
-	 * [SB0003] Suspender Imï¿½veis em Programa Especial
+	 * [SB0003] Suspender Imóveis em Programa Especial
 	 * 
 	 * @author Hugo Azevedo
 	 * @date 20/08/2012
@@ -12240,9 +12240,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 
 	
 	/**
-	 * Pesquisar Valor Dï¿½bito a Cobrar
+	 * Pesquisar Valor Débito a Cobrar
 	 * 
-	 * [UC 1370] Consultar Aï¿½ï¿½es de Cobranï¿½a por Imï¿½vel
+	 * [UC 1370] Consultar Aï¿½ï¿½es de cobrança por imóvel
 	 * 
 	 * @author Davi Menezes
 	 * @date 20/08/2012
@@ -12251,9 +12251,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisar Valor Dï¿½bito a Cobrar no Histï¿½rico
+	 * Pesquisar Valor Débito a Cobrar no Histórico
 	 * 
-	 * [UC 1370] Consultar Aï¿½ï¿½es de Cobranï¿½a por Imï¿½vel
+	 * [UC 1370] Consultar Aï¿½ï¿½es de cobrança por imóvel
 	 * 
 	 * @author Davi Menezes
 	 * @date 20/08/2012
@@ -12264,7 +12264,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * 
 	 * [UC1367] Registrar Movimento do Programa Especial
-	 * [SB0003] Suspender Imï¿½veis em Programa Especial
+	 * [SB0003] Suspender Imóveis em Programa Especial
 	 * 
 	 * @author Hugo Azevedo
 	 * @date 20/08/2012
@@ -12273,11 +12273,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Conta obterContaImovelAnoMesFaturamento(Integer idImovel, Integer anoMesFaturamento) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1194] Consultar Estrutura Tarifï¿½ria Loja Virtual da Caer
-	 * [SB0001]  Pesquisar Tarifa Social ou Tarifa Mï¿½nima
+	 * [UC1194] Consultar Estrutura Tarifária Loja Virtual da Caer
+	 * [SB0001]  Pesquisar Tarifa Social ou Tarifa Mínima
 	 * 
-	 * Mï¿½todo que vai retornar um Helper que possui o consumo
-	 * da tarifa mï¿½nima e da tarifa social e seus respectivos
+	 * método que vai retornar um Helper que possui o consumo
+	 * da tarifa mínima e da tarifa social e seus respectivos
 	 * valores.
 	 * 
 	 * @author Diogo Peixoto, Arthur Carvalho, Davi Menezes
@@ -12293,7 +12293,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Collection<Object[]> pesquisarTarifaSocialOuTarifaMinimaCaer(Integer idTarifa, Integer idCategoria) throws ErroRepositorioException;
 
 	/**
-	 * [UC1001] Emitir declaraï¿½ï¿½o de quitaï¿½ï¿½o anual de dï¿½bitos
+	 * [UC1001] Emitir declaração de quitação anual de débitos
 	 * 
 	 * 
 	 * @author Rodrigo Cabral
@@ -12313,7 +12313,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException, SQLException;
 	
 	/**
-	 * [UC0216] - Calcular Acrï¿½scimos por Impontualidade
+	 * [UC0216] - Calcular Acréscimos por Impontualidade
 	 * 
 	 * @author Arthur Carvalho
 	 * @date 29/11/2012
@@ -12464,7 +12464,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * Verificar se existe mais alguma conta associada a 
-	 * entrada do parcelamento que nï¿½o tenha sido paga
+	 * entrada do parcelamento que não tenha sido paga
 	 * 
 	 * @author Davi Menezes
 	 * @date 14/03/2013
@@ -12489,8 +12489,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC 1517] - Baixa Automï¿½tica dos Pagamentos Nï¿½o Classificados
-	 * [SB 0003] - Analisar Impressï¿½o Simultï¿½nea
+	 * [UC 1517] - Baixa automática dos Pagamentos não Classificados
+	 * [SB 0003] - Analisar Impressão Simultânea
 	 * 
 	 * @author Davi Menezes
 	 * @date 09/07/2013
@@ -12502,7 +12502,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC 1517] - Baixa Automï¿½tica dos Pagamentos Nï¿½o Classificados
+	 * [UC 1517] - Baixa automática dos Pagamentos não Classificados
 	 * [SB 0005] - Retificar Conta
 	 * 
 	 * @author Davi Menezes
@@ -12512,7 +12512,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC 1517] - Baixa Automï¿½tica dos Pagamentos Nï¿½o Classificados
+	 * [UC 1517] - Baixa automática dos Pagamentos não Classificados
 	 * [SB 0005] - Retificar Conta
 	 * 
 	 * @author Davi Menezes
@@ -12540,7 +12540,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
     /**
 	 * [UC0000] - XXX
 	 *
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 27/11/2013
 	 *
 	 * @param idRota
@@ -12554,7 +12554,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * UC0113 - Faturar Grupo Faturamento
 	 * RM8595
-	 * Author: Sï¿½vio Luiz 
+	 * Author: Sílvio Luiz 
 	 * Data: 19/11/2013
 	 * 
 	 * Deleta Debito Carta Movimento
@@ -12563,10 +12563,10 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Recupera o cpf e o cnpj do cliente responsï¿½vel pela conta [UC0348] - Emitir Contas
+	 * Recupera o cpf e o cnpj do cliente responsável pela conta [UC0348] - Emitir Contas
 	 * 
 	 * RM8595
-	 * Author: Sï¿½vio Luiz 
+	 * Author: Sílvio Luiz 
 	 * Data: 19/11/2013
 	 * 
 	 * @return
@@ -12579,29 +12579,29 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
+	 * [UC XXXX] - Processar amortização de dívida ativa
 	 * 
 	 * Pesquisa os itens associados a uma guia de pagamento
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 16/02/2014
 	 */
 	public Collection<GuiaPagamentoItem> pesquisarItensGuiaPagamento(Integer idGuiaPagamento)
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
+	 * [UC XXXX] - Processar amortização de dívida ativa
 	 * 
-	 * Pesquisar guias de pagamento canceladas ou parceladas na referencia contï¿½bil
+	 * Pesquisar guias de pagamento canceladas ou parceladas na referencia contábil
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 18/02/2014
 	 */
 	public Collection<GuiaPagamento> pesquisarGuiasPagamentoCanceladasPorMesAnoReferenciaContabil(
 			int anoMesReferenciaContabil, Integer idLocalidade) throws ErroRepositorioException;
 	
 	/**
-	 * UC0120 - Efetuar Parcelamento de Dï¿½bitos
+	 * UC0120 - Efetuar Parcelamento de Débitos
 	 * Author: Vivianne Sousa Data: 18/02/2013
 	 * 
 	 * @param conta
@@ -12612,7 +12612,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * UC0120 - Efetuar Parcelamento de Dï¿½bitos
+	 * UC0120 - Efetuar Parcelamento de Débitos
 	 * Author: Vivianne Sousa Data: 18/02/2013
 	 * 
 	 * @throws ErroRepositorioException
@@ -12658,7 +12658,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	
 	/**
-	 * [UC1616] Prepara dados SMS/EMAIL cobranï¿½a de conta
+	 * [UC1616] Prepara dados SMS/EMAIL cobrança de conta
 	 * 
 	 * @author Hugo Azevedo
 	 * @date 11/07/2014
@@ -12667,7 +12667,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	
 	/**
-	 * [UC1616] Prepara dados SMS/EMAIL cobranï¿½a de conta
+	 * [UC1616] Prepara dados SMS/EMAIL cobrança de conta
 	 * 
 	 * @author Hugo Azevedo
 	 * @date 11/07/2014
@@ -12675,8 +12675,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public void excluirMensagensReferencia(Integer anoMesReferencia, Integer idGrupoFaturamento) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1290] Inserir ou Atualizar Imï¿½vel Atualizaï¿½ï¿½o Cadastral
-	 * [SB0020] Calcular Valor de ï¿½gua e/ou Esgoto
+	 * [UC1290] Inserir ou Atualizar imóvel Atualização Cadastral
+	 * [SB0020] Calcular Valor de água e/ou Esgoto
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 20/10/2014
@@ -12686,11 +12686,11 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Integer pesquisarMaiorNumeroConsumoFaixaInicio() throws ErroRepositorioException;
 	
 	/**
-	 * [UC0819] Gerar Histï¿½rico do Encerramento do Faturamento
+	 * [UC0819] Gerar Histórico do Encerramento do Faturamento
 	 * 
 	 * Pesquisa as guias de pagamento canceladas ou parceladas
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 29/10/2014
 	 * 
 	 * @param anoMesReferenciaContabil
@@ -12704,7 +12704,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	
 	/**
 	 * [UC1669] Atualizar Dados nas Tabelas Resumos Grenciais Faturamento
-	 * @author Fï¿½bio Aguiar
+	 * @author Fábio Aguiar
 	 * @throws ControladorException 
 	 * @data 30/01/2015
 	 * 
@@ -12715,7 +12715,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	/**
 	 * [UC ] Filtrar Conta Comunicado
 	 * 
-	 * @author Flï¿½vio Leonardo C Cordeiro
+	 * @author Fávio Leonardo C Cordeiro
 	 * @date 09/02/2015
 	 * 
 	 * @throws ErroRepositorioException 
@@ -12726,10 +12726,10 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public void removerComunicadoConta(ContaComunicado contaComunicado)throws ErroRepositorioException, SQLException;
 	
 	/**
-	 * Mï¿½todo responsï¿½vel por<br>
+	 * método responsável por<br>
 	 * verifica se existe conta<br>
 	 * algum conta comunicado<br>
-	 * vinculado ao ano mï¿½s
+	 * vinculado ao ano mês
 	 * @author Jonathan Marcos
 	 * @since 13/02/2015
 	 * @param anoMes
@@ -12740,7 +12740,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo responsï¿½vel por<br>
+	 * método responsável por<br>
 	 * pesquisar a conta comunicado<br>
 	 * associado a quadra
 	 * @author Jonathan Marcos
@@ -12754,7 +12754,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo responsï¿½vel por<br>
+	 * método responsável por<br>
 	 * pesquisar a conta comunicado<br>
 	 * associado a rota
 	 * @author Jonathan Marcos
@@ -12768,7 +12768,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo reponsï¿½vel por<br>
+	 * método reponsï¿½vel por<br>
 	 * pesquisar a conta comunicado<br>
 	 * associado ao setor
 	 * @author Jonathan Marcos
@@ -12782,7 +12782,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo responsï¿½vel por<br>
+	 * método responsável por<br>
 	 * pesquisar a conta comunicado<br>
 	 * associado a localidade
 	 * @author Jonathan Marcos
@@ -12796,7 +12796,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo responsï¿½vel por<br>
+	 * método responsável por<br>
 	 * pesquisar a conta comunicado<br>
 	 * associado a gerï¿½ncia regional
 	 * @author Jonathan Marcos
@@ -12810,7 +12810,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * Mï¿½todo responsï¿½vel por<br>
+	 * método responsável por<br>
 	 * pesquisar conta comunicado<br>
 	 * associado ao grupo de faturamento
 	 * @author Jonathan Marcos
@@ -12824,10 +12824,10 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0302] - Gerar Debitos a Cobrar de Acrï¿½scimos por Impontualidade
+	 * [UC0302] - Gerar Debitos a Cobrar de Acréscimos por Impontualidade
 	 * Author: Cesar Medeiros Data: 04/03/2015
 	 * 
-	 * Obtï¿½m as contas de um imï¿½vel com ano/mes da data de vencimento menor ou
+	 * Obtï¿½m as contas de um imóvel com ano/mes da data de vencimento menor ou
 	 * igual ao ano/mes de referencia da arrecadacao corrente e com situacao
 	 * atual correspondente a normal, retificada ou incluida.
 	 * 
@@ -12849,9 +12849,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	 * Proposta:
 	 * RM Interna:
 	 * 
-	 * Mï¿½todo responsï¿½vel por selecionar
-	 * imï¿½veis com prï¿½ condiï¿½ï¿½es de religaï¿½ï¿½o
-	 * automï¿½tica vinculados a rota
+	 * método responsável por selecionar
+	 * Imóveis com pré condições de religação
+	 * automática vinculados a rota
 	 * 
 	 * @author Jonathan Marcos
 	 * @since 06/03/2015
@@ -12866,9 +12866,9 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	 * Proposta:
 	 * RM Interna:
 	 * 
-	 * Mï¿½todo responsï¿½vel por
-	 * validar condiï¿½ï¿½es do imï¿½vel
-	 * para religaï¿½ï¿½o automï¿½tica
+	 * método responsável por
+	 * validar condições do imóvel
+	 * para religação automática
 	 * 
 	 * @author Jonathan Marcos
 	 * @since 06/03/2015
@@ -12881,10 +12881,10 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			Integer anoMesLeitura) throws ErroRepositorioException;
 	
 	/**
-	 * [UC 1366] - Alterar Vï¿½nculo Clientes Com Imï¿½vel e Contas 
-	 * [IT 0002] - Obter Contas em Aberto do Imï¿½vel
+	 * [UC 1366] - Alterar Vínculo Clientes Com imóvel e Contas 
+	 * [IT 0002] - Obter Contas em Aberto do imóvel
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 24/04/2015
 	 * 
 	 */
@@ -12892,47 +12892,47 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC 1366] - Alterar Vï¿½nculo Clientes Com Imï¿½vel e Contas
+	 * [UC 1366] - Alterar Vínculo Clientes Com imóvel e Contas
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 24/04/2015
 	 */
 	public Date obterDataLeituraConta(Integer idFaturamentoGrupo,
 			Integer anoMesReferencia) throws ErroRepositorioException;
 	
 	/**
-	 * [UC 1366] - Alterar Vï¿½nculo Clientes Com Imï¿½vel e Contas
+	 * [UC 1366] - Alterar Vínculo Clientes Com imóvel e Contas
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 24/04/2015
 	 */
 	public Integer pesquisarIdClienteConta(Integer idConta)
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC 1366] - Alterar Vï¿½nculo Clientes Com Imï¿½vel e Contas 
-	 * [IT 0002] - Obter Contas em Aberto do Imï¿½vel
+	 * [UC 1366] - Alterar Vínculo Clientes Com imóvel e Contas 
+	 * [IT 0002] - Obter Contas em Aberto do imóvel
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 24/04/2015
 	 */
 	public Collection pesquisarClienteContaAnterior(Integer idConta)
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC 1366] - Alterar Vï¿½nculo Clientes Com Imï¿½vel e Contas
+	 * [UC 1366] - Alterar Vínculo Clientes Com imóvel e Contas
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 24/04/2015
 	 */
 	public Date obterDataPrevistaConta(Integer idFaturamentoGrupo,
 			Integer anoMesReferencia) throws ErroRepositorioException;
 	
 	/**
-	 * [UC 1366] - Alterar Vinculo Clientes com Imï¿½vel e conta 
+	 * [UC 1366] - Alterar Vinculo Clientes com imóvel e conta 
 	 * [IT 0007] - Atualizar a Quantidade de vinculos alterados da conta
 	 * 
-	 * @author Rafael Corrï¿½a
+	 * @author Rafael Corrêa
 	 * @date 24/04/2015
 	 */
 	public void atualizarQuantidadeVinculosAlteradosConta(Integer idConta)
@@ -12950,8 +12950,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC1680] - Retornar Dados Imï¿½vel Telemetria Via WebService
-	 * [IT0001] - Pesquisar Dados Imï¿½vel Conta
+	 * [UC1680] - Retornar Dados imóvel Telemetria Via WebService
+	 * [IT0001] - Pesquisar Dados imóvel Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 29/04/2015
@@ -12959,8 +12959,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Conta pesquisarUltimaConta(Integer idImovel) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1680] - Retornar Dados Imï¿½vel Telemetria Via WebService
-	 * [IT0001] - Pesquisar Dados Imï¿½vel Conta
+	 * [UC1680] - Retornar Dados imóvel Telemetria Via WebService
+	 * [IT0001] - Pesquisar Dados imóvel Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 29/04/2015
@@ -12968,8 +12968,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public ContaHistorico pesquisarUltimaContaHistorico(Integer idImovel) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1680] - Retornar Dados Imï¿½vel Telemetria Via WebService
-	 * [IT0001] - Pesquisar Dados Imï¿½vel Conta
+	 * [UC1680] - Retornar Dados imóvel Telemetria Via WebService
+	 * [IT0001] - Pesquisar Dados imóvel Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 29/04/2015
@@ -12977,8 +12977,8 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Date pesquisarDataPagamentoUltimaContaPaga(Integer idImovel) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1680] - Retornar Dados Imï¿½vel Telemetria Via WebService
-	 * [IT0001] - Pesquisar Dados Imï¿½vel Conta
+	 * [UC1680] - Retornar Dados imóvel Telemetria Via WebService
+	 * [IT0001] - Pesquisar Dados imóvel Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 29/04/2015
@@ -12993,7 +12993,7 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	public Object[] pesquisarCategoriaPrincipalImovel(Integer idImovel) throws ErroRepositorioException;
 	
 	/**
-	 * [UC1687] - Gerar dÃ©bito a cobrar de depreciaÃ§Ã£o de HidrÃ´metro
+	 * [UC1687] - Gerar dÃ©bito a cobrar de depreciação de Hidrômetro
 	 * @author Cesar Medeiros
 	 * @date 22/06/2015
 	 */
@@ -13025,4 +13025,34 @@ public Collection<Object[]> obterIndicadorGeracaoAcrescimosClienteImovel(Integer
 	 */
 	public Collection<Integer> pesquisarCreditosARealizarEmDocumentoCobranca(Integer idImovel, Date dataLimite)
 		throws ErroRepositorioException;
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * @author Jean Varela
+	 * @date 06/10/2015
+	 */
+	public Integer pesquisarIdLocalidadeGuiaPagamento(Integer idGuiaPagamento) throws ErroRepositorioException;
+	
+	/**
+	 * [UC0348] Emitir Contas
+	 * 
+	 * Verifica se motivo de revisão da conta é igual ao motivo de revisão da anormalidade estouro de consumo 
+	 * 
+	 * @author Vivianne Sousa
+	 * @date 21/10/2015
+	 */
+	public Integer pesquisarMotivoRevisaoContaAnormalidadeConsumo(Integer idConta) throws ErroRepositorioException;
+	
+	/**
+	 * [UC0113] - Faturar Grupo de Faturamento
+	 * [SB0006] - Gerar Dados da Conta
+	 * 
+	 * Determina o tipo de conta que será associado na impressão da conta
+	 * 
+	 * @author Vivianne Sousa
+	 * @date 27/10/2015
+	 */
+	public boolean verificarMotivoRevisaoEstouroConsumo (Integer idContaMotivoRevisao) throws ErroRepositorioException;
+
 }

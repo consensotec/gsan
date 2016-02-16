@@ -1,5 +1,6 @@
 package gcom.relatorio.cadastro.imovel;
 
+import gcom.cadastro.imovel.FiltroImovelPerfil;
 import gcom.cadastro.imovel.FiltroImovelPerfilHelper;
 import gcom.cadastro.imovel.ImovelPerfil;
 import gcom.cadastro.sistemaparametro.SistemaParametro;
@@ -26,6 +27,11 @@ public class RelatorioManterImovelPerfil extends TarefaRelatorio{
 	private static final long serialVersionUID = 1L;
 	public  RelatorioManterImovelPerfil(Usuario usuario){
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_IMOVEL_PERFIL);
+	}
+	
+	@Deprecated
+	public RelatorioManterImovelPerfil() {
+		super(null, "");
 	}
 
 	/**

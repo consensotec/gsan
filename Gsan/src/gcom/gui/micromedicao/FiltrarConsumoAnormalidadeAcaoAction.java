@@ -177,6 +177,8 @@ public class FiltrarConsumoAnormalidadeAcaoAction extends GcomAction {
 		filtroConsumoAnormalidadeAcao.adicionarCaminhoParaCarregamentoEntidade(
 				FiltroConsumoAnormalidadeAcao.SOLICITACAO_TIPO_ESPECIFICACAO_MES3);
 		
+	
+		
 		
 		// Verifica se o campo Consumo Anormalidade foi informado
 
@@ -460,6 +462,39 @@ public class FiltrarConsumoAnormalidadeAcaoAction extends GcomAction {
 			
 		
 		}
+		
+		//Verifica se o campo Motivo de Revisão para o 1º Mês foi informado
+		if (form.getMotivoRevisaoMes1() != null && !form.getMotivoRevisaoMes1().equals("-1")){
+			peloMenosUmParametroInformado = true;
+			
+			filtroConsumoAnormalidadeAcao.adicionarParametro(new ParametroSimples(
+					FiltroConsumoAnormalidadeAcao.MOTIVO_REVISAO_MES1,form.getMotivoRevisaoMes1()));
+		}
+		
+		//Verifica se o campo Motivo de Revisão para o 2º Mês foi informado
+		if (form.getMotivoRevisaoMes2() != null && !form.getMotivoRevisaoMes2().equals("-1")){
+			peloMenosUmParametroInformado = true;
+					
+			filtroConsumoAnormalidadeAcao.adicionarParametro(new ParametroSimples(
+					FiltroConsumoAnormalidadeAcao.MOTIVO_REVISAO_MES2,form.getMotivoRevisaoMes2()));
+		}
+		
+		//Verifica se o campo Motivo de Revisão para o 3º Mês foi informado
+		if (form.getMotivoRevisaoMes3() != null && !form.getMotivoRevisaoMes3().equals("-1")){
+			peloMenosUmParametroInformado = true;
+							
+			filtroConsumoAnormalidadeAcao.adicionarParametro(new ParametroSimples(
+					FiltroConsumoAnormalidadeAcao.MOTIVO_REVISAO_MES3,form.getMotivoRevisaoMes3()));
+		}
+		
+		//Verifica se o indicador de consumo normal foi informado
+		if (form.getIndicadorCobrancaConsumoNormal() != null && !form.getIndicadorCobrancaConsumoNormal().equals("")) {
+			peloMenosUmParametroInformado = true;
+			
+			filtroConsumoAnormalidadeAcao.adicionarParametro(new ParametroSimples(
+					FiltroConsumoAnormalidadeAcao.INDICADOR_COBRANCA_CONSUMO_NORMAL,form.getIndicadorCobrancaConsumoNormal()));
+		}
+		
 		// Erro caso o usuário mandou Pesquisar sem nenhum parâmetro
 		if (!peloMenosUmParametroInformado) {
 			throw new ActionServletException(

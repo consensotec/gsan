@@ -127,6 +127,11 @@ public class RelatorioNegativadorMovimentoRetornoResumo extends TarefaRelatorio 
 		super(usuario, ConstantesRelatorios.RELATORIO_2_VIA_CONTA);
 	}
 
+	@Deprecated
+	public RelatorioNegativadorMovimentoRetornoResumo() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

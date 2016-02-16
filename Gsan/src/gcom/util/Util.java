@@ -79,6 +79,10 @@ import gcom.cadastro.geografico.MunicipioFeriado;
 import gcom.cadastro.imovel.Categoria;
 import gcom.cadastro.imovel.Subcategoria;
 import gcom.cadastro.sistemaparametro.NacionalFeriado;
+import gcom.cobranca.CobrancaDocumento;
+import gcom.cobranca.DocumentoTipo;
+import gcom.fachada.Fachada;
+import gcom.faturamento.conta.Conta;
 import gcom.gui.ActionServletException;
 import gcom.util.email.ErroEmailException;
 import gcom.util.email.ServicosEmail;
@@ -93,6 +97,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
 import java.math.BigDecimal;
@@ -130,8 +135,6 @@ import org.apache.commons.validator.GenericValidator;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import sun.management.ManagementFactory;
 
 import com.mortennobel.imagescaling.ResampleOp;
 
@@ -481,13 +484,16 @@ public class Util {
 	}
 
 	/**
-	 * Author: Raphael Rossiter Data: 20/01/2006
+	 * @author Raphael Rossiter
+	 * @date 20/01/2006
 	 * 
-	 * @param data
-	 *            com a barra
+	 * @param data com a barra
 	 * @return Uma data no formato yyyyMM (sem a barra)
 	 */
 	public static String formatarMesAnoParaAnoMesSemBarra(String data) {
+		if (data == null || data.length() < 7) {
+			return null;
+		}
 
 		String mes = data.substring(0, 2);
 		String ano = data.substring(3, 7);
@@ -5059,12 +5065,16 @@ public class Util {
 		// retorna a nova data
 		return data;
 	}
-	
+
 	public static boolean verificarIdNaoVazio(String id) {
 		if (id == null || id.equals("null") || id.trim().equals("") || id.trim().equals(ConstantesSistema.NUMERO_NAO_INFORMADO + "")) {
 			return false;
 		}
 		return true;		
+	}
+
+	public static boolean verificarIdNaoVazio(Integer id) {
+		return  id != null && id.intValue() != ConstantesSistema.NUMERO_NAO_INFORMADO;		
 	}
 
 	public static boolean verificarNaoVazio(String valor) {
@@ -7207,6 +7217,83 @@ public class Util {
 		return file;
 	}
  	
+ 	public static File resizeImg(File in,String nomeArquivoRedimensionado, Integer alturaDesejada, Integer larguraDesejada) throws IOException{
+		
+		File file = null;
+		
+		try {
+			
+			BufferedImage src = ImageIO.read(in);
+			
+	        double altura = src.getHeight();
+	        double largura = src.getWidth();
+	        //int alturaDesejada = 768; //a altura proporcional será 1024
+	        
+	        if (altura > alturaDesejada || largura > larguraDesejada){
+	        	
+	        	Double novaLargura = null;
+	        	Double novaAltura = null;
+	        	
+	        	// verifica se a largura é maior que a altura
+	        	if ( largura > altura ){
+	        		
+	        		novaLargura = larguraDesejada.doubleValue();
+	        		novaAltura = (novaLargura / largura) * altura;
+	        		
+	        		if (novaAltura > alturaDesejada){
+	        			novaAltura = alturaDesejada.doubleValue();
+	        		}
+	        	}
+	        	// se a altura for maior que a largura
+	        	else if ( altura > largura ){
+	        		
+	        		novaAltura = alturaDesejada.doubleValue();
+	        		novaLargura = (novaAltura / altura) * largura;
+	        		
+	        		if (novaLargura > larguraDesejada){
+	        			novaLargura = larguraDesejada.doubleValue();
+	        		}
+	        	}
+	        	else{
+	        		
+	        		
+	        		if (alturaDesejada > larguraDesejada){
+	        			
+	        			novaAltura = alturaDesejada.doubleValue();
+	        			novaLargura = alturaDesejada.doubleValue(); 
+	        		}
+	        		else{
+	        			
+	        			novaAltura = larguraDesejada.doubleValue();
+	        			novaLargura = larguraDesejada.doubleValue();
+	        		}
+	        	}
+	        	
+	        	ResampleOp resampleOp = new ResampleOp(novaLargura.intValue() , novaAltura.intValue());
+
+		        BufferedImage rescaled = resampleOp.filter(src, null);
+
+		        //grava imagem redimensionada
+		        file = new File(nomeArquivoRedimensionado);
+		        ImageIO.write(rescaled, "JPG", file);
+	        }
+	        else{
+	        	
+	        	file = in;
+	        }
+		}
+		catch (IOException e) {
+			
+			if (file != null){
+				file.delete();
+			}
+			
+			new IllegalArgumentException("Problema no upload da imagem");
+        }
+		
+		return file;
+	}
+ 	
  	/**
  	 * @author Jonathan Marcos
  	 * @since 25/08/2014
@@ -7504,4 +7591,141 @@ public class Util {
     	return true;
     }
     
+    /**
+     * Retorna o código de barras formatado, já com as sepações de "-'
+     * 
+     * @author Bruno Barros
+     * @since 08/11/2015
+     * @param conta Conta que iremos criar o código de barrsas
+     * @return String com o código de barras formatado
+     */
+    public static String obterCodigoBarrasFormatado( Conta conta ){
+    	
+		String codigoBarras = obterCodigoBarras( conta );
+
+		// Formata a representação númerica do código de
+		// barras
+		String representacaoNumericaCodBarraFormatada = codigoBarras
+				.substring(0, 11)
+				+ "-"
+				+ codigoBarras.substring(11, 12)
+				+ " "
+				+ codigoBarras.substring(12, 23)
+				+ "-"
+				+ codigoBarras.substring(23, 24)
+				+ " "
+				+ codigoBarras.substring(24, 35)
+				+ "-"
+				+ codigoBarras.substring(35, 36)
+				+ " "
+				+ codigoBarras.substring(36, 47)
+				+ "-" + codigoBarras.substring(47, 48);
+			
+		return representacaoNumericaCodBarraFormatada;
+    }
+    
+    /**
+     * Retorna o código de barras PURO, sem a formatação dos "-"
+     * 
+     * @author Bruno Barros
+     * @since 08/11/2015
+     * @param conta Conta que iremos criar o código de barrsas
+     * @return String com o código de barras formatado
+     */
+    public static String obterCodigoBarras( Conta conta ){
+    	
+		String codigoBarras = "";
+
+		String anoMesFormatado = "";
+		String anoMesRecebido = ""
+				+ conta.getReferencia();
+		if (anoMesRecebido.length() < 6) {
+			anoMesFormatado = anoMesRecebido;
+		} else {
+			String mes = anoMesRecebido.substring(4, 6);
+			String ano = anoMesRecebido.substring(0, 4);
+			anoMesFormatado = mes + "" + ano;
+		}
+
+		Fachada fachada = Fachada.getInstancia();
+
+		codigoBarras = fachada
+				.obterRepresentacaoNumericaCodigoBarra(
+						new Integer(3),
+						new BigDecimal(conta
+								.getValorTotalConta()),
+						new Integer(
+								conta.getLocalidade().getId()),
+						new Integer(
+								conta.getImovel().getId()),
+						anoMesFormatado,
+						new Integer(
+								new Short(
+										conta.getDigitoVerificadorConta())
+										.toString()), null,
+						null, null, null, null, null,null);
+
+		return codigoBarras;
+    }
+    
+    /**
+     * Retorna o código de barras PURO, sem a formatação dos "-"
+     * 
+     * @author Bruno Barros
+     * @since 08/11/2015
+     * @param conta Conta que iremos criar o código de barrsas
+     * @return String com o código de barras formatado
+     */
+    public static String obterCodigoBarras( CobrancaDocumento cd ){
+    	
+		String representacaoNumericaCodBarra = Fachada.getInstancia()
+				.obterRepresentacaoNumericaCodigoBarra(
+						new Integer(5),
+						cd.getValorDocumento(),
+						cd.getLocalidade().getId(),
+						cd.getImovel().getId(),
+						null,
+						null,
+						null,
+						null,
+						cd.getNumeroSequenciaDocumento()+"",
+						new Integer( DocumentoTipo.EXTRATO_DE_DEBITO ),
+						null, null,null);
+	
+	
+		return representacaoNumericaCodBarra;
+    }
+    
+    /**
+     * Retorna o código de barras formatado, já com as sepações de "-'
+     * 
+     * @author Bruno Barros
+     * @since 08/11/2015
+     * @param documentoCobraca Documento de cobraca que iremos criar o código de barrsas
+     * @return String com o código de barras formatado
+     */
+    public static String obterCodigoBarrasFormatado( CobrancaDocumento documentoCobranca ){
+    	
+		String codigoBarras = obterCodigoBarras( documentoCobranca );
+
+		// Formata a representação númerica do código de
+		// barras
+		String representacaoNumericaCodBarraFormatada = codigoBarras
+				.substring(0, 11)
+				+ "-"
+				+ codigoBarras.substring(11, 12)
+				+ " "
+				+ codigoBarras.substring(12, 23)
+				+ "-"
+				+ codigoBarras.substring(23, 24)
+				+ " "
+				+ codigoBarras.substring(24, 35)
+				+ "-"
+				+ codigoBarras.substring(35, 36)
+				+ " "
+				+ codigoBarras.substring(36, 47)
+				+ "-" + codigoBarras.substring(47, 48);
+			
+		return representacaoNumericaCodBarraFormatada;
+    }    
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="gcom.mobile.execucaoordemservico.ExecucaoOSFoto" table="mobile.exe_os_foto">
+		<id name="id" type="java.lang.Integer" column="eoft_id">
+			<generator class="sequence">
+				<param name="sequence">mobile.seq_exe_os_foto</param>
+			</generator>
+		</id>
+
+		<property name="dataFoto" type="java.sql.Timestamp" column="eoft_tmfoto" not-null="false" length="6"/>
+		<property name="descricaoFoto" type="java.lang.String" column="eoft_dsfoto" length="90"/>
+		<property name="fotoOrdemServico" type="binary" column="eoft_imfoto" length="-1" not-null="true"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="eoft_tmultimaalteracao" not-null="true" length="6"/>
+		<property name="observacaoFoto" type="java.lang.String" column="eoft_dsobservacao" length="200"/>
+		<property name="coordenadaX" type="java.math.BigDecimal" column="eoft_nncoordenadax" not-null="false" length="16"/>
+		<property name="coordenadaY" type="java.math.BigDecimal" column="eoft_nncoordenaday" not-null="false" length="16"/>
+		
+		<many-to-one name="arquivoTextoOSCobranca" class="gcom.mobile.execucaoordemservico.ArquivoTextoOSCobranca">
+			<column name="AOSC_ID"/>
+		</many-to-one>
+		<many-to-one name="ordemServico" class="gcom.atendimentopublico.ordemservico.OrdemServico">
+			<column name="orse_id"/>
+		</many-to-one>
+		<many-to-one name="fotoSituacaoOrdemServico" class="gcom.atendimentopublico.ordemservico.FotoSituacaoOrdemServico">
+			<column name="fsos_id"/>
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

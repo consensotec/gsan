@@ -17,7 +17,6 @@ import gcom.util.agendadortarefas.AgendadorTarefas;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +36,11 @@ public class RelatorioImpostosPorClienteResponsavel extends TarefaRelatorio {
 
 	public RelatorioImpostosPorClienteResponsavel(Usuario usuario, String relatorioTipo) {
 		super(usuario, relatorioTipo);
+	}
+	
+	@Deprecated
+	public RelatorioImpostosPorClienteResponsavel() {
+		super(null,"");
 	}
 		
 	@Override
@@ -81,13 +85,14 @@ public class RelatorioImpostosPorClienteResponsavel extends TarefaRelatorio {
 				anoMesInicialTemp, anoMesFinalTemp,clienteID, tipoRelatorio);
 			tipoImposto = "DA ARRECADAÇÃO";
 		}
-		
+
 		// coleção de beans do relatório
-		List<RelatorioImpostosPorClienteResponsavelBean> relatorioBeans = this.inicializarBeansRelatorio(helpersRelatorio, tipoRelatorio);
+		List<RelatorioImpostosPorClienteResponsavelBean> relatorioBeans =
+				this.inicializarBeansRelatorio(helpersRelatorio, tipoRelatorio);
 
 		//Parâmetros do relatório
 		Map<String, Object> parametros = new HashMap<String, Object>();
-		
+
 		SistemaParametro sistemaParametro = fachada.pesquisarParametrosDoSistema();
 		
 		//Adiciona a imagem do relatorio identificando a empresa aos parâmetros
@@ -101,7 +106,7 @@ public class RelatorioImpostosPorClienteResponsavel extends TarefaRelatorio {
 		}else if(tipoRelatorio.equalsIgnoreCase("sintetico")){
 			tipoRelatorio = "SINTÉTICO";
 		}
-		parametros.put("tipoRelatorio",tipoRelatorio);
+		parametros.put("tipoRelatorio", tipoRelatorio);
 				
 		if (relatorioBeans != null && !relatorioBeans.isEmpty()) {
 			RelatorioDataSource ds = new RelatorioDataSource(relatorioBeans);
@@ -110,16 +115,14 @@ public class RelatorioImpostosPorClienteResponsavel extends TarefaRelatorio {
 				retorno = this.gerarRelatorio(
 							ConstantesRelatorios.RELATORIO_IMPOSTOS_POR_CLIENTE_RESPONSAVEL_ANALITICO_ARRECADACAO,
 							parametros, ds, tipoFormatoRelatorio);
-			}else{
+			} else {
 				retorno = this.gerarRelatorio(
 						ConstantesRelatorios.RELATORIO_IMPOSTOS_POR_CLIENTE_RESPONSAVEL,
 						parametros, ds, tipoFormatoRelatorio);
 			}
 			
 		} else {
-			/*
-			 * Adicionado por: Mariana Victor - 24/02/2011
-			 */
+			// Adicionado por: Mariana Victor - 24/02/2011
 			this.nomeRelatorio = ConstantesRelatorios.RELATORIO_VAZIO;
 			
 			RelatorioImpostosPorClienteResponsavelBean relatorioBean = 
@@ -133,26 +136,28 @@ public class RelatorioImpostosPorClienteResponsavel extends TarefaRelatorio {
 					ConstantesRelatorios.RELATORIO_VAZIO,
 					parametros, ds, tipoFormatoRelatorio);
 		}
-		
+
 		// ------------------------------------
 		// Grava o relatório no sistema
 		try {
 			persistirRelatorioConcluido(retorno, Relatorio.RELATORIO_IMPOSTOS_CLIENTE_RESPONSAVEL, idFuncionalidadeIniciada);
 		} catch (ControladorException e) {
 			e.printStackTrace();
-			throw new TarefaException(	"Erro ao gravar relatório no sistema",
-										e);
+			throw new TarefaException("Erro ao gravar relatório no sistema", e);
 		}
-		// ------------------------------------
-				
+
 		return retorno;
 	}
-	
+
 	/**
-	 * Processa os registros trazidos do banco
-	 * 28/11/2012
+	 * Inicializa o bean do relatorio com os registros trazidos do banco
 	 * 
 	 * @author Erivan Sousa
+	 * @date 28/11/2012
+	 * 
+	 * @author André Miranda
+	 * @date 06/11/2015
+	 * 
 	 * @param helpersRelatorio
 	 * @param relatorioTipo
 	 * 
@@ -160,117 +165,59 @@ public class RelatorioImpostosPorClienteResponsavel extends TarefaRelatorio {
 	 */
 	protected List<RelatorioImpostosPorClienteResponsavelBean> inicializarBeansRelatorio(
 			Collection<ImpostoDeduzidoHelper> helpersRelatorio, String relatorioTipo) {
-		// Inicializa o bean do relatorio
+		boolean isAnalitico = relatorioTipo.equalsIgnoreCase("analitico");
+		RelatorioImpostosPorClienteResponsavelBean bean;
 		List<RelatorioImpostosPorClienteResponsavelBean> relatorioBeans = new ArrayList<RelatorioImpostosPorClienteResponsavelBean>();
 
-		if (relatorioTipo.equalsIgnoreCase("sintetico")) {
-
-			if (helpersRelatorio != null && !helpersRelatorio.isEmpty()) {
-
-				for (Iterator<ImpostoDeduzidoHelper> iter = helpersRelatorio.iterator(); iter.hasNext();) {
-
-					ImpostoDeduzidoHelper elementoHelper = (ImpostoDeduzidoHelper) iter.next();
-
-					// cria o novo bean - cada bean representa um imposto por
-					// cliente e por fatura no relatorio
-					RelatorioImpostosPorClienteResponsavelBean relatorioBean = new RelatorioImpostosPorClienteResponsavelBean();
-
-					if (elementoHelper.getIdCliente() != null && elementoHelper.getIdCliente() != null) {
-						relatorioBean.setClienteIdNome(elementoHelper.getIdCliente() + " - "
-								+ elementoHelper.getNomeCliente());
-					}
-
-					if (elementoHelper.getCnpjCliente() != null) {
-						relatorioBean.setCnpjCliente(elementoHelper.getCnpjCliente());
-					}
-
-					if (elementoHelper.getValorFatura() != null) {
-						relatorioBean.setValorFatura(elementoHelper.getValorFatura());
-					}
-
-					if (elementoHelper.getIdImpostoTipo() != null) {
-						relatorioBean.setIdImpostoTipo(elementoHelper.getIdImpostoTipo());
-					}
-
-					if (elementoHelper.getDescricaoImposto() != null) {
-						relatorioBean.setDescricaoImposto(elementoHelper.getDescricaoImposto());
-					}
-
-					if (elementoHelper.getPercentualAliquota() != null) {
-						relatorioBean.setPercentualAliquota(Util.formataBigDecimal(elementoHelper.getPercentualAliquota(), 2, true));
-					}
-
-					if (elementoHelper.getValor() != null) {
-						relatorioBean.setValorImposto(elementoHelper.getValor());
-					}
-					
-					if (elementoHelper.getBaseCalculo() != null) {
-						relatorioBean.setBaseCalculo(elementoHelper.getBaseCalculo());
-					}
-
-					relatorioBeans.add(relatorioBean);
-				}
-			}
-
-		} else if (relatorioTipo.equalsIgnoreCase("analitico")) {
-
-			if (helpersRelatorio != null && !helpersRelatorio.isEmpty()) {
-
-				for (Iterator<ImpostoDeduzidoHelper> iter = helpersRelatorio.iterator(); iter.hasNext();) {
-
-					ImpostoDeduzidoHelper elementoHelper = (ImpostoDeduzidoHelper) iter.next();
-
-					RelatorioImpostosPorClienteResponsavelBean relatorioBean = new RelatorioImpostosPorClienteResponsavelBean();
-
-					if (elementoHelper.getIdCliente() != null && elementoHelper.getIdCliente() != null) {
-						relatorioBean.setClienteIdNome(elementoHelper.getIdCliente() + " - "
-								+ elementoHelper.getNomeCliente());
-					}
-
-					if (elementoHelper.getCnpjCliente() != null) {
-						relatorioBean.setCnpjCliente(Util.formatarCnpj(elementoHelper.getCnpjCliente()));
-					}
-
-					if (elementoHelper.getValorFatura() != null) {
-						relatorioBean.setValorFatura(elementoHelper.getValorFatura());
-					}
-
-					if (elementoHelper.getIdImpostoTipo() != null) {
-						relatorioBean.setIdImpostoTipo(elementoHelper.getIdImpostoTipo());
-					}
-
-					if (elementoHelper.getDescricaoImposto() != null) {
-						relatorioBean.setDescricaoImposto(elementoHelper.getDescricaoImposto());
-					}
-
-					if (elementoHelper.getPercentualAliquota() != null) {
-						relatorioBean.setPercentualAliquota(Util.formataBigDecimal(elementoHelper.getPercentualAliquota(), 2, true));
-					}
-
-					if (elementoHelper.getValor() != null) {
-						relatorioBean.setValorImposto(elementoHelper.getValor());
-					}
-
-					if (elementoHelper.getIdImovel() != null) {
-						relatorioBean.setImovelID(Util.retornaMatriculaImovelFormatada(elementoHelper.getIdImovel()));
-					}
-					
-					if (elementoHelper.getBaseCalculo() != null) {
-						relatorioBean.setBaseCalculo(elementoHelper.getBaseCalculo());
-					}	
-					
-					if (elementoHelper.getIdConta() != null) {
-						relatorioBean.setIdConta(elementoHelper.getIdConta().toString());
-					}
-					
-					if (elementoHelper.getAnoMesReferencia() != null) {
-						relatorioBean.setAnoMesReferenciaConta(Util.formatarAnoMesParaMesAno(elementoHelper.getAnoMesReferencia()));
-					}
-					
-					relatorioBeans.add(relatorioBean);
-				}
-			}
+		if (Util.isVazioOrNulo(helpersRelatorio)) {
+			return relatorioBeans;
 		}
+
+		for (ImpostoDeduzidoHelper helper : helpersRelatorio) {
+			// cria o novo bean - cada bean representa um imposto por cliente e
+			// por fatura no relatorio
+			bean = new RelatorioImpostosPorClienteResponsavelBean();
+
+			bean.setValorFatura(helper.getValorFatura());
+			bean.setIdImpostoTipo(helper.getIdImpostoTipo());
+			bean.setDescricaoImposto(helper.getDescricaoImposto());
+			bean.setValorImposto(helper.getValor());
+			bean.setBaseCalculo(helper.getBaseCalculo());
+			bean.setIdFatura(helper.getIdFatura());
+
+			if (helper.getCnpjCliente() != null) {
+				bean.setCnpjCliente(Util.formatarCnpj(helper.getCnpjCliente()));
+			}
+
+			if (helper.getReferenciaFatura() != null) {
+				bean.setReferenciaFatura(Util.formatarAnoMesParaMesAno(helper.getReferenciaFatura()));
+			}
+
+			if (helper.getIdCliente() != null && helper.getNomeCliente() != null) {
+				bean.setClienteIdNome(helper.getIdCliente() + " - " + helper.getNomeCliente());
+			}
+
+			if (helper.getPercentualAliquota() != null) {
+				bean.setPercentualAliquota(Util.formataBigDecimal(helper.getPercentualAliquota(), 2, true));
+			}
+
+			if (isAnalitico) {
+				if (helper.getIdImovel() != null) {
+					bean.setImovelID(Util.retornaMatriculaImovelFormatada(helper.getIdImovel()));
+				}
+
+				if (helper.getIdConta() != null) {
+					bean.setIdConta(helper.getIdConta().toString());
+				}
+
+				if (helper.getAnoMesReferencia() != null) {
+					bean.setAnoMesReferenciaConta(Util.formatarAnoMesParaMesAno(helper.getAnoMesReferencia()));
+				}
+			}
+
+			relatorioBeans.add(bean);
+		}
+
 		return relatorioBeans;
 	}
 
@@ -284,8 +231,4 @@ public class RelatorioImpostosPorClienteResponsavel extends TarefaRelatorio {
 		AgendadorTarefas.agendarTarefa("RelatorioImpostosPorClienteResponsavel", this);
 		
 	}
-	
-	
-	
-	
 }

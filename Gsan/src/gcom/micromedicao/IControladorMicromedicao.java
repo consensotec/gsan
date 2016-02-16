@@ -91,6 +91,7 @@ import gcom.faturamento.MotivoInterferenciaTipo;
 import gcom.faturamento.MovimentoContaPrefaturada;
 import gcom.gui.faturamento.bean.AnalisarImoveisReleituraHelper;
 import gcom.gui.micromedicao.ColetaMedidorEnergiaHelper;
+import gcom.gui.micromedicao.DadosLeiturista;
 import gcom.gui.micromedicao.DadosMovimentacao;
 import gcom.gui.micromedicao.HistoricoMedicaoIndividualizadaHelper;
 import gcom.gui.relatorio.micromedicao.FiltroRelatorioLeituraConsultarArquivosTextoHelper;
@@ -139,6 +140,7 @@ import gcom.relatorio.micromedicao.RelatorioRotasOnlinePorEmpresaBean;
 import gcom.seguranca.acesso.usuario.Usuario;
 import gcom.util.ControladorException;
 import gcom.util.ErroRepositorioException;
+import gcom.util.email.ErroEmailException;
 import gcom.util.filtro.Filtro;
 
 import java.io.BufferedReader;
@@ -148,8 +150,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-
-import javax.mail.SendFailedException;
 
 import org.apache.commons.fileupload.FileItem;
 
@@ -1842,7 +1842,7 @@ public interface IControladorMicromedicao {
 	 * @param dados
 	 * @throws ControladorException
 	 */
-	public void atualizarLeituraAnormalidadeCelularCasoSistema(Vector<DadosMovimentacao> dados) throws SendFailedException,ControladorException;
+	public void atualizarLeituraAnormalidadeCelularCasoSistema(Vector<DadosMovimentacao> dados) throws ErroEmailException,ControladorException;
 	
 
 	/**
@@ -1954,7 +1954,7 @@ public interface IControladorMicromedicao {
 	 * @throws ControladorException
 	 */
 	public Collection<DadosMovimentacao> buscarImoveisPorRota(Rota idRota,
-			Integer anoMesReferencia, boolean manter) throws ControladorException;
+			Integer anoMesReferencia, boolean manter, Short indicadorOrdenacao ) throws ControladorException;
 
 	/**
 	 * 
@@ -4085,4 +4085,22 @@ public interface IControladorMicromedicao {
 	 * @throws ErroRepositorioException
 	 */
 	public Integer obterUltimoConsumoImovel(Integer idImovel, Integer tipoLigacao)throws ControladorException; 
+	
+	/**
+	 * [UC0840] Atualizar Conta Pré-faturada
+	 * [SB0006] - Pesquisa motivo de revisão
+	 * Autor Vivianne Sousa
+	 * Data: 28/10/2015
+	 */
+	public Integer obterAnormalidadeConsumoAnoMes(Integer idImovel, Integer anoMes, Integer idLigacaoTipo) throws ControladorException; 
+	
+	/**
+	 * [UC1127] Gerar RA e OS para Anormalidade Consumo
+	 * Autor Vivianne Sousa
+	 * Data: 28/10/2015
+	 */
+	public void gerarRAOSAnormalidadeConsumo(FaturamentoGrupo faturamentoGrupo,
+		SistemaParametro sistemaParametro, Rota rota, int idFuncionalidadeIniciada) throws ControladorException;
+	
+	public Integer obterRotaIdImovel(Integer matricula, Integer anoMes) throws ControladorException;
 }

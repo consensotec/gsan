@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="ExibirServicosPortalSaaeActionForm"
+			type="gcom.gui.portal.saae.ExibirServicosPortalSaaeActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="ExibirServicosPortalSaaeActionForm"
+			type="gcom.gui.portal.saae.ExibirServicosPortalSaaeAction"
+			validate="false" scope="session"
+			path="/exibirServicosPortalSaaeAction">
+			<forward name="exibirServicosPortalSaaeAction"
+				path="/jsp/portal/saae/index_portal_saae.jsp" />
+			<forward name="servicosPortalSaaeAction"
+				path="/jsp/portal/saae/servicos.jsp" />
+			<forward name="servicoDeclaracaoAnualSaae"
+				path="/jsp/portal/saae/emitir_declaracao_anual_quitacao_debito_portal_saae.jsp" />				
+		 </action>
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>
+

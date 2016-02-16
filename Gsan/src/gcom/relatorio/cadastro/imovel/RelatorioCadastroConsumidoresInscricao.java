@@ -124,6 +124,11 @@ public class RelatorioCadastroConsumidoresInscricao extends TarefaRelatorio {
 		super(usuario,
 				ConstantesRelatorios.RELATORIO_CADASTRO_CONSUMIDORES_INSCRICAO);
 	}
+	
+	@Deprecated
+	public RelatorioCadastroConsumidoresInscricao() {
+		super(null, "");
+	}
 
 	/**
 	 * <<Descrição do método>>

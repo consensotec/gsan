@@ -130,6 +130,11 @@ public class RelatorioManterNegativadorRetornoMotivo extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_NEGATIVADOR_RETORNO_MOTIVO);
 	}
 
+	@Deprecated
+	public RelatorioManterNegativadorRetornoMotivo() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

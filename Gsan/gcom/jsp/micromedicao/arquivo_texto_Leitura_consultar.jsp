@@ -457,6 +457,18 @@ function gerarRelatorio(form){
 							labelProperty="descricaoSituacao" property="id" />
 					</html:select></td>
 					
+				<tr>
+
+					<td><strong>Matricula:<font
+						color="#FF0000"></font></strong></td>
+					<td><html:text property="matricula" 
+								size="8" 
+								maxlength="8"
+								onkeypress="return isCampoNumerico(event);"/>
+					</td>
+
+				</tr>					
+					
 					<!--<strong> <html:radio property="situaTransmLeitura" value="1" /></strong>
 					<strong>Disponível<html:radio property="situaTransmLeitura"
 						value="2" />Liberado</strong> <strong><html:radio

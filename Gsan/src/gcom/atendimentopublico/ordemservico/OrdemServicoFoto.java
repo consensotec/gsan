@@ -3,6 +3,7 @@ package gcom.atendimentopublico.ordemservico;
 import gcom.interceptor.ObjetoTransacao;
 import gcom.util.filtro.Filtro;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrdemServicoFoto extends ObjetoTransacao{
@@ -17,6 +18,8 @@ public class OrdemServicoFoto extends ObjetoTransacao{
 	private byte[] fotoOrdemServico;
 	private Date ultimaAlteracao;
 	private String observacaoFoto;
+	private BigDecimal coordenadaX;
+	private BigDecimal coordenadaY;
 	
 	public OrdemServicoFoto(){
 
@@ -101,6 +104,22 @@ public class OrdemServicoFoto extends ObjetoTransacao{
 
 	public void setObservacaoFoto(String observacaoFoto) {
 		this.observacaoFoto = observacaoFoto;
+	}
+
+	public BigDecimal getCoordenadaX() {
+		return coordenadaX;
+	}
+
+	public void setCoordenadaX(BigDecimal coordenadaX) {
+		this.coordenadaX = coordenadaX;
+	}
+
+	public BigDecimal getCoordenadaY() {
+		return coordenadaY;
+	}
+
+	public void setCoordenadaY(BigDecimal coordenadaY) {
+		this.coordenadaY = coordenadaY;
 	}
 	
 }

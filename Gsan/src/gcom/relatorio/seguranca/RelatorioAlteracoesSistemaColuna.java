@@ -30,6 +30,11 @@ public class RelatorioAlteracoesSistemaColuna extends TarefaRelatorio {
 	public RelatorioAlteracoesSistemaColuna(Usuario usuario,String nomeRelatorio) {
 		super(usuario, nomeRelatorio);
 	}
+	
+	@Deprecated
+	public RelatorioAlteracoesSistemaColuna() {
+		super(null, "");
+	}
 
 	@Override
 	public Object executar() throws TarefaException {

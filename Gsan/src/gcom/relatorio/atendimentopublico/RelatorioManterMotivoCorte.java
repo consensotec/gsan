@@ -117,6 +117,11 @@ public class RelatorioManterMotivoCorte extends TarefaRelatorio {
 	public RelatorioManterMotivoCorte(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_MOTIVO_CORTE);
 	}
+	
+	@Deprecated
+	public RelatorioManterMotivoCorte() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

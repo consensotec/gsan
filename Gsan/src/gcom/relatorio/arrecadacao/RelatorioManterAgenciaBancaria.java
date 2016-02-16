@@ -119,6 +119,11 @@ public class RelatorioManterAgenciaBancaria extends TarefaRelatorio {
 	public RelatorioManterAgenciaBancaria(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_AGENCIA_BANCARIA);
 	}
+	
+	@Deprecated
+	public RelatorioManterAgenciaBancaria() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

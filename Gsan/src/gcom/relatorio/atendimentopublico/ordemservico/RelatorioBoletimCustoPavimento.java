@@ -122,6 +122,11 @@ public class RelatorioBoletimCustoPavimento extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_BOLETIM_CUSTO_PAVIMENTO);
 	}
 
+	@Deprecated
+	public RelatorioBoletimCustoPavimento() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

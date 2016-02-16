@@ -121,5 +121,6 @@ public class FiltroSituacaoTransmissaoLeitura extends Filtro implements
 	 */
 	public final static String DESCRICAO = "descricaoSituacao";
 
+	public final static String INDICADOR_COBRANCA = "indicadorCobranca";
 
 }

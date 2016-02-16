@@ -3,15 +3,73 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	version="2.4">
+	
+    <servlet>
+        <servlet-name>GerarExtrato</servlet-name>
+        <servlet-class>gcom.webservice.totem.servlets.GerarExtrato</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GerarExtrato</servlet-name>
+        <url-pattern>/gerarExtrato</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>VerificarImovel</servlet-name>
+        <servlet-class>gcom.webservice.totem.servlets.VerificarImovel</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VerificarImovel</servlet-name>
+        <url-pattern>/verificarImovel</url-pattern>
+    </servlet-mapping>	
 
+    <servlet>
+        <servlet-name>InserirDebito</servlet-name>
+        <servlet-class>gcom.webservice.totem.servlets.InserirDebito</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InserirDebito</servlet-name>
+        <url-pattern>/inserirDebito</url-pattern>
+    </servlet-mapping>
 	
-	
+    <servlet>
+        <servlet-name>ListarDebitos</servlet-name>
+        <servlet-class>gcom.webservice.totem.servlets.ListarDebitos</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListarDebitos</servlet-name>
+        <url-pattern>/listarDebitos</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ListarContas</servlet-name>
+        <servlet-class>gcom.webservice.totem.servlets.ListarContas</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListarContas</servlet-name>
+        <url-pattern>/listarContas</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ObterDadosConta</servlet-name>
+        <servlet-class>gcom.webservice.totem.servlets.ObterDadosConta</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ObterDadosConta</servlet-name>
+        <url-pattern>/obterDadosConta</url-pattern>
+    </servlet-mapping>	    	    	    	
+
 	<filter>
 		<filter-name>filtroSessaoExpirada</filter-name>
 		<filter-class>gcom.gui.util.FiltroSessaoExpirada</filter-class>
 	</filter>
 
-    <filter>
+	<filter>
 		<filter-name>requestControlFilter</filter-name>
 		<filter-class>gcom.util.web.RequestControlFilter</filter-class>
 		<!--<init-param>
@@ -20,12 +78,12 @@
 		</init-param>
 		-->
 	</filter>
-	
+
 	<filter-mapping>
 		<filter-name>filtroSessaoExpirada</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-	
+
 	<filter>
 		<filter-name>filtroAtualizarQuadroAvisos</filter-name>
 		<filter-class>gcom.gui.util.FiltroAtualizarQuadroAvisos</filter-class>
@@ -35,7 +93,7 @@
 		<filter-name>filtroAtualizarQuadroAvisos</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-	
+
 	<filter-mapping>
 		<filter-name>filtroAtualizarQuadroAvisos</filter-name>
 		<url-pattern>*.jsp</url-pattern>
@@ -60,54 +118,49 @@
 		<filter-name>filtroSegurancaAcesso</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-	
-	
 
 	<filter-mapping>
 		<filter-name>requestControlFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-	
 
 	<servlet>
 		<servlet-name>InicializadorSistema</servlet-name>
 		<servlet-class>gcom.gui.InicializadorSistema</servlet-class>
 		<load-on-startup>3</load-on-startup>
 	</servlet>
-	
+
 	<filter>
-	  <filter-name>ResponseHeaderFilter</filter-name>
-	  <filter-class>gcom.gui.util.ResponseHeaderFilter</filter-class>
-	  <init-param>
-	    <param-name>Cache-Control</param-name>
-	    <param-value>max-age=3600</param-value>
-	  </init-param>
-	  <init-param>
-	  	<param-name>Expires</param-name>
-	  	<param-value>Thu, 01 Dec 2099 16:00:00 GMT</param-value>
-	  </init-param>
+		<filter-name>ResponseHeaderFilter</filter-name>
+		<filter-class>gcom.gui.util.ResponseHeaderFilter</filter-class>
+		<init-param>
+			<param-name>Cache-Control</param-name>
+			<param-value>max-age=3600</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Expires</param-name>
+			<param-value>Thu, 01 Dec 2099 16:00:00 GMT</param-value>
+		</init-param>
 	</filter>
-	
+
 	<filter-mapping>
-	  <filter-name>ResponseHeaderFilter</filter-name>
-	  <url-pattern>*.gif</url-pattern>
+		<filter-name>ResponseHeaderFilter</filter-name>
+		<url-pattern>*.gif</url-pattern>
 	</filter-mapping>
 
 	<filter-mapping>
-	  <filter-name>ResponseHeaderFilter</filter-name>
-	  <url-pattern>*.css</url-pattern>
+		<filter-name>ResponseHeaderFilter</filter-name>
+		<url-pattern>*.css</url-pattern>
 	</filter-mapping>
 
-   
-    <filter-mapping>
-	  <filter-name>ResponseHeaderFilter</filter-name>
-	  <url-pattern>*.js</url-pattern>
+
+	<filter-mapping>
+		<filter-name>ResponseHeaderFilter</filter-name>
+		<url-pattern>*.js</url-pattern>
 	</filter-mapping>
-   
+
 	<listener>
-  		<listener-class>
-   			gcom.gui.SessaoHttpListener
-  		</listener-class>
+		<listener-class>gcom.gui.SessaoHttpListener</listener-class>
 	</listener>
 
 	<servlet>
@@ -348,7 +401,7 @@
 				/WEB-INF/atendimentopublico/struts-config-EfetuarLigacaoAguaComInstalacaoHidrometro.xml,
 				/WEB-INF/cadastro/sistemaparametro/struts-config-FiltrarSistemaAlteracaoHistorico.xml,
 				/WEB-INF/cadastro/unidade/struts-config-FiltrarUnidadeOrganizacional.xml,
-				/WEB-INF/cadastro/imovel/struts-config-InformarImovelSituacaoCobranca.xml,					
+				/WEB-INF/cadastro/imovel/struts-config-InformarImovelSituacaoCobranca.xml,
 				/WEB-INF/cadastro/unidade/struts-config-ManterUnidadeOrganizacional.xml,
 				/WEB-INF/cadastro/sistemaparametro/struts-config-InserirHistoricoAlteracaoSistema.xml,
 				/WEB-INF/faturamento/struts-config-AssociarTarifaConsumoImoveis.xml,
@@ -404,9 +457,9 @@
 				/WEB-INF/relatorio/faturamento/struts-config-GerarRelatorioAnaliticoFaturamento.xml,
 				/WEB-INF/atendimentopublico/struts-config-gerarContratoPrestacaoServico.xml,
 				/WEB-INF/micromedicao/struts-config-InformarLeituraFiscalizacao.xml,
-			  	/WEB-INF/micromedicao/struts-config-InserirAnormalidadeLeitura.xml,
-			      /WEB-INF/micromedicao/struts-config-FiltrarAnormalidadeLeitura.xml,
-			      /WEB-INF/micromedicao/struts-config-ManterAnormalidadeLeitura.xml,
+				/WEB-INF/micromedicao/struts-config-InserirAnormalidadeLeitura.xml,
+				/WEB-INF/micromedicao/struts-config-FiltrarAnormalidadeLeitura.xml,
+				/WEB-INF/micromedicao/struts-config-ManterAnormalidadeLeitura.xml,
 				/WEB-INF/micromedicao/struts-config-InformarLeituraFiscalizacao.xml,
 				/WEB-INF/micromedicao/struts-config-registrarLeiturasAnormalidadesRelatorio.xml,
 				/WEB-INF/faturamento/struts-config-inserirTipoCredito.xml,
@@ -454,8 +507,8 @@
 				/WEB-INF/cadastro/struts-config-testarCelular.xml,
 				/WEB-INF/relatorio/arrecadacao/struts-config-GerarRelatorioAcompanhamentoMovimentoArrecadadoresPorNSA.xml,
 				/WEB-INF/micromedicao/struts-config-inserirLeiturista.xml,
-			      /WEB-INF/micromedicao/struts-config-ManterLeiturista.xml,
-			      /WEB-INF/micromedicao/struts-config-FiltrarLeiturista.xml,
+				/WEB-INF/micromedicao/struts-config-ManterLeiturista.xml,
+				/WEB-INF/micromedicao/struts-config-FiltrarLeiturista.xml,
 				/WEB-INF/relatorio/financeiro/struts-resumoDevedoresDuvidososGerarRelatorio.xml,
 				/WEB-INF/micromedicao/struts-config-InserirRoteiroEmpresa.xml,
 				/WEB-INF/relatorio/financeiro/struts-resumoDevedoresDuvidososGerarRelatorio.xml,
@@ -498,8 +551,8 @@
 				/WEB-INF/cobranca/struts-config-AssociarRotasCriterioCobranca.xml,
 				/WEB-INF/relatorio/financeiro/struts-config-EvolucaoContasAReceberContabilGerarRelatorio.xml,
 				/WEB-INF/relatorio/financeiro/struts-config-SaldoContasAReceberContabilGerarRelatorio.xml,
-				/WEB-INF/relatorio/cadastro/struts-config-GerarRelatorioImoveisUltimosConsumosAgua.xml,				
-				/WEB-INF/cobranca/spcserasa/struts-config-InserirNegativador.xml,				
+				/WEB-INF/relatorio/cadastro/struts-config-GerarRelatorioImoveisUltimosConsumosAgua.xml,
+				/WEB-INF/cobranca/spcserasa/struts-config-InserirNegativador.xml,
 				/WEB-INF/cobranca/spcserasa/struts-config-FiltrarNegativador.xml,
 				/WEB-INF/relatorio/atendimentopublico/struts-config-GerarOrdemFiscalizacao.xml,
 				/WEB-INF/cobranca/spcserasa/struts-config-ManterNegativador.xml,
@@ -514,11 +567,11 @@
 				/WEB-INF/cobranca/spcserasa/struts-config-InserirNegativadorRetornoMotivo.xml,
 				/WEB-INF/relatorio/gerencial/faturamento/struts-config-EmissaoRelatorioQuadroMetasAcumulado.xml,
 				/WEB-INF/cobranca/spcserasa/struts-config-InserirNegativadorExclusaoMotivo.xml,
-	    	   		/WEB-INF/cobranca/spcserasa/struts-config-FiltrarNegativadorExclusaoMotivo.xml,
-	    			/WEB-INF/cobranca/spcserasa/struts-config-ManterNegativadorExclusaoMotivo.xml,
-		    		/WEB-INF/arrecadacao/pagamento/struts-config-ExpurgoPagamentoInformar.xml,
-		    		/WEB-INF/relatorio/cadastro/struts-config-GerarRelatorioImoveisFaturasRecentesDiaFaturasAntigasAtraso.xml,
-	    			/WEB-INF/cobranca/spcserasa/struts-config-FiltrarNegativadorRetornoMotivo.xml,
+				/WEB-INF/cobranca/spcserasa/struts-config-FiltrarNegativadorExclusaoMotivo.xml,
+				/WEB-INF/cobranca/spcserasa/struts-config-ManterNegativadorExclusaoMotivo.xml,
+				/WEB-INF/arrecadacao/pagamento/struts-config-ExpurgoPagamentoInformar.xml,
+				/WEB-INF/relatorio/cadastro/struts-config-GerarRelatorioImoveisFaturasRecentesDiaFaturasAntigasAtraso.xml,
+				/WEB-INF/cobranca/spcserasa/struts-config-FiltrarNegativadorRetornoMotivo.xml,
 				/WEB-INF/cobranca/spcserasa/struts-config-ManterNegativadorRetornoMotivo.xml,
 				/WEB-INF/cobranca/spcserasa/struts-config-InserirNegativadorRegistroTipo.xml,
 				/WEB-INF/cobranca/spcserasa/struts-config-FiltrarNegativadorRegistroTipo.xml,
@@ -537,14 +590,14 @@
 				/WEB-INF/cobranca/spcserasa/struts-config-InformarDadosConsultaNegativacao.xml,
 				/WEB-INF/micromedicao/struts-config-AtualizarLeituraAnormalidadeCelular.xml,
 				/WEB-INF/atendimentopublico/ligacaoagua/struts-config-EfetuarReligacaoAguaComInstalacaoHidrometro.xml,
-				/WEB-INF/cobranca/spcserasa/struts-config-RegistrarNegativadorMovimentoRetorno.xml,				
+				/WEB-INF/cobranca/spcserasa/struts-config-RegistrarNegativadorMovimentoRetorno.xml,
 				/WEB-INF/cobranca/spcserasa/struts-config-FiltrarNegativadorMovimento.xml,
 				/WEB-INF/cobranca/spcserasa/struts-config-ConsultarNegativadorMovimento.xml,
 				/WEB-INF/cobranca/spcserasa/struts-config-ConsultarNegativadorMovimentoRegItemPopup.xml,
 				/WEB-INF/relatorio/gerencial/faturamento/struts-config-GerarArquivoTextoOrcamentoSinp.xml,
 				/WEB-INF/cadastro/imovel/struts-config-CadastrarAtualizarImovelCelular.xml,
-				/WEB-INF/relatorio/gerencial/faturamento/struts-config-GerarArquivoTextoOrcamentoSinp.xml,				
-				/WEB-INF/relatorio/gerencial/faturamento/struts-config-EmissaoRelatorioQuadroMetasExercicio.xml,				
+				/WEB-INF/relatorio/gerencial/faturamento/struts-config-GerarArquivoTextoOrcamentoSinp.xml,
+				/WEB-INF/relatorio/gerencial/faturamento/struts-config-EmissaoRelatorioQuadroMetasExercicio.xml,
 				/WEB-INF/micromedicao/struts-config-InformarLeituraRota.xml,
 				/WEB-INF/atendimentopublico/struts-config-InserirMotivoCorte.xml,
 				/WEB-INF/micromedicao/struts-config-InformarRotaLeiturista.xml,
@@ -638,8 +691,8 @@
 				/WEB-INF/faturamento/struts-config-ManterFaturamentoSituacaoTipo.xml,
 				/WEB-INF/atendimentopublico/struts-config-InserirLigacaoEsgotoEsgotamento.xml,
 				/WEB-INF/atendimentopublico/struts-config-FiltrarLigacaoEsgotoEsgotamento.xml,
-				/WEB-INF/atendimentopublico/struts-config-ManterLigacaoEsgotoEsgotamento.xml,			
-				/WEB-INF/seguranca/struts-config-InserirUsuarioTipo.xml,						
+				/WEB-INF/atendimentopublico/struts-config-ManterLigacaoEsgotoEsgotamento.xml,
+				/WEB-INF/seguranca/struts-config-InserirUsuarioTipo.xml,
 				/WEB-INF/seguranca/struts-config-FiltrarUsuarioTipo.xml,
 				/WEB-INF/seguranca/struts-config-ManterUsuarioTipo.xml,
 				/WEB-INF/micromedicao/struts-config-ProcessarRequisicaoTelemetria.xml,
@@ -687,9 +740,9 @@
 				/WEB-INF/integracao/struts-config-ProcessarRequisicaoGis.xml,
 				/WEB-INF/integracao/struts-config-ProcessarCoordenadasGis.xml,
 				/WEB-INF/cobranca/struts-config-RelatorioImoveisComAcordo.xml,
-				/WEB-INF/relatorio/gerencial/micromedicao/struts-config-gerarRelatorioResumoDistritoOperacional.xml,		
+				/WEB-INF/relatorio/gerencial/micromedicao/struts-config-gerarRelatorioResumoDistritoOperacional.xml,
 				/WEB-INF/cobranca/struts-config-RelatorioImoveisComAcordo.xml,
- 				/WEB-INF/transacao/struts-config-ManterTabelaColuna.xml,
+				/WEB-INF/transacao/struts-config-ManterTabelaColuna.xml,
 				/WEB-INF/faturamento/autoinfracao/struts-config-FiltrarAutoInfracao.xml,
 				/WEB-INF/faturamento/autoinfracao/struts-config-ManterAutoInfracao.xml,
 				/WEB-INF/atendimentopublico/struts-config-AlterarTipoCorte.xml,
@@ -711,7 +764,7 @@
 				/WEB-INF/cobranca/struts-config-FiltrarCobrancaGrupo.xml,
 				/WEB-INF/cobranca/struts-config-ManterCobrancaGrupo.xml,
 				/WEB-INF/cobranca/struts-config-AnalisarMetasCiclo.xml,
-  				/WEB-INF/faturamento/struts-config-FiltrarSituacaoEspecialFaturamento.xml,
+				/WEB-INF/faturamento/struts-config-FiltrarSituacaoEspecialFaturamento.xml,
 				/WEB-INF/faturamento/struts-config-ManterSituacaoEspecialFaturamento.xml,
 				/WEB-INF/relatorio/faturamento/conta/struts-config-GerarRelatorioConta.xml,
 				/WEB-INF/seguranca/acesso/struts-config-PesquisarCategoriaFuncionalidade.xml,
@@ -721,9 +774,9 @@
 				/WEB-INF/cobranca/struts-config-RelatorioAcompanhamentoAcoesCobranca.xml,
 				/WEB-INF/cobranca/struts-config-FiltrarAcompanhamentoReligacoesSupressoesReestabelecimentos.xml,
 				/WEB-INF/relatorio/faturamento/struts-config-GerarRelatorioJurosMultasDebitosCancelados.xml,
-    		            /WEB-INF/cadastro/projeto/struts-config-InserirProjeto.xml,
-    		            /WEB-INF/cadastro/projeto/struts-config-ManterProjeto.xml,
-                        /WEB-INF/cadastro/projeto/struts-config-FiltrarProjeto.xml,       
+				/WEB-INF/cadastro/projeto/struts-config-InserirProjeto.xml,
+				/WEB-INF/cadastro/projeto/struts-config-ManterProjeto.xml,
+				/WEB-INF/cadastro/projeto/struts-config-FiltrarProjeto.xml,
 				/WEB-INF/cobranca/struts-config-GerarArquivoTextoPagamentosContasCobrancaEmpresa.xml,
 				/WEB-INF/relatorio/micromedicao/struts-config-RelatorioAcompanhamentoLeiturista.xml,
 				/WEB-INF/operacional/struts-config-InserirSistemaAbastecimento.xml,
@@ -754,8 +807,8 @@
 				/WEB-INF/atendimentopublico/ordemservico/struts-config-EmitirOrdemFiscalizacao.xml,
 				/WEB-INF/cobranca/struts-config-FaixaDocumentosReceberManter.xml,
 				/WEB-INF/faturamento/struts-config-FiltrarFaturamentoImediatoAjuste.xml,
-         			/WEB-INF/relatorio/cobranca/struts-config-GerarRelatorioDocumentosAReceber.xml,
-         			/WEB-INF/relatorio/micromedicao/struts-config-GerarRelatorioColetaMedidorEnergia.xml,
+				/WEB-INF/relatorio/cobranca/struts-config-GerarRelatorioDocumentosAReceber.xml,
+				/WEB-INF/relatorio/micromedicao/struts-config-GerarRelatorioColetaMedidorEnergia.xml,
 				/WEB-INF/micromedicao/struts-config-InformarMedidorEnergiaRota.xml,
 				/WEB-INF/relatorio/cadastro/struts-config-GerarRelatorioEmitirBoletimCadastroIndividual.xml,
 				/WEB-INF/relatorio/micromedicao/struts-config-GerarRelatorioResumoLigacoesCapacidadeHidrometro.xml,
@@ -787,7 +840,7 @@
 				/WEB-INF/atendimentopublico/ordemservico/struts-config-ConsultarDescricaoMotivoAceiteRepavimentacaoPopup.xml,
 				/WEB-INF/micromedicao/struts-config-InserirItemServico.xml,
 				/WEB-INF/micromedicao/struts-config-ManterItemServico.xml,
-				/WEB-INF/micromedicao/struts-config-FiltrarItemServico.xml,				
+				/WEB-INF/micromedicao/struts-config-FiltrarItemServico.xml,
 				/WEB-INF/seguranca/acesso/struts-config-InserirControleLiberacaoPMEP.xml,
 				/WEB-INF/seguranca/acesso/struts-config-FiltrarControleLiberacaoPMEP.xml,
 				/WEB-INF/seguranca/acesso/struts-config-ManterControleLiberacaoPMEP.xml,
@@ -796,14 +849,14 @@
 				/WEB-INF/seguranca/acesso/struts-config-ResultadoPesquisaControleLiberacaoPMEP.xml,
 				/WEB-INF/cadastro/struts-config-InformarTelefone.xml,
 				/WEB-INF/atendimentopublico/ordemservico/struts-config-InformarDocumentoEspecificacaoObrigatoriedade.xml,
-				/WEB-INF/faturamento/struts-config-AnalisarReleituraImoveis.xml,			
+				/WEB-INF/faturamento/struts-config-AnalisarReleituraImoveis.xml,
 				/WEB-INF/relatorio/seguranca/struts-config-GerarRelatorioAlteracoesSistemaColuna.xml,
 				/WEB-INF/relatorio/cadastro/struts-config-GerarRelatorioLogradouroPorMunicipio.xml,
 				/WEB-INF/relatorio/cadastro/struts-config-GerarRelatorioAtualizacaoCadastralViaInternet.xml,
 				/WEB-INF/micromedicao/struts-config-FiltrarLeiturasTelemetria.xml,
 				/WEB-INF/micromedicao/struts-config-ManterLeiturasTelemetria.xml,
 				/WEB-INF/atendimentopublico/registroatendimento/struts-config-FiltrarAcompanhamentoRegistroAtendimento.xml,
-               		/WEB-INF/faturamento/struts-config-AnalisarReleituraImoveis.xml,
+				/WEB-INF/faturamento/struts-config-AnalisarReleituraImoveis.xml,
 				/WEB-INF/micromedicao/struts-config-InserirConsumoAnormalidadeAcao.xml,
 				/WEB-INF/micromedicao/struts-config-FiltrarConsumoAnormalidadeAcao.xml,
 				/WEB-INF/micromedicao/struts-config-ManterConsumoAnormalidadeAcao.xml,
@@ -847,9 +900,9 @@
 				/WEB-INF/relatorio/faturamento/struts-config-GerarRelatorioDevolucaoPagamentosDuplicidade.xml,
 				/WEB-INF/atendimentopublico/struts-config-DeterminarTipoServicoEspecificacao.xml,
 				/WEB-INF/cadastro/struts-config-FiltrarAlteracaoInscricaoImovel.xml,
-				/WEB-INF/cadastro/struts-config-ComandoCartasTarifaSocialGerar.xml,	
+				/WEB-INF/cadastro/struts-config-ComandoCartasTarifaSocialGerar.xml,
 				/WEB-INF/relatorio/cobranca/struts-config-GerarBoletimMedicaoCobranca.xml,
-				/WEB-INF/cadastro/struts-config-selecionarComandoRetirarImovelTarifaSocial.xml,	
+				/WEB-INF/cadastro/struts-config-selecionarComandoRetirarImovelTarifaSocial.xml,
 				/WEB-INF/relatorio/cadastro/struts-config-ResumoImoveisExcluidosTarifaSocialGerar.xml,
 				/WEB-INF/relatorio/atendimentopublico/struts-config-GerarRelatorioOSExecutadasPrestadoraServico.xml,
 				/WEB-INF/atendimentopublico/struts-config-InformarTramiteSituacaoCobranca.xml,
@@ -870,16 +923,16 @@
 				/WEB-INF/faturamento/struts-config-InformarConsumoParametro.xml,
 				/WEB-INF/relatorio/cobranca/struts-config-GerarRelatorioAnalisePerdasCreditos.xml,
 				/WEB-INF/relatorio/micromedicao/struts-config-GerarRelatorioImoveisComLeituras.xml,
-				/WEB-INF/cobranca/contratoparcelamento/struts-config-InformarPagamentoContratoParcelamentoPorCliente.xml,				
+				/WEB-INF/cobranca/contratoparcelamento/struts-config-InformarPagamentoContratoParcelamentoPorCliente.xml,
 				/WEB-INF/relatorio/atendimentopublico/struts-config-GerarRelatorioOSSituacao.xml,
 				/WEB-INF/relatorio/atendimentopublico/struts-config-GerarRelatorioAcompanhamentoBoletimMedicao.xml,
 				/WEB-INF/cobranca/cobrancaporresultado/struts-config-RegistrarArquivoTxtEncerramentoOSCobranca.xml,
 				/WEB-INF/atendimentopublico/ordemservico/struts-config-InformarCalibragem.xml,
 				/WEB-INF/relatorio/cobranca/struts-config-GerarRelatorioOSAcompanhamentoCobrancaResultadoAction.xml,
 				/WEB-INF/relatorio/cobranca/struts-config-ConsultarComandosAcompanhamentoCobrancaResultadoAction.xml,
-    			/WEB-INF/micromedicao/struts-config-ProcessarRequisicaoDispositivoMovelAcompanhamentoServico.xml,
+				/WEB-INF/micromedicao/struts-config-ProcessarRequisicaoDispositivoMovelAcompanhamentoServico.xml,
 				/WEB-INF/atendimentopublico/ordemservico/struts-config-ConsultarComandoOSSeletivaInspecaoAnormalidade.xml,
-    		    /WEB-INF/micromedicao/struts-config-ProcessarRequisicaoDispositivoMovelAcompanhamentoServico.xml, 
+				/WEB-INF/micromedicao/struts-config-ProcessarRequisicaoDispositivoMovelAcompanhamentoServico.xml,
 				/WEB-INF/relatorio/faturamento/struts-config-GerarRelatorioMultasAutosInfracaoPendentes.xml,
 				/WEB-INF/atendimentopublico/ordemservico/struts-config-AcompanhamentoArquivoRoteiro.xml,
 				<!--/WEB-INF/micromedicao/struts-config-ProcessarRequisicaoDispositivoMovelAcompanhamentoServico.xml-->
@@ -895,7 +948,7 @@
 				<!-- /WEB-INF/arrecadacao/struts-config-InformarAcertoDocumentosNaoAceitos.xml, -->
 				/WEB-INF/atendimentopublico/ordemservico/struts-config-ConsultarArquivoTextoOSVisita.xml,
 				/WEB-INF/arrecadacao/struts-config-InformarAcertoDocumentosNaoAceitos.xml,
-				/WEB-INF/micromedicao/struts-config-ProcessarRequisicaoDispositivoMovelFiscalizacaoAnormalidade.xml,				
+				/WEB-INF/micromedicao/struts-config-ProcessarRequisicaoDispositivoMovelFiscalizacaoAnormalidade.xml,
 				/WEB-INF/relatorio/atendimentopublico/struts-config-GerarRelatorioBoletimMedicaoOSInspecaoAnormalidade.xml,
 				/WEB-INF/micromedicao/struts-config-ProcessarRequisicaoDispositivoMovelFiscalizacaoAnormalidade.xml,
 				/WEB-INF/relatorio/atendimentopublico/struts-config-GerarRelatorioBoletimMedicaoOSInspecaoAnormalidade.xml,
@@ -913,7 +966,7 @@
 				/WEB-INF/gerencial/faturamento/struts-config-ConsultarResumoAnaliseFaturamentoPeriodo.xml,
 				/WEB-INF/arrecadacao/struts-config-consultarDocumentoNossoNumero.xml,
 				/WEB-INF/atendimentopublico/ordemservico/struts-config-InformarMotivoEncerramento.xml,
-				/WEB-INF/cobranca/cobrancaporresultado/struts-config-GerarRelatorioPenalidadesIndiceAtuacaoSucessoFinanceiro.xml, 
+				/WEB-INF/cobranca/cobrancaporresultado/struts-config-GerarRelatorioPenalidadesIndiceAtuacaoSucessoFinanceiro.xml,
 				/WEB-INF/faturamento/struts-config-CancelarFaturamentoGrupo.xml,
 				/WEB-INF/cobranca/cobrancaporresultado/struts-config-GerarRelatorioAcompanhamentoComandosCobranca.xml,
 				/WEB-INF/relatorio/cobranca/struts-config-GerarEmitirBoletimMedicaoContratos.xml,
@@ -921,7 +974,7 @@
 				/WEB-INF/cadastro/cliente/struts-config-FiltrarClienteVirtual.xml,
 				/WEB-INF/cadastro/atualizacaocadastral/struts-config-GerarTabelasTemporariasPorLocalidade.xml,
 				/WEB-INF/relatorio/cobranca/struts-config-GerarRelatorioImoveisContasRetiradosEmpresasCobrancaAction.xml,
-				/WEB-INF/relatorio/faturamento/struts-config-GerarRelatorioContasNaoImpressas.xml,				
+				/WEB-INF/relatorio/faturamento/struts-config-GerarRelatorioContasNaoImpressas.xml,
 				/WEB-INF/cobranca/cobrancaporresultado/struts-config-RetirarImoveisContasEmpresaCobranca.xml,
 				/WEB-INF/portal/caema/struts-config-ConsultarEstruturaTarifariaPortalCaema.xml,
 				/WEB-INF/portal/caema/struts-config-EfetuarParcelamentoDebitosPortalCaema.xml,
@@ -963,7 +1016,7 @@
 				/WEB-INF/portal/caer/struts-config-ConsultarConsumoHistoricoAguaPortalCaer.xml,
 				/WEB-INF/portal/caer/struts-config-InformarVencimentoAlternativoPortalCaer.xml,
 				/WEB-INF/portal/caer/struts-config-ValidarCertidaoNegativaDebitoPortalCaer.xml,
-				/WEB-INF/atendimentopublico/struts-config-VisualizarCoordenadasImpressaoSimultanea.xml,	
+				/WEB-INF/atendimentopublico/struts-config-VisualizarCoordenadasImpressaoSimultanea.xml,
 				/WEB-INF/financeiro/struts-config-RegerarLancamentosContabeis.xml,
 				/WEB-INF/portal/caer/struts-config-EfetuarParcelamentoDebitosPortalCaer.xml,
 				/WEB-INF/faturamento/struts-config-InserirVigenciaSimulacaoTarifaConsumo.xml,
@@ -1043,8 +1096,24 @@
 				/WEB-INF/relatorio/cadastro/struts-config-GerarRelatorioEnquadramentoDesenquadramentoGrandeCliente.xml,
 				/WEB-INF/faturamento/struts-config-GerarArquivoExportacaoFaturas.xml,
 				/WEB-INF/seguranca/struts-config-InformarPaginaAjudaFuncionalidade.xml,
-				/WEB-INF/portal/caer/struts-config-SolicitarContaBraillePortalCaer.xml		
-
+				/WEB-INF/portal/caer/struts-config-SolicitarContaBraillePortalCaer.xml,
+				/WEB-INF/portal/saae/struts-config-ExibirServicosPortalSaae.xml,
+				/WEB-INF/portal/saae/struts-config-EfetuarParcelamentoDebitosPortalSaae.xml,
+				/WEB-INF/portal/saae/struts-config-ExibirCanaisAtendimentoSaae.xml,
+				/WEB-INF/portal/saae/struts-config-ExibirLojasAtendimentoPresencialPortalSaae.xml,
+				/WEB-INF/portal/saae/struts-config-ExibirPortalInformacoesSaae.xml,
+				/WEB-INF/portal/saae/struts-config-SolicitarServicosPortalSaae.xml,
+				/WEB-INF/portal/saae/struts-config-EmitirSegundaViaContaPortalSaae.xml,
+				/WEB-INF/arrecadacao/pagamento/struts-config-ConfirmarPagamentoCartaoCredito.xml,
+				/WEB-INF/portal/comum/cartaocredito/struts-config-RegistrarRetornoDadosCartaoCreditoAction.xml,
+				/WEB-INF/relatorio/arrecadacao/struts-config-GerarRelatorioPrevisaoPagamentoCartaoCredito.xml,
+				/WEB-INF/mobile/execucaoordemservico/struts-config-GerarArquivoTextoOrdensServicoSmartphone.xml,
+				/WEB-INF/mobile/execucaoordemservico/struts-config-ConsultarDadosArquivoTextoOSCobrancaSmartphone.xml,
+				/WEB-INF/mobile/execucaoordemservico/struts-config-ConsultarOrdemServicoCobrancaSmartphone.xml,
+				/WEB-INF/mobile/execucaoordemservico/struts-config-ProcessarRequisicaoDispositivoMovelExecucaoOS.xml,
+				/WEB-INF/atendimentopublico/struts-config-EfetuarInstalacaoSubstituicaoRetiradaHidrometroLote.xml,
+				/WEB-INF/atendimentopublico/ordemservico/struts-config-RegistrarRetornoArquivoTextoOSCobrancaSmartphone.xml,
+				/WEB-INF/relatorio/cobranca/struts-config-GerarRelatorioArquivoRetornoCobrancaAction.xml
 			</param-value>
 		</init-param>
 		<init-param>
@@ -1054,20 +1123,20 @@
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 
-    <servlet-mapping>
-        <servlet-name>action</servlet-name>
-        <url-pattern>*.do</url-pattern>
-    </servlet-mapping>   
-	
-	   <servlet>
-	  	<servlet-name>autocomplete</servlet-name>
-	  	<servlet-class>gcom.gui.AutocompleteGenericoServlet</servlet-class>
-	  </servlet>
-	  <servlet-mapping>
-	  	<servlet-name>autocomplete</servlet-name>
-	  	<url-pattern>/autocomplete</url-pattern>
-	  </servlet-mapping>
-	
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>autocomplete</servlet-name>
+		<servlet-class>gcom.gui.AutocompleteGenericoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>autocomplete</servlet-name>
+		<url-pattern>/autocomplete</url-pattern>
+	</servlet-mapping>
+
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
@@ -1104,9 +1173,7 @@
 
 		<taglib>
 			<taglib-uri>/WEB-INF/struts-template.tld</taglib-uri>
-			<taglib-location>
-				/WEB-INF/struts-template.tld
-			</taglib-location>
+			<taglib-location>/WEB-INF/struts-template.tld</taglib-location>
 		</taglib>
 
 		<taglib>

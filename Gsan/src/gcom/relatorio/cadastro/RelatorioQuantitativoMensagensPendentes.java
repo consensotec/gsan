@@ -1,5 +1,12 @@
 package gcom.relatorio.cadastro;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import gcom.cadastro.atualizacaocadastral.bean.DadosResumoMovimentoAtualizacaoCadastralHelper;
 import gcom.cadastro.sistemaparametro.SistemaParametro;
 import gcom.fachada.Fachada;
@@ -12,19 +19,17 @@ import gcom.tarefa.TarefaRelatorio;
 import gcom.util.Util;
 import gcom.util.agendadortarefas.AgendadorTarefas;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 public class RelatorioQuantitativoMensagensPendentes extends TarefaRelatorio {
 
 	private static final long serialVersionUID = 1L;
 
 	public RelatorioQuantitativoMensagensPendentes(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_QUANTITATIVO_MENSAGENS_PENDENTES);
+	}
+	
+	@Deprecated
+	public RelatorioQuantitativoMensagensPendentes(){
+		super(null, "");
 	}
 	
 	@Override

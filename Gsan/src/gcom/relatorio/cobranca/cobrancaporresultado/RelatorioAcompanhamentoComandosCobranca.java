@@ -35,6 +35,11 @@ public class RelatorioAcompanhamentoComandosCobranca extends TarefaRelatorio {
 	public RelatorioAcompanhamentoComandosCobranca(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_ACOMPANHAMENTO_COMANDOS_COBRANCA);
 	}
+
+	@Deprecated
+	public RelatorioAcompanhamentoComandosCobranca() {
+		super(null, "");
+	}
 	
 	public Object executar() throws TarefaException {
 		// ------------------------------------

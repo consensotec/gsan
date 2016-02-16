@@ -115,6 +115,12 @@ public class RelatorioBoletimCustoAtualizacaoCadastral extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_BOLETIM_CUSTO_ATUALIZACAO_CADASTRAL);
 	}
 	
+	@Deprecated
+	public RelatorioBoletimCustoAtualizacaoCadastral() {
+		super(null, "");
+	}
+	
+	
 	private Collection<RelatorioBoletimCustoAtualizacaoCadastralBean> inicializarBeanRelatorio(
 			TreeMap<AtributosBoletimChaveHelper, AtributosBoletimHelper> mapAtributosBoletim) {
 		

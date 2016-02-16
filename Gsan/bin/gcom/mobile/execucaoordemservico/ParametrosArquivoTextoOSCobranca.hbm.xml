@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="gcom.mobile.execucaoordemservico.ParametrosArquivoTextoOSCobranca"
+		table="mobile.par_arq_txt_os_cobranca">
+		<id name="id" type="java.lang.Integer" column="posc_id">
+			<generator class="sequence">
+				<param name="sequence">
+					mobile.seq_par_arq_txt_os_cobranca
+				</param>
+			</generator>
+		</id>
+		
+		<property name="anoMesReferenciaCronograma" type="java.lang.Integer" column="posc_amreferenciacronograma" length="4"/>
+			
+		<property name="codigoTipoOS" type="java.lang.Integer" column="POSC_CDTIPOOS" not-null="true" length="4" />
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="POSC_TMULTIMAALTERACAO" not-null="true" length="8" />
+			
+		<!-- Associations -->
+		<!-- bi-directional many-to-one association to Empresa -->
+		<many-to-one name="empresa"
+			class="gcom.cadastro.empresa.Empresa" not-null="true">
+			<column name="empr_id" />
+		</many-to-one>
+
+		<many-to-one name="cobrancaGrupo"
+			class="gcom.cobranca.CobrancaGrupo" not-null="false">
+			<column name="cbgr_id" />
+		</many-to-one>
+		
+		<many-to-one name="cobrancaAcaoAtividadeComando"
+			class="gcom.cobranca.CobrancaAcaoAtividadeComando" not-null="false">
+			<column name="cacm_id" />
+		</many-to-one>
+		
+		<many-to-one name="servicoTipo" class="gcom.atendimentopublico.ordemservico.ServicoTipo">
+			<column name="svtp_id"/>
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

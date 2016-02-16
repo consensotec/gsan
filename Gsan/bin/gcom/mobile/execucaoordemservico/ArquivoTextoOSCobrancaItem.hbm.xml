@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+	<class name="gcom.mobile.execucaoordemservico.ArquivoTextoOSCobrancaItem" table="mobile.arq_txt_os_cobranca_item">
+		<id name="id" type="java.lang.Integer" column="aoci_id">
+			<generator class="sequence">
+				<param name="sequence">mobile.seq_arq_txt_os_cobranca_item</param>
+			</generator>
+		</id>
+		
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="aoci_tmultimaalteracao" length="8"/>
+		<property name="codigoSetorComercial" type="java.lang.Integer" column="aoci_cdsetorcomercial" not-null="true" length="8"/>
+		<property name="codigoRota" type="java.lang.Integer" column="aoci_cdrota" not-null="true" length="8"/>
+		<property name="numeroQuadra" type="java.lang.Integer" column="aoci_nnquadra" not-null="true" length="8"/>
+		
+		<many-to-one name="arquivoTextoOSCobranca" class="gcom.mobile.execucaoordemservico.ArquivoTextoOSCobranca">
+			<column name="aosc_id"/>
+		</many-to-one>
+		
+		<many-to-one name="ordemServico" class="gcom.atendimentopublico.ordemservico.OrdemServico">
+			<column name="orse_id"/>
+		</many-to-one>
+		
+		<many-to-one name="localidade" class="gcom.cadastro.localidade.Localidade">
+			<column name="loca_id"/>
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

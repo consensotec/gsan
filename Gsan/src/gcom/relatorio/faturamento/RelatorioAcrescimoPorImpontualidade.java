@@ -105,6 +105,11 @@ public class RelatorioAcrescimoPorImpontualidade extends TarefaRelatorio {
 	public RelatorioAcrescimoPorImpontualidade(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_ACRESCIMOS_POR_IMPONTUALIDADE);
 	}
+	
+	@Deprecated
+	public RelatorioAcrescimoPorImpontualidade() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

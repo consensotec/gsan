@@ -5064,4 +5064,46 @@ public class ControladorGerencialArrecadacaoSEJB implements SessionBean {
 			throw new EJBException(ex);
 		}
 	}
+	
+	
+	/**
+	 * Batch criado para migrar todos os resumos analiticos 
+	 * do banco comercial para o gerencial
+	 * 
+	 * @autor Bruno Barros
+	 * 
+	 * @param idFuncionalidadeIniciada
+	 * @throws ControladorException
+	 */
+	
+	public void migrarResumosAnaliticos( int idFuncionalidadeIniciada ) throws ControladorException{
+		
+		int idUnidadeIniciada = 0;
+
+		/*
+		 * Registrar o início do processamento da Unidade de
+		 * Processamento do Batch
+		*/		
+		idUnidadeIniciada = getControladorBatch()
+				.iniciarUnidadeProcessamentoBatch(
+						idFuncionalidadeIniciada,
+						UnidadeProcessamento.FUNCIONALIDADE,
+						0);
+		
+		try {
+		
+			repositorioGerencialArrecadacao.migrarResumosAnaliticos();
+			
+			getControladorBatch().encerrarUnidadeProcessamentoBatch(null,
+					idUnidadeIniciada, false);
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			getControladorBatch().encerrarUnidadeProcessamentoBatch(ex,	idUnidadeIniciada, true);
+			throw new EJBException(ex);
+		}
+		
+		
+	}
 }

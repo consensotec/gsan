@@ -111,6 +111,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * classe responsável por criar o relatório de imóvel manter
  * 
@@ -124,6 +126,11 @@ public class RelatorioManterImovel extends TarefaRelatorio {
 	 */
 	public RelatorioManterImovel(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEL_MANTER);
+	}
+	
+	@Deprecated
+	public RelatorioManterImovel() {
+		super(null, "");
 	}
 	
 	

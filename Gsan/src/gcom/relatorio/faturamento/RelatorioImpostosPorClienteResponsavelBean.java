@@ -90,7 +90,6 @@ import gcom.relatorio.RelatorioBean;
  * @date 22/06/2009
  */
 public class RelatorioImpostosPorClienteResponsavelBean implements RelatorioBean {
-	
 	//O id e o nome do cliente no formato XXXXX - NOMEDOCLIENTE
 	//onde XXXXX é o ID do CLIENTE
 	private String clienteIdNome;
@@ -104,7 +103,7 @@ public class RelatorioImpostosPorClienteResponsavelBean implements RelatorioBean
 	
 	private BigDecimal baseCalculo;	
 	
-	private String idFatura;
+	private Integer idFatura;
 	
 	private Integer idImpostoTipo;
 	
@@ -115,13 +114,15 @@ public class RelatorioImpostosPorClienteResponsavelBean implements RelatorioBean
 	private String percentualAliquota;
 	
 	private String idConta;
-	
+
 	private String anoMesReferenciaConta;
-	
+
+	private String referenciaFatura;
+
 	public RelatorioImpostosPorClienteResponsavelBean() {
-	
+
 	}
-	
+
 	public String getDescricaoImposto() {
 		return descricaoImposto;
 	}
@@ -145,8 +146,6 @@ public class RelatorioImpostosPorClienteResponsavelBean implements RelatorioBean
 	public void setPercentualAliquota(String percentualAliquota) {
 		this.percentualAliquota = percentualAliquota;
 	}
-    
-	
 
 	public BigDecimal getValorImposto() {
 		return valorImposto;
@@ -156,25 +155,27 @@ public class RelatorioImpostosPorClienteResponsavelBean implements RelatorioBean
 		this.valorImposto = valorImposto;
 	}
 
-	
 	public String getClienteIdNome() {
 		return clienteIdNome;
 	}
+
 	public void setClienteIdNome(String clienteIdNome) {
 		this.clienteIdNome = clienteIdNome;
 	}
+
 	public String getImovelID() {
 		return imovelID;
 	}
+
 	public void setImovelID(String imovelID) {
 		this.imovelID = imovelID;
 	}
 
-	public String getIdFatura() {
+	public Integer getIdFatura() {
 		return idFatura;
 	}
 
-	public void setIdFatura(String idFatura) {
+	public void setIdFatura(Integer idFatura) {
 		this.idFatura = idFatura;
 	}
 
@@ -218,4 +219,11 @@ public class RelatorioImpostosPorClienteResponsavelBean implements RelatorioBean
 		this.anoMesReferenciaConta = anoMesReferenciaConta;
 	}
 
+	public String getReferenciaFatura() {
+		return referenciaFatura;
+	}
+
+	public void setReferenciaFatura(String referenciaFatura) {
+		this.referenciaFatura = referenciaFatura;
+	}
 }

@@ -91,6 +91,7 @@ import gcom.util.ControladorException;
 import gcom.util.Util;
 import gcom.util.agendadortarefas.AgendadorTarefas;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -110,6 +111,11 @@ public class RelatorioOrcamentoSINP extends TarefaRelatorio {
 	
 	public RelatorioOrcamentoSINP(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_ORCAMENTO_SINP);
+	}
+
+	@Deprecated
+	public RelatorioOrcamentoSINP() {
+		super(null, "");
 	}
 
 	/**

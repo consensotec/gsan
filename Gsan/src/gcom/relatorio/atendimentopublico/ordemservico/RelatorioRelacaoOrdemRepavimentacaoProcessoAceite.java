@@ -123,6 +123,11 @@ public class RelatorioRelacaoOrdemRepavimentacaoProcessoAceite extends TarefaRel
 		super(usuario, ConstantesRelatorios.RELATORIO_RELACAO_ORDEM_REPAVIMENTACAO_PROCESSO_ACEITE);
 	}
 
+	@Deprecated
+	public RelatorioRelacaoOrdemRepavimentacaoProcessoAceite() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

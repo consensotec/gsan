@@ -108,6 +108,11 @@ public class RelatorioImoveisAtivosNaoMedidos extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_ATIVOS_NAO_MEDIDOS);
 	}
 
+	@Deprecated
+	public RelatorioImoveisAtivosNaoMedidos() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

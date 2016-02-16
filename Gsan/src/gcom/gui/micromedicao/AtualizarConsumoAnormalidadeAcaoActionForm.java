@@ -147,6 +147,16 @@ public class AtualizarConsumoAnormalidadeAcaoActionForm extends ValidatorActionF
     private String indicadorUso;
     
     private String consumoAnormalidadeAcaoId;
+    
+    private String indicadorValidarRetificacao;
+    
+    private String indicadorCobrancaConsumoNormal;
+                   
+    private String motivoRevisaoMes1;
+    
+    private String motivoRevisaoMes2;
+    
+    private String motivoRevisaoMes3;
 
 	public String getConsumoAnormalidade() {
 		return consumoAnormalidade;
@@ -385,7 +395,44 @@ public class AtualizarConsumoAnormalidadeAcaoActionForm extends ValidatorActionF
 	public void setConsumoAnormalidadeAcaoId(String consumoAnormalidadeAcaoId) {
 		this.consumoAnormalidadeAcaoId = consumoAnormalidadeAcaoId;
 	}
-	
-	
-	
+
+	public String getIndicadorValidarRetificacao() {
+		return indicadorValidarRetificacao;
+	}
+
+	public void setIndicadorValidarRetificacao(String indicadorValidarRetificacao) {
+		this.indicadorValidarRetificacao = indicadorValidarRetificacao;
+	}
+
+	public String getIndicadorCobrancaConsumoNormal() {
+		return indicadorCobrancaConsumoNormal;
+	}
+
+	public void setIndicadorCobrancaConsumoNormal(String indicadorCobrancaConsumoNormal) {
+		this.indicadorCobrancaConsumoNormal = indicadorCobrancaConsumoNormal;
+	}
+
+	public String getMotivoRevisaoMes1() {
+		return motivoRevisaoMes1;
+	}
+
+	public void setMotivoRevisaoMes1(String motivoRevisaoMes1) {
+		this.motivoRevisaoMes1 = motivoRevisaoMes1;
+	}
+
+	public String getMotivoRevisaoMes2() {
+		return motivoRevisaoMes2;
+	}
+
+	public void setMotivoRevisaoMes2(String motivoRevisaoMes2) {
+		this.motivoRevisaoMes2 = motivoRevisaoMes2;
+	}
+
+	public String getMotivoRevisaoMes3() {
+		return motivoRevisaoMes3;
+	}
+
+	public void setMotivoRevisaoMes3(String motivoRevisaoMes3) {
+		this.motivoRevisaoMes3 = motivoRevisaoMes3;
+	}
 }

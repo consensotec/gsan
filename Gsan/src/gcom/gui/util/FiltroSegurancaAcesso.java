@@ -107,6 +107,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+
 /**
  * Filtro responsável pela segurança do sistema verificando se o usuário que está 
  * requisitando a funcionalidade ou operação, tem acesso ou algum tipo de restrição 
@@ -115,10 +116,10 @@ import org.apache.log4j.Logger;
  * @date 20/07/2006
  */
 public class FiltroSegurancaAcesso extends HttpServlet implements Filter {
-	//Variável que aramzena as configurações iniciais do filtro
+	// Variável que aramzena as configurações iniciais do filtro
 	private FilterConfig filterConfig;
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Metódo responsável por setaas configurações inicias necessárias
 	 *
@@ -130,7 +131,6 @@ public class FiltroSegurancaAcesso extends HttpServlet implements Filter {
 	public void init(FilterConfig filterConfig) {
 		this.filterConfig = filterConfig;
 	}
-
 	
 	/**
 	 * Metódo responsável por verificar se o usuário tem acesso a funcionalidade ou operação
@@ -146,96 +146,80 @@ public class FiltroSegurancaAcesso extends HttpServlet implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) 
 		throws ServletException, IOException {
-		
+
 		try {
-			
-			
-			//Faz um cast no request para recuperar a sessão do usuário
+			// Faz um cast no request para recuperar a sessão do usuário
 			HttpServletRequest requestPagina = (HttpServletRequest) request;
-		
-			//Recupera a sessão do usuário logado
+
+			// Recupera a sessão do usuário logado
 			HttpSession sessao = requestPagina.getSession(false);
 
-			//Recupera o usuário que está logado da sessão
+			// Recupera o usuário que está logado da sessão
 			Usuario usuarioLogado = null;
 			
-			if(sessao != null){
-				usuarioLogado= (Usuario) sessao.getAttribute("usuarioLogado");
+			if (sessao != null) {
+				usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
 			}
 
-			Abrangencia abrangencia = 
-        		(Abrangencia)request.getAttribute(Abrangencia.ABRANGENCIA);
-            
-			//Recupera a coleção de grupos que o usuário logado pertence
-            Collection<Grupo> colecaoGruposUsuario = null;
-            
-            if(sessao != null){
-            	colecaoGruposUsuario = (Collection) 
-            		sessao.getAttribute("colecaoGruposUsuario");
-            }
-            	
-			
+			Abrangencia abrangencia = (Abrangencia) request.getAttribute(Abrangencia.ABRANGENCIA);
+
+			// Recupera a coleção de grupos que o usuário logado pertence
+			Collection<Grupo> colecaoGruposUsuario = null;
+
+			if (sessao != null) {
+				colecaoGruposUsuario = (Collection) sessao.getAttribute("colecaoGruposUsuario");
+			}
+
 			//Recupera a url do request
 			String enderecoURL = requestPagina.getServletPath();
-			
-            
-			/*
-			 * Caso a url seja de um processo de abas 
-			 * recupera a url pelo parametro do wizard adicionando o ".do" no final
-			 */
-			if(enderecoURL.contains("Wizard")){
+
+			// Caso a url seja de um processo de abas 
+			// recupera a url pelo parametro do wizard adicionando o ".do" no final
+			if (enderecoURL.contains("Wizard")) {
 				enderecoURL = requestPagina.getParameter("action") + ".do";
 			}
-			
-			//Alterado por Sávio Luiz.
-			//Data:29/02/2008
-			//verifica se o endereço da funcionalidade existe a palavra tabela auxiliar
-			//se existir então acrescenta o parametros ao caminho para 
-			//que ele seja único.
-			if(enderecoURL.contains("TabelaAuxiliar")){
-				if(requestPagina.getParameter("tela") != null && 
-					!requestPagina.getParameter("tela").equals("")){
-					
-					enderecoURL = 
-						enderecoURL+ "?tela="+requestPagina.getParameter("tela") ;
+
+			// Alterado por Sávio Luiz.
+			// Data: 29/02/2008
+			// verifica se o endereço da funcionalidade existe a palavra tabela
+			// auxiliar se existir então acrescenta o parametros ao caminho para
+			// que ele seja único.
+			if (enderecoURL.contains("TabelaAuxiliar")) {
+				if (requestPagina.getParameter("tela") != null && !requestPagina.getParameter("tela").equals("")) {
+					enderecoURL = enderecoURL + "?tela=" + requestPagina.getParameter("tela");
 				}
 			}
 			
-			if(requestPagina.getParameter("gerarRelatorio") != null && 
-					!requestPagina.getParameter("gerarRelatorio").equals("")){
-					
-				enderecoURL = 
-					enderecoURL+ "?gerarRelatorio="+requestPagina.getParameter("gerarRelatorio") ;
+			if (requestPagina.getParameter("gerarRelatorio") != null
+					&& !requestPagina.getParameter("gerarRelatorio").equals("")) {
+				enderecoURL = enderecoURL + "?gerarRelatorio=" + requestPagina.getParameter("gerarRelatorio");
 			}
 			
-			//Caso seja um acesso ao olap, a url é a mesma para todos
-			//por isso pega o id da funcionalidade direto
+			// Caso seja um acesso ao olap, a url é a mesma para todos
+			// por isso pega o id da funcionalidade direto
 			Integer idFuncionalidade = null;
-			if(enderecoURL.contains("selecaoOLAPAction")){
+			if (enderecoURL.contains("selecaoOLAPAction")) {
 				String id = requestPagina.getParameter("id");
-				if(id != null && !id.equals("")){
-					idFuncionalidade = new Integer(requestPagina.getParameter("id"));	
+				if (id != null && !id.equals("")) {
+					idFuncionalidade = new Integer(requestPagina.getParameter("id"));
 				}
 			}
 
-			if(enderecoURL.contains("informarDadosGeracaoRelatorioConsultaAction")){
+			if (enderecoURL.contains("informarDadosGeracaoRelatorioConsultaAction")) {
 				String id = requestPagina.getParameter("id");
-				if(id != null && !id.equals("")){
-					idFuncionalidade = new Integer(requestPagina.getParameter("id"));	
+				if (id != null && !id.equals("")) {
+					idFuncionalidade = new Integer(requestPagina.getParameter("id"));
 				}
 			}
-			
-			
-			
-			
+
 			Fachada fachada = Fachada.getInstancia();
-			
-			//Verifica se a url requisitada pelo usuário é uma operação ou uma funcionalidade
+
+			// Verifica se a url requisitada pelo usuário é uma operação ou uma funcionalidade
 			String tipoURL = fachada.verificarTipoURL(enderecoURL);
-			
+
 			setCaminhoMenu(sessao, idFuncionalidade, enderecoURL, tipoURL);
-			
-			//Caso o usuário esteja logado e não tenha clicado no link de logoff
+
+			// Caso o usuário esteja logado e não tenha clicado no link de logoff
 			if(usuarioLogado != null  && 
 				!enderecoURL.contains("Logoff") && 
 				!enderecoURL.contains("Login") && 
@@ -264,79 +248,65 @@ public class FiltroSegurancaAcesso extends HttpServlet implements Filter {
 				!enderecoURL.contains("processarRequisicaoDispositivoMovelAcompanhamentoServicoAction") &&
 				!enderecoURL.contains("processarRequisicaoDispositivoMovelFiscalizacaoAnormalidadeAction") &&
 				!enderecoURL.contains("processarRequisicaoDispositivoMovelAtualizacaoCadastralAction") &&
+				!enderecoURL.contains("processarRequisicaoDispositivoMovelExecucaoOSAction") &&
 				!enderecoURL.contains("contasAtrasoWebService")
 				 ){
-                
-				//Caso o tipo da url não esteja nulo
-				if(tipoURL != null){
+				// Caso o tipo da url não esteja nulo
+				if (tipoURL != null) {
+
+					// Caso o usuário tenha solicitado uma funcionalidade
+					if (tipoURL.equalsIgnoreCase("funcionalidade")) {
 					
-					//Caso o usuário tenha solicitado uma funcionalidade 
-					if(tipoURL.equalsIgnoreCase("funcionalidade")){
-												
-						/*
-						 * Caso usuário não tenha acesso a funcionalidade
-						 * exibe a tela de acesso negado para funcionalidade
-						 * Caso contrário chama o próximo filtro na fila
-						 */ 
-						if(!fachada.verificarAcessoPermitidoFuncionalidade(usuarioLogado,
-							enderecoURL, colecaoGruposUsuario,idFuncionalidade)){
-							
-							RequestDispatcher rd = 
-								filterConfig.getServletContext().
-									getRequestDispatcher("/jsp/util/acesso_negado_funcionalidade.jsp");
-							
+						// Caso usuário não tenha acesso a funcionalidade
+						// exibe a tela de acesso negado para funcionalidade
+						// Caso contrário chama o próximo filtro na fila
+						if (!fachada.verificarAcessoPermitidoFuncionalidade(usuarioLogado, enderecoURL,
+								colecaoGruposUsuario, idFuncionalidade)) {
+							RequestDispatcher rd = filterConfig.getServletContext().getRequestDispatcher(
+									"/jsp/util/acesso_negado_funcionalidade.jsp");
+
 							request.setAttribute("URL", enderecoURL);
-							rd.forward(request,response);
-						}else{
+							rd.forward(request, response);
+						} else {
 							doFilter(request, response, filterChain, usuarioLogado, enderecoURL);
 						}
 						
 						//Caso o usuário tenha solicitado uma operação 
 					}else if(tipoURL.equalsIgnoreCase("operacao")){
-						
-						
-						/*
-						 * Caso o usuário não tenha acesso a operação
-						 * exibe a tela de acesso negado para operação
-						 * Caso contrário chama o próximo filtro na fila
-						 */
-						if(!fachada.verificarAcessoPermitidoOperacao(usuarioLogado,
-							enderecoURL, colecaoGruposUsuario)){
-							
-							RequestDispatcher rd = 
-								filterConfig.getServletContext().
-									getRequestDispatcher("/jsp/util/acesso_negado_operacao.jsp");
-							
+						// Caso o usuário não tenha acesso a operação
+						// exibe a tela de acesso negado para operação
+						// Caso contrário chama o próximo filtro na fila
+						if (!fachada.verificarAcessoPermitidoOperacao(usuarioLogado, enderecoURL, colecaoGruposUsuario)) {
+							RequestDispatcher rd = filterConfig.getServletContext().getRequestDispatcher(
+									"/jsp/util/acesso_negado_operacao.jsp");
+
 							request.setAttribute("URL", enderecoURL);
-							rd.forward(request,response);
-							
+							rd.forward(request, response);
 						}else{
-                            
-							if(abrangencia != null){
-                                
-								if(!fachada.verificarAcessoAbrangencia(abrangencia)){
-                                    RequestDispatcher rd = 
-                                    	filterConfig.getServletContext().
-                                    		getRequestDispatcher("/jsp/util/acesso_negado_abrangencia.jsp");
-                                    rd.forward(request,response);
-                                }else{
-                                	doFilter(request, response, filterChain, usuarioLogado, enderecoURL);
-                                }
-                            }else{
-                            	doFilter(request, response, filterChain, usuarioLogado, enderecoURL);
-                            }
+							if (abrangencia != null) {
+
+								if (!fachada.verificarAcessoAbrangencia(abrangencia)) {
+									RequestDispatcher rd = filterConfig.getServletContext().getRequestDispatcher(
+											"/jsp/util/acesso_negado_abrangencia.jsp");
+									rd.forward(request, response);
+								} else {
+									doFilter(request, response, filterChain, usuarioLogado, enderecoURL);
+								}
+							} else {
+								doFilter(request, response, filterChain, usuarioLogado, enderecoURL);
+							}
 						}
 					}
-				}else{
-				
+				} else {
+					if(verificaUrlLojaVirtualSaae(enderecoURL)){
+						doFilter(request, response, filterChain, usuarioLogado, enderecoURL);
+					}else{
 					RequestDispatcher rd = 
 						filterConfig.getServletContext().
 							getRequestDispatcher("/jsp/util/acesso_negado_funcionalidade.jsp");
 					request.setAttribute("URL", enderecoURL);
-					rd.forward(request,response);	
+					rd.forward(request,response);	}
 				}
-				
-				
 			// Lista de todas as funcionalidades que podem ser acessadas sem que exista um usuario logado na sessao
 			} else if (enderecoURL.contains("Logoff") || 
 				enderecoURL.contains("Login") || 
@@ -386,23 +356,25 @@ public class FiltroSegurancaAcesso extends HttpServlet implements Filter {
 				enderecoURL.contains("inserirClientePortalAction")  ||
 				enderecoURL.contains("processarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction" )||
 				enderecoURL.contains("processarRequisicaoDispositivoMovelAtualizacaoCadastralAction") ||
+				enderecoURL.contains("processarRequisicaoDispositivoMovelExecucaoOSAction") ||
 				enderecoURL.contains("contasAtrasoWebService") ||
 				verificaUrlLojaVirtualCaema(enderecoURL) ||
 				verificaUrlLojaVirtualCaer(enderecoURL) ||
-				verificaUrlLojaVirtualCaern(enderecoURL)
+				verificaUrlLojaVirtualCaern(enderecoURL)||
+				verificaUrlLojaVirtualSaae(enderecoURL)
 				){
-				
 				doFilter(request, response, filterChain, usuarioLogado, enderecoURL);
-				
 			} else {
-
-				RequestDispatcher rd = filterConfig.getServletContext()
-						.getRequestDispatcher(
-								"/jsp/util/acesso_negado_funcionalidade.jsp");
-				
-				request.setAttribute("URL", enderecoURL);
-				rd.forward(request, response);
-
+				if(verificaUrlLojaVirtualSaae(enderecoURL)){
+					doFilter(request, response, filterChain, usuarioLogado, enderecoURL);
+				}else{				
+					RequestDispatcher rd = filterConfig.getServletContext()
+							.getRequestDispatcher(
+									"/jsp/util/acesso_negado_funcionalidade.jsp");
+					
+					request.setAttribute("URL", enderecoURL);
+					rd.forward(request, response);
+				}
 			}
 		} catch (ServletException sx) {
 			throw sx;
@@ -410,19 +382,17 @@ public class FiltroSegurancaAcesso extends HttpServlet implements Filter {
 			throw iox;
 		}
 	}
-	
+
 	/**
 	 * Verifa se a url informada eh da loja virtual da Caema
 	 * 
 	 * @author Rafael Pinto
 	 * @date 19/01/2012
-	 * 
 	 */
 	private boolean verificaUrlLojaVirtualCaema(String enderecoURL){
-		
-		//Caso seja url´s da loja virtual
+		// Caso seja url´s da loja virtual
 		boolean ehUrlLoja = false;
-		
+
 		if(	enderecoURL.contains("exibirServicosPortalCaemaAction") ||
 			enderecoURL.contains("inserirCadastroEmailClientePortalCaemaAction") || 
 			enderecoURL.contains("exibirInserirSolicitacaoServicosPortalCaemaAction") || 
@@ -451,9 +421,8 @@ public class FiltroSegurancaAcesso extends HttpServlet implements Filter {
 
 			ehUrlLoja = true;
 		}
-		
+
 		return ehUrlLoja;
-		
 	}
 
 	/**
@@ -463,9 +432,9 @@ public class FiltroSegurancaAcesso extends HttpServlet implements Filter {
 	 * @date 04/09/2012
 	 */
 	private boolean verificaUrlLojaVirtualCaer(String enderecoURL){
-		//Caso seja url´s da loja virtual da Caer
+		// Caso seja url´s da loja virtual da Caer
 		boolean ehUrlLoja = false;
-		
+
 		if( enderecoURL.contains("exibirServicosPortalCaerAction") || 
 			enderecoURL.contains("exibirInserirCadastroEmailClientePortalCaerAction") ||
 			enderecoURL.contains("inserirCadastroEmailClientePortalCaerAction") || 
@@ -489,10 +458,10 @@ public class FiltroSegurancaAcesso extends HttpServlet implements Filter {
 			enderecoURL.contains("gerarRelatorioDocumentosParcelamentoPortalCaerAction") ||
 			enderecoURL.contains("exibirInserirCadastroContaBraillePortalCaerAction") ||
 			enderecoURL.contains("inserirCadastroContaBraillePortalCaerAction")){
-			
+
 			ehUrlLoja = true;
 		}
-			
+
 		return ehUrlLoja;
 	}
 	
@@ -503,9 +472,9 @@ public class FiltroSegurancaAcesso extends HttpServlet implements Filter {
 	 * @date 15/07/2012
 	 */
 	private boolean verificaUrlLojaVirtualCaern(String enderecoURL){
-		//Caso seja url´s da loja virtual da Caern
+		// Caso seja url´s da loja virtual da Caern
 		boolean ehUrlLoja = false;
-		
+
 		if( enderecoURL.contains("exibirServicosPortalCaernAction") || 
 			enderecoURL.contains("exibirInserirCadastroEmailClientePortalCaernAction") ||
 			enderecoURL.contains("inserirCadastroEmailClientePortalCaernAction") || 
@@ -530,15 +499,37 @@ public class FiltroSegurancaAcesso extends HttpServlet implements Filter {
 			enderecoURL.contains("emitirContratoAdesaoAction")||
 			enderecoURL.contains("exibirInserirCadastroContaBraillePortalCaernAction") ||
 			enderecoURL.contains("inserirCadastroContaBraillePortalCaernAction")) {
-			
+
 			ehUrlLoja = true;
 		}
-			
+
 		return ehUrlLoja;
 	}
-	
+
+	/**
+	 * Verifa se a url informada eh da loja virtual da Saae
+	 * 
+	 * @author Cesar Medeiros
+	 * @date 15/09/2015
+ 	 */
+	private boolean verificaUrlLojaVirtualSaae(String enderecoURL) {
+		return (
+			enderecoURL.contains("exibirServicosPortalSaaeAction") ||
+			enderecoURL.contains("exibirEfetuarParcelamentoDebitosPortalSaaeAction") ||
+			enderecoURL.contains("emitirSegundaViaContaPortalSaaeAction") ||
+			enderecoURL.contains("efetuarParcelamentoDebitosPortalSaaeAction") ||
+			enderecoURL.contains("exibirCanaisAtendimentoSaaeAction") ||
+			enderecoURL.contains("exibirLojasAtendimentoPresencialPortalSaaeAction") ||
+			enderecoURL.contains("exibirInformacoesPortalSaaeAction") ||
+			enderecoURL.contains("exibirConsultarEstruturaTarifariaPortalSaaeAction") ||
+			enderecoURL.contains("exibirInserirSolicitacaoServicosPortalSaaeAction") ||
+			enderecoURL.contains("inserirSolicitacaoServicosPortalSaaeAction") ||
+			enderecoURL.contains("registrarRetornoDadosCartaoCreditoAction")
+		);
+	}
+
 	private void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain, Usuario usuarioLogado, String enderecoURL) throws IOException, ServletException {
-		long tempoInicial =System.currentTimeMillis();
+		long tempoInicial = System.currentTimeMillis();
 		
 		filterChain.doFilter(request, response);
 		
@@ -769,14 +760,5 @@ public class FiltroSegurancaAcesso extends HttpServlet implements Filter {
 		return retorno;
 	}
 
-	
-	/**
-	 * <Breve descrição sobre o caso de uso>
-	 *
-	 * @author Pedro Alexandre
-	 * @date 05/07/2006
-	 *
-	 */
-	public void destroy() {
-	}
+	public void destroy() { }
 }

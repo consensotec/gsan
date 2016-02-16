@@ -84,7 +84,6 @@ import gcom.seguranca.acesso.usuario.Usuario;
 import gcom.tarefa.TarefaException;
 import gcom.tarefa.TarefaRelatorio;
 import gcom.util.agendadortarefas.AgendadorTarefas;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -108,6 +107,11 @@ public class RelatorioRelacaoParcelamentoAnalitico extends TarefaRelatorio {
 
 	public RelatorioRelacaoParcelamentoAnalitico(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_RELACAO_PARCELAMENTO);
+	}
+	
+	@Deprecated
+	public RelatorioRelacaoParcelamentoAnalitico() {
+		super(null, "");
 	}
 
 	/**

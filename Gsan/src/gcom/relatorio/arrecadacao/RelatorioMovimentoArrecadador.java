@@ -111,6 +111,11 @@ public class RelatorioMovimentoArrecadador extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_MOVIMENTO_ARRECADADOR);
 	}
 
+	@Deprecated
+	public RelatorioMovimentoArrecadador() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

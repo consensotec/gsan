@@ -602,4 +602,9 @@ public interface IRepositorioClienteImovel {
 //	Pesquisar Cliente Imovel
 	public Collection<ClienteImovel> pesquisarClientesImovelDadosComplementares(Integer idImovel) 
 			throws ErroRepositorioException;
+	
+	
+	public ClienteImovel retornaClienteImovelProprietario(Integer idImovel) throws ErroRepositorioException;
+	
+	public ClienteImovel retornaClienteImovelResponsavel(Integer idImovel) throws ErroRepositorioException;
 }

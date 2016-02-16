@@ -77,16 +77,8 @@
 
 package gcom.gui.cobranca;
 
-import java.util.Collection;
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 import gcom.cobranca.bean.DadosAmortizacaoDividaAtivaHelper;
+import gcom.cobranca.bean.DadosAmortizacaoDividaAtivaSinteticoHelper;
 import gcom.fachada.Fachada;
 import gcom.gui.ActionServletException;
 import gcom.relatorio.ExibidorProcessamentoTarefaRelatorio;
@@ -96,6 +88,16 @@ import gcom.tarefa.TarefaRelatorio;
 import gcom.util.SistemaException;
 import gcom.util.Util;
 
+import java.util.Collection;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
 /**
  * [UC1585] - Emitir Relatório Divida Ativa Amortizada 
  * 
@@ -104,36 +106,47 @@ import gcom.util.Util;
  */
 public class GerarRelatorioDividaAtivaAmortizadaAction extends ExibidorProcessamentoTarefaRelatorio {
 
+	private Fachada fachada; 
+	
 	public ActionForward execute(ActionMapping actionMapping,
 			ActionForm actionForm, HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) {
 
 		ActionForward retorno = null;
-		Fachada fachada = Fachada.getInstancia();
+		fachada = Fachada.getInstancia();
+		RelatorioDividaAtivaAmortizada relatorioDividaAtivaAmortizada = null;
+		RelatorioDividaAtivaAmortizadaSintetico relatorioDividaAtivaAmortizadaSintetico = null;
 		
 		httpServletRequest.setAttribute("telaSucessoRelatorio", true);
 		
 		FiltrarRelatorioDividaAtivaActionForm form = (FiltrarRelatorioDividaAtivaActionForm) actionForm;
 		
+		String periodoInscricao = "";
 		Date periodoInscricaoInicial = null;
 		Date periodoInscricaoFinal   = null;
 		if(form.getPeriodoInscricaoInicial() != null && !form.getPeriodoInscricaoInicial().equals("")
 				&& form.getPeriodoInscricaoFinal() != null && !form.getPeriodoInscricaoFinal().equals("")){
+			periodoInscricao = form.getPeriodoInscricaoInicial() + " a " + form.getPeriodoInscricaoFinal();
 			periodoInscricaoInicial = Util.gerarDataInicialApartirAnoMesRefencia(Util.formatarMesAnoComBarraParaAnoMes(form.getPeriodoInscricaoInicial()));
 			periodoInscricaoFinal = Util.gerarDataApartirAnoMesRefencia(Util.formatarMesAnoComBarraParaAnoMes(form.getPeriodoInscricaoFinal()));
 		}
 		
+		String periodoAtualizacao = "";
 		Date periodoAtualizacaoInicial = null;
 		Date periodoAtualizacaoFinal   = null;
 		if(form.getPeriodoAtualizacaoInicial() != null && !form.getPeriodoAtualizacaoInicial().equals("")
 				&& form.getPeriodoAtualizacaoFinal() != null && !form.getPeriodoAtualizacaoFinal().equals("")){
+			periodoAtualizacao = form.getPeriodoAtualizacaoInicial() + " a "  + form.getPeriodoAtualizacaoFinal();
 			periodoAtualizacaoInicial = Util.gerarDataInicialApartirAnoMesRefencia(Util.formatarMesAnoComBarraParaAnoMes(form.getPeriodoAtualizacaoInicial()));
 			periodoAtualizacaoFinal = Util.gerarDataApartirAnoMesRefencia(Util.formatarMesAnoComBarraParaAnoMes(form.getPeriodoAtualizacaoFinal()));
 		}
 		
 		Integer idImovel = null;
+		String descricaoLocalidade = "";
+		String descricaoImovel = "";
 		if(form.getIdImovel() != null && !form.getIdImovel().equals("")){
 			idImovel = Integer.parseInt(form.getIdImovel()); 
+			descricaoImovel = idImovel + " - " + form.getInscricaoImovel(); 
 		}
 		
 		Short indicadorIntra = null;
@@ -147,21 +160,59 @@ public class GerarRelatorioDividaAtivaAmortizadaAction extends ExibidorProcessam
 			tipoRelatorio = TarefaRelatorio.TIPO_PDF + "";
 		}
 		
-		Collection<DadosAmortizacaoDividaAtivaHelper> colecaoDadosAmortizacaoDividaAtivaHelper = fachada.obterDadosAmortizacoesDividaAtiva(periodoInscricaoInicial,
-																																			periodoInscricaoFinal, 
+		String formatoRelatorio = null;
+		
+		if(form.getIndicadorRelatorioSinteticoAnalitico() != null){
+			formatoRelatorio = form.getIndicadorRelatorioSinteticoAnalitico();
+		}		
+		
+		
+		
+		//Sintético
+		if(formatoRelatorio != null && Integer.parseInt(formatoRelatorio) == 2){
+			Collection<DadosAmortizacaoDividaAtivaSinteticoHelper> colecaoDadosAmortizacaoDividaAtivaSinteticoHelper = fachada.obterDadosAmortizacoesDividaAtivaSintetico
+																																	(periodoInscricaoInicial,
+																																		periodoInscricaoFinal, 
+																																		periodoAtualizacaoInicial, 
+																																		periodoAtualizacaoFinal, 
+																																		idImovel, indicadorIntra);
+
+			relatorioDividaAtivaAmortizadaSintetico = new RelatorioDividaAtivaAmortizadaSintetico((Usuario) httpServletRequest.getSession().getAttribute("usuarioLogado"));
+			
+			relatorioDividaAtivaAmortizadaSintetico.addParametro("colecaoDadosAmortizacaoDividaAtivaSinteticoHelper", colecaoDadosAmortizacaoDividaAtivaSinteticoHelper);
+			relatorioDividaAtivaAmortizadaSintetico.addParametro("tipoformatoRelatorio", Integer.parseInt(tipoRelatorio));
+			relatorioDividaAtivaAmortizadaSintetico.addParametro("intra", indicadorIntra);
+			relatorioDividaAtivaAmortizadaSintetico.addParametro("periodoInscricao",periodoInscricao);
+			relatorioDividaAtivaAmortizadaSintetico.addParametro("periodoAmortizacao",periodoAtualizacao);
+			relatorioDividaAtivaAmortizadaSintetico.addParametro("descricaoLocalidade",descricaoLocalidade);
+			relatorioDividaAtivaAmortizadaSintetico.addParametro("descricaoImovel",descricaoImovel);
+		//Analítico
+		}else{
+			Collection<DadosAmortizacaoDividaAtivaHelper> colecaoDadosAmortizacaoDividaAtivaHelper = fachada.obterDadosAmortizacoesDividaAtiva(periodoInscricaoInicial,
+																																            periodoInscricaoFinal, 
 																																			periodoAtualizacaoInicial, 
 																																			periodoAtualizacaoFinal, 
 																																			idImovel, indicadorIntra);
 		
-		RelatorioDividaAtivaAmortizada relatorioDividaAtivaAmortizada = new RelatorioDividaAtivaAmortizada((Usuario) httpServletRequest.getSession().getAttribute("usuarioLogado"));
+			relatorioDividaAtivaAmortizada = new RelatorioDividaAtivaAmortizada((Usuario) httpServletRequest.getSession().getAttribute("usuarioLogado"));
 		
-		relatorioDividaAtivaAmortizada.addParametro("colecaoDadosAmortizacaoDividaAtivaHelper", colecaoDadosAmortizacaoDividaAtivaHelper);
-		relatorioDividaAtivaAmortizada.addParametro("tipoformatoRelatorio", Integer.parseInt(tipoRelatorio));
-		relatorioDividaAtivaAmortizada.addParametro("intra", indicadorIntra);
+			relatorioDividaAtivaAmortizada.addParametro("colecaoDadosAmortizacaoDividaAtivaHelper", colecaoDadosAmortizacaoDividaAtivaHelper);
+			relatorioDividaAtivaAmortizada.addParametro("tipoformatoRelatorio", Integer.parseInt(tipoRelatorio));
+			relatorioDividaAtivaAmortizada.addParametro("intra", indicadorIntra);
+			relatorioDividaAtivaAmortizada.addParametro("periodoInscricao",periodoInscricao);
+			relatorioDividaAtivaAmortizada.addParametro("periodoAmortizacao",periodoAtualizacao);
+			relatorioDividaAtivaAmortizada.addParametro("descricaoImovel",descricaoImovel);
+		}
 		
 		try{
 			
-			retorno = processarExibicaoRelatorio(relatorioDividaAtivaAmortizada, tipoRelatorio, httpServletRequest, httpServletResponse, actionMapping);
+			if(relatorioDividaAtivaAmortizada != null){
+				retorno = processarExibicaoRelatorio(relatorioDividaAtivaAmortizada, tipoRelatorio, httpServletRequest, httpServletResponse, actionMapping);
+			}else{
+				if(relatorioDividaAtivaAmortizadaSintetico != null){
+					retorno = processarExibicaoRelatorio(relatorioDividaAtivaAmortizadaSintetico, tipoRelatorio, httpServletRequest, httpServletResponse, actionMapping);
+				}
+			}
 			
 		}catch(SistemaException ex){
 			// manda o erro para a página no request atual
@@ -175,7 +226,7 @@ public class GerarRelatorioDividaAtivaAmortizadaAction extends ExibidorProcessam
 			throw new ActionServletException("atencao.relatorio.vazio");
 		}
 		
-		
 		return retorno;
 	}
+	
 }

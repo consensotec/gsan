@@ -277,6 +277,7 @@ public class ExibirAtualizarTipoServicoAction extends GcomAction {
 			atualizarTipoServicoActionForm.setIndicadorCorrecaoAnormalidade(""+servicoTipo.getIndicadorCorrecaoAnormalidade());
 			atualizarTipoServicoActionForm.setIndicadorCobrarJuros("" + servicoTipo.getIndicadorCobrarJuros());
 			atualizarTipoServicoActionForm.setIndicadorIncluirDebito("" + servicoTipo.getIndicadorIncluirDebito());
+			atualizarTipoServicoActionForm.setIndicadorServicoCobranca("" + servicoTipo.getIndicadorServicoCobranca());
 			
 			FiltroServicoTipoAtividade filtroServicoTipoAtividade = new FiltroServicoTipoAtividade();
 			filtroServicoTipoAtividade.adicionarParametro(new ParametroSimples(FiltroServicoTipoAtividade.SERVICO_TIPO_ID, servicoTipo.getId()));

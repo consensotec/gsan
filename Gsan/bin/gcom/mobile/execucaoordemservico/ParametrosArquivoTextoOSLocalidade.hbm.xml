@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="gcom.mobile.execucaoordemservico.ParametrosArquivoTextoOSLocalidade"
+		table="mobile.param_arq_txt_os_loca">
+		<id name="id" type="java.lang.Integer" column="polo_id">
+			<generator class="sequence">
+				<param name="sequence">
+					mobile.seq_param_arq_txt_os_loca
+				</param>
+			</generator>
+		</id>
+
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="polo_tmultimaalteracao" not-null="true" length="8" />
+
+		<!-- Associations -->
+		<!-- bi-directional many-to-one association to Empresa -->
+		<many-to-one name="parametrosArquivoTextoOSCobranca"
+			class="gcom.mobile.execucaoordemservico.ParametrosArquivoTextoOSCobranca" not-null="true">
+			<column name="posc_id" />
+		</many-to-one>
+
+		<!-- bi-directional many-to-one association to Localidade -->
+		<many-to-one name="localidade"
+			class="gcom.cadastro.localidade.Localidade" not-null="false">
+			<column name="loca_id" />
+		</many-to-one>		
+	</class>
+</hibernate-mapping>

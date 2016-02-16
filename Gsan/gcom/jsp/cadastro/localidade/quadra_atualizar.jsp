@@ -498,6 +498,9 @@
 					"varName", " return this[varName];"));
 			this.ab = new Array("perfilQuadra", "Informe Perfil da Quadra.",
 					new Function("varName", " return this[varName];"));
+
+			this.ac = new Array("bairroID", "Informe o bairro da quadra",
+					new Function("varName", " return this[varName];"));			
 		}
 
 		function InteiroZeroPositivoValidations() {
@@ -569,6 +572,8 @@
 			this.aa = new Array("rotaID", "Informe Rota.", new Function(
 					"varName", " return this[varName];"));
 			this.ab = new Array("perfilQuadra", "Informe Perfil da Quadra.",
+					new Function("varName", " return this[varName];"));
+			this.ac = new Array("bairroID", "Informe o bairro da quadra",
 					new Function("varName", " return this[varName];"));
 		}
 
@@ -807,7 +812,7 @@
 												<html:hidden property="indicadorRelacionamentoQuadraBairro" />
 
 												<tr>
-													<td><strong>Bairro:</strong>
+													<td><strong>Bairro:<font color="#FF0000">*</font></strong>
 													</td>
 													<td><html:text property="bairroID" maxlength="4"
 															tabindex="19" size="5"

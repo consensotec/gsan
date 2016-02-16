@@ -123,6 +123,7 @@ import gcom.cobranca.parcelamento.ParcDesctoInativVista;
 import gcom.cobranca.parcelamento.Parcelamento;
 import gcom.cobranca.parcelamento.ParcelamentoDescontoInatividade;
 import gcom.cobranca.parcelamento.ParcelamentoFaixaValor;
+import gcom.cobranca.parcelamento.ParcelamentoPagamentoCartaoCredito;
 import gcom.cobranca.parcelamento.ParcelamentoQuantidadeReparcelamento;
 import gcom.cobranca.parcelamento.ParcelamentoSituacao;
 import gcom.faturamento.conta.Conta;
@@ -8951,7 +8952,7 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 					+ " from atendimentopublico.ordem_servico orse "
 					+ " inner join atendimentopublico.atend_motivo_encmt amen on amen.amen_id = orse.amen_id "
 					+ " where orse.cbdo_id = :idDocumentoCobrancaAcaoPrecedente and amen.amen_icexecucao = :indicadorExecucao and "
-					+ " orse.orse_tmencerramento is not null and orse.orse_tmencerramento <= :dataMinimaEmissaoRealizacaoAcaoPrecente ";
+					+ " orse.orse_tmgeracao is not null and orse.orse_tmgeracao <= :dataMinimaEmissaoRealizacaoAcaoPrecente ";
 
 			retorno = (Integer) session
 					.createSQLQuery(consulta)
@@ -18911,7 +18912,7 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 					"  parc.parc_vlprestacao as valorParcela, \n"
 					+
 					// 11
-					"  parc.parc_vlentrada as entrada, \n"
+					"  parc.parc_vlentrada - coalesce( cd.cbdo_vldesconto, 0 ) as entrada, \n"
 					+
 					// 12
 					"  parc.parc_tmparcelamento as dataParcelamento, \n"
@@ -18954,6 +18955,7 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 					+ "    left join cadastro.unidade_organizacional unid ON usur.unid_id = unid.unid_id \n"
 					+ "    inner join cadastro.imovel imo on ( imo.imov_id = parc.imov_id ) \n"
 					+ "    inner join cadastro.quadra qua on ( qua.qdra_id = imo.qdra_id ) \n"
+					+ "    left join cobranca.cobranca_documento cd on ( cd.parc_id = parc.parc_id ) "
 					+ "	 left join cadastro.cliente_fone clieFone on ( clieFone.clie_id = clie.clie_id and \n"
 					+ "	 clieFone.cfon_icfonepadrao = 1 ) \n"
 					+ "	 left join faturamento.conta cnta on ( cnta.imov_id = parc.imov_id and cnta. \n"
@@ -21015,340 +21017,163 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 	 * @throws ErroRepositorioException
 	 */
 	public Collection pesquisaImpostoFaturaClienteResponsavelFederal(
-			Integer anoMesInicial, Integer anoMesFinal, Integer idCliente/*
-																		 * Integer
-																		 * idImovel
-																		 */)
-			throws ErroRepositorioException {
-
+			Integer anoMesInicial, Integer anoMesFinal, Integer idCliente)	throws ErroRepositorioException {
 		Collection retorno = null;
-
 		Session session = HibernateUtil.getSession();
 		String consulta;
+		// Pesquisa pela fatura se o período é referente a um mês
+		boolean fatura = anoMesInicial.equals(anoMesFinal);
 
 		try {
-
 			Query query = null;
 
-			if (idCliente != null) {
+			consulta = "SELECT "
+					+ " impostoTipo 		AS impostoTipo,"
+					+ " descricaoImposto 	AS descricaoImposto,"
+					+ " percAliquota		AS percAliquota,"
+					+ " sum(valorImposto) 	AS valorImposto,"
+					+ " cliente				AS cliente,"
+					+ " nomeCliente			AS nomeCliente,"
+					+ " sum(valorFatura) 	AS valorFatura,"
+					+ " cnpj				AS cnpj,"
+					+ " sum(baseCalculo)  	AS baseCalculo,"
+					+ " idFatura			AS idFatura"
+					+ " FROM(  " 
+					+ " SELECT imtp.imtp_id     		AS impostoTipo, "
+					+ " imtp.imtp_dsimposto      		AS descricaoImposto," 
+					+ " cnid.cnid_pcaliquota     		AS percAliquota, "
+					+ " Sum(cnid.cnid_vlimposto) 		AS valorImposto, "
+					+ " clie.clie_id             		AS cliente, "
+					+ " clie_nmcliente          		AS nomeCliente," 
+					+ " Sum(( ( cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos ) - ( cnta.cnta_vlcreditos + cnta.cnta_vlimpostos ) )) AS valorFatura," 
+					+ " clie.clie_nncnpj         		AS cnpj," 
+					+ " Sum(( ( cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos ) - ( cnta.cnta_vlcreditos ) )) AS baseCalculo ";
 
-				consulta = " SELECT imtp.imtp_id                                                  AS "
-						+ "        impostoTipo, "
-						+ "        imtp.imtp_dsimposto                                           AS "
-						+ "        descricaoImposto, "
-						+ "        cnid.cnid_pcaliquota                                          AS "
-						+ "        percAliquota, "
-						+ "        Sum(cnid.cnid_vlimposto)                                      AS "
-						+ "        valorImposto, "
-						+ "        clie.clie_id                                                  AS cliente, "
-						+ "        clie_nmcliente                                                AS "
-						+ "        nomeCliente, "
-						+ "        Sum(( ( cnta.cnta_vlagua + cnta.cnta_vlesgoto "
-						+ "                + cnta.cnta_vldebitos ) - "
-						+ "              ( cnta.cnta_vlcreditos + cnta.cnta_vlimpostos ) ))      AS "
-						+ "        valorFatura, "
-						+ "        clie.clie_nncnpj                                              AS cnpj, "
-						+ "        Sum(( ( cnta.cnta_vlagua + cnta.cnta_vlesgoto "
-						+ "                + cnta.cnta_vldebitos ) - ( cnta.cnta_vlcreditos ) )) AS "
-						+ "        baseCalculo "
-						+ " FROM   faturamento.conta_impostos_deduzidos cnid "
-						+ "        INNER JOIN faturamento.conta cnta "
-						+ "                ON ( cnid.cnta_id = cnta.cnta_id ) "
-						+ "        INNER JOIN cadastro.cliente_conta clct "
-						+ "                ON ( cnta.cnta_id = clct.cnta_id "
-						+ "                     AND clct.crtp_id = :cliRelacaoTipo ) "
-						+ "        INNER JOIN cadastro.cliente clie "
-						+ "                ON ( clct.clie_id = clie.clie_id ) "
-						+ "        INNER JOIN cadastro.cliente_tipo cltp "
-						+ "                ON ( clie.cltp_id = cltp.cltp_id ) "
-						+ "        INNER JOIN faturamento.imposto_tipo imtp "
-						+ "                ON ( cnid.imtp_id = imtp.imtp_id ) "
-						+ " WHERE  clct.clie_id = :idCliente "
-						+ "        AND cnta.cnta_id IN (SELECT idconta "
-						+ "                             FROM   (SELECT imovel, "
-						+ "                                            referencia, "
-						+ "                                            Min(cnta_id) AS idconta "
-						+ "                                     FROM   (SELECT conta.imov_id "
-						+ "                                                    AS "
-						+ "                                                    imovel, "
-						+ "                                                    conta.cnta_amreferenciaconta "
-						+ "                                                    AS "
-						+ "                                                    referencia, "
-						+ "                                                    conta.cnta_id "
-						+ "                                             FROM   faturamento.conta conta "
-						+ "                                             WHERE  conta.cnta_amreferenciaconta "
-						+ "                                                    BETWEEN "
-						+ "                                                    :anoMesReferenciaInicial AND :anoMesReferenciaFinal "
-						+ "                                             UNION ALL "
-						+ "                                             SELECT contaHist.imov_id "
-						+ "                                                    AS "
-						+ "                                                    imovel, "
-						+ " contaHist.cnhi_amreferenciaconta AS "
-						+ " referencia, "
-						+ " contaHist.cnta_id "
-						+ " FROM   faturamento.conta_historico "
-						+ " contaHist "
-						+ " WHERE  contaHist.cnhi_amreferenciaconta BETWEEN "
-						+ " :anoMesReferenciaInicial AND :anoMesReferenciaFinal) a "
-						+ " GROUP  BY imovel, "
-						+ " referencia) b) "
-						+ " GROUP BY clie.clie_id, "
-						+ " 		 clie_nmcliente, "
-						+ " 		 imtp.imtp_id, "
-						+ " 		 imtp.imtp_dsimposto, "
-						+ " 		 cnid.cnid_pcaliquota, "
-						+ " 		 clie.clie_nncnpj "
-						+ " UNION ALL "
-						+ " SELECT imtp.imtp_id                                                  AS "
-						+ "        impostoTipo, "
-						+ "        imtp.imtp_dsimposto                                           AS "
-						+ "        descricaoImposto, "
-						+ "        cidh.cidh_pcaliquota                                          AS "
-						+ "        percAliquota, "
-						+ "        Sum(cidh.cidh_vlimposto)                                      AS "
-						+ "        valorImposto, "
-						+ "        clie.clie_id                                                  AS cliente, "
-						+ "        clie_nmcliente                                                AS "
-						+ "        nomeCliente, "
-						+ "        Sum(( ( cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto "
-						+ "                + cnhi.cnhi_vldebitos ) - "
-						+ "              ( cnhi.cnhi_vlcreditos + cnhi.cnhi_vlimpostos ) ))      AS "
-						+ "        valorFatura, "
-						+ "        clie.clie_nncnpj                                              AS cnpj, "
-						+ "        Sum(( ( cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto "
-						+ "                + cnhi.cnhi_vldebitos ) - ( cnhi.cnhi_vlcreditos ) )) AS "
-						+ "        baseCalculo "
-						+ " FROM   faturamento.conta_impostos_dedz_hist cidh "
-						+ "        INNER JOIN faturamento.conta_historico cnhi "
-						+ "                ON ( cidh.cnta_id = cnhi.cnta_id ) "
-						+ "        INNER JOIN cadastro.cliente_conta_historico clch "
-						+ "                ON ( cnhi.cnta_id = clch.cnta_id "
-						+ "                     AND clch.crtp_id = :cliRelacaoTipo ) "
-						+ "        INNER JOIN cadastro.cliente clie "
-						+ "                ON ( clch.clie_id = clie.clie_id ) "
-						+ "        INNER JOIN cadastro.cliente_tipo cltp "
-						+ "                ON ( clie.cltp_id = cltp.cltp_id ) "
-						+ "        INNER JOIN faturamento.imposto_tipo imtp "
-						+ "                ON ( cidh.imtp_id = imtp.imtp_id ) "
-						+ " WHERE  clch.clie_id = :idCliente "
-						+ "        AND cnhi.cnta_id IN (SELECT idconta "
-						+ "                             FROM   (SELECT imovel, "
-						+ "                                            referencia, "
-						+ "                                            Min(cnta_id) AS idconta "
-						+ "                                     FROM   (SELECT conta.imov_id "
-						+ "                                                    AS "
-						+ "                                                    imovel, "
-						+ "                                                    conta.cnta_amreferenciaconta "
-						+ "                                                    AS "
-						+ "                                                    referencia, "
-						+ "                                                    conta.cnta_id "
-						+ "                                             FROM   faturamento.conta conta "
-						+ "                                             WHERE  conta.cnta_amreferenciaconta "
-						+ "                                                    BETWEEN "
-						+ "                                                    :anoMesReferenciaInicial AND :anoMesReferenciaFinal "
-						+ "                                             UNION ALL "
-						+ "                                             SELECT contaHist.imov_id "
-						+ "                                                    AS "
-						+ "                                                    imovel, "
-						+ " contaHist.cnhi_amreferenciaconta AS "
-						+ " referencia, "
-						+ " contaHist.cnta_id "
-						+ " FROM   faturamento.conta_historico "
-						+ " contaHist "
-						+ " WHERE  contaHist.cnhi_amreferenciaconta BETWEEN "
-						+ " :anoMesReferenciaInicial AND :anoMesReferenciaFinal) a "
-						+ " GROUP  BY imovel, "
-						+ " referencia) b) "
-						+ " GROUP BY clie.clie_id, "
-						+ " 		 clie_nmcliente, "
-						+ " 		 imtp.imtp_id, "
-						+ " 		 imtp.imtp_dsimposto, "
-						+ " 		 cidh.cidh_pcaliquota, "
-						+ " 		 clie.clie_nncnpj "
-						+ " ORDER  BY cliente, "
-						+ "           impostotipo   ";
-
-				query = session
-						.createSQLQuery(consulta)
-						.addScalar("impostoTipo", Hibernate.INTEGER)
-						.addScalar("descricaoImposto", Hibernate.STRING)
-						.addScalar("percAliquota", Hibernate.BIG_DECIMAL)
-						.addScalar("valorImposto", Hibernate.BIG_DECIMAL)
-						.addScalar("cliente", Hibernate.INTEGER)
-						.addScalar("nomeCliente", Hibernate.STRING)
-						.addScalar("valorFatura", Hibernate.BIG_DECIMAL)
-						.addScalar("cnpj", Hibernate.STRING)
-						.addScalar("baseCalculo", Hibernate.BIG_DECIMAL)
-						.setShort("cliRelacaoTipo",
-								ClienteRelacaoTipo.RESPONSAVEL)
-						.setInteger("anoMesReferenciaInicial", anoMesInicial)
-						.setInteger("anoMesReferenciaFinal", anoMesFinal)
-						.setInteger("idCliente", idCliente);
-
+			if (fatura) {
+				consulta = consulta 
+					+ " ,fatu.fatu_id					AS idFatura";
 			} else {
-
-				consulta = " SELECT imtp.imtp_id                                                  AS "
-						+ "        impostoTipo, "
-						+ "        imtp.imtp_dsimposto                                           AS "
-						+ "        descricaoImposto, "
-						+ "        cnid.cnid_pcaliquota                                          AS "
-						+ "        percAliquota, "
-						+ "        Sum(cnid.cnid_vlimposto)                                      AS "
-						+ "        valorImposto, "
-						+ "        clie.clie_id                                                  AS cliente, "
-						+ "        clie_nmcliente                                                AS "
-						+ "        nomeCliente, "
-						+ "        Sum(( ( cnta.cnta_vlagua + cnta.cnta_vlesgoto "
-						+ "                + cnta.cnta_vldebitos ) - "
-						+ "              ( cnta.cnta_vlcreditos + cnta.cnta_vlimpostos ) ))      AS "
-						+ "        valorFatura, "
-						+ "        clie.clie_nncnpj                                              AS cnpj, "
-						+ "        Sum(( ( cnta.cnta_vlagua + cnta.cnta_vlesgoto "
-						+ "                + cnta.cnta_vldebitos ) - ( cnta.cnta_vlcreditos ) )) AS "
-						+ "        baseCalculo "
-						+ " FROM   faturamento.conta_impostos_deduzidos cnid "
-						+ "        INNER JOIN faturamento.conta cnta "
-						+ "                ON ( cnid.cnta_id = cnta.cnta_id ) "
-						+ "        INNER JOIN cadastro.cliente_conta clct "
-						+ "                ON ( cnta.cnta_id = clct.cnta_id "
-						+ "                     AND clct.crtp_id = :cliRelacaoTipo ) "
-						+ "        INNER JOIN cadastro.cliente clie "
-						+ "                ON ( clct.clie_id = clie.clie_id ) "
-						+ "        INNER JOIN cadastro.cliente_tipo cltp "
-						+ "                ON ( clie.cltp_id = cltp.cltp_id ) "
-						+ "        INNER JOIN faturamento.imposto_tipo imtp "
-						+ "                ON ( cnid.imtp_id = imtp.imtp_id ) "
-						+ " WHERE  cnta.cnta_id IN (SELECT idconta "
-						+ "                             FROM   (SELECT imovel, "
-						+ "                                            referencia, "
-						+ "                                            Min(cnta_id) AS idconta "
-						+ "                                     FROM   (SELECT conta.imov_id "
-						+ "                                                    AS "
-						+ "                                                    imovel, "
-						+ "                                                    conta.cnta_amreferenciaconta "
-						+ "                                                    AS "
-						+ "                                                    referencia, "
-						+ "                                                    conta.cnta_id "
-						+ "                                             FROM   faturamento.conta conta "
-						+ "                                             WHERE  conta.cnta_amreferenciaconta "
-						+ "                                                    BETWEEN "
-						+ " 													:anoMesReferenciaInicial AND :anoMesReferenciaFinal "
-						+ "                                             UNION ALL "
-						+ "                                             SELECT contaHist.imov_id "
-						+ "                                                    AS "
-						+ "                                                    imovel, "
-						+ " contaHist.cnhi_amreferenciaconta AS "
-						+ " referencia, "
-						+ " contaHist.cnta_id "
-						+ " FROM   faturamento.conta_historico "
-						+ " contaHist "
-						+ " WHERE  contaHist.cnhi_amreferenciaconta BETWEEN "
-						+ " :anoMesReferenciaInicial AND :anoMesReferenciaFinal) a "
-						+ " GROUP  BY imovel, "
-						+ " referencia) b) "
-						+ " GROUP BY clie.clie_id, "
-						+ " 		 clie_nmcliente, "
-						+ " 		 imtp.imtp_id, "
-						+ " 		 imtp.imtp_dsimposto, "
-						+ " 		 cnid.cnid_pcaliquota, "
-						+ " 		 clie.clie_nncnpj "
-						+ " UNION ALL "
-						+ " SELECT imtp.imtp_id                                                  AS "
-						+ "        impostoTipo, "
-						+ "        imtp.imtp_dsimposto                                           AS "
-						+ "        descricaoImposto, "
-						+ "        cidh.cidh_pcaliquota                                          AS "
-						+ "        percAliquota, "
-						+ "        Sum(cidh.cidh_vlimposto)                                      AS "
-						+ "        valorImposto, "
-						+ "        clie.clie_id                                                  AS cliente, "
-						+ "        clie_nmcliente                                                AS "
-						+ "        nomeCliente, "
-						+ "        Sum(( ( cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto "
-						+ "                + cnhi.cnhi_vldebitos ) - "
-						+ "              ( cnhi.cnhi_vlcreditos + cnhi.cnhi_vlimpostos ) ))      AS "
-						+ "        valorFatura, "
-						+ "        clie.clie_nncnpj                                              AS cnpj, "
-						+ "        Sum(( ( cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto "
-						+ "                + cnhi.cnhi_vldebitos ) - ( cnhi.cnhi_vlcreditos ) )) AS "
-						+ "        baseCalculo "
-						+ " FROM   faturamento.conta_impostos_dedz_hist cidh "
-						+ "        INNER JOIN faturamento.conta_historico cnhi "
-						+ "                ON ( cidh.cnta_id = cnhi.cnta_id ) "
-						+ "        INNER JOIN cadastro.cliente_conta_historico clch "
-						+ "                ON ( cnhi.cnta_id = clch.cnta_id "
-						+ "                     AND clch.crtp_id = :cliRelacaoTipo ) "
-						+ "        INNER JOIN cadastro.cliente clie "
-						+ "                ON ( clch.clie_id = clie.clie_id ) "
-						+ "        INNER JOIN cadastro.cliente_tipo cltp "
-						+ "                ON ( clie.cltp_id = cltp.cltp_id ) "
-						+ "        INNER JOIN faturamento.imposto_tipo imtp "
-						+ "                ON ( cidh.imtp_id = imtp.imtp_id ) "
-						+ " WHERE  cnhi.cnta_id IN (SELECT idconta "
-						+ "                             FROM   (SELECT imovel, "
-						+ "                                            referencia, "
-						+ "                                            Min(cnta_id) AS idconta "
-						+ "                                     FROM   (SELECT conta.imov_id "
-						+ "                                                    AS "
-						+ "                                                    imovel, "
-						+ "                                                    conta.cnta_amreferenciaconta "
-						+ "                                                    AS "
-						+ "                                                    referencia, "
-						+ "                                                    conta.cnta_id "
-						+ "                                             FROM   faturamento.conta conta "
-						+ "                                             WHERE  conta.cnta_amreferenciaconta "
-						+ "                                                    between "
-						+ "                                                    :anoMesReferenciaInicial AND :anoMesReferenciaFinal "
-						+ "                                             UNION ALL "
-						+ "                                             SELECT contaHist.imov_id "
-						+ "                                                    AS "
-						+ "                                                    imovel, "
-						+ " contaHist.cnhi_amreferenciaconta AS "
-						+ " referencia, "
-						+ " contaHist.cnta_id "
-						+ " FROM   faturamento.conta_historico "
-						+ " contaHist "
-						+ " WHERE  contaHist.cnhi_amreferenciaconta BETWEEN "
-						+ " :anoMesReferenciaInicial AND :anoMesReferenciaFinal) a "
-						+ " GROUP  BY imovel, "
-						+ " referencia) b) "
-						+ " GROUP BY clie.clie_id, "
-						+ " 		 clie_nmcliente, "
-						+ " 		 imtp.imtp_id, "
-						+ " 		 imtp.imtp_dsimposto, "
-						+ " 		 cidh.cidh_pcaliquota, "
-						+ " 		 clie.clie_nncnpj "
-						+ " ORDER  BY cliente, "
-						+ "           impostotipo   ";
-
-				query = session
-						.createSQLQuery(consulta)
-						.addScalar("impostoTipo", Hibernate.INTEGER)
-						.addScalar("descricaoImposto", Hibernate.STRING)
-						.addScalar("percAliquota", Hibernate.BIG_DECIMAL)
-						.addScalar("valorImposto", Hibernate.BIG_DECIMAL)
-						.addScalar("cliente", Hibernate.INTEGER)
-						.addScalar("nomeCliente", Hibernate.STRING)
-						.addScalar("valorFatura", Hibernate.BIG_DECIMAL)
-						.addScalar("cnpj", Hibernate.STRING)
-						.addScalar("baseCalculo", Hibernate.BIG_DECIMAL)
-						.setShort("cliRelacaoTipo",
-								ClienteRelacaoTipo.RESPONSAVEL)
-						.setInteger("anoMesReferenciaInicial", anoMesInicial)
-						.setInteger("anoMesReferenciaFinal", anoMesFinal);
+				consulta = consulta 
+					+ " ,null							AS idFatura";
 			}
+
+			consulta = consulta 
+					+ " FROM   faturamento.conta_impostos_deduzidos cnid" 
+					+ " INNER JOIN faturamento.conta cnta 	 		ON ( cnid.cnta_id = cnta.cnta_id )" 
+					+ " INNER JOIN cadastro.cliente_conta clct 		ON ( cnta.cnta_id = clct.cnta_id AND clct.crtp_id = :cliRelacaoTipo )" 
+					+ " INNER JOIN cadastro.cliente clie 	 		ON ( clct.clie_id = clie.clie_id )" 
+					+ " INNER JOIN cadastro.cliente_tipo cltp 	 	ON ( clie.cltp_id = cltp.cltp_id )" 
+					+ " INNER JOIN faturamento.imposto_tipo imtp 	ON ( cnid.imtp_id = imtp.imtp_id )" ;
+			if (fatura) {
+				consulta = consulta 
+					+ " LEFT JOIN faturamento.fatura fatu			ON ( fatu.clie_id = clie.clie_id AND fatu.fatu_amreferencia = cnta.cnta_amreferenciaconta)";
+			}
+			
+			consulta = consulta    
+					+ " WHERE  cnta.cnta_id IN (SELECT idconta FROM"   
+					+ " 								(SELECT imovel, referencia, Max(cnta_id) AS idconta FROM"   
+					+ " 										(SELECT conta.imov_id AS imovel, conta.cnta_amreferenciaconta AS referencia, conta.cnta_id FROM   faturamento.conta conta" 
+					+ " 												WHERE  conta.cnta_amreferenciaconta BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal" 
+					+ " 										 UNION ALL" 
+					+ " 										 SELECT contaHist.imov_id AS imovel, contaHist.cnhi_amreferenciaconta AS referencia, contaHist.cnta_id FROM  faturamento.conta_historico contaHist" 
+					+ " 												WHERE  contaHist.cnhi_amreferenciaconta BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal) a  GROUP  BY imovel," 
+					+ " 								referencia)" 
+					+ " 						b)"; 
+					
+			if (idCliente != null) {
+				consulta = consulta
+					+ " AND clct.clie_id = " + idCliente;
+			}
+
+			consulta = consulta 
+					+ " GROUP BY clie.clie_id, clie_nmcliente, imtp.imtp_id, imtp.imtp_dsimposto, cnid.cnid_pcaliquota, clie.clie_nncnpj " ;
+			if (fatura) {
+				consulta = consulta 
+					+ " ,fatu.fatu_id ";
+			}
+
+			consulta = consulta				
+					+ " UNION ALL"
+					+ " SELECT imtp.imtp_id 			AS impostoTipo," 
+					+ " imtp.imtp_dsimposto             AS descricaoImposto," 
+					+ " cidh.cidh_pcaliquota            AS percAliquota," 
+					+ " Sum(cidh.cidh_vlimposto)        AS valorImposto," 
+					+ " clie.clie_id                    AS cliente," 
+					+ " clie_nmcliente                  AS nomeCliente," 
+					+ " Sum(( ( cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos ) - ( cnhi.cnhi_vlcreditos + cnhi.cnhi_vlimpostos ) )) AS valorFatura," 
+					+ " clie.clie_nncnpj                AS cnpj," 
+					+ " Sum(( ( cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos ) - ( cnhi.cnhi_vlcreditos ) )) AS baseCalculo ";
+
+			if (fatura) {
+				consulta = consulta 
+					+ " ,fatu.fatu_id					AS idFatura";
+			} else {
+				consulta = consulta 
+					+ " ,null							AS idFatura";
+			}
+
+			consulta = consulta 
+					+ " FROM   faturamento.conta_impostos_dedz_hist cidh" 
+					+ " INNER JOIN faturamento.conta_historico cnhi 		ON ( cidh.cnta_id = cnhi.cnta_id )" 
+					+ " INNER JOIN cadastro.cliente_conta_historico clch 	ON ( cnhi.cnta_id = clch.cnta_id AND clch.crtp_id = :cliRelacaoTipo )" 
+					+ " INNER JOIN cadastro.cliente clie 					ON ( clch.clie_id = clie.clie_id )" 
+					+ " INNER JOIN cadastro.cliente_tipo cltp 				ON ( clie.cltp_id = cltp.cltp_id )" 
+					+ " INNER JOIN faturamento.imposto_tipo imtp 			ON ( cidh.imtp_id = imtp.imtp_id )" ;
+			if (fatura) {
+				consulta = consulta
+					+ " LEFT JOIN faturamento.fatura fatu		   			ON ( fatu.clie_id = clie.clie_id AND fatu.fatu_amreferencia = cnhi.cnhi_amreferenciaconta)"	;						
+			}
+			consulta = consulta 
+					+ "  WHERE  cnhi.cnta_id IN (SELECT idconta FROM "   
+					+ " 								(SELECT imovel, referencia, Max(cnta_id) AS idconta FROM "   
+					+ " 										(SELECT conta.imov_id AS imovel, conta.cnta_amreferenciaconta AS referencia, conta.cnta_id FROM   faturamento.conta conta" 
+					+ " 												WHERE  conta.cnta_amreferenciaconta BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal " 
+					+ " 										 UNION ALL" 
+					+ " 										 SELECT contaHist.imov_id AS imovel, contaHist.cnhi_amreferenciaconta AS referencia, contaHist.cnta_id FROM  faturamento.conta_historico contaHist" 
+					+ " 												WHERE  contaHist.cnhi_amreferenciaconta BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal) a  GROUP  BY imovel," 
+					+ " 								referencia)" 
+					+ " 						b)" ;
+			if (idCliente != null) {
+				consulta = consulta
+					+ " AND clch.clie_id = " + idCliente;
+			}
+
+			consulta = consulta
+					+ " GROUP BY clie.clie_id, clie_nmcliente, imtp.imtp_id, imtp.imtp_dsimposto, cidh.cidh_pcaliquota, clie.clie_nncnpj ";					
+			if (fatura) {
+				consulta = consulta
+					+ " ,fatu.fatu_id ";
+			}
+			consulta = consulta	
+					+ " ORDER  BY cliente, impostotipo "
+					+ " ) t "
+					+ " GROUP BY impostoTipo,descricaoImposto,percAliquota,cliente,nomeCliente,cnpj,idFatura " 
+					+ " ORDER  BY cliente, impostotipo";
+
+			query = session
+					.createSQLQuery(consulta)
+					.addScalar("impostoTipo", Hibernate.INTEGER)
+					.addScalar("descricaoImposto", Hibernate.STRING)
+					.addScalar("percAliquota", Hibernate.BIG_DECIMAL)
+					.addScalar("valorImposto", Hibernate.BIG_DECIMAL)
+					.addScalar("cliente", Hibernate.INTEGER)
+					.addScalar("nomeCliente", Hibernate.STRING)
+					.addScalar("valorFatura", Hibernate.BIG_DECIMAL)
+					.addScalar("cnpj", Hibernate.STRING)
+					.addScalar("baseCalculo", Hibernate.BIG_DECIMAL)
+					.addScalar("idFatura", Hibernate.INTEGER)
+					.setShort("cliRelacaoTipo",ClienteRelacaoTipo.RESPONSAVEL)
+					.setInteger("anoMesReferenciaInicial", anoMesInicial)
+					.setInteger("anoMesReferenciaFinal", anoMesFinal);
 
 			retorno = (Collection) query.list();
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
 			HibernateUtil.closeSession(session);
 		}
 
 		return retorno;
-
 	}
 
 	/**
@@ -21373,202 +21198,126 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 
 		Collection retorno = null;
 		Session session = HibernateUtil.getSession();
-		StringBuffer sbConsulta = new StringBuffer();
-
+		String consulta;
+		// Pesquisa pela fatura se o período é referente a um mês
+		boolean fatura = anoMesInicial.equals(anoMesFinal);
 		try {
 
 			Query query = null;
 
-			if (idCliente != null) {
-				sbConsulta.append(" ");
-
-				sbConsulta.append("select imtp.imtp_id as impostoTipo, ");
-				sbConsulta.append("imtp.imtp_dsimposto as descricaoImposto, ");
-				sbConsulta.append("cnid.cnid_pcaliquota as percAliquota, ");
-				sbConsulta.append("sum(cnid.cnid_vlimposto) as valorImposto, ");
-				sbConsulta.append("clie.clie_id as cliente, ");
-				sbConsulta.append("clie_nmcliente as nomeCliente, ");
-				sbConsulta
-						.append("sum(((cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos) - (cnta.cnta_vlcreditos + cnta.cnta_vlimpostos))) as valorFatura, ");
-				sbConsulta.append("clie.clie_nncnpj as cnpj, ");
-				sbConsulta
-						.append("sum(((cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos) - (cnta.cnta_vlcreditos))) as baseCalculo ");
-				sbConsulta
-						.append("from	faturamento.conta_impostos_deduzidos cnid ");
-				sbConsulta
-						.append("inner join faturamento.conta cnta on (cnid.cnta_id = cnta.cnta_id) ");
-				sbConsulta
-						.append("inner join arrecadacao.pagamento pgmt on (cnta.cnta_id = pgmt.cnta_id and pgmt.pgmt_dtpagamento is not null and (pgmt.pgst_idatual = :pagamentoClassificado or (pgmt.pgst_idatual in (:pagamentoABaixar, :duplicidadeExcessoDevolvido) and (pgmt.pgst_idanterior is null or pgmt.pgst_idanterior <> :pagamentoDuplicidade)))) ");
-				sbConsulta
-						.append("inner join cadastro.cliente_conta clct on (pgmt.cnta_id = clct.cnta_id and clct.crtp_id = :cliRelacaoTipo) ");
-				sbConsulta
-						.append("inner join cadastro.cliente clie on (clct.clie_id = clie.clie_id) ");
-				sbConsulta
-						.append("inner join cadastro.cliente_tipo cltp on (clie.cltp_id = cltp.cltp_id ) "); // and
-																												// cltp.epod_id
-																												// =
-																												// 3
-				sbConsulta
-						.append("inner join faturamento.imposto_tipo imtp on (cnid.imtp_id = imtp.imtp_id) ");
-				sbConsulta
-						.append("where pgmt.pgmt_amreferenciaarrecadacao BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal ");
-				sbConsulta.append("and clct.clie_id = :idCliente ");
-				sbConsulta
-						.append("GROUP BY clie.clie_id, clie_nmcliente, imtp.imtp_id, imtp.imtp_dsimposto, cnid.cnid_pcaliquota, clie.clie_nncnpj ");
-				sbConsulta.append("union all ");
-				sbConsulta.append("select imtp.imtp_id impostoTipo, ");
-				sbConsulta.append("imtp.imtp_dsimposto as descricaoImposto, ");
-				sbConsulta.append("cidh.cidh_pcaliquota as percAliquota, ");
-				sbConsulta.append("sum(cidh.cidh_vlimposto) as valorImposto, ");
-				sbConsulta.append("clie.clie_id as cliente, ");
-				sbConsulta.append("clie_nmcliente as nomeCliente, ");
-				sbConsulta
-						.append("sum(((cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos) - (cnhi.cnhi_vlcreditos + cnhi.cnhi_vlimpostos))) as valorFatura, ");
-				sbConsulta.append("clie.clie_nncnpj as cnpj, ");
-				sbConsulta
-						.append("sum(((cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos) - (cnhi.cnhi_vlcreditos)))as baseCalculo ");
-				sbConsulta
-						.append("from	faturamento.conta_impostos_dedz_hist cidh ");
-				sbConsulta
-						.append("inner join faturamento.conta_historico cnhi on (cidh.cnta_id = cnhi.cnta_id) ");
-				sbConsulta
-						.append("inner join cadastro.cliente_conta_historico clch on (cnhi.cnta_id = clch.cnta_id and clch.crtp_id = :cliRelacaoTipo) ");
-				sbConsulta
-						.append("inner join arrecadacao.pagamento_historico pgmth on (clch.cnta_id = pgmth.cnta_id and (pgmth.pgst_idatual = :pagamentoClassificado or (pgmth.pgst_idatual in (:pagamentoABaixar, :duplicidadeExcessoDevolvido) and (pgmth.pgst_idanterior is null or pgmth.pgst_idanterior <> :pagamentoDuplicidade)))) ");
-				sbConsulta
-						.append("inner join cadastro.cliente clie on (clch.clie_id = clie.clie_id) ");
-				sbConsulta
-						.append("inner join cadastro.cliente_tipo cltp on (clie.cltp_id = cltp.cltp_id ) "); // and
-																												// cltp.epod_id
-																												// =
-																												// 3
-				sbConsulta
-						.append("inner join faturamento.imposto_tipo imtp on (cidh.imtp_id = imtp.imtp_id) ");
-				sbConsulta
-						.append("where pgmth.pghi_amreferenciahistorico BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal ");
-				sbConsulta.append("and clch.clie_id = :idCliente ");
-				sbConsulta
-						.append("GROUP BY clie.clie_id, clie_nmcliente, imtp.imtp_id, imtp.imtp_dsimposto, cidh.cidh_pcaliquota, clie.clie_nncnpj ");
-				sbConsulta.append("ORDER BY cliente, impostoTipo ");
-
-				query = session
-						.createSQLQuery(sbConsulta.toString())
-						.addScalar("impostoTipo", Hibernate.INTEGER)
-						.addScalar("descricaoImposto", Hibernate.STRING)
-						.addScalar("percAliquota", Hibernate.BIG_DECIMAL)
-						.addScalar("valorImposto", Hibernate.BIG_DECIMAL)
-						.addScalar("cliente", Hibernate.INTEGER)
-						.addScalar("nomeCliente", Hibernate.STRING)
-						.addScalar("valorFatura", Hibernate.BIG_DECIMAL)
-						.addScalar("cnpj", Hibernate.STRING)
-						.addScalar("baseCalculo", Hibernate.BIG_DECIMAL)
-						.setInteger("anoMesReferenciaInicial", anoMesInicial)
-						.setInteger("anoMesReferenciaFinal", anoMesFinal)
-						.setInteger("pagamentoClassificado",
-								PagamentoSituacao.PAGAMENTO_CLASSIFICADO)
-						.setInteger("pagamentoABaixar",
-								PagamentoSituacao.VALOR_A_BAIXAR)
-						.setInteger("duplicidadeExcessoDevolvido",
-								PagamentoSituacao.DUPLICIDADE_EXCESSO_DEVOLVIDO)
-						.setInteger("pagamentoDuplicidade",
-								PagamentoSituacao.PAGAMENTO_EM_DUPLICIDADE)
-						.setInteger("cliRelacaoTipo",
-								ClienteRelacaoTipo.RESPONSAVEL)
-						.setInteger("idCliente", idCliente);
-
+			consulta =
+				  " select imtp.imtp_id 		as impostoTipo,  "
+				+ " imtp.imtp_dsimposto 		as descricaoImposto, "
+				+ " cnid.cnid_pcaliquota 		as percAliquota, "
+				+ " sum(cnid.cnid_vlimposto) 	as valorImposto, "
+				+ " clie.clie_id 				as cliente,  "
+				+ " clie_nmcliente 				as nomeCliente,  "
+				+ " sum(((cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos) - (cnta.cnta_vlcreditos + cnta.cnta_vlimpostos))) as valorFatura,  "
+				+ " clie.clie_nncnpj 			as cnpj,  "
+				+ " sum(((cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos) - (cnta.cnta_vlcreditos))) as baseCalculo  ";
+			if (fatura) {
+				consulta = consulta 
+				+ " ,fatu.fatu_id				as idFatura"
+				+ " ,fatu.fatu_amreferencia 	as referenciaFatura ";
 			} else {
-
-				sbConsulta.append("select imtp.imtp_id as impostoTipo, ");
-				sbConsulta.append("imtp.imtp_dsimposto as descricaoImposto, ");
-				sbConsulta.append("cnid.cnid_pcaliquota as percAliquota, ");
-				sbConsulta.append("sum(cnid.cnid_vlimposto) as valorImposto, ");
-				sbConsulta.append("clie.clie_id as cliente, ");
-				sbConsulta.append("clie_nmcliente as nomeCliente, ");
-				sbConsulta
-						.append("sum(((cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos) - (cnta.cnta_vlcreditos + cnta.cnta_vlimpostos))) as valorFatura, ");
-				sbConsulta.append("clie.clie_nncnpj as cnpj, ");
-				sbConsulta
-						.append("sum(((cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos) - (cnta.cnta_vlcreditos))) as baseCalculo ");
-				sbConsulta
-						.append("from	faturamento.conta_impostos_deduzidos cnid ");
-				sbConsulta
-						.append("inner join faturamento.conta cnta on (cnid.cnta_id = cnta.cnta_id) ");
-				sbConsulta
-						.append("inner join arrecadacao.pagamento pgmt on (cnta.cnta_id = pgmt.cnta_id and pgmt.pgmt_dtpagamento is not null and (pgmt.pgst_idatual = :pagamentoClassificado or (pgmt.pgst_idatual in (:pagamentoABaixar, :duplicidadeExcessoDevolvido) and (pgmt.pgst_idanterior is null or pgmt.pgst_idanterior <> :pagamentoDuplicidade)))) ");
-				sbConsulta
-						.append("inner join cadastro.cliente_conta clct on (pgmt.cnta_id = clct.cnta_id and clct.crtp_id = :cliRelacaoTipo) ");
-				sbConsulta
-						.append("inner join cadastro.cliente clie on (clct.clie_id = clie.clie_id) ");
-				sbConsulta
-						.append("inner join cadastro.cliente_tipo cltp on (clie.cltp_id = cltp.cltp_id ) "); // and
-																												// cltp.epod_id
-																												// =
-																												// 3
-				sbConsulta
-						.append("inner join faturamento.imposto_tipo imtp on (cnid.imtp_id = imtp.imtp_id) ");
-				sbConsulta
-						.append("where pgmt.pgmt_amreferenciaarrecadacao BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal ");
-				sbConsulta
-						.append("GROUP BY clie.clie_id, clie_nmcliente, imtp.imtp_id, imtp.imtp_dsimposto, cnid.cnid_pcaliquota, clie.clie_nncnpj ");
-				sbConsulta.append("union all ");
-				sbConsulta.append("select imtp.imtp_id as impostoTipo, ");
-				sbConsulta.append("imtp.imtp_dsimposto as descricaoImposto, ");
-				sbConsulta.append("cidh.cidh_pcaliquota as percAliquota, ");
-				sbConsulta.append("sum(cidh.cidh_vlimposto) as valorImposto, ");
-				sbConsulta.append("clie.clie_id as cliente, ");
-				sbConsulta.append("clie_nmcliente as nomeCliente, ");
-				sbConsulta
-						.append("sum(((cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos) - (cnhi.cnhi_vlcreditos + cnhi.cnhi_vlimpostos))) as valorFatura, ");
-				sbConsulta.append("clie.clie_nncnpj as cnpj, ");
-				sbConsulta
-						.append("sum(((cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos) - (cnhi.cnhi_vlcreditos)))as baseCalculo ");
-				sbConsulta
-						.append("from	faturamento.conta_impostos_dedz_hist cidh ");
-				sbConsulta
-						.append("inner join faturamento.conta_historico cnhi on (cidh.cnta_id = cnhi.cnta_id) ");
-				sbConsulta
-						.append("inner join cadastro.cliente_conta_historico clch on (cnhi.cnta_id = clch.cnta_id and clch.crtp_id = :cliRelacaoTipo) ");
-				sbConsulta
-						.append("inner join arrecadacao.pagamento_historico pgmth on (clch.cnta_id = pgmth.cnta_id and (pgmth.pgst_idatual = :pagamentoClassificado or (pgmth.pgst_idatual in (:pagamentoABaixar, :duplicidadeExcessoDevolvido) and (pgmth.pgst_idanterior is null or pgmth.pgst_idanterior <> :pagamentoDuplicidade)))) ");
-				sbConsulta
-						.append("inner join cadastro.cliente clie on (clch.clie_id = clie.clie_id) ");
-				sbConsulta
-						.append("inner join cadastro.cliente_tipo cltp on (clie.cltp_id = cltp.cltp_id ) "); // and
-																												// cltp.epod_id
-																												// =
-																												// 3
-				sbConsulta
-						.append("inner join faturamento.imposto_tipo imtp on (cidh.imtp_id = imtp.imtp_id) ");
-				sbConsulta
-						.append("where pgmth.pghi_amreferenciahistorico  BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal ");
-				sbConsulta
-						.append("GROUP BY clie.clie_id, clie_nmcliente, imtp.imtp_id, imtp.imtp_dsimposto, cidh.cidh_pcaliquota, clie.clie_nncnpj ");
-				sbConsulta.append("ORDER BY cliente, impostoTipo ");
-
-				query = session
-						.createSQLQuery(sbConsulta.toString())
-						.addScalar("impostoTipo", Hibernate.INTEGER)
-						.addScalar("descricaoImposto", Hibernate.STRING)
-						.addScalar("percAliquota", Hibernate.BIG_DECIMAL)
-						.addScalar("valorImposto", Hibernate.BIG_DECIMAL)
-						.addScalar("cliente", Hibernate.INTEGER)
-						.addScalar("nomeCliente", Hibernate.STRING)
-						.addScalar("valorFatura", Hibernate.BIG_DECIMAL)
-						.addScalar("cnpj", Hibernate.STRING)
-						.addScalar("baseCalculo", Hibernate.BIG_DECIMAL)
-						.setInteger("anoMesReferenciaInicial", anoMesInicial)
-						.setInteger("anoMesReferenciaFinal", anoMesFinal)
-						.setInteger("pagamentoClassificado",
-								PagamentoSituacao.PAGAMENTO_CLASSIFICADO)
-						.setInteger("pagamentoABaixar",
-								PagamentoSituacao.VALOR_A_BAIXAR)
-						.setInteger("duplicidadeExcessoDevolvido",
-								PagamentoSituacao.DUPLICIDADE_EXCESSO_DEVOLVIDO)
-						.setInteger("pagamentoDuplicidade",
-								PagamentoSituacao.PAGAMENTO_EM_DUPLICIDADE)
-						.setInteger("cliRelacaoTipo",
-								ClienteRelacaoTipo.RESPONSAVEL);
+				consulta = consulta 
+				+ " ,null						as idFatura"
+				+ " ,null					 	as referenciaFatura ";
 			}
+			consulta = consulta
+				+ " from	faturamento.conta_impostos_deduzidos cnid  "
+				+ " inner join faturamento.conta cnta 					on (cnid.cnta_id = cnta.cnta_id) "
+				+ " inner join arrecadacao.pagamento pgmt 				on (cnta.cnta_id = pgmt.cnta_id and pgmt.pgmt_dtpagamento is not null and (pgmt.pgst_idatual = :pagamentoClassificado or (pgmt.pgst_idatual in (:pagamentoABaixar, :duplicidadeExcessoDevolvido) and (pgmt.pgst_idanterior is null or pgmt.pgst_idanterior <> :pagamentoDuplicidade))))  "
+				+ " inner join cadastro.cliente_conta clct 				on (pgmt.cnta_id = clct.cnta_id and clct.crtp_id = :cliRelacaoTipo)  "
+				+ " inner join cadastro.cliente clie 					on (clct.clie_id = clie.clie_id) "
+				+ " inner join cadastro.cliente_tipo cltp 				on (clie.cltp_id = cltp.cltp_id) "
+				+ " inner join faturamento.imposto_tipo imtp 			on (cnid.imtp_id = imtp.imtp_id) ";
+			if (fatura) {
+				consulta = consulta 
+				+ " left  join faturamento.fatura fatu					on ( fatu.clie_id = clie.clie_id AND fatu.fatu_amreferencia = cnta.cnta_amreferenciaconta) ";
+			}
+			consulta = consulta 
+				+ " where pgmt.pgmt_amreferenciaarrecadacao BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal ";
+			if(idCliente != null){
+				consulta = consulta
+				+ " and clie.clie_id = " + idCliente;
+			}	
+			if (fatura) {
+				consulta = consulta 
+				+ " GROUP BY clie.clie_id, clie_nmcliente, imtp.imtp_id, imtp.imtp_dsimposto, cnid.cnid_pcaliquota, clie.clie_nncnpj,fatu.fatu_id,fatu.fatu_amreferencia ";
+			}else{
+				consulta = consulta 
+				+ " GROUP BY clie.clie_id, clie_nmcliente, imtp.imtp_id, imtp.imtp_dsimposto, cnid.cnid_pcaliquota, clie.clie_nncnpj ";
+			}
+			consulta = consulta
+				+ " union all  "
+				+ " select imtp.imtp_id 		as impostoTipo,  "
+				+ " imtp.imtp_dsimposto 		as descricaoImposto,  "
+				+ " cidh.cidh_pcaliquota 		as percAliquota,  "
+				+ " sum(cidh.cidh_vlimposto) 	as valorImposto,  "
+				+ " clie.clie_id 				as cliente,  "
+				+ " clie_nmcliente 				as nomeCliente,  "
+				+ " sum(((cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos) - (cnhi.cnhi_vlcreditos + cnhi.cnhi_vlimpostos))) as valorFatura,  "
+				+ " clie.clie_nncnpj 			as cnpj,  "
+				+ " sum(((cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos) - (cnhi.cnhi_vlcreditos)))as baseCalculo  ";
+			if (fatura) {
+				consulta = consulta 
+				+ " ,fatu.fatu_id				as idFatura"
+				+ " ,fatu.fatu_amreferencia 	as referenciaFatura ";
+			} else {
+				consulta = consulta 
+				+ " ,null						as idFatura"
+				+ " ,null					 	as referenciaFatura ";
+			}
+			consulta = consulta
+				+ " from	faturamento.conta_impostos_dedz_hist cidh  "
+				+ " inner join faturamento.conta_historico cnhi 		on (cidh.cnta_id = cnhi.cnta_id)  "
+				+ " inner join cadastro.cliente_conta_historico clch 	on (cnhi.cnta_id = clch.cnta_id and clch.crtp_id = :cliRelacaoTipo)  "
+				+ " inner join arrecadacao.pagamento_historico pgmth 	on (clch.cnta_id = pgmth.cnta_id and (pgmth.pgst_idatual = :pagamentoClassificado or (pgmth.pgst_idatual in (:pagamentoABaixar, :duplicidadeExcessoDevolvido) and (pgmth.pgst_idanterior is null or pgmth.pgst_idanterior <> :pagamentoDuplicidade))))  "
+				+ " inner join cadastro.cliente clie 					on (clch.clie_id = clie.clie_id)  "
+				+ " inner join cadastro.cliente_tipo cltp 				on (clie.cltp_id = cltp.cltp_id )   "
+				+ " inner join faturamento.imposto_tipo imtp 			on (cidh.imtp_id = imtp.imtp_id)  ";
+			if (fatura) {
+				consulta = consulta 
+				+ " left  join faturamento.fatura fatu					on ( fatu.clie_id = clie.clie_id AND fatu.fatu_amreferencia = cnhi.cnhi_amreferenciaconta)  ";
+			}
+			consulta = consulta
+				+ " where pgmth.pghi_amreferenciahistorico  BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal  ";
+			if (idCliente != null) {
+				consulta = consulta 
+				+ " and clie.clie_id = " + idCliente;
+			}	
+			if (fatura) {
+				consulta = consulta 
+				+ " GROUP BY clie.clie_id, clie_nmcliente, imtp.imtp_id, imtp.imtp_dsimposto, cidh.cidh_pcaliquota, clie.clie_nncnpj ,fatu.fatu_id,fatu.fatu_amreferencia "
+				+ " ORDER BY cliente, idFatura,impostoTipo  ";
+			}else{
+				consulta = consulta 
+				+ " GROUP BY clie.clie_id, clie_nmcliente, imtp.imtp_id, imtp.imtp_dsimposto, cidh.cidh_pcaliquota, clie.clie_nncnpj  "
+				+ " ORDER BY cliente, impostoTipo  ";
+			}
+				
+			query = session
+					.createSQLQuery(consulta.toString())
+					.addScalar("impostoTipo", Hibernate.INTEGER)
+					.addScalar("descricaoImposto", Hibernate.STRING)
+					.addScalar("percAliquota", Hibernate.BIG_DECIMAL)
+					.addScalar("valorImposto", Hibernate.BIG_DECIMAL)
+					.addScalar("cliente", Hibernate.INTEGER)
+					.addScalar("nomeCliente", Hibernate.STRING)
+					.addScalar("valorFatura", Hibernate.BIG_DECIMAL)
+					.addScalar("cnpj", Hibernate.STRING)
+					.addScalar("baseCalculo", Hibernate.BIG_DECIMAL)
+					.addScalar("idFatura", Hibernate.INTEGER)
+					.addScalar("referenciaFatura", Hibernate.INTEGER)
+					.setInteger("anoMesReferenciaInicial", anoMesInicial)
+					.setInteger("anoMesReferenciaFinal", anoMesFinal)
+					.setInteger("pagamentoClassificado",PagamentoSituacao.PAGAMENTO_CLASSIFICADO)
+					.setInteger("pagamentoABaixar",PagamentoSituacao.VALOR_A_BAIXAR)
+					.setInteger("duplicidadeExcessoDevolvido",PagamentoSituacao.DUPLICIDADE_EXCESSO_DEVOLVIDO)
+					.setInteger("pagamentoDuplicidade",PagamentoSituacao.PAGAMENTO_EM_DUPLICIDADE)
+					.setInteger("cliRelacaoTipo",ClienteRelacaoTipo.RESPONSAVEL);
+
 			retorno = (Collection) query.list();
 		} catch (HibernateException e) {
 			// levanta a exceção para a próxima camada
@@ -21601,178 +21350,130 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 			throws ErroRepositorioException {
 
 		Collection retorno = null;
-
 		Session session = HibernateUtil.getSession();
 		String consulta;
+		// Pesquisa pela fatura se o período é referente a um mês
+		boolean fatura = anoMesInicial.equals(anoMesFinal);
 
 		try {
-
 			Query query = null;
-
-			if (idCliente != null) {
-
-				consulta = "select	imtp.imtp_id as impostoTipo ,"
-						+ " imtp.imtp_dsimposto as descricaoImposto , "
-						+ " cnid.cnid_pcaliquota as percAliquota, "
-						+ " sum(cnid.cnid_vlimposto) as valorImposto, "
-						+ " clie.clie_id as cliente, "
-						+ " clie_nmcliente as nomeCliente, "
-						+ " sum(((cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos) - (cnta.cnta_vlcreditos + cnta.cnta_vlimpostos))) as valorFatura, "
-						+ " cnta.imov_id as imovel, "
-						+ " clie.clie_nncnpj as cnpj, "
-						+ " sum(((cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos) - (cnta.cnta_vlcreditos))) as baseCalculo, "
-						+ " cnta.cnta_id as conta, "
-						+ " cnta.cnta_amreferenciaconta as anoMesReferecia "
-						+ "from	faturamento.conta_impostos_deduzidos cnid "
-						+ "inner join faturamento.conta cnta on (cnid.cnta_id = cnta.cnta_id) "
-						+ "inner join arrecadacao.pagamento pgmt on (cnta.cnta_id = pgmt.cnta_id and pgmt.pgmt_dtpagamento is not null and (pgmt.pgst_idatual = :pagamentoClassificado or (pgmt.pgst_idatual in (:pagamentoABaixar, :duplicidadeExcessoDevolvido) and (pgmt.pgst_idanterior is null or pgmt.pgst_idanterior <> :pagamentoDuplicidade)))) "
-						+ "inner join cadastro.cliente_conta clct on (pgmt.cnta_id = clct.cnta_id and clct.crtp_id = :cliRelacaoTipo) "
-						+ "inner join cadastro.cliente clie on (clct.clie_id = clie.clie_id) "
-						+ "inner join cadastro.cliente_tipo cltp on (clie.cltp_id = cltp.cltp_id ) " // and
-																										// cltp.epod_id
-																										// =
-																										// 3
-						+ "inner join faturamento.imposto_tipo imtp on (cnid.imtp_id = imtp.imtp_id) "
-						+ "where pgmt.pgmt_amreferenciaarrecadacao BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal "
-						+ " and		clct.clie_id = :idCliente "
-						+ " GROUP BY clie.clie_id, clie_nmcliente, cnta.imov_id, cnta.cnta_id, imtp.imtp_id, imtp.imtp_dsimposto, cnid.cnid_pcaliquota, clie.clie_nncnpj, cnta.cnta_amreferenciaconta "
-						+ " union all "
-						+ " select	imtp.imtp_id impostoTipo ,"
-						+ " imtp.imtp_dsimposto as descricaoImposto , "
-						+ " cidh.cidh_pcaliquota as percAliquota, "
-						+ " sum(cidh.cidh_vlimposto) as valorImposto, "
-						+ " clie.clie_id as cliente, "
-						+ " clie_nmcliente as nomeCliente, "
-						+ " sum(((cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos) - (cnhi.cnhi_vlcreditos + cnhi.cnhi_vlimpostos))) as valorFatura, "
-						+ " cnhi.imov_id as imovel, "
-						+ " clie.clie_nncnpj as cnpj, "
-						+ "sum(((cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos) - (cnhi.cnhi_vlcreditos))) as baseCalculo, "
-						+ " cnhi.cnta_id as conta, "
-						+ " cnhi.cnhi_amreferenciaconta as anoMesReferecia "
-						+ "from	faturamento.conta_impostos_dedz_hist cidh "
-						+ "inner join faturamento.conta_historico cnhi on (cidh.cnta_id = cnhi.cnta_id) "
-						+ "inner join cadastro.cliente_conta_historico clch on (cnhi.cnta_id = clch.cnta_id and clch.crtp_id = :cliRelacaoTipo) "
-						+ "inner join arrecadacao.pagamento_historico pgmth on (clch.cnta_id = pgmth.cnta_id and (pgmth.pgst_idatual = :pagamentoClassificado or (pgmth.pgst_idatual in (:pagamentoABaixar, :duplicidadeExcessoDevolvido) and (pgmth.pgst_idanterior is null or pgmth.pgst_idanterior <> :pagamentoDuplicidade)))) "
-						+ "inner join cadastro.cliente clie on (clch.clie_id = clie.clie_id) "
-						+ "inner join cadastro.cliente_tipo cltp on (clie.cltp_id = cltp.cltp_id ) " // and
-																										// cltp.epod_id
-																										// =
-																										// 3
-						+ "inner join faturamento.imposto_tipo imtp on (cidh.imtp_id = imtp.imtp_id) "
-						+ " where	pgmth.pghi_amreferenciahistorico BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal "
-						+ " and		clch.clie_id = :idCliente "
-						+ " GROUP BY clie.clie_id, clie_nmcliente, cnhi.imov_id, cnhi.cnta_id, imtp.imtp_id, imtp.imtp_dsimposto, cidh.cidh_pcaliquota, clie.clie_nncnpj, cnhi.cnhi_amreferenciaconta "
-						+ " ORDER BY cliente, imovel,anoMesReferecia, impostoTipo ";
-
-				query = session
-						.createSQLQuery(consulta)
-						.addScalar("impostoTipo", Hibernate.INTEGER)
-						.addScalar("descricaoImposto", Hibernate.STRING)
-						.addScalar("percAliquota", Hibernate.BIG_DECIMAL)
-						.addScalar("valorImposto", Hibernate.BIG_DECIMAL)
-						.addScalar("cliente", Hibernate.INTEGER)
-						.addScalar("nomeCliente", Hibernate.STRING)
-						.addScalar("valorFatura", Hibernate.BIG_DECIMAL)
-						.addScalar("imovel", Hibernate.INTEGER)
-						.addScalar("cnpj", Hibernate.STRING)
-						.addScalar("baseCalculo", Hibernate.BIG_DECIMAL)
-						.addScalar("conta", Hibernate.INTEGER)
-						.addScalar("anoMesReferecia", Hibernate.STRING)
-						.setInteger("anoMesReferenciaInicial", anoMesInicial)
-						.setInteger("anoMesReferenciaFinal", anoMesFinal)
-						.setInteger("pagamentoClassificado",
-								PagamentoSituacao.PAGAMENTO_CLASSIFICADO)
-						.setInteger("pagamentoABaixar",
-								PagamentoSituacao.VALOR_A_BAIXAR)
-						.setInteger("duplicidadeExcessoDevolvido",
-								PagamentoSituacao.DUPLICIDADE_EXCESSO_DEVOLVIDO)
-						.setInteger("pagamentoDuplicidade",
-								PagamentoSituacao.PAGAMENTO_EM_DUPLICIDADE)
-						.setInteger("cliRelacaoTipo",
-								ClienteRelacaoTipo.RESPONSAVEL)
-						.setInteger("idCliente", idCliente);
-
+			
+			consulta = "select	imtp.imtp_id 		as impostoTipo ,"
+					+ " imtp.imtp_dsimposto 		as descricaoImposto ," 
+					+ " cnid.cnid_pcaliquota 		as percAliquota," 
+					+ " sum(cnid.cnid_vlimposto) 	as valorImposto," 
+					+ " clie.clie_id 				as cliente," 
+					+ " clie_nmcliente 				as nomeCliente," 
+					+ " sum(((cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos) - (cnta.cnta_vlcreditos + cnta.cnta_vlimpostos))) as valorFatura," 
+					+ " cnta.imov_id 				as imovel," 
+					+ " clie.clie_nncnpj 			as cnpj," 
+					+ " sum(((cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos) - (cnta.cnta_vlcreditos))) as baseCalculo," 
+					+ " cnta.cnta_id 				as conta," 
+					+ " cnta.cnta_amreferenciaconta as anoMesReferecia";
+			if (fatura) {
+				consulta = consulta 
+					+ " ,fatu.fatu_id					AS idFatura";
 			} else {
-
-				consulta = "select	imtp.imtp_id as impostoTipo ,"
-						+ " imtp.imtp_dsimposto as descricaoImposto , "
-						+ " cnid.cnid_pcaliquota as percAliquota, "
-						+ " sum(cnid.cnid_vlimposto) as valorImposto, "
-						+ " clie.clie_id as cliente, "
-						+ " clie_nmcliente as nomeCliente, "
-						+ " sum(((cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos) - (cnta.cnta_vlcreditos + cnta.cnta_vlimpostos))) as valorFatura, "
-						+ " cnta.imov_id as imovel, "
-						+ " clie.clie_nncnpj as cnpj, "
-						+ "sum(((cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos) - (cnta.cnta_vlcreditos))) as baseCalculo, "
-						+ " cnta.cnta_id as conta, "
-						+ " cnta.cnta_amreferenciaconta as anoMesReferecia "
-						+ "from	faturamento.conta_impostos_deduzidos cnid "
-						+ "inner join faturamento.conta cnta on (cnid.cnta_id = cnta.cnta_id) "
-						+ "inner join arrecadacao.pagamento pgmt on (cnta.cnta_id = pgmt.cnta_id and pgmt.pgmt_dtpagamento is not null and (pgmt.pgst_idatual = :pagamentoClassificado or (pgmt.pgst_idatual in (:pagamentoABaixar, :duplicidadeExcessoDevolvido) and (pgmt.pgst_idanterior is null or pgmt.pgst_idanterior <> :pagamentoDuplicidade)))) "
-						+ "inner join cadastro.cliente_conta clct on (pgmt.cnta_id = clct.cnta_id and clct.crtp_id = :cliRelacaoTipo) "
-						+ "inner join cadastro.cliente clie on (clct.clie_id = clie.clie_id) "
-						+ "inner join cadastro.cliente_tipo cltp on (clie.cltp_id = cltp.cltp_id ) " // and
-																										// cltp.epod_id
-																										// =
-																										// 3
-						+ "inner join faturamento.imposto_tipo imtp on (cnid.imtp_id = imtp.imtp_id) "
-						+ "where pgmt.pgmt_amreferenciaarrecadacao BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal "
-						+ " GROUP BY clie.clie_id, clie_nmcliente, cnta.imov_id, cnta.cnta_id, imtp.imtp_id, imtp.imtp_dsimposto, cnid.cnid_pcaliquota, clie.clie_nncnpj, cnta.cnta_amreferenciaconta "
-						+ " union all "
-						+ " select	imtp.imtp_id as impostoTipo ,"
-						+ " imtp.imtp_dsimposto as descricaoImposto , "
-						+ " cidh.cidh_pcaliquota as percAliquota, "
-						+ " sum(cidh.cidh_vlimposto) as valorImposto, "
-						+ " clie.clie_id as cliente, "
-						+ " clie_nmcliente as nomeCliente, "
-						+ " sum(((cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos) - (cnhi.cnhi_vlcreditos + cnhi.cnhi_vlimpostos))) as valorFatura, "
-						+ " cnhi.imov_id as imovel, "
-						+ " clie.clie_nncnpj as cnpj, "
-						+ " sum(((cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos) - (cnhi.cnhi_vlcreditos)))as baseCalculo, "
-						+ " cnhi.cnta_id as conta, "
-						+ " cnhi.cnhi_amreferenciaconta as anoMesReferecia "
-						+ "from	faturamento.conta_impostos_dedz_hist cidh "
-						+ "inner join faturamento.conta_historico cnhi on (cidh.cnta_id = cnhi.cnta_id) "
-						+ "inner join cadastro.cliente_conta_historico clch on (cnhi.cnta_id = clch.cnta_id and clch.crtp_id = :cliRelacaoTipo) "
-						+ "inner join arrecadacao.pagamento_historico pgmth on (clch.cnta_id = pgmth.cnta_id and (pgmth.pgst_idatual = :pagamentoClassificado or (pgmth.pgst_idatual in (:pagamentoABaixar, :duplicidadeExcessoDevolvido) and (pgmth.pgst_idanterior is null or pgmth.pgst_idanterior <> :pagamentoDuplicidade)))) "
-						+ "inner join cadastro.cliente clie on (clch.clie_id = clie.clie_id) "
-						+ "inner join cadastro.cliente_tipo cltp on (clie.cltp_id = cltp.cltp_id ) " // and
-																										// cltp.epod_id
-																										// =
-																										// 3
-						+ "inner join faturamento.imposto_tipo imtp on (cidh.imtp_id = imtp.imtp_id) "
-						+ " where	pgmth.pghi_amreferenciahistorico BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal "
-
-						+ " GROUP BY clie.clie_id, clie_nmcliente, cnhi.imov_id,  cnhi.cnta_id,imtp.imtp_id, imtp.imtp_dsimposto, cidh.cidh_pcaliquota, clie.clie_nncnpj,clie_nncnpj,  cnhi.cnhi_amreferenciaconta "
-						+ " ORDER BY cliente, imovel,anoMesReferecia, impostoTipo ";
-
-				query = session
-						.createSQLQuery(consulta)
-						.addScalar("impostoTipo", Hibernate.INTEGER)
-						.addScalar("descricaoImposto", Hibernate.STRING)
-						.addScalar("percAliquota", Hibernate.BIG_DECIMAL)
-						.addScalar("valorImposto", Hibernate.BIG_DECIMAL)
-						.addScalar("cliente", Hibernate.INTEGER)
-						.addScalar("nomeCliente", Hibernate.STRING)
-						.addScalar("valorFatura", Hibernate.BIG_DECIMAL)
-						.addScalar("imovel", Hibernate.INTEGER)
-						.addScalar("cnpj", Hibernate.STRING)
-						.addScalar("baseCalculo", Hibernate.BIG_DECIMAL)
-						.addScalar("conta", Hibernate.INTEGER)
-						.addScalar("anoMesReferecia", Hibernate.STRING)
-						.setInteger("anoMesReferenciaInicial", anoMesInicial)
-						.setInteger("anoMesReferenciaFinal", anoMesFinal)
-						.setInteger("pagamentoClassificado",
-								PagamentoSituacao.PAGAMENTO_CLASSIFICADO)
-						.setInteger("pagamentoABaixar",
-								PagamentoSituacao.VALOR_A_BAIXAR)
-						.setInteger("duplicidadeExcessoDevolvido",
-								PagamentoSituacao.DUPLICIDADE_EXCESSO_DEVOLVIDO)
-						.setInteger("pagamentoDuplicidade",
-								PagamentoSituacao.PAGAMENTO_EM_DUPLICIDADE)
-						.setInteger("cliRelacaoTipo",
-								ClienteRelacaoTipo.RESPONSAVEL);
+				consulta = consulta 
+					+ " ,null							AS idFatura";
 			}
+			consulta = consulta		
+					+ " from	faturamento.conta_impostos_deduzidos cnid" 
+					+ " inner join faturamento.conta cnta 				on (cnid.cnta_id = cnta.cnta_id)" 
+					+ " inner join arrecadacao.pagamento pgmt 			on (cnta.cnta_id = pgmt.cnta_id and pgmt.pgmt_dtpagamento is not null and (pgmt.pgst_idatual = :pagamentoClassificado or (pgmt.pgst_idatual in (:pagamentoABaixar, :duplicidadeExcessoDevolvido) and (pgmt.pgst_idanterior is null or pgmt.pgst_idanterior <> :pagamentoDuplicidade)))) " 
+					+ " inner join cadastro.cliente_conta clct 			on (pgmt.cnta_id = clct.cnta_id and clct.crtp_id = :cliRelacaoTipo) "
+					+ " inner join cadastro.cliente clie 				on (clct.clie_id = clie.clie_id) "
+					+ " inner join cadastro.cliente_tipo cltp 			on (clie.cltp_id = cltp.cltp_id) " 
+					+ " inner join faturamento.imposto_tipo imtp 		on (cnid.imtp_id = imtp.imtp_id) " ;
+			if(fatura){
+					consulta = consulta
+					+ " left  join faturamento.fatura fatu				on ( fatu.clie_id = clie.clie_id AND fatu.fatu_amreferencia = cnta.cnta_amreferenciaconta)";
+			}	
+			consulta = consulta
+					+ " where pgmt.pgmt_amreferenciaarrecadacao BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal";
+			if (idCliente != null) {
+				consulta = consulta
+					+ " and		clct.clie_id = " + idCliente;
+			}
+			if(fatura){
+				consulta = consulta 
+					+ " GROUP BY clie.clie_id, clie_nmcliente, cnta.imov_id, cnta.cnta_id, imtp.imtp_id, imtp.imtp_dsimposto, cnid.cnid_pcaliquota, clie.clie_nncnpj, cnta.cnta_amreferenciaconta ,fatu.fatu_id";
+			}else{
+				consulta = consulta 
+					+ " GROUP BY clie.clie_id, clie_nmcliente, cnta.imov_id, cnta.cnta_id, imtp.imtp_id, imtp.imtp_dsimposto, cnid.cnid_pcaliquota, clie.clie_nncnpj, cnta.cnta_amreferenciaconta ";
+			}
+			consulta = consulta 
+					+ " union all " 
+					+ " select	imtp.imtp_id 		as impostoTipo ,"
+					+ " imtp.imtp_dsimposto 		as descricaoImposto ," 
+					+ " cidh.cidh_pcaliquota 		as percAliquota," 
+					+ " sum(cidh.cidh_vlimposto) 	as valorImposto," 
+					+ " clie.clie_id 				as cliente," 
+					+ " clie_nmcliente 				as nomeCliente," 
+					+ " sum(((cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos) - (cnhi.cnhi_vlcreditos + cnhi.cnhi_vlimpostos))) as valorFatura," 
+					+ " cnhi.imov_id 				as imovel, "
+					+ " clie.clie_nncnpj 			as cnpj," 
+					+ " sum(((cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos) - (cnhi.cnhi_vlcreditos)))as baseCalculo," 
+					+ " cnhi.cnta_id 				as conta," 
+					+ " cnhi.cnhi_amreferenciaconta as anoMesReferecia";
+			if (fatura) {
+				consulta = consulta 
+					+ " ,fatu.fatu_id					AS idFatura";
+			} else {
+				consulta = consulta 
+					+ " ,null							AS idFatura";
+			}
+			consulta = consulta
+					+ " from	faturamento.conta_impostos_dedz_hist cidh" 
+					+ " inner join faturamento.conta_historico cnhi 		on (cidh.cnta_id = cnhi.cnta_id)" 
+					+ " inner join cadastro.cliente_conta_historico clch 	on (cnhi.cnta_id = clch.cnta_id and clch.crtp_id = :cliRelacaoTipo)" 
+					+ " inner join arrecadacao.pagamento_historico pgmth 	on (clch.cnta_id = pgmth.cnta_id and (pgmth.pgst_idatual = :pagamentoClassificado or (pgmth.pgst_idatual in (:pagamentoABaixar, :duplicidadeExcessoDevolvido) and (pgmth.pgst_idanterior is null or pgmth.pgst_idanterior <> :pagamentoDuplicidade)))) " 
+					+ " inner join cadastro.cliente clie 					on (clch.clie_id = clie.clie_id)" 
+					+ " inner join cadastro.cliente_tipo cltp 				on (clie.cltp_id = cltp.cltp_id ) "
+					+ " inner join faturamento.imposto_tipo imtp 			on (cidh.imtp_id = imtp.imtp_id)" ;
+			if(fatura){
+				consulta = consulta
+					+ " left  join faturamento.fatura fatu					on ( fatu.clie_id = clie.clie_id AND fatu.fatu_amreferencia = cnhi.cnhi_amreferenciaconta)";
+			}
+			consulta = consulta
+					+ " where pgmth.pghi_amreferenciahistorico BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal ";
+			if (idCliente != null) {
+				consulta = consulta
+					+ " and		clch.clie_id = " + idCliente ;
+			}
+			if(fatura){
+				consulta = consulta
+					+ " GROUP BY clie.clie_id, clie_nmcliente, cnhi.imov_id,  cnhi.cnta_id,imtp.imtp_id, imtp.imtp_dsimposto, cidh.cidh_pcaliquota, clie.clie_nncnpj,clie_nncnpj,  cnhi.cnhi_amreferenciaconta ,fatu.fatu_id"
+					+ " ORDER BY cliente, idFatura, imovel,anoMesReferecia, impostoTipo ";
+			}else{
+				consulta = consulta
+					+ " GROUP BY clie.clie_id, clie_nmcliente, cnhi.imov_id,  cnhi.cnta_id,imtp.imtp_id, imtp.imtp_dsimposto, cidh.cidh_pcaliquota, clie.clie_nncnpj,clie_nncnpj,  cnhi.cnhi_amreferenciaconta "
+					+ " ORDER BY cliente, imovel,anoMesReferecia, impostoTipo ";
+			}
+
+			query = session
+					.createSQLQuery(consulta)
+					.addScalar("impostoTipo", Hibernate.INTEGER)
+					.addScalar("descricaoImposto", Hibernate.STRING)
+					.addScalar("percAliquota", Hibernate.BIG_DECIMAL)
+					.addScalar("valorImposto", Hibernate.BIG_DECIMAL)
+					.addScalar("cliente", Hibernate.INTEGER)
+					.addScalar("nomeCliente", Hibernate.STRING)
+					.addScalar("valorFatura", Hibernate.BIG_DECIMAL)
+					.addScalar("imovel", Hibernate.INTEGER)
+					.addScalar("cnpj", Hibernate.STRING)
+					.addScalar("baseCalculo", Hibernate.BIG_DECIMAL)
+					.addScalar("conta", Hibernate.INTEGER)
+					.addScalar("anoMesReferecia", Hibernate.STRING)
+					.addScalar("idFatura", Hibernate.INTEGER)
+					.setInteger("anoMesReferenciaInicial", anoMesInicial)
+					.setInteger("anoMesReferenciaFinal", anoMesFinal)
+					.setInteger("pagamentoClassificado",PagamentoSituacao.PAGAMENTO_CLASSIFICADO)
+					.setInteger("pagamentoABaixar",PagamentoSituacao.VALOR_A_BAIXAR)
+					.setInteger("duplicidadeExcessoDevolvido",PagamentoSituacao.DUPLICIDADE_EXCESSO_DEVOLVIDO)
+					.setInteger("pagamentoDuplicidade",PagamentoSituacao.PAGAMENTO_EM_DUPLICIDADE)
+					.setInteger("cliRelacaoTipo",ClienteRelacaoTipo.RESPONSAVEL);
+			
 			retorno = (Collection) query.list();
 		} catch (HibernateException e) {
 			// levanta a exceção para a próxima camada
@@ -24253,7 +23954,11 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 
 					+ "sum(case when ((la.dataCorte is not null) "
 					+ "and (la.dataCorte >= :dataInicial "
-					+ "and la.dataCorte <= :dataFinal)) then 1 else 0 end) as cortes "
+					+ "and la.dataCorte <= :dataFinal) "
+					+ "and   f.servicoTipo.id in "
+					+ "(SELECT stop.comp_id.idServicoTipo "
+					+ "FROM ServicoTipoOperacao stop "
+					+ "WHERE stop.comp_id.idOperacao in (48))) then 1 else 0 end) as cortes "
 
 					+ "from gcom.atendimentopublico.ligacaoagua.LigacaoAgua la, "
 					+ "gcom.cadastro.imovel.Imovel im, "
@@ -28546,335 +28251,154 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 	 * @throws ErroRepositorioException
 	 */
 	public Collection pesquisaImpostoFaturaClienteResponsavelFederalAnalitico(
-			Integer anoMesInicial, Integer anoMesFinal, Integer idCliente/*
-																		 * Integer
-																		 * idImovel
-																		 */)
+			Integer anoMesInicial, Integer anoMesFinal, Integer idCliente)
 			throws ErroRepositorioException {
 
 		Collection retorno = null;
-
 		Session session = HibernateUtil.getSession();
 		String consulta;
-
+		// Pesquisa pela fatura se o período é referente a um mês
+		boolean fatura = anoMesInicial.equals(anoMesFinal);
+		
 		try {
-
 			Query query = null;
 
-			if (idCliente != null) {
+			consulta = "SELECT imtp.imtp_id          AS impostoTipo,  "    
+					+ " imtp.imtp_dsimposto          AS descricaoImposto, "       
+					+ " cnid.cnid_pcaliquota         AS percAliquota, "  
+					+ " Sum(cnid.cnid_vlimposto)     AS valorImposto, "       
+					+ " clie.clie_id                 AS cliente, "       
+					+ " clie_nmcliente               AS nomeCliente, "       
+					+ " Sum(( ( cnta.cnta_vlagua + cnta.cnta_vlesgoto  + cnta.cnta_vldebitos ) - (cnta.cnta_vlcreditos + cnta.cnta_vlimpostos) )) AS valorFatura,"        
+					+ " cnta.imov_id                 AS imovel, "       
+					+ " clie.clie_nncnpj             AS cnpj, "       
+					+ " Sum(( ( cnta.cnta_vlagua + cnta.cnta_vlesgoto  + cnta.cnta_vldebitos ) - ( cnta.cnta_vlcreditos ) )) AS baseCalculo ";
 
-				consulta = "SELECT imtp.imtp_id                                                  AS "
-						+ "       impostoTipo,  "
-						+ "       imtp.imtp_dsimposto                                           AS "
-						+ "       descricaoImposto, "
-						+ "       cnid.cnid_pcaliquota                                          AS "
-						+ "       percAliquota, "
-						+ "       Sum(cnid.cnid_vlimposto)                                      AS "
-						+ "       valorImposto, "
-						+ "       clie.clie_id                                                  AS cliente, "
-						+ "       clie_nmcliente                                                AS "
-						+ "       nomeCliente, "
-						+ "       Sum(( ( cnta.cnta_vlagua + cnta.cnta_vlesgoto  "
-						+ "               + cnta.cnta_vldebitos ) - ( "
-						+ "             cnta.cnta_vlcreditos + cnta.cnta_vlimpostos "
-						+ "                                         ) ))                        AS "
-						+ "       valorFatura, "
-						+ "       cnta.imov_id                                                   AS imovel, "
-						+ "       clie.clie_nncnpj                                              AS cnpj, "
-						+ "       Sum(( ( cnta.cnta_vlagua + cnta.cnta_vlesgoto "
-						+ "               + cnta.cnta_vldebitos ) - ( cnta.cnta_vlcreditos ) )) AS "
-						+ "       baseCalculo "
-						+ "FROM   faturamento.conta_impostos_deduzidos cnid "
-						+ "       INNER JOIN faturamento.conta cnta "
-						+ "               ON ( cnid.cnta_id = cnta.cnta_id ) "
-						+ "       INNER JOIN cadastro.cliente_conta clct "
-						+ "               ON ( cnta.cnta_id = clct.cnta_id "
-						+ "                    AND clct.crtp_id = :cliRelacaoTipo ) "
-						+ "       INNER JOIN cadastro.cliente clie "
-						+ "               ON ( clct.clie_id = clie.clie_id ) "
-						+ "       INNER JOIN cadastro.cliente_tipo cltp "
-						+ "               ON ( clie.cltp_id = cltp.cltp_id ) "
-						+ "       INNER JOIN faturamento.imposto_tipo imtp "
-						+ "               ON ( cnid.imtp_id = imtp.imtp_id ) "
-						+ "WHERE  clct.clie_id = :idCliente AND  "
-						+ "  cnta.cnta_id IN (SELECT idconta "
-						+ "                   FROM "
-						+ "  (SELECT imovel, "
-						+ "          referencia, "
-						+ "          Min(cnta_id) AS idconta "
-						+ "   FROM   (SELECT conta.imov_id                AS imovel "
-						+ "                  , "
-						+ "                  conta.cnta_amreferenciaconta AS "
-						+ "                  referencia, "
-						+ "                  conta.cnta_id "
-						+ "           FROM   faturamento.conta conta "
-						+ "           WHERE  conta.cnta_amreferenciaconta BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal "
-						+ "           UNION ALL "
-						+ "           SELECT contaHist.imov_id                AS "
-						+ "                  imovel, "
-						+ "                  contaHist.cnhi_amreferenciaconta AS "
-						+ "                  referencia, "
-						+ "                  contaHist.cnta_id "
-						+ "           FROM   faturamento.conta_historico contaHist "
-						+ "           WHERE  contaHist.cnhi_amreferenciaconta BETWEEN "
-						+ " 			:anoMesReferenciaInicial AND :anoMesReferenciaFinal ) a "
-						+ "   GROUP  BY imovel, "
-						+ "             referencia) b) "
-						+ "GROUP  BY clie.clie_id, "
-						+ "          clie_nmcliente, "
-						+ "          cnta.imov_id, "
-						+ "          imtp.imtp_id, "
-						+ "          imtp.imtp_dsimposto, "
-						+ "          cnid.cnid_pcaliquota, "
-						+ "          clie.clie_nncnpj "
-						+ "UNION ALL "
-						+ "SELECT imtp.imtp_id                                                 impostoTipo, "
-						+ "       imtp.imtp_dsimposto                                          AS "
-						+ "       descricaoImposto, "
-						+ "       cidh.cidh_pcaliquota                                         AS "
-						+ "       percAliquota, "
-						+ "       Sum(cidh.cidh_vlimposto)                                     AS "
-						+ "       valorImposto, "
-						+ "       clie.clie_id                                                 AS cliente, "
-						+ "       clie_nmcliente                                               AS "
-						+ "       nomeCliente, "
-						+ "       Sum(( ( cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto "
-						+ "               + cnhi.cnhi_vldebitos ) - ( "
-						+ "             cnhi.cnhi_vlcreditos + cnhi.cnhi_vlimpostos "
-						+ "                                         ) ))                       AS "
-						+ "       valorFatura, "
-						+ "       cnhi.imov_id                                                 AS imovel, "
-						+ "       clie.clie_nncnpj                                             AS cnpj, "
-						+ "       Sum(( ( cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto "
-						+ "               + cnhi.cnhi_vldebitos ) - ( cnhi.cnhi_vlcreditos ) ))AS "
-						+ "       baseCalculo "
-						+ "FROM   faturamento.conta_impostos_dedz_hist cidh "
-						+ "       INNER JOIN faturamento.conta_historico cnhi "
-						+ "               ON ( cidh.cnta_id = cnhi.cnta_id ) "
-						+ "       INNER JOIN cadastro.cliente_conta_historico clch "
-						+ "               ON ( cnhi.cnta_id = clch.cnta_id "
-						+ "                    AND clch.crtp_id = :cliRelacaoTipo ) "
-						+ "       INNER JOIN cadastro.cliente clie "
-						+ "               ON ( clch.clie_id = clie.clie_id ) "
-						+ "       INNER JOIN cadastro.cliente_tipo cltp "
-						+ "               ON ( clie.cltp_id = cltp.cltp_id ) "
-						+ "       INNER JOIN faturamento.imposto_tipo imtp "
-						+ "               ON ( cidh.imtp_id = imtp.imtp_id ) "
-						+ "WHERE  clch.clie_id = :idCliente AND  "
-						+ "  cnhi.cnta_id IN (SELECT idconta "
-						+ "                   FROM "
-						+ "  (SELECT imovel, "
-						+ "          referencia, "
-						+ "          Min(cnta_id) AS idconta "
-						+ "   FROM   (SELECT conta.imov_id                AS imovel "
-						+ "                  , "
-						+ "                  conta.cnta_amreferenciaconta AS "
-						+ "                  referencia, "
-						+ "                  conta.cnta_id "
-						+ "           FROM   faturamento.conta conta "
-						+ "           WHERE  conta.cnta_amreferenciaconta BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal "
-						+ "           UNION ALL "
-						+ "           SELECT contaHist.imov_id                AS "
-						+ "                  imovel, "
-						+ "                  contaHist.cnhi_amreferenciaconta AS "
-						+ "                  referencia, "
-						+ "                  contaHist.cnta_id "
-						+ "           FROM   faturamento.conta_historico contaHist "
-						+ "           WHERE  contaHist.cnhi_amreferenciaconta BETWEEN "
-						+ "                  :anoMesReferenciaInicial AND :anoMesReferenciaFinal) a "
-						+ "   GROUP  BY imovel, "
-						+ "             referencia) b) "
-						+ "GROUP  BY clie.clie_id, "
-						+ "          clie_nmcliente, "
-						+ "          cnhi.imov_id, "
-						+ "          imtp.imtp_id, "
-						+ "          imtp.imtp_dsimposto, "
-						+ "          cidh.cidh_pcaliquota, "
-						+ "          clie.clie_nncnpj "
-						+ "ORDER  BY cliente, "
-						+ "          imovel, " + "          impostotipo   ";
-
-				query = session
-						.createSQLQuery(consulta)
-						.addScalar("impostoTipo", Hibernate.INTEGER)
-						.addScalar("descricaoImposto", Hibernate.STRING)
-						.addScalar("percAliquota", Hibernate.BIG_DECIMAL)
-						.addScalar("valorImposto", Hibernate.BIG_DECIMAL)
-						.addScalar("cliente", Hibernate.INTEGER)
-						.addScalar("nomeCliente", Hibernate.STRING)
-						.addScalar("valorFatura", Hibernate.BIG_DECIMAL)
-						.addScalar("imovel", Hibernate.INTEGER)
-						.addScalar("cnpj", Hibernate.STRING)
-						.addScalar("baseCalculo", Hibernate.BIG_DECIMAL)
-						.setShort("cliRelacaoTipo",
-								ClienteRelacaoTipo.RESPONSAVEL)
-						.setInteger("anoMesReferenciaInicial", anoMesInicial)
-						.setInteger("anoMesReferenciaFinal", anoMesFinal).
-
-						setInteger("idCliente", idCliente);
-
+			if (fatura) {
+				consulta = consulta 
+					+ " ,fatu.fatu_id					AS idFatura";
 			} else {
-
-				consulta = "SELECT imtp.imtp_id                                                  AS "
-						+ "       impostoTipo,  "
-						+ "       imtp.imtp_dsimposto                                           AS "
-						+ "       descricaoImposto, "
-						+ "       cnid.cnid_pcaliquota                                          AS "
-						+ "       percAliquota, "
-						+ "       Sum(cnid.cnid_vlimposto)                                      AS "
-						+ "       valorImposto, "
-						+ "       clie.clie_id                                                  AS cliente, "
-						+ "       clie_nmcliente                                                AS "
-						+ "       nomeCliente, "
-						+ "       Sum(( ( cnta.cnta_vlagua + cnta.cnta_vlesgoto  "
-						+ "               + cnta.cnta_vldebitos ) - ( "
-						+ "             cnta.cnta_vlcreditos + cnta.cnta_vlimpostos "
-						+ "                                         ) ))                        AS "
-						+ "       valorFatura, "
-						+ "       cnta.imov_id                                                   AS imovel, "
-						+ "       clie.clie_nncnpj                                              AS cnpj, "
-						+ "       Sum(( ( cnta.cnta_vlagua + cnta.cnta_vlesgoto "
-						+ "               + cnta.cnta_vldebitos ) - ( cnta.cnta_vlcreditos ) )) AS "
-						+ "       baseCalculo "
-						+ "FROM   faturamento.conta_impostos_deduzidos cnid "
-						+ "       INNER JOIN faturamento.conta cnta "
-						+ "               ON ( cnid.cnta_id = cnta.cnta_id ) "
-						+ "       INNER JOIN cadastro.cliente_conta clct "
-						+ "               ON ( cnta.cnta_id = clct.cnta_id "
-						+ "                    AND clct.crtp_id = :cliRelacaoTipo ) "
-						+ "       INNER JOIN cadastro.cliente clie "
-						+ "               ON ( clct.clie_id = clie.clie_id ) "
-						+ "       INNER JOIN cadastro.cliente_tipo cltp "
-						+ "               ON ( clie.cltp_id = cltp.cltp_id ) "
-						+ "       INNER JOIN faturamento.imposto_tipo imtp "
-						+ "               ON ( cnid.imtp_id = imtp.imtp_id ) "
-						+ "WHERE "
-						+ "  cnta.cnta_id IN (SELECT idconta "
-						+ "                   FROM "
-						+ "  (SELECT imovel, "
-						+ "          referencia, "
-						+ "          Min(cnta_id) AS idconta "
-						+ "   FROM   (SELECT conta.imov_id                AS imovel "
-						+ "                  , "
-						+ "                  conta.cnta_amreferenciaconta AS "
-						+ "                  referencia, "
-						+ "                  conta.cnta_id "
-						+ "           FROM   faturamento.conta conta "
-						+ "           WHERE  conta.cnta_amreferenciaconta BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal "
-						+ "           UNION ALL "
-						+ "           SELECT contaHist.imov_id                AS "
-						+ "                  imovel, "
-						+ "                  contaHist.cnhi_amreferenciaconta AS "
-						+ "                  referencia, "
-						+ "                  contaHist.cnta_id "
-						+ "           FROM   faturamento.conta_historico contaHist "
-						+ "           WHERE  contaHist.cnhi_amreferenciaconta BETWEEN "
-						+ "                  :anoMesReferenciaInicial AND :anoMesReferenciaFinal) a "
-						+ "   GROUP  BY imovel, "
-						+ "             referencia) b) "
-						+ "GROUP  BY clie.clie_id, "
-						+ "          clie_nmcliente, "
-						+ "          cnta.imov_id, "
-						+ "          imtp.imtp_id, "
-						+ "          imtp.imtp_dsimposto, "
-						+ "          cnid.cnid_pcaliquota, "
-						+ "          clie.clie_nncnpj "
-						+ "UNION ALL "
-						+ "SELECT imtp.imtp_id                                                 impostoTipo, "
-						+ "       imtp.imtp_dsimposto                                          AS "
-						+ "       descricaoImposto, "
-						+ "       cidh.cidh_pcaliquota                                         AS "
-						+ "       percAliquota, "
-						+ "       Sum(cidh.cidh_vlimposto)                                     AS "
-						+ "       valorImposto, "
-						+ "       clie.clie_id                                                 AS cliente, "
-						+ "       clie_nmcliente                                               AS "
-						+ "       nomeCliente, "
-						+ "       Sum(( ( cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto "
-						+ "               + cnhi.cnhi_vldebitos ) - ( "
-						+ "             cnhi.cnhi_vlcreditos + cnhi.cnhi_vlimpostos "
-						+ "                                         ) ))                       AS "
-						+ "       valorFatura, "
-						+ "       cnhi.imov_id                                                 AS imovel, "
-						+ "       clie.clie_nncnpj                                             AS cnpj, "
-						+ "       Sum(( ( cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto "
-						+ "               + cnhi.cnhi_vldebitos ) - ( cnhi.cnhi_vlcreditos ) ))AS "
-						+ "       baseCalculo "
-						+ "FROM   faturamento.conta_impostos_dedz_hist cidh "
-						+ "       INNER JOIN faturamento.conta_historico cnhi "
-						+ "               ON ( cidh.cnta_id = cnhi.cnta_id ) "
-						+ "       INNER JOIN cadastro.cliente_conta_historico clch "
-						+ "               ON ( cnhi.cnta_id = clch.cnta_id "
-						+ "                    AND clch.crtp_id = :cliRelacaoTipo ) "
-						+ "       INNER JOIN cadastro.cliente clie "
-						+ "               ON ( clch.clie_id = clie.clie_id ) "
-						+ "       INNER JOIN cadastro.cliente_tipo cltp "
-						+ "               ON ( clie.cltp_id = cltp.cltp_id ) "
-						+ "       INNER JOIN faturamento.imposto_tipo imtp "
-						+ "               ON ( cidh.imtp_id = imtp.imtp_id ) "
-						+ "WHERE "
-						+ "  cnhi.cnta_id IN (SELECT idconta "
-						+ "                   FROM "
-						+ "  (SELECT imovel, "
-						+ "          referencia, "
-						+ "          Min(cnta_id) AS idconta "
-						+ "   FROM   (SELECT conta.imov_id                AS imovel "
-						+ "                  , "
-						+ "                  conta.cnta_amreferenciaconta AS "
-						+ "                  referencia, "
-						+ "                  conta.cnta_id "
-						+ "           FROM   faturamento.conta conta "
-						+ "           WHERE  conta.cnta_amreferenciaconta BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal "
-						+ "           UNION ALL "
-						+ "           SELECT contaHist.imov_id                AS "
-						+ "                  imovel, "
-						+ "                  contaHist.cnhi_amreferenciaconta AS "
-						+ "                  referencia, "
-						+ "                  contaHist.cnta_id "
-						+ "           FROM   faturamento.conta_historico contaHist "
-						+ "           WHERE  contaHist.cnhi_amreferenciaconta BETWEEN "
-						+ "                  :anoMesReferenciaInicial AND :anoMesReferenciaFinal) a "
-						+ "   GROUP  BY imovel, "
-						+ "             referencia) b) "
-						+ "GROUP  BY clie.clie_id, "
-						+ "          clie_nmcliente, "
-						+ "          cnhi.imov_id, "
-						+ "          imtp.imtp_id, "
-						+ "          imtp.imtp_dsimposto, "
-						+ "          cidh.cidh_pcaliquota, "
-						+ "          clie.clie_nncnpj "
-						+ "ORDER  BY cliente, "
-						+ "          imovel, " + "          impostotipo   ";
-
-				query = session
-						.createSQLQuery(consulta)
-						.addScalar("impostoTipo", Hibernate.INTEGER)
-						.addScalar("descricaoImposto", Hibernate.STRING)
-						.addScalar("percAliquota", Hibernate.BIG_DECIMAL)
-						.addScalar("valorImposto", Hibernate.BIG_DECIMAL)
-						.addScalar("cliente", Hibernate.INTEGER)
-						.addScalar("nomeCliente", Hibernate.STRING)
-						.addScalar("valorFatura", Hibernate.BIG_DECIMAL)
-						.addScalar("imovel", Hibernate.INTEGER)
-						.addScalar("cnpj", Hibernate.STRING)
-						.addScalar("baseCalculo", Hibernate.BIG_DECIMAL)
-						.setShort("cliRelacaoTipo",
-								ClienteRelacaoTipo.RESPONSAVEL)
-						.setInteger("anoMesReferenciaInicial", anoMesInicial)
-						.setInteger("anoMesReferenciaFinal", anoMesFinal);
+				consulta = consulta 
+					+ " ,null							AS idFatura";
 			}
+
+			consulta = consulta
+					+ " FROM   faturamento.conta_impostos_deduzidos cnid "       
+					+ " INNER JOIN faturamento.conta cnta               ON ( cnid.cnta_id = cnta.cnta_id )"        
+					+ " INNER JOIN cadastro.cliente_conta clct          ON ( cnta.cnta_id = clct.cnta_id AND clct.crtp_id = :cliRelacaoTipo )"        
+					+ " INNER JOIN cadastro.cliente clie                ON ( clct.clie_id = clie.clie_id )"        
+					+ " INNER JOIN cadastro.cliente_tipo cltp           ON ( clie.cltp_id = cltp.cltp_id )"        
+					+ " INNER JOIN faturamento.imposto_tipo imtp        ON ( cnid.imtp_id = imtp.imtp_id )" ;
+			if (fatura) {
+				consulta = consulta 
+					+ " LEFT JOIN faturamento.fatura fatu				ON ( fatu.clie_id = clie.clie_id AND fatu.fatu_amreferencia = cnta.cnta_amreferenciaconta)";
+			}
+			consulta = consulta
+					+ " WHERE   "
+					+ " cnta.cnta_id IN (SELECT idconta FROM"   
+					+ " 			(SELECT imovel, referencia, Max(cnta_id) AS idconta  FROM"   
+					+ " 				(SELECT conta.imov_id   AS imovel,conta.cnta_amreferenciaconta AS referencia, conta.cnta_id FROM  faturamento.conta conta"  
+					+ " 				        WHERE  conta.cnta_amreferenciaconta BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal "            
+					+ " 				 UNION ALL            "
+					+ " 				 SELECT contaHist.imov_id AS imovel,contaHist.cnhi_amreferenciaconta AS referencia,contaHist.cnta_id FROM   faturamento.conta_historico contaHist" 
+					+ " 				        WHERE  contaHist.cnhi_amreferenciaconta BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal) a    GROUP  BY imovel, "
+					+ " 		         referencia)" 
+					+ " 	         b)";
+			if (idCliente != null) {
+				consulta = consulta
+					+ " AND clct.clie_id = " + idCliente;
+			}
+
+			consulta = consulta 
+					+ "GROUP  BY clie.clie_id,clie_nmcliente,cnta.imov_id,imtp.imtp_id,imtp.imtp_dsimposto, cnid.cnid_pcaliquota,clie.clie_nncnpj ";
+			if (fatura) {
+				consulta = consulta 
+					+ " ,fatu.fatu_id ";
+			}
+
+			consulta = consulta
+					+ " UNION ALL" 
+					+ " SELECT imtp.imtp_id          AS impostoTipo,"        
+					+ " imtp.imtp_dsimposto          AS descricaoImposto,"        
+					+ " cidh.cidh_pcaliquota         AS percAliquota,"        
+					+ " Sum(cidh.cidh_vlimposto)     AS valorImposto,"        
+					+ " clie.clie_id                 AS cliente,"        
+					+ " clie_nmcliente               AS nomeCliente,"        
+					+ " Sum(( ( cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos ) - (cnhi.cnhi_vlcreditos + cnhi.cnhi_vlimpostos) ))  AS valorFatura,"        
+					+ " cnhi.imov_id                 AS imovel,"        
+					+ " clie.clie_nncnpj             AS cnpj,"        
+					+ " Sum(( ( cnhi.cnhi_vlagua + cnhi.cnhi_vlesgoto + cnhi.cnhi_vldebitos ) - ( cnhi.cnhi_vlcreditos ) ))AS baseCalculo ";
+
+			if (fatura) {
+				consulta = consulta 
+					+ " ,fatu.fatu_id					AS idFatura";
+			} else {
+				consulta = consulta 
+					+ " ,null							AS idFatura";
+			}
+
+			consulta = consulta
+					+ " FROM   faturamento.conta_impostos_dedz_hist cidh"        
+					+ " INNER JOIN faturamento.conta_historico cnhi        ON ( cidh.cnta_id = cnhi.cnta_id )"        
+					+ " INNER JOIN cadastro.cliente_conta_historico clch   ON ( cnhi.cnta_id = clch.cnta_id AND clch.crtp_id = :cliRelacaoTipo )"        
+					+ " INNER JOIN cadastro.cliente clie                   ON ( clch.clie_id = clie.clie_id )"        
+					+ " INNER JOIN cadastro.cliente_tipo cltp              ON ( clie.cltp_id = cltp.cltp_id )"        
+					+ " INNER JOIN faturamento.imposto_tipo imtp           ON ( cidh.imtp_id = imtp.imtp_id )" ;
+			if (fatura) {
+				consulta = consulta 
+					+ " LEFT JOIN faturamento.fatura fatu		   		   ON ( fatu.clie_id = clie.clie_id AND fatu.fatu_amreferencia = cnhi.cnhi_amreferenciaconta)";
+			}
+			consulta = consulta
+					+ " WHERE"   
+					+ " cnhi.cnta_id IN (SELECT idconta FROM"   
+					+ " 			(SELECT imovel, referencia, Max(cnta_id) AS idconta FROM"   
+					+ " 				(SELECT conta.imov_id AS imovel, conta.cnta_amreferenciaconta AS referencia,conta.cnta_id FROM faturamento.conta conta"
+					+ " 				        WHERE  conta.cnta_amreferenciaconta BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal "            
+					+ " 				 UNION ALL"            
+					+ " 				 SELECT contaHist.imov_id AS imovel, contaHist.cnhi_amreferenciaconta AS referencia, contaHist.cnta_id FROM faturamento.conta_historico contaHist"  
+					+ " 				        WHERE  contaHist.cnhi_amreferenciaconta BETWEEN :anoMesReferenciaInicial AND :anoMesReferenciaFinal) a    GROUP  BY imovel,"
+					+ " 	                referencia)" 
+					+ " 	         b)" ;
+			if (idCliente != null) {
+				consulta = consulta
+					+ " AND clch.clie_id = " + idCliente;
+			}
+
+			consulta = consulta 
+					+ " GROUP  BY clie.clie_id,clie_nmcliente,cnhi.imov_id,imtp.imtp_id,imtp.imtp_dsimposto,cidh.cidh_pcaliquota,clie.clie_nncnpj ";
+			if (fatura) {
+				consulta = consulta 
+					+ "  ,fatu.fatu_id ";
+			}
+
+			consulta = consulta
+					+ " ORDER BY cliente,imovel,impostotipo ";
+
+			query = session
+					.createSQLQuery(consulta)
+					.addScalar("impostoTipo", Hibernate.INTEGER)
+					.addScalar("descricaoImposto", Hibernate.STRING)
+					.addScalar("percAliquota", Hibernate.BIG_DECIMAL)
+					.addScalar("valorImposto", Hibernate.BIG_DECIMAL)
+					.addScalar("cliente", Hibernate.INTEGER)
+					.addScalar("nomeCliente", Hibernate.STRING)
+					.addScalar("valorFatura", Hibernate.BIG_DECIMAL)
+					.addScalar("imovel", Hibernate.INTEGER)
+					.addScalar("cnpj", Hibernate.STRING)
+					.addScalar("baseCalculo", Hibernate.BIG_DECIMAL)
+					.addScalar("idFatura", Hibernate.INTEGER)
+					.setShort("cliRelacaoTipo", ClienteRelacaoTipo.RESPONSAVEL)
+					.setInteger("anoMesReferenciaInicial", anoMesInicial)
+					.setInteger("anoMesReferenciaFinal", anoMesFinal);
 
 			retorno = (Collection) query.list();
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
 			HibernateUtil.closeSession(session);
 		}
 
 		return retorno;
-
 	}
 
 	/**
@@ -39490,7 +39014,7 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 					+ " inner join atendimentopublico.atend_mot_enc_acao_cobr amea on amea.amen_id = orse.amen_id "
 					+ " where orse.cbdo_id = :idDocumentoCobrancaAcaoPrecedente and amea.amea_icgerasucessor = :icGeraSucessor "
 					+ " and amea.cbac_id = :idAcaoPrecedente and orse.orse_tmencerramento is not null "
-					+ " and orse.orse_tmencerramento <= :dataMinimaEmissaoRealizacaoAcaoPrecente ";
+					+ " and orse.orse_tmgeracao <= :dataMinimaEmissaoRealizacaoAcaoPrecente ";
 
 			retorno = (Integer) session
 					.createSQLQuery(consulta)
@@ -43812,7 +43336,8 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 					+ "       	dade.dade_amreferenciadebito	  AS anoMesReferenciaDebito, "
 					+ "       	daat.daat_dstipoamortizacao       AS tipoAmortizacao, "
 					+ "       	daam.daam_vldebitoamortizado      AS valorDebitoAmortizado, "
-					+ "			CASE WHEN (dade.parc_id is not null) THEN 'PARC.' ELSE 'CONTA' END AS tipo "
+					+ "			CASE WHEN (dade.parc_id is not null) THEN 'PARC.' ELSE 'CONTA' END AS tipo, "
+					+ "       	daat.daat_id				      AS idtipoAmortizacao "
 					+ "FROM   	cobranca.divida_ativa_amortizacao daam "
 					+ "       	INNER JOIN cobranca.divida_ativa_debito dade "
 					+ "               	ON dade.dade_id = daam.dade_id "
@@ -43826,8 +43351,12 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 					+ "               	ON imov.imov_id = daim.imov_id "
 					+ "       	INNER JOIN cadastro.localidade loca "
 					+ "               	ON loca.loca_id = imov.loca_id "
-					+ "WHERE  " + "       	daam.daat_id <> :idDividaAtivaTipo "
-					+ "       	AND daim.daim_icintra = :indicadorIntra ";
+					+ "WHERE  " + "       	daam.daat_id <> :idDividaAtivaTipo ";
+			
+			if (indicadorIntra == 1 || indicadorIntra == 2){
+				sql +=  " AND daim.daim_icintra = :indicadorIntra ";
+				parameters.put("indicadorIntra", indicadorIntra);
+			}
 
 			if (dataInscricaoInicial != null && dataInscricaoFinal != null) {
 				sql += " AND dacr.dacr_dtinscricao BETWEEN :dataInscricaoInicial AND :dataInscricaoFinal ";
@@ -43874,9 +43403,8 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 					.addScalar("tipoAmortizacao", Hibernate.STRING)
 					.addScalar("valorDebitoAmortizado", Hibernate.BIG_DECIMAL)
 					.addScalar("tipo", Hibernate.STRING)
-					.setInteger("idDividaAtivaTipo",
-							DividaAtivaAmortizacaoTipo.PARCELAMENTO)
-					.setShort("indicadorIntra", indicadorIntra);
+					.addScalar("idtipoAmortizacao",Hibernate.INTEGER)
+					.setInteger("idDividaAtivaTipo",DividaAtivaAmortizacaoTipo.PARCELAMENTO);
 
 			Set set = parameters.keySet();
 			Iterator iterMap = set.iterator();
@@ -45005,11 +44533,13 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 					+ " inner join cobranca.cobranca_atividade cbat on cbat.cbat_id = caac.cbat_id "
 					+ " where cbgr.cbgr_id = "
 					+ cobrancaGrupo.getId()
-					+ " and cbat.cbat_nnordemrealizacao = 1 "
-					+ " order by caac_dtprevista desc ";
+					+ " and cbat.cbat_nnordemrealizacao = 1 and cbcr.cbac_id = :cobrancaAcao"
+					+ " order by caac_dtprevista desc limit 1";
 
 			retorno = (Collection) session.createSQLQuery(sql)
-					.addScalar("data_prevista", Hibernate.STRING).list();
+					.addScalar("data_prevista", Hibernate.STRING)
+					.setInteger("cobrancaAcao", CobrancaAcao.VISITA_COBRANCA)
+					.list();
 
 			return retorno;
 
@@ -45221,8 +44751,6 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 		return retorno;
 	}
 
-
-	
 	/**
 	 * [UC0927] - Confirmar Cartão de Crédito/Débito
 	 * [SB0003] - Inserir Guia de Pagamento Cliente 
@@ -45230,7 +44758,7 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 	 * @author Vivianne Sousa
 	 * @date 04/05/2015
 	 */
-	public Collection<DebitoACobrar> pesquisarDebitoACobrarDoParcelamento(Integer idParcelamento)
+	public Collection<DebitoACobrar> pesquisarDebitoACobrarParcelamento(Integer idParcelamento, Integer idDebitoCreditoSituacao)
 			throws ErroRepositorioException {
 		Session session = HibernateUtil.getSession();
 		Collection<DebitoACobrar> retorno = null;
@@ -45239,17 +44767,17 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 			consulta = "SELECT dbac FROM DebitoACobrar dbac "
 					+ "INNER JOIN FETCH dbac.debitoTipo dbtp "
 					+ "WHERE dbac.parcelamento.id = :idParcelamento " 
-					+ "AND dbac.debitoCreditoSituacaoAtual.id = :normal ";
+					+ "AND dbac.debitoCreditoSituacaoAtual.id = :idDebitoCreditoSituacao ";
 
 			retorno = session.createQuery(consulta)
 					.setInteger("idParcelamento",idParcelamento)
-					.setInteger("normal", DebitoCreditoSituacao.NORMAL).list();
-
+					.setInteger("idDebitoCreditoSituacao", idDebitoCreditoSituacao).list();
 		} catch (HibernateException e) {
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
 			HibernateUtil.closeSession(session);
 		}
+
 		return retorno;
 	}
 	
@@ -45260,7 +44788,7 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 	 * @author Vivianne Sousa
 	 * @date 04/05/2015
 	 */
-	public Collection<CreditoARealizar> pesquisarCreditoARealizarDoParcelamento(Integer idParcelamento)
+	public Collection<CreditoARealizar> pesquisarCreditoARealizarParcelamento(Integer idParcelamento, Integer idDebitoCreditoSituacao)
 			throws ErroRepositorioException {
 		Session session = HibernateUtil.getSession();
 		Collection<CreditoARealizar> retorno = null;
@@ -45269,11 +44797,11 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 			consulta = "SELECT crar FROM CreditoARealizar crar "
 					+ "INNER JOIN FETCH crar.creditoTipo crtp "
 					+ "WHERE crar.parcelamento.id = :idParcelamento "
-					+ "AND crar.debitoCreditoSituacaoAtual.id = :normal ";
+					+ "AND crar.debitoCreditoSituacaoAtual.id = :idDebitoCreditoSituacao ";
 
 			retorno = session.createQuery(consulta)
 					.setInteger("idParcelamento",idParcelamento)
-					.setInteger("normal", DebitoCreditoSituacao.NORMAL).list();
+					.setInteger("idDebitoCreditoSituacao", idDebitoCreditoSituacao).list();
 
 		} catch (HibernateException e) {
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
@@ -45357,18 +44885,18 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 	 * @author Vivianne Sousa
 	 * @date 11/05/2015
 	 */
-	public Collection pesquisarIdGuiaPagamentoParcelamentoCartao(Integer idParcelamento)
+	public Collection pesquisarIdGuiaPagamentoParcelamentoCartao(Integer idParcPagCartaoCredito)
 			throws ErroRepositorioException {
 		Session session = HibernateUtil.getSession();
 		Collection retorno = null;
 		String consulta;
 		try {
-			consulta = "SELECT gppc.guiaPagamentoGeral.id "
-					+ "FROM GuiaPagamentoParcelamentoCartao gppc "
-					+ "WHERE gppc.parcelamento.id = :idParcelamento ";
+			consulta = "SELECT pcci.guiaPagamentoGeral.id "
+					+ "FROM PagamentoCartaoCreditoItem pcci "
+					+ "WHERE pcci.parcelamentoPagamentoCartaoCredito.id = :idParcPagCartaoCredito ";
 
 			retorno = session.createQuery(consulta)
-					.setInteger("idParcelamento",idParcelamento).list();
+					.setInteger("idParcPagCartaoCredito",idParcPagCartaoCredito).list();
 
 		} catch (HibernateException e) {
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
@@ -45444,5 +44972,316 @@ public class RepositorioCobrancaHBM implements IRepositorioCobranca {
 			// fecha a sessão
 			HibernateUtil.closeSession(session);
 		}
+	}
+	/**
+	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 *
+	 * @author Vivianne Sousa
+	 * @date 16/09/2015
+	 */
+	public ParcelamentoPagamentoCartaoCredito pesquisarParcelamentoPagamentoCartaoCredito(Integer idParcelamento)
+			throws ErroRepositorioException {
+		Session session = HibernateUtil.getSession();
+		ParcelamentoPagamentoCartaoCredito retorno = null;
+		String consulta;
+		try {
+			consulta = "SELECT pacc FROM ParcelamentoPagamentoCartaoCredito pacc "
+					+ "WHERE pacc.parcelamento.id = :idParcelamento ";
+
+			retorno = (ParcelamentoPagamentoCartaoCredito)session.createQuery(consulta)
+					.setInteger("idParcelamento",idParcelamento)
+					.setMaxResults(1).uniqueResult();
+
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+		return retorno;
+	}
+	
+	/**
+	 * [UC0213] Desfazer Parcelamentos Débito
+	 * 
+	 * @author Vivianne Sousa
+	 * @date 06/10/2015
+	 */
+	public void deletarPagamentoCartaoCreditoItem(Integer idParcPagCartaoCredito)
+			throws ErroRepositorioException {
+		Session session = HibernateUtil.getSession();
+		String sql;
+		try {
+			sql = " delete from gcom.cobranca.parcelamento.PagamentoCartaoCreditoItem "
+					+ " where pacc_id =  :idParcPagCartaoCredito ";
+			session.createQuery(sql).setInteger("idParcPagCartaoCredito", idParcPagCartaoCredito).executeUpdate();
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+	
+    /**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Pesquisa a data do parcelamento de uma guia de pagamento
+	 * 
+	 * @author Jean Varela
+	 * @date 07/10/2015
+	 */
+	public Date pesquisarDataParcelamentoGuiaPagamento(int idGuiaPagamento) throws ErroRepositorioException {
+
+		Session session = HibernateUtil.getSession();
+
+		Date retorno = null;
+		String consulta = null;
+
+		try {
+			 consulta = "select parc_tmparcelamento from  faturamento.guia_pagamento guia "
+			         + "INNER JOIN cobranca.parcelamento parc on guia.parc_id=parc.parc_id "
+			         + "where gpag_id= :idGuiaPagamento";
+
+			
+			  retorno = (Date) ((SQLQuery) session.createSQLQuery(consulta))
+					    .addScalar("parc_tmparcelamento", Hibernate.DATE)
+					    .setInteger("idGuiaPagamento", idGuiaPagamento)
+					    .setMaxResults(1).uniqueResult();
+
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+
+		return retorno;
+	}
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Pesquisa o identificador transação para um determinado pagamento de guia de pagamento
+	 * 
+	 * @author Jean Varela
+	 * @date 07/10/2015
+	 */
+	public String pesquisarIdentificadorTransacaoParaPagamentoGuiaPagamento(int idGuiaPagamento) throws ErroRepositorioException {
+
+		Session session = HibernateUtil.getSession();
+
+		String retorno = null;
+		String consulta = null;
+
+		try {
+			 consulta = "select pacc_nnidentificadortransacao from  faturamento.guia_pagamento guia "
+			         + "INNER JOIN cobranca.parcelamento parc on guia.parc_id=parc.parc_id "
+			         + "where gpag_id= :idGuiaPagamento";
+
+			
+			  retorno = (String) ((SQLQuery) session.createSQLQuery(consulta))
+					    .addScalar("pacc_nnidentificadortransacao", Hibernate.DATE)
+					    .setInteger("idGuiaPagamento", idGuiaPagamento)
+					    .setMaxResults(1).uniqueResult();
+
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+
+		return retorno;
+	}
+	/**
+	 * Consultar Arquivo Texto Retorno Cobranca
+	 * [UC????]
+	 * 
+	 * Pesquisa os dados necessários para a geração do relatório
+	 * 
+	 * @author Joao Pedro Medeiros
+	 * @created 23/11/2015
+	 */
+	
+	public Collection<Object[]> obterRelatorioConsultarArquivoRetornoCobranca(Date dataVencimentoInicial,
+		Date dataVencimentoFinal) throws ErroRepositorioException {
+		Collection<Object[]> retorno = null;
+		Session session = HibernateUtil.getSession();
+		dataVencimentoInicial = Util.formatarDataInicial(dataVencimentoInicial);
+		dataVencimentoFinal = Util.formatarDataFinal(dataVencimentoFinal);
+		String sql = "";
+
+		sql = "SELECT" +
+				" orse.imov_id 				AS imovel, " +
+				" eocl.eocl_dscpf			AS cpf, " +
+				" eocl.eocl_dscnpj			AS cnpj, " +
+				" eocl.eocl_nmcliente		AS nome, " +
+				" eocl.eocl_dsrg			AS numIdentidade, " +
+				" oerg.oerg_dsabreviado		AS orgaoExp, " +
+				" unfe.unfe_dsufsigla		AS unidadeFed, " +
+				" eocl.eocl_dsdddtelefone	AS numDdd, " +
+				" eocl.eocl_dstelefone		AS numFone, " +
+				" eocl.eocl_dsramaltelefone	AS numRamal, " +
+				" atoccl.clie_id			AS idCliente " +
+				" FROM mobile.exe_os_cliente eocl " +
+				" INNER JOIN atendimentopublico.ordem_servico orse 	ON orse.orse_id = eocl.orse_id " +
+				" LEFT JOIN cadastro.orgao_expedidor_rg oerg 		ON oerg.oerg_id = eocl.oerg_id " +
+				" LEFT JOIN cadastro.unidade_federacao unfe		ON unfe.unfe_id = eocl.unfe_id " +
+				" LEFT JOIN mobile.arq_txt_os_cobranca_clie atoccl ON atoccl.orse_id = eocl.orse_id AND atoccl.aosc_id = eocl.aosc_id  " +
+				" WHERE " +
+				"eocl_tmultimaalteracao between (:dataVencimentoInicial) and (:dataVencimentoFinal) ";
+		try {
+			retorno = (Collection<Object[]>) session.createSQLQuery(sql)
+			.addScalar("imovel", Hibernate.STRING) // 0
+			.addScalar("cpf", Hibernate.STRING) //1
+			.addScalar("cnpj", Hibernate.STRING) // 2
+			.addScalar("nome", Hibernate.STRING) // 3
+			.addScalar("numIdentidade", Hibernate.STRING)// 4
+			.addScalar("orgaoExp", Hibernate.STRING) // 5
+			.addScalar("unidadeFed", Hibernate.STRING) // 6
+			.addScalar("numDdd", Hibernate.STRING) //7
+			.addScalar("numFone", Hibernate.STRING) //8
+			.addScalar("numRamal", Hibernate.STRING) //9
+			.addScalar("idCliente", Hibernate.STRING) //10
+			.setTimestamp("dataVencimentoInicial", dataVencimentoInicial)
+			.setTimestamp("dataVencimentoFinal", dataVencimentoFinal)
+			.list();
+
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(	e,
+												"Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+
+		return retorno;
+	}
+	
+	/**
+	 *[UC1498] - Consultar Arquivo Texto de Ordens de Serviço para Smartphone (Novo)
+	 *[IT0018] Exibir Lista de Grupos de Cobrança
+	 *
+	 * @author Jean Varela
+	 * @date 08/12/2015
+	 */
+	public Collection<Object[]> pesquisaGrupoCobrancaPorEmpresa(Integer idEmpresa) throws ErroRepositorioException{
+		Collection<Object[]> retorno = null;
+		Session session = HibernateUtil.getSession();
+
+		try{
+				String sql = "select cbgr_id,cbgr_dscobrancagrupo " +
+				             "from cobranca.cobranca_grupo grupo " +
+				             "inner join micromedicao.contrato_empresa_servico cese " +
+				             "on grupo.cese_id = cese.cese_id " +  
+				             "where cese.empr_id= :idEmpresa order by cbgr_dscobrancagrupo";
+				
+				retorno = (Collection<Object[]>) session.createSQLQuery(sql)
+												.addScalar("cbgr_id", Hibernate.INTEGER)
+												.addScalar("cbgr_dscobrancagrupo", Hibernate.STRING)
+												.setInteger("idEmpresa", idEmpresa).list();	
+			 		
+			 	return retorno;
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+	
+	/**
+	 * [UC1585] - Emitir Relatório Dívida Ativa Amortizada.
+	 * 
+	 * @author Joao Pedro Medeiros
+	 * @throws ErroRepositorioException 
+	 * @created 04/01/2016
+	 * 
+	 */
+	public Collection<Object[]> obterDadosAmortizacoesDividaAtivaSintetico(
+			Date dataInscricaoInicial, Date dataInscricaoFinal,
+			Date dataAmortizacaoInicial, Date dataAmortizacaoFinal,
+			Integer idImovel, Short indicadorIntra) throws ErroRepositorioException {
+
+		Session session = HibernateUtil.getSession();
+		Collection retorno = null;
+		try {
+
+			Map parameters = new HashMap();
+
+			String sql = ""
+					+ "SELECT 	daat.daat_dstipoamortizacao AS tipoAmortizacao, "
+					+ "			COUNT(daat.daat_dstipoamortizacao)       AS totalTipoAmortizacao, "
+					+ "			SUM(daam.daam_vldebitoamortizado)      AS totalValorDebitoAmortizado "
+					+ " FROM   	cobranca.divida_ativa_amortizacao daam  "
+					+ "       	INNER JOIN cobranca.divida_ativa_debito dade "
+					+ "               	ON dade.dade_id = daam.dade_id "
+					+ "       	INNER JOIN cobranca.divida_ativa_imovel daim "
+					+ "               	ON daim.daim_id = dade.daim_id "
+					+ "       	INNER JOIN cobranca.divida_ativa_criterio dacr "
+					+ "               	ON dacr.dacr_id = daim.dacr_id "
+					+ "       	INNER JOIN cobranca.div_atv_amortizacao_tipo daat "
+					+ "               	ON daat.daat_id = daam.daat_id "
+					+ "       	INNER JOIN cadastro.imovel imov "
+					+ "               	ON imov.imov_id = daim.imov_id "
+					+ "       	INNER JOIN cadastro.localidade loca "
+					+ "               	ON loca.loca_id = imov.loca_id "
+					+ "      	WHERE daam.daat_id <> :idDividaAtivaTipo ";
+
+			if (indicadorIntra == 1 || indicadorIntra == 2){
+				sql +=  " AND daim.daim_icintra = :indicadorIntra ";
+				parameters.put("indicadorIntra", indicadorIntra);
+			}
+			
+			if (dataInscricaoInicial != null && dataInscricaoFinal != null) {
+				sql += " AND dacr.dacr_dtinscricao BETWEEN :dataInscricaoInicial AND :dataInscricaoFinal ";
+				parameters.put("dataInscricaoInicial", dataInscricaoInicial);
+				parameters.put("dataInscricaoFinal", dataInscricaoFinal);
+			}
+
+			if (dataAmortizacaoInicial != null && dataAmortizacaoFinal != null) {
+				sql += " AND daam.daam_dtamortizacao BETWEEN :dataAmortizacaoInicial AND :dataAmortizacaoFinal ";
+				parameters
+						.put("dataAmortizacaoInicial", dataAmortizacaoInicial);
+				parameters.put("dataAmortizacaoFinal", dataAmortizacaoFinal);
+			}
+
+			if (idImovel != null) {
+				sql += " AND daim.imov_id = :idImovel ";
+				parameters.put("idImovel", idImovel);
+			}
+
+			sql +=
+			" GROUP BY daat.daat_dstipoamortizacao ";
+
+			Query q = session
+					.createSQLQuery(sql)
+					.addScalar("tipoAmortizacao", Hibernate.STRING)
+					.addScalar("totalTipoAmortizacao", Hibernate.BIG_DECIMAL)
+					.addScalar("totalValorDebitoAmortizado", Hibernate.BIG_DECIMAL)
+					.setInteger("idDividaAtivaTipo",
+							DividaAtivaAmortizacaoTipo.PARCELAMENTO);
+
+			Set set = parameters.keySet();
+			Iterator iterMap = set.iterator();
+
+			while (iterMap.hasNext()) {
+				String key = (String) iterMap.next();
+				if (parameters.get(key) instanceof Set) {
+					Set setList = (HashSet) parameters.get(key);
+					q.setParameterList(key, setList);
+				} else if (parameters.get(key) instanceof Collection) {
+					Collection collection = (ArrayList) parameters.get(key);
+					q.setParameterList(key, collection);
+				} else {
+					q.setParameter(key, parameters.get(key));
+				}
+			}
+
+			retorno = q.list();
+
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+		
+		return retorno;
 	}
 }

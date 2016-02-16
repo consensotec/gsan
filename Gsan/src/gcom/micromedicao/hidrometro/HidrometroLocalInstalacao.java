@@ -86,6 +86,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 /** @author Hibernate CodeGenerator */
 public class HidrometroLocalInstalacao extends  ObjetoTransacao {
 	private static final long serialVersionUID = 1L;
+	
+	public final static Integer CALCADA = new Integer(7);
+	 
     /** identifier field */
     private Integer id;
 

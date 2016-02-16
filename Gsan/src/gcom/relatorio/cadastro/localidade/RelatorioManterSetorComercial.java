@@ -121,6 +121,11 @@ public class RelatorioManterSetorComercial extends TarefaRelatorio {
 	public RelatorioManterSetorComercial(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_SETOR_COMERCIAL_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterSetorComercial() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

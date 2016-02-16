@@ -3701,4 +3701,13 @@ public interface ControladorOrdemServicoLocal extends javax.ejb.EJBLocalObject {
 	 * */		
 	public Boolean osComfoto(int idOrdemServico) throws ControladorException;
 	
+	/**
+	 * [UC1695] - Instalar/Substituir/Retirar Hidrômetro em Lote
+	 *
+	 * @author Rodrigo Cabral
+	 * @date 23/11/2015
+	 * 
+	 */
+	public OrdemServico pesquisarOrdemServicoHidrometro(Integer idOS) throws ControladorException;
+	
 }

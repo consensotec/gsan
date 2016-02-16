@@ -1,5 +1,12 @@
 package gcom.relatorio.cadastro;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import gcom.atendimentopublico.registroatendimento.FiltroMeioSolicitacao;
 import gcom.atendimentopublico.registroatendimento.MeioSolicitacao;
 import gcom.batch.Relatorio;
@@ -21,13 +28,6 @@ import gcom.util.Util;
 import gcom.util.agendadortarefas.AgendadorTarefas;
 import gcom.util.filtro.ParametroSimples;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 /**
  * [UC1124] Gerar Relatório de Alterações de CPF/CNPJ
  * 
@@ -39,6 +39,11 @@ public class RelatorioAlteracoesCpfCnpj extends TarefaRelatorio {
 	
 	public RelatorioAlteracoesCpfCnpj(Usuario usuario, String nomeRelatorio) {
 		super(usuario, nomeRelatorio);
+	}
+	
+	@Deprecated
+	public RelatorioAlteracoesCpfCnpj() {
+		super(null, "");
 	}
 	
 	/**

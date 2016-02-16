@@ -113,6 +113,11 @@ public class RelatorioManterAvisoBancario extends TarefaRelatorio {
 	public RelatorioManterAvisoBancario(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_AVISO_BANCARIO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterAvisoBancario() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

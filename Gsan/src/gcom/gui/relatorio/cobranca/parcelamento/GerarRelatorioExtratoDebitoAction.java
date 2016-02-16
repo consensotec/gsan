@@ -101,6 +101,7 @@ import gcom.financeiro.FinanciamentoTipo;
 import gcom.gui.ActionServletException;
 import gcom.gui.portal.caema.EfetuarParcelamentoDebitosPortalCaemaActionForm;
 import gcom.gui.portal.caer.EfetuarParcelamentoDebitosPortalCaerActionForm;
+import gcom.gui.portal.saae.EfetuarParcelamentoDebitosPortalSaaeActionForm;
 import gcom.relatorio.ExibidorProcessamentoTarefaRelatorio;
 import gcom.relatorio.RelatorioVazioException;
 import gcom.relatorio.cobranca.parcelamento.ExtratoDebitoRelatorioHelper;
@@ -276,6 +277,20 @@ public class GerarRelatorioExtratoDebitoAction extends
 				enderecoImovel = form.getEnderecoImovel();
 			}else if(Util.verificarNaoVazio(parcelamentoPortal) && parcelamentoPortal.equalsIgnoreCase("CAER")){
 				EfetuarParcelamentoDebitosPortalCaerActionForm form = (EfetuarParcelamentoDebitosPortalCaerActionForm) sessao.getAttribute("formParcelamento");
+				valorDocumento = Util.formatarMoedaRealparaBigDecimal(form.getValorPagamentoAVista());
+				valorDesconto = Util.formatarMoedaRealparaBigDecimal(form.getValorDescontoPagamentoAVista());
+				valorDescontoCredito = Util.formatarMoedaRealparaBigDecimal(form.getValorCreditoARealizar());
+				parcelamentoValorDebitoACobrarServico = Util.formatarMoedaRealparaBigDecimal(form.getValorDebitoACobrarServico());
+				parcelamentoValorDebitoACobrarParcelamento = Util.formatarMoedaRealparaBigDecimal(form.getValorDebitoACobrarParcelamento());
+				
+				//Linha 2
+				inscricao = form.getInscricaoImovel();
+				nomeUsuario = form.getNomeCliente();
+				matricula = form.getMatriculaImovel();
+				cpfCnpj = form.getCpfCliente();
+				enderecoImovel = form.getEnderecoImovel();
+			}else if(Util.verificarNaoVazio(parcelamentoPortal) && parcelamentoPortal.equalsIgnoreCase("SAAE")){
+				EfetuarParcelamentoDebitosPortalSaaeActionForm form = (EfetuarParcelamentoDebitosPortalSaaeActionForm) sessao.getAttribute("formParcelamento");
 				valorDocumento = Util.formatarMoedaRealparaBigDecimal(form.getValorPagamentoAVista());
 				valorDesconto = Util.formatarMoedaRealparaBigDecimal(form.getValorDescontoPagamentoAVista());
 				valorDescontoCredito = Util.formatarMoedaRealparaBigDecimal(form.getValorCreditoARealizar());

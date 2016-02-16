@@ -111,6 +111,11 @@ public class RelatorioDevolucaoPagamentosDuplicidade extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_DEVOLUCAO_PAGAMENTO_DUPLICIDADE);
 	}
 
+	@Deprecated
+	public RelatorioDevolucaoPagamentosDuplicidade() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

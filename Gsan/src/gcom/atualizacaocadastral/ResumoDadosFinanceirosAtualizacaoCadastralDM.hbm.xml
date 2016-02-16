@@ -26,6 +26,7 @@
 		<property column="rfac_qtalteracaosituacaoagua" generated="never" lazy="false" name="qtdeAlteracaoSituacaoAgua" type="java.lang.Integer" />
 		<property column="rfac_qtalteracaosituacaoesgoto" generated="never" lazy="false" name="qtdeAlteracaoSituacaoEsgoto" type="java.lang.Integer" />
 		<property column="rfac_qtalteracaohidrometro" generated="never" lazy="false" name="qtdeAlteracaoHidrometro" type="java.lang.Integer" />
+		<property column="rfac_qtalteracaoinscricao" generated="never" lazy="false" name="qtdeAlteracaoInscricao" type="java.lang.Integer" />
 		<property column="rfac_qtalteracaorg" generated="never" lazy="false" name="qtdeAlteracaoRg" type="java.lang.Integer" />
 		<property column="rfac_qtinclusaorg" generated="never" lazy="false" name="qtdeInclusaoRg" type="java.lang.Integer" />
 		<property column="rfac_qtalteracaocpfcnpj" generated="never" lazy="false" name="qtdeAlteracaoCpfCnpj" type="java.lang.Integer" />
@@ -64,8 +65,8 @@
 		<property column="rfac_qtimovelligesgotoantes" generated="never" lazy="false" name="qtdeImovelLigEsgotoAntes" type="java.lang.Integer" />
 		<property column="rfac_qtimovelligesgotodepois" generated="never" lazy="false" name="qtdeImovelLigEsgotoDepois" type="java.lang.Integer" />
 		<property column="rfac_qtimovelsupesgotoantes" generated="never" lazy="false" name="qtdeImovelSupEsgotoAntes" type="java.lang.Integer" />
-		<property column="rfac_qtimovelsupesgotodepois" generated="never" lazy="false" name="qtdeImovelSupEsgotoDepois" type="java.lang.Integer" />
-		  
+		<property column="rfac_qtimovelsupesgotodepois" generated="never" lazy="false" name="qtdeImovelSupEsgotoDepois" type="java.lang.Integer" />		
+		<property column="rfac_qtimovelcoresgotoantes" generated="never" lazy="false" name="qtdeImovelCorEsgotoAntes" type="java.lang.Integer" />
 		<property column="rfac_vlaguaantes" generated="never" lazy="false" name="valorAguaAntes" type="java.math.BigDecimal" />
 		<property column="rfac_vlaguadepois" generated="never" lazy="false" name="valorAguaDepois" type="java.math.BigDecimal" />
 		<property column="rfac_vlesgotoantes" generated="never" lazy="false" name="valorEsgotoAntes" type="java.math.BigDecimal" />
@@ -73,10 +74,10 @@
 		<property column="rfac_vlmulta" generated="never" lazy="false" name="valorMulta" type="java.math.BigDecimal" />
 		<property column="rfac_vlconsumofraudado" generated="never" lazy="false" name="valorConsumoFraudado" type="java.math.BigDecimal" />
 
-		<property column="dmlo_idantes" generated="never" lazy="false" name="idLocalizacaoAntes" type="java.lang.Integer" />
-		<property column="dmlo_iddepois" generated="never" lazy="false" name="idLocalizacaoDepois" type="java.lang.Integer" />
+		<property column="dmlo_id" generated="never" lazy="false" name="idLocalizacao" type="java.lang.Integer" />
 		<property column="dmtp_id" generated="never" lazy="false" name="idTempo" type="java.lang.Integer" />
 		<property column="dmus_id" generated="never" lazy="false" name="idUsuario" type="java.lang.Integer" />
+		<property column="dmind_id" generated="never" lazy="false" name="idIndicador" type="java.lang.Integer" />
 
 		<property column="rfac_tmultimaalteracao" generated="never" lazy="false" name="ultimaAlteracao" type="java.sql.Timestamp" />
 	</class>

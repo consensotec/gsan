@@ -1,0 +1,85 @@
+#lupa {
+	position:absolute; 
+	left:100px; 
+	top: 23px; 
+	cursor: pointer;
+}
+
+#telaBuscaCaern {
+	position:absolute; 
+	width: 800px; 
+	height: 400px; 
+	left: 50%; 
+	top: 50%; 
+	margin-left:-400px; 
+	margin-top:-200px; 
+	background-color: #cbe5fe; 
+	padding: 10px; 
+	display:none;
+	z-index:100; 
+	border: 1px solid #777;
+}
+
+#telaBuscaCaernClose {
+	float:right; 
+	color:#434c54; 
+	text-decoration:none;
+}
+
+#busca {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #BBB;
+	margin-top: 5px;
+}
+#resultadoBusca {
+	display: none;
+	text-align: center;
+	overflow-y: scroll;
+	height: 325px;
+	width: 100%;
+	margin: 0 auto;
+	!background-color: #99ccff;
+	background-color: #FFFFFF;
+	font-size: 12px;
+}
+#resultados {
+	width: 100%;
+	font-size: 12px;
+}
+#resultados {
+	border-collapse: collapse;
+}
+#resultados tr {
+	margin: 0;
+	border: 0px;
+}
+#resultados td {
+	!background-color: #99ccff;
+	background-color: #FFFFFF;
+	padding: 5px;
+	cursor: pointer;
+	margin: 0;
+	border: 1px solid #547596;
+}
+#resultados td.selecionado {
+	background-color: #6587a8;
+	color: #FFFFFF;
+}
+#resultados a {
+	color: #000000;
+	text-decoration: none;
+}
+#resultados td.selecionado a {
+	color: #FFFFFF;
+}
+#resultados td:hover {
+	background-color: #BCDEFA;
+}
+.caminho {
+	font-size: 10px;
+	color: #444444;
+}
+#resultados td.selecionado .caminho {
+	color: #EEEFFF;
+}

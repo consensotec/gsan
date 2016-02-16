@@ -118,6 +118,11 @@ public class RelatorioManterEmpresa extends TarefaRelatorio {
 	public RelatorioManterEmpresa(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_EMPRESA_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterEmpresa() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

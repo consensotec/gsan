@@ -131,9 +131,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Interface para o repositÃ³rio de cliente
+ * Interface para o repositório de cliente
  * 
- * @author SÃ¡vio Luiz
+ * @author Sávio Luiz
  * @created 22 de Abril de 2005
  */
 public interface IRepositorioArrecadacao {
@@ -192,8 +192,8 @@ public interface IRepositorioArrecadacao {
 	 * @date 02/03/2006
 	 * 
 	 * @param filtroArrecadadorMovimento
-	 * @return Uma coleÃ§Ã£o de objetos do tipo ArrecadadorMovimento de acordo com
-	 *         os parÃ¢metros recebidos atravÃ©s do filtro. EstÃ¡ consulta inclui
+	 * @return Uma coleção de objetos do tipo ArrecadadorMovimento de acordo com
+	 *         os parâmetros recebidos através do filtro. EstÃ¡ consulta inclui
 	 *         os movimentos abertos e fechados
 	 * @throws ErroRepositorioException
 	 */
@@ -202,14 +202,14 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Calcula o valor total dos avisos bancÃ¡rios de um determinado movimento
+	 * Calcula o valor total dos avisos bancários de um determinado movimento
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 06/03/2006
 	 * 
 	 * @param arrecadadorMovimento
-	 * @return Um BigDecimal que representa o somatÃ³rio de todos os avisos
-	 *         bancÃ¡rios de um determinado movimento
+	 * @return Um BigDecimal que representa o somatário de todos os avisos
+	 *         bancários de um determinado movimento
 	 * @throws ErroRepositorioException
 	 */
 	public BigDecimal obterTotalArrecadacaoAvisoBancarioPorMovimentoArrecadadores(
@@ -217,8 +217,8 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * ObtÃ©m o nÃºmero de registros em ocorrÃªncia de um determinado movimento
-	 * (nÃºmero de linhas da tabela ARRECADADOR_MOVIMENTO_ITEM com ARMV_ID =
+	 * Obtém o número de registros em ocorrência de um determinado movimento
+	 * (número de linhas da tabela ARRECADADOR_MOVIMENTO_ITEM com ARMV_ID =
 	 * ARMV_ID da tabela ARRECADADOR_MOVIMENTO e AMIT_DSOCORRENCIA diferente de
 	 * "OK")
 	 * 
@@ -235,8 +235,8 @@ public interface IRepositorioArrecadacao {
 			String descricaoOcorrencia) throws ErroRepositorioException;
 
 	/**
-	 * ObtÃ©m o nÃºmero de registros que nÃ£o foram aceitos de um determinado
-	 * movimento (nÃºmero de linhas da tabela ARRECADADOR_MOVIMENTO_ITEM com
+	 * Obtém o número de registros que não foram aceitos de um determinado
+	 * movimento (número de linhas da tabela ARRECADADOR_MOVIMENTO_ITEM com
 	 * ARMV_ID = ARMV_ID da tabela ARRECADADOR_MOVIMENTO e AMIT_ICACEITACAO
 	 * igual a 2 (NÃƒO))
 	 * 
@@ -252,13 +252,13 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Seleciona os avisos bancÃ¡rios de um determinado movimento
+	 * Seleciona os avisos bancários de um determinado movimento
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 09/03/2006
 	 * 
 	 * @param arrecadadorMovimento
-	 * @return Uma Collection com os avisos bancÃ¡rios de um determinado
+	 * @return Uma Collection com os avisos bancários de um determinado
 	 *         movimento
 	 * @throws ErroRepositorioException
 	 */
@@ -268,14 +268,14 @@ public interface IRepositorioArrecadacao {
 
 	/**
 	 * Calcula o valor total dos pagamentos associados a um determinado aviso
-	 * bancÃ¡rio (soma (PGMT_VLPAGAMENTO) da tabela PAGAMENTO com AVBC_ID =
+	 * bancário (soma (PGMT_VLPAGAMENTO) da tabela PAGAMENTO com AVBC_ID =
 	 * AVBC_ID da tabela AVISO_BANCARIO)
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 09/03/2006
 	 * 
 	 * @param avisoBancario
-	 * @return Um BigDecimal que representa o somatÃ³rio de todos os pagamentos
+	 * @return Um BigDecimal que representa o somatário de todos os pagamentos
 	 *         de um determinado aviso
 	 * @throws ErroRepositorioException
 	 */
@@ -283,15 +283,15 @@ public interface IRepositorioArrecadacao {
 			AvisoBancario avisoBancario) throws ErroRepositorioException;
 
 	/**
-	 * Calcula o valor total das devoluÃ§Ãµes associados a um determinado aviso
-	 * bancÃ¡rio (soma (DEVL_VLDEVOLUCAO) da tabela DEVOLUCAO com AVBC_ID =
+	 * Calcula o valor total das devoluções associados a um determinado aviso
+	 * bancário (soma (DEVL_VLDEVOLUCAO) da tabela DEVOLUCAO com AVBC_ID =
 	 * AVBC_ID da tabela AVISO_BANCARIO)
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 09/03/2006
 	 * 
 	 * @param avisoBancario
-	 * @return Um BigDecimal que representa o somatÃ³rio de todos as devoluÃ§Ãµes
+	 * @return Um BigDecimal que representa o somatório de todos as devoluções
 	 *         de um determinado aviso
 	 * @throws ErroRepositorioException
 	 */
@@ -299,7 +299,7 @@ public interface IRepositorioArrecadacao {
 			AvisoBancario avisoBancario) throws ErroRepositorioException;
 
 	/**
-	 * [UC0270] Apresentar AnÃ¡lise do Movimento dos Arrecadadores
+	 * [UC0270] Apresentar Análise do Movimento dos Arrecadadores
 	 * 
 	 * O sistema seleciona os itens do movimento do arrecadador.
 	 * 
@@ -317,7 +317,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0270] Apresentar AnÃ¡lise do Movimento dos Arrecadadores
+	 * [UC0270] Apresentar Análise do Movimento dos Arrecadadores
 	 * 
 	 * O sistema seleciona os itens do movimento do arrecadador.
 	 * 
@@ -335,10 +335,10 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Faz a pesquisa de devoluÃ§Ã£o fazendo os carregamentos de clienteContas,
+	 * Faz a pesquisa de devoluçõo fazendo os carregamentos de clienteContas,
 	 * clienteImoveis, clientesGuiaPagamento
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date
 	 * 
 	 * @param FiltroDevolucao
@@ -349,9 +349,9 @@ public interface IRepositorioArrecadacao {
 			FiltroDevolucao filtroDevolucao) throws ErroRepositorioException;
 
 	/**
-	 * Exclui os dados diÃ¡rios da arrecadaÃ§Ã£o do ano/mÃªs da arrecadaÃ§Ã£o corrente
+	 * Exclui os dados diários da arrecadação do ano/mâs da arrecadação corrente
 	 * 
-	 * [UC0301] Gerar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+	 * [UC0301] Gerar Dados Dários da Arrecadação
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 11/04/2006
@@ -363,10 +363,10 @@ public interface IRepositorioArrecadacao {
 			int anoMesReferenciaArrecadacao) throws ErroRepositorioException;
 
 	/**
-	 * Acumula a quantidade e o valor dos pagamentos com ano/mÃªs de referÃªncia
-	 * da arrecadaÃ§Ã£o igual ao ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o corrente
+	 * Acumula a quantidade e o valor dos pagamentos com ano/mês de referância
+	 * da arrecadação igual ao ano/mês de referência da arrecadaâo corrente
 	 * 
-	 * [UC0301] Gerar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+	 * [UC0301] Gerar Dados Diários da Arrecadação
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 11/04/2006
@@ -381,10 +381,10 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Acumula a quantidade e o valor das devolucoes com ano/mÃªs de referÃªncia
-	 * da arrecadaÃ§Ã£o igual ao ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o corrente
+	 * Acumula a quantidade e o valor das devolucoes com ano/mês de referÃªncia
+	 * da arrecadação igual ao ano/mês de referância da arrecadação corrente
 	 * 
-	 * [UC0301] Gerar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+	 * [UC0301] Gerar Dados Diários da Arrecadação
 	 * 
 	 * @author Francisco do Nascimento
 	 * @date 01/04/2008
@@ -399,9 +399,9 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * Atualiza a situaÃ§Ã£o atual dos pagamentos (PGST_IDATUAL) com valor
+	 * Atualiza a situação atual dos pagamentos (PGST_IDATUAL) com valor
 	 * correspondente a pagamento classificado (tabela PAGAMENTO_SITUACAO) e
 	 * atualiza o id da conta nos pagamentos (seta CNTA_ID da tabela PAGAMENTO
 	 * para CNTA_ID da tabela CONTA)
@@ -419,7 +419,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * Atualiza a situacao atual dos pagamentos (PGST_IDATUAL) com valor
 	 * correspondente ao parÃ¢metro passado
@@ -435,10 +435,10 @@ public interface IRepositorioArrecadacao {
 			Integer pagamentoSituacao) throws ErroRepositorioException;
 
 	/**
-	 * [UC0319] Gerar Movimento de DÃ©bito AutomÃ¡tico para o banco
+	 * [UC0319] Gerar Movimento de Débito Automático para o banco
 	 * 
 	 * pesquisa todos os bancos que tenham contrato vigente para arrecadador
-	 * contas com forma de arrecadaÃ§Ã£o correspondente a debito automÃ¡tico
+	 * contas com forma de arrecadação correspondente a debito automático
 	 * 
 	 * [SB0002] - Carregar Lista de Bancos
 	 * 
@@ -453,20 +453,20 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0319] Gerar Movimento de DÃ©bito AutomÃ¡tico para o banco
+	 * [UC0319] Gerar Movimento de Débito Automático para o banco
 	 * 
-	 * pesquisa os movimentos de dÃ©bito automÃ¡tico para o banco,referentes ao
-	 * grupo e ano/mÃªs de faturamento informados
+	 * pesquisa os movimentos de débito automático para o banco,referentes ao
+	 * grupo e ano/mês de faturamento informados
 	 * 
 	 * [SB0002] - Carregar Lista de Bancos
 	 * 
-	 * @author SÃ¡vio Luiz, Raphael Rossiter, Anderson Italo
+	 * @author Sávio Luiz, Raphael Rossiter, Anderson Italo
 	 * @date 18/04/2006, 01/12/2008, 04/02/2010
 	 * 
-	 * [FS0006] Â– Verificar a situaÃ§Ã£o da conta
-	 * Caso a situaÃ§Ã£o da conta sejam normal (0) ou retificada (1) ou incluÃ­da (2), 
+	 * [FS0006] Á– Verificar a situação da conta
+	 * Caso a situaÃ§Ã£o da conta sejam normal (0) ou retificada (1) ou incluí­da (2), 
 	 * gerar movimentos de dÃ©bito automÃ¡tico para o banco.
-	 * Caso contrÃ¡rio retornar para o passo correspondente no subfluxo.
+	 * Caso contrário retornar para o passo correspondente no subfluxo.
 	 * 
 	 * @param idFaturamentoGrupo,anoMesReferenciaFaturamento,idBanco
 	 * @return ColeÃ§Ã£o de DebitoAutomaticoMovimento
@@ -494,16 +494,16 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0319] Gerar Movimento de DÃ©bito AutomÃ¡tico para o banco
+	 * [UC0319] Gerar Movimento de Débito Automático para o banco
 	 * 
 	 * pesquisa 2 campos do arrecadador contrato
 	 * 
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @date 18/04/2006
 	 * 
 	 * @param idFaturamentoGrupo,anoMesReferenciaFaturamento,idBanco
-	 * @return CÃ³digo do ConvÃªnio, numero sequencial de envio
+	 * @return Código do Convênio, numero sequencial de envio
 	 * @throws ErroRepositorioException
 	 */
 
@@ -511,12 +511,12 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0319] Gerar Movimento de DÃ©bito AutomÃ¡tico para o banco
+	 * [UC0319] Gerar Movimento de Débito Automático para o banco
 	 * 
 	 * pesquisa a agencia passando o id do banco
 	 * 
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @date 20/04/2006
 	 * 
 	 * @param idBanco
@@ -528,16 +528,16 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0319] Gerar Movimento de DÃ©bito AutomÃ¡tico para o banco
+	 * [UC0319] Gerar Movimento de Débito Automático para o banco
 	 * 
 	 * atualiza o numero sequencial arquivo envio debito automatico
 	 * 
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @date 20/04/2006
 	 * 
 	 * @param idBanco
-	 * @return CÃ³digo do ConvÃªnio, numero sequencial de envio
+	 * @return Código do Convênio, numero sequencial de envio
 	 * @throws ErroRepositorioException
 	 */
 
@@ -546,14 +546,14 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0319] Gerar Movimento de DÃ©bito AutomÃ¡tico para o banco
+	 * [UC0319] Gerar Movimento de Débito Automático para o banco
 	 * 
-	 * pesquisa o email do arrecadador contrato passando o cÃ³digo do banco
+	 * pesquisa o email do arrecadador contrato passando o código do banco
 	 * 
-	 * [SB0003] - Regerar arquivo TXT para um movimento de dÃ©bito automÃ¡tico
+	 * [SB0003] - Regerar arquivo TXT para um movimento de débito automático
 	 * gerado anteriormente
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @date 25/04/2006
 	 * 
 	 * @return String
@@ -564,7 +564,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * Atualizar Valor Excedente do Pagamento
 	 * 
@@ -580,7 +580,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * Atualizar Valor Excedente do Pagamento
 	 * 
@@ -597,9 +597,9 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluçõµes
 	 * 
-	 * Atualiza a situaÃ§Ã£o atual dos pagamentos (PGST_IDATUAL) com valor
+	 * Atualiza a situação atual dos pagamentos (PGST_IDATUAL) com valor
 	 * correspondente a pagamento classificado (tabela PAGAMENTO_SITUACAO) e
 	 * atualiza o id da guia de pagamento nos pagamentos (seta GPAG_ID da tabela
 	 * PAGAMENTO para GPAG_ID da tabela GUIA_PAGAMENTO)
@@ -617,15 +617,15 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * O sistema seleciona a guia de pagamento correspondente ao pagamento
-	 * atravÃ©s do imÃ³vel, cliente e do tipo de dÃ©bito (a partir da tabela
+	 * atravÃ©s do imóvel, cliente e do tipo de débito (a partir da tabela
 	 * GUIA_PAGAMENTO com IMOV_ID, CLIE_ID e DBTP_ID da tabela PAGAMENTO e
 	 * DCST_IDATUAL com valor correspondente a normal da tabela
 	 * DEBITO_CREDITO_SITUACAO)
 	 * 
-	 * [SF0003] Selecionar Guia de Pagamento pela Localidade, ImÃ³vel, Cliente e
+	 * [SF0003] Selecionar Guia de Pagamento pela Localidade, Imóvel, Cliente e
 	 * DÃ©bito Tipo
 	 * 
 	 * @author Raphael Rossiter, Pedro Alexandre, Pedro Alexandre
@@ -643,14 +643,14 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * Atualiza a situaÃ§Ã£o atual dos pagamentos (PGST_IDATUAL) com valor
+	 * Atualiza a situação atual dos pagamentos (PGST_IDATUAL) com valor
 	 * correspondente a pagamento classificado (tabela PAGAMENTO_SITUACAO) e
-	 * atualiza o id do dÃ©bito a cobrar nos pagamentos (seta DBAC_ID da tabela
+	 * atualiza o id do débito a cobrar nos pagamentos (seta DBAC_ID da tabela
 	 * PAGAMENTO para DBAC_ID da tabela DEBITO_A_COBRAR)
 	 * 
-	 * [SF0004] Processar Pagamento de DÃ©bito a Cobrar
+	 * [SF0004] Processar Pagamento de Débito a Cobrar
 	 * 
 	 * @author Raphael Rossiter ,Pedro Alexandre
 	 * @date 27/04/2006, 12/12/2006
@@ -663,14 +663,14 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * O sistema seleciona o dÃ©bito a cobrar correspondente ao pagamento atravÃ©s
-	 * do imÃ³vel e do tipo de dÃ©bito (a partir da tabela DEBITO_A_COBRAR com
+	 * O sistema seleciona o débito a cobrar correspondente ao pagamento através
+	 * do imóvel e do tipo de débito (a partir da tabela DEBITO_A_COBRAR com
 	 * IMOV_ID e DBTP_ID da tabela PAGAMENTO e DCST_IDATUAL com valor
 	 * correspondente a normal da tabela DEBITO_CREDITO_SITUACAO)
 	 * 
-	 * [SF0005] Selecionar DÃ©bito a Cobrar pela Localidade, ImÃ³vel e DÃ©bito Tipo
+	 * [SF0005] Selecionar Débito a Cobrar pela Localidade, Imóvel e Débito Tipo
 	 * 
 	 * @author Raphael Rossiter, Pedro Alexandre
 	 * @date 26/04/2006, 05/06/2007
@@ -702,10 +702,10 @@ public interface IRepositorioArrecadacao {
 
 	/**
 	 * 
-	 * Faz a pesquisa de guia de devoluÃ§Ã£o para o relatÃ³rio fazendo os
+	 * Faz a pesquisa de guia de devolução para o relatório fazendo os
 	 * carregamentos de clienteContas, clienteImoveis, clientesGuiaPagamento
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date 11/09/2006
 	 * 
 	 * @param FiltroGuiaDevolucao
@@ -719,12 +719,12 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * [UC0324] - Filtrar Guia de Devolucao
 	 * 
-	 * [SF0001] - Seleciona Guias de DevoluÃ§Ã£o do Cliente
+	 * [SF0001] - Seleciona Guias de Devolução do Cliente
 	 * 
-	 * Faz a pesquisa de guia de devoluÃ§Ã£o fazendo os carregamentos de
+	 * Faz a pesquisa de guia de devolução fazendo os carregamentos de
 	 * clienteContas, clienteImoveis, clientesGuiaPagamento
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date
 	 * 
 	 * @param FiltroGuiaDevolucao
@@ -738,12 +738,12 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * [UC0324] - Filtrar Guia de Devolucao
 	 * 
-	 * [SF0001] - Seleciona Guias de DevoluÃ§Ã£o do Cliente
+	 * [SF0001] - Seleciona Guias de Devolulção do Cliente
 	 * 
-	 * Faz a pesquisa de guia de devoluÃ§Ã£o fazendo os carregamentos de
+	 * Faz a pesquisa de guia de devolução fazendo os carregamentos de
 	 * clienteContas, clienteImoveis, clientesGuiaPagamento
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date
 	 * 
 	 * @param FiltroGuiaDevolucao
@@ -755,8 +755,8 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Consulta ResumoArrecadacao para a geraÃ§Ã£o do relatÃ³rio '[UC0345] Gerar
-	 * RelatÃ³rio de Resumo ArrecadaÃ§Ã£o' de acordo com a opÃ§Ã£o de totalizaÃ§Ã£o.
+	 * Consulta ResumoArrecadacao para a geração do relatário '[UC0345] Gerar
+	 * Relatário de Resumo Arrecadação' de acordo com a opção de totalização.
 	 * 
 	 * @author Vivianne Sousa, Diogo Peixoto
 	 * @created 23/05/2006, 27/04/2011
@@ -771,8 +771,8 @@ public interface IRepositorioArrecadacao {
 			int anoMesReferencia, Collection<Integer> idsPerfilImovel, boolean estadoMunicipio) throws ErroRepositorioException;
 
 	/**
-	 * Consulta ResumoArrecadacao para a geraÃ§Ã£o do relatÃ³rio '[UC0345] Gerar
-	 * RelatÃ³rio de Resumo ArrecadaÃ§Ã£o' de acordo com a opÃ§Ã£o de totalizaÃ§Ã£o.
+	 * Consulta ResumoArrecadacao para a geração do relatório '[UC0345] Gerar
+	 * relatório de Resumo Arrecadação' de acordo com a opção de totalização.
 	 * 
 	 * @author Vivianne Sousa
 	 * @created 23/05/2006
@@ -785,8 +785,8 @@ public interface IRepositorioArrecadacao {
 			int anoMesReferencia, Collection<Integer> idsPerfilImovel) throws ErroRepositorioException;
 
 	/**
-	 * Consulta ResumoArrecadacao para a geraÃ§Ã£o do relatÃ³rio '[UC0345] Gerar
-	 * RelatÃ³rio de Resumo ArrecadaÃ§Ã£o' de acordo com a opÃ§Ã£o de totalizaÃ§Ã£o.
+	 * Consulta ResumoArrecadacao para a geração do relatório '[UC0345] Gerar
+	 * relatório de Resumo Arrecadação' de acordo com a opção de totalização.
 	 * 
 	 * @author Vivianne Sousa
 	 * @created 23/05/2006
@@ -799,8 +799,8 @@ public interface IRepositorioArrecadacao {
 			int anoMesReferencia, Collection<Integer> idsPerfilImovel) throws ErroRepositorioException;
 	
 	/**
-	 * Consulta ResumoArrecadacao para a geraÃ§Ã£o do relatÃ³rio '[UC0345] Gerar
-	 * RelatÃ³rio de Resumo ArrecadaÃ§Ã£o' de acordo com a opÃ§Ã£o de totalizaÃ§Ã£o.
+	 * Consulta ResumoArrecadacao para a geração do relatório '[UC0345] Gerar
+	 * relatório de Resumo Arrecadação' de acordo com a opção de totalização.
 	 * 
 	 * @author Diogo Peixoto
 	 * @created 20/04/2011
@@ -814,8 +814,8 @@ public interface IRepositorioArrecadacao {
 		throws ErroRepositorioException;
 	
 	/**
-	 * Consulta ResumoArrecadacao para a geraÃ§Ã£o do relatÃ³rio '[UC0345] Gerar
-	 * RelatÃ³rio de Resumo ArrecadaÃ§Ã£o' de acordo com a opÃ§Ã£o de totalizaÃ§Ã£o.
+	 * Consulta ResumoArrecadacao para a geração do relatório '[UC0345] Gerar
+	 * relatório de Resumo Arrecadação' de acordo com a opção de totalização.
 	 * 
 	 * @author Diogo Peixoto
 	 * @created 20/04/2011
@@ -830,8 +830,8 @@ public interface IRepositorioArrecadacao {
 		throws ErroRepositorioException;
 
 	/**
-	 * Consulta ResumoArrecadacao para a geraÃ§Ã£o do relatÃ³rio '[UC0345] Gerar
-	 * RelatÃ³rio de Resumo ArrecadaÃ§Ã£o' de acordo com a opÃ§Ã£o de totalizaÃ§Ã£o.
+	 * Consulta ResumoArrecadacao para a geração do relatório '[UC0345] Gerar
+	 * relatório de Resumo Arrecadação' de acordo com a opção de totalização.
 	 * 
 	 * @author Vivianne Sousa
 	 * @created 23/05/2006
@@ -845,8 +845,8 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Consulta ResumoArrecadacao para a geraÃ§Ã£o do relatÃ³rio '[UC0345] Gerar
-	 * RelatÃ³rio de Resumo ArrecadaÃ§Ã£o' de acordo com a opÃ§Ã£o de totalizaÃ§Ã£o.
+	 * Consulta ResumoArrecadacao para a geração do relatório '[UC0345] Gerar
+	 * relatório de Resumo Arrecadação' de acordo com a opção de totalização.
 	 * 
 	 * @author Vivianne Sousa
 	 * @created 23/05/2006
@@ -860,8 +860,8 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Consulta ResumoArrecadacao para a geraÃ§Ã£o do relatÃ³rio '[UC0345] Gerar
-	 * RelatÃ³rio de Resumo ArrecadaÃ§Ã£o' de acordo com a opÃ§Ã£o de totalizaÃ§Ã£o.
+	 * Consulta ResumoArrecadacao para a geração do relatório '[UC0345] Gerar
+	 * relatório de Resumo Arrecadação' de acordo com a opção de totalização.
 	 * 
 	 * @author Vivianne Sousa
 	 * @created 23/05/2006
@@ -877,9 +877,9 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * [UC0352] Emitir Conta
 	 * 
-	 * pesquisa o nome do banco e cÃ³digo da agencia passando o id do imÃ³vel
+	 * pesquisa o nome do banco e código da agencia passando o id do imÃ³vel
 	 * 
-	 * [SB0017] - Gerar Linhas das contas com DÃ©bito AutomÃ¡tico
+	 * [SB0017] - Gerar Linhas das contas com Débito Automático
 	 * 
 	 * @author SÃ¡vio Luiz
 	 * @date 26/05/2006
@@ -892,9 +892,9 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Consulta a qtde de registros ResumoArrecadacao para a geraÃ§Ã£o do
-	 * relatÃ³rio '[UC0345] Gerar RelatÃ³rio de Resumo do Arrecadacao' de acordo
-	 * com a opÃ§Ã£o de totalizaÃ§Ã£o.
+	 * Consulta a qtde de registros ResumoArrecadacao para a geração do
+	 * relatório '[UC0345] Gerar relatório de Resumo do Arrecadacao' de acordo
+	 * com a opção de totalização.
 	 * 
 	 * @author Vivianne Sousa, Diogo Peixoto
 	 * @created 02/06/2006, 20/04/2011
@@ -911,9 +911,9 @@ public interface IRepositorioArrecadacao {
 			Integer municipio, String opcaoTotalizacao) throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do Mês
 	 * 
-	 * Inseri os resumos das arrecadaÃ§Ãµes gerados pelo batch no sistema
+	 * Inseri os resumos das arrecadações gerados pelo batch no sistema
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 17/05/2006
@@ -926,12 +926,12 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do Mês
 	 * 
-	 * Verifica se jÃ¡ existe resumo da arrecadaÃ§Ã£o para o ano/mÃªs de referÃªncia
-	 * da arrecadaÃ§Ã£o
+	 * Verifica se já existe resumo da arrecadação para o ano/mês de referência
+	 * da arrecadação
 	 * 
-	 * [FS0003] - Verificar a existÃªncia do resumo da arrecadaÃ§Ã£o
+	 * [FS0003] - Verificar a existência do resumo da arrecadação
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 16/05/2006
@@ -945,11 +945,11 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do Mês
 	 * 
-	 * Pesquisa os pagamentos classificados de conta do ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o com a situaÃ§Ã£o atual(PGST_IDATUAL) igual a pagamento
-	 * classificado ou baixar valor excedente e com o cÃ³digo da conta diferente
+	 * Pesquisa os pagamentos classificados de conta do ano/mês de referência da
+	 * arrecadação com a situação atual(PGST_IDATUAL) igual a pagamento
+	 * classificado ou baixar valor excedente e com o código da conta diferente
 	 * de nulo (CNTA_ID <> NULL)
 	 * 
 	 * @author Pedro Alexandre
@@ -964,10 +964,10 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do Mês
 	 * 
-	 * Pesquisa os pagamentos classificados de guia de pagamento do ano/mÃªs de
-	 * referÃªncia da arrecadaÃ§Ã£o com a situaÃ§Ã£o atual(PGST_IDATUAL) igual a
+	 * Pesquisa os pagamentos classificados de guia de pagamento do ano/mês de
+	 * referÃªncia da Arrecadação com a situaÃ§Ã£o atual(PGST_IDATUAL) igual a
 	 * pagamento classificado ou baixar valor excedente e com o cÃ³digo da guia
 	 * de pagamento diferente de nulo (GPAG_ID <> NULL)
 	 * 
@@ -983,11 +983,11 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do Mês
 	 * 
-	 * Pesquisa os pagamentos classificados de dÃ©bito a cobrar do ano/mÃªs de
-	 * referÃªncia da arrecadaÃ§Ã£o com a situaÃ§Ã£o atual(PGST_IDATUAL) igual a
-	 * pagamento classificado ou baixar valor excedente e com o cÃ³digo do dÃ©bito
+	 * Pesquisa os pagamentos classificados de débito a cobrar do ano/mês de
+	 * referÃªncia da arrecadação com a situação atual(PGST_IDATUAL) igual a
+	 * pagamento classificado ou baixar valor excedente e com o código do débito
 	 * a cobrar diferente de nulo (DBAC_ID <> NULL)
 	 * 
 	 * @author Pedro Alexandre
@@ -1002,10 +1002,10 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do Mês
 	 * 
-	 * Pesquisa os pagamentos nÃ£o classificados do mÃªs, que sÃ£o do ano/mÃªs de
-	 * referÃªncia da arrecadaÃ§Ã£o com a situaÃ§Ã£o atual(PGST_IDATUAL) diferente de
+	 * Pesquisa os pagamentos nÃ£o classificados do mês, que são do ano/mês de
+	 * referÃªncia da Arrecadação com a situaÃ§Ã£o atual(PGST_IDATUAL) diferente de
 	 * pagamento classificado
 	 * 
 	 * @author Pedro Alexandre
@@ -1020,11 +1020,11 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Pesquisa as devoluÃ§Ãµes classificadas do ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o e com situaÃ§Ã£o atual igual a devoluÃ§Ã£o classificada ou
-	 * devoluÃ§Ã£o de outros valores
+	 * Pesquisa as devoluÃ§Ãµes classificadas do ano/mês de referÃªncia da
+	 * Arrecadação e com situaÃ§Ã£o atual igual a devolução classificada ou
+	 * devolução de outros valores
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 16/05/2006
@@ -1038,10 +1038,10 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Pesquisa as devoluÃ§Ãµes nÃ£o classificadas do mÃªs, para situaÃ§Ã£o atual
-	 * diferente de devoluÃ§Ã£o classificada e devoluÃ§Ã£o de outros valores
+	 * Pesquisa as devoluÃ§Ãµes nÃ£o classificadas do mês, para situaÃ§Ã£o atual
+	 * diferente de devolução classificada e devolução de outros valores
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 16/05/2006
@@ -1055,11 +1055,11 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Pesquisa os pagamentos de contas efetuados em meses anteriores
-	 * classificados no mÃªs, que sÃ£oos do ano/mÃªs de referÃªncia anterior ao da
-	 * arrecadaÃ§Ã£o, que foram classificados no mÃªs, com situaÃ§Ã£o atual igual a
+	 * classificados no mês, que sÃ£oos do ano/mês de referÃªncia anterior ao da
+	 * Arrecadação, que foram classificados no mês, com situaÃ§Ã£o atual igual a
 	 * pagamento classificado ou baixar valor excedente e com cÃ³digo da conta
 	 * diferente de nulo (CNTA_ID <> NULL)
 	 * 
@@ -1075,11 +1075,11 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Pesquisa os pagamentos de guias de pagamento efetuados em meses
-	 * anteriores classificados no mÃªs, que sÃ£o os do ano/mÃªs de referÃªncia
-	 * anterior ao da arrecadaÃ§Ã£o, que foram classificados no mÃªs, com situaÃ§Ã£o
+	 * anteriores classificados no mês, que sÃ£o os do ano/mês de referÃªncia
+	 * anterior ao da Arrecadação, que foram classificados no mês, com situaÃ§Ã£o
 	 * atual igual a pagamento classificado ou baixar valor excedente e com
 	 * cÃ³digo da guia de pagamento diferente de nulo (GPAG_ID <> NULL)
 	 * 
@@ -1095,11 +1095,11 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Pesquisa os pagamentos de dÃ©bitos a cobrar efetuados em meses anteriores
-	 * classificados no mÃªs, que sÃ£o os do ano/mÃªs de referÃªncia anterior ao da
-	 * arrecadaÃ§Ã£o, que foram classificados no mÃªs, com situaÃ§Ã£o atual igual a
+	 * classificados no mês, que sÃ£o os do ano/mês de referÃªncia anterior ao da
+	 * Arrecadação, que foram classificados no mês, com situaÃ§Ã£o atual igual a
 	 * pagamento classificado ou baixar valor excedente e com cÃ³digo do dÃ©bito a
 	 * cobrar diferente de nulo (DBAC_ID <> NULL)
 	 * 
@@ -1115,12 +1115,12 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Pesquisa as devoluÃ§Ãµes efetuadas em meses anteriores classificadas no
-	 * mÃªs, que sÃ£o as do ano/mÃªs de referÃªncia anterior ao da arrecadaÃ§Ã£o e que
-	 * foram classificadas no mÃªs, comsituaÃ§Ã£o atual igual a devoluÃ§Ã£o
-	 * classificada ou devoluÃ§Ã£o de outros valores.
+	 * mês, que sÃ£o as do ano/mês de referÃªncia anterior ao da Arrecadação e que
+	 * foram classificadas no mês, comsituaÃ§Ã£o atual igual a devolução
+	 * classificada ou devolução de outros valores.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 16/05/2006
@@ -1134,7 +1134,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Pesquisa os pagamentos nÃ£o classificados com baixa comandada, que sÃ£o os
 	 * que estÃ£o com a situaÃ§Ã£o atual com o valor correspondente a baixar
@@ -1150,10 +1150,10 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Pesquisa os pagamentos nÃ£o classificados, que sÃ£o os do ano/mÃªs de
-	 * referÃªncia igual ou anterior ao da arrecadaÃ§Ã£o e que estÃ£o nÃ£o
+	 * Pesquisa os pagamentos nÃ£o classificados, que sÃ£o os do ano/mês de
+	 * referÃªncia igual ou anterior ao da Arrecadação e que estÃ£o nÃ£o
 	 * classificados,com situaÃ§Ã£o atual diferente de pagamento classificado e de
 	 * baixar valor excedente
 	 * 
@@ -1169,12 +1169,12 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Pesquisa as devoluÃ§Ãµes nÃ£o classificadas, que sÃ£o as do ano/mÃªs de
-	 * referÃªncia igual ou anterior ao da arrecadaÃ§Ã£o e que continuam nÃ£o
-	 * classificados, com situaÃ§Ã£o atual com o valor diferente de devoluÃ§Ã£o
-	 * classificada e devoluÃ§Ã£o de outros valores.
+	 * Pesquisa as devoluÃ§Ãµes nÃ£o classificadas, que sÃ£o as do ano/mês de
+	 * referÃªncia igual ou anterior ao da Arrecadação e que continuam nÃ£o
+	 * classificados, com situaÃ§Ã£o atual com o valor diferente de devolução
+	 * classificada e devolução de outros valores.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 16/05/2006
@@ -1190,7 +1190,7 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 100
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor de Ã¡gua por categoria e localidade paa os pagamentos
 	 * classificados de conta
@@ -1211,7 +1211,7 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 200
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor de esgoto por categoria e localidade paa os pagamentos
 	 * classificados de conta
@@ -1232,7 +1232,7 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 300
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor do dÃ©bitos cobrados por localidade, categoria e item
 	 * contÃ¡bil dos pagamentos classificados de conta para tipo de financiamento
@@ -1256,7 +1256,7 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 400
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor do dÃ©bitos cobrados por localidade, categoria dos
 	 * pagamentos classificados de conta para tipo de financiamento igual a
@@ -1278,7 +1278,7 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 500
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor do dÃ©bitos cobrados por localidade, categoria dos
 	 * pagamentos classificados de conta para tipo de financiamento igual a
@@ -1300,7 +1300,7 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 600
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor do dÃ©bitos cobrados por localidade, categoria dos
 	 * pagamentos classificados de conta para tipo de financiamento igual a
@@ -1325,7 +1325,7 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 700
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor do dÃ©bitos cobrados por localidade, categoria dos
 	 * pagamentos classificados de conta para tipo de financiamento igual a
@@ -1347,10 +1347,10 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 800
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Acumula o valor dos crÃ©ditos realizados por localidade e categoria para
-	 * os pagamentos classificados de contas, para origem de crÃ©dito igual a
+	 * Acumula o valor dos Créditos realizados por localidade e categoria para
+	 * os pagamentos classificados de contas, para origem de Crédito igual a
 	 * contas pagas em duplicidade/excesso.
 	 * 
 	 * @author Pedro Alexandre
@@ -1369,11 +1369,11 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 900
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Acumula o valor dos crÃ©ditos realizados por localidade, categoria e item
+	 * Acumula o valor dos Créditos realizados por localidade, categoria e item
 	 * contÃ¡bil para os pagamentos classificados de contas, para origem de
-	 * crÃ©dito igual a valores cobrados indevidamente.
+	 * Crédito igual a valores cobrados indevidamente.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 22/05/2006
@@ -1393,10 +1393,10 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 1000
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Acumula o valor dos crÃ©ditos realizados por localidade e categoria para
-	 * os pagamentos classificados de contas, para origem de crÃ©dito igual a
+	 * Acumula o valor dos Créditos realizados por localidade e categoria para
+	 * os pagamentos classificados de contas, para origem de Crédito igual a
 	 * descontos concedidos.
 	 * 
 	 * @author Pedro Alexandre
@@ -1421,7 +1421,7 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 1700
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor da entrada do parcelamento por localidade e categoria dos
 	 * pagamentos classificados de guias de pagamento com tipo de financiamento
@@ -1443,7 +1443,7 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 1800
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor da guia de pagamento por localidade, categoria e item
 	 * contÃ¡bil dos pagamentos classificados de guias de pagamento com tipo de
@@ -1467,7 +1467,7 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 1900
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor que falta ser cobrado dos dÃ©bitos a cobrar dos pagamentos
 	 * classificados de dÃ©bito a cobrar por localidade, categoria e item
@@ -1495,10 +1495,10 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 2600
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Pesquisa as devoluÃ§Ãµes classificadas para acumular o valor da devoluÃ§Ã£o
-	 * por categoria com situaÃ§Ã£o igual a devoluÃ§Ã£o classificada.
+	 * Pesquisa as devoluÃ§Ãµes classificadas para acumular o valor da devolução
+	 * por categoria com situaÃ§Ã£o igual a devolução classificada.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 25/05/2006
@@ -1514,10 +1514,10 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 2700
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Pesquisa as devoluÃ§Ãµes classificadas para acumular o valor da devoluÃ§Ã£o
-	 * por categoria e item contÃ¡bil com situaÃ§Ã£o igual a devoluÃ§Ã£o de outros
+	 * Pesquisa as devoluÃ§Ãµes classificadas para acumular o valor da devolução
+	 * por categoria e item contÃ¡bil com situaÃ§Ã£o igual a devolução de outros
 	 * valores.
 	 * 
 	 * @author Pedro Alexandre
@@ -1542,10 +1542,10 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 3500
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor de Ã¡gua por localidade e categoria para os pagamentos de
-	 * contas efetuados em meses anteriores classificados no mÃªs.
+	 * contas efetuados em meses anteriores classificados no mês.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 23/05/2006
@@ -1563,10 +1563,10 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 3600
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor de esgoto por localidade e categoria para os pagamentos
-	 * de contas efetuados em meses anteriores classificados no mÃªs.
+	 * de contas efetuados em meses anteriores classificados no mês.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 23/05/2006
@@ -1584,11 +1584,11 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 3700
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor dos dÃ©bitos cobrados por localidade, categoria e item
 	 * contÃ¡bil para os pagamentos de contas efetuados em meses anteriores
-	 * classificados no mÃªs para tipo de financiamento igual a serviÃ§o.
+	 * classificados no mês para tipo de financiamento igual a serviÃ§o.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 23/05/2006
@@ -1608,10 +1608,10 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 3800
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor dos dÃ©bitos cobrados por localidade e categoria para os
-	 * pagamentos de contas efetuados em meses anteriores classificados no mÃªs
+	 * pagamentos de contas efetuados em meses anteriores classificados no mês
 	 * para tipo de financiamento igual a parcelamento de Ã¡gua.
 	 * 
 	 * @author Pedro Alexandre
@@ -1630,10 +1630,10 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 3900
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor dos dÃ©bitos cobrados por localidade e categoria para os
-	 * pagamentos de contas efetuados em meses anteriores classificados no mÃªs
+	 * pagamentos de contas efetuados em meses anteriores classificados no mês
 	 * para tipo de financiamento igual a parcelamento de esgoto.
 	 * 
 	 * @author Pedro Alexandre
@@ -1652,11 +1652,11 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 4000
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor dos dÃ©bitos cobrados por localidade, categoria e item
 	 * contÃ¡bil para os pagamentos de contas efetuados em meses anteriores
-	 * classificados no mÃªs para tipo de financiamento igual a parcelamento de
+	 * classificados no mês para tipo de financiamento igual a parcelamento de
 	 * serviÃ§o e grupo de parcelamento diferente de juros cobrados.
 	 * 
 	 * @author Pedro Alexandre
@@ -1677,11 +1677,11 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 4100
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor dos dÃ©bitos cobrados por localidade, categoria e item
 	 * contÃ¡bil para os pagamentos de contas efetuados em meses anteriores
-	 * classificados no mÃªs para tipo de financiamento igual a parcelamento de
+	 * classificados no mês para tipo de financiamento igual a parcelamento de
 	 * serviÃ§o e grupo de parcelamento igual a juros cobrados.
 	 * 
 	 * @author Pedro Alexandre
@@ -1700,11 +1700,11 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 4200
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Acumula o valor dos crÃ©ditos realizados por localidade e categoria para
+	 * Acumula o valor dos Créditos realizados por localidade e categoria para
 	 * os pagamentos de contas efetuados em meses anteriores classificados no
-	 * mÃªs, para origem do crÃ©dito igual a documentos pagos em
+	 * mês, para origem do Crédito igual a documentos pagos em
 	 * duplicidade/excesso.
 	 * 
 	 * @author Pedro Alexandre
@@ -1723,11 +1723,11 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 4300
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Acumula o valor dos crÃ©ditos realizados por localidade, categoria e item
+	 * Acumula o valor dos Créditos realizados por localidade, categoria e item
 	 * contÃ¡bil para os pagamentos de contas efetuados em meses anteriores
-	 * classificados no mÃªs, para origem do crÃ©dito igual a valores cobrados
+	 * classificados no mês, para origem do Crédito igual a valores cobrados
 	 * indevidamente.
 	 * 
 	 * @author Pedro Alexandre
@@ -1748,11 +1748,11 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 4400
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Acumula o valor dos crÃ©ditos realizados por localidade e categoria, para
+	 * Acumula o valor dos Créditos realizados por localidade e categoria, para
 	 * os pagamentos de contas efetuados em meses anteriores classificados no
-	 * mÃªs, para origem do crÃ©dito igual a descontos concedidos.
+	 * mês, para origem do Crédito igual a descontos concedidos.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 23/05/2006
@@ -1777,11 +1777,11 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 5100
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor das entrads do parcelamento por localidade e categoria
 	 * dos pagamento de guias de pagamento efetuados em meses anteriores
-	 * classificados no mÃªs com tipo de financiamento igual a entrada de
+	 * classificados no mês com tipo de financiamento igual a entrada de
 	 * parcelamento.
 	 * 
 	 * @author Pedro Alexandre
@@ -1800,11 +1800,11 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 5200
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor das entrads do parcelamento por localidade, categoria e
 	 * item contÃ¡bil dos pagamento de guias de pagamento efetuados em meses
-	 * anteriores classificados no mÃªs com tipo de financiamento igual a
+	 * anteriores classificados no mês com tipo de financiamento igual a
 	 * serviÃ§o.
 	 * 
 	 * @author Pedro Alexandre
@@ -1825,11 +1825,11 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 5300
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor que falta ser cobrado dos dÃ©bitos a cobrar por
 	 * localidade, categoria e item contÃ¡bil para os pagamentos de dÃ©bitos a
-	 * cobrar efetuados em meses anteriores classificados no mÃªs.
+	 * cobrar efetuados em meses anteriores classificados no mês.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 23/05/2006
@@ -1849,11 +1849,11 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 5500
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Pesquisa as devoluÃ§Ãµes efetuadas em meses anteriores classificadas no mÃªs
-	 * para acumular o valor da devoluÃ§Ã£o por localidade e categoria com
-	 * situaÃ§Ã£o atual igual a devoluÃ§Ã£o classificada.
+	 * Pesquisa as devoluÃ§Ãµes efetuadas em meses anteriores classificadas no mês
+	 * para acumular o valor da devolução por localidade e categoria com
+	 * situaÃ§Ã£o atual igual a devolução classificada.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 30/05/2006
@@ -1870,11 +1870,11 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Sequencial do tipo lanÃ§amento igual a 5600
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Pesquisa as devoluÃ§Ãµes efetuadas em meses anteriores classificadas no mÃªs
-	 * para acumular o valor da devoluÃ§Ã£o por localidade, categoria e item
-	 * contÃ¡bil, com situaÃ§Ã£o atual igual a devoluÃ§Ã£o de outros valores.
+	 * Pesquisa as devoluÃ§Ãµes efetuadas em meses anteriores classificadas no mês
+	 * para acumular o valor da devolução por localidade, categoria e item
+	 * contÃ¡bil, com situaÃ§Ã£o atual igual a devolução de outros valores.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 31/05/2006
@@ -1896,7 +1896,7 @@ public interface IRepositorioArrecadacao {
 	 * Sequencial do tipo lanÃ§amento igual a 6200 (SOMA DOS SEQ.100,200,3500 e
 	 * 3600)
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Este metÃ³do acumular os valores dos sequencias : 100, 200, 3500 e
 	 * 3600,para ser acumuldo Ã¡ soma dos recebimentos de valores contabilizados
@@ -1919,7 +1919,7 @@ public interface IRepositorioArrecadacao {
 	 * Sequencial do tipo lanÃ§amento igual a 6200 (SOMA DOS SEQ.
 	 * 300,400,500,600,700,3700,3800,3900,4000 e 4100)
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Este metÃ³do acumular os valores dos sequencias : 300, 400, 500, 600, 700,
 	 * 3700, 3800, 3900, 4000 e 4100,para ser acumulado Ã¡ soma dos recebimentos
@@ -1942,7 +1942,7 @@ public interface IRepositorioArrecadacao {
 	 * Sequencial do tipo lanÃ§amento igual a 6200 (SOMA DOS
 	 * SEQ.800,900,1000,4200,4300 e 4400)
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Este metÃ³do acumular os valores dos sequencias : 800, 900, 1000, 4200,
 	 * 4300 e 4400, para ser acumulado negativamente Ã¡ soma dos recebimentos de
@@ -1965,7 +1965,7 @@ public interface IRepositorioArrecadacao {
 	 * Sequencial do tipo lanÃ§amento igual a 6200 (SOMA DOS
 	 * SEQ.1200,1300,1400,1500,4600,4700,4800 e 4900)
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Este metÃ³do acumular os valores dos sequencias : 1200, 1300, 1400, 1500,
 	 * 4600, 4700, 4800 e 4900, para ser acumulado negativamente Ã¡ soma dos
@@ -1984,10 +1984,10 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Pesquisa os dÃ©bitos cobrados das contas dos pagamentos classificados de
-	 * contas e dos pagamentos anteriores de conta classificados no mÃªs.
+	 * contas e dos pagamentos anteriores de conta classificados no mês.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 02/06/2006
@@ -2001,10 +2001,10 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Pesquisa os crÃ©ditos realizados das contas dos pagamentos classificados
-	 * de contas e dos pagamentos anteriores de conta classificados no mÃªs.
+	 * Pesquisa os Créditos realizados das contas dos pagamentos classificados
+	 * de contas e dos pagamentos anteriores de conta classificados no mês.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 02/06/2006
@@ -2020,8 +2020,8 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
 	 * 
-	 * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona os pagamentos com ano/mês de referÃªncia da
+	 * Arrecadação igual ou menor que o ano/mês de referÃªncia da Arrecadação
 	 * corrente (seleciona a partir da tabela PAGAMENTO para
 	 * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
 	 * PARM_AMREFERENCIAARRECADACAO) e com o tipo do documento correspondente a
@@ -2039,8 +2039,8 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
 	 * 
-	 * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona os pagamentos com ano/mês de referÃªncia da
+	 * Arrecadação igual ou menor que o ano/mês de referÃªncia da Arrecadação
 	 * corrente (seleciona a partir da tabela PAGAMENTO para
 	 * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
 	 * PARM_AMREFERENCIAARRECADACAO) e com o tipo do documento correspondente a
@@ -2063,8 +2063,8 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
 	 * 
-	 * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona os pagamentos com ano/mês de referÃªncia da
+	 * Arrecadação igual ou menor que o ano/mês de referÃªncia da Arrecadação
 	 * corrente (seleciona a partir da tabela PAGAMENTO para
 	 * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
 	 * PARM_AMREFERENCIAARRECADACAO), com o tipo do documento correspondente a
@@ -2082,8 +2082,8 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
 	 * 
-	 * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona os pagamentos com ano/mês de referÃªncia da
+	 * Arrecadação igual ou menor que o ano/mês de referÃªncia da Arrecadação
 	 * corrente (seleciona a partir da tabela PAGAMENTO para
 	 * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
 	 * PARM_AMREFERENCIAARRECADACAO), com o tipo do documento correspondente a
@@ -2103,8 +2103,8 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
 	 * 
-	 * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona os pagamentos com ano/mês de referÃªncia da
+	 * Arrecadação igual ou menor que o ano/mês de referÃªncia da Arrecadação
 	 * corrente (seleciona a partir da tabela PAGAMENTO para
 	 * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
 	 * PARM_AMREFERENCIAARRECADACAO), com o tipo do documento correspondente a
@@ -2122,8 +2122,8 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
 	 * 
-	 * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona os pagamentos com ano/mês de referÃªncia da
+	 * Arrecadação igual ou menor que o ano/mês de referÃªncia da Arrecadação
 	 * corrente (seleciona a partir da tabela PAGAMENTO para
 	 * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
 	 * PARM_AMREFERENCIAARRECADACAO), com o tipo do documento correspondente a
@@ -2143,8 +2143,8 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
 	 * 
-	 * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona os pagamentos com ano/mês de referÃªncia da
+	 * Arrecadação igual ou menor que o ano/mês de referÃªncia da Arrecadação
 	 * corrente (seleciona a partir da tabela PAGAMENTO para
 	 * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
 	 * PARM_AMREFERENCIAARRECADACAO), com o tipo do documento correspondente a
@@ -2160,14 +2160,14 @@ public interface IRepositorioArrecadacao {
 			Integer anoMesReferencia) throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona os pagamentos com ano/mês de referência da
+	 * Arrecadação igual ou menor que o ano/mês de referência da Arrecadação
 	 * corrente (seleciona a partir da tabela PAGAMENTO para
 	 * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
 	 * PARM_AMREFERENCIAARRECADACAO), com o tipo do documento correspondente a
-	 * debito a cobrar e o campo DBAC_ID nÃ£o informado
+	 * debito a cobrar e o campo DBAC_ID não informado
 	 * 
 	 * @author Raphael Rossiter, Pedro Alexandre
 	 * @data 18/04/2006, 28/11/2006
@@ -2181,10 +2181,10 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona os pagamentos com ano/mês de referência da
+	 * Arrecadação igual ou menor que o ano/mês de referÃªncia da Arrecadação
 	 * corrente (seleciona a partir da tabela PAGAMENTO para
 	 * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
 	 * PARM_AMREFERENCIAARRECADACAO), com o tipo do documento correspondente a
@@ -2202,15 +2202,15 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * O sistema seleciona a conta correspondente ao pagamento atravÃ©s do imÃ³vel
-	 * e ano/mÃªs de referÃªncia do pagamento (a partir da tabela CONTA com
+	 * O sistema seleciona a conta correspondente ao pagamento através do imóvel
+	 * e ano/mês de referência do pagamento (a partir da tabela CONTA com
 	 * IMOV_ID = IMOV_ID da tabela PAGAMENTO, PGMT_AMREFERENCIAPAGAMENTO da
 	 * tabela PAGAMENTO e DCST_IDATUAL com o valor correspondente a normal,
 	 * retificada ou incluÃ­da, da tabela DEBTIO_CREDITO_SITUACAO)
 	 * 
-	 * [SF0001] Selecionar Conta pelo ImÃ³vel e Ano/MÃªs de ReferÃªncia
+	 * [SF0001] Selecionar Conta pelo Imóvel e Ano/mês de ReferÃªncia
 	 * 
 	 * @author Raphael Rossiter, Pedro Alexandre
 	 * @date 18/04/2006, 05/06/2007
@@ -2225,11 +2225,11 @@ public interface IRepositorioArrecadacao {
 			Integer anoMesReferenciaPagamento, Integer anoMesFaturamento) throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
-	 * Pesquisa os pagamentos do ImÃ³vel pesquisarPagamento
+	 * Pesquisa os pagamentos do Imóvel pesquisarPagamento
 	 * 
 	 * @author Roberta Costa
 	 * @date 12/06/06
@@ -2250,14 +2250,14 @@ public interface IRepositorioArrecadacao {
             String valorPagamentoFinal) throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
 	 * Pesquisa os pagamentos do tipo Conta do Cliente
 	 * pesquisarPagamentoClienteConta
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date 12/12/06
 	 * 
 	 * @return Collection<Pagamento>
@@ -2276,14 +2276,14 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
 	 * Pesquisa os pagamentos do tipo Guia de Pagamento do Cliente
 	 * pesquisarPagamentoClienteGuiaPagamento
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date 12/06/06
 	 * 
 	 * @return Collection<Pagamento>
@@ -2303,14 +2303,14 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
 	 * Pesquisa os pagamentos do tipo Debito a Cobrar do Cliente
 	 * pesquisarPagamentoClienteDebitoACobrar
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date 12/06/06
 	 * 
 	 * @return Collection
@@ -2330,7 +2330,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
@@ -2357,7 +2357,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
@@ -2384,7 +2384,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
@@ -2426,13 +2426,13 @@ public interface IRepositorioArrecadacao {
 			String descricao, int idElo) throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * O sistema seleciona as devoluÃ§Ãµes com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona as devoluções com ano/mês de referência da
+	 * Arrecadação igual ou menor que o ano/mês de referência da Arrecadação
 	 * corrente (seleciona a partir da tabela DEVOLUCAO para
 	 * DEVL_AMREFERENCIAARRECADACAO igual ou menor ao
-	 * PARM_AMREFERENCIAARRECADACAO) e com o ano/mÃªs de referÃªncia preenchido
+	 * PARM_AMREFERENCIAARRECADACAO) e com o ano/mês de referência preenchido
 	 * (DEVL_AMREFERENCIADEVOLUCAO com valor diferente de nulo)
 	 * 
 	 * @author Raphael Rossiter
@@ -2445,13 +2445,13 @@ public interface IRepositorioArrecadacao {
 			Integer anoMesReferencia) throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * O sistema seleciona as devoluÃ§Ãµes com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona as devoluÃ§Ãµes com ano/mês de referência da
+	 * Arrecadação igual ou menor que o ano/mês de referência da Arrecadação
 	 * corrente (seleciona a partir da tabela DEVOLUCAO para
 	 * DEVL_AMREFERENCIAARRECADACAO igual ou menor ao
-	 * PARM_AMREFERENCIAARRECADACAO) e com o ano/mÃªs de referÃªncia preenchido
+	 * PARM_AMREFERENCIAARRECADACAO) e com o ano/mês de referência preenchido
 	 * (DEVL_AMREFERENCIADEVOLUCAO com valor diferente de nulo)
 	 * 
 	 * @author Raphael Rossiter, Pedro Alexandre
@@ -2466,13 +2466,13 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * O sistema seleciona as devoluÃ§Ãµes com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona as devoluções com ano/mês de referência da
+	 * Arrecadação igual ou menor que o ano/mês de referência da Arrecadação
 	 * corrente (seleciona a partir da tabela DEVOLUCAO para
 	 * DEVL_AMREFERENCIAARRECADACAO igual ou menor ao
-	 * PARM_AMREFERENCIAARRECADACAO) e com o ano/mÃªs de referÃªncia nÃ£o
+	 * PARM_AMREFERENCIAARRECADACAO) e com o ano/mês de referência não
 	 * preenchido (DEVL_AMREFERENCIADEVOLUCAO com valor diferente nulo)
 	 * 
 	 * @author Raphael Rossiter
@@ -2485,13 +2485,13 @@ public interface IRepositorioArrecadacao {
 			Integer anoMesReferencia) throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * O sistema seleciona as devoluÃ§Ãµes com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona as devoluções com ano/mês de referência da
+	 * Arrecadação igual ou menor que o ano/mês de referência da Arrecadação
 	 * corrente (seleciona a partir da tabela DEVOLUCAO para
 	 * DEVL_AMREFERENCIAARRECADACAO igual ou menor ao
-	 * PARM_AMREFERENCIAARRECADACAO) e com o ano/mÃªs de referÃªncia nÃ£o
+	 * PARM_AMREFERENCIAARRECADACAO) e com o ano/mês de referência não
 	 * preenchido (DEVL_AMREFERENCIADEVOLUCAO com valor diferente nulo)
 	 * 
 	 * @author Raphael Rossiter, Pedro Alexandre
@@ -2506,9 +2506,9 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * [SF0010] Selecionar Pagamentos nÃ£o Classificados de Conta
+	 * [SF0010] Selecionar Pagamentos não Classificados de Conta
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 26/04/2006
@@ -2522,13 +2522,13 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * Atualiza a situacao atual das devolucoes (DVST_IDATUAL) com valor
-	 * correspondente a pagamento em duplicidade nÃ£o encontrado (tabela
+	 * correspondente a pagamento em duplicidade não encontrado (tabela
 	 * DEVOLUCAO_SITUACAO)
 	 * 
-	 * [SF0011] Processar DevoluÃ§Ãµes de Pagamentos
+	 * [SF0011] Processar Devoluções de Pagamentos
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 15/06/2006
@@ -2540,7 +2540,7 @@ public interface IRepositorioArrecadacao {
 			Integer devolucaoSituacao) throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * Atualiza a situacao anterior dos pagamentos (PGST_IDANTERIOR) (tabela
 	 * PAGAMENTO_SITUACAO)
@@ -2557,9 +2557,9 @@ public interface IRepositorioArrecadacao {
 			Integer pagamentoSituacao) throws ErroRepositorioException;
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * [SF0012] Selecionar Pagamentos nÃ£o classificados de guia de pagamento ou
+	 * [SF0012] Selecionar Pagamentos não classificados de guia de pagamento ou
 	 * dÃ©bito a cobrar
 	 * 
 	 * @author Raphael Rossiter
@@ -2606,7 +2606,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
@@ -2635,7 +2635,7 @@ public interface IRepositorioArrecadacao {
 	 * 
 	 * Pesquisa os pagamentos do Cliente
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date 21/12/06
 	 * 
 	 * @return Collection<Pagamento>
@@ -2749,8 +2749,8 @@ public interface IRepositorioArrecadacao {
 
 	/**
 	 * 
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
-	 * para o RelatÃ³rio
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
+	 * para o relatório
 	 * 
 	 * @author Rafael CorrÃªa
 	 * @date 29/08/2006
@@ -2770,18 +2770,18 @@ public interface IRepositorioArrecadacao {
 			String[] idsPagamentosSituacoes, String[] idsDebitosTipos,
 			String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
             String valorPagamentoInicial,
-            String valorPagamentoFinal)
+            String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder)
 			throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um sql que serÃ¡ usado na pesquisa de pagamentos
-	 * para o RelatÃ³rio
+	 * Este caso de uso cria um sql que será usado na pesquisa de pagamentos
+	 * para o relatório
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
 	 * Pesquisa os pagamentos do Cliente
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date 12/12/06
 	 * 
 	 * @return Collection
@@ -2801,15 +2801,15 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
-	 * para o RelatÃ³rio
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
+	 * para o relatório
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
 	 * Pesquisa os pagamentos do tipo Aviso Bancario
 	 * pesquisarPagamentoAvisoBancario
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date 29/08/06
 	 * 
 	 * @return Collection<Pagamento>
@@ -2829,8 +2829,8 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
-	 * para o RelatÃ³rio
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
+	 * para o relatório
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
@@ -2857,8 +2857,8 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
-	 * para o RelatÃ³rio
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
+	 * para o relatório
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
@@ -2881,7 +2881,7 @@ public interface IRepositorioArrecadacao {
 			String[] idsPagamentosSituacoes, String[] idsDebitosTipos,
 			String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
             String valorPagamentoInicial,
-            String valorPagamentoFinal)
+            String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder)
 			throws ErroRepositorioException;
 
 	/**
@@ -2928,14 +2928,14 @@ public interface IRepositorioArrecadacao {
 			Date dataPagamentoFinal, String[] idsPagamentosSituacoes,
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma,
 			String[] idsDocumentosTipos, String valorPagamentoInicial, 
-            String valorPagamentoFinal) throws ErroRepositorioException;
+            String valorPagamentoFinal, String[] idsCategoria, String[] idsEsferaPoder) throws ErroRepositorioException;
 
 	public Integer verificarExistenciaGuiaDevolucao(Integer idGuiaDevolucao)
 			throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa os avisos bancÃ¡rios para o relatÃ³rio atravÃ©s das opÃ§Ãµes
-	 * selecionadas no Filtrar Aviso BancÃ¡rio
+	 * Pesquisa os avisos bancários para o relatório através das opções
+	 * selecionadas no Filtrar Aviso bancário
 	 * 
 	 * @author Rafael CorrÃªa
 	 * @date 04/09/06
@@ -2949,8 +2949,8 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa os avisos deduÃ§Ãµes de um aviso bancÃ¡rio para o relatÃ³rio atravÃ©s
-	 * do id do aviso bancÃ¡rio
+	 * Pesquisa os avisos deduções de um aviso bancário para o relatório através
+	 * do id do aviso bancário
 	 * 
 	 * @author Rafael CorrÃªa
 	 * @date 05/09/06
@@ -2963,10 +2963,10 @@ public interface IRepositorioArrecadacao {
 			Integer idAvisoBancario) throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa os avisos acertos de um aviso bancÃ¡rio para o relatÃ³rio atravÃ©s
-	 * do id do aviso bancÃ¡rio
+	 * Pesquisa os avisos acertos de um aviso bancário para o relatório através
+	 * do id do aviso bancário
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date 05/09/06
 	 * 
 	 * @return Collection<AcertosRelatorioHelper>
@@ -2978,9 +2978,9 @@ public interface IRepositorioArrecadacao {
 
 	/**
 	 * 
-	 * Pesquisa dos dados diÃ¡rios da arrecadaÃ§Ã£o
+	 * Pesquisa dos dados diários da Arrecadação
 	 * 
-	 * [UC0333] Filtrar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+	 * [UC0333] Filtrar Dados Diários da Arrecadação
 	 * 
 	 * @author Rafael Santos
 	 * @date 05/09/2006
@@ -2996,9 +2996,9 @@ public interface IRepositorioArrecadacao {
 			String[] idsEsferaPoder) throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa dos dados diÃ¡rios de devolucao
+	 * Pesquisa dos dados diários de devolucao
 	 * 
-	 * [UC0333] Filtrar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+	 * [UC0333] Filtrar Dados Diários da Arrecadação
 	 * 
 	 * @author Francisco do Nascimento
 	 * @date 21/07/2008
@@ -3014,9 +3014,9 @@ public interface IRepositorioArrecadacao {
 			String[] idsEsferaPoder) throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa dos dados diÃ¡rios da arrecadaÃ§Ã£o pela Gerencia
+	 * Pesquisa dos dados diários da Arrecadação pela Gerencia
 	 * 
-	 * [UC0333] Filtrar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+	 * [UC0333] Filtrar Dados Diários da Arrecadação
 	 * 
 	 * @author Rafael Santos
 	 * @date 05/09/2006
@@ -3027,7 +3027,7 @@ public interface IRepositorioArrecadacao {
 			String idGerenciaRegional) throws ErroRepositorioException;
 
 	/**
-	 * Retornar ColeÃ§Ã£o do movimento do arrecadador
+	 * Retornar Coleção do movimento do arrecadador
 	 * 
 	 * Seleciona Movimento Arrecadadores
 	 * 
@@ -3061,7 +3061,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa os dados da Guia de Pagamento necessÃ¡rios para o relatÃ³rio
+	 * Pesquisa os dados da Guia de Pagamento necessários para o relatório
 	 * atravÃ©s do id da Guia de Pagamento
 	 * 
 	 * @author Vivianne Sousa
@@ -3075,7 +3075,7 @@ public interface IRepositorioArrecadacao {
 			Integer idGuiaPagamento) throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa os dados da Guia de Pagamento Historico necessÃ¡rios para o relatÃ³rio
+	 * Pesquisa os dados da Guia de Pagamento Historico necessários para o relatório
 	 * atravÃ©s do id da Guia de Pagamento Historico
 	 * 
 	 * @author Davi Menezes
@@ -3089,7 +3089,7 @@ public interface IRepositorioArrecadacao {
 			Integer idGuiaPagamento) throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa o nome do cliente da guia de pagamento atravÃ©s do id da Guia de
+	 * Pesquisa o nome do cliente da guia de pagamento através do id da Guia de
 	 * Pagamento e com CRTP_ID com o valor correspondente a usuÃ¡rio(2)
 	 * 
 	 * @author Vivianne Sousa
@@ -3103,8 +3103,8 @@ public interface IRepositorioArrecadacao {
 			Integer idGuiaPagamento) throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa os dados da Guia de DevoluÃ§Ã£o necessÃ¡rios para o relatÃ³rio
-	 * atravÃ©s do id da Guia de DevoluÃ§Ã£o
+	 * Pesquisa os dados da Guia de devolução necessários para o relatório
+	 * atravÃ©s do id da Guia de devolução
 	 * 
 	 * @author Ana Maria
 	 * @date 05/10/06
@@ -3117,7 +3117,7 @@ public interface IRepositorioArrecadacao {
 			Integer idGuiaDevolucao) throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa os dados do Cliente pelo ImÃ³vel
+	 * Pesquisa os dados do Cliente pelo Imóvel
 	 * 
 	 * @author Ana Maria
 	 * @date 06/10/06
@@ -3129,12 +3129,12 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
 	 * para pesquisar os pagamento historicos
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
-	 * Pesquisa os pagamentos historicos do ImÃ³vel
+	 * Pesquisa os pagamentos historicos do Imóvel
 	 * 
 	 * @author Rafael Santos
 	 * @date 06/10/2006
@@ -3177,7 +3177,7 @@ public interface IRepositorioArrecadacao {
 			String[] idsDocumentosTipos) throws ErroRepositorioException;
 
 	/**
-	 * Filtra os pagamento historicos do Imovel para paginaÃ§Ã£o
+	 * Filtra os pagamento historicos do Imovel para paginação
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
@@ -3335,7 +3335,7 @@ public interface IRepositorioArrecadacao {
 			String periodoPagamentoFim, Date dataPagamentoInicial,
 			Date dataPagamentoFinal, String[] idsPagamentosSituacoes,
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma,
-			String[] idsDocumentosTipos) throws ErroRepositorioException;
+			String[] idsDocumentosTipos,String[] idsCategoria, String[] idsEsferaPoder) throws ErroRepositorioException;
 
 	/**
 	 * Filtra os Pagamento Historicos da Localidade
@@ -3451,7 +3451,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Faz a pesquisa de devoluÃ§Ã£oHistorico fazendo os carregamentos de
+	 * Faz a pesquisa de devoluçãoHistorico fazendo os carregamentos de
 	 * clienteContas, clienteImoveis, clientesGuiaPagamento
 	 * 
 	 * @author Vivianne Sousa
@@ -3467,11 +3467,11 @@ public interface IRepositorioArrecadacao {
 
 	/**
 	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
-	 * histÃ³rico para o RelatÃ³rio
+	 * Histórico para o relatório
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
-	 * Pesquisa os pagamentos histÃ³rico do tipo Debito a Cobrar do Cliente
+	 * Pesquisa os pagamentos Histórico do tipo Debito a Cobrar do Cliente
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 17/10/06
@@ -3488,7 +3488,7 @@ public interface IRepositorioArrecadacao {
 			Date dataPagamentoInicial, Date dataPagamentoFinal,
 			String[] idsPagamentosSituacoes, String[] idsDebitosTipos,
 			String[] idsArrecadacaoForma, String[] idsDocumentosTipos, String valorPagamentoInicial,
-            String valorPagamentoFinal)
+            String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder)
 			throws ErroRepositorioException;
 
 	/**
@@ -3505,7 +3505,7 @@ public interface IRepositorioArrecadacao {
 			int idLocalidade, int idElo) throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa conta e agÃªncia do sistema de parÃ¢metros
+	 * Pesquisa conta e agência do sistema de parâmetros
 	 * 
 	 * @author Ana Maria
 	 * @date 23/10/06
@@ -3517,9 +3517,9 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa id do lanÃ§amento contabil
+	 * Pesquisa id do lançamento contabil
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @date 08/11/06
 	 * 
 	 * @return Integer
@@ -3529,9 +3529,9 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * pesquisar descriÃ§Ã£o do DÃ©bito AutomÃ¡tico
+	 * pesquisar descrição do Débito Automático
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @date 22/11/06
 	 * 
 	 * @return Integer
@@ -3541,10 +3541,10 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa a lista de ano/mÃªs de arrecadaÃ§aÃµ menores e igual ao ano/mÃªs de
-	 * arrecadaÃ§Ã£o atual.
+	 * Pesquisa a lista de ano/mês de arrecadação menores e igual ao ano/mês de
+	 * Arrecadação atual.
 	 * 
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * @author Raphael Rossiter, Pedro Alexandre
 	 * @date 18/04/2006, 29/11/2006
@@ -3631,7 +3631,7 @@ public interface IRepositorioArrecadacao {
 			Integer idArrecadadorMovimentoItem) throws ErroRepositorioException;
 
 	/**
-	 * retorna a decriÃ§Ã£o da Forma de ArrecadaÃ§Ã£o (arfm_dsarrecadacaoforma) da
+	 * retorna a decrição da Forma de Arrecadação (arfm_dsarrecadacaoforma) da
 	 * tabela ARRECADACAO_FORMA a partir do codigoArrecadacaoForma
 	 * (arfm_cdarrecadacaoforma) passado
 	 * 
@@ -3681,10 +3681,10 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa a lista de ano/mÃªs de arrecadaÃ§Ã£o menores e igual ao ano/mÃªs de
-	 * arrecadaÃ§Ã£o atual e igual ao id do imÃ³vel informado.
+	 * Pesquisa a lista de ano/mês de Arrecadação menores e igual ao ano/mês de
+	 * Arrecadação atual e igual ao id do imóvel informado.
 	 * 
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * @author Raphael Rossiter, Pedro Alexandre
 	 * @date 18/04/2006, 29/11/2006
@@ -3699,9 +3699,9 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Pesquisar uma coleÃ§Ã£o de ids de localidades que possuem pagamentos
+	 * Pesquisar uma coleção de ids de localidades que possuem pagamentos
 	 * 
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 29/11/2006
@@ -3717,7 +3717,7 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * Pesquisar os ids das localidades que possuem pagamentos
 	 * 
-	 * [UC0301] Gerar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+	 * [UC0301] Gerar Dados Diários da Arrecadação
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 04/12/2006
@@ -3729,10 +3729,10 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Pesquisar os ano/mÃªs de referÃªncia do pagamentos para um imÃ³vel e ano/mÃªs
-	 * de arrecadaÃ§Ã£o informados para o tipo de documento informado.
+	 * Pesquisar os ano/mês de referência do pagamentos para um imóvel e ano/mês
+	 * de Arrecadação informados para o tipo de documento informado.
 	 * 
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 06/12/2006
@@ -3748,9 +3748,9 @@ public interface IRepositorioArrecadacao {
 			Integer idDocumentoTipo) throws ErroRepositorioException;
 
 	/**
-	 * Pesquisa a esfera do poder do cliente responsÃ¡vel pelo imÃ³vel.
+	 * Pesquisa a esfera do poder do cliente responsável pelo imóvel.
 	 * 
-	 * [UC0301] - Gerar Dados DiÃ¡rios da Arrecadacao
+	 * [UC0301] - Gerar Dados Diários da Arrecadacao
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 05/12/2006
@@ -3763,9 +3763,9 @@ public interface IRepositorioArrecadacao {
 			Integer idImovel) throws ErroRepositorioException;
 
 	/**
-	 * Atualiza a situÃ§Ã£o dos pagamentos informados.
+	 * Atualiza a situção dos pagamentos informados.
 	 * 
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * @author Raphael Rossiter, Pedro Alexandre
 	 * @date 18/04/2006, 12/12/2006
@@ -3779,15 +3779,15 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
-	 * para o RelatÃ³rio
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
+	 * para o relatório
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
 	 * Pesquisa os pagamentos do tipo Debito a Cobrar do Cliente
 	 * pesquisarPagamentoLocalidade
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date 12/12/06
 	 * 
 	 * @return Collection
@@ -3803,11 +3803,11 @@ public interface IRepositorioArrecadacao {
 			String[] idsPagamentosSituacoes, String[] idsDebitosTipos,
 			String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
             String valorPagamentoInicial,
-            String valorPagamentoFinal )
+            String valorPagamentoFinal, String[] idsCategoria, String[] idsEsferaPoder )
 			throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa o imÃ³vel pelo id fazendo os carregamentos necessÃ¡rios
+	 * Pesquisa o imóvel pelo id fazendo os carregamentos necessários
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
@@ -3821,7 +3821,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa o cliente pelo id fazendo os carregamentos necessÃ¡rios
+	 * Pesquisa o cliente pelo id fazendo os carregamentos necessários
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
@@ -3835,7 +3835,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa o endereÃ§o de correspondÃªncia do cliente pelo seu id fazendo os carregamentos necessÃ¡rios
+	 * Pesquisa o endereÃ§o de correspondência do cliente pelo seu id fazendo os carregamentos necessários
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
@@ -3849,7 +3849,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa o telefone padrÃ£o do cliente pelo seu id fazendo os carregamentos necessÃ¡rios
+	 * Pesquisa o telefone padrão do cliente pelo seu id fazendo os carregamentos necessÃ¡rios
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
@@ -3863,11 +3863,11 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisa os clientes do imÃ³vel pelo seu id do imÃ³vel fazendo os carregamentos necessÃ¡rios
+	 * Pesquisa os clientes do imóvel pelo seu id do imóvel fazendo os carregamentos necessários
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date 16/12/06
 	 * 
 	 * @return Collection<ClienteImovel>
@@ -3877,14 +3877,14 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
+	 * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
 	 * Pesquisa os pagamentos do tipo Debito a Cobrar do Cliente
 	 * pesquisarPagamentoLocalidade
 	 * 
-	 * @author Rafael CorrÃªa
+	 * @author Rafael Corrêa
 	 * @date 12/06/06
 	 * 
 	 * @return Collection<Pagamento>
@@ -3906,12 +3906,12 @@ public interface IRepositorioArrecadacao {
     
 
     /**
-     * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] - Encerrar Arrecadação do mês
      * 
-     * Verifica se jÃ¡ existe resumo da arrecadaÃ§Ã£o para o ano/mÃªs de referÃªncia
-     * da arrecadaÃ§Ã£o
+     * Verifica se já existe resumo da Arrecadação para o ano/mês de referência
+     * da Arrecadação
      * 
-     * [FS0003] - Verificar a existÃªncia do resumo da arrecadaÃ§Ã£o
+     * [FS0003] - Verificar a existÃªncia do resumo da Arrecadação
      * 
      * @author Pedro Alexandre
      * @date 16/05/2006
@@ -3924,9 +3924,9 @@ public interface IRepositorioArrecadacao {
     public Collection pesquisarResumoArrecadacaoPorAnoMesArrecadacao(Integer anoMesReferenciaArrecadacao,Integer idLocalidade) throws ErroRepositorioException ;
 
     /**
-     * Pesquisa uma coleÃ§Ã£o de ids das categorias cadastradas
+     * Pesquisa uma coleção de ids das categorias cadastradas
      *
-     * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] Encerrar Arrecadação do mês
      *
      * @author Pedro Alexandre
      * @date 15/12/2006
@@ -3937,9 +3937,9 @@ public interface IRepositorioArrecadacao {
     public Collection<Integer> pesquisarIdsCategorias() throws ErroRepositorioException ;
     
     /**
-     * Pesquisa uma coleÃ§Ã£o de ids dos lanÃ§amentos de itens contÃ¡beis cadastrados
+     * Pesquisa uma coleção de ids dos lançaamentos de itens contábeis cadastrados
      *
-     * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] Encerrar Arrecadação do mês
      *
      * @author Pedro Alexandre
      * @date 15/12/2006
@@ -3950,9 +3950,9 @@ public interface IRepositorioArrecadacao {
     public Collection pesquisarDadosLancamentosItemContabil() throws ErroRepositorioException ;
 
     /**
-     * pesquisa a lista dos acertos da ArrecadaÃ§Ã£o/Devolucao do Aviso Bancario
+     * pesquisa a lista dos acertos da Arrecadação/Devolucao do Aviso Bancario
      * 
-     *[UC0268] - Apresentar AnÃ¡lise do Aviso BancÃ¡rio
+     *[UC0268] - Apresentar Análise do Aviso bancário
      * 
      * @author Vivianne Sousa
      * @date 13/12/2006
@@ -3966,11 +3966,11 @@ public interface IRepositorioArrecadacao {
      	throws ErroRepositorioException;
      
     /**
-     * O sistema seleciona a lista de pagamentos associados ao aviso bancÃ¡rio 
+     * O sistema seleciona a lista de pagamentos associados ao aviso bancário 
      * a partir da tabela PAGAMENTO com AVBC_ID=AVBC_ID da tabela AVISO_BANCARIO 
      * classificados por LOCA_ID ,IMOV_ID e PGMT_AMREFERENCIAPAGAMENTO
      * 
-     * [UC0268] - Apresentar AnÃ¡lise do Aviso BancÃ¡rio
+     * [UC0268] - Apresentar Análise do Aviso bancário
      * 
      * @author Vivianne Sousa
      * @date 15/12/2006
@@ -3982,10 +3982,10 @@ public interface IRepositorioArrecadacao {
     	throws ErroRepositorioException;
     
     /**
-     * O sistema seleciona a lista de desvoluÃ§Ãµes associados ao aviso bancÃ¡rio 
+     * O sistema seleciona a lista de desvoluções associados ao aviso bancário 
      * a partir da tabela DEVOLUCAO com AVBC_ID=AVBC_ID da tabela AVISO_BANCARIO 
      * 
-     * [UC0268] - Apresentar AnÃ¡lise do Aviso BancÃ¡rio
+     * [UC0268] - Apresentar Análise do Aviso bancário
      * 
      * @author Vivianne Sousa
      * @date 15/12/2006
@@ -3997,10 +3997,10 @@ public interface IRepositorioArrecadacao {
     	throws ErroRepositorioException;
     
     /**
-     * Pesquisa os avisos deduÃ§Ãµes de um aviso bancÃ¡rio para o relatÃ³rio atravÃ©s
-     * do id do aviso bancÃ¡rio
+     * Pesquisa os avisos deduções de um aviso bancário para o relatório atravÃ©s
+     * do id do aviso bancário
      * 
-     *[UC0268] - Apresentar AnÃ¡lise do Aviso BancÃ¡rio
+     *[UC0268] - Apresentar Análise do Aviso bancário
      * 
      * @author Vivianne Sousa
      * @date 13/12/2006
@@ -4013,7 +4013,7 @@ public interface IRepositorioArrecadacao {
      	throws ErroRepositorioException;
      
      /**
-      *[UC0268] - Apresentar AnÃ¡lise do Aviso BancÃ¡rio
+      *[UC0268] - Apresentar Análise do Aviso bancário
       * 
       * @author Vivianne Sousa
       * @date 13/12/2006
@@ -4026,9 +4026,9 @@ public interface IRepositorioArrecadacao {
      	throws ErroRepositorioException ;
      
      /**
-      * somatorio do valor das deduÃ§Ãµes existentes para o aviso bancario
+      * somatorio do valor das deduções existentes para o aviso bancario
       * 
-      * [UC0268] - Apresentar AnÃ¡lise do Aviso BancÃ¡rio
+      * [UC0268] - Apresentar Análise do Aviso bancário
       * 
       * @author Vivianne Sousa
       * @date 13/12/2006
@@ -4041,7 +4041,7 @@ public interface IRepositorioArrecadacao {
      	throws ErroRepositorioException ;
  	
      /**
-      * [UC0268] - Apresentar AnÃ¡lise do Aviso BancÃ¡rio
+      * [UC0268] - Apresentar Análise do Aviso bancário
       * 
       * @author Vivianne Sousa
       * @date 13/12/2006
@@ -4055,9 +4055,9 @@ public interface IRepositorioArrecadacao {
      
      /**
       * Pesquisa alguns valores necessarios para 
-      * obter a situaÃ§Ã£o do aviso bancario, se aberto ou fechado
+      * obter a situação do aviso bancario, se aberto ou fechado
       * 
-      * [UC0254] - Efetuar AnÃ¡lise do Movimento dos Arrecadadores
+      * [UC0254] - Efetuar Análise do Movimento dos Arrecadadores
       * 
       * @author Vivianne Sousa
       * @date 11/12/2006
@@ -4070,9 +4070,9 @@ public interface IRepositorioArrecadacao {
      	throws ErroRepositorioException;
      
      /**
-      * Sequencial do tipo lanÃ§amento igual a 1200
+      * Sequencial do tipo lançamento igual a 1200
        * 
-       * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+       * [UC0276] - Encerrar Arrecadação do mês
        * 
        * Pesquisa os daods de ContaImpostosDeduzidos dos pagamentos
        * classificados de contas para acumular o valor do imposto por
@@ -4093,7 +4093,7 @@ public interface IRepositorioArrecadacao {
     		  Integer idTipoImposto) throws ErroRepositorioException ;
 
       /**
-       * <Breve descriÃ§Ã£o sobre o caso de uso>
+       * <Breve descrição sobre o caso de uso>
        *
        * <Identificador e nome do caso de uso>
        *
@@ -4109,7 +4109,7 @@ public interface IRepositorioArrecadacao {
       public Collection pesquisarPagamentosNaoClassificadosMesPorSituacaoAnterior(Integer anoMesReferenciaArrecadacao, Integer idLocalidade, Integer idSituacaoAnterior) throws ErroRepositorioException ;
 
       /**
-       * <Breve descriÃ§Ã£o sobre o caso de uso>
+       * <Breve descrição sobre o caso de uso>
        *
        * <Identificador e nome do caso de uso>
        *
@@ -4125,7 +4125,7 @@ public interface IRepositorioArrecadacao {
       public Collection pesquisarDevolucoesNaoClassificadasMesPorSituacaoAtual(Integer anoMesReferenciaArrecadacao, Integer idLocalidade, Integer idDevolucaoSituacaoAtual) throws ErroRepositorioException ;
 
       /**
-       * <Breve descriÃ§Ã£o sobre o caso de uso>
+       * <Breve descrição sobre o caso de uso>
        *
        * <Identificador e nome do caso de uso>
        *
@@ -4141,7 +4141,7 @@ public interface IRepositorioArrecadacao {
       public Collection pesquisarContasImpostosDeduzidosPagamentosContasEfetuadosEmMesesAnterioresClassificadosMesPorTipoImposto(Integer idLocalidade, Integer anoMesReferenciaArrecadacao, Integer idImpostoTipo) throws ErroRepositorioException ;
 
       /**
-       * <Breve descriÃ§Ã£o sobre o caso de uso>
+       * <Breve descrição  sobre o caso de uso>
        *
        * <Identificador e nome do caso de uso>
        *
@@ -4157,7 +4157,7 @@ public interface IRepositorioArrecadacao {
       public Collection pesquisarPagamentosNaoClassificadosComBaixaComandadaPorSituacaoAnterior(Integer idLocalidade, Integer anoMesReferenciaArrecadacao, Integer idPagamentoSituacaoAnterior) throws ErroRepositorioException ;
 
       /**
-       * <Breve descriÃ§Ã£o sobre o caso de uso>
+       * <Breve descrição sobre o caso de uso>
        *
        * <Identificador e nome do caso de uso>
        *
@@ -4173,7 +4173,7 @@ public interface IRepositorioArrecadacao {
       public Collection pesquisarPagamentosNaoClassificadosMesEMesesAnterioresPorSituacaoAtual(Integer anoMesReferenciaArrecadacao, Integer idLocalidade, Integer idPagamentoSituacaoAtual) throws ErroRepositorioException ;
 
       /**
-       * <Breve descriÃ§Ã£o sobre o caso de uso>
+       * <Breve descrição sobre o caso de uso>
        *
        * <Identificador e nome do caso de uso>
        *
@@ -4189,7 +4189,7 @@ public interface IRepositorioArrecadacao {
       public Collection pesquisarDevolucoesNaoClassificadasMesEAnterioresPorSituacaoAtual(Integer anoMesReferenciaArrecadacao, Integer idLocalidade, Integer idDevolucaoSituacaoAtual) throws ErroRepositorioException ;
 
       /**
-       * <Breve descriÃ§Ã£o sobre o caso de uso>
+       * <Breve descrição sobre o caso de uso>
        *
        * <Identificador e nome do caso de uso>
        *
@@ -4205,9 +4205,9 @@ public interface IRepositorioArrecadacao {
       public Collection pesquisarPagamentosNaoClassificadosMesPorSituacaoAtual(Integer anoMesReferenciaArrecadacao, Integer idLocalidade, Integer idSituacaoAtual) throws ErroRepositorioException ;
 
       /**
-       * Exclui os dados diÃ¡rios da arrecadaÃ§Ã£o do ano/mÃªs da arrecadaÃ§Ã£o corrente por localidade
+       * Exclui os dados diários da Arrecadação do ano/mês da Arrecadação corrente por localidade
        * 
-       * [UC0301] Gerar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+       * [UC0301] Gerar Dados Diários da Arrecadação
        * 
        * @author Pedro Alexandre
        * @date 11/04/2006
@@ -4269,7 +4269,7 @@ public interface IRepositorioArrecadacao {
       		String indicadorAceitacao, String indicadorAbertoFechado) throws ErroRepositorioException;
       
       /**
-       * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+       * [UC0276] Encerrar Arrecadação do mês
        *
        * Pesquisa a coleÃ§Ã£o de guias de pagamento categoria 
        * para o id da guia informada.
@@ -4284,7 +4284,7 @@ public interface IRepositorioArrecadacao {
       public Collection pesquisarGuiaPagamentoCategoria(Integer idGuiaPagamento) throws ErroRepositorioException ;
 
       /**
-       * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+       * [UC0276] Encerrar Arrecadação do mês
        *
        * Pesquisa a coleÃ§Ã£o de cliente de guias de pagamento  
        * para o id da guia informada.
@@ -4299,10 +4299,10 @@ public interface IRepositorioArrecadacao {
       public Collection pesquisarClienteGuiaPagamento(Integer idGuiaPagamento) throws ErroRepositorioException ;
 
       /**
-       * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+       * [UC0276] Encerrar Arrecadação do mês
        *
-       * Para cada guia de pagamento transferida para o histÃ³rico 
-       * atualiza o indicador de que a guia de pagamento estÃ¡ no histÃ³rico.
+       * Para cada guia de pagamento transferida para o Histórico 
+       * atualiza o indicador de que a guia de pagamento está no Histórico.
        *
        * @author Pedro Alexandre
        * @date 09/01/2007
@@ -4313,9 +4313,9 @@ public interface IRepositorioArrecadacao {
       public void atualizarIndicadorGuiaPagamentoNoHistorico(Collection idsGuiasPagamento) throws ErroRepositorioException ;
 
       /**
-       * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+       * [UC0276] Encerrar Arrecadação do mês
        *
-       * Atualiza o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o.
+       * Atualiza o ano/mês de referência da Arrecadação.
        *
        * @author Pedro Alexandre
        * @date 09/01/2007
@@ -4327,10 +4327,10 @@ public interface IRepositorioArrecadacao {
       public void atualizarAnoMesArrecadacao(int anoMesArrecadacaoAtual, int anoMesArrecadacaoNovo) throws ErroRepositorioException ;
 
       /**
-       * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+       * [UC0276] Encerrar Arrecadação do mês
        *
        * Pesquisa as contas correspondentes aos pagamentos classificados de conta 
-       * e os pagamentos anteriores de conta classificados no mÃªs.
+       * e os pagamentos anteriores de conta classificados no mês.
        *
        * @author Pedro Alexandre
        * @date 09/01/2007
@@ -4347,10 +4347,10 @@ public interface IRepositorioArrecadacao {
 
 
       /**
-       * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+       * [UC0276] Encerrar Arrecadação do mês
        *
        * Pesquisa as guias de pagamento correspondentes aos pagamentos classificados de guia de 
-       * pagamento e aos pagamentos anteriores de guia de pagamento classificados no mÃªs.
+       * pagamento e aos pagamentos anteriores de guia de pagamento classificados no mês.
        *
        * @author Pedro Alexandre
        * @date 09/01/2007
@@ -4365,7 +4365,7 @@ public interface IRepositorioArrecadacao {
       public Collection<GuiaPagamento> pesquisarGuiasPagamentoDePagamentosClassificadosGuiasPagamentoEPagamentosAnterioresGuiaPagamentoClassificadosNoMes(Integer anoMesReferenciaArrecadacao, Integer idLocalidade, Integer numeroIndice, Integer quantidadeRegistros) throws ErroRepositorioException ;
 
       /**
-       * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+       * [UC0276] Encerrar Arrecadação do mês
        *
        * Pesquisar os pagamentos classificados ou com valor excedente baixado e com 
        * valor excedente maior do que zero.
@@ -4383,9 +4383,9 @@ public interface IRepositorioArrecadacao {
       public Collection<Integer> pesquisarPagamentosClassificadosOuValorExcedenteBaixado(Integer anoMesReferenciaArrecadacao, Integer idLocalidade, int numeroIndice, int quantidadeRegistros) throws ErroRepositorioException ;
 
       /**
-       * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+       * [UC0276] Encerrar Arrecadação do mês
        *
-       * Pesquisa as devoluÃ§Ãµes classificadas para transferir para o histÃ³rico.
+       * Pesquisa as devoluções classificadas para transferir para o Histórico.
        *
        * @author Pedro Alexandre
        * @date 10/01/2007
@@ -4400,7 +4400,7 @@ public interface IRepositorioArrecadacao {
       public Collection<Devolucao> pesquisarDevolucoesClassificadasPorLocalidade(Integer anoMesReferenciaArrecadacao, Integer idLocalidade, Integer numeroIndice, Integer quantidadeRegistros) throws ErroRepositorioException ;
 
       /**
-       * O sistema seleciona a lista de pagamentos associados ao aviso bancÃ¡rio 
+       * O sistema seleciona a lista de pagamentos associados ao aviso bancário 
        * a partir da tabela PAGAMENTO com AVBC_ID=AVBC_ID da tabela AVISO_BANCARIO 
        * 
        * @author Vivianne Sousa
@@ -4425,7 +4425,7 @@ public interface IRepositorioArrecadacao {
   	
   	
   	/**
-	 * Atualiza logradouroBairro de um ou mais imÃ³veis  
+	 * Atualiza logradouroBairro de um ou mais imóveis  
 	 * 
 	 * [UC0] Atualizar Logradouro
 	 * 
@@ -4494,15 +4494,15 @@ public interface IRepositorioArrecadacao {
     	throws ErroRepositorioException;
     
     /**
-     * Este caso de uso cria um filtro que serÃ¡ usado na pesquisa de pagamentos
-     * para o RelatÃ³rio
+     * Este caso de uso cria um filtro que será usado na pesquisa de pagamentos
+     * para o relatório
      * 
      * [UC0255] Filtrar Pagamentos
      * 
      * Pesquisa os pagamentos do tipo Debito a Cobrar do Cliente
      * pesquisarPagamentoLocalidade
      * 
-     * @author Rafael CorrÃªa
+     * @author Rafael Corrêa
      * @date 12/12/06
      * 
      * @return Collection
@@ -4527,10 +4527,10 @@ public interface IRepositorioArrecadacao {
     public void removerGuiaPagamentoPagamento(Integer idPagamento) throws ErroRepositorioException ;
 
     /**
-     * [UC0301] Gerar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+     * [UC0301] Gerar Dados DiÃ¡rios da Arrecadação
      *
-     * Pesquisa os ano/mÃªs de referÃªncia dos pagamentos para ano/mÃªs 
-     * de referÃªncia maior ou igual ao ano/mÃªs de referÃªncia atual da arrecadaÃ§Ã£o
+     * Pesquisa os ano/mês de referência dos pagamentos para ano/mês 
+     * de referÃªncia maior ou igual ao ano/mês de referência atual da Arrecadação
      *
      * @author Pedro Alexandre 
      * @date 07/03/2007
@@ -4556,7 +4556,7 @@ public interface IRepositorioArrecadacao {
     public Integer pesquisarQuantidadePagamentosPorDebitoACobrar(Integer idDebitoACobrar) throws ErroRepositorioException ;
 
     /**
-     * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+     * [UC0300] Classificar Pagamentos e Devoluções
      * 
      * Atualiza a situacao atual dos pagamentos (PGST_IDATUAL) (tabela
      * PAGAMENTO_SITUACAO)
@@ -4570,10 +4570,10 @@ public interface IRepositorioArrecadacao {
     public void atualizarSituacaoPagamentoClassificado(Collection<Integer> colecaoIdsPagamentos) throws ErroRepositorioException ;
 
     /**
-     * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+     * [UC0300] Classificar Pagamentos e Devoluções
      * 
      * Caso o valor total dos pagamentos seja menor que o valor do documento,
-     * atualiza a situaÃ§Ã£o atual dos pagamentos (PGST_IDATUAL) com valor
+     * atualiza a situação atual dos pagamentos (PGST_IDATUAL) com valor
      * correspondente a valor nÃ£o confere (tabela PAGAMENTO_SITUACAO) e
      * atualiza o id da conta nos pagamentos (seta CNTA_ID da tabela PAGAMENTO
      * para CNTA_ID da tabela CONTA)
@@ -4589,10 +4589,10 @@ public interface IRepositorioArrecadacao {
     public void processarPagamentoValorNaoConfereConta(Map<Integer, Collection> mapPagamentosValorNaoConfere) throws ErroRepositorioException ;
 
     /**
-     * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+     * [UC0300] Classificar Pagamentos e Devoluções
      * 
      * Caso o valor total dos pagamentos seja menor que o valor do documento,
-     * atualiza a situaÃ§Ã£o atual dos pagamentos (PGST_IDATUAL) com valor
+     * atualiza a situação atual dos pagamentos (PGST_IDATUAL) com valor
      * correspondente a valor nÃ£o confere (tabela PAGAMENTO_SITUACAO) e
      * atualiza o id da guia de pagamento nos pagamentos (seta GPAG_ID da tabela PAGAMENTO
      * para GPAG_ID da tabela GUIA PAGAMENTO)
@@ -4608,12 +4608,12 @@ public interface IRepositorioArrecadacao {
     public void processarPagamentoValorNaoConfereGuiaPagamento(Map<Integer, Collection> mapPagamentosValorNaoConfere) throws ErroRepositorioException ;
 
     /**
-     * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+     * [UC0300] Classificar Pagamentos e Devoluções
      * 
      * Caso o valor total dos pagamentos seja menor que o valor do documento,
-     * atualiza a situaÃ§Ã£o atual dos pagamentos (PGST_IDATUAL) com valor
-     * correspondente a valor nÃ£o confere (tabela PAGAMENTO_SITUACAO) e
-     * atualiza o id do dÃ©bito a cobrar nos pagamentos (seta DBAC_ID da tabela PAGAMENTO
+     * atualiza a situaçã atual dos pagamentos (PGST_IDATUAL) com valor
+     * correspondente a valor não confere (tabela PAGAMENTO_SITUACAO) e
+     * atualiza o id do débito a cobrar nos pagamentos (seta DBAC_ID da tabela PAGAMENTO
      * para DBAC_ID da tabela DEBITO A COBRAR)
      * 
      * [SB0008] Processar Pagamento a Maior ou a Menor
@@ -4627,7 +4627,7 @@ public interface IRepositorioArrecadacao {
     public void processarPagamentoValorNaoConfereDebitoACobrar(Map<Integer, Collection> mapPagamentosValorNaoConfere) throws ErroRepositorioException ;
 
     /**
-     * [UC0300] - Classificar Pagamentos e DevoluÃ§Ãµes
+     * [UC0300] - Classificar Pagamentos e Devoluções
      *
      * <Breve descriÃ§Ã£o sobre o subfluxo>
      *
@@ -4643,7 +4643,7 @@ public interface IRepositorioArrecadacao {
 
     /**
      * Remove o id da guia de pagamento dos pagamentos referentes a conta
-     * para poder mandar a guia de pagamento para o histÃ³rico.
+     * para poder mandar a guia de pagamento para o Histórico.
      *
      * [UC0000] Gerar HistÃ³rco para encerrar Faturamento
      *
@@ -4657,7 +4657,7 @@ public interface IRepositorioArrecadacao {
     public void apagarIdGuiaPagamentoPagamentos(Integer idGuiaPagamento) throws ErroRepositorioException ;
     
     /**
-	 * Pesquisa os movimentos dos arrecadores para a geraÃ§Ã£o do relatÃ³rio
+	 * Pesquisa os movimentos dos arrecadores para a geração do relatório
 	 * 
 	 * [UCXXXX] Acompanhar Movimento dos Arrecadadores
 	 * 
@@ -4674,13 +4674,13 @@ public interface IRepositorioArrecadacao {
 
 
 	/**
-     * Sequencial do tipo lanÃ§amento igual a 750
+     * Sequencial do tipo lançamento igual a 750
      * 
-     * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] - Encerrar Arrecadação do mês
      * 
-     * Acumula o valor do dÃ©bitos cobrados por localidade, categoria dos
+     * Acumula o valor do débitos cobrados por localidade, categoria dos
      * pagamentos classificados de conta para tipo de financiamento igual a
-     * doaÃ§Ãµes
+     * doações
      * 
      * @author Pedro Alexandre
      * @date 03/04/2007
@@ -4696,13 +4696,13 @@ public interface IRepositorioArrecadacao {
 
     
     /**
-     * Sequencial do tipo lanÃ§amento igual a 4150
+     * Sequencial do tipo lançamento igual a 4150
      * 
-     * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] - Encerrar Arrecadação do mês
      * 
-     * Acumula o valor dos dÃ©bitos cobrados por localidade, categoria e item
+     * Acumula o valor dos débitos cobrados por localidade, categoria e item
      * contÃ¡bil para os pagamentos de contas efetuados em meses anteriores
-     * classificados no mÃªs para tipo de financiamento igual doaÃ§Ãµes.
+     * classificados no mês para tipo de financiamento igual doações.
      * 
      * @author Pedro Alexandre
      * @date 03/04/2007
@@ -4717,10 +4717,10 @@ public interface IRepositorioArrecadacao {
     public BigDecimal acumularValorDebitoCobradoPagamentosContasEfetuadosEmMesesAnterioresClassificadosNoMesFinanciamentoTipoParcelamentoDoacoes(Integer idLocalidade, Integer anoMesReferenciaArrecadacao, Integer idCategoria, Integer idLancamentoItemContabil) throws ErroRepositorioException ;
 
     /**
-     * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] Encerrar Arrecadação do mês
      *
      * Pesquisa as guias de pagamento correspondentes aos pagamentos classificados de guia de 
-     * pagamento e aos pagamentos anteriores de guia de pagamento classificados no mÃªs.
+     * pagamento e aos pagamentos anteriores de guia de pagamento classificados no mês.
      *
      * @author Pedro Alexandre
      * @date 09/01/2007
@@ -4733,10 +4733,10 @@ public interface IRepositorioArrecadacao {
     public Collection<GuiaPagamento> pesquisarGuiasPagamentoDePagamentosClassificadosGuiasPagamentoEPagamentosAnterioresGuiaPagamentoClassificadosNoMes(Integer anoMesReferenciaArrecadacao, Integer idLocalidade) throws ErroRepositorioException ;
 
     /**
-     * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] Encerrar Arrecadação do mês
      *
      * Pesquisar os pagamentos classificados ou com valor excedente baixado e com 
-     * valor excedente maior do que zero para transferir para o histÃ³rico.
+     * valor excedente maior do que zero para transferir para o Histórico.
      *
      * @author Pedro Alexandre
      * @date 10/01/2007
@@ -4749,13 +4749,13 @@ public interface IRepositorioArrecadacao {
     public Collection<Pagamento> pesquisarPagamentosClassificadosOuValorExcedenteBaixado(Integer anoMesReferenciaArrecadacao, Integer idLocalidade) throws ErroRepositorioException ;
 
     /**
-     * Sequencial do tipo lanÃ§amento igual a 4000
+     * Sequencial do tipo lançamento igual a 4000
      * 
-     * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] - Encerrar Arrecadação do mês
      * 
      * Acumula o valor dos dÃ©bitos cobrados por localidade, categoria e item
      * contÃ¡bil para os pagamentos de contas efetuados em meses anteriores
-     * classificados no mÃªs para tipo de financiamento igual a parcelamento de
+     * classificados no mês para tipo de financiamento igual a parcelamento de
      * serviÃ§o e grupo de parcelamento diferente de juros cobrados.
      * 
      * @author Pedro Alexandre
@@ -4771,9 +4771,9 @@ public interface IRepositorioArrecadacao {
     public BigDecimal acumularValorDebitoCobradoPagamentosContasEfetuadosEmMesesAnterioresClassificadosNoMesFinanciamentoTipoDoacoes(Integer idLocalidade, Integer anoMesReferenciaArrecadacao, Integer idCategoria, Integer idLancamentoItemContabil) throws ErroRepositorioException ;
 
     /**
-     * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] Encerrar Arrecadação do mês
      *
-     * Pesquisa as devoluÃ§Ãµes classificadas para transferir para o histÃ³rico.
+     * Pesquisa as devoluções classificadas para transferir para o Histórico.
      *
      * @author Pedro Alexandre
      * @date 10/01/2007
@@ -4786,10 +4786,10 @@ public interface IRepositorioArrecadacao {
     public Collection<Devolucao> pesquisarDevolucoesClassificadasPorLocalidade(Integer anoMesReferenciaArrecadacao, Integer idLocalidade) throws ErroRepositorioException ;
 
     /**
-     * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] Encerrar Arrecadação do mês
      *
      * Pesquisa as contas correspondentes aos pagamentos classificados de conta 
-     * e os pagamentos anteriores de conta classificados no mÃªs.
+     * e os pagamentos anteriores de conta classificados no mês.
      *
      * @author Pedro Alexandre
      * @date 09/01/2007
@@ -4803,7 +4803,7 @@ public interface IRepositorioArrecadacao {
 
 
     /**
-     * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] Encerrar Arrecadação do mês
      *
      * Pesquisa a conta  
      * @author Pedro Alexandre
@@ -4816,7 +4816,7 @@ public interface IRepositorioArrecadacao {
     public Conta pesquisarConta(Integer idConta) throws ErroRepositorioException ;
 
     /**
-     * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] Encerrar Arrecadação do mês
      *
      * Pesquisar o pagamento
      *
@@ -4836,13 +4836,13 @@ public interface IRepositorioArrecadacao {
     public Collection<DebitoACobrar> pesquisarDebitosACobrarDePagamentosClassificadosGuiasPagamentoEPagamentosAnterioresGuiaPagamentoClassificadosNoMes(Integer anoMesReferenciaArrecadacao, Integer idLocalidade, boolean dividaAtiva) throws ErroRepositorioException ;
 
     /**
-     * Sequencial do tipo lanÃ§amento igual a 4400, 4410, 4420, 4430
+     * Sequencial do tipo lançaamento igual a 4400, 4410, 4420, 4430
      * 
-     * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] - Encerrar Arrecadação do mês
      * 
-     * Acumula o valor dos crÃ©ditos realizados por localidade e categoria, para
+     * Acumula o valor dos Créditos realizados por localidade e categoria, para
      * os pagamentos de contas efetuados em meses anteriores classificados no
-     * mÃªs, para origem do crÃ©dito igual a descontos concedidos.
+     * mês, para origem do Crédito igual a descontos concedidos.
      * 
      * @author Pedro Alexandre
      * @date 23/05/2006
@@ -4858,13 +4858,13 @@ public interface IRepositorioArrecadacao {
 
     
     /**
-     * Sequencial do tipo lanÃ§amento igual a 400 e 500
+     * Sequencial do tipo lançamento igual a 400 e 500
      * 
-     * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] - Encerrar Arrecadação do mês
      * 
-     * Acumula o valor do dÃ©bitos cobrados por localidade, categoria dos
+     * Acumula o valor do débitos cobrados por localidade, categoria dos
      * pagamentos classificados de conta para tipo de financiamento igual a
-     * parcelamento de Ã¡gua ou parcelamento de esgoto.
+     * parcelamento de Água ou parcelamento de esgoto.
      * 
      * @author Pedro Alexandre
      * @date 18/04/2007
@@ -4880,12 +4880,12 @@ public interface IRepositorioArrecadacao {
 
     
     /**
-     * Sequencial do tipo lanÃ§amento igual a 3800
+     * Sequencial do tipo lançaamento igual a 3800
      * 
-     * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] - Encerrar Arrecadação do mês
      * 
-     * Acumula o valor dos dÃ©bitos cobrados por localidade e categoria para os
-     * pagamentos de contas efetuados em meses anteriores classificados no mÃªs
+     * Acumula o valor dos débitos cobrados por localidade e categoria para os
+     * pagamentos de contas efetuados em meses anteriores classificados no mês
      * para tipo de financiamento igual a parcelamento de Ã¡gua.
      * 
      * @author Pedro Alexandre
@@ -4901,13 +4901,13 @@ public interface IRepositorioArrecadacao {
     public BigDecimal acumularValorDebitoCobradoPagamentosContasEfetuadosEmMesesAnterioresClassificadosNoMesPorFinanciamentoTipo(Integer idLocalidade, Integer anoMesReferenciaArrecadacao, Integer idCategoria, Integer idFinanciamentoTipo) throws ErroRepositorioException ;
 
     /**
-     * Sequencial do tipo lanÃ§amento igual a 300
+     * Sequencial do tipo lançaamento igual a 300
      * 
-     * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] - Encerrar Arrecadação do mês
      * 
-     * Acumula o valor do dÃ©bitos cobrados por localidade, categoria e item
-     * contÃ¡bil dos pagamentos classificados de conta para tipo de financiamento
-     * igual a serviÃ§o
+     * Acumula o valor do débitos cobrados por localidade, categoria e item
+     * contábil dos pagamentos classificados de conta para tipo de financiamento
+     * igual a serviço
      * 
      * @author Pedro Alexandre
      * @date 22/05/2006
@@ -4923,13 +4923,13 @@ public interface IRepositorioArrecadacao {
     public BigDecimal acumularValorDebitoCobradoPagamentosClassificadosContaPorFinanciamentoTipo(Integer idLocalidade, Integer anoMesReferenciaArrecadacao, Integer idLancamentoItemContabil, Integer idCategoria, Collection<Integer> colecaoIdsFinanciamentoTipo) throws ErroRepositorioException ;
 
     /**
-     * Sequencial do tipo lanÃ§amento igual a 3700
+     * Sequencial do tipo lançamento igual a 3700
      * 
-     * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+     * [UC0276] - Encerrar Arrecadação do mês
      * 
-     * Acumula o valor dos dÃ©bitos cobrados por localidade, categoria e item
-     * contÃ¡bil para os pagamentos de contas efetuados em meses anteriores
-     * classificados no mÃªs para tipo de financiamento igual a serviÃ§o.
+     * Acumula o valor dos débitos cobrados por localidade, categoria e item
+     * contábil para os pagamentos de contas efetuados em meses anteriores
+     * classificados no mês para tipo de financiamento igual a serviço.
      * 
      * @author Pedro Alexandre
      * @date 23/05/2006
@@ -4950,10 +4950,10 @@ public interface IRepositorioArrecadacao {
      * Atualiza o arrecadador contrato
      * 
      * 
-     * @author SÃ¡vio Luiz,Vivianne Sousa
+     * @author Sávio Luiz,Vivianne Sousa
      * @date 19/04/2007,28/11/2007
      * 
-     * @return ColeÃ§Ã£o de Bancos
+     * @return Coleção de Bancos
      * @throws ErroRepositorioException
      */
 
@@ -4965,10 +4965,10 @@ public interface IRepositorioArrecadacao {
 
     
     /**
-     * Pesquisar os ano/mÃªs de referÃªncia do pagamentos para um imÃ³vel e ano/mÃªs
-     * de arrecadaÃ§Ã£o informados para o tipo de documento informado.
+     * Pesquisar os ano/mês de referência do pagamentos para um imóvel e ano/mês
+     * de Arrecadação informados para o tipo de documento informado.
      * 
-     * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+     * [UC0300] Classificar Pagamentos e Devoluções
      * 
      * @author Pedro Alexandre
      * @date 06/12/2006
@@ -4983,7 +4983,7 @@ public interface IRepositorioArrecadacao {
     /**
      * Seleciona os pagamentos histÃ³rios de um aviso
      * 
-     * @author Rafael CorrÃªa
+     * @author Rafael Corrêa
      * @date 23/04/2007
      * 
      * @return Collection
@@ -5033,7 +5033,7 @@ public interface IRepositorioArrecadacao {
 	
 	 /**
 	 *  
-	 * @author SÃ¡vio Luiz
+	 * @author Savio Luiz
 	 * @data 28/04/2007
 	 * 
 	 * @param idConta
@@ -5043,8 +5043,8 @@ public interface IRepositorioArrecadacao {
 			Integer idDebitoACobrar) throws ErroRepositorioException;
 	
 	/**
-	 * Consulta ResumoArrecadacao para a geraÃ§Ã£o do relatÃ³rio '[UC0345] Gerar
-	 * RelatÃ³rio de Resumo ArrecadaÃ§Ã£o' de acordo com a opÃ§Ã£o de totalizaÃ§Ã£o.
+	 * Consulta ResumoArrecadacao para a geração do relatório '[UC0345] Gerar
+	 * relatório de Resumo Arrecadação' de acordo com a opção de totalização.
 	 * 
 	 * @author Vivianne Sousa
 	 * @created 04/06/2007
@@ -5057,8 +5057,8 @@ public interface IRepositorioArrecadacao {
 			int anoMesReferencia, Collection<Integer> idsPerfilImovel) throws ErroRepositorioException;
 	
 	/**
-	 * Consulta ResumoArrecadacao para a geraÃ§Ã£o do relatÃ³rio '[UC0345] Gerar
-	 * RelatÃ³rio de Resumo ArrecadaÃ§Ã£o' de acordo com a opÃ§Ã£o de totalizaÃ§Ã£o.
+	 * Consulta ResumoArrecadacao para a geração do relatório '[UC0345] Gerar
+	 * relatório de Resumo Arrecadação' de acordo com a opção de totalização.
 	 * 
 	 * @author Vivianne Sousa
 	 * @created 04/06/2007
@@ -5072,7 +5072,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisar pagamentos pelo aviso bancÃ¡rio
+	 * Pesquisar pagamentos pelo aviso bancário
 	 * 
 	 * @author Ana Maria
 	 * @date 11/06/2007
@@ -5084,7 +5084,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Pesquisar devoluÃ§Ã£oes pelo aviso bancÃ¡rio
+	 * Pesquisar devoluçãoes pelo aviso bancário
 	 * 
 	 * @author Ana Maria
 	 * @date 11/06/2007
@@ -5096,7 +5096,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;	
 	
 	/**
-	 * Pesquisar valores de arrecadaÃ§Ã£o e devoluÃ§Ã£o do aviso bancÃ¡rio
+	 * Pesquisar valores de Arrecadação e devolução do aviso bancário
 	 * 
 	 * @author Ana Maria
 	 * @date 14/06/2007
@@ -5121,7 +5121,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Atualizar valor de arrecadaÃ§Ã£o calculado 
+	 * Atualizar valor de Arrecadação calculado 
 	 * 
 	 * @author Ana Maria
 	 * @date 15/06/2007
@@ -5147,7 +5147,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	 /**
-	 * Atualizar valor de devoluÃ§Ã£o calculado 
+	 * Atualizar valor de devolução calculado 
 	 * 
 	 * @author Ana Maria
 	 * @date 15/06/2007
@@ -5160,7 +5160,7 @@ public interface IRepositorioArrecadacao {
 			Integer idAvisoBancario)throws ErroRepositorioException;	
 	
 	/**
-	 * [UC0263] Filtrar Movimento dos Arrecadadores - RelatÃ³rio
+	 * [UC0263] Filtrar Movimento dos Arrecadadores - relatório
 	 * 
 	 * @author Ana Maria
 	 * @date 13/07/2007
@@ -5226,9 +5226,9 @@ public interface IRepositorioArrecadacao {
 			Integer idBanco) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0626] Gerar Resumo de Metas Acumulado no MÃªs (CAERN)
+	 * [UC0626] Gerar Resumo de Metas Acumulado no mês (CAERN)
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @data 28/11/2007
 	 * 
 	 * @param idConta
@@ -5238,9 +5238,9 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0739] Informar SituaÃ§Ã£o de Expurgo do Pagamento
+	 * [UC0739] Informar Situação de Expurgo do Pagamento
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @data 02/01/2008
 	 * 
 	 * @param idConta
@@ -5250,9 +5250,9 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0739] Informar SituaÃ§Ã£o de Expurgo do Pagamento
+	 * [UC0739] Informar Situação de Expurgo do Pagamento
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @data 02/01/2008
 	 * 
 	 * @param idConta
@@ -5262,10 +5262,10 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0739] Informar SituaÃ§Ã£o de Expurgadodo Pagamento
+	 * [UC0739] Informar Situação de Expurgadodo Pagamento
 	 * 
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @date 04/01/2008
 	 * 
 	 * @param idsPagamentos
@@ -5276,9 +5276,9 @@ public interface IRepositorioArrecadacao {
 
 	
 	/**
-	 * Pesquisa a ContaHistorico para o imÃ³vel no ano/mÃªs de referÃªncia informados
+	 * Pesquisa a ContaHistorico para o imóvel no ano/mês de referência informados
 	 *
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 *
 	 * @author Pedro Alexandre
 	 * @date 15/01/2008
@@ -5294,9 +5294,9 @@ public interface IRepositorioArrecadacao {
 
 	
 	/**
-	 * [UC0744] Gerar Comparativo do Faturamento, ArrecadaÃ§Ã£o e Expurgo
+	 * [UC0744] Gerar Comparativo do Faturamento, Arrecadação e Expurgo
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @data 10/01/2008
 	 * 
 	 * @param idConta
@@ -5307,7 +5307,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UCXXX] Pesquisa uma Guia de ArrecadaÃ§Ã£o
+	 * [UCXXX] Pesquisa uma Guia de Arrecadação
 	 * 
 	 * @author Roberto Barbalho
 	 * @data 25/01/2008
@@ -5335,7 +5335,7 @@ public interface IRepositorioArrecadacao {
     
     
     /**
-     * [UC0737] Atualiza Quantidade de Parcela Paga Consecutiva e Parcela BÃ´nus
+     * [UC0737] Atualiza Quantidade de Parcela Paga Consecutiva e Parcela Bónus
      * 
      * @author Vivianne Sousa
      * @data 01/02/2008
@@ -5347,9 +5347,9 @@ public interface IRepositorioArrecadacao {
             throws ErroRepositorioException;
     
     /**
-	 * [UC0744] Gerar Comparativo do Faturamento, ArrecadaÃ§Ã£o e Expurgo
+	 * [UC0744] Gerar Comparativo do Faturamento, Arrecadação e Expurgo
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @data 17/02/2008
 	 * 
 	 * @param idConta
@@ -5360,9 +5360,9 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0744] Gerar Comparativo do Faturamento, ArrecadaÃ§Ã£o e Expurgo
+	 * [UC0744] Gerar Comparativo do Faturamento, Arrecadação e Expurgo
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @data 17/02/2008
 	 * 
 	 * @param idConta
@@ -5374,11 +5374,11 @@ public interface IRepositorioArrecadacao {
 
 	
 	/**
-	 * Sequencial do tipo lanÃ§amento igual a 100
+	 * Sequencial do tipo lançamento igual a 100
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Acumula o valor de Ã¡gua e esgoto por categoria 
+	 * Acumula o valor de Água e esgoto por categoria 
 	 * e localidade paa os pagamentos classificados de conta
 	 * 
 	 * @author Pedro Alexandre
@@ -5396,12 +5396,12 @@ public interface IRepositorioArrecadacao {
 			Integer idCategoria) throws ErroRepositorioException ;
 
 	/**
-	 * Sequencial do tipo lanÃ§amento igual a 3500
+	 * Sequencial do tipo lançamento igual a 3500
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
 	 * Acumula o valor de Ã¡gua por localidade e categoria para os pagamentos de
-	 * contas efetuados em meses anteriores classificados no mÃªs.
+	 * contas efetuados em meses anteriores classificados no mês.
 	 * 
 	 * @author Pedro Alexandre, Pedro Alexandre
 	 * @date 23/05/2006, 23/05/2008
@@ -5418,7 +5418,7 @@ public interface IRepositorioArrecadacao {
 			Integer idCategoria) throws ErroRepositorioException ;
 
 	/**
-	 * [UC0259] - Processar Pagamento com CÃ³digo de Barras
+	 * [UC0259] - Processar Pagamento com Código de Barras
 	 *
 	 * [SB0014] - Processar Pagamento Legado CAEMA - GUIA DE PAGAMENTO
 	 *
@@ -5435,7 +5435,7 @@ public interface IRepositorioArrecadacao {
 			Integer numeroGuia, Integer anoGuia) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0259] - Processar Pagamento com CÃ³digo de Barras
+	 * [UC0259] - Processar Pagamento com Código de Barras
 	 *
 	 * [SB0014] - Processar Pagamento Legado CAEMA - AVISO DE DÃ‰BITOS
 	 *
@@ -5462,10 +5462,10 @@ public interface IRepositorioArrecadacao {
  	public ArrecadadorContratoTarifa pesquisarArrecadadorContratoTarifa(Integer idArrecadador,
  			Integer idFormaArrecadacao) throws ErroRepositorioException;
 	/**
-	 * Exclui resumo arrecadaÃ§Ã£o do ano/mÃªs da arrecadaÃ§Ã£o corrente
+	 * Exclui resumo Arrecadação do ano/mês da Arrecadação corrente
 	 * por localidade
 	 * 
-	 * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] Encerrar Arrecadação do mês
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 11/08/2008
@@ -5479,7 +5479,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0818] Gerar Historico do Encerramento da ArrecadaÃ§Ã£o
+	 * [UC0818] Gerar Historico do Encerramento da Arrecadação
 	 * 
 	 * Pesquisa os creditos a realizar correspondentes as devoluÃ§Ãµes classificadas
 	 * 
@@ -5497,7 +5497,7 @@ public interface IRepositorioArrecadacao {
 	
 
 	/**
-	 * [UC0826] Gerar RelatÃ³rio AnÃ¡lise da ArrecaÃ§Ã£o
+	 * [UC0826] Gerar relatório Análise da ArrecaÃ§Ã£o
 	 * 
 	 * @see RepositorioArrecadacaoHBM#pesquisarAnaliseArrecadacao(PesquisarAnaliseArrecadacaoHelper)
 	 * 
@@ -5508,7 +5508,7 @@ public interface IRepositorioArrecadacao {
     		PesquisarAnaliseArrecadacaoHelper helper) throws ErroRepositorioException;
     
 	/**
-	 * [UC0827] Gerar RelatÃ³rio AnÃ¡lise dos Avisos Bancarios
+	 * [UC0827] Gerar relatório Análise dos Avisos Bancarios
 	 * 
 	 * @see RepositorioArrecadacaoHBM#pesquisarAnaliseAvisosBancarios(PesquisarAnaliseAvisosBancariosHelper)
 	 * 
@@ -5519,7 +5519,7 @@ public interface IRepositorioArrecadacao {
     		PesquisarAnaliseAvisosBancariosHelper helper) throws ErroRepositorioException;
     
     /**
-     * [UC0829] Gerar RelatÃ³rio Avisos Bancarios Por Conta Corrente
+     * [UC0829] Gerar relatório Avisos Bancarios Por Conta Corrente
      * 
      * @see RepositorioArrecadacaoHBM#pesquisarAvisoBancarioPorContaCorrente(PesquisarAvisoBancarioPorContaCorrenteHelper)
      * 
@@ -5530,7 +5530,7 @@ public interface IRepositorioArrecadacao {
     		PesquisarAvisoBancarioPorContaCorrenteHelper helper) throws ErroRepositorioException;
     
     /**
-     * [UC0829] Gerar RelatÃ³rio Avisos Bancarios Por Conta Corrente
+     * [UC0829] Gerar relatório Avisos Bancarios Por Conta Corrente
      * 
      * @see RepositorioArrecadacaoHBM#pesquisarPagamentosDosAvisos(PesquisarAvisoBancarioPorContaCorrenteHelper, Collection)
      * 
@@ -5541,7 +5541,7 @@ public interface IRepositorioArrecadacao {
     		PesquisarAvisoBancarioPorContaCorrenteHelper helper, Collection<Integer> idsAvisos) throws ErroRepositorioException;
 	
     /**
-     * [UC0828] Atualizar DiferenÃ§a Acumulada no MÃªs
+     * [UC0828] Atualizar Diferença Acumulada no mês
      * 
      * @see RepositorioArrecadacaoHBM#pesquisarDiferencaAcumuladaNoMes(int)
      * 
@@ -5551,7 +5551,7 @@ public interface IRepositorioArrecadacao {
     public List<Object[]> pesquisarDiferencaAcumuladaNoMes(int anoMesArrecadacao, int anoMesArrecadacaoAnterior) throws ErroRepositorioException;
     
     /**
-     * [UC0828] Atualizar DiferenÃ§a Acumulada no MÃªs
+     * [UC0828] Atualizar Diferença Acumulada no mês
      * 
      * @author Victor Cisneiros
      * @date 01/09/2008
@@ -5559,10 +5559,10 @@ public interface IRepositorioArrecadacao {
     public void removerDiferencasAcumuladasNoMes(int anoMesArrecadacao) throws ErroRepositorioException;
 
 	/**
-	 * Exclui os dados diÃ¡rios da devolucao do ano/mÃªs da arrecadaÃ§Ã£o corrente
+	 * Exclui os dados diários da devolucao do ano/mês da Arrecadação corrente
 	 * por localidade
 	 * 
-	 * [UC0301] Gerar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+	 * [UC0301] Gerar Dados Diários da Arrecadação
 	 * 
 	 * @author Francisco do Nascimento
 	 * @date 22/10/2008
@@ -5576,9 +5576,9 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;    
     
     /**
-	 * [UC0744] Gerar Comparativo do Faturamento, ArrecadaÃ§Ã£o e Expurgo
+	 * [UC0744] Gerar Comparativo do Faturamento, Arrecadação e Expurgo
 	 * 
-	 * @author SÃ¡vio Luiz
+	 * @author Sávio Luiz
 	 * @data 17/02/2008
 	 * 
 	 * @param idConta
@@ -5591,11 +5591,11 @@ public interface IRepositorioArrecadacao {
     
     /**
      * 
-     * [UC0818] - Gerar HistÃ³rico do Encerramento da ArrecadaÃ§Ã£o
+     * [UC0818] - Gerar Histórico do Encerramento da Arrecadação
      *
      * Fluxo Principal
      *
-     * [FS0001] - Verifica existencia resumo arrecadaÃ§Ã£o   
+     * [FS0001] - Verifica existencia resumo Arrecadação   
      *
      * @author bruno
      * @date 24/10/2008
@@ -5606,7 +5606,7 @@ public interface IRepositorioArrecadacao {
     public Integer verificarExistenciaResumoArrecadacaoParaAnoMes( Integer anoMesReferencia ) throws ErroRepositorioException;
        
 	/**
-	 * [UC0333] Consultar Dados DiÃ¡rios da Arrecadacao
+	 * [UC0333] Consultar Dados Diários da Arrecadacao
 	 * 
 	 * Metodo para filtrar os dados diarios para qualquer aba da funcionalidade
 	 * 
@@ -5621,7 +5621,7 @@ public interface IRepositorioArrecadacao {
 	
 	/**
 	 * 
-	 * [UC0333] Consultar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+	 * [UC0333] Consultar Dados Diários da Arrecadação
 	 *
 	 * Verificar se existe dados diarios da arrecadacao de acordo com o filtro 
 	 * passado
@@ -5637,8 +5637,8 @@ public interface IRepositorioArrecadacao {
 		throws ErroRepositorioException;
 	
 	/**
-	 * Atualiza o valor excedente, a situaÃ§Ã£o anterior para NULO e a situaÃ§Ã£o atual dos pagamentos informados para o
-	 * tipo de situaÃ§Ã£o informada.
+	 * Atualiza o valor excedente, a situação anterior para NULO e a situação atual dos pagamentos informados para o
+	 * tipo de situação informada.
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 27/11/2008
@@ -5652,16 +5652,16 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona os pagamentos com ano/mês de referância da
+	 * Arrecadação igual ou menor que o ano/mês de referÃªncia da Arrecadação
 	 * corrente (seleciona a partir da tabela PAGAMENTO para
 	 * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
 	 * PARM_AMREFERENCIAARRECADACAO), com o tipo do documento correspondente a
 	 * guia de pagamento e o campo GPAG_ID informado e
-	 * o ano/mÃªs de referÃªncia contÃ¡bil da guia de pagamento seja 
-	 * menor ao ano/mÃªs de referÃªncia do faturamento 
+	 * o ano/mês de referência contÃ¡bil da guia de pagamento seja 
+	 * menor ao ano/mês de referÃªncia do faturamento 
 	 * 
 	 * @author Vivianne Sousa
 	 * @data 25/11/2008
@@ -5678,16 +5678,16 @@ public interface IRepositorioArrecadacao {
 
 
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona os pagamentos com ano/mês de referência da
+	 * Arrecadação igual ou menor que o ano/mês de referência da Arrecadação
 	 * corrente (seleciona a partir da tabela PAGAMENTO para
 	 * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
 	 * PARM_AMREFERENCIAARRECADACAO), com o tipo do documento correspondente a
 	 * guia de pagamento e o campo GPAG_ID informado e
-	 * o ano/mÃªs de referÃªncia contÃ¡bil da guia de pagamento seja 
-	 * maior ou igual ao ano/mÃªs de referÃªncia do faturamento 
+	 * o ano/mês de referÃªncia contÃ¡bil da guia de pagamento seja 
+	 * maior ou igual ao ano/mês de referÃªncia do faturamento 
 	 * 
 	 * @author Vivianne Sousa
 	 * @data 25/11/2008
@@ -5702,16 +5702,16 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona os pagamentos com ano/mês de referência da
+	 * Arrecadação igual ou menor que o ano/mês de referência da Arrecadação
 	 * corrente (seleciona a partir da tabela PAGAMENTO para
 	 * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
 	 * PARM_AMREFERENCIAARRECADACAO), com o tipo do documento correspondente a
 	 * debito a cobrar e o campo DBAC_ID informado e 
-	 * o ano/mÃªs de referÃªncia contÃ¡bil do dÃ©bito a cobrar seja 
-	 * maior ou igual ao ano/mÃªs de referÃªncia do faturamento 
+	 * o ano/mês de referÃªncia contÃ¡bil do dÃ©bito a cobrar seja 
+	 * maior ou igual ao ano/mês de referÃªncia do faturamento 
 	 * 
 	 * @author Vivianne Sousa
 	 * @data 25/11/2008
@@ -5726,16 +5726,16 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
-	 * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-	 * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+	 * O sistema seleciona os pagamentos com ano/mês de referência da
+	 * Arrecadação igual ou menor que o ano/mês de referência da Arrecadação
 	 * corrente (seleciona a partir da tabela PAGAMENTO para
 	 * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
 	 * PARM_AMREFERENCIAARRECADACAO), com o tipo do documento correspondente a
 	 * debito a cobrar e o campo DBAC_ID informado e 
-	 * o ano/mÃªs de referÃªncia contÃ¡bil do dÃ©bito a cobrar seja 
-	 * menor q o ano/mÃªs de referÃªncia do faturamento 
+	 * o ano/mês de referência contábil do débito a cobrar seja 
+	 * menor q o ano/mês de referÃªncia do faturamento 
 	 * 
 	 * @author Vivianne Sousa
 	 * @data 25/11/2008
@@ -5750,11 +5750,11 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * Sequencial do tipo lanÃ§amento igual a 2440
+	 * Sequencial do tipo lançamento igual a 2440
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Pesquisa as devoluÃ§Ãµes do tipo descontos por pagamento a vista
+	 * Pesquisa as devoluções do tipo descontos por pagamento a vista
 	 * 
 	 * @author Francisco do Nascimento
 	 * @date 03/12/2008
@@ -5769,11 +5769,11 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 
 	/**
-	 * Sequencial do tipo lanÃ§amento igual a 2470
+	 * Sequencial do tipo lançamento igual a 2470
 	 * 
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] - Encerrar Arrecadação do mês
 	 * 
-	 * Pesquisa as devoluÃ§Ãµes do tipo descontos por credito
+	 * Pesquisa as devoluções do tipo descontos por credito
 	 * 
 	 * @author Francisco do Nascimento
 	 * @date 04/12/2008
@@ -5798,7 +5798,7 @@ public interface IRepositorioArrecadacao {
 	/**
 	  * [UC0146] Manter Conta
 	  * 
-	  * FS0028 - Verificar parÃ¢metro consulta e dÃ©bito automÃ¡tico
+	  * FS0028 - Verificar parâmetro consulta e débito automático
 	  * @return
 	  * @throws ErroRepositorioException
 	  */
@@ -5825,7 +5825,7 @@ public interface IRepositorioArrecadacao {
 			String idArrecadadorMovimento ) throws ErroRepositorioException ;
     
 	/**
-	 * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] Encerrar Arrecadação do mês
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 01/06/2009
@@ -5840,9 +5840,9 @@ public interface IRepositorioArrecadacao {
 			Integer idLocalidade, Integer idRD) throws ErroRepositorioException;
 	
 	/**
-	 * Sequencial do tipo lanÃ§amento igual a 2450
-	 * [UC0276] - Encerrar ArrecadaÃ§Ã£o do MÃªs
-	 * Pesquisa as devoluÃ§Ãµes do tipo descontos por pagamento a vista da campanha de solidariedade a crianÃ§a
+	 * Sequencial do tipo lançaamento igual a 2450
+	 * [UC0276] - Encerrar Arrecadação do mês
+	 * Pesquisa as devoluções do tipo descontos por pagamento a vista da campanha de solidariedade a crianÃ§a
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 01/06/2009
@@ -5856,7 +5856,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
     
     /**
-	 * [UC0259] - Processar Pagamento com CÃ³digo de Barras
+	 * [UC0259] - Processar Pagamento com Código de Barras
 	 *
 	 * [SB0014] - Processar Pagamento Legado COSANPA - CONTA
 	 *
@@ -5870,7 +5870,7 @@ public interface IRepositorioArrecadacao {
 	public Object[] pesquisarExistenciaContaPorNumeroFatura(String numeroFatura) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0259] - Processar Pagamento com CÃ³digo de Barras
+	 * [UC0259] - Processar Pagamento com Código de Barras
 	 *
 	 * [SB0014] - Processar Pagamento Legado COSANPA - DOCUMENTO DE COBRANÃ‡A
 	 *
@@ -5885,7 +5885,7 @@ public interface IRepositorioArrecadacao {
 		throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0259] - Processar Pagamento com CÃ³digo de Barras
+	 * [UC0259] - Processar Pagamento com Código de Barras
 	 *
 	 * [SB0014] - Processar Pagamento Legado COSANPA - DOCUMENTO DE COBRANÃ‡A
 	 *
@@ -5899,16 +5899,16 @@ public interface IRepositorioArrecadacao {
 	public Collection pesquisarCobrancaDocumentoItem(Integer idCobrancaDocumento) throws ErroRepositorioException ;
     
     /**
-     * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+     * [UC0300] Classificar Pagamentos e Devoluções
      * 
-     * O sistema seleciona os pagamentos com ano/mÃªs de referÃªncia da
-     * arrecadaÃ§Ã£o igual ou menor que o ano/mÃªs de referÃªncia da arrecadaÃ§Ã£o
+     * O sistema seleciona os pagamentos com ano/mês de referência da
+     * Arrecadação igual ou menor que o ano/mês de referência da Arrecadação
      * corrente (seleciona a partir da tabela PAGAMENTO para
      * PGMT_AMREFERENCIAARRECADACAO igual ou menor ao
      * PARM_AMREFERENCIAARRECADACAO), com o tipo do documento correspondente a
      * debito a cobrar e o campo DBAC_ID informado e 
-     * o ano/mÃªs de referÃªncia contÃ¡bil do dÃ©bito a cobrar seja 
-     * maior ou igual ao ano/mÃªs de referÃªncia do faturamento 
+     * o ano/mês de referência contábil do débito a cobrar seja 
+     * maior ou igual ao ano/mês de referÃªncia do faturamento 
      * 
      * @author Bruno Barros
      * @data 16/06/2009
@@ -5923,7 +5923,7 @@ public interface IRepositorioArrecadacao {
             throws ErroRepositorioException;   
     
     /**
-	 * [UC0259] - Processar Pagamento com CÃ³digo de Barras
+	 * [UC0259] - Processar Pagamento com Código de Barras
 	 *
 	 * [SB0014] - Processar Pagamento Legado COSANPA - GUIA DE PAGAMENTO
 	 *
@@ -5937,7 +5937,7 @@ public interface IRepositorioArrecadacao {
 	public Object[] pesquisarExistenciaGuiaPagamentoPorNumeroGuiaFatura(String numeroGuiaFatura) throws ErroRepositorioException ;
 
 	/**
-	 * [UC0264] - Distribuir Dados do CÃ³digo de Barras
+	 * [UC0264] - Distribuir Dados do Código de Barras
 	 * 
 	 * [SB0008] - Distribuir Pagamento Legado COSANPA
 	 * 
@@ -5951,7 +5951,7 @@ public interface IRepositorioArrecadacao {
 	public Integer pesquisarFaturaPorNumeroFatura(String numeroFatura) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0259] - Processar Pagamento com CÃ³digo de Barras
+	 * [UC0259] - Processar Pagamento com Código de Barras
 	 * 
 	 * [SB0016] - Processar Pagamento Antecipado de Conta
 	 *
@@ -5966,7 +5966,7 @@ public interface IRepositorioArrecadacao {
 		throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0264] - Distribuir Dados do CÃ³digo de Barras
+	 * [UC0264] - Distribuir Dados do Código de Barras
 	 * 
 	 * [SB0008] - Distribuir Pagamento Legado COSANPA
 	 * 
@@ -5981,7 +5981,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0744] Gerar Comparativo do Faturamento, ArrecadaÃ§Ã£o e Expurgo
+	 * [UC0744] Gerar Comparativo do Faturamento, Arrecadação e Expurgo
 	 * 
 	 * @author RÃ´mulo AurÃ©lio
 	 * @data 26/10/2008
@@ -5991,11 +5991,11 @@ public interface IRepositorioArrecadacao {
 			Integer anoMesReferencia) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0744] Gerar Comparativo do Faturamento, ArrecadaÃ§Ã£o e Expurgo
+	 * [UC0744] Gerar Comparativo do Faturamento, Arrecadação e Expurgo
 	 * 
 	 * @author RÃ´mulo AurÃ©lio
 	 * @data 26/10/2008
-	 * Quantidade/valor de documentos pagoa para unidade de negÃ³cio / referÃªncia
+	 * Quantidade/valor de documentos pagoa para unidade de negócio / referÃªncia
 	 */ 
 	public Object[] pesquisarQuantidadeDocumentosPagos(Integer idLocalidade,
 			Integer anoMesReferencia) throws ErroRepositorioException;
@@ -6037,7 +6037,7 @@ public interface IRepositorioArrecadacao {
 	public Integer pesquisarExistenciaGuiaPagamento(Integer idGuia) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0978] Pesquisa RelatÃ³rio de Pagamento para Entidades Beneficentes Analitico
+	 * [UC0978] Pesquisa relatório de Pagamento para Entidades Beneficentes Analitico
 	 * 
 	 * @author Daniel Alves
 	 * @data   26/01/2010
@@ -6054,7 +6054,7 @@ public interface IRepositorioArrecadacao {
 	
 	
 	/**
-	 * [UC0978] Pesquisa RelatÃ³rio de Pagamento para Entidades Beneficentes Sintetico
+	 * [UC0978] Pesquisa relatório de Pagamento para Entidades Beneficentes Sintetico
 	 * 
 	 * @author Daniel Alves
 	 * @data   26/01/2010
@@ -6070,7 +6070,7 @@ public interface IRepositorioArrecadacao {
 			int opcaoTotalizacao
 			) throws ErroRepositorioException;
 	/**
-	 * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] Encerrar Arrecadação do mês
 	 * 
 	 * Pesquisar o pagamento
 	 * 
@@ -6086,7 +6086,7 @@ public interface IRepositorioArrecadacao {
 	
 	
 	/**
-	 * [UC0978] Count para RelatÃ³rio de Pagamento para Entidades Beneficentes Analitico
+	 * [UC0978] Count para relatório de Pagamento para Entidades Beneficentes Analitico
 	 * 
 	 * @author Daniel Alves
 	 * @data   26/01/2010
@@ -6105,7 +6105,7 @@ public interface IRepositorioArrecadacao {
 			) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0978] Count para RelatÃ³rio de Pagamento para Entidades Beneficentes Sintetico
+	 * [UC0978] Count para relatório de Pagamento para Entidades Beneficentes Sintetico
 	 * 
 	 * @author Daniel Alves
 	 * @data   26/01/2010
@@ -6125,7 +6125,7 @@ public interface IRepositorioArrecadacao {
 	
 	
 	/**
-	 * [UC0927] Â– Confirmar CartÃ£o de CrÃ©dito/DÃ©bito
+	 * [UC0927] Â– Confirmar CartÃ£o de Crédito/Débito
 	 *
 	 * @author Raphael Rossiter
 	 * @date 03/02/2010
@@ -6140,9 +6140,9 @@ public interface IRepositorioArrecadacao {
 			String codigoOpcaoExtrato) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0259] - Processar Pagamento com cÃ³digo de Barras
+	 * [UC0259] - Processar Pagamento com código de Barras
 	 * 
-	 * [SB0019] Â– Gerar DÃ©bitos/CrÃ©ditos Parcelas Antecipadas 
+	 * [SB0019] Â– Gerar Débitos/Créditos Parcelas Antecipadas 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 13/04/2010
@@ -6156,9 +6156,9 @@ public interface IRepositorioArrecadacao {
 			Integer numeroPrestacoesAntecipadas) throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0259] - Processar Pagamento com cÃ³digo de Barras
+	 * [UC0259] - Processar Pagamento com código de Barras
 	 * 
-	 * [SB0019] Â– Gerar DÃ©bitos/CrÃ©ditos Parcelas Antecipadas 
+	 * [SB0019] Â– Gerar Débitos/Créditos Parcelas Antecipadas 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 14/04/2010
@@ -6174,9 +6174,9 @@ public interface IRepositorioArrecadacao {
 	
 	/**
 	 * 
-	 * [UC0259] Â– Processar Pagamento com CÃ³digo de Barras
+	 * [UC0259] Â– Processar Pagamento com Código de Barras
 	 * 
-	 * [SB0019] Â– Gerar DÃ©bitos/CrÃ©ditos Parcelas Antecipadas.
+	 * [SB0019] Â– Gerar Débitos/Créditos Parcelas Antecipadas.
 	 *
 	 * @author Raphael Rossiter
 	 * @date 19/04/2010
@@ -6189,9 +6189,9 @@ public interface IRepositorioArrecadacao {
 	throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0259] Â– Processar Pagamento com CÃ³digo de Barras
+	 * [UC0259] Â– Processar Pagamento com Código de Barras
 	 * 
-	 * [SB0019] Â– Gerar DÃ©bitos/CrÃ©ditos Parcelas Antecipadas. 
+	 * [SB0019] Â– Gerar Débitos/Créditos Parcelas Antecipadas. 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 19/04/2010
@@ -6227,7 +6227,7 @@ public interface IRepositorioArrecadacao {
 		/**
 		 * [UC0322] Inserir Guia Devolucao.
 		 * 
-		 * [FS0023] Verificar crÃ©dito a realizar. Â–Verificarasds 
+		 * [FS0023] Verificar Crédito a realizar. Â–Verificarasds 
 		 *
 		 * @author Hugo Leonardo
 		 * @date 26/05/2010
@@ -6241,7 +6241,7 @@ public interface IRepositorioArrecadacao {
 		/**
 		 * [UC0322] Inserir Guia Devolucao.
 		 * 
-		 * [FS0023] Verificar crÃ©dito a realizar HistÃ³rico. Â–Verificarasds 
+		 * [FS0023] Verificar Crédito a realizar Histórico. Â–Verificarasds 
 		 *
 		 * @author Hugo Leonardo
 		 * @date 26/05/2010
@@ -6253,8 +6253,8 @@ public interface IRepositorioArrecadacao {
 				throws ErroRepositorioException;
 		
 		/**
-		 * [UC0194] Inserir CrÃ©dito a realizar.
-		 * 		[FS0013] Verificar Guia devoluÃ§Ã£o. Â–Verificarasds 
+		 * [UC0194] Inserir Crédito a realizar.
+		 * 		[FS0013] Verificar Guia devolução. Â–Verificarasds 
 		 *
 		 * @author Hugo Leonardo
 		 * @date 27/05/2010
@@ -6266,7 +6266,7 @@ public interface IRepositorioArrecadacao {
 				throws ErroRepositorioException;
 		
 		/**
-		 * [UC0977] - Registrar Movimento CartÃ£o de CrÃ©dito
+		 * [UC0977] - Registrar Movimento Cartão de Crédito
 		 * 
 		 * [SB0006Â– Distribuir Dados do Registro de Movimento do Arrecadador] 
 		 *
@@ -6280,7 +6280,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException ;
 		
 		/**
-		 * [UC0977] - Registrar Movimento CartÃ£o de CrÃ©dito
+		 * [UC0977] - Registrar Movimento Cartão de Crédito
 		 * 
 		 * [SB0006Â– Distribuir Dados do Registro de Movimento do Arrecadador] 
 		 *
@@ -6303,7 +6303,7 @@ public interface IRepositorioArrecadacao {
 	public boolean verificarExistenciaContrato(String numeroContrato) throws ErroRepositorioException;
 	
 	/**
-	 * [UC0339] Consultar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+	 * [UC0339] Consultar Dados Diários da Arrecadação
 	 *
 	 * @author Hugo Amorim
 	 * @date 29/06/2010
@@ -6340,7 +6340,7 @@ public interface IRepositorioArrecadacao {
 		throws ErroRepositorioException ;
 	
 	/**
-	 * [UC1043] Gerar RelatÃ³rio AnÃ¡lise Pagamento CartÃ£o DÃ©bito
+	 * [UC1043] Gerar relatório Análise Pagamento Cartão Débito
 	 *
 	 * @author Hugo Amorim
 	 * @date 21/06/2010
@@ -6352,7 +6352,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC1043] Gerar RelatÃ³rio AnÃ¡lise Pagamento CartÃ£o DÃ©bito
+	 * [UC1043] Gerar relatório Análise Pagamento Cartão Débito
 	 *
 	 * @author Hugo Amorim
 	 * @date 21/06/2010
@@ -6364,7 +6364,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC1043] Gerar RelatÃ³rio AnÃ¡lise Pagamento CartÃ£o DÃ©bito
+	 * [UC1043] Gerar relatório Análise Pagamento Cartão Débito
 	 *
 	 * @author Hugo Amorim
 	 * @date 21/06/2010
@@ -6375,7 +6375,7 @@ public interface IRepositorioArrecadacao {
 			Integer integer)throws ErroRepositorioException;
 	
 	/**
-	 * [UC1043] Gerar RelatÃ³rio AnÃ¡lise Pagamento CartÃ£o DÃ©bito
+	 * [UC1043] Gerar relatório Análise Pagamento Cartão Débito
 	 *
 	 * @author Hugo Amorim
 	 * @date 21/06/2010
@@ -6386,7 +6386,7 @@ public interface IRepositorioArrecadacao {
 			Integer tipoItem, Integer idItem)throws ErroRepositorioException;
 	
 	/**
-	 * [UC0724] - Processar Pagamento com Ficha de CompensaÃ§Ã£o 
+	 * [UC0724] - Processar Pagamento com Ficha de Compensação 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 24/11/2010
@@ -6399,7 +6399,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC0339] Consultar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+	 * [UC0339] Consultar Dados Diários da Arrecadação
 	 *
 	 * @author Mariana Victor
 	 * @date 01/02/2011
@@ -6410,7 +6410,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0339] Consultar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
+	 * [UC0339] Consultar Dados Diários da Arrecadação
 	 *
 	 * @author Arthur Carvalho
 	 * @date 22/03/2011
@@ -6435,7 +6435,7 @@ public interface IRepositorioArrecadacao {
 	
 	/**
 	 * 
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 01/06/2011
@@ -6450,7 +6450,7 @@ public interface IRepositorioArrecadacao {
 	
 	/**
 	 * 
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 01/06/2011
@@ -6465,7 +6465,7 @@ public interface IRepositorioArrecadacao {
 	
 	/**
 	 * 
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 01/06/2011
@@ -6480,7 +6480,7 @@ public interface IRepositorioArrecadacao {
 	
 	/**
 	 * 
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 01/06/2011
@@ -6494,7 +6494,7 @@ public interface IRepositorioArrecadacao {
 		throws ErroRepositorioException ;
 
 	/**
-	 * [UC0724] - Processar Pagamento com Ficha de CompensaÃ§Ã£o
+	 * [UC0724] - Processar Pagamento com Ficha de Compensação
 	 * 
 	 * @author Mariana Victor
 	 * @data 04/08/2011
@@ -6504,7 +6504,7 @@ public interface IRepositorioArrecadacao {
 	
 	
 	/**
-	 * [UC0724] - Processar Pagamento com Ficha de CompensaÃ§Ã£o 
+	 * [UC0724] - Processar Pagamento com Ficha de Compensção 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 26/07/2011
@@ -6517,7 +6517,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException ;
 	
 	/**
-	 * [UC 1215] Â– Gerar RelatÃ³rio de Documentos nÃ£o Aceitos
+	 * [UC 1215] Â– Gerar relatório de Documentos não Aceitos
 	 * 
 	 * @author Raimundo Martins
 	 *
@@ -6530,7 +6530,7 @@ public interface IRepositorioArrecadacao {
 	public boolean existeClienteIdDocNaoIdentificado();
 
 	/**
-	 * [UC 1217] Â– Gerar RelatÃ³rio de Transferencia de Pagamento
+	 * [UC 1217] Â– Gerar relatório de Transferencia de Pagamento
 	 * 
 	 * @author Raimundo Martins
 	 *
@@ -6556,11 +6556,11 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-     * [UC1214] Informar Acerto Documentos NÃ£o Aceitos
+     * [UC1214] Informar Acerto Documentos Não Aceitos
 	 * 
-	 * 3. O sistema identifica os pagamentos com documentos nÃ£o aceitos 
-	 * 	 que foram gerados para um cliente fictÃ­cio e
-	 *   junto com o filtro selecionado pelo usuÃ¡rio.
+	 * 3. O sistema identifica os pagamentos com documentos não aceitos 
+	 * 	 que foram gerados para um cliente fictício e
+	 *   junto com o filtro selecionado pelo usuário.
 	 * 
 	 * @author Mariana Victor
 	 * @date 19/08/2011
@@ -6575,9 +6575,9 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-     * [UC1214] Informar Acerto Documentos NÃ£o Aceitos
+     * [UC1214] Informar Acerto Documentos Não Aceitos
 	 * 
-	 *  7.2.1. Total do Pagamento (PGMT _VLPAGAMENTO do pagamento doc. nÃ£o aceito).
+	 *  7.2.1. Total do Pagamento (PGMT _VLPAGAMENTO do pagamento doc. não aceito).
 	 * 
 	 * @author Mariana Victor
 	 * @date 22/08/2011
@@ -6592,7 +6592,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-     * [UC1214] Informar Acerto Documentos NÃ£o Aceitos
+     * [UC1214] Informar Acerto Documentos Não Aceitos
 	 * 
 	 * @author Mariana Victor
 	 * @date 24/08/2011
@@ -6607,7 +6607,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-     * [UC1214] Informar Acerto Documentos NÃ£o Aceitos
+     * [UC1214] Informar Acerto Documentos Não Aceitos
 	 * 
 	 * @author Mariana Victor
 	 * @date 24/08/2011
@@ -6622,7 +6622,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-     * [UC1214] Informar Acerto Documentos NÃ£o Aceitos
+     * [UC1214] Informar Acerto Documentos Não Aceitos
 	 * 
 	 * @author Mariana Victor
 	 * @date 24/08/2011
@@ -6673,8 +6673,8 @@ public interface IRepositorioArrecadacao {
 			String[] idsDocumentosTipos, String valorPagamentoInicial, String valorPagamentoFinal) throws ErroRepositorioException;
 
 	/**
-	 * Este caso de uso cria um sql que serÃ¡ usado na pesquisa de pagamentos
-	 * para o RelatÃ³rio
+	 * Este caso de uso cria um sql que será usado na pesquisa de pagamentos
+	 * para o relatório
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
@@ -6714,8 +6714,8 @@ public interface IRepositorioArrecadacao {
 		throws ErroRepositorioException ;
 
 	/**
-	 * Pesquisa o id do cliente da guia de pagamento atravÃ©s do id da Guia de
-	 * Pagamento e com CRTP_ID com o valor correspondente a usuÃ¡rio(2)
+	 * Pesquisa o id do cliente da guia de pagamento através do id da Guia de
+	 * Pagamento e com CRTP_ID com o valor correspondente a usuário(2)
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 07/12/2011
@@ -6759,9 +6759,9 @@ public interface IRepositorioArrecadacao {
 	
 	/**
 	 * [UC0629] Consultar Arquivo Texto Leitura
-	 * [FS0018] Verificar nÃ£o possibilidade de mudar a situaÃ§Ã£o do arquivo
+	 * [FS0018] Verificar não possibilidade de mudar a situação do arquivo
 	 * 
-	 * Verifica se existe rota subdividida com  situaÃ§Ã£o  diferente de finalizada
+	 * Verifica se existe rota subdividida com  situação  diferente de finalizada
 	 * 
 	 * @author Nathalia Santos  
 	 * @date 20/03/2012
@@ -6771,7 +6771,7 @@ public interface IRepositorioArrecadacao {
 	
 	/**
 	 * [UC0629] Consultar Arquivo Texto Leitura
-	 * [FS0018] Verificar nÃ£o possibilidade de mudar a situaÃ§Ã£o do arquivo
+	 * [FS0018] Verificar não possibilidade de mudar a situação do arquivo
 	 * 
 	 * Verifica se existe rota subdividida 
 	 * 
@@ -6783,7 +6783,7 @@ public interface IRepositorioArrecadacao {
 	
 	/**
 	 * [UC0629] Consultar Arquivo Texto Leitura
-	 * [FS0018] Verificar nÃ£o possibilidade de mudar a situaÃ§Ã£o do arquivo
+	 * [FS0018] Verificar não possibilidade de mudar a situação do arquivo
 	 * 
 	 * Verifica se existe rota subdividida utilizada no gerar zip
 	 * 
@@ -6794,7 +6794,7 @@ public interface IRepositorioArrecadacao {
 		throws ErroRepositorioException ;
 	/**
 	 * 
-	 * [UC1349] Gerar Movimento de DÃ©bito AutomÃ¡tico de Parcelamento por Cliente
+	 * [UC1349] Gerar Movimento de Débito Automático de Parcelamento por Cliente
 	 * [SB0002] Carregar Lista de Bancos
 	 * 
 	 * @author Hugo Azevedo
@@ -6805,7 +6805,7 @@ public interface IRepositorioArrecadacao {
 	
 
 	/**
-	 * [UC0978] Pesquisa RelatÃ³rio de Pagamento para Entidades Beneficentes Analitico
+	 * [UC0978] Pesquisa relatório de Pagamento para Entidades Beneficentes Analitico
 	 * 
 	 * @author Erivan Sousa
 	 * @data   27/07/2012
@@ -6825,7 +6825,7 @@ public interface IRepositorioArrecadacao {
 
 	/**
 	 * 
-	 * [UC1349] Gerar Movimento de DÃ©bito AutomÃ¡tico de Parcelamento por Cliente
+	 * [UC1349] Gerar Movimento de Débito Automático de Parcelamento por Cliente
 	 * [SB0002] Carregar Lista de Bancos
 	 * 
 	 * @author Hugo Azevedo
@@ -6835,7 +6835,7 @@ public interface IRepositorioArrecadacao {
 	public Collection<DebitoAutomaticoMovimentoParcelamentoCliente> obterColecaoDebitoAutomaticoParcCliente(Date dataParcelas, Integer idBanco) throws ErroRepositorioException;
 
 	/**
-	 * [UC0978] Pesquisa RelatÃ³rio de Pagamento para Entidades Beneficentes Sintetico
+	 * [UC0978] Pesquisa relatório de Pagamento para Entidades Beneficentes Sintetico
 	 * 
 	 * @author Erivan Sousa
 	 * @data   30/07/2012
@@ -6855,7 +6855,7 @@ public interface IRepositorioArrecadacao {
 
 	/**
 	 * 
-	 * [UC1349] Gerar Movimento de DÃ©bito AutomÃ¡tico de Parcelamento por Cliente
+	 * [UC1349] Gerar Movimento de Débito Automático de Parcelamento por Cliente
 	 * [SB0002] Carregar Lista de Bancos
 	 * 
 	 * @author Hugo Azevedo
@@ -6878,7 +6878,7 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC0276] Encerrar ArrecadaÃ§Ã£o do MÃªs
+	 * [UC0276] Encerrar Arrecadação do Mês
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 15/08/2012
@@ -6891,7 +6891,7 @@ public interface IRepositorioArrecadacao {
 	
 	/**
 	 * 
-	 * [UC1349] Gerar Movimento de DÃ©bito AutomÃ¡tico de Parcelamento por Cliente
+	 * [UC1349] Gerar Movimento de Débito Automático de Parcelamento por Cliente
 	 * [SB0002] Carregar Lista de Bancos
 	 * 
 	 * @author Hugo Azevedo
@@ -6904,7 +6904,7 @@ public interface IRepositorioArrecadacao {
 	/**
 	 * [UC 0629] Consultar Arquivo Texto Leitura
 	 * 
-	 * [SB 0008] Exibir Imagens Anormalidades do ImÃ³vel
+	 * [SB 0008] Exibir Imagens Anormalidades do Imóvel
 	 * 
 	 * @author Davi Menezes
 	 * @date 31/08/2012
@@ -6925,7 +6925,7 @@ public interface IRepositorioArrecadacao {
 	
 	/**
 	 * 
-	 * [UC0300] Classificar Pagamentos e DevoluÃ§Ãµes
+	 * [UC0300] Classificar Pagamentos e Devoluções
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 17/01/2013
@@ -6939,7 +6939,7 @@ public interface IRepositorioArrecadacao {
 		throws ErroRepositorioException ;
 
 	/**
-	 * [UC 1517] - Baixa AutomÃ¡tica dos Pagamentos NÃ£o Classificados
+	 * [UC 1517] - Baixa Automática dos Pagamentos Não Classificados
 	 * [SB 0001] - Selecionar Pagamento Valor Divergente
 	 * 
 	 * @author Davi Menezes
@@ -6951,8 +6951,8 @@ public interface IRepositorioArrecadacao {
 	public Collection pesquisarPagamentosValorNaoConfere(Integer idPagamentoSituacao,Integer idRota) throws ErroRepositorioException;
 	
 	/**
-	 * [UC 1518 ] - Gerar RelatÃ³rio dos Pagamentos Baixados Automaticamente
-	 * [SB 0002 ] - RelatÃ³rio AnalÃ­tico
+	 * [UC 1518 ] - Gerar relatório dos Pagamentos Baixados Automaticamente
+	 * [SB 0002 ] - relatório Analático
 	 * 
 	 * @author Davi Menezes
 	 * @date 11/07/2013
@@ -6961,8 +6961,8 @@ public interface IRepositorioArrecadacao {
 			throws ErroRepositorioException;
 	
 	/**
-	 * [UC 1518 ] - Gerar RelatÃ³rio dos Pagamentos Baixados Automaticamente
-	 * [SB 0003 ] - RelatÃ³rio SintÃ©tico
+	 * [UC 1518 ] - Gerar relatório dos Pagamentos Baixados Automaticamente
+	 * [SB 0003 ] - relatório Sintético
 	 * 
 	 * @author Davi Menezes
 	 * @date 11/07/2013
@@ -6979,7 +6979,7 @@ public interface IRepositorioArrecadacao {
 	public Integer verificarExistenciaContaDebitoCarteiraMovimento(Integer idConta) throws ErroRepositorioException;
 	
 	/**
-	 * RN2013108067 â€“ MudanÃ§a dos boletos bancarios: da carteira 18 para carteira 17
+	 * RN2013108067 â€“ Mudança dos boletos bancarios: da carteira 18 para carteira 17
 	 * [UC1574] - Solicitar Geracao de Arquivo Carteira 17 
 	 * 
 	 * @author Diogo Luiz
@@ -6991,7 +6991,7 @@ public interface IRepositorioArrecadacao {
 	
 	
 	/**
-	 * RN2013108067 â€“ MudanÃ§a dos boletos bancarios: da carteira 18 para carteira 17
+	 * RN2013108067 â€“ Mudança dos boletos bancarios: da carteira 18 para carteira 17
 	 * [UC1575] - Gerar de Arquivo Carteira 17 
 	 * 
 	 * @author Diogo Luiz
@@ -7002,7 +7002,7 @@ public interface IRepositorioArrecadacao {
 			Integer bancoId) throws ErroRepositorioException;
 
 	/**
-	 * RN2013108067 â€“ MudanÃ§a dos boletos bancarios: da carteira 18 para carteira 17
+	 * RN2013108067 â€“ Mudança dos boletos bancarios: da carteira 18 para carteira 17
 	 * [UC1575] - Gerar de Arquivo Carteira 17 
 	 * 
 	 * @author Diogo Luiz
@@ -7013,7 +7013,7 @@ public interface IRepositorioArrecadacao {
 
 	
 	/**
-	 * RN2013108067 â€“ MudanÃ§a dos boletos bancarios: da carteira 18 para carteira 17
+	 * RN2013108067 â€“ Mudança dos boletos bancarios: da carteira 18 para carteira 17
 	 * [UC1575] - Gerar de Arquivo Carteira 17 
 	 * 
 	 * @author Diogo Luiz
@@ -7115,15 +7115,98 @@ public interface IRepositorioArrecadacao {
 	 */	
 	public void gerarResumoArrecadacaoAtualizaDados()
 			throws ErroRepositorioException, SQLException;
-	
+
 	public Collection<Object[]> pesquisarGuiaPagamentoCarne(String idParcelamento) throws ErroRepositorioException;
-	
+
 	/**
 	 * [UC0927] - Confirmar Cartão de Crédito/Débito
 	 *
 	 * @author Vivianne Sousa
 	 * @date 07/05/2015
+	 * 
+	 * @param idCliente Id do cliente arrecadador ou null
 	 */
-	public Arrecadador pesquisarArrecadadorCartao(Integer idCliente, Integer idArrecadacaoForma) throws ErroRepositorioException;
+	public Arrecadador pesquisarArrecadadorCartao(Integer idCliente, Integer idArrecadacaoForma)
+ throws ErroRepositorioException;
 	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Pesquisa a coleção de guia de pagamentos de um cliente arrecadador que 
+	 * estão pendentes.
+	 * 
+	 * @author Jean Varela
+	 * @date 23/09/2015
+	 * 
+	 * @param idGuiaPagamentoItem, dataVencimentoGuiaPagamento
+	 * @return guia de pagamento pendentes
+	 */
+	public Collection pesquisarGuiasPagamentoPendentes(Integer idClienteArrecadador,Date dataVencimentoGuiaPagamento,Integer idDebitoCreditoSituacao) throws ErroRepositorioException ;
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Pesquisa  o percentual de tarifa cobrado por um cliente arrecadador
+	 * 
+	 * @author Jean Varela
+	 * @date 28/09/2015
+	 * 
+	 * @param idClienteArrecadador,idArrecadacaoForma
+	 * @return percetual de tarifa cobrado pelo arrecadador
+	 */
+    public BigDecimal pesquisarPercentualTarifaArrecadador(Integer idArrecadador,Integer idArrecadacaoForma) throws ErroRepositorioException;
+    
+    /**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Recupera o identificado de um deposito arrecadação
+	 * 
+	 * @author Jean Varela
+	 * @date 28/09/2015
+	 * 
+	 * @param idClienteArrecadador,idArrecadacaoForma
+	 * @return identificado do deposito arrecadacao  
+	 */    
+    public Integer obterIdentificadorDepositoArrecadacao(Integer idArrecadador,Integer idArrecadacaoForma) throws ErroRepositorioException;
+    
+    /**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Recupera um aviso bancario
+	 *  
+	 * @author Jean Varela
+	 * @date 28/09/2015
+	 * 
+	 * @param idArrecadador, idArrecadacaoForma, dataLancamento 
+	 * @return aviso bancário
+	 */  
+    public Object pesquisarAvisoBancario(Integer idArrecadador, Integer idArrecadacaoForma, Date dataLancamento) throws ErroRepositorioException;   	  
+    
+    /**
+ 	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+ 	 * 
+ 	 * Pesquisa a quantidade de guias de pagamento de um cliente
+ 	 * que possuem vencimento em uma determinada data e que já foram pagas.
+ 	 *  
+ 	 * @author Jean Varela
+ 	 * @date 28/09/2015
+ 	 * 
+ 	 * @param idCliente, datavencimento
+ 	 * @return quantidade de guia de pagamento que foram pagas
+ 	 */  
+	public Integer pesquisarQuantidadeGuiasPagamentoPagas(Integer idCliente, Date dataVencimento) throws ErroRepositorioException;
+		
+	
+	/**
+	 * [UC1694] Relatório Previsão/Pagamento Cartão de Crédito
+	 *
+	 * @author Vivianne Sousa
+	 * @date 07/10/2015
+	 */
+	public Collection<Object[]> pesquisarDadosRelatorioCartaoCreditoSintetico(Date dataVecimentoInicial,
+			Date dataVecimentoFinal, String idCliente) throws ErroRepositorioException;
+	
+	public Collection<Object[]> obterRelatorioAnaliticoPrevisaoPagamentoCartaoCredito(Date dataVencimentoInicial,
+		Date dataVencimentoFinal, String idCliente)
+		   throws ErroRepositorioException;                                                     
 }

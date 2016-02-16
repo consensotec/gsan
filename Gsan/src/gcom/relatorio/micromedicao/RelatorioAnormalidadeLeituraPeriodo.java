@@ -110,6 +110,11 @@ public class RelatorioAnormalidadeLeituraPeriodo extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_ANORMALIDADE_LEITURA_PERIODO);
 	}
 
+	@Deprecated
+	public RelatorioAnormalidadeLeituraPeriodo() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 		
 		List<RelatorioAnormalidadeLeituraPeriodoBean> relatorioBeans = executarConsultaRelatoriosBean();

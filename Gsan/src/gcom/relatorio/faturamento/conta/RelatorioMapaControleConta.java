@@ -108,6 +108,11 @@ public class RelatorioMapaControleConta extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_MAPA_CONTROLE_CONTA);
 	}
 	
+	@Deprecated
+	public RelatorioMapaControleConta() {
+		super(null, "");
+	}
+	
 	private Collection<RelatorioMapaControleContaBean> inicializarBeanRelatorio(
 			Collection colecaoMapaControleConta) {
 		

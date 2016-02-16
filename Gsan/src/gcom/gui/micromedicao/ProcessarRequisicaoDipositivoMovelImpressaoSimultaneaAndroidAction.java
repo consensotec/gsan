@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2007-2007 the GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
+* Copyright (C) 2007-2007 the GSAN - Sistema Integrado de Gestï¿½o de Serviï¿½os de Saneamento
 *
 * This file is part of GSAN, an integrated service management system for Sanitation
 *
@@ -18,58 +18,58 @@
 */
 
 /*
-* GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
+* GSAN - Sistema Integrado de Gestï¿½o de Serviï¿½os de Saneamento
 * Copyright (C) <2007> 
 * Adriano Britto Siqueira
 * Alexandre Santos Cabral
 * Ana Carolina Alves Breda
 * Ana Maria Andrade Cavalcante
-* Aryed Lins de Araújo
+* Aryed Lins de Araï¿½jo
 * Bruno Leonardo Rodrigues Barros
 * Carlos Elmano Rodrigues Ferreira
-* Cláudio de Andrade Lira
-* Denys Guimarães Guenes Tavares
+* Clï¿½udio de Andrade Lira
+* Denys Guimarï¿½es Guenes Tavares
 * Eduardo Breckenfeld da Rosa Borges
-* Fabíola Gomes de Araújo
-* Flávio Leonardo Cavalcanti Cordeiro
-* Francisco do Nascimento Júnior
+* Fabï¿½ola Gomes de Araï¿½jo
+* Flï¿½vio Leonardo Cavalcanti Cordeiro
+* Francisco do Nascimento Jï¿½nior
 * Homero Sampaio Cavalcanti
-* Ivan Sérgio da Silva Júnior
-* José Edmar de Siqueira
-* José Thiago Tenório Lopes
-* Kássia Regina Silvestre de Albuquerque
+* Ivan Sï¿½rgio da Silva Jï¿½nior
+* Josï¿½ Edmar de Siqueira
+* Josï¿½ Thiago Tenï¿½rio Lopes
+* Kï¿½ssia Regina Silvestre de Albuquerque
 * Leonardo Luiz Vieira da Silva
-* Márcio Roberto Batista da Silva
-* Maria de Fátima Sampaio Leite
-* Micaela Maria Coelho de Araújo
-* Nelson Mendonça de Carvalho
+* Mï¿½rcio Roberto Batista da Silva
+* Maria de Fï¿½tima Sampaio Leite
+* Micaela Maria Coelho de Araï¿½jo
+* Nelson Mendonï¿½a de Carvalho
 * Newton Morais e Silva
 * Pedro Alexandre Santos da Silva Filho
-* Rafael Corrêa Lima e Silva
+* Rafael Corrï¿½a Lima e Silva
 * Rafael Francisco Pinto
 * Rafael Koury Monteiro
-* Rafael Palermo de Araújo
+* Rafael Palermo de Araï¿½jo
 * Raphael Veras Rossiter
 * Roberto Sobreira Barbalho
 * Rodrigo Avellar Silveira
 * Rosana Carvalho Barbosa
-* Sávio Luiz de Andrade Cavalcante
+* Sï¿½vio Luiz de Andrade Cavalcante
 * Tai Mu Shih
 * Thiago Augusto Souza do Nascimento
 * Tiago Moreno Rodrigues
 * Vivianne Barbosa Sousa
 *
-* Este programa é software livre; você pode redistribuí-lo e/ou
-* modificá-lo sob os termos de Licença Pública Geral GNU, conforme
-* publicada pela Free Software Foundation; versão 2 da
-* Licença.
-* Este programa é distribuído na expectativa de ser útil, mas SEM
-* QUALQUER GARANTIA; sem mesmo a garantia implícita de
-* COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
-* PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+* Este programa ï¿½ software livre; vocï¿½ pode redistribuï¿½-lo e/ou
+* modificï¿½-lo sob os termos de Licenï¿½a Pï¿½blica Geral GNU, conforme
+* publicada pela Free Software Foundation; versï¿½o 2 da
+* Licenï¿½a.
+* Este programa ï¿½ distribuï¿½do na expectativa de ser ï¿½til, mas SEM
+* QUALQUER GARANTIA; sem mesmo a garantia implï¿½cita de
+* COMERCIALIZAï¿½ï¿½O ou de ADEQUAï¿½ï¿½O A QUALQUER PROPï¿½SITO EM
+* PARTICULAR. Consulte a Licenï¿½a Pï¿½blica Geral GNU para obter mais
 * detalhes.
-* Você deve ter recebido uma cópia da Licença Pública Geral GNU
-* junto com este programa; se não, escreva para Free Software
+* Vocï¿½ deve ter recebido uma cï¿½pia da Licenï¿½a Pï¿½blica Geral GNU
+* junto com este programa; se nï¿½o, escreva para Free Software
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
 * 02111-1307, USA.
 */  
@@ -102,6 +102,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -131,7 +132,7 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
     private static final int BAIXAR_ROTA = 13;
     
 	/**
-	 * Método Execute do Action
+	 * Mï¿½todo Execute do Action
 	 * 
 	 * @param actionMapping
 	 * @param actionForm
@@ -233,9 +234,9 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
 	}
 	
 	/**
-	 * [UC0811] Processar Requisições do Dispositivo Móvel Impressao Simultanea.
+	 * [UC0811] Processar Requisiï¿½ï¿½es do Dispositivo Mï¿½vel Impressao Simultanea.
 	 * 
-	 * Método que baixa o arquivo de entrada do servidor.
+	 * Mï¿½todo que baixa o arquivo de entrada do servidor.
 	 * 
 	 * @author Bruno Barros
 	 * @date 13/09/2009
@@ -251,7 +252,7 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
 		
 //******************************************************************	
 // 08/01/2009		
-// COMENTADO PARA ENTRAR SÓ NA PROX. VERSÃO		 
+// COMENTADO PARA ENTRAR Sï¿½ NA PROX. VERSï¿½O		 
 //		String versao = data.readUTF();
 //		System.out.println("versao: " + versao);
 //		if(versao != null && versao.equals("v0.1")){
@@ -273,7 +274,7 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
 					tipoArquivo = "tipoArquivo=G&";
 				}
 				
-				// Parametro que identifica que o tipo de arquivo da rota está sendo enviado
+				// Parametro que identifica que o tipo de arquivo da rota estï¿½ sendo enviado
 				String parametroArquivoBaixarRota = "arquivoRoteiro=";				
 				
 				// 1 do tipo de resposta ok + tipo do arquivo + parametro Arquivo baixar rota + tamanho do arquivo da rota
@@ -309,7 +310,7 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
 					
 //******************************************************************			
 //			else { 
-//			System.out.println("Erro versão Mobile");
+//			System.out.println("Erro versï¿½o Mobile");
 //			response.setContentLength(RESPOSTA_ERRO_VERSAO);
 //			OutputStream out = response.getOutputStream();
 //			out.write(RESPOSTA_ERRO_VERSAO);
@@ -320,9 +321,9 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
 	}
 	
 	/**
-	 * [UC0811] Processar Requisições do Dispositivo Móvel.
+	 * [UC0811] Processar Requisiï¿½ï¿½es do Dispositivo Mï¿½vel.
 	 * 
-	 * Método que atualiza as movimentações dos leituristas.
+	 * Mï¿½todo que atualiza as movimentaï¿½ï¿½es dos leituristas.
 	 *
 	 * @author Bruno Barros
 	 * @date 10/11/2009
@@ -340,15 +341,15 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
 //		out.flush();
 		try{
 			RetornoAtualizarFaturamentoMovimentoCelularHelper retorno = Fachada.getInstancia().atualizarFaturamentoMovimentoCelular( buffer, false, false, 1);
-			// caso tenha gerado relatório de inconsistência,
-			// então retorna que o imóvel não foi processado
+			// caso tenha gerado relatï¿½rio de inconsistï¿½ncia,
+			// entï¿½o retorna que o imï¿½vel nï¿½o foi processado
 			if ( retorno.getRelatorioConsistenciaProcessamento() != null ){                
 			    System.out.println("Erro ao atualizar faturamento movimento celular");
 			    response.setContentLength( 1 );			
 			    out.write(RESPOSTA_ERRO);
 			    out.flush();
 			} else if ( retorno.getMensagemComunicacaoServidorCelular() != null ){                    
-			    System.out.println("Validação encontrada. Retornando para o celular.");
+			    System.out.println("Validaï¿½ï¿½o encontrada. Retornando para o celular.");
 			    
 			    response.setContentLength( 1 + retorno.getMensagemComunicacaoServidorCelular().length() );
 			    
@@ -377,9 +378,9 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
 	
 	
 	/**
-	 * [UC0631] Processar Requisições do Dispositivo Móvel.
+	 * [UC0631] Processar Requisiï¿½ï¿½es do Dispositivo Mï¿½vel.
 	 * 
-	 * Método que finaliza as movimentações.
+	 * Mï¿½todo que finaliza as movimentaï¿½ï¿½es.
 	 *
 	 * @author Bruno Barros
 	 * @date 10/11/2009
@@ -410,7 +411,7 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
 
 			idRota = fachada.obterIdRotaDeMovimentoRotEmpresaPorImovel(idPrimeiroImovel);
 			
-			// Caso não encotremos essa rota, pesquisamos 
+			// Caso nï¿½o encotremos essa rota, pesquisamos 
 			// assumindo que o imovel possue rota alternativa
 			if ( idRota == null ){
 //				String primeiroRegistro = buffer.readLine();
@@ -443,7 +444,7 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
         		buffer = new BufferedReader(readerRetorno);
 			}
 			
-			// Caso o tipo de finalização seja de arquivo com imóveis faltando, pesquisamos quais ja chegaram
+			// Caso o tipo de finalizaï¿½ï¿½o seja de arquivo com imï¿½veis faltando, pesquisamos quais ja chegaram
 			if ( indcFinalizacao == FINALIZAR_LEITURA_ARQUIVO_IMOVEIS_FALTANDO ){
 				buffer = fachada.removerImoveisJaProcessadosBufferImpressaoSimultanea( idRota, buffer, ConstantesSistema.SIM );
 			}
@@ -454,8 +455,8 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
             	 retorno = fachada.atualizarFaturamentoMovimentoCelular( buffer,false, true, indicadorAndroid);
             }
 
-			//caso não tenha gerado relatório de inconsistência,
-			//então retorna que o imóvel não foi processado
+			//caso nï¿½o tenha gerado relatï¿½rio de inconsistï¿½ncia,
+			//entï¿½o retorna que o imï¿½vel nï¿½o foi processado
             if( retorno != null && ( retorno.getRelatorioConsistenciaProcessamento() != null || retorno.getMensagemComunicacaoServidorCelular() !=null ) ){
 				System.out.println("Erro ao atualizar faturamento movimento celular");
 				response.setContentLength( 1 );			
@@ -463,51 +464,51 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
 				out.flush();
 			} else {            
 				
-				// Verificamos se a quantidade de imóveis que chegaram é mesma
+				// Verificamos se a quantidade de imï¿½veis que chegaram ï¿½ mesma
                 // gerada no arquivo de ida
                 Integer anoMesFaturamento = fachada.retornaAnoMesFaturamentoGrupoDaRota( idRota );
                 
-                //cria uma coleção de situações de transmissões para verificar se é para finalizar o arquivo princial 
-                //(Caso todos arquivos divididos estejam com a situação de Finalizado ou Finalizado Incompleto então finaliza 
+                //cria uma coleï¿½ï¿½o de situaï¿½ï¿½es de transmissï¿½es para verificar se ï¿½ para finalizar o arquivo princial 
+                //(Caso todos arquivos divididos estejam com a situaï¿½ï¿½o de Finalizado ou Finalizado Incompleto entï¿½o finaliza 
                 // o arquivo principal para finalizado ou finalizado imcompleto).
                 Integer[] idsSituacaoTransmissao = new Integer[1];
                 idsSituacaoTransmissao[0] = SituacaoTransmissaoLeitura.TRANSMITIDO;
                 
-				//Atualiza a situação do arquivo texto de em campo para finalizado
-				//Alteração feita por Sávio Luiz 
+				//Atualiza a situaï¿½ï¿½o do arquivo texto de em campo para finalizado
+				//Alteraï¿½ï¿½o feita por Sï¿½vio Luiz 
 				//Data:05/04/2010
 				if(indcFinalizacao == FINALIZAR_LEITURA || indcFinalizacao == FINALIZAR_LEITURA_ARQUIVO_IMOVEIS_FALTANDO ){
 	                
 	                Integer diferenca = fachada.pesquisarDiferencaQuantidadeMovimentoContaPrefaturadaArquivoTextoRoteiroEmpresa( idRota,  anoMesFaturamento );
 	                
 	                if ( diferenca != 0 && !fachada.isRotaDividida( idRota, anoMesFaturamento ) ){
-	                    System.out.println("Validação encontrada. Retornando para o celular.");
+	                    System.out.println("Validaï¿½ï¿½o encontrada. Retornando para o celular.");
 	                    
-	                    String mensagem = "mensagem=A quantidade de imóveis enviados não corresponde ao esperado";
+	                    String mensagem = "mensagem=A quantidade de imï¿½veis enviados nï¿½o corresponde ao esperado";
 	                    response.setContentLength( 1 + mensagem.getBytes().length );        
 	                    out.write(RESPOSTA_ERRO);
 	                    out.write( mensagem. getBytes() );
 	                    out.flush();
 	                }else{
-	                	// Se o arquivo não for dividido, então atualiza o arquivo pela rota
+	                	// Se o arquivo nï¿½o for dividido, entï¿½o atualiza o arquivo pela rota
 	                	if(!fachada.isRotaDividida( idRota, anoMesFaturamento )){
 	                	  fachada.atualizarArquivoTextoEnviadoPorRotaIgnora(idRota, SituacaoTransmissaoLeitura.TRANSMITIDO, anoMesFaturamento);
 	                	}else{
-	                		//caso exista arquivo dividido, então atualiza o arquivo dividido pelo imei
+	                		//caso exista arquivo dividido, entï¿½o atualiza o arquivo dividido pelo imei
 	                		fachada.atualizarArquivoTextoEnviado(imei, SituacaoTransmissaoLeitura.EM_CAMPO,
 	    							SituacaoTransmissaoLeitura.TRANSMITIDO);
-	                		//verifica se todas as rotas divididas estão com a situação de FINALIZADO
+	                		//verifica se todas as rotas divididas estï¿½o com a situaï¿½ï¿½o de FINALIZADO
 	                		if(!fachada.verificarExistenciaArquivosDivididosSituacaoDiferente(idRota, anoMesFaturamento,idsSituacaoTransmissao)){
-	                			// atualiza o arquivo principal para a situação de finalizado 
+	                			// atualiza o arquivo principal para a situaï¿½ï¿½o de finalizado 
 	                			fachada.atualizarArquivoTextoEnviadoPorRota(idRota, SituacaoTransmissaoLeitura.EM_CAMPO,
 	         							SituacaoTransmissaoLeitura.TRANSMITIDO, anoMesFaturamento);
 	                		}else{
-	                			// verifica se todas as rotas divididas estão com a situação de FINALIZADO ou finalizado imcompleto.
+	                			// verifica se todas as rotas divididas estï¿½o com a situaï¿½ï¿½o de FINALIZADO ou finalizado imcompleto.
 	                			idsSituacaoTransmissao = new Integer[2];
 	                			idsSituacaoTransmissao[0] = SituacaoTransmissaoLeitura.TRANSMITIDO;
 	                			idsSituacaoTransmissao[1] = SituacaoTransmissaoLeitura.FINALIZADO_INCOMPLETO;
 	                			if(!fachada.verificarExistenciaArquivosDivididosSituacaoDiferente(idRota, anoMesFaturamento,idsSituacaoTransmissao)){
-		                			// atualiza o arquivo principal para a situação de finalizado 
+		                			// atualiza o arquivo principal para a situaï¿½ï¿½o de finalizado 
 		                			fachada.atualizarArquivoTextoEnviadoPorRota(idRota, SituacaoTransmissaoLeitura.EM_CAMPO,
 		         							SituacaoTransmissaoLeitura.FINALIZADO_INCOMPLETO, anoMesFaturamento);
 	                			}
@@ -524,21 +525,21 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
 					if(!fachada.isRotaDividida( idRota, anoMesFaturamento )){
 					  fachada.atualizarArquivoTextoEnviadoPorRotaIgnora(idRota,	SituacaoTransmissaoLeitura.FINALIZADO_INCOMPLETO, anoMesFaturamento);
 					}else{
-						//caso exista arquivo dividido, então atualiza o arquivo dividido pelo imei
+						//caso exista arquivo dividido, entï¿½o atualiza o arquivo dividido pelo imei
                 		fachada.atualizarArquivoTextoEnviado(imei, SituacaoTransmissaoLeitura.EM_CAMPO,
     							SituacaoTransmissaoLeitura.FINALIZADO_INCOMPLETO);
-                		//verifica se todas as rotas divididas estão com a situação de FINALIZADO
+                		//verifica se todas as rotas divididas estï¿½o com a situaï¿½ï¿½o de FINALIZADO
                 		if(!fachada.verificarExistenciaArquivosDivididosSituacaoDiferente(idRota, anoMesFaturamento,idsSituacaoTransmissao)){
-                			// atualiza o arquivo principal para a situação de finalizado 
+                			// atualiza o arquivo principal para a situaï¿½ï¿½o de finalizado 
                 			fachada.atualizarArquivoTextoEnviadoPorRota(idRota, SituacaoTransmissaoLeitura.EM_CAMPO,
          							SituacaoTransmissaoLeitura.TRANSMITIDO, anoMesFaturamento);
                 		}else{
-                			// verifica se todas as rotas divididas estão com a situação de FINALIZADO ou finalizado imcompleto.
+                			// verifica se todas as rotas divididas estï¿½o com a situaï¿½ï¿½o de FINALIZADO ou finalizado imcompleto.
                 			idsSituacaoTransmissao = new Integer[2];
                 			idsSituacaoTransmissao[0] = SituacaoTransmissaoLeitura.TRANSMITIDO;
                 			idsSituacaoTransmissao[1] = SituacaoTransmissaoLeitura.FINALIZADO_INCOMPLETO;
                 			if(!fachada.verificarExistenciaArquivosDivididosSituacaoDiferente(idRota, anoMesFaturamento,idsSituacaoTransmissao)){
-	                			// atualiza o arquivo principal para a situação de finalizado 
+	                			// atualiza o arquivo principal para a situaï¿½ï¿½o de finalizado 
 	                			fachada.atualizarArquivoTextoEnviadoPorRota(idRota, SituacaoTransmissaoLeitura.EM_CAMPO,
 	         							SituacaoTransmissaoLeitura.FINALIZADO_INCOMPLETO, anoMesFaturamento);
                 			}
@@ -564,7 +565,7 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
 	
 	/**
 	 * 
-	 * Método de Comfirmação do Recebimento do Arquivo
+	 * Mï¿½todo de Comfirmaï¿½ï¿½o do Recebimento do Arquivo
 	 * 
 	 * @since 23/05/08
 	 * @param data
@@ -578,20 +579,20 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
 		
 		try{
 			
-			//Atualiza a situação do arquivo texto de "em campo" para "finalizado e não transmitido"
-			//Alteração feita por Sávio Luiz 
+			//Atualiza a situaï¿½ï¿½o do arquivo texto de "em campo" para "finalizado e nï¿½o transmitido"
+			//Alteraï¿½ï¿½o feita por Sï¿½vio Luiz 
 			//Data:05/04/2010
 			fachada.atualizarArquivoTextoEnviado(imei, SituacaoTransmissaoLeitura.EM_CAMPO,
 					SituacaoTransmissaoLeitura.FINALIZADO_NAO_TRANSMITIDO);
 			
-			//Atualiza a situação do arquivo texto de "liberado" para "em campo"
-			//Alteração feita por Sávio Luiz 
+			//Atualiza a situaï¿½ï¿½o do arquivo texto de "liberado" para "em campo"
+			//Alteraï¿½ï¿½o feita por Sï¿½vio Luiz 
 			//Data:05/04/2010
 			fachada.atualizarArquivoTextoEnviado(imei, SituacaoTransmissaoLeitura.LIBERADO,
 					SituacaoTransmissaoLeitura.EM_CAMPO);
 			
-			//Atualiza a situação do arquivo texto de "disponível" para "liberado"
-			//Alteração feita por Sávio Luiz 
+			//Atualiza a situaï¿½ï¿½o do arquivo texto de "disponï¿½vel" para "liberado"
+			//Alteraï¿½ï¿½o feita por Sï¿½vio Luiz 
 			//Data:05/04/2010
 			if ( fachada.liberaProximoArquivoImpressaoSimultaneaOnLine() ){
 				fachada.atualizarArquivoTextoMenorSequencialLeitura(imei,SituacaoTransmissaoLeitura.DISPONIVEL,
@@ -641,10 +642,8 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
 	}
     
     /**
-     * 
-     * 
      * @author Davi Menezes
-     * @date 17/07/2012
+     * @since 17/07/2012
      * 
      * @parameters @param din
      * @parameters @param response
@@ -652,85 +651,97 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
      * 
      * @throws IOException
      */
-    private void receberFoto(DataInputStream din, HttpServletResponse response, OutputStream out) throws IOException {
-    	try{
-	    	System.out.println("INICIO: Recebendo foto anormalidade ");
-	    	
-	    	//Lemos o número do imóvel a que essa foto pertence
-	    	int numeroImovel = din.readInt();
-	    	
-	    	//Lemos o número da leitura de anormalidade
-	    	int idAnormalidade = din.readInt();
-	    	
-	    	//Lemos o Ano/Mês Referencia
-	    	int anoMesReferencia = din.readInt();
-	    	
-	    	//foto tipo
-	    	int tipoFoto = din.readInt();
+	private void receberFoto(DataInputStream din, HttpServletResponse response,
+			OutputStream out) throws IOException {
+		try {
+			System.out.println("INICIO: Recebendo foto anormalidade ");
 
-	    	//Lemos o Ano/Mês Referencia
-	    	int tipoMedicao = din.readInt();
-	    	
-	    	long fileSize = din.readLong();
-	    	
-	    	int idFotoTipoLeituraConsumoAnormalidade = 0;
-			
-			byte[] bytesFoto = new byte[(int)fileSize];
+			int numeroImovel = din.readInt();
+			int idAnormalidade = din.readInt();
+			int anoMesReferencia = din.readInt();
+			int tipoFoto = din.readInt();
+			int tipoMedicao = din.readInt();
+			long fileSize = din.readLong();
+			int idFotoTipoLeituraConsumoAnormalidade = 0;
+
+			byte[] bytesFoto = new byte[(int) fileSize];
 			int read = 0;
 			int numRead = 0;
-			
-			while(read < bytesFoto.length && (numRead=din.read(bytesFoto, read, bytesFoto.length-read))>= 0)
-			{
+
+			while (read < bytesFoto.length
+					&& (numRead = din.read(bytesFoto, read, bytesFoto.length
+							- read)) >= 0) {
 				read = read + numRead;
 			}
-			
-			//inserimos na base
-			System.out.println("INICIO: Recebendo foto anormalidade IMÓVEL: "+numeroImovel);
-			
-			File arquivoOriginal  = new File("foto.jpg");
-            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream( new FileOutputStream(arquivoOriginal));
-            bufferedOutputStream.write(bytesFoto);
-            
-            File arquivoRedimensionado = arquivoOriginal;
-            SistemaParametro sistemaParametro = getFachada().pesquisarParametrosDoSistema();
-            if (sistemaParametro.getImagemResolucaoAltura() != null)
-            {
-               arquivoRedimensionado = Util.resizeImg(arquivoOriginal, sistemaParametro.getImagemResolucaoAltura(), sistemaParametro.getImagemResolucaoLargura());
-            }
-            
-            ByteArrayOutputStream baosArquivoRedimensionado = new ByteArrayOutputStream();
-            FileInputStream inputStream = new FileInputStream(arquivoRedimensionado);
 
-            // Escrevemos aos poucos
-            int INPUT_BUFFER_SIZE = 1024;
-            byte[] temp = new byte[INPUT_BUFFER_SIZE];
-            int numBytesRead = 0;
+			System.out.println("INICIO: Recebendo foto anormalidade IMÓVEL: "
+					+ numeroImovel);
+			
+			String dataTime = String.valueOf(new Date().getTime());
+			String nomeArquivoOrigem = numeroImovel + "-" +tipoFoto
+					+ "-" + dataTime + ".jpg";
+			String nomeArquivoRedimensionado = numeroImovel + "-" +tipoFoto
+					+ "-" + dataTime + "-resize.jpg";
 
-            while ((numBytesRead = inputStream.read(temp, 0, INPUT_BUFFER_SIZE)) != -1) 
-            {
-            	baosArquivoRedimensionado.write(temp, 0, numBytesRead);
-            }
-   
-            bytesFoto = baosArquivoRedimensionado.toByteArray();
-         	
-	    	idFotoTipoLeituraConsumoAnormalidade = din.available()>0 ? din.readInt() : 0;
-	        
-			getFachada().inserirFotoMovimentoRoteiroEmpresa(numeroImovel, idAnormalidade,idFotoTipoLeituraConsumoAnormalidade, anoMesReferencia,tipoFoto,tipoMedicao, bytesFoto);
-		
+			File arquivoOriginal = new File(nomeArquivoOrigem);
+			BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(
+					new FileOutputStream(arquivoOriginal));
+			bufferedOutputStream.write(bytesFoto);
+
+			File arquivoRedimensionado = null;
+			SistemaParametro sistemaParametro = getFachada()
+					.pesquisarParametrosDoSistema();
+
+			if (sistemaParametro.getImagemResolucaoAltura() != null
+					&& sistemaParametro.getImagemResolucaoLargura() != null) {
+				arquivoRedimensionado = Util.resizeImg(arquivoOriginal,nomeArquivoRedimensionado,
+						sistemaParametro.getImagemResolucaoAltura(),
+						sistemaParametro.getImagemResolucaoLargura());
+			} else {
+				arquivoRedimensionado = arquivoOriginal;
+			}
+
+			ByteArrayOutputStream baosArquivoRedimensionado = new ByteArrayOutputStream();
+			FileInputStream fisArquivoRedimensionado = new FileInputStream(
+					arquivoRedimensionado);
+
+			int INPUT_BUFFER_SIZE = 1024;
+			byte[] temp = new byte[INPUT_BUFFER_SIZE];
+			int numBytesRead = 0;
+
+			while ((numBytesRead = fisArquivoRedimensionado.read(temp, 0,
+					INPUT_BUFFER_SIZE)) != -1) {
+				baosArquivoRedimensionado.write(temp, 0, numBytesRead);
+			}
+
+			bytesFoto = baosArquivoRedimensionado.toByteArray();
+
+			idFotoTipoLeituraConsumoAnormalidade = din.available() > 0 ? din
+					.readInt() : 0;
+
+			getFachada().inserirFotoMovimentoRoteiroEmpresa(numeroImovel,
+					idAnormalidade, idFotoTipoLeituraConsumoAnormalidade,
+					anoMesReferencia, tipoFoto, tipoMedicao, bytesFoto);
+
+			bufferedOutputStream.close();
 			arquivoOriginal.delete();
+
+			fisArquivoRedimensionado.close();
+			baosArquivoRedimensionado.close();
 			arquivoRedimensionado.delete();
-			
-			System.out.println("FIM: Recebendo foto anormalidade IMÓVEL: "+numeroImovel);
-			
-			response.setContentLength(1+read+bytesFoto.length);
-			
+
+			System.out.println("FIM: Recebendo foto anormalidade IMÓVEL: "
+					+ numeroImovel);
+
+			response.setContentLength(1 + read + bytesFoto.length);
+
 			out.write(RESPOSTA_OK);
 			out.flush();
-			
+
 			System.out.println("FIM: Recebendo foto anormalidade ");
-			
-    	} catch (Exception e) {
-    		e.printStackTrace();
+
+		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("ERROR: Ao receber a foto de anormalidade ");
 			response.setContentLength(1);
 			out.write(RESPOSTA_ERRO);
@@ -741,7 +752,7 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
     /**
      * [UC1302] RM3982
      * 
-     * Método que baixa a nova versão do mobile para o android
+     * Mï¿½todo que baixa a nova versï¿½o do mobile para o android
      * 
      * @author Carlos Chaves
      * @date 29/08/2012
@@ -798,7 +809,7 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
         		
         		String versao = obj[1].toString();
         		
-        		System.out.println("Inicio : Verificar Versao,  Android ISC");
+        		System.out.println("Inicio : Verificar VERSÃO,  Android ISC");
               //  response.setContentLength( versao.length());
 
                 out.write(RESPOSTA_OK);
@@ -806,7 +817,7 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
         		out.write(versao.getBytes());
                 out.flush();
 
-                System.out.println("Fim: Verificar Versao, ARQUIVO APK Android ISC");  
+                System.out.println("Fim: Verificar VERSÃO, ARQUIVO APK Android ISC");  
         	}else{
         		System.out.println("Erro ao Baixar arquivo Android ISC");
                 response.setContentLength( 1 );
@@ -822,8 +833,5 @@ public class ProcessarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction 
             out.flush();
 
          }
-	}
-    
-    
-		
+	}	
 }

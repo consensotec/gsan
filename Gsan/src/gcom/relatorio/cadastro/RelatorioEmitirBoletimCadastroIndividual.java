@@ -108,6 +108,16 @@ public class RelatorioEmitirBoletimCadastroIndividual extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_EMITIR_BOLETIM_CADASTRO_INDIVIDUAL);
 	}
 
+	
+	@Deprecated
+	public RelatorioEmitirBoletimCadastroIndividual() {
+		super(null, "");
+	}
+
+	/**
+	 * < <Descrição do método>>
+	 * 
+	 */
 	public Object executar() throws TarefaException {
 
 		// valor de retorno

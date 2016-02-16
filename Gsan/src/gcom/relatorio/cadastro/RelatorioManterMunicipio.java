@@ -122,6 +122,11 @@ public class RelatorioManterMunicipio extends TarefaRelatorio {
 	public RelatorioManterMunicipio(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MUNICIPIO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterMunicipio() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

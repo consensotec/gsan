@@ -76,14 +76,21 @@
 package gcom.gui.relatorio.cobranca.parcelamento;
 
 import gcom.cadastro.unidade.UnidadeOrganizacional;
+import gcom.cobranca.parcelamento.FiltroParcelamento;
+import gcom.cobranca.parcelamento.Parcelamento;
 import gcom.fachada.Fachada;
 import gcom.relatorio.ExibidorProcessamentoTarefaRelatorio;
 import gcom.seguranca.acesso.usuario.Usuario;
 import gcom.tarefa.TarefaRelatorio;
+import gcom.util.Util;
+import gcom.util.filtro.ParametroSimples;
+
 import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -171,6 +178,13 @@ public class GerarRelatorioParcelamentoAction extends
 		if (tipoRelatorio == null) {
 			tipoRelatorio = TarefaRelatorio.TIPO_PDF + "";
 		}
+
+		FiltroParcelamento filtro = new FiltroParcelamento();
+		filtro.adicionarParametro(new ParametroSimples(FiltroParcelamento.ID, Integer.valueOf(idParcelamento)));
+		Collection<Parcelamento> colecao = fachada.pesquisar(filtro, Parcelamento.class.getName());
+		Parcelamento parcelamento = (Parcelamento) Util.retonarObjetoDeColecao(colecao);
+
+		relatorioParcelamento.addParametro("indicadorFormaCobranca", String.valueOf(parcelamento.getCobrancaForma().getId()));
 
 		relatorioParcelamento.addParametro("tipoFormatoRelatorio", Integer
 				.parseInt(tipoRelatorio));

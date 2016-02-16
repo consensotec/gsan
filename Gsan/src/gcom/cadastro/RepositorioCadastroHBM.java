@@ -5021,7 +5021,7 @@ public class RepositorioCadastroHBM implements IRepositorioCadastro {
 							"numSequencialRota", Hibernate.INTEGER).addScalar(
 							"numMorador", Hibernate.SHORT).addScalar(
 							"cepLogradouro", Hibernate.INTEGER).addScalar(
-							"bairroLogradouro", Hibernate.LONG).addScalar(
+							"bairroLogradouro", Hibernate.INTEGER).addScalar(
 							"codigoCep", Hibernate.INTEGER).addScalar(
 							"idBairro", Hibernate.INTEGER).addScalar(
 							"descricaoBairro", Hibernate.STRING).addScalar(

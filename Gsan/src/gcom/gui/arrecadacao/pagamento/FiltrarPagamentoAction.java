@@ -888,7 +888,7 @@ public class FiltrarPagamentoAction extends GcomAction {
 								dataPagamentoInicial, dataPagamentoFinal,
 								idsPagamentosSituacoes, idsdebitosTipos,
 								idsArrecadacaoForma, idsDocumentosTipos,valorPagamentoInicial,
-                                valorPagamentoFinal);
+                                valorPagamentoFinal,null,null);
 			}
 				
 			if (opcaoPagamento != null
@@ -903,7 +903,7 @@ public class FiltrarPagamentoAction extends GcomAction {
 						periodoPagamentoInicio, periodoPagamentoFim,
 						dataPagamentoInicial, dataPagamentoFinal,
 						idsPagamentosSituacoes, idsdebitosTipos,
-						idsArrecadacaoForma, idsDocumentosTipos);
+						idsArrecadacaoForma, idsDocumentosTipos,null,null);
 			}
 				
 				
@@ -928,7 +928,7 @@ public class FiltrarPagamentoAction extends GcomAction {
 					dataPagamentoInicial, dataPagamentoFinal,
 					idsPagamentosSituacoes, idsdebitosTipos,
 					idsArrecadacaoForma, idsDocumentosTipos,valorPagamentoInicial,
-					valorPagamentoFinal);
+					valorPagamentoFinal,null,null);
 
 			// 2º Passo - Chamar a função de Paginação passando o total de
 			// registros

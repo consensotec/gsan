@@ -308,6 +308,9 @@ public class ExibirConsultarDebitoACobrarAction extends GcomAction {
 			
 			// carrega o imóvel origem do débito a cobrar
 			filtroDebitoACobrar.adicionarCaminhoParaCarregamentoEntidade("debitoACobrarGeralOrigem.debitoACobrar.imovel");
+			
+			// carrega o imóvel origem do débito a cobrar
+			filtroDebitoACobrar.adicionarCaminhoParaCarregamentoEntidade("debitoACobrarGeralOrigem.debitoACobrarHistorico.imovel");
 
 			// pesquisa a coleção de débitos cobrados
 			colecaoDebitoACobrarConsultar = fachada.pesquisar(filtroDebitoACobrar, DebitoACobrar.class.getName());

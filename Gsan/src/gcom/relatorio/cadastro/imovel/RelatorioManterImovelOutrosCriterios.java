@@ -89,12 +89,15 @@ import gcom.cadastro.localidade.UnidadeNegocio;
 import gcom.cadastro.sistemaparametro.SistemaParametro;
 import gcom.cobranca.CobrancaSituacao;
 import gcom.fachada.Fachada;
+import gcom.gui.ActionServletException;
 import gcom.micromedicao.consumo.ConsumoHistorico;
 import gcom.micromedicao.medicao.MedicaoHistorico;
 import gcom.relatorio.ConstantesRelatorios;
 import gcom.relatorio.RelatorioDataSource;
 import gcom.relatorio.RelatorioVazioException;
 import gcom.seguranca.acesso.usuario.Usuario;
+import gcom.seguranca.parametrosistema.FiltroParametroSistema;
+import gcom.seguranca.parametrosistema.ParametroSistema;
 import gcom.tarefa.TarefaException;
 import gcom.tarefa.TarefaRelatorio;
 import gcom.util.ConstantesSistema;
@@ -127,6 +130,11 @@ public class RelatorioManterImovelOutrosCriterios extends TarefaRelatorio {
 	public RelatorioManterImovelOutrosCriterios(Usuario usuario) {
 		super(usuario,
 				ConstantesRelatorios.RELATORIO_IMOVEL_OUTROS_CRITERIOS_MANTER);
+	}
+
+	@Deprecated
+	public RelatorioManterImovelOutrosCriterios() {
+		super(null, "");
 	}
 
 	/**
@@ -321,7 +329,7 @@ public class RelatorioManterImovelOutrosCriterios extends TarefaRelatorio {
 						idUnidadeNegoio,cdRotaInicial,
 						cdRotaFinal,sequencialRotaInicial,
 						sequencialRotaFinal, indicadorNivelEsgotamento, indicadorCpfCnpjInformado);
-
+		
 		// valor de retorno
 		byte[] retorno = null;
 
@@ -1178,8 +1186,26 @@ public class RelatorioManterImovelOutrosCriterios extends TarefaRelatorio {
 				ConstantesSistema.GERAR_RELATORIO_IMOVEL,cdRotaInicial,
 				cdRotaFinal, sequencialRotaInicial,
 				sequencialRotaFinal, indicadorNivelEsgotamento);
+		
+		int qtdPesquisa = quantidade.intValue();
+		
+		FiltroParametroSistema filtroParametro = new FiltroParametroSistema();
+		filtroParametro.adicionarParametro(new ParametroSimples(FiltroParametroSistema.CODIGO_CONSTANTE, 
+				ParametroSistema.QTD_MAX_RELATORIO_IMOVEIS));
+		
+		Collection colParametro = fachada.pesquisar(filtroParametro, ParametroSistema.class.getName());
+		String valorParametro = null;
+		if(colParametro != null && !colParametro.isEmpty()){
+			valorParametro = ((ParametroSistema)colParametro.iterator().next()).getValorParametro();
+			
+			if(qtdPesquisa > Integer.parseInt(valorParametro)){
+				throw new ActionServletException(
+						"atencao.relatorio_imoveis_maior_que_limite", null,"");
+			}
 
-		return quantidade.intValue();
+		}
+
+		return qtdPesquisa;
 	}
 
 	public void agendarTarefaBatch() {

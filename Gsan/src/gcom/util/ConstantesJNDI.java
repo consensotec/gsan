@@ -145,6 +145,8 @@ public class ConstantesJNDI {
 
 	public static String CONTROLADOR_TARIFA_SOCIAL_SEJB = "";
 
+	public static String CONTROLADOR_EXECUCAO_ORDEM_SERVICO_SEJB = "";
+
 	public static String QUEUE_CONTROLADOR_FATURAMENTO_MDB = "";
 
 	public static String QUEUE_CONTROLADOR_ARRECADACAO_MDB = "";
@@ -192,6 +194,8 @@ public class ConstantesJNDI {
 	public static String CONTROLADOR_OPERACIONAL_SEJB = "";
 	
 	public static String CONTROLADOR_SPC_SERASA_SEJB = "";
+	
+	public static String CONTROLADOR_TOTEM_SEJB = "";
 
 	public static String BATCH_CONSISTIR_LEITURAS_CALCULAR_CONSUMOS_MDB = "";
 
@@ -743,6 +747,11 @@ public class ConstantesJNDI {
 	
 	public static String BATCH_GERAR_RESUMO_DADOS_FINANCEIROS_ATUALIZACAO_CADASTRAL = "";
 	
+	public static String BATCH_GERAR_RESUMOS_FATURAMENTO_PENTAHO = "";
+
+	public static String BATCH_MIGRAR_RESUMOS_ANALITICOS = "";
+
+	public static String BATCH_GERAR_RESUMOS_ARRECADACAO_PENTAHO = "";
 	
 
 	static {
@@ -900,6 +909,9 @@ public class ConstantesJNDI {
 			
 			CONTROLADOR_SPC_SERASA_SEJB = propriedades
 					.getProperty("ControladorSpcSerasa");
+			
+			CONTROLADOR_TOTEM_SEJB = propriedades
+					.getProperty("ControladorTotem");			
 
 			BATCH_CONSISTIR_LEITURAS_CALCULAR_CONSUMOS_MDB = propriedades
 					.getProperty("QueueBatchConsistirLeiturasCalcularConsumosMDB");
@@ -1305,9 +1317,15 @@ public class ConstantesJNDI {
 				propriedades.getProperty("ControladorRelatorioFaturamento");
 			
 			CONTROLADOR_INTEGRACAO_SEJB = propriedades.getProperty("ControladorIntegracao");
-			
+
+			CONTROLADOR_ATUALIZACAO_CADASTRAL_SEJB = propriedades
+					.getProperty("ControladorAtualizacaoCadastral");
+
+			CONTROLADOR_EXECUCAO_ORDEM_SERVICO_SEJB = propriedades
+					.getProperty("ControladorExecucaoOrdemServico");
+
 			BATCH_GERAR_CREDITO_SITUACAO_ESPECIAL_FATURAMENTO_MDB = propriedades
-			.getProperty("QueueBatchGerarCreditoSituacaoEspecialFaturamentoMDB");
+					.getProperty("QueueBatchGerarCreditoSituacaoEspecialFaturamentoMDB");
 			
 			BATCH_GERAR_MOVIMENTO_HIDROMETRO = propriedades.getProperty("QueueBatchGerarMovimentoHidrometroMDB");
 			
@@ -1316,7 +1334,6 @@ public class ConstantesJNDI {
 			BATCH_EXCLUIR_IMOVEIS_DA_TARIFA_SOCIAL = propriedades.getProperty("QueueBatchExcluirImoveisDaTarifaSocialMDB");
 			
 			BATCH_GERAR_ARQUIVO_TEXTO_PAGAMENTOS_CONTAS_COBRANCA_POR_EMPRESA = propriedades.getProperty("QueueBatchGerarArquivoTextoPagamentosContasCobrancaEmpresaMDB");
-			
 			
 			BATCH_GERAR_RESUMO_NEGATIVACAO_MDB = propriedades
 			.getProperty("QueueBatchGerarResumoNegativacaoMDB");
@@ -1673,9 +1690,6 @@ public class ConstantesJNDI {
 			BATCH_GERAR_RESUMO_CADASTRO_ATUALIZA_DADOS = propriedades
 					.getProperty("QueueBatchGerarResumoCadastroAtualizaDadosMDB");
 			
-			CONTROLADOR_ATUALIZACAO_CADASTRAL_SEJB = propriedades
-					.getProperty("ControladorAtualizacaoCadastral");
-			
 			BATCH_RELIGAR_IMOVEIS_CORTADOS_COM_LEITURA_REAL_CONSUMO = propriedades
 					.getProperty("QueueBatchReligarImoveisCortadosComLeituraRealConsumoMDB");
 			
@@ -1693,15 +1707,19 @@ public class ConstantesJNDI {
 		
 			BATCH_GERAR_RESUMO_DADOS_FINANCEIROS_ATUALIZACAO_CADASTRAL = propriedades
 					.getProperty("BatchGerarResumoDadosFinanceirosAtualizacaoCadastralMDB");
+
+			BATCH_MIGRAR_RESUMOS_ANALITICOS = propriedades
+					.getProperty("QueueBatchMigrarResumosAnaliticosMDB");
+			
+			BATCH_GERAR_RESUMOS_FATURAMENTO_PENTAHO = propriedades
+					.getProperty("QueueBatchGerarResumosFaturamentoPentahoMDB");
+			
+			BATCH_GERAR_RESUMOS_ARRECADACAO_PENTAHO = propriedades
+					.getProperty("QueueBatchGerarResumosArrecadacaoPentahoMDB");
 			
 			stream.close();
-
 		} catch (Exception ex) {
-
 			ex.printStackTrace();
-
 		}
-
 	}
-
 }

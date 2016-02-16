@@ -123,6 +123,11 @@ public class RelatorioGerarCurvaAbcDebitos extends TarefaRelatorio {
 	public RelatorioGerarCurvaAbcDebitos(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_GERAR_CURVA_ABC_DEBITOS);
 	}
+	
+	@Deprecated
+	public RelatorioGerarCurvaAbcDebitos() {
+		super(null, "");
+	}
 
 	/**
 	 * 

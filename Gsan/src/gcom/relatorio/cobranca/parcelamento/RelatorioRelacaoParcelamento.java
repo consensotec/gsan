@@ -114,6 +114,11 @@ public class RelatorioRelacaoParcelamento extends TarefaRelatorio {
 	public RelatorioRelacaoParcelamento(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_EMITIR_PROTOCOLO_DOCUMENTO_COBRANCA);
 	}
+	
+	@Deprecated
+	public RelatorioRelacaoParcelamento() {
+		super(null, "");
+	}
 
 	private Collection<RelatorioRelacaoParcelamentoBean> inicializarBeanRelatorio(
 			Collection<RelacaoParcelamentoRelatorioHelper> dadosRelatorio) {

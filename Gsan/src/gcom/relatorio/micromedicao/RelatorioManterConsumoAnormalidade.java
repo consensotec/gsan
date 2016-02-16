@@ -117,6 +117,11 @@ public class RelatorioManterConsumoAnormalidade extends TarefaRelatorio {
 	public RelatorioManterConsumoAnormalidade(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_ANORMALIDADE_CONSUMO);
 	}
+	
+	@Deprecated
+	public RelatorioManterConsumoAnormalidade() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

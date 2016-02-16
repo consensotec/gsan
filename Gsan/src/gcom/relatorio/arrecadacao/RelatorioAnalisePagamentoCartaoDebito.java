@@ -25,6 +25,11 @@ public class RelatorioAnalisePagamentoCartaoDebito extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_ANALISE_PAGAMENTO_CARTAO_DEBITO);
 	}
 
+	@Deprecated
+	public RelatorioAnalisePagamentoCartaoDebito() {
+		super(null, "");
+	}
+
 	@Override
 	public Object executar() throws TarefaException {
 		

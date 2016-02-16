@@ -111,6 +111,11 @@ public class RelatorioCertidaoNegativaCliente extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_CERTIDAO_NEGATIVA);
 	}
 
+	@Deprecated
+	public RelatorioCertidaoNegativaCliente() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 
@@ -205,7 +210,7 @@ public class RelatorioCertidaoNegativaCliente extends TarefaRelatorio {
 	
 			parametros.put("validade", "IMPORTANTE: Qualquer rasura tornará nulo o efeito desta certidão, que tem validade de 60 dias.");
 			parametros.put("atendente", usuarioLogado.getNomeUsuario());
-			parametros.put("nomeEmpresa", "COMPANHIA DE SANEAMENTO AMBIENTAL DO MARANHÃO");
+			parametros.put("nomeEmpresa", sistemaParametro.getNomeEmpresa());
 			parametros.put("cnpjEmpresa", Util.formatarCnpj( sistemaParametro.getCnpjEmpresa()) );
 			parametros.put("inscricaoEstadual", Util.formatarInscricaoEstadualCaema( sistemaParametro.getInscricaoEstadual()) );
 			parametros.put("nomeRelatorio", "CERTIDÃO NEGATIVA DE DÉBITOS POR CLIENTE");

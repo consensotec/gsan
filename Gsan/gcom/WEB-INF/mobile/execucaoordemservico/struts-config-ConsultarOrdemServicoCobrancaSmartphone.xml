@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean 
+			name="ConsultarOrdemServicoCobrancaSmartphoneActionForm" 
+			type="gcom.gui.mobile.execucaoordemservico.ConsultarOrdemServicoCobrancaSmartphoneActionForm" /> 
+ 		<form-bean 
+			name="ConsultarDadosOrdemServicoCobrancaSmartphoneActionForm" 
+			type="gcom.gui.mobile.execucaoordemservico.ConsultarDadosOrdemServicoCobrancaSmartphoneActionForm"   /> 
+	</form-beans>
+	<global-forwards />
+	<action-mappings>
+		<action 
+			name="ConsultarOrdemServicoCobrancaSmartphoneActionForm"  
+			type="gcom.gui.mobile.execucaoordemservico.ExibirConsultarOrdemServicoCobrancaSmartphoneAction" 
+			validate="true"
+			scope="session"
+			path="/exibirConsultarOrdemServicoCobrancaSmartphoneAction">
+			<forward 
+				name="exibirConsultarOrdemServicoCobrancaSmartphone"
+				path="/jsp/mobile/execucaoordemservico/arquivo_texto_ordens_servico_cobranca_smartphone_consultar.jsp" />
+		</action>
+		
+ 		<action name="ConsultarOrdemServicoCobrancaSmartphoneActionForm"
+			type="gcom.gui.mobile.execucaoordemservico.ConsultarOrdemServicoCobrancaSmartphoneAction"
+			validate="true" scope="session"
+			path="/consultarOrdemServicoCobrancaSmartphoneAction">
+			<forward 
+				name="consultarOrdemServicoCobrancaSmartphone"
+				path="/jsp/mobile/execucaoordemservico/arquivo_texto_ordens_servico_cobranca_smartphone_consultar.jsp" />
+		</action>
+		
+		<action	name="ConsultarDadosOrdemServicoCobrancaSmartphoneActionForm"
+			type="gcom.gui.mobile.execucaoordemservico.ExibirConsultarDadosOrdemServicoCobrancaSmartphoneAction"
+			validate="false" 
+			input="/exibirConsultarDadosOrdemServicoCobrancaSmartphoneAction.do"
+			scope="session" 
+			path="/exibirConsultarDadosOrdemServicoCobrancaSmartphoneAction">
+			
+			<forward name="consultarDadosOrdemServicoCobrancaSmartphone"
+				     path="/consultarDadosOrdemServicoCobrancaSmartphoneWizardAction.do?action=exibirConsultarDadosOrdemServicoCobrancaSmartphoneRetornoAction" />
+		</action>
+		
+   		<action name="ConsultarDadosOrdemServicoCobrancaSmartphoneActionForm"
+			    type="gcom.gui.mobile.execucaoordemservico.ConsultarDadosOrdemServicoCobrancaSmartphoneWizardAction"
+			    validate="true" 
+			    parameter="action" 
+			    scope="session"
+			    path="/consultarDadosOrdemServicoCobrancaSmartphoneWizardAction">
+			
+			<forward name="consultarDadosOrdemServicoCobrancaSmartphoneRetorno"
+				     path="/jsp/mobile/execucaoordemservico/ordem_servico_cobranca_smartphone_consultar.jsp" />
+				
+			<forward name="consultarDadosOrdemServicoCobrancaSmartphoneFotos"
+				     path="/jsp/mobile/execucaoordemservico/ordem_servico_cobranca_smartphone_fotos_consultar.jsp" />
+				     
+			<forward name="consultarDadosOrdemServicoCobrancaSmartphone"
+				     path="/consultarDadosOrdemServicoCobrancaSmartphoneWizardAction.do?action=consultarDadosOrdemServicoCobrancaSmartphoneRetorno" />
+				     
+			<forward name="consultarDadosOrdemServicoCobrancaSmartphoneAction"
+				     path="/consultarDadosOrdemServicoCobrancaSmartphoneAction" />
+				     
+			<forward name="fiscalizacao"
+				     path="/exibirInformarRetornoOSFiscalizacaoAction.do" />
+		</action>
+		
+   		<action	name="ConsultarDadosOrdemServicoCobrancaSmartphoneActionForm"
+			type="gcom.gui.mobile.execucaoordemservico.ExibirConsultarDadosOrdemServicoCobrancaSmartphoneRetornoAction"
+			validate="false" scope="session" 
+			path="/exibirConsultarDadosOrdemServicoCobrancaSmartphoneRetornoAction">
+		
+			<forward name="consultarDadosOrdemServicoCobrancaSmartphoneRetornoAction"
+				     path="/consultarDadosOrdemServicoCobrancaSmartphoneWizardAction.do?action=consultarDadosOrdemServicoCobrancaSmartphoneRetornoAction" />
+				
+		</action>
+		
+		<action name="ConsultarOrdemServicoCobrancaSmartphoneActionForm"
+			type="gcom.gui.mobile.execucaoordemservico.EncerrarOrdemServicoCobrancaSmartphoneAction"
+			validate="true" scope="session"
+			path="/encerrarOrdemServicoCobrancaSmartphoneAction">
+			<forward name="consultarDadosOrdemServicoCobrancaSmartphone"
+				     path="/exibirConsultarOrdemServicoCobrancaSmartphoneAction.do" />
+		</action>
+		
+ 		<action	name="ConsultarDadosOrdemServicoCobrancaSmartphoneActionForm"
+			type="gcom.gui.mobile.execucaoordemservico.ConsultarDadosOrdemServicoCobrancaSmartphoneAction"
+			validate="false" scope="session" 
+			path="/consultarDadosOrdemServicoCobrancaSmartphoneAction">
+		
+		</action>
+		
+		<action 
+			type="gcom.gui.mobile.execucaoordemservico.EncerrarOrdemServicoIndividualCobrancaSmartphoneAction"
+			scope="session" path="/encerrarOrdemServicoIndividualCobrancaSmartphoneAction">
+			
+		</action>
+					
+	</action-mappings>
+	
+	<message-resources null="false" parameter="gcom.properties.application" />	
+		
+</struts-config>

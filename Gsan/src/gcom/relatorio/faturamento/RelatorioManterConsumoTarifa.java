@@ -108,6 +108,11 @@ public class RelatorioManterConsumoTarifa extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_CONSUMO_TARIFA_MANTER);
 	}
 
+	@Deprecated
+	public RelatorioManterConsumoTarifa() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

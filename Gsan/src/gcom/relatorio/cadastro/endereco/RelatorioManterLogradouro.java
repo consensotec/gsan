@@ -120,6 +120,11 @@ public class RelatorioManterLogradouro extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_LOGRADOURO_MANTER);
 	}
 
+	@Deprecated
+	public RelatorioManterLogradouro() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

@@ -73,6 +73,7 @@ function verificarChecado(valor){
 
 
 function recuperarDadosPopup(codigoRegistro, descricaoRegistro, tipoConsulta) {
+
 	var form = document.ConsultarPagamentoActionForm;
 	if (tipoConsulta == 'imovel') {
 		form.idImovel.value = codigoRegistro;
@@ -82,7 +83,20 @@ function recuperarDadosPopup(codigoRegistro, descricaoRegistro, tipoConsulta) {
 		form.clienteRelacaoTipo.disabled = true;
 		form.localidadeInicial.readOnly = true;
 		form.localidadeFinal.readOnly = true;
-		
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
+		form.idAvisoBancario.readOnly = true;
+		form.idAvisoBancario.value = "";
+		form.codigoAgenteArrecadador.value = "";
+		form.dataLancamentoAviso.value = "";
+		form.numeroSequencialAviso.value = "";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
 	}
 	if (tipoConsulta == 'cliente') {
 		form.idCliente.value = codigoRegistro;
@@ -91,7 +105,21 @@ function recuperarDadosPopup(codigoRegistro, descricaoRegistro, tipoConsulta) {
 		form.idImovel.readOnly = true;
 		form.localidadeInicial.readOnly = true;
 		form.localidadeFinal.readOnly = true;
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
 		form.clienteRelacaoTipo.disabled = false;
+		form.idAvisoBancario.readOnly = true;
+		form.idAvisoBancario.value = "";
+		form.codigoAgenteArrecadador.value = "";
+		form.dataLancamentoAviso.value = "";
+		form.numeroSequencialAviso.value = "";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
 	}
 	if (tipoConsulta == 'localidadeOrigem') {
 		form.localidadeInicial.value = codigoRegistro;
@@ -101,6 +129,18 @@ function recuperarDadosPopup(codigoRegistro, descricaoRegistro, tipoConsulta) {
 		form.idImovel.readOnly = true;
 		form.idCliente.readOnly = true;
 		form.clienteRelacaoTipo.disabled = true;
+		form.idAvisoBancario.readOnly = true;
+		form.idAvisoBancario.value = "";
+		form.codigoAgenteArrecadador.value = "";
+		form.dataLancamentoAviso.value = "";
+		form.numeroSequencialAviso.value = "";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
+		form.idsCategoria.disabled = false;
+		form.idsEsferaPoder.disabled = false;
 	}	
 	if (tipoConsulta == 'localidadeDestino') {
 		form.localidadeFinal.value = codigoRegistro;
@@ -108,6 +148,16 @@ function recuperarDadosPopup(codigoRegistro, descricaoRegistro, tipoConsulta) {
 		form.idImovel.readOnly = true;
 		form.idCliente.readOnly = true;
 		form.clienteRelacaoTipo.disabled = true;
+		form.idAvisoBancario.readOnly = true;
+		form.idAvisoBancario.value = "";
+		form.codigoAgenteArrecadador.value = "";
+		form.dataLancamentoAviso.value = "";
+		form.numeroSequencialAviso.value = "";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
 	}
 	
 	validaClienteRelacaoTipo();
@@ -134,6 +184,15 @@ function recuperarDadosCincoParametros(codigoRegistro, descricaoRegistro1, descr
 		form.localidadeFinal.value = "";
 		form.descricaoLocalidadeFinal.value = "";
 		form.localidadeFinal.readOnly = true;
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
 	}
 	
 }
@@ -160,6 +219,15 @@ function recuperarDadosSeisParametros(codigoRegistro, descricaoRegistro1, descri
 		form.localidadeFinal.value = "";
 		form.descricaoLocalidadeFinal.value = "";
 		form.localidadeFinal.readOnly = true;
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
+		form.idAvisoBancario.readOnly = true;
+		form.idAvisoBancario.value = "";
+		form.codigoAgenteArrecadador.value = "";
+		form.dataLancamentoAviso.value = "";
+		form.numeroSequencialAviso.value = "";
 	}
 }
 
@@ -171,6 +239,7 @@ function limparImovel() {
 		form.idCliente.readOnly = false;
 		form.localidadeInicial.readOnly = false;
 		form.localidadeFinal.readOnly = false;
+		form.idAvisoBancario.readOnly = false;
 	}	
 	validaClienteRelacaoTipo();
 }
@@ -185,6 +254,7 @@ function limparCliente() {
 		form.clienteRelacaoTipo.disabled = true;
 		form.localidadeInicial.readOnly = false;
 		form.localidadeFinal.readOnly = false;
+		form.idAvisoBancario.readOnly = false;
 	}	
 	validaClienteRelacaoTipo();
 }
@@ -200,6 +270,11 @@ function limparLocalidadeInicial(){
 		form.descricaoLocalidadeFinal.value = "";
 		form.idImovel.readOnly = false;
 		form.idCliente.readOnly = false;
+		form.idAvisoBancario.readOnly = false;
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
 	}	
 }
 
@@ -210,6 +285,11 @@ function limparLocalidadeFinal() {
 		form.descricaoLocalidadeFinal.value = "";
 		form.idImovel.readOnly = false;
 		form.idCliente.readOnly = false;
+		form.idAvisoBancario.readOnly = false;
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
 	}	
 }
 
@@ -241,6 +321,7 @@ function limparMovimento() {
 		form.clienteRelacaoTipo.disabled = true;
 		form.localidadeInicial.readOnly = false;
 		form.localidadeFinal.readOnly = false;
+		form.idAvisoBancario.readOnly = false;
 	}	
 }
 
@@ -250,12 +331,27 @@ function controleImovel(){
 		form.idCliente.readOnly = true;
 		form.localidadeInicial.readOnly = true;
 		form.localidadeFinal.readOnly = true;
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
+		form.idAvisoBancario.readOnly = true;
+		form.idAvisoBancario.value = "";
+		form.codigoAgenteArrecadador.value = "";
+		form.dataLancamentoAviso.value = "";
+		form.numeroSequencialAviso.value = "";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
 	}
 	else
 	{
 		form.idCliente.readOnly = false;
 		form.localidadeInicial.readOnly = false;
 		form.localidadeFinal.readOnly = false;
+		form.idAvisoBancario.readOnly = false;
 	}
 }
 
@@ -275,7 +371,21 @@ function validaEnterImovel(tecla, caminhoActionReload, nomeCampo) {
 		form.idCliente.readOnly = true;
 		form.localidadeInicial.readOnly = true;
 		form.localidadeFinal.readOnly = true;
-	} else {4
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
+		form.idAvisoBancario.readOnly = true;
+		form.idAvisoBancario.value = "";
+		form.codigoAgenteArrecadador.value = "";
+		form.dataLancamentoAviso.value = "";
+		form.numeroSequencialAviso.value = "";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
+	} else {
 	    form.idCliente.readOnly = false;
 		form.localidadeInicial.readOnly = false;
 		form.localidadeFinal.readOnly = false;
@@ -286,6 +396,7 @@ function validaEnterImovel(tecla, caminhoActionReload, nomeCampo) {
 		form.localidadeFinal.value = "";
 		form.descricaoLocalidadeInicial.value = "";
 		form.descricaoLocalidadeFinal.value = "";
+		form.idAvisoBancario.readOnly = false;
 	}
 	validaClienteRelacaoTipo();
 }
@@ -296,12 +407,27 @@ function controleCliente(){
 		form.idImovel.readOnly = true;
 		form.localidadeInicial.readOnly = true;
 		form.localidadeFinal.readOnly = true;
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
 		form.clienteRelacaoTipo.disabled = false;
+		form.idAvisoBancario.readOnly = true;
+		form.idAvisoBancario.value = "";
+		form.codigoAgenteArrecadador.value = "";
+		form.dataLancamentoAviso.value = "";
+		form.numeroSequencialAviso.value = "";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
 	}else{
 		form.idImovel.readOnly = false;
 		form.localidadeInicial.readOnly = false;
 		form.localidadeFinal.readOnly = false;
 		form.clienteRelacaoTipo.disabled = true;
+		form.idAvisoBancario.readOnly = false;
 	}
 	validaClienteRelacaoTipo();
 }
@@ -321,6 +447,20 @@ function validaEnterCliente(tecla, caminhoActionReload, nomeCampo) {
 		form.idImovel.readOnly = true;
 		form.localidadeInicial.readOnly = true;
 		form.localidadeFinal.readOnly = true;
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
+		form.idAvisoBancario.readOnly = true;
+		form.idAvisoBancario.value = "";
+		form.codigoAgenteArrecadador.value = "";
+		form.dataLancamentoAviso.value = "";
+		form.numeroSequencialAviso.value = "";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
     } else {
 		form.idImovel.readOnly = false;
 		form.localidadeInicial.readOnly = false;
@@ -331,6 +471,7 @@ function validaEnterCliente(tecla, caminhoActionReload, nomeCampo) {
 		form.localidadeFinal.value = "";
 		form.descricaoLocalidadeInicial.value = "";
 		form.descricaoLocalidadeFinal.value = "";
+		form.idAvisoBancario.readOnly = false;
 	}
 	validaClienteRelacaoTipo();
 }
@@ -340,17 +481,33 @@ function controleLocalidadeInicial(){
 	if(form.localidadeInicial.value.length > 0){
 		form.idImovel.readOnly = true;
 		form.idCliente.readOnly = true;
+		form.idsCategoria.disabled = false;
+		form.idsEsferaPoder.disabled = false;
+		form.idAvisoBancario.readOnly = true;
+		form.idAvisoBancario.value = "";
+		form.codigoAgenteArrecadador.value = "";
+		form.dataLancamentoAviso.value = "";
+		form.numeroSequencialAviso.value = "";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
 	}
 	else
 	{
 		form.idImovel.readOnly = false;
 		form.idCliente.readOnly = false;
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
+		form.idAvisoBancario.readOnly = false;
 	}
 }
 
 function validaEnterLocalidadeInicial(tecla, caminhoActionReload, nomeCampo) {
 	var form = document.ConsultarPagamentoActionForm;
-	
 	validaEnterComMensagem(tecla, caminhoActionReload, nomeCampo, "Localidade Inicial");
 	
 	if(form.localidadeInicial.value.length > 0) {
@@ -361,11 +518,28 @@ function validaEnterLocalidadeInicial(tecla, caminhoActionReload, nomeCampo) {
 		form.idCliente.value = "";	
 		form.nomeCliente.value = "";
 		form.clienteRelacaoTipo.disabled = true;
+		form.idsCategoria.disabled = false;
+		form.idsEsferaPoder.disabled = false;
+		form.idAvisoBancario.readOnly = true;
+		form.idAvisoBancario.value = "";
+		form.codigoAgenteArrecadador.value = "";
+		form.dataLancamentoAviso.value = "";
+		form.numeroSequencialAviso.value = "";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
     } else {
 		form.idImovel.readOnly = false;
 		form.idCliente.readOnly = false;
 		form.idCliente.value = "";
         form.nomeCliente.value = "";
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
+		form.idAvisoBancario.readOnly = false;
 	}
 }
 
@@ -374,9 +548,26 @@ function controleLocalidadeFinal(){
 	if(form.localidadeFinal.value.length > 0){
 		form.idImovel.readOnly = true;
 		form.idCliente.readOnly = true;
+		form.idsCategoria.disabled = false;
+		form.idsEsferaPoder.disabled = false;
+		form.idAvisoBancario.readOnly = true;
+		form.idAvisoBancario.value = "";
+		form.codigoAgenteArrecadador.value = "";
+		form.dataLancamentoAviso.value = "";
+		form.numeroSequencialAviso.value = "";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
 	}else{
 		form.idImovel.readOnly = false;
 		form.idCliente.readOnly = false;
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
+		form.idAvisoBancario.readOnly = false;
 	}
 }
 
@@ -393,11 +584,28 @@ function validaEnterLocalidadeFinal(tecla, caminhoActionReload, nomeCampo) {
 		form.idCliente.value = "";	
 		form.nomeCliente.value = "";
 		form.clienteRelacaoTipo.disabled = true;
+		form.idsCategoria.disabled = false;
+		form.idsEsferaPoder.disabled = false;
+		form.idAvisoBancario.readOnly = true;
+		form.idAvisoBancario.value = "";
+		form.codigoAgenteArrecadador.value = "";
+		form.dataLancamentoAviso.value = "";
+		form.numeroSequencialAviso.value = "";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
     } else {
 		form.idImovel.readOnly = false;
 		form.idCliente.readOnly = false;
 		form.idCliente.value = "";
         form.nomeCliente.value = "";
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
+		form.idAvisoBancario.readOnly = false;
 	}
 }
 
@@ -433,21 +641,32 @@ function chamarPopup(url, tipo, objeto, codigoObjeto, altura, largura, msg,objet
 }
 
 function controleCamposAvisoBancarioMovimentoArrecadador() {
-	
 	var form = document.ConsultarPagamentoActionForm;
-
 	if (form.idAvisoBancario.value != null && form.idAvisoBancario.value != '') {
 		form.idImovel.readOnly = true;
 		form.idCliente.readOnly = true;
 		form.clienteRelacaoTipo.disabled = true;
 		form.localidadeInicial.readOnly = true;
 		form.localidadeFinal.readOnly = true;
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
+		form.idArrecadador.value = "";
+		form.codigoBanco.value = "";
+		form.codigoRemessa.value = "";
+		form.identificacaoServico.value = "";
+		form.numeroSequencial.value = "";
 	} else if (form.idArrecadador.value != null && form.idArrecadador.value != '') {
 		form.idImovel.readOnly = true;
 		form.idCliente.readOnly = true;
 		form.clienteRelacaoTipo.disabled = true;
 		form.localidadeInicial.readOnly = true;
 		form.localidadeFinal.readOnly = true;
+		form.idsCategoria.disabled = true;
+		form.idsCategoria.value = "-1";
+		form.idsEsferaPoder.disabled = true;
+		form.idsEsferaPoder.value = "-1";
 	}
 }
 
@@ -683,7 +902,7 @@ function validaClienteRelacaoTipo() {
 			    				</td>
 							</tr>
 							
-							
+							<tr><td colspan="4" height="24"><hr></td></tr>
 							<tr>
 								<td><strong>Localidade Inicial:</strong></td>
 								<td>
@@ -738,6 +957,7 @@ function validaClienteRelacaoTipo() {
 								</td>
 							</tr>
 							
+							<tr><td colspan="4" height="24"><hr></td></tr>
 					        <tr>
 					          <td width="18%">
 					            <strong>Aviso Bancário:</strong>
@@ -748,7 +968,7 @@ function validaClienteRelacaoTipo() {
 					              <html:text property="idAvisoBancario" size="9" maxlength="9" 
 					              			onkeyup="validaEnter(event, 'exibirFiltrarPagamentoAction.do', 'idAvisoBancario');limparAvisoBancarioTecla();" 
 					              			onkeypress="return isCampoNumerico(event);"/> 
-					              <a href="javascript:abrirPopup('exibirPesquisarAvisoBancarioAction.do?limparForm=1', 475, 765);">
+					              <a href="javascript:controleAvisoBancario();">
 										<img width="23" height="21" border="0"
 											src="<bean:message key="caminho.imagens"/>pesquisa.gif"
 											title="Pesquisar Aviso Bancário" /></a>
@@ -788,7 +1008,8 @@ function validaClienteRelacaoTipo() {
 									</strong>
 								</td>
 							</tr>
-						<%if(session.getAttribute("tela") == null){%>	
+						<%if(session.getAttribute("tela") == null){%>
+							<tr><td colspan="4" height="24"><hr></td></tr>	
 							<tr>
 								<td><strong>Opção de Pagamento:</strong></td>
 								<td colspan="3">
@@ -864,6 +1085,41 @@ function validaClienteRelacaoTipo() {
 				<tr>
 					<td colspan="4">
 						<table width="100%" border="0">
+						
+						<%if(request.getAttribute("tela") == null && session.getAttribute("tela") == null ){%>	
+								<tr>
+									<td width="30%">
+										<strong>Categoria:</strong>
+									</td>					
+									<td>
+										<html:select property="idsCategoria" multiple="multiple" size="4" style="width: 230px;">
+										<logic:present name="colecaoCategorias">
+											<option value="<%=""+ConstantesSistema.NUMERO_NAO_INFORMADO%>">&nbsp;</option>
+											<html:options collection="colecaoCategorias"
+												labelProperty="descricao" property="id" />
+										</logic:present>
+										</html:select>
+									</td>
+								</tr>
+								<tr>
+									<td width="30%">
+										<strong>
+											Esfera de Poder:
+										</strong>
+									</td>					
+									<td>
+										<html:select property="idsEsferaPoder" multiple="multiple" size="4" style="width: 230px;">
+											<logic:present name="colecaoEsferasPoder">
+												<option value="<%=""+ConstantesSistema.NUMERO_NAO_INFORMADO%>">&nbsp;</option>
+												<html:options collection="colecaoEsferasPoder"
+													labelProperty="descricao" property="id" />
+											</logic:present>
+										</html:select>
+									</td>
+								</tr>
+							<%} %>
+						
+						
 							<tr>
 								<td width="30%"><strong>Situação do Pagamento:</strong></td>
 								<td>
@@ -1038,8 +1294,12 @@ function validaClienteRelacaoTipo() {
 			form.clienteRelacaoTipo.value = "";
 			form.clienteRelacaoTipo.disabled = true;	
 		}	
+	
 		if(form.localidadeInicial.value.length > 0) {
 			controleLocalidadeInicial();
+		}else{
+			form.idsCategoria.disabled = true;
+			form.idsEsferaPoder.disabled = true;
 		}	
 		if(form.localidadeFinal.value.length > 0) {
 			controleLocalidadeFinal();

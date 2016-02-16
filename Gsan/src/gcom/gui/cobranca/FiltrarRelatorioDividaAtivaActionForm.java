@@ -20,6 +20,7 @@ public class FiltrarRelatorioDividaAtivaActionForm extends ActionForm {
 	private String periodoAtualizacaoFinal;
 	private String idImovel;
 	private String inscricaoImovel;
+	private String indicadorRelatorioSinteticoAnalitico;
 	
 	public String getIndicadorTipoRelatorio() {
 		return indicadorTipoRelatorio;
@@ -69,5 +70,10 @@ public class FiltrarRelatorioDividaAtivaActionForm extends ActionForm {
 	public void setInscricaoImovel(String inscricaoImovel) {
 		this.inscricaoImovel = inscricaoImovel;
 	}
-	
+	public String getIndicadorRelatorioSinteticoAnalitico() {
+		return indicadorRelatorioSinteticoAnalitico;
+	}
+	public void setIndicadorRelatorioSinteticoAnalitico(String indicadorRelatorioSinteticoAnalitico) {
+		this.indicadorRelatorioSinteticoAnalitico = indicadorRelatorioSinteticoAnalitico;
+	}
 }

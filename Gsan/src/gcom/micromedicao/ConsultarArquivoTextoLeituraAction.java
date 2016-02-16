@@ -252,6 +252,17 @@ public class ConsultarArquivoTextoLeituraAction extends GcomAction {
 				consultarArquivoTextoRoteiroEmpresaHelper.setIdLeiturista(leiturista);
 	
 			}
+			
+			//MATRICULA
+			String matricula = consultarArquivoTextoLeituraActionForm.getMatricula();
+			
+			if (matricula != null && !matricula.equals("")) {
+	
+				peloMenosUmParametroInformado = true;
+				
+				consultarArquivoTextoRoteiroEmpresaHelper.setMatricula(matricula);
+	
+			}
 	
 			// Erro caso o usuário mandou Pesquisar sem nenhum parâmetro
 			if (!peloMenosUmParametroInformado) {

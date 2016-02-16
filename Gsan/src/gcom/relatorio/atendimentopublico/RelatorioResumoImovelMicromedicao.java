@@ -106,6 +106,11 @@ public class RelatorioResumoImovelMicromedicao extends TarefaRelatorio {
 	public RelatorioResumoImovelMicromedicao(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_RESUMO_IMOVEL_MICROMEDICAO);
 	}
+	
+	@Deprecated
+	public RelatorioResumoImovelMicromedicao() {
+		super(null, "");
+	}
 
 	private Collection<RelatorioResumoImovelMicromedicaoBean> inicializarBeanRelatorio(
 			Collection dadosRelatorio) {

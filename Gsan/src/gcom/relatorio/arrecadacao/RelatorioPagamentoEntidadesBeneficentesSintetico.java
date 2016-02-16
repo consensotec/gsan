@@ -110,6 +110,11 @@ public class RelatorioPagamentoEntidadesBeneficentesSintetico extends TarefaRela
 		super(usuario,
 				ConstantesRelatorios.RELATORIO_PAGAMENTO_ENTIDADES_BENEFICENTES_SINTETICO);
 	}
+	
+	@Deprecated
+	public RelatorioPagamentoEntidadesBeneficentesSintetico() {
+		super(null, "");
+	}
 
 	@Override
 	public int calcularTotalRegistrosRelatorio() {

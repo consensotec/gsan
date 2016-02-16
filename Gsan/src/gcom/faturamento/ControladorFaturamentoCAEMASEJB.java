@@ -2991,7 +2991,10 @@ public class ControladorFaturamentoCAEMASEJB extends ControladorFaturamento impl
 	 * @param
 	 * @throws ControladorException
 	 */
-	public void gerarDebitoACobrarTaxaEmissaoConta(Integer idImovel, int anoMesReferencia) throws ControladorException {
+	public int gerarDebitoACobrarTaxaEmissaoConta(Integer idImovel, int anoMesReferencia) throws ControladorException {
+		
+		Integer id;
+		
 		try {
 			Imovel imovel = getControladorImovel().pesquisarImovel(idImovel);
 
@@ -3136,6 +3139,8 @@ public class ControladorFaturamentoCAEMASEJB extends ControladorFaturamento impl
 
 			Integer idDebitoACobrar = (Integer) this.getControladorUtil().inserir(debitoACobrar);
 			debitoACobrar.setId(idDebitoACobrar);
+			
+			id = idDebitoACobrar;
 
 			// Recupera Categorias por Imovel
 			Collection<Categoria> colecaoCategoria = this.getControladorImovel().obterQuantidadeEconomiasCategoria(
@@ -3149,6 +3154,8 @@ public class ControladorFaturamentoCAEMASEJB extends ControladorFaturamento impl
 			sessionContext.setRollbackOnly();
 			throw new ControladorException("erro.sistema", ex);
 		}
+		
+		return id;
 	}
 
 	/**

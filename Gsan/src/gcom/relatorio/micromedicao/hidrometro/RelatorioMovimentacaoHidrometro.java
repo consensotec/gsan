@@ -109,6 +109,11 @@ public class RelatorioMovimentacaoHidrometro extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_CONSULTAR_MOVIMENTACAO_HIDROMETRO);
 	}
 
+	@Deprecated
+	public RelatorioMovimentacaoHidrometro() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

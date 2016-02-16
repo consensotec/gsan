@@ -33,6 +33,11 @@ public class RelatorioHistoricoImoveisProgramaEspecial extends TarefaRelatorio {
 	public RelatorioHistoricoImoveisProgramaEspecial(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_HISTORICO_IMOVEIS_PROGRAMA_ESPECIAL);
 	}
+	
+	@Deprecated
+	public RelatorioHistoricoImoveisProgramaEspecial() {
+		super(null, "");
+	}
 
 	/**
 	 * 

@@ -124,6 +124,11 @@ public class RelatorioManterCronogramaCobranca extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_CRONOGRAMA_COBRANCA_MANTER);
 	}
 
+	@Deprecated
+	public RelatorioManterCronogramaCobranca() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

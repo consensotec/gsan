@@ -16,10 +16,15 @@
 					</logic:notPresent>
 				</td>
 
-          		<td align="right">Vers&atilde;o: 10.2.10.2.5p - Versão Obter Débito (${applicationScope.versaoTipo}) 19/10/2015 - 8:55:43 </td>
+          		<td align="right">Vers&atilde;o: 10.2.12.2.5p (${applicationScope.versaoTipo}) 03/02/2016 - 16:50:56 </td>
         	</tr>
       	</table>
 		</td>
   	</tr>
 </table>
+
+<!-- <script>
+	caerninit();
+</script> -->
+
 </logic:notPresent>

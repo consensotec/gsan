@@ -107,6 +107,11 @@ public class RelatorioAutoInfracao extends TarefaRelatorio {
 	public RelatorioAutoInfracao(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_AUTO_INFRACAO);
 	}
+	
+	@Deprecated
+	public RelatorioAutoInfracao() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

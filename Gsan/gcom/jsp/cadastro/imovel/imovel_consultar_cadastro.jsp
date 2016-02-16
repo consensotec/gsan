@@ -927,12 +927,10 @@ function abrirFotosAtualizacaoCadastral() {
 						</tr>
 					</table>
 						<tr>
-			            	<%/*
 							<td align="left">
 								<input type="button" class="bottonRightCol" value="Fotos Atualização Cadastral"
 									onClick="abrirFotosAtualizacaoCadastral()">
 							</td>
-			            	*/%>
 							<td align="right">
 								  <div align="right">
 									   <a href="javascript:verificaExibicaoRelatorioDadosCadastraisImovel();">

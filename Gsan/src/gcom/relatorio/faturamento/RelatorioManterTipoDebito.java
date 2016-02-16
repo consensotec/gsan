@@ -119,6 +119,11 @@ public class RelatorioManterTipoDebito extends TarefaRelatorio {
 	public RelatorioManterTipoDebito(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_TIPO_DEBITO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterTipoDebito() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

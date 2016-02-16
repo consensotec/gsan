@@ -78,10 +78,22 @@
 
 package gcom.batch.micromedicao;
 
+import gcom.cadastro.sistemaparametro.SistemaParametro;
+import gcom.faturamento.FaturamentoGrupo;
+import gcom.micromedicao.ControladorMicromedicaoLocal;
+import gcom.micromedicao.ControladorMicromedicaoLocalHome;
+import gcom.micromedicao.Rota;
+import gcom.util.ConstantesJNDI;
+import gcom.util.ControladorException;
+import gcom.util.ServiceLocator;
+import gcom.util.ServiceLocatorException;
+import gcom.util.SistemaException;
+
 import javax.ejb.CreateException;
 import javax.ejb.EJBException;
 import javax.ejb.MessageDrivenBean;
 import javax.ejb.MessageDrivenContext;
+import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
@@ -105,22 +117,21 @@ public class BatchGerarRAOSAnormalidadeConsumo implements MessageDrivenBean, Mes
 	public void onMessage(Message message) {
         if (message instanceof ObjectMessage) {
 
-//            ObjectMessage objectMessage = (ObjectMessage) message;
-//            try {
-//                this.getControladorMicromedicao().gerarRAOSAnormalidadeConsumo(
-//						(Collection) ((Object[]) objectMessage.getObject())[0],
-//						(FaturamentoGrupo) ((Object[]) objectMessage.getObject())[1],						
-//						(Integer) ((Object[]) objectMessage.getObject())[2]);            
-//            } catch (JMSException e) {
-//                System.out.println("Erro no MDB");
-//                e.printStackTrace();
-//            } catch (ControladorException e) {
-//                System.out.println("Erro no MDB");
-//                e.printStackTrace();
-//            }
+            ObjectMessage objectMessage = (ObjectMessage) message;
+            try {
+                this.getControladorMicromedicao().gerarRAOSAnormalidadeConsumo(
+                		(FaturamentoGrupo) ((Object[]) objectMessage.getObject())[0],
+                		(SistemaParametro) ((Object[]) objectMessage.getObject())[1],	
+                		(Rota) ((Object[]) objectMessage.getObject())[2],
+						(Integer) ((Object[]) objectMessage.getObject())[3]);            
+			} catch (JMSException e) {
+				System.out.println("Erro no MDB");
+				e.printStackTrace();
+			} catch (ControladorException e) {
+				e.printStackTrace();
+			}
         }	
 	}
-
 	
 	/**
 	 * Default create method
@@ -129,5 +140,30 @@ public class BatchGerarRAOSAnormalidadeConsumo implements MessageDrivenBean, Mes
 	 */
 	public void ejbCreate() {
 
+	}
+	
+	protected ControladorMicromedicaoLocal getControladorMicromedicao() {
+		ControladorMicromedicaoLocalHome localHome = null;
+		ControladorMicromedicaoLocal local = null;
+
+		// pega a instância do ServiceLocator.
+
+		ServiceLocator locator = null;
+
+		try {
+			locator = ServiceLocator.getInstancia();
+
+			localHome = (ControladorMicromedicaoLocalHome) locator
+					.getLocalHomePorEmpresa(ConstantesJNDI.CONTROLADOR_MICROMEDICAO_SEJB);
+			// guarda a referencia de um objeto capaz de fazer chamadas à
+			// objetos remotamente
+			local = localHome.create();
+
+			return local;
+		} catch (CreateException e) {
+			throw new SistemaException(e);
+		} catch (ServiceLocatorException e) {
+			throw new SistemaException(e);
+		}
 	}
 }

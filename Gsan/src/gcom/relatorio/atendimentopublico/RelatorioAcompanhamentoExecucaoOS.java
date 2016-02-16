@@ -112,6 +112,11 @@ public class RelatorioAcompanhamentoExecucaoOS extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_ACOMPANHAMENTO_EXECUCAO_OS);
 	}
 
+	@Deprecated
+	public RelatorioAcompanhamentoExecucaoOS() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

@@ -118,6 +118,11 @@ public class RelatorioManterFaturamentoSituacaoTipo extends TarefaRelatorio {
 	public RelatorioManterFaturamentoSituacaoTipo(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_FATURAMENTO_SITUACAO_TIPO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterFaturamentoSituacaoTipo() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

@@ -127,6 +127,11 @@ public class RelatorioManterMovimentoArrecadador extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_MOVIMENTO_ARRECADADOR_MANTER);
 	}
 
+	@Deprecated
+	public RelatorioManterMovimentoArrecadador() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

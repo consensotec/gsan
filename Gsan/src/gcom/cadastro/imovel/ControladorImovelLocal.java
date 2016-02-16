@@ -110,6 +110,7 @@ import gcom.cadastro.localidade.Quadra;
 import gcom.cadastro.tarifasocial.TarifaSocialCarta;
 import gcom.cadastro.tarifasocial.TarifaSocialComandoCarta;
 import gcom.cadastro.tarifasocial.TarifaSocialDadoEconomia;
+import gcom.cobranca.CobrancaGrupo;
 import gcom.cobranca.CobrancaSituacao;
 import gcom.cobranca.CobrancaSituacaoTipo;
 import gcom.cobranca.bean.SituacaoEspecialCobrancaHelper;
@@ -4190,4 +4191,12 @@ public interface ControladorImovelLocal extends javax.ejb.EJBLocalObject {
 	 * @throws ErroRepositorioException
 	 */
 	public ConsumoTarifa pesquisarConsumoTarifaImovel(Integer idImovel) throws ControladorException;
+	
+	/**
+	 * [UC01484] - Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * 
+	 * @author Vivianne Sousa	
+	 * @date 03/12/2015
+	 */
+	public Rota pesquisarRotaImovel(Integer idImovel)throws ControladorException;
 }

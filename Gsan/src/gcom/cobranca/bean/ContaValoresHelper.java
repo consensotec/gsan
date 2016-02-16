@@ -80,6 +80,7 @@ package gcom.cobranca.bean;
 
 import gcom.cobranca.parcelamento.Parcelamento;
 import gcom.faturamento.conta.Conta;
+import gcom.util.ConstantesSistema;
 import gcom.util.Util;
 
 import java.io.Serializable;
@@ -196,7 +197,7 @@ public class ContaValoresHelper implements Serializable {
 	 * @return Returns the valoratualizacaoMonetaria.
 	 */
 	public BigDecimal getValorAtualizacaoMonetaria() {
-		return valorAtualizacaoMonetaria;
+		return ( valorAtualizacaoMonetaria != null ? valorAtualizacaoMonetaria : new BigDecimal(0) );
 	}
 
 	/**
@@ -212,7 +213,7 @@ public class ContaValoresHelper implements Serializable {
 	 * @return Returns the valorJurosMora.
 	 */
 	public BigDecimal getValorJurosMora() {
-		return valorJurosMora;
+		return ( valorJurosMora != null ? valorJurosMora : new BigDecimal(0) );
 	}
 
 	/**
@@ -227,7 +228,7 @@ public class ContaValoresHelper implements Serializable {
 	 * @return Returns the valorMulta.
 	 */
 	public BigDecimal getValorMulta() {
-		return valorMulta;
+		return ( valorMulta != null ? valorMulta : new BigDecimal(0) );
 	}
 
 	/**

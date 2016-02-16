@@ -47,6 +47,11 @@ public class RelatorioDocumentoVisitaCobranca extends TarefaRelatorio {
 		public RelatorioDocumentoVisitaCobranca(Usuario usuario) {
 			super(usuario, ConstantesRelatorios.RELATORIO_DOCUMENTO_VISITA_COBRANCA);
 		}
+
+		@Deprecated
+		public RelatorioDocumentoVisitaCobranca() {
+			super(null, "");
+		}
 		
 		public Object executar() throws TarefaException {
 

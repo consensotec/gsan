@@ -130,6 +130,11 @@ public class RelatorioDocumentosParcelamentoPortalCaema extends TarefaRelatorio 
 		super(usuario, ConstantesRelatorios.RELATORIO_DOCUMENTOS_PARCELAMENTO_LOJA_VIRTUAL);
 	}
 
+	@Deprecated
+	public RelatorioDocumentosParcelamentoPortalCaema() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 
 		// ------------------------------------

@@ -4595,7 +4595,7 @@ public class RepositorioGerencialHBM implements IRepositorioGerencial {
 				+ "SUM(COALESCE(rfat.rece_vofaturado,0)) AS esgotoTotalVolumeFaturadoGeral"
 				+ " FROM micromedicao.un_resumo_coleta_esgoto rfat INNER JOIN cadastro.g_localidade loc on (rfat.loca_id = loc.loca_id) "
 				+ joinMunicipio
-				+ "WHERE rfat.rece_amreferencia = :anoMes";
+				+ "WHERE rfat.rece_amreferencia = :anoMes and rece_icfaturamento = 1 ";
 			
 			// Localidade
 			if (localidade != null) {
@@ -4701,7 +4701,7 @@ public class RepositorioGerencialHBM implements IRepositorioGerencial {
 				+ "SUM(COALESCE(rfat.reca_voconsumofaturado,0)) AS aguaTotalVolumeFaturadoGeral"
 				+ " FROM micromedicao.un_resumo_consumo_agua rfat INNER JOIN cadastro.g_localidade loc on (rfat.loca_id = loc.loca_id) "
 				+ joinMunicipio
-				+ "WHERE rfat.reca_amreferencia = :anoMes";
+				+ "WHERE rfat.reca_amreferencia = :anoMes and rfat.reca_icligacaofaturada = 1 ";
 			
 			// Localidade
 			if (localidade != null) {

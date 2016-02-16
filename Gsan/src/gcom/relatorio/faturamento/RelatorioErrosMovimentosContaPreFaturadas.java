@@ -125,7 +125,11 @@ public class RelatorioErrosMovimentosContaPreFaturadas extends TarefaRelatorio {
 	public RelatorioErrosMovimentosContaPreFaturadas(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_ERROS_MOVIMENTOS_CONTA_PRE_FATURADAS);
 	}
-
+	
+	@Deprecated
+	public RelatorioErrosMovimentosContaPreFaturadas() {
+		super(null, "");
+	}
 	public Object executar() throws TarefaException {
         return relatorio;
 	}

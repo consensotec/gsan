@@ -1,5 +1,12 @@
 package gcom.relatorio.gerencial.micromedicao;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import gcom.batch.Relatorio;
 import gcom.cadastro.sistemaparametro.SistemaParametro;
 import gcom.fachada.Fachada;
@@ -12,17 +19,14 @@ import gcom.tarefa.TarefaRelatorio;
 import gcom.util.ControladorException;
 import gcom.util.agendadortarefas.AgendadorTarefas;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 public class RelatorioResumoZonaAbastecimento extends TarefaRelatorio {
 	private static final long serialVersionUID = 1L;
 	public RelatorioResumoZonaAbastecimento(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_RESUMO_ZONA_ABASTECIMENTO);
+	}
+	@Deprecated
+	public RelatorioResumoZonaAbastecimento() {
+		super(null, "");
 	}
 
 	@Override

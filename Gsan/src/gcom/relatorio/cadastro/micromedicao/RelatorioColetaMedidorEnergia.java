@@ -111,6 +111,11 @@ public class RelatorioColetaMedidorEnergia extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_COLETA_MEDIDOR_ENERGIA);
 	}
 
+	@Deprecated
+	public RelatorioColetaMedidorEnergia() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

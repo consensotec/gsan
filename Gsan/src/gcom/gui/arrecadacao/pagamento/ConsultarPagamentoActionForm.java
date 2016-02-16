@@ -136,7 +136,8 @@ public class ConsultarPagamentoActionForm extends ValidatorActionForm {
     private String valorPagamentoInicial;
     private String valorPagamentoFinal;
    
-	
+    private String[] idsCategoria;
+    private String[] idsEsferaPoder;
 	
 	public String getCpfCnpj() {
 		return cpfCnpj;
@@ -608,24 +609,37 @@ public class ConsultarPagamentoActionForm extends ValidatorActionForm {
 	public void setOpcaoPagamento(String opcaoPagamento) {
 		this.opcaoPagamento = opcaoPagamento;
 	}
-
     
     public String getValorPagamentoFinal() {
         return valorPagamentoFinal;
     }
 
-    
     public void setValorPagamentoFinal(String valorPagamentoFinal) {
         this.valorPagamentoFinal = valorPagamentoFinal;
     }
-
     
     public String getValorPagamentoInicial() {
         return valorPagamentoInicial;
     }
-
     
     public void setValorPagamentoInicial(String valorPagamentoInicial) {
         this.valorPagamentoInicial = valorPagamentoInicial;
     }
+
+	public String[] getIdsCategoria() {
+		return idsCategoria;
+	}
+
+	public void setIdsCategoria(String[] idsCategoria) {
+		this.idsCategoria = idsCategoria;
+	}
+
+	public String[] getIdsEsferaPoder() {
+		return idsEsferaPoder;
+	}
+
+	public void setIdsEsferaPoder(String[] idsEsferaPoder) {
+		this.idsEsferaPoder = idsEsferaPoder;
+	}
+    
 }

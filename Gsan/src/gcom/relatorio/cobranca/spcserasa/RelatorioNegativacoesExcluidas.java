@@ -154,6 +154,11 @@ public class RelatorioNegativacoesExcluidas extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_NEGATIVACOES_EXCLUIDAS);
 	}
 
+	@Deprecated
+	public RelatorioNegativacoesExcluidas() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

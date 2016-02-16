@@ -112,6 +112,11 @@ public class RelatorioAvisoDeDebito extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_CONTA_TIPO_2);
 	}
 
+	@Deprecated
+	public RelatorioAvisoDeDebito() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

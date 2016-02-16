@@ -121,6 +121,11 @@ public class RelatorioImoveisConsumoMedio extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_CONSUMO_MEDIO);
 	}
 
+	@Deprecated
+	public RelatorioImoveisConsumoMedio() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

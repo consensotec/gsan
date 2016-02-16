@@ -28,6 +28,11 @@ public class RelatorioDocumentosAReceber extends TarefaRelatorio {
 	public RelatorioDocumentosAReceber(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_DOCUMENTOS_A_RECEBER);
 	}
+
+	@Deprecated
+	public RelatorioDocumentosAReceber() {
+		super(null, "");
+	}
 	
 	@Override
 	public int calcularTotalRegistrosRelatorio() {

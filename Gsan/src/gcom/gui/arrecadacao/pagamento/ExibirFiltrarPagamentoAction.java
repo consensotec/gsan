@@ -83,8 +83,12 @@ import gcom.arrecadacao.pagamento.FiltroPagamentoSituacao;
 import gcom.arrecadacao.pagamento.PagamentoSituacao;
 import gcom.cadastro.cliente.Cliente;
 import gcom.cadastro.cliente.ClienteRelacaoTipo;
+import gcom.cadastro.cliente.EsferaPoder;
 import gcom.cadastro.cliente.FiltroCliente;
 import gcom.cadastro.cliente.FiltroClienteRelacaoTipo;
+import gcom.cadastro.cliente.FiltroEsferaPoder;
+import gcom.cadastro.imovel.Categoria;
+import gcom.cadastro.imovel.FiltroCategoria;
 import gcom.cadastro.imovel.FiltroImovel;
 import gcom.cadastro.imovel.Imovel;
 import gcom.cadastro.localidade.FiltroLocalidade;
@@ -94,7 +98,9 @@ import gcom.cobranca.FiltroDocumentoTipo;
 import gcom.fachada.Fachada;
 import gcom.faturamento.debito.DebitoTipo;
 import gcom.faturamento.debito.FiltroDebitoTipo;
+import gcom.gui.ActionServletException;
 import gcom.gui.GcomAction;
+import gcom.util.ConstantesInterfaceGSAN;
 import gcom.util.ConstantesSistema;
 import gcom.util.Util;
 import gcom.util.filtro.ParametroSimples;
@@ -142,42 +148,29 @@ public class ExibirFiltrarPagamentoAction extends GcomAction {
 		String idImovel = consultarPagamentoActionForm.getIdImovel();
 		if (idImovel != null && !idImovel.equals("")) {
 			FiltroImovel filtroImovel = new FiltroImovel();
-			filtroImovel
-					.adicionarCaminhoParaCarregamentoEntidade("localidade");
-			filtroImovel
-					.adicionarCaminhoParaCarregamentoEntidade("setorComercial");
-			filtroImovel
-					.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTipo");
-			filtroImovel
-					.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTitulo");
-			filtroImovel
-					.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
-			filtroImovel
-					.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio.unidadeFederacao");
-			filtroImovel
-					.adicionarCaminhoParaCarregamentoEntidade("quadra");
-			filtroImovel
-					.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.cep");
-			filtroImovel.adicionarParametro(new ParametroSimples(
-					FiltroImovel.ID, idImovel));
+			filtroImovel.adicionarCaminhoParaCarregamentoEntidade("localidade");
+			filtroImovel.adicionarCaminhoParaCarregamentoEntidade("setorComercial");
+			filtroImovel.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTipo");
+			filtroImovel.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTitulo");
+			filtroImovel.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
+			filtroImovel.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio.unidadeFederacao");
+			filtroImovel.adicionarCaminhoParaCarregamentoEntidade("quadra");
+			filtroImovel.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.cep");
+			filtroImovel.adicionarParametro(new ParametroSimples(FiltroImovel.ID, idImovel));
 
-			Collection imoveis = fachada.pesquisar(filtroImovel, Imovel.class
-					.getName());
+			Collection imoveis = fachada.pesquisar(filtroImovel, Imovel.class.getName());
 
 			if (imoveis != null && !imoveis.isEmpty()) {
 				Imovel imovel = (Imovel) ((List) imoveis).get(0);
 				httpServletRequest.setAttribute("imovel", imovel);
-				consultarPagamentoActionForm.setInscricao(imovel
-						.getInscricaoFormatada());
+				consultarPagamentoActionForm.setInscricao(imovel.getInscricaoFormatada());
 			} else {
 				httpServletRequest.setAttribute("matriculaInexistente", "true");
 				consultarPagamentoActionForm.setIdImovel("");
-				consultarPagamentoActionForm
-						.setInscricao("MATRÍCULA INEXISTENTE");
+				consultarPagamentoActionForm.setInscricao("MATRÍCULA INEXISTENTE");
 			}
 		} else if (idImovel != null && idImovel.equals("")
-				&& consultarPagamentoActionForm.getInscricao()
-						.equalsIgnoreCase("MATRÍCULA INEXISTENTE")) {
+				&& consultarPagamentoActionForm.getInscricao().equalsIgnoreCase("MATRÍCULA INEXISTENTE")) {
 			httpServletRequest.setAttribute("matriculaInexistente", "true");
 		}
 		
@@ -186,11 +179,9 @@ public class ExibirFiltrarPagamentoAction extends GcomAction {
 		
 		if (idCliente != null && !idCliente.equals("")) {
 			FiltroCliente filtroCliente = new FiltroCliente();
-			filtroCliente.adicionarParametro(new ParametroSimples(
-					FiltroCliente.ID, idCliente));
+			filtroCliente.adicionarParametro(new ParametroSimples(FiltroCliente.ID, idCliente));
 
-			Collection clientes = fachada.pesquisar(filtroCliente,
-					Cliente.class.getName());
+			Collection clientes = fachada.pesquisar(filtroCliente,Cliente.class.getName());
 
 			if (clientes != null && !clientes.isEmpty()) {
 				Cliente cliente = (Cliente) ((List) clientes).get(0);
@@ -199,12 +190,10 @@ public class ExibirFiltrarPagamentoAction extends GcomAction {
 			} else {
 				httpServletRequest.setAttribute("clienteInexistente", "true");
 				consultarPagamentoActionForm.setIdCliente("");
-				consultarPagamentoActionForm
-						.setNomeCliente("CÓDIGO DE CLIENTE INEXISTENTE");
+				consultarPagamentoActionForm.setNomeCliente("CÓDIGO DE CLIENTE INEXISTENTE");
 			}
 		} else if (idCliente != null && idCliente.equals("")
-				&& consultarPagamentoActionForm.getNomeCliente()
-						.equalsIgnoreCase("CÓDIGO DE CLIENTE INEXISTENTE")) {
+				&& consultarPagamentoActionForm.getNomeCliente().equalsIgnoreCase("CÓDIGO DE CLIENTE INEXISTENTE")) {
 			httpServletRequest.setAttribute("clienteInexistente", "true");
 		}
 
@@ -212,24 +201,18 @@ public class ExibirFiltrarPagamentoAction extends GcomAction {
 		String idLocalidadeInicial = consultarPagamentoActionForm.getLocalidadeInicial();
 		if (idLocalidadeInicial != null && !idLocalidadeInicial.trim().equals("")) {
 			FiltroLocalidade filtroLocalidade = new FiltroLocalidade();
-			filtroLocalidade.adicionarParametro(new ParametroSimples(
-					FiltroLocalidade.ID, idLocalidadeInicial));
+			filtroLocalidade.adicionarParametro(new ParametroSimples(FiltroLocalidade.ID, idLocalidadeInicial));
 
-			Collection colecaoLocalidade = fachada.pesquisar(filtroLocalidade,
-					Localidade.class.getName());
+			Collection colecaoLocalidade = fachada.pesquisar(filtroLocalidade,Localidade.class.getName());
 
 			if (colecaoLocalidade != null && !colecaoLocalidade.isEmpty()) {
-				Localidade localidade = (Localidade) colecaoLocalidade
-						.iterator().next();
-				
+				Localidade localidade = (Localidade) colecaoLocalidade.iterator().next();
 				consultarPagamentoActionForm.setLocalidadeInicial(idLocalidadeInicial);
-				consultarPagamentoActionForm
-						.setDescricaoLocalidadeInicial(localidade.getDescricao());
+				consultarPagamentoActionForm.setDescricaoLocalidadeInicial(localidade.getDescricao());
 
 			} else {
 				consultarPagamentoActionForm.setLocalidadeInicial("");
-				consultarPagamentoActionForm
-						.setDescricaoLocalidadeInicial("LOCALIDADE INEXISTENTE");
+				consultarPagamentoActionForm.setDescricaoLocalidadeInicial("LOCALIDADE INEXISTENTE");
 				httpServletRequest.setAttribute("localidadeInexistente", true);
 			}
 		}
@@ -304,15 +287,12 @@ public class ExibirFiltrarPagamentoAction extends GcomAction {
 		sessao.setAttribute("colecaoPagamentoSituacao", colecaoPagamentoSituacao);
 		
 		// Pegando valores pra o combo FORMA DE ARRECADACAO
-		FiltroArrecadacaoForma filtroArrecadacaoForma = new FiltroArrecadacaoForma(
-				FiltroArrecadacaoForma.DESCRICAO);
-		Collection colecaoArrecadacaoForma = fachada
-			.pesquisar(filtroArrecadacaoForma, ArrecadacaoForma.class.getName());
+		FiltroArrecadacaoForma filtroArrecadacaoForma = new FiltroArrecadacaoForma(FiltroArrecadacaoForma.DESCRICAO);
+		Collection colecaoArrecadacaoForma = fachada.pesquisar(filtroArrecadacaoForma, ArrecadacaoForma.class.getName());
 		sessao.setAttribute("colecaoArrecadacaoForma", colecaoArrecadacaoForma);
 
 		// Pegando valores pra o combo Tipo de Débito		
-		FiltroDebitoTipo filtroDebitoTipo = new FiltroDebitoTipo(
-				FiltroDebitoTipo.DESCRICAO);
+		FiltroDebitoTipo filtroDebitoTipo = new FiltroDebitoTipo(FiltroDebitoTipo.DESCRICAO);
 		filtroDebitoTipo.setConsultaSemLimites(true);
 		Collection colecaoDebitoTipo = fachada
 			.pesquisar(filtroDebitoTipo, DebitoTipo.class.getCanonicalName());
@@ -324,6 +304,9 @@ public class ExibirFiltrarPagamentoAction extends GcomAction {
 		Collection colecaoDocumentoTipo = fachada
 			.pesquisar(filtroDocumentoTipo, DocumentoTipo.class.getName());
 		sessao.setAttribute("colecaoDocumentoTipo", colecaoDocumentoTipo);
+		
+		carregarColecaoCategorias(sessao);
+		carregarColecaoEsferasPoder(sessao);
 		
 		if (httpServletRequest.getParameter("tela") != null) {		
 			sessao.setAttribute("tela",tela);
@@ -345,5 +328,42 @@ public class ExibirFiltrarPagamentoAction extends GcomAction {
 		}
 		
 		return retorno;
+	}
+	
+	private void carregarColecaoCategorias(HttpSession sessao){
+		
+		FiltroCategoria filtroCategoria = new FiltroCategoria();
+		filtroCategoria.setConsultaSemLimites(true);
+		filtroCategoria.setCampoOrderBy(FiltroCategoria.DESCRICAO);
+		filtroCategoria.adicionarParametro(new ParametroSimples(
+				FiltroCategoria.INDICADOR_USO,ConstantesSistema.INDICADOR_USO_ATIVO));
+
+		Collection<Categoria> colecaoCategoria = this.getFachada().pesquisar(filtroCategoria, Categoria.class.getName());
+
+		if ( Util.isVazioOrNulo(colecaoCategoria)) {
+			throw new ActionServletException(ConstantesInterfaceGSAN.ATENCAO_NAO_CADASTRADO, 
+					ConstantesInterfaceGSAN.LABEL_GSAN_CATEGORIA);
+		}
+		
+		sessao.setAttribute("colecaoCategorias",colecaoCategoria);
+	}
+	
+	private void carregarColecaoEsferasPoder(HttpSession sessao){
+		
+		FiltroEsferaPoder filtroEsferaPoder = new FiltroEsferaPoder();
+		filtroEsferaPoder.setConsultaSemLimites(true);
+		filtroEsferaPoder.setCampoOrderBy(FiltroEsferaPoder.DESCRICAO);
+		filtroEsferaPoder.adicionarParametro(
+				new ParametroSimples(FiltroEsferaPoder.INDICADOR_USO, 
+				ConstantesSistema.INDICADOR_USO_ATIVO));
+
+		Collection<EsferaPoder> colecaoEsferaPoder = 
+			this.getFachada().pesquisar(filtroEsferaPoder,EsferaPoder.class.getName());
+
+		if ( Util.isVazioOrNulo(colecaoEsferaPoder)) {
+			throw new ActionServletException(ConstantesInterfaceGSAN.ATENCAO_NAO_CADASTRADO, 
+					ConstantesInterfaceGSAN.LABEL_GSAN_ESFERA_PODER);
+		}
+		sessao.setAttribute("colecaoEsferasPoder",colecaoEsferaPoder);
 	}
 }

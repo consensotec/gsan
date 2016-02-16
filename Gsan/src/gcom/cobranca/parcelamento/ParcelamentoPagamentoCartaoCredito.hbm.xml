@@ -7,11 +7,11 @@
 				<param name="sequence">cobranca.seq_parcel_pagto_cartao_cred</param>
 			</generator>
 		</id>
-		<property name="documentoCartaoCredito" type="java.lang.String" column="pacc_nndoctocartaocredito" not-null="true"/>
-		<property name="numeroAutorizacao" type="java.lang.String" column="pacc_nnautorzcartaocredito" not-null="true"/>
-		<property name="numeroCartaoCredito" type="java.lang.String" column="pacc_nnnumerocartaocredito" not-null="true"/>
-		<property name="anoMesValidade" type="java.lang.Integer" column="pacc_amvalidadecartaocredito" not-null="true"/>
-		<property name="identificacaoTransacao" type="java.lang.String" column="pacc_nnidentificadortransacao" not-null="true"/>
+		<property name="documentoCartaoCredito" type="java.lang.String" column="pacc_nndoctocartaocredito" not-null="false"/>
+		<property name="numeroAutorizacao" type="java.lang.String" column="pacc_nnautorzcartaocredito" not-null="false"/>
+		<property name="numeroCartaoCredito" type="java.lang.String" column="pacc_nnnumerocartaocredito" not-null="false"/>
+		<property name="anoMesValidade" type="java.lang.Integer" column="pacc_amvalidadecartaocredito" not-null="false"/>
+		<property name="identificacaoTransacao" type="java.lang.String" column="pacc_nnidentificadortransacao" not-null="false"/>
 		<property name="valorParcelado" type="java.math.BigDecimal" column="pacc_vlparcelado" not-null="true"/>
 		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="pacc_tmultimaalteracao" not-null="true"/>
 		<property name="quantidadeParcelas" type="java.lang.Integer" column="pacc_qtparcela" not-null="true"/>
@@ -20,16 +20,23 @@
 		<property name="dataConfirmadoOperadora" type="java.sql.Date" column="pacc_dtconfirmadooperadora" not-null="false"/>
 		<property name="valorConfirmadoOperadora" type="java.math.BigDecimal" column="pacc_vlconfirmadooperadora" not-null="false"/>
 		<property name="comprovantePagamento" type="binary" column="pacc_imcomprovantepgto" length="-1" not-null="false"/>
-		<many-to-one name="cliente" class="gcom.cadastro.cliente.Cliente" not-null="true">
+		<property name="numeroPedido" type="java.lang.String" column="pacc_nnpedido" not-null="false"/>
+		<property name="conteudoConcluirParcelamento" type="binary" column="pacc_cnconluirparcelamento" length="-1" not-null="false"/>
+		<property name="identificacaoRequisicao" type="java.lang.String" column="pacc_idrequisicao" length="38" not-null="false"/>
+		<property name="codigoComprovanteVenda" type="java.lang.String" column="pacc_cdcomprovantevenda" length="38" not-null="false"/>
+		<property name="email" type="java.lang.String" column="pacc_dsemail" length="40" not-null="false"/>
+		<property name="identificacaoPagamento" type="java.lang.String" column="pacc_nnidentificadorpagamento" length="38" not-null="false"/>
+
+		<many-to-one name="cliente" class="gcom.cadastro.cliente.Cliente" not-null="false">
 			<column name="clie_idtitularcartaocredito"/>
 		</many-to-one>
-		<many-to-one name="arrecadador" class="gcom.arrecadacao.Arrecadador" not-null="true">
+		<many-to-one name="arrecadador" class="gcom.arrecadacao.Arrecadador" not-null="false">
 			<column name="arrc_id"/>
 		</many-to-one>
 		<many-to-one name="usuarioConfirmacao" class="gcom.seguranca.acesso.usuario.Usuario" not-null="true">
 			<column name="usur_idconfirmacao"/>
 		</many-to-one>
-		<many-to-one name="parcelamento" class="gcom.cobranca.parcelamento.Parcelamento" not-null="true">
+		<many-to-one name="parcelamento" class="gcom.cobranca.parcelamento.Parcelamento" not-null="false">
 			<column name="parc_id"/>
 		</many-to-one>
 	</class>

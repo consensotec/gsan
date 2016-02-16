@@ -110,6 +110,11 @@ public class RelatorioManterBairro extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_BAIRRO_MANTER);
 	}
 
+	@Deprecated
+	public RelatorioManterBairro() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

@@ -12,7 +12,6 @@ import gcom.tarefa.TarefaException;
 import gcom.tarefa.TarefaRelatorio;
 import gcom.util.ControladorException;
 import gcom.util.agendadortarefas.AgendadorTarefas;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -35,6 +34,11 @@ public class RelatorioAcompanhamentoRegistroAtendimentoSinteticoEncerrado extend
 	
 	public RelatorioAcompanhamentoRegistroAtendimentoSinteticoEncerrado(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_ACOMPANHAMENTO_REGISTRO_ATENDIMENTO_SINTETICO_ENCERRADO);
+	}
+
+	@Deprecated
+	public RelatorioAcompanhamentoRegistroAtendimentoSinteticoEncerrado() {
+		super(null, "");
 	}
 
 	public Object executar() throws TarefaException {

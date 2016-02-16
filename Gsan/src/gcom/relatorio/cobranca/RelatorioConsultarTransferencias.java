@@ -107,6 +107,11 @@ public class RelatorioConsultarTransferencias extends TarefaRelatorio {
 	public RelatorioConsultarTransferencias(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_TRANSFERENCIAS_CONSULTAR);
 	}
+	
+	@Deprecated
+	public RelatorioConsultarTransferencias() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

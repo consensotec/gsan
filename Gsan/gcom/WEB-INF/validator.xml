@@ -1172,6 +1172,10 @@
 			<field property="setorCensitarioID" depends="caracteresespeciais, long">
 				<arg0 key="Setor Censitário" resource="false" />
 			</field>
+			<field property="bairroID"
+				depends="required, caracteresespeciais, long">
+				<arg0 key="Bairro" resource="false" />
+			</field>			
 			
 		</form>
 
@@ -1208,6 +1212,10 @@
 				depends="caracteresespeciais, long">
 				<arg0 key="Setor Censitário" resource="false" />
 			</field>
+			<field property="bairroID"
+				depends="required, caracteresespeciais, long">
+				<arg0 key="Bairro" resource="false" />
+			</field>			
 		</form>
 
 		<!-- Início Validação do Form de alterar inscrição do imóvel -->
@@ -12458,6 +12466,21 @@
 			</field>
 
 		</form>
+		
+		<form name="EfetuarInstalacaoSubstituicaoRetiradaLoteActionForm">
+
+			<field property="leituraInstalacao"
+				depends="caracteresespeciais, integer">
+				<arg0 key="Leitura de Instalação" resource="false" />
+			</field>
+
+
+			<field property="leituraRetirada"
+				depends="caracteresespeciais, integer">
+				<arg0 key="Leitura de Retirada" resource="false" />
+			</field>
+
+		</form>
 
 		<!-- [UC0659] - Fim Validação Filtrar Contrato Negativador Author: Yara Taciane: 19/12/2007  -->
 
@@ -13645,7 +13668,11 @@
 				depends="required, long">
 				<arg0 key="Código do Setor Comercial" resource="false" />
 			</field>
-
+			
+			<field property="indicadorOrdenacao"
+				depends="required, long">
+				<arg0 key="Tipo de Ordenação" resource="false" />
+			</field>
 
 
 		</form>
@@ -19412,5 +19439,121 @@
 				<arg0 key="Cliente Superior" resource="false" />
 			</field>
 		</form>
+		
+		
+	<!-- [UC1694] - Relatório Previsão/Pagamento Cartão de Crédito: Joao Pedro Medeiros Data: 16/10/2015  -->
+		<form name="GerarRelatorioPrevisaoPagamentoCartaoCreditoActionForm">
+			<field property="dataVencimentoInicial" depends="required, caracteresespeciais, date">
+				<arg0 key="Data de Vencimento Inicial" resource="false" />
+				<var>
+					<var-name>datePattern</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+			</field>
+			
+			
+			<field property="dataVencimentoFinal" depends="required, caracteresespeciais, date">
+				<arg0 key="Data de Vencimento Final" resource="false" />
+				<var>
+					<var-name>datePattern</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+			</field>
+
+			<field property="idCliente" depends="required">
+				<arg0 key="Cliente" resource="false" />
+			</field>
+
+			<field property="tipoRelatorio" depends="required">
+				<arg0 key="Tipo de Relatorio" resource="false" />
+			</field>
+		</form>
+
+		<form name="GerarArquivoTextoOrdensServicoSmartphoneActionForm">
+			<field property="idEmpresa" depends="required">
+				<arg0 key="Empresa" resource="false" />
+			</field>
+			<field property="idTipoOS" depends="required">
+				<arg0 key="Tipo da Ordem de Serviço" resource="false" />
+			</field>
+			<field property="idServicoTipo" depends="required">
+				<arg0 key="Tipo de Serviço" resource="false" />
+			</field>
+			<field property="mesAnoCronograma" depends="caracteresespeciais, mesAno">
+				<arg0 key="Mês/Ano do Cronograma" resource="false" />
+			</field>
+
+			<field property="dataCobrancaEventualInicial" depends="caracteresespeciais, date">
+				<arg0 key="Data Cobrança Eventual Inicial" resource="false" />
+
+				<var>
+					<var-name>datePattern</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+			</field>
+
+			<field property="dataCobrancaEventualFinal" depends="caracteresespeciais, date">
+				<arg0 key="Data Cobrança Eventual Final" resource="false" />
+
+				<var>
+					<var-name>datePattern</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+			</field>
+		</form>
+		
+		<!-- [UC1700] - Relatório Consultar Arquivo Retorno Cobranca: Joao Pedro Medeiros Data: 24/11/2015  -->
+		<form name="GerarRelatorioConsultarArquivoRetornoCobrancaActionForm">
+			<field property="dataVencimentoInicial" depends="required, caracteresespeciais, date">
+				<arg0 key="Data de Vencimento Inicial" resource="false" />
+				<var>
+					<var-name>datePattern</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+			</field>
+			
+			
+			<field property="dataVencimentoFinal" depends="required, caracteresespeciais, date">
+				<arg0 key="Data de Vencimento Final" resource="false" />
+				<var>
+					<var-name>datePattern</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+			</field>
+
+		</form>
+
+
+		<form name="ConsultarArquivoTextoOSCobrancaSmartphoneActionForm">
+			<field property="idEmpresa" depends="required">
+				<arg0 key="Empresa" resource="false" />
+			</field>
+			<field property="idServicoTipo" depends="required">
+				<arg0 key="Tipo de Serviço" resource="false" />
+			</field>
+			<field property="mesAnoCronograma" depends="caracteresespeciais, mesAno">
+				<arg0 key="Mês/Ano do Cronograma" resource="false" />
+			</field>
+			
+			<field property="dataCobrancaEventualInicial" depends="caracteresespeciais, date">
+				<arg0 key="Data Cobrança Eventual Inicial" resource="false" />
+
+				<var>
+					<var-name>datePattern</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+			</field>
+
+			<field property="dataCobrancaEventualFinal" depends="caracteresespeciais, date">
+				<arg0 key="Data Cobrança Eventual Final" resource="false" />
+
+				<var>
+					<var-name>datePattern</var-name>
+					<var-value>dd/MM/yyyy</var-value>
+				</var>
+			</field>
+
+		</form>
+
 	</formset>
 </form-validation>

@@ -29,6 +29,11 @@ public class RelatorioDemonstrativoSinteticoLigacoes extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_DEMONSTRATIVO_SINTETICO_LIGACOES);
 	}
 
+	@Deprecated
+	public RelatorioDemonstrativoSinteticoLigacoes() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 
 		// valor de retorno

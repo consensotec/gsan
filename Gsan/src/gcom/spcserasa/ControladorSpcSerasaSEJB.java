@@ -4802,11 +4802,14 @@ public class ControladorSpcSerasaSEJB implements SessionBean {
 			//h.03
 			colocarConteudo(ddmmaaaa, 10, registro);
 			//h.04
-			colocarConteudo(numeroContrato, 18, registro);
+			colocarConteudo(numeroContrato, 18, registro);			
+			// Alterado Bruno Barros ( 12/01/2016 ), para pegar os dados da entidade e do associado do negativador contrato		
 			//h.05
-			colocarConteudo("01101", 26, registro);
+			//colocarConteudo("01101", 26, registro);
+			colocarConteudo( Util.adicionarZerosEsquedaNumero(5, nc.getNumeroEntidade()+"" ) , 26, registro);
 			//h.06
-			colocarConteudo("00102779", 31, registro);
+			//colocarConteudo("00102779", 31, registro);
+			colocarConteudo( Util.adicionarZerosEsquedaNumero(8, nc.getNumeroAssociado()+"" ), 31, registro);
 			//h.07
 			colocarConteudo(aaaammdd, 39, registro);
 			//h.08
@@ -5766,7 +5769,7 @@ public class ControladorSpcSerasaSEJB implements SessionBean {
 
 			zos.close();
 
-			ServicosEmail.enviarMensagemArquivoAnexado(emailReceptor, emailRemetente,
+			ServicosEmail.enviarMensagemArquivoAnexado(emailRemetente, emailReceptor,
 					 tituloMensagem, corpoMensagem, compactado);
 
 			leituraTipo.delete();
@@ -12898,18 +12901,20 @@ public class ControladorSpcSerasaSEJB implements SessionBean {
 //						pagamentoAtualizacao.getImovel().getId(),
 //						pagamentoAtualizacao.getContaGeral().getConta().getReferencia());
 				
-				Collection colecaoNegativadorMovimentoRegItemEfetuar = obterItensNegativacaoAssociadosAConta(
-						pagamentoAtualizacao.getImovel().getId(),
-						referencia);
-				
-				if(colecaoNegativadorMovimentoRegItemEfetuar != null && !colecaoNegativadorMovimentoRegItemEfetuar.isEmpty()){
-					//2.4.1.Caso existam itens de negativação associados à conta atual
-					Iterator iterNmri = colecaoNegativadorMovimentoRegItemEfetuar.iterator();
-					while (iterNmri.hasNext()) {
-						Integer idNmri = (Integer) iterNmri.next();
-						//[SB0009 - Atualizar Item da Negativação - Efetuar Pagamento].
-						atualizarNegativadorMovimentoRegItemPorPagamento(idNmri,pagamentoAtualizacao);
-					}
+				if ( referencia != null ){
+					Collection colecaoNegativadorMovimentoRegItemEfetuar = obterItensNegativacaoAssociadosAConta(
+							pagamentoAtualizacao.getImovel().getId(),
+							referencia);
+					
+					if(colecaoNegativadorMovimentoRegItemEfetuar != null && !colecaoNegativadorMovimentoRegItemEfetuar.isEmpty()){
+						//2.4.1.Caso existam itens de negativação associados à conta atual
+						Iterator iterNmri = colecaoNegativadorMovimentoRegItemEfetuar.iterator();
+						while (iterNmri.hasNext()) {
+							Integer idNmri = (Integer) iterNmri.next();
+							//[SB0009 - Atualizar Item da Negativação - Efetuar Pagamento].
+							atualizarNegativadorMovimentoRegItemPorPagamento(idNmri,pagamentoAtualizacao);
+						}
+					}					
 				}
 				
 			}

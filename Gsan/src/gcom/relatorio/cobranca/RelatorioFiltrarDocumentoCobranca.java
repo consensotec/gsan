@@ -77,6 +77,14 @@
 
 package gcom.relatorio.cobranca;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import gcom.batch.Relatorio;
 import gcom.cadastro.empresa.Empresa;
 import gcom.cadastro.empresa.FiltroEmpresa;
@@ -117,14 +125,6 @@ import gcom.util.Util;
 import gcom.util.agendadortarefas.AgendadorTarefas;
 import gcom.util.filtro.ParametroSimples;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 /**
  * Descrição da classe
  * Classe responsável pelo processamento dos
@@ -141,6 +141,11 @@ public class RelatorioFiltrarDocumentoCobranca extends TarefaRelatorio {
 	
 	public RelatorioFiltrarDocumentoCobranca(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_FILTRAR_DOCUMENTO_COBRANCA);
+	}
+	
+	@Deprecated
+	public RelatorioFiltrarDocumentoCobranca(){
+		super(null, "");
 	}
 	
 	@Override

@@ -477,7 +477,7 @@ public class RemoverManterImovelAction extends GcomAction {
 		
 		imovel.setObservacaoCancelamento(manutencaoRegistroActionForm.getMensagemObservacaoExclusao());
 		
-		imovel.setIndicadorExclusao(ConstantesSistema.SIM);
+		//imovel.setIndicadorExclusao(ConstantesSistema.SIM);
 		
 		//-------------------- Registrar Transação ---------------------------------------
 		RegistradorOperacao registradorOperacao = new RegistradorOperacao(

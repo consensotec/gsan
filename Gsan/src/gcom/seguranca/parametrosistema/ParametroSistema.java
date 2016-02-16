@@ -84,39 +84,50 @@ import gcom.util.filtro.ParametroSimples;
 
 import java.util.Date;
 
-public class ParametroSistema extends ObjetoTransacao{
+public class ParametroSistema extends ObjetoTransacao {
+	private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 1L;	
-	
 	public static final String COMUNICADO_LINHAS_QTD_MAX = "QTDMAXLINCOMUNICADO";
 	public static final String COMUNICADO_COLUNAS_QTD_MAX = "QTDMAXCOLCOMUNICADO";
 	public static final String QTD_MESES_FATURAR_AGUA = "QTMESESFATURARAGUA";
-	
+
 	public static final String ID_CORTADOCOMCONSUMO = "ID_CORTADOCOMCONSUMO";
-	
+
 	//Referência Inicial para cobrança de multa nas contas vencidas
 	public static final String REF_INICIAL_COBRANCA_MULTA_CONTAS_VENCIDAS = "REFINICOBMULTACONTA";
-	
+
 	public static final String INDICADOR_NEGATIVACAO_POR_GUIA = "ICNEGATIVACAOPORGUIA";
-	
+
 	public static final String INDICADOR_PERGUNTA_SUBSTITUICAO_CLIENTE = "ICPERGUNTASUBSTCLIE";
-	
+
 	public static final String INDICADOR_PERGUNTA_2_VIA_CLIENTE_IMOVEL = "ICPERGUNTA2VIACLIIMO";
-	
+
 	public static final String CODIGO_CONVENIO_1682402 = "CODCOVEN1682402";
-	
+
 	public static final String DESCRICAO_CONTATO_CONTA_BRAILLE = "DSCONTATOCNTABRAILLE";
-	
+
 	public static final String INDICADOR_CONTROLE_GRANDE_CLIENTE = "ICCONTRGRANDECLIENTE";
-	
+
 	public static final String INDICADOR_PERCENTUAL_ALTERNATIVO_ESGOTO = "ICUSOPERCALTERNATESG";
-	
+
 	public static final String INDICADOR_GERACAO_RELATORIO_TIPO_CLIENTE_ESFERA_PODER = "ICRELDEBESFPODTPCLIE";
-	
+
 	public static final String QTD_DIAS_BAIXA_EXTRATO_DEBITOS = "QTDIASBAIXAEXTRATO";
-	
+
+	public static final String SENHA_PADRAO = "SENHAPADRAO";
+
 	public static final String QTD_DIAS_ACEITA_TELEMETRIA = "QTDDIASDIFTELEMETRIA";
 	
+	public static final String USUARIO_SERVIDOR_PENTAHO = "USURSERVPENTAHO";
+	
+	public static final String IP_SERVIDOR_PENTAHO = "IPSERVPENTAHO";
+	
+	public static final String CAMINHO_ARQUIVO_CARGA_PENTAHO = "CAMARQCARGPENT";
+	
+	public static final String QTD_MAX_RELATORIO_IMOVEIS = "QTDMAXRELIMO";
+
+	public static final String NUMERO_LIMITE_OS_COBRANCA = "NNLIMITEOSCOBRANCA";
+
 	private Integer id;
 	private String nome;
 	private String descricao;

@@ -1749,5 +1749,15 @@ public interface IRepositorioAtendimentoPublico {
 		 * @throws ControladorException 
 		 * */
 		public void gerarResumoAtendimentoPublicoAtualizaDados()  throws ErroRepositorioException, SQLException;
+		
+		/**
+		 *  [UC0412] Manter Tipo de Serviço
+		 * @author João Pedro de Medeiros
+		 * @throws ControladorException 
+		 * @data 15/12/2015
+		 * 
+		 * @throws ControladorException 
+		 * */
+		public Integer pesquisarConstanteFuncionalidadeTipoServico(Integer servicoTipoId) throws ErroRepositorioException;
 	
 }

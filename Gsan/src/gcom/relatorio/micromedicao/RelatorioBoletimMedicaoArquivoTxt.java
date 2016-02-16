@@ -27,6 +27,11 @@ public class RelatorioBoletimMedicaoArquivoTxt extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_BOLETIM_MEDICAO_ARQUIVO_TXT);
 	}
 
+	@Deprecated
+	public RelatorioBoletimMedicaoArquivoTxt() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

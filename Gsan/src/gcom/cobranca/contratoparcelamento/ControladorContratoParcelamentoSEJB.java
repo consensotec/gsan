@@ -4564,7 +4564,7 @@ public class ControladorContratoParcelamentoSEJB implements SessionBean {
 	 * @data 29/08/2011
 	 */
 	public InserirContratoParcelamentoValoresParcelasHelper calcularValoresParcelasContratoParcelamento(
-			BigDecimal valorContaSelecaoTotal, BigDecimal acrescimo, String indicadorDebitoAcresc,
+			BigDecimal valorContaSelecaoTotal, BigDecimal acrescimo, BigDecimal valorDebitoACobrar, String indicadorDebitoAcresc,
 			String indicadorParcelJuros, BigDecimal jurosBigDec, int numeroParcelInicial, int numeroParcelFinal) 
 		throws ControladorException {
 			InserirContratoParcelamentoValoresParcelasHelper helper = new InserirContratoParcelamentoValoresParcelasHelper();
@@ -4693,7 +4693,7 @@ public class ControladorContratoParcelamentoSEJB implements SessionBean {
 	 * @data 29/08/2011
 	 */
 	public InserirContratoParcelamentoValoresParcelasHelper calcularValoresParcelasContratoParcelamentoRD(
-			BigDecimal valorContaSelecaoTotal, BigDecimal valorContaComAcrescimo, String indicadorDebitoAcresc,
+			BigDecimal valorContaSelecaoTotal, BigDecimal valorContaComAcrescimo, BigDecimal valorDebitoACobrar, String indicadorDebitoAcresc,
 			String indicadorParcelJuros, ContratoParcelamento contratoParcelamento, 
 			QuantidadePrestacoes quantidadePrestacoes) 
 		throws ControladorException {
@@ -4774,9 +4774,9 @@ public class ControladorContratoParcelamentoSEJB implements SessionBean {
 				}
 				
 				if(valorJurosParcelamento != null && valorJurosParcelamento.compareTo(BigDecimal.ZERO) > 0){
-					contratoParcelamento.setValorDebitoAtualizado(valorParcelado.subtract(valorJurosParcelamento));
+					contratoParcelamento.setValorDebitoAtualizado(valorParcelado.subtract(valorJurosParcelamento).add( valorDebitoACobrar ));
 				}else{
-					contratoParcelamento.setValorDebitoAtualizado(valorParcelado);
+					contratoParcelamento.setValorDebitoAtualizado(valorParcelado.add( valorDebitoACobrar ));
 				}
 				contratoParcelamento.setValorJurosParcelamento(valorJurosParcelamento);
 				contratoParcelamento.setTaxaJuros(quantidadePrestacoes.getTaxaJuros());
@@ -4787,7 +4787,7 @@ public class ControladorContratoParcelamentoSEJB implements SessionBean {
 				}else{
 					valorParcelado = valorContaSelecaoTotal;
 				}
-				contratoParcelamento.setValorDebitoAtualizado(valorParcelado);
+				contratoParcelamento.setValorDebitoAtualizado(valorParcelado.add( valorDebitoACobrar ));
 				
 				contratoParcelamento.setValorJurosParcelamento(null);
 				contratoParcelamento.setTaxaJuros(null);

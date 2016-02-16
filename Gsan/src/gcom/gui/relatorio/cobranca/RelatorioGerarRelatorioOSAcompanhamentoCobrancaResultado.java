@@ -57,6 +57,12 @@ public class RelatorioGerarRelatorioOSAcompanhamentoCobrancaResultado extends Ta
 				ConstantesRelatorios.RELATORIO_ACOMPANHAMENTO_OS_COBRANCA_RESULTADO);
 	}
 
+	@Deprecated
+	public RelatorioGerarRelatorioOSAcompanhamentoCobrancaResultado() {
+		super(null,
+				"");
+	}
+
 	public Object executar() throws TarefaException {
 
 		// ------------------------------------

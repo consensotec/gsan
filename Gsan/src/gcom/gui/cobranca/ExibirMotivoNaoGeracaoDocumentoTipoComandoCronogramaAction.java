@@ -212,6 +212,8 @@ public class ExibirMotivoNaoGeracaoDocumentoTipoComandoCronogramaAction extends 
 					filtroCobrancaAcaoAtividadeCronograma.adicionarParametro(new ParametroSimples(
 							FiltroCobrancaAcaoAtividadeCronograma.ID_COBRANCA_ACAO_CRONOGRAMA, cobrancaAcaoCronograma.getId()));
 					
+					filtroCobrancaAcaoAtividadeCronograma.adicionarCaminhoParaCarregamentoEntidade( FiltroCobrancaAcaoAtividadeCronograma.COBRANCA_ATIVIDADE_COBRANCA_ACAO );
+					
 					Collection colecaoCobrancaAcaoAtividadeCronograma = fachada.pesquisar(filtroCobrancaAcaoAtividadeCronograma, CobrancaAcaoAtividadeCronograma.class.getName());
 					cobrancaAcaoAtividadeCronograma = (CobrancaAcaoAtividadeCronograma) Util.retonarObjetoDeColecao(colecaoCobrancaAcaoAtividadeCronograma);
 				}

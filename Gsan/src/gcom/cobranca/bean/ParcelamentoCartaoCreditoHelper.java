@@ -36,7 +36,9 @@ public class ParcelamentoCartaoCreditoHelper implements Serializable {
  	private Date dataConfirmacaoOperadora;
  	
  	private byte[] imagemArquivoComprovante;
-
+ 	
+ 	private String numeroPedido;
+ 	
 	public String getIdClienteArrecadador() {
 		return IdClienteArrecadador;
 	}
@@ -148,5 +150,12 @@ public class ParcelamentoCartaoCreditoHelper implements Serializable {
 	public void setImagemArquivoComprovante(byte[] imagemArquivoComprovante) {
 		this.imagemArquivoComprovante = imagemArquivoComprovante;
 	}
-	
+
+	public String getNumeroPedido() {
+		return numeroPedido;
+	}
+
+	public void setNumeroPedido(String numeroPedido) {
+		this.numeroPedido = numeroPedido;
+	}
 }

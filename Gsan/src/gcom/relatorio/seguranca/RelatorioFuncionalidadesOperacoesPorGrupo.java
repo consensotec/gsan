@@ -86,7 +86,6 @@ import gcom.tarefa.TarefaException;
 import gcom.tarefa.TarefaRelatorio;
 import gcom.util.ControladorException;
 import gcom.util.agendadortarefas.AgendadorTarefas;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -109,6 +108,11 @@ public class RelatorioFuncionalidadesOperacoesPorGrupo extends TarefaRelatorio {
 	
 	public RelatorioFuncionalidadesOperacoesPorGrupo(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_FUNCIONALIDADE_E_OPERACAO_POR_GRUPO);
+	}
+
+	@Deprecated
+	public RelatorioFuncionalidadesOperacoesPorGrupo() {
+		super(null, "");
 	}
 
 	/**

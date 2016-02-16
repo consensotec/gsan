@@ -58,6 +58,11 @@ public class RelatorioOrdensServicoFiscalizacaoAction extends TarefaRelatorio {
 		super(usuario, tipoRelatorio);
 	}
 	
+	@Deprecated
+	public RelatorioOrdensServicoFiscalizacaoAction() {
+		super(null, "");
+	}
+	
 	public Object executar() throws TarefaException {
 
 		// ------------------------------------

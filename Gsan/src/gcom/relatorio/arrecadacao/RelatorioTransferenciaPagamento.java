@@ -1,5 +1,11 @@
 package gcom.relatorio.arrecadacao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import gcom.arrecadacao.ArrecadacaoForma;
 import gcom.arrecadacao.Arrecadador;
 import gcom.arrecadacao.aviso.AvisoBancario;
@@ -19,12 +25,6 @@ import gcom.tarefa.TarefaRelatorio;
 import gcom.util.ControladorException;
 import gcom.util.agendadortarefas.AgendadorTarefas;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 /**
  * [UC1217] Gerar relatorio de transferencia de pagamento
  * @author Raimundo Martins
@@ -37,6 +37,11 @@ public class RelatorioTransferenciaPagamento extends TarefaRelatorio{
 	
 	public RelatorioTransferenciaPagamento(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_TRANSFERENCIA_PAGAMENTO);	 
+	}
+
+	@Deprecated
+	public RelatorioTransferenciaPagamento() {
+		super(null, "");
 	}
 	
 	@Override

@@ -136,6 +136,7 @@ public class FiltrarResolucaoDiretoriaAction extends GcomAction {
 	    String indicadorNegociacaoSoAVista = "";
 	    String indicadorDescontoSoEmContaAVista = "";
 	    String indicadorParcelamentoLojaVirtual = "";
+	    String indicadorParcelamentoCartaoCredito = "";
 
 		// Verifica se voltou do ManterResolucaoDiretoria e para isso, verifica
 		// se a paginação é nula
@@ -186,6 +187,10 @@ public class FiltrarResolucaoDiretoriaAction extends GcomAction {
 
 			indicadorParcelamentoLojaVirtual = filtrarResolucaoDiretoriaActionForm.getIndicadorParcelamentoLojaVirtual();
 			sessao.setAttribute("indicadorParcelamentoLojaVirtual",indicadorParcelamentoLojaVirtual);
+			
+			indicadorParcelamentoCartaoCredito = filtrarResolucaoDiretoriaActionForm.getIndicadorParcelamentoCartaoCredito();
+			sessao.setAttribute("indicadorCartaoCredito",indicadorParcelamentoCartaoCredito);
+
 		} else {
 			// Recupera as variáveis digitadas anteriormente para colocá-los
 			// novamente no filtro, pois devido ao esquema de
@@ -212,6 +217,7 @@ public class FiltrarResolucaoDiretoriaAction extends GcomAction {
 			indicadorNegociacaoSoAVista = (String)sessao.getAttribute("indicadorNegociacaoSoAVista");
 			indicadorDescontoSoEmContaAVista = (String)sessao.getAttribute("indicadorDescontoSoEmContaAVista");
 			indicadorParcelamentoLojaVirtual = (String)sessao.getAttribute("indicadorParcelamentoLojaVirtual");
+			indicadorParcelamentoCartaoCredito = (String)sessao.getAttribute("indicadorParcelamentoCartaoCredito");
 		}
 
 		// Cria o filtro
@@ -323,6 +329,12 @@ public class FiltrarResolucaoDiretoriaAction extends GcomAction {
 		if (!filtrarResolucaoDiretoriaActionForm.getIndicadorParcelamentoLojaVirtual().equals(ConstantesSistema.TODOS.toString())){
 			filtroResolucaoDiretoria.adicionarParametro(new ParametroSimples(FiltroResolucaoDiretoria.INDICADOR_PARCELAMENTO_LOJA_VIRTUAL,filtrarResolucaoDiretoriaActionForm.getIndicadorParcelamentoLojaVirtual()));
 			peloMenosUmParametroInformado = true;
+		}
+		
+		//Indicador Parcelamento Cartao de Credito
+		if ( !filtrarResolucaoDiretoriaActionForm.getIndicadorParcelamentoCartaoCredito().equals( ConstantesSistema.TODOS.toString() ) ){
+			filtroResolucaoDiretoria.adicionarParametro( new ParametroSimples( FiltroResolucaoDiretoria.INDICADOR_PARCELAMENTO_CARTAO_CREDITO, filtrarResolucaoDiretoriaActionForm.getIndicadorParcelamentoCartaoCredito() ) );
+			peloMenosUmParametroInformado = true;			
 		}
 		
 		// Erro caso o usuário mandou filtrar sem nenhum parâmetro

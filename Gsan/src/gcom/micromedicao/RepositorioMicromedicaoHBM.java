@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2007 the GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
+ * Copyright (C) 2007-2007 the GSAN - Sistema Integrado de Gestï¿½o de Serviï¿½os de Saneamento
  *
  * This file is part of GSAN, an integrated service management system for Sanitation
  *
@@ -18,60 +18,60 @@
  */
 
 /*
- * GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
+ * GSAN - Sistema Integrado de Gestï¿½o de Serviï¿½os de Saneamento
  * Copyright (C) <2007>
  * Adriano Britto Siqueira
  * Alexandre Santos Cabral
  * Ana Carolina Alves Breda
  * Ana Maria Andrade Cavalcante
- * Aryed Lins de Araújo
+ * Aryed Lins de Araï¿½jo
  * Bruno Leonardo Rodrigues Barros
  * Carlos Elmano Rodrigues Ferreira
- * Cláudio de Andrade Lira
- * Denys Guimarães Guenes Tavares
+ * Clï¿½udio de Andrade Lira
+ * Denys Guimarï¿½es Guenes Tavares
  * Eduardo Breckenfeld da Rosa Borges
- * Fabíola Gomes de Araújo
- * Flávio Leonardo Cavalcanti Cordeiro
- * Francisco do Nascimento Júnior
+ * Fabï¿½ola Gomes de Araï¿½jo
+ * Flï¿½vio Leonardo Cavalcanti Cordeiro
+ * Francisco do Nascimento Jï¿½nior
  * Homero Sampaio Cavalcanti
- * Ivan Sérgio da Silva Júnior
- * José Edmar de Siqueira
- * José Thiago Tenório Lopes
- * Kássia Regina Silvestre de Albuquerque
+ * Ivan Sï¿½rgio da Silva Jï¿½nior
+ * Josï¿½ Edmar de Siqueira
+ * Josï¿½ Thiago Tenï¿½rio Lopes
+ * Kï¿½ssia Regina Silvestre de Albuquerque
  * Leonardo Luiz Vieira da Silva
- * Márcio Roberto Batista da Silva
- * Maria de Fátima Sampaio Leite
- * Micaela Maria Coelho de Araújo
- * Nelson Mendonça de Carvalho
+ * Mï¿½rcio Roberto Batista da Silva
+ * Maria de Fï¿½tima Sampaio Leite
+ * Micaela Maria Coelho de Araï¿½jo
+ * Nelson Mendonï¿½a de Carvalho
  * Newton Morais e Silva
  * Pedro Alexandre Santos da Silva Filho
- * Rafael Corrêa Lima e Silva
+ * Rafael Corrï¿½a Lima e Silva
  * Rafael Francisco Pinto
  * Rafael Koury Monteiro
- * Rafael Palermo de Araújo
+ * Rafael Palermo de Araï¿½jo
  * Raphael Veras Rossiter
  * Roberto Sobreira Barbalho
  * Rodrigo Avellar Silveira
- * Rômulo Aurélio de Melo Souza Filho
+ * Rï¿½mulo Aurï¿½lio de Melo Souza Filho
  * Rosana Carvalho Barbosa
- * Sávio Luiz de Andrade Cavalcante
+ * Sï¿½vio Luiz de Andrade Cavalcante
  * Tai Mu Shih
  * Thiago Augusto Souza do Nascimento
  * Tiago Moreno Rodrigues
  * Vivianne Barbosa Sousa
  * Yara Taciane de Souza
  *
- * Este programa é software livre; você pode redistribuí-lo e/ou
- * modificá-lo sob os termos de Licença Pública Geral GNU, conforme
- * publicada pela Free Software Foundation; versão 2 da
- * Licença.
- * Este programa é distribuído na expectativa de ser útil, mas SEM
- * QUALQUER GARANTIA; sem mesmo a garantia implícita de
- * COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
- * PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+ * Este programa ï¿½ software livre; vocï¿½ pode redistribuï¿½-lo e/ou
+ * modificï¿½-lo sob os termos de Licenï¿½a Pï¿½blica Geral GNU, conforme
+ * publicada pela Free Software Foundation; versï¿½o 2 da
+ * Licenï¿½a.
+ * Este programa ï¿½ distribuï¿½do na expectativa de ser ï¿½til, mas SEM
+ * QUALQUER GARANTIA; sem mesmo a garantia implï¿½cita de
+ * COMERCIALIZAï¿½ï¿½O ou de ADEQUAï¿½ï¿½O A QUALQUER PROPï¿½SITO EM
+ * PARTICULAR. Consulte a Licenï¿½a Pï¿½blica Geral GNU para obter mais
  * detalhes.
- * Você deve ter recebido uma cópia da Licença Pública Geral GNU
- * junto com este programa; se não, escreva para Free Software
+ * Vocï¿½ deve ter recebido uma cï¿½pia da Licenï¿½a Pï¿½blica Geral GNU
+ * junto com este programa; se nï¿½o, escreva para Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
@@ -186,7 +186,7 @@ import org.hibernate.criterion.Restrictions;
 
 
 /**
- * < <Descrição da Classe>>
+ * < <Descriï¿½ï¿½o da Classe>>
  *
  * @author Administrador
  */
@@ -223,12 +223,12 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * pesquisa uma coleção de cep(s) de acordo com o código
+	 * pesquisa uma coleï¿½ï¿½o de cep(s) de acordo com o cï¿½digo
 	 *
 	 * @param faixaInicial
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param faixaFinal
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @return Description of the Return Value
 	 * @exception ErroRepositorioException
 	 *                Description of the Exception
@@ -258,24 +258,24 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					10 * numeroPagina).setMaxResults(10).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		// return retorno;
 		return hidrometros;
 	}
 
 	/**
-	 * pesquisa uma coleção de cep(s) de acordo com o código
+	 * pesquisa uma coleï¿½ï¿½o de cep(s) de acordo com o cï¿½digo
 	 *
 	 * @param faixaInicial
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param faixaFinal
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @return Description of the Return Value
 	 * @exception ErroRepositorioException
 	 *                Description of the Exception
@@ -303,23 +303,23 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					faixaInicial).setString("ff", faixaFinal).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return hidrometros;
 	}
 
 	/**
-	 * pesquisa uma coleção de cep(s) de acordo com o código
+	 * pesquisa uma coleï¿½ï¿½o de cep(s) de acordo com o cï¿½digo
 	 *
 	 * @param faixaInicial
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param faixaFinal
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @return Description of the Return Value
 	 * @exception ErroRepositorioException
 	 *                Description of the Exception
@@ -348,24 +348,24 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					500 * qtd).setMaxResults(500).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return hidrometros;
 	}
 
 	/**
-	 * Pesquisa uma coleção de hidrômetros de acordo com fixo, faixa inicial e
+	 * Pesquisa uma coleï¿½ï¿½o de hidrï¿½metros de acordo com fixo, faixa inicial e
 	 * faixa final
 	 *
 	 * @param faixaInicial
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param faixaFinal
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @return Description of the Return Value
 	 * @exception ErroRepositorioException
 	 *                Description of the Exception
@@ -395,23 +395,23 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					faixaInicial).setString("ff", faixaFinal).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return hidrometros;
 	}
 
 	/**
-	 * pesquisa uma coleção de cep(s) de acordo com o código
+	 * pesquisa uma coleï¿½ï¿½o de cep(s) de acordo com o cï¿½digo
 	 *
 	 * @param faixaInicial
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param faixaFinal
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @return Description of the Return Value
 	 * @exception ErroRepositorioException
 	 *                Description of the Exception
@@ -438,22 +438,22 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return retorno;
 	}
 
 	/**
 	 *
 	 * @param faixaInicial
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param faixaFinal
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @return Description of the Return Value
 	 * @exception ErroRepositorioException
 	 *                Description of the Exception
@@ -477,24 +477,24 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return retorno;
 	}
 
 	/**
-	 * < <Descrição do método>>
+	 * < <Descriï¿½ï¿½o do mï¿½todo>>
 	 *
 	 * @param faturamentoGrupo
-	 *            Descrição do parâmetro
-	 * @return Descrição do retorno
+	 *            Descriï¿½ï¿½o do parï¿½metro
+	 * @return Descriï¿½ï¿½o do retorno
 	 * @exception ErroRepositorioException
-	 *                Descrição da exceção
+	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
 	 */
 	public Collection pesquisarImovelFaturamentoGrupoObterIds(
 			FaturamentoGrupo faturamentoGrupo) throws ErroRepositorioException {
@@ -514,10 +514,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					faturamentoGrupo.getId().intValue()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -525,15 +525,15 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * < <Descrição do método>>
+	 * < <Descriï¿½ï¿½o do mï¿½todo>>
 	 *
 	 * @param faturamentoGrupo
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param imovel
-	 *            Descrição do parâmetro
-	 * @return Descrição do retorno
+	 *            Descriï¿½ï¿½o do parï¿½metro
+	 * @return Descriï¿½ï¿½o do retorno
 	 * @exception ErroRepositorioException
-	 *                Descrição da exceção
+	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
 	 */
 	public Collection pesquisarImovelTesteMedicaoConsumoLigacaoAgua(
 			FaturamentoGrupo faturamentoGrupo, Imovel imovel)
@@ -568,10 +568,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					faturamentoGrupo.getAnoMesReferencia().intValue()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -579,15 +579,15 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * < <Descrição do método>>
+	 * < <Descriï¿½ï¿½o do mï¿½todo>>
 	 *
 	 * @param faturamentoGrupo
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param imovel
-	 *            Descrição do parâmetro
-	 * @return Descrição do retorno
+	 *            Descriï¿½ï¿½o do parï¿½metro
+	 * @return Descriï¿½ï¿½o do retorno
 	 * @exception ErroRepositorioException
-	 *                Descrição da exceção
+	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
 	 */
 	public Collection pesquisarImovelTesteMedicaoConsumoPoco(
 			FaturamentoGrupo faturamentoGrupo, Imovel imovel)
@@ -620,10 +620,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					faturamentoGrupo.getAnoMesReferencia().intValue()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -631,15 +631,15 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * < <Descrição do método>>
+	 * < <Descriï¿½ï¿½o do mï¿½todo>>
 	 *
 	 * @param faturamentoGrupo
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param imovel
-	 *            Descrição do parâmetro
-	 * @return Descrição do retorno
+	 *            Descriï¿½ï¿½o do parï¿½metro
+	 * @return Descriï¿½ï¿½o do retorno
 	 * @exception ErroRepositorioException
-	 *                Descrição da exceção
+	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
 	 */
 	public Collection pesquisarImovelTesteMedicaoConsumoLigacaoEsgoto(
 			FaturamentoGrupo faturamentoGrupo, Imovel imovel)
@@ -663,10 +663,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					imovel.getId().intValue()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -674,21 +674,21 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * < <Descrição do método>>
+	 * < <Descriï¿½ï¿½o do mï¿½todo>>
 	 *
 	 * @param imovel
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param anoMesReferencia
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param periodoInformado
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param ligacaoTipo
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 *
-	 * @return Descrição do retorno
+	 * @return Descriï¿½ï¿½o do retorno
 	 *
 	 * @exception ErroRepositorioException
-	 *                Descrição da exceção
+	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
 	 */
 	public Collection pesquisarConsumoMedidoHidrometroPeriodoInformadoLigacaoAgua(
 			Imovel imovel, int anoMesReferencia,
@@ -725,10 +725,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -736,17 +736,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * < <Descrição do método>>
+	 * < <Descriï¿½ï¿½o do mï¿½todo>>
 	 *
 	 * @param imovel
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param anoMesReferencia
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param periodoInformado
-	 *            Descrição do parâmetro
-	 * @return Descrição do retorno
+	 *            Descriï¿½ï¿½o do parï¿½metro
+	 * @return Descriï¿½ï¿½o do retorno
 	 * @exception ErroRepositorioException
-	 *                Descrição da exceção
+	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
 	 */
 	public Collection pesquisarConsumoMedidoHidrometroPeriodoInformadoPoco(
 			Imovel imovel, int anoMesReferencia)
@@ -785,10 +785,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					MedicaoTipo.POCO).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -796,21 +796,21 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * < <Descrição do método>>
+	 * < <Descriï¿½ï¿½o do mï¿½todo>>
 	 *
 	 * @param imovel
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param anoMesReferencia
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param periodoInformado
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param ligacaoTipo
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 *
-	 * @return Descrição do retorno
+	 * @return Descriï¿½ï¿½o do retorno
 	 *
 	 * @exception ErroRepositorioException
-	 *                Descrição da exceção
+	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
 	 */
 	public Integer pesquisarConsumoFaturadoMesPorConsumoHistorico(
 			Integer idImovel, int anoMesReferencia, Integer idLigacaoTipo)
@@ -837,10 +837,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					anoMesReferencia).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -848,15 +848,15 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * < <Descrição do método>>
+	 * < <Descriï¿½ï¿½o do mï¿½todo>>
 	 *
 	 * @param imovel
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param anoMesReferencia
-	 *            Descrição do parâmetro
-	 * @return Descrição do retorno
+	 *            Descriï¿½ï¿½o do parï¿½metro
+	 * @return Descriï¿½ï¿½o do retorno
 	 * @exception ErroRepositorioException
-	 *                Descrição da exceção
+	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
 	 */
 	public Collection pesquisarObterConsumoMedioImovel(Imovel imovel,
 			int anoMesReferencia) throws ErroRepositorioException {
@@ -885,10 +885,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					anoMesReferencia).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -896,13 +896,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * < <Descrição do método>>
+	 * < <Descriï¿½ï¿½o do mï¿½todo>>
 	 *
 	 * @param imovel
-	 *            Descrição do parâmetro
-	 * @return Descrição do retorno
+	 *            Descriï¿½ï¿½o do parï¿½metro
+	 * @return Descriï¿½ï¿½o do retorno
 	 * @exception ErroRepositorioException
-	 *                Descrição da exceção
+	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
 	 */
 	public Collection pesquisarImovelLigacaoSituacao(Imovel imovel)
 			throws ErroRepositorioException {
@@ -923,10 +923,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					imovel.getId().intValue()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -934,17 +934,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * < <Descrição do método>>
+	 * < <Descriï¿½ï¿½o do mï¿½todo>>
 	 *
 	 * @param imovel
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param medicaoTipo
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param sistemaParametro
-	 *            Descrição do parâmetro
-	 * @return Descrição do retorno
+	 *            Descriï¿½ï¿½o do parï¿½metro
+	 * @return Descriï¿½ï¿½o do retorno
 	 * @exception ErroRepositorioException
-	 *                Descrição da exceção
+	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
 	 */
 	public Collection pesquisarObterDadosHistoricoMedicao(Imovel imovel,
 			MedicaoTipo medicaoTipo, SistemaParametro sistemaParametro)
@@ -957,7 +957,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 		String composicao = null;
 
-		// Caso seja ligação de água
+		// Caso seja ligaï¿½ï¿½o de ï¿½gua
 		if (medicaoTipo.getId().intValue() == MedicaoTipo.LIGACAO_AGUA
 				.intValue()) {
 			composicao = "where mh.medicaoTipo.id = :medicaoTipoId"
@@ -986,10 +986,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 							sistemaParametro.getAnoMesFaturamento()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -997,8 +997,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/*
-	 * Método utilizado para pesquisar dados do maior histórico de medição
-	 * existente para um imóvel
+	 * Mï¿½todo utilizado para pesquisar dados do maior histï¿½rico de mediï¿½ï¿½o
+	 * existente para um imï¿½vel
 	 *
 	 * [UC0101] Consistir Leituras e Calcular Consumos Autor: Leonardo Vieira
 	 * Data: 20/02/2006
@@ -1015,7 +1015,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 		String composicao = null;
 
-		// Caso seja ligação de água
+		// Caso seja ligaï¿½ï¿½o de ï¿½gua
 		if (medicaoTipo.getId().intValue() == MedicaoTipo.LIGACAO_AGUA
 				.intValue()) {
 			composicao = "where mt.id = :medicaoTipoId"
@@ -1043,10 +1043,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -1054,13 +1054,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * < <Descrição do método>>
+	 * < <Descriï¿½ï¿½o do mï¿½todo>>
 	 *
 	 * @param objeto
-	 *            Descrição do parâmetro
-	 * @return Descrição do retorno
+	 *            Descriï¿½ï¿½o do parï¿½metro
+	 * @return Descriï¿½ï¿½o do retorno
 	 * @exception ErroRepositorioException
-	 *                Descrição da exceção
+	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
 	 */
 	public Object inserirBat(Object objeto) throws ErroRepositorioException {
 
@@ -1084,21 +1084,21 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * < <Descrição do método>>
+	 * < <Descriï¿½ï¿½o do mï¿½todo>>
 	 *
 	 * @param rotas
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param anoMesReferencia
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param ligacaoAguaSituacaoLigado
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param ligacaoAguaSituacaoCortado
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param ligacaoEsgotoLigado
-	 *            Descrição do parâmetro
-	 * @return Descrição do retorno
+	 *            Descriï¿½ï¿½o do parï¿½metro
+	 * @return Descriï¿½ï¿½o do retorno
 	 * @exception ErroRepositorioException
-	 *                Descrição da exceção
+	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
 	 */
 	public Collection pesquisarImoveisLigadosCortadosAguaLigadosEsgoto(
 			Rota rota, int anoMesReferencia, Integer ligacaoAguaSituacaoLigado,
@@ -1157,10 +1157,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setInteger("rota", rota.getId()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -1171,9 +1171,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 *
 	 * [UC0101] - Consistir Leituras e Calcular Consumos
 	 *
-	 * Método Especifico Para CAERN
+	 * Mï¿½todo Especifico Para CAERN
 	 *
-	 * @author Raphael Rossiter, Flávio Cordeiro
+	 * @author Raphael Rossiter, Flï¿½vio Cordeiro
 	 * @date 20/03/2007
 	 *
 	 * @param rota
@@ -1237,10 +1237,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setInteger("rota", rota.getId()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -1248,17 +1248,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * < <Descrição do método>>
+	 * < <Descriï¿½ï¿½o do mï¿½todo>>
 	 *
 	 * @param imovel
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param ligacaoTipo
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param anoMesReferencia
-	 *            Descrição do parâmetro
-	 * @return Descrição do retorno
+	 *            Descriï¿½ï¿½o do parï¿½metro
+	 * @return Descriï¿½ï¿½o do retorno
 	 * @exception ErroRepositorioException
-	 *                Descrição da exceção
+	 *                Descriï¿½ï¿½o da exceï¿½ï¿½o
 	 */
 	public Collection pesquisarConsumoHistoricoConsumoAnormalidade(
 			Imovel imovel, LigacaoTipo ligacaoTipo, int anoMesReferencia)
@@ -1281,10 +1281,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					anoMesReferencia).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -1292,9 +1292,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Consultar Histórico de Medição Individualizada
+	 * Consultar Histï¿½rico de Mediï¿½ï¿½o Individualizada
 	 *
-	 * [UC0179] Consultar Histórico de Medição Individualizada
+	 * [UC0179] Consultar Histï¿½rico de Mediï¿½ï¿½o Individualizada
 	 *
 	 * @author Pedro Alexandre
 	 * @date 29/01/2008
@@ -1339,10 +1339,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					anoMesReferencia).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -1377,10 +1377,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					leituraAnormalidadeFaturamento.getId().intValue()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -1425,10 +1425,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					faturamentoSituacaoTipo.getId().intValue()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -1458,10 +1458,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					imovel.getConsumoTarifa().getId().intValue()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -1493,10 +1493,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -1660,10 +1660,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setFirstResult(inicioPesquisa).setMaxResults(1000).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -1704,10 +1704,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					MedicaoTipo.LIGACAO_AGUA.intValue()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -1748,10 +1748,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					MedicaoTipo.POCO.intValue()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -1789,10 +1789,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					anoMes.intValue()).setMaxResults(1).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -1829,10 +1829,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"anoMes", anoMes.intValue()).setMaxResults(1).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -1857,10 +1857,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			retorno = session.createQuery(consulta).setInteger("idImovel",
 					idImovel.intValue()).setMaxResults(1).list();
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -1882,10 +1882,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"idConsumoTarifa", idConsumoTarifa.intValue())
 					.setMaxResults(1).uniqueResult();
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -1911,10 +1911,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"idCategoria", idCategoria.intValue()).setMaxResults(1)
 					.uniqueResult();
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -1938,10 +1938,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -1964,19 +1964,19 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * Pesquisa a medição histórico do imóvel.
+	 * Pesquisa a mediï¿½ï¿½o histï¿½rico do imï¿½vel.
 	 *
-	 * [UC0179] Consultar Histórico de Medição Individualizada
+	 * [UC0179] Consultar Histï¿½rico de Mediï¿½ï¿½o Individualizada
 	 *
 	 * @author Pedro Alexandre
 	 * @date 28/01/2008
@@ -2008,10 +2008,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -2037,17 +2037,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sávio Luiz Data:
+	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sï¿½vio Luiz Data:
 	 * 04/01/2006
 	 */
 
@@ -2065,17 +2065,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sávio Luiz Data:
+	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sï¿½vio Luiz Data:
 	 * 04/01/2006
 	 */
 
@@ -2095,10 +2095,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -2106,7 +2106,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sávio Luiz Data:
+	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sï¿½vio Luiz Data:
 	 * 04/01/2006
 	 */
 
@@ -2144,17 +2144,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sávio Luiz Data:
+	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sï¿½vio Luiz Data:
 	 * 04/01/2006
 	 */
 
@@ -2181,17 +2181,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sávio Luiz Data:
+	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sï¿½vio Luiz Data:
 	 * 04/01/2006
 	 */
 
@@ -2212,17 +2212,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sávio Luiz Data:
+	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sï¿½vio Luiz Data:
 	 * 04/01/2006
 	 */
 
@@ -2262,7 +2262,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 * 23/01/2006
 	 *
 	 * @param inscricaoImovel
-	 *            Inscrição do Imovel
+	 *            Inscriï¿½ï¿½o do Imovel
 	 * @return Dados do Imovel Vinculado
 	 * @throws ControladorException
 	 */
@@ -2286,10 +2286,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					ClienteRelacaoTipo.USUARIO).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -2298,7 +2298,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 * Consultar Matriculas dos Imoveis Vinculados do Imovel condominio Auhtor:
-	 * Rafael Santos Data: 23/01/2006 [UC0179] Consultar Historico Medição
+	 * Rafael Santos Data: 23/01/2006 [UC0179] Consultar Historico Mediï¿½ï¿½o
 	 * Indiviualizada
 	 *
 	 * @param consumoHistorico
@@ -2326,10 +2326,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 							 .list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -2360,10 +2360,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -2372,7 +2372,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * Consultar Consumo Historico da Medicao Individualizada
 	 *
-	 * [UC0179] Consultar Historico Medição Indiviualizada
+	 * [UC0179] Consultar Historico Mediï¿½ï¿½o Indiviualizada
 	 *
 	 * @author Rafael Santos, Pedro Alexandre
 	 * @date 23/01/2006, 24/01/2008
@@ -2400,7 +2400,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					 + 		  "ch.indicadorFaturamento, "
 					 + 		  "consumoAnormalidade.id, "
 					 + 		  "ch.consumoImovelVinculadosCondominio, "
-					 + 		  "imovel.indicadorImovelAreaComum "
+					 + 		  "imovel.indicadorImovelAreaComum, "
+					 +		  "ch.contaMotivoRevisao.id " 
 					 + "FROM ConsumoHistorico ch "
 					 + 		"LEFT JOIN ch.consumoAnormalidade consumoAnormalidade "
 					 + 		"LEFT JOIN ch.consumoTipo consumoTipo "
@@ -2421,10 +2422,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retornoDados;
@@ -2432,8 +2433,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Pesquisa o imóvel condomínio com a situação de ligação de água (ligado ou
-	 * cortado) e a situação da ligação de esgoto (ligado) [UC0103] Efetuar
+	 * Pesquisa o imï¿½vel condomï¿½nio com a situaï¿½ï¿½o de ligaï¿½ï¿½o de ï¿½gua (ligado ou
+	 * cortado) e a situaï¿½ï¿½o da ligaï¿½ï¿½o de esgoto (ligado) [UC0103] Efetuar
 	 * Rateio de Consumo Autor: Leonardo Vieira Data: 17/02/2006
 	 */
 
@@ -2467,10 +2468,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					ligacaoEsgotoSituacaoCortado.intValue()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -2513,10 +2514,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retornoDados;
@@ -2524,8 +2525,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Consultar Imoveis com Medição Indiviualizada Auhtor: Sávio Luiz Data:
-	 * 06/02/2006 [UC0180] Consultar Imoveis com Medição Indiviualizada
+	 * Consultar Imoveis com Mediï¿½ï¿½o Indiviualizada Auhtor: Sï¿½vio Luiz Data:
+	 * 06/02/2006 [UC0180] Consultar Imoveis com Mediï¿½ï¿½o Indiviualizada
 	 *
 	 */
 
@@ -2546,10 +2547,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -2557,8 +2558,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Consultar Imoveis com Medição Indiviualizada Auhtor: Sávio Luiz Data:
-	 * 06/02/2006 [UC0180] Consultar Imoveis com Medição Indiviualizada
+	 * Consultar Imoveis com Mediï¿½ï¿½o Indiviualizada Auhtor: Sï¿½vio Luiz Data:
+	 * 06/02/2006 [UC0180] Consultar Imoveis com Mediï¿½ï¿½o Indiviualizada
 	 *
 	 */
 
@@ -2579,19 +2580,19 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * [UC0121] - Filtrar Exceções de Leituras e Consumos
+	 * [UC0121] - Filtrar Exceï¿½ï¿½es de Leituras e Consumos
 	 *
-	 * @author Flávio Leonardo, Raphael Rossiter
+	 * @author Flï¿½vio Leonardo, Raphael Rossiter
 	 * @date 00/00/0000, 06/10/2009
 	 *
 	 * @param filtroMedicaoHistoricoSql
@@ -3129,17 +3130,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * [UC0121] - Filtrar Exceções de Leituras e Consumos
+	 * [UC0121] - Filtrar Exceï¿½ï¿½es de Leituras e Consumos
 	 *
 	 * @author Raphael Rossiter
 	 * @date 06/10/2009
@@ -3404,9 +3405,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0121] - Filtrar Exceções de Leituras e Consumos
+	 * [UC0121] - Filtrar Exceï¿½ï¿½es de Leituras e Consumos
 	 *
-	 * @author Flávio Leonardo, Raphael Rossiter
+	 * @author Flï¿½vio Leonardo, Raphael Rossiter
 	 * @date 00/00/0000, 06/10/2009
 	 *
 	 * @param filtroMedicaoHistoricoSql
@@ -3612,10 +3613,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -3623,11 +3624,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Método que apresenta os dados do imovel
+	 * Mï¿½todo que apresenta os dados do imovel
 	 *
-	 * [UC0153] Apresentar dados para Analise da medição e Consumo
+	 * [UC0153] Apresentar dados para Analise da mediï¿½ï¿½o e Consumo
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 04/08/2006
 	 *
 	 * @param idImovel
@@ -3693,7 +3694,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				+ " imovel.imov_nnsequencialrota as sequencialRota, "// 43
 
 				/*
-				 * Início Campos Adicionados por Rafael Corrêa 22/07/2008
+				 * Inï¿½cio Campos Adicionados por Rafael Corrï¿½a 22/07/2008
 				 */
 				+ " hidrometroRelojoaria.hire_dsrelojoaria as tipoRelojoaria, " // 44
 				+ " usuarioResponsavelInstalacao.usur_nmusuario as nomeusuarioresponsavelinstalac, " // 45
@@ -3703,11 +3704,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				+ " ligacaoEsgotoDestinoDejetos.ledd_dsdestinodejetos as descricaoligacaoesgotodestinod, " // 49
 				+ " ligacaoesgotodestinoaguaspluv1.leda_dsaguaspluviais as descricaoligacaoesgotodestinoa, " // 50
 				/*
-				 * Fim Campos Adicionados por Rafael Corrêa
+				 * Fim Campos Adicionados por Rafael Corrï¿½a
 				 */
 
 				/*
-				 * Início Campos Adicionados por Raphael Rossiter 21/10/2009
+				 * Inï¿½cio Campos Adicionados por Raphael Rossiter 21/10/2009
 				 */
 				+ " rotaAlternativa.rota_cdrota as codigoRotaAlternativa, " // 51
 				+ " rotaAlternativa.ftgr_id as faturamentoGrupoAlternativa, " // 52
@@ -3719,7 +3720,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				 */
 				
 				/*
-				 * Início Campos Adicionados por Mariana Victor 23/12/2011
+				 * Inï¿½cio Campos Adicionados por Mariana Victor 23/12/2011
 				 */
 				+ " hidrometro.hidr_icmacro as indicadorMacromedidor, "// 56
 				+ " hidrometro.hidr_nntombamento as tombamento, "// 57
@@ -3732,7 +3733,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				+ " hidrometro.hidr_icfinalidade as indicadorFinalidade, "// 60
 				
 				/*
-				 * Início Campos Adicionados por Jonathan Marcos 22/06/2015
+				 * Inï¿½cio Campos Adicionados por Jonathan Marcos 22/06/2015
 				 */
 				+ " ligacaoEsgoto.lesg_nnconsumopcalternativo AS consumoAlternativoEsgoto, " //61
 				+ " ligacaoEsgoto.lesg_pcalternativo AS percentualAlternativoEsgoto" // 62
@@ -3859,10 +3860,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -3871,11 +3872,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Método que apresenta os dados do imovel
+	 * Mï¿½todo que apresenta os dados do imovel
 	 *
-	 * [UC0153] Apresentar dados para Analise da medição e Consumo
+	 * [UC0153] Apresentar dados para Analise da mediï¿½ï¿½o e Consumo
 	 *
-	 * @author Flávio Cordeiro, Ivan Sérgio
+	 * @author Flï¿½vio Cordeiro, Ivan Sï¿½rgio
 	 * @date 04/08/2006, 06/03/2008
 	 * @alteracao: Trocar imovel.hidi_id por imovel.poco_id, pois alguns imoveis
 	 *             nao possuem registro na tabela de
@@ -3961,10 +3962,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 							Hibernate.SHORT).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -3973,11 +3974,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Método que apresenta os dados do imovel
+	 * Mï¿½todo que apresenta os dados do imovel
 	 *
-	 * [UC0153] Apresentar dados para Analise da medição e Consumo
+	 * [UC0153] Apresentar dados para Analise da mediï¿½ï¿½o e Consumo
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 04/08/2006
 	 *
 	 * @param idImovel
@@ -4081,10 +4082,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -4093,11 +4094,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Método que apresenta os dados do imovel
+	 * Mï¿½todo que apresenta os dados do imovel
 	 *
-	 * [UC0153] Apresentar dados para Analise da medição e Consumo
+	 * [UC0153] Apresentar dados para Analise da mediï¿½ï¿½o e Consumo
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 04/08/2006
 	 *
 	 * @param idImovel
@@ -4200,10 +4201,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -4212,9 +4213,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Retorna uma coleção com os dados das medicoes para apresentação
+	 * Retorna uma coleï¿½ï¿½o com os dados das medicoes para apresentaï¿½ï¿½o
 	 *
-	 * [UC0153] Apresentar dados para Analise da medição e Consumo
+	 * [UC0153] Apresentar dados para Analise da mediï¿½ï¿½o e Consumo
 	 */
 	public Collection carregarDadosMedicao(Integer idImovel, boolean ligacaoAgua)
 			throws ErroRepositorioException {
@@ -4275,10 +4276,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 							.addScalar("dataInstalacaoHidrometro", Hibernate.DATE).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -4286,9 +4287,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Retorna uma coleção com os dados das medicoes para apresentação
+	 * Retorna uma coleï¿½ï¿½o com os dados das medicoes para apresentaï¿½ï¿½o
 	 *
-	 * [UC0153] Apresentar dados para Analise da medição e Consumo
+	 * [UC0153] Apresentar dados para Analise da mediï¿½ï¿½o e Consumo
 	 */
 	public Collection carregarDadosMedicaoResumo(Integer idImovel,
 			boolean ligacaoAgua) throws ErroRepositorioException {
@@ -4335,10 +4336,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 							Hibernate.STRING).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -4346,11 +4347,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Retorna um objeto com os dados das medicoes para apresentação
+	 * Retorna um objeto com os dados das medicoes para apresentaï¿½ï¿½o
 	 *
-	 * Flávio
+	 * Flï¿½vio
 	 *
-	 * [UC0153] Apresentar dados para Analise da medição e Consumo
+	 * [UC0153] Apresentar dados para Analise da mediï¿½ï¿½o e Consumo
 	 */
 	public Object[] carregarDadosMedicaoResumido(Integer idImovel,
 			boolean ligacaoAgua, String anoMes) throws ErroRepositorioException {
@@ -4414,10 +4415,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -4425,9 +4426,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Retorna uma coleção com os dados dos Consumos para apresentação
+	 * Retorna uma coleï¿½ï¿½o com os dados dos Consumos para apresentaï¿½ï¿½o
 	 *
-	 * [UC0153] Apresentar dados para Analise da medição e Consumo
+	 * [UC0153] Apresentar dados para Analise da mediï¿½ï¿½o e Consumo
 	 */
 	public Collection carregarDadosConsumo(Integer idImovel, int anoMes,
 			boolean ligacaoAgua) throws ErroRepositorioException {
@@ -4540,10 +4541,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -4551,11 +4552,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Retorna uma coleção com os dados dos Consumos para apresentação sem
+	 * Retorna uma coleï¿½ï¿½o com os dados dos Consumos para apresentaï¿½ï¿½o sem
 	 * informar o ano/mes para o caso em que o Imovel nao possui Hidrometro (Sem
 	 * Medicao).
 	 *
-	 * [UC0153] Apresentar dados para Analise da medição e Consumo
+	 * [UC0153] Apresentar dados para Analise da mediï¿½ï¿½o e Consumo
 	 */
 	public Collection carregarDadosConsumo(Integer idImovel, boolean ligacaoAgua)
 			throws ErroRepositorioException {
@@ -4697,10 +4698,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -4708,11 +4709,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Retorna um Objeto com os dados dos Consumos para apresentação
+	 * Retorna um Objeto com os dados dos Consumos para apresentaï¿½ï¿½o
 	 *
-	 * Flávio
+	 * Flï¿½vio
 	 *
-	 * [UC0153] Apresentar dados para Analise da medição e Consumo
+	 * [UC0153] Apresentar dados para Analise da mediï¿½ï¿½o e Consumo
 	 */
 	public Object[] carregarDadosConsumoResumido(Integer idImovel, int anoMes,
 			boolean ligacaoAgua) throws ErroRepositorioException {
@@ -4773,18 +4774,18 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * Método que retorna os imoveis condominiais e esteja com ligados ou
-	 * cortados a agua e ou ligados com esgoto que possuam hidrometro no poço
+	 * Mï¿½todo que retorna os imoveis condominiais e esteja com ligados ou
+	 * cortados a agua e ou ligados com esgoto que possuam hidrometro no poï¿½o
 	 * das rotas passadas
 	 *
 	 * [UC0103] Efetuar Rateio de Consumo
@@ -4820,11 +4821,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					+ " inner join imovel.ligacaoAguaSituacao as last "
 					+ " inner join imovel.ligacaoEsgotoSituacao as lest "
 
-					// VERIFICANDO SE É UM IMÓVEL CONDOMÍNIO
+					// VERIFICANDO SE ï¿½ UM IMï¿½VEL CONDOMï¿½NIO
 					+ "WHERE imovel.indicadorImovelCondominio = "
 					+ ConstantesSistema.SIM
 
-					// VERIFICANDO SE O IMÓVEL ESTÁ DISPONÍVEL PARA EFETUAR
+					// VERIFICANDO SE O IMï¿½VEL ESTï¿½ DISPONï¿½VEL PARA EFETUAR
 					// RATEIO
 					+ " AND (last.indicadorFaturamentoSituacao = :faturamentoAgua OR "
 					+ "lest.indicadorFaturamentoSituacao = :faturamentoEsgoto)"
@@ -4832,7 +4833,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					+ " AND (imovel.hidrometroInstalacaoHistorico IS NOT NULL "
 					+ "      OR ligacaoAgua.hidrometroInstalacaoHistorico IS NOT NULL) "
 
-					// VERIFICANDO SE O IMÓVEL PERTENCE A ROTA
+					// VERIFICANDO SE O IMï¿½VEL PERTENCE A ROTA
 					+ " AND (case when imovel.rotaAlternativa is null then rota.id else rotaAlt.id end) = :idRota " //AND imovel.rotaAlternativa IS NULL
 					+ " AND imovel.indicadorExclusao <> 1 "
 					+ " AND NOT EXISTS "
@@ -4849,17 +4850,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setInteger("idRota", idRota).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * Método que retorna todos os imoveis veinculados a um imovel condominio
+	 * Mï¿½todo que retorna todos os imoveis veinculados a um imovel condominio
 	 *
 	 * [UC0103] Efetuar Rateio de Consumo
 	 *
@@ -4894,10 +4895,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				"  imov.indicadorImovelAreaComum " +//10
 				"from " +
 				"  Imovel imov " + // imovel
-				"  left join imov.ligacaoAguaSituacao as last " + // ligação de água situação
-				"  left join imov.ligacaoEsgotoSituacao as lest " + // ligação de esgoto situação
+				"  left join imov.ligacaoAguaSituacao as last " + // ligaï¿½ï¿½o de ï¿½gua situaï¿½ï¿½o
+				"  left join imov.ligacaoEsgotoSituacao as lest " + // ligaï¿½ï¿½o de esgoto situaï¿½ï¿½o
 				"  left join imov.imovelCondominio as imovelCondominio " + // imovel condominio
-				"  left join imov.ligacaoAgua lagu " + // ligação de água
+				"  left join imov.ligacaoAgua lagu " + // ligaï¿½ï¿½o de ï¿½gua
 			    "  left join lagu.hidrometroInstalacaoHistorico hidi " + // hidrometro
 			    "  left join hidi.rateioTipo rttp " + // rateio tipo
 			    "where " +
@@ -4909,10 +4910,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"idImovelCondominio", idImovelCondominio).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -4920,8 +4921,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Método que retorna o consumo de ligacao da agua ou esgoto (tipo passado)
-	 * de um imovel em um determinado anoMes do faturamento. Método utilizado
+	 * Mï¿½todo que retorna o consumo de ligacao da agua ou esgoto (tipo passado)
+	 * de um imovel em um determinado anoMes do faturamento. Mï¿½todo utilizado
 	 * pra saber a ligacao de
 	 *
 	 * 2.2.2.2 e 2.2.3.2 do [UC0103] Efetuar Rateio de Consumo
@@ -4962,10 +4963,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -4973,13 +4974,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Método que retorna o consumo de ligacao da agua ou esgoto (tipo passado)
-	 * de um imovel em um determinado anoMes do faturamento. Método utilizado
+	 * Mï¿½todo que retorna o consumo de ligacao da agua ou esgoto (tipo passado)
+	 * de um imovel em um determinado anoMes do faturamento. Mï¿½todo utilizado
 	 * pra saber a ligacao de
 	 *
 	 * 2.2.2.2 e 2.2.3.2 do [UC0103] Efetuar Rateio de Consumo
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 07/04/2006
 	 *
 	 * @param idImovel
@@ -5018,10 +5019,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -5031,13 +5032,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Método que retorna o consumo de ligacao da agua ou esgoto (tipo passado)
-	 * de um imovel em um determinado anoMes do faturamento. Método utilizado
+	 * Mï¿½todo que retorna o consumo de ligacao da agua ou esgoto (tipo passado)
+	 * de um imovel em um determinado anoMes do faturamento. Mï¿½todo utilizado
 	 * pra saber a ligacao de
 	 *
 	 * 2.2.2.2 e 2.2.3.2 do [UC0103] Efetuar Rateio de Consumo
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 07/04/2006
 	 *
 	 * @param idImovel
@@ -5075,10 +5076,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -5087,7 +5088,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Método que retorna um consumoHistorico do imovel com o anoMes passado
+	 * Mï¿½todo que retorna um consumoHistorico do imovel com o anoMes passado
 	 *
 	 * @author thiago toscano
 	 * @date 18/04/2006
@@ -5121,24 +5122,24 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * Método que retorna o id da leitura anormalidade do faturamento no caso do
-	 * tipo de ligação ser agua
+	 * Mï¿½todo que retorna o id da leitura anormalidade do faturamento no caso do
+	 * tipo de ligaï¿½ï¿½o ser agua
 	 *
 	 * [UC0348] Emitir Contas
 	 *
 	 * [SB0003] Obter Dados do Consumo e Medicao Anterior
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 17/05/2006
 	 *
 	 *
@@ -5167,24 +5168,24 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * Método que retorna o id da leitura anormalidade do faturamento no caso do
-	 * tipo de ligação ser esgoto
+	 * Mï¿½todo que retorna o id da leitura anormalidade do faturamento no caso do
+	 * tipo de ligaï¿½ï¿½o ser esgoto
 	 *
 	 * [UC0348] Emitir Contas
 	 *
 	 * [SB0003] Obter Dados do Consumo e Medicao Anterior
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 17/05/2006
 	 *
 	 *
@@ -5213,24 +5214,24 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * Método que retorna um arrey de Object com informações do histórico de
-	 * medição com tipo de medição agua
+	 * Mï¿½todo que retorna um arrey de Object com informaï¿½ï¿½es do histï¿½rico de
+	 * mediï¿½ï¿½o com tipo de mediï¿½ï¿½o agua
 	 *
 	 * [UC0348] Emitir Contas
 	 *
-	 * [SB0004] Obter Dados de medição da conta
+	 * [SB0004] Obter Dados de mediï¿½ï¿½o da conta
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 17/05/2006
 	 *
 	 *
@@ -5273,24 +5274,24 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * Método que retorna um arrey de Object com informações do histórico de
-	 * medição com tipo de medição poco
+	 * Mï¿½todo que retorna um arrey de Object com informaï¿½ï¿½es do histï¿½rico de
+	 * mediï¿½ï¿½o com tipo de mediï¿½ï¿½o poco
 	 *
 	 * [UC0348] Emitir Contas
 	 *
-	 * [SB0004] Obter Dados de medição da conta
+	 * [SB0004] Obter Dados de mediï¿½ï¿½o da conta
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 17/05/2006
 	 *
 	 *
@@ -5333,24 +5334,24 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * Método que retorna um arrey de Object com informações do histórico de
-	 * consumo com tipo de medição poco
+	 * Mï¿½todo que retorna um arrey de Object com informaï¿½ï¿½es do histï¿½rico de
+	 * consumo com tipo de mediï¿½ï¿½o poco
 	 *
 	 * [UC0348] Emitir Contas
 	 *
 	 * [SB0006] Obter Dados de consumo da conta
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 19/05/2006
 	 *
 	 *
@@ -5392,10 +5393,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -5403,7 +5404,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Método que retorna o maior código de Rota de um Setor Comercial
+	 * Mï¿½todo que retorna o maior cï¿½digo de Rota de um Setor Comercial
 	 *
 	 * @author Vivianne Sousa
 	 * @date 12/07/2006
@@ -5444,7 +5445,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Método que remove RotaAcaoCriterio
+	 * Mï¿½todo que remove RotaAcaoCriterio
 	 *
 	 * @author Vivianne Sousa
 	 * @date 12/07/2006
@@ -5460,7 +5461,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			Collection<UsuarioAcaoUsuarioHelper> acaoUsuarioHelper)
 			throws ErroRepositorioException {
 
-		// obtém a sessão
+		// obtï¿½m a sessï¿½o
 		Session session = HibernateUtil.getSession();
 
 		try {
@@ -5493,20 +5494,20 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 			session.flush();
-			// restrições no sistema
+			// restriï¿½ï¿½es no sistema
 		} catch (JDBCException e) {
 			// e.printStackTrace();
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new RemocaoInvalidaException(e);
 			// erro no hibernate
 		} catch (CallbackException e) {
 			throw new ErroRepositorioException(e, e.getMessage());
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -5514,7 +5515,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Método utilizado para pesquisar os consumo historicos a serem
+	 * Mï¿½todo utilizado para pesquisar os consumo historicos a serem
 	 * substituidos pelo caso de uso [UC0106] Substituir Consumos Anteriores
 	 *
 	 */
@@ -5528,10 +5529,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 		try {
 
-			// anoMesFaturamento Final que será o anoMesFaturamento - 1
+			// anoMesFaturamento Final que serï¿½ o anoMesFaturamento - 1
 			int anoMesFinal = Util.subtraiAteSeisMesesAnoMesReferencia(
 					anoMesFaturamento, new Integer(1));
-			// anoMesFaturamento Inicial que será o anoMesFaturamento -
+			// anoMesFaturamento Inicial que serï¿½ o anoMesFaturamento -
 			// sistemaParametro.PARM_NNMESESCALCULOMEDIACONSUMO
 			int anoMesInicial = Util.subtraiAteSeisMesesAnoMesReferencia(
 					anoMesFaturamento, new Integer(sistemaParametro
@@ -5840,7 +5841,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Registrar leituras e anormalidades Autor:Sávio Luiz
+	 * Registrar leituras e anormalidades Autor:Sï¿½vio Luiz
 	 *
 	 * @throws ErroRepositorioException
 	 */
@@ -5885,17 +5886,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					anoMes.intValue()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sávio Luiz Data:
+	 * [UC0082] - Registrar Leituras e Anormalidades Autor: Sï¿½vio Luiz Data:
 	 * 04/01/2006
 	 */
 
@@ -5970,10 +5971,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					anoMes.intValue()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -6107,17 +6108,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 			// } catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			// throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
 	}
 
 	/**
-	 * Registrar leituras e anormalidades Autor:Sávio Luiz
+	 * Registrar leituras e anormalidades Autor:Sï¿½vio Luiz
 	 *
 	 * @throws ErroRepositorioException
 	 */
@@ -6138,17 +6139,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * Método que retorna o número da leitura de retirada do hidrômetro
+	 * Mï¿½todo que retorna o nï¿½mero da leitura de retirada do hidrï¿½metro
 	 *
 	 * @author Ana Maria
 	 * @date 25/09/2006
@@ -6186,7 +6187,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Método que retorna o número da leitura de retirada do hidrômetro
+	 * Mï¿½todo que retorna o nï¿½mero da leitura de retirada do hidrï¿½metro
 	 *
 	 * @author Ana Maria
 	 * @date 25/09/2006
@@ -6251,15 +6252,15 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
 	}
 
 	/**
-	 * Verifica se existe consumo histórico para o imóvel de acordo com o tipo
-	 * de ligação
+	 * Verifica se existe consumo histï¿½rico para o imï¿½vel de acordo com o tipo
+	 * de ligaï¿½ï¿½o
 	 *
 	 * @author Ana Maria
 	 * @date 17/10/2006
@@ -6296,7 +6297,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Método que deleta o consumo histórico do imóvel
+	 * Mï¿½todo que deleta o consumo histï¿½rico do imï¿½vel
 	 *
 	 * @author Leonardo Vieira
 	 * @date 02/11/2006
@@ -6318,10 +6319,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setInteger("amFaturamento", amFaturamento).executeUpdate();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 	}
@@ -6338,10 +6339,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setInteger("amFaturamento", amFaturamento).executeUpdate();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 	}
@@ -6363,10 +6364,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.executeUpdate();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 	}
@@ -6388,19 +6389,19 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.executeUpdate();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 	}
 
 	/**
-	 * [UC0488] Informar Retorno Ordem de Fiscalização
+	 * [UC0488] Informar Retorno Ordem de Fiscalizaï¿½ï¿½o
 	 *
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 15/11/2006
 	 *
 	 * @param idOS
@@ -6436,10 +6437,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0488] Informar Retorno Ordem de Fiscalização
+	 * [UC0488] Informar Retorno Ordem de Fiscalizaï¿½ï¿½o
 	 *
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 15/11/2006
 	 *
 	 * @param idOS
@@ -6476,7 +6477,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0488] Informar Retorno Ordem de Fiscalização
+	 * [UC0488] Informar Retorno Ordem de Fiscalizaï¿½ï¿½o
 	 *
 	 *
 	 * @author Raphael Rossiter
@@ -6516,11 +6517,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Atualizar Hidrômetro
+	 * Atualizar Hidrï¿½metro
 	 *
-	 * Pesquisa o imóvel no qual o hidrômetro está instalado
+	 * Pesquisa o imï¿½vel no qual o hidrï¿½metro estï¿½ instalado
 	 *
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 23/11/2006
 	 *
 	 * @param idHidrometro
@@ -6557,11 +6558,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0498] - Efetuar Ligação de Água com Instalaação de Hidrômetro
+	 * [UC0498] - Efetuar Ligaï¿½ï¿½o de ï¿½gua com Instalaaï¿½ï¿½o de Hidrï¿½metro
 	 *
-	 * Pesquisa o id do hidrômetro e a sua situação pelo número
+	 * Pesquisa o id do hidrï¿½metro e a sua situaï¿½ï¿½o pelo nï¿½mero
 	 *
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 29/11/2006
 	 *
 	 * @param numeroHidrometro
@@ -6603,10 +6604,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0488] Informar Retorno Ordem de Fiscalização
+	 * [UC0488] Informar Retorno Ordem de Fiscalizaï¿½ï¿½o
 	 *
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 06/12/2006
 	 *
 	 * @param idOS
@@ -6630,20 +6631,20 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * [UC0488] Informar Retorno Ordem de Fiscalização
+	 * [UC0488] Informar Retorno Ordem de Fiscalizaï¿½ï¿½o
 	 *
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 06/12/2006
 	 *
 	 * @param idOS
@@ -6666,20 +6667,20 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * [UC0488] Informar Retorno Ordem de Fiscalização
+	 * [UC0488] Informar Retorno Ordem de Fiscalizaï¿½ï¿½o
 	 *
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 14/11/2006
 	 *
 	 * @param idOS
@@ -6709,10 +6710,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -6796,10 +6797,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 							"consumosVinculados", Hibernate.INTEGER).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -6808,11 +6809,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Obtém os ids de todas as rotas cadastradas
+	 * Obtï¿½m os ids de todas as rotas cadastradas
 	 *
-	 * [UC0251] - Gerar Atividade de Ação de Cobrança
+	 * [UC0251] - Gerar Atividade de Aï¿½ï¿½o de Cobranï¿½a
 	 *
-	 * [SB0002] - Gerar Atividade de Ação de Cobrança para os Imóveis da Lista
+	 * [SB0002] - Gerar Atividade de Aï¿½ï¿½o de Cobranï¿½a para os Imï¿½veis da Lista
 	 * de Rotas
 	 *
 	 * @author Leonardo Vieira
@@ -6834,10 +6835,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			retorno = (Collection) session.createQuery(consulta).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -6845,15 +6846,15 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Obtém os ids de todas as rotas cadastradas menos as rotas que tiverem o
+	 * Obtï¿½m os ids de todas as rotas cadastradas menos as rotas que tiverem o
 	 * emp_cobranca = 1
 	 *
-	 * [UC0251] - Gerar Atividade de Ação de Cobrança
+	 * [UC0251] - Gerar Atividade de Aï¿½ï¿½o de Cobranï¿½a
 	 *
-	 * [SB0002] - Gerar Atividade de Ação de Cobrança para os Imóveis da Lista
+	 * [SB0002] - Gerar Atividade de Aï¿½ï¿½o de Cobranï¿½a para os Imï¿½veis da Lista
 	 * de Rotas
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 05/03/2007
 	 *
 	 * @return
@@ -6876,10 +6877,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"indUm", 1).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -6890,7 +6891,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 * [] Ligacoes Medicao Individualizada
 	 *
 	 *
-	 * @author Flávio Cordeiro
+	 * @author Flï¿½vio Cordeiro
 	 * @date 17/12/2006
 	 *
 	 * @param colecaoLigacoesMedicao
@@ -6943,10 +6944,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.executeUpdate();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 	}
@@ -6980,10 +6981,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"idRota", rota.getId()).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -6993,12 +6994,12 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0082] - Registrar Leituras e Anormalidades
 	 *
-	 * [SB0001] - Gerar Relatório Resumo das Leituras e Anormalidades
+	 * [SB0001] - Gerar Relatï¿½rio Resumo das Leituras e Anormalidades
 	 * Registradas
 	 *
-	 * Obter empresa do imóvel.
+	 * Obter empresa do imï¿½vel.
 	 *
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 13/04/2007
 	 *
 	 * @param idImovel
@@ -7020,10 +7021,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"idImovel", idImovel).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -7033,8 +7034,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0103] Efetuar Rateio de Consumo
 	 *
-	 * atualiza o consumo de água/esgoto a ser rateado e o consumo de
-	 * água/esgoto dos imóveis vínculados do imóvel condomínio.
+	 * atualiza o consumo de ï¿½gua/esgoto a ser rateado e o consumo de
+	 * ï¿½gua/esgoto dos imï¿½veis vï¿½nculados do imï¿½vel condomï¿½nio.
 	 *
 	 * @author Pedro Alexandre
 	 * @date 17/01/2007
@@ -7074,7 +7075,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0002] Gerar Relação(ROL) em TXT
+	 * [SB0002] Gerar Relaï¿½ï¿½o(ROL) em TXT
 	 *
 	 * @author Rafael Francisco Pinto
 	 * @date 19/01/2007
@@ -7173,7 +7174,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0002] Gerar Relação(ROL) em TXT - Registro 2 (DOIS)
+	 * [SB0002] Gerar Relaï¿½ï¿½o(ROL) em TXT - Registro 2 (DOIS)
 	 *
 	 * @author Rafael Francisco Pinto
 	 * @date 22/01/2007
@@ -7218,7 +7219,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0002] Gerar Relação(ROL) em TXT - Registro 1 (HUM)
+	 * [SB0002] Gerar Relaï¿½ï¿½o(ROL) em TXT - Registro 1 (HUM)
 	 *
 	 * @author Rafael Francisco Pinto
 	 * @date 23/01/2007
@@ -7269,7 +7270,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 13/03/2007
 	 *
 	 * @throws ErroRepositorioException
@@ -7377,7 +7378,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					+ "leituraTipo.id = :idLeituraTipo and imovelPerfil.indicadorGerarDadosLeitura = 1 ";
 
 			/*
-			 * Alteração para ordenar igual ao rol da CAERN Thiago Nascimento
+			 * Alteraï¿½ï¿½o para ordenar igual ao rol da CAERN Thiago Nascimento
 			 * 16/04/2008
 			 */
 			if (empresa.toUpperCase().equals("COMPESA")) {
@@ -7394,10 +7395,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setFirstResult(inicioPesquisa).setMaxResults(1000).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -7405,8 +7406,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Pesquisa todas as rotas do sistema. Metódo usado no [UC0302] Gerar Débito
-	 * a Cobrar de Acréscimos por Impontualidade
+	 * Pesquisa todas as rotas do sistema. Metï¿½do usado no [UC0302] Gerar Dï¿½bito
+	 * a Cobrar de Acrï¿½scimos por Impontualidade
 	 *
 	 * @author Pedro Alexandre
 	 * @date 20/03/2007
@@ -7428,10 +7429,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			retorno = (Collection) session.createQuery(consulta).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -7439,9 +7440,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0105] Obter Consumo Mínimo da Ligação por Subcategoria
+	 * [UC0105] Obter Consumo Mï¿½nimo da Ligaï¿½ï¿½o por Subcategoria
 	 *
-	 * (CSTC_NNCONSUMOMINIMO da tarifa associada ao imóvel na tabela
+	 * (CSTC_NNCONSUMOMINIMO da tarifa associada ao imï¿½vel na tabela
 	 * CONSUMO_TARIFA_CATEGORIA com SCAT_ID=Id da subcategoria e CSTV_ID =
 	 * CSTV_ID da tabela CONSUMO_TARIFA_VIGENCIA com CSTF_ID=CSTF_ID da tabela
 	 * IMOVEL e maior CSTV_DTVIGENCIA, que seja menor ou igual a data corrente)
@@ -7486,11 +7487,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0082] - Registrar Leituras e Anormalidades
 	 *
-	 * [SB0001] - Gerar Relatório Resumo das Leituras e Anormalidades
+	 * [SB0001] - Gerar Relatï¿½rio Resumo das Leituras e Anormalidades
 	 *
-	 * Pesquisa os dados do relatório do comparativo de leituras e anormalidades
+	 * Pesquisa os dados do relatï¿½rio do comparativo de leituras e anormalidades
 	 *
-	 * @author Rafael Corrêa - Hugo Leonardo      - Magno Gouveia
+	 * @author Rafael Corrï¿½a - Hugo Leonardo      - Magno Gouveia
 	 * @date 13/04/2007 - 18/03/2010      		  - 21/06/2011
 	 *
 	 * @author Magno Gouveia
@@ -7621,12 +7622,12 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 				List<Integer> anoMesOcorrencias = new ArrayList<Integer>();
 				if(colecaoAnormalidadesLeituras != null && !colecaoAnormalidadesLeituras.isEmpty()){
-					// caso a opção -1 tenha sido selecionada, remove
+					// caso a opï¿½ï¿½o -1 tenha sido selecionada, remove
 					if(colecaoAnormalidadesLeituras.contains(ConstantesSistema.NUMERO_NAO_INFORMADO)){
 						colecaoAnormalidadesLeituras.remove(ConstantesSistema.NUMERO_NAO_INFORMADO);
 					}
 
-					// caso não tenha sido setado o número de ocorrências consecutivas, ou esta seja menor ou igual a 0
+					// caso nï¿½o tenha sido setado o nï¿½mero de ocorrï¿½ncias consecutivas, ou esta seja menor ou igual a 0
 					if(numOcorrenciasConsecutivas == null || numOcorrenciasConsecutivas <= 0){
 						numOcorrenciasConsecutivas = 1;
 					}
@@ -7693,11 +7694,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0082] - Registrar Leituras e Anormalidades
 	 *
-	 * [SB0001] - Gerar Relatório Resumo das Leituras e Anormalidades
+	 * [SB0001] - Gerar Relatï¿½rio Resumo das Leituras e Anormalidades
 	 *
 	 * Pesquisa as Anormalidades de Leitura e suas quantidades
 	 *
-	 * @author Rafael Corrêa - Hugo Leonardo - Magno Gouveia
+	 * @author Rafael Corrï¿½a - Hugo Leonardo - Magno Gouveia
 	 * @date 13/04/2007 - 18/03/2010		 - 29/06/2011
 	 *
 	 * @return Collection
@@ -7800,12 +7801,12 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			List<Integer> anoMesOcorrencias = new ArrayList<Integer>();
 			if(colecaoAnormalidadesLeituras != null && !colecaoAnormalidadesLeituras.isEmpty()){
-				// caso a opção -1 tenha sido selecionada, remove
+				// caso a opï¿½ï¿½o -1 tenha sido selecionada, remove
 				if(colecaoAnormalidadesLeituras.contains(ConstantesSistema.NUMERO_NAO_INFORMADO)){
 					colecaoAnormalidadesLeituras.remove(ConstantesSistema.NUMERO_NAO_INFORMADO);
 				}
 
-				// caso não tenha sido setado o número de ocorrências consecutivas, ou esta seja menor ou igual a 0
+				// caso nï¿½o tenha sido setado o nï¿½mero de ocorrï¿½ncias consecutivas, ou esta seja menor ou igual a 0
 				if(numOcorrenciasConsecutivas == null || numOcorrenciasConsecutivas <= 0){
 					numOcorrenciasConsecutivas = 1;
 				}
@@ -8153,10 +8154,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -8198,10 +8199,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -8210,9 +8211,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0613] - Registrar Leituras e Anormalidades
 	 *
-	 * Pesquisa os imóveis com faixa falsa
+	 * Pesquisa os imï¿½veis com faixa falsa
 	 *
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 18/06/2007
 	 *
 	 * @return Collection
@@ -8304,9 +8305,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0613] - Registrar Leituras e Anormalidades
 	 *
-	 * Retorna a quantidade de imóveis com faixa falsa
+	 * Retorna a quantidade de imï¿½veis com faixa falsa
 	 *
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 18/06/2007
 	 *
 	 * @return Collection
@@ -8372,10 +8373,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					LigacaoTipo.LIGACAO_AGUA).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -8420,13 +8421,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"idImovel", idImovel).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return retorno;
 	}
 
@@ -8456,20 +8457,20 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"idImovel", idImovel).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return retorno;
 	}
 
 	/**
 	 * [UC0623] Gerar Resumo de Metas CAERN
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 15/11/2006
 	 *
 	 * @param idOS
@@ -8648,9 +8649,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0005] Gerar Relação(ROL) em TXT - CAER
+	 * [SB0005] Gerar Relaï¿½ï¿½o(ROL) em TXT - CAER
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 13/08/2007
 	 *
 	 * @param idRota
@@ -8767,9 +8768,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0005] Gerar Relação(ROL) em TXT - CAER
+	 * [SB0005] Gerar Relaï¿½ï¿½o(ROL) em TXT - CAER
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 24/08/2007
 	 *
 	 * @param idRota
@@ -8799,10 +8800,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -8813,9 +8814,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0005] Gerar Relação(ROL) em TXT - CAER
+	 * [SB0005] Gerar Relaï¿½ï¿½o(ROL) em TXT - CAER
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 24/08/2007
 	 *
 	 * @param idRota
@@ -8844,10 +8845,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -8858,7 +8859,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 * [UC00082] Registrar Leituras e Anormalidades
 	 *
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 29/08/2007
 	 *
 	 * @param idRota
@@ -8903,14 +8904,14 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * pesquisa uma coleção de roteiroempresa(s) de acordo com o código
+	 * pesquisa uma coleï¿½ï¿½o de roteiroempresa(s) de acordo com o cï¿½digo
 	 *
 	 * @param idLocalidade
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param codigoSetorComercial
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @param idLeiturista
-	 *            Descrição do parâmetro
+	 *            Descriï¿½ï¿½o do parï¿½metro
 	 * @return Description of the Return Value
 	 * @exception ErroRepositorioException
 	 *                Description of the Exception
@@ -8996,7 +8997,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 *
 	 * [UC0370] - Filtrar Roteiro Empresa
 	 *
-	 * @author Thiago Tenório
+	 * @author Thiago Tenï¿½rio
 	 * @date 01/11/06
 	 *
 	 * @param idEquipe
@@ -9055,7 +9056,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0631] Processar Requisições do Dispositivo Móvel.
+	 * [UC0631] Processar Requisiï¿½ï¿½es do Dispositivo Mï¿½vel.
 	 *
 	 * [SB0001] Baixar Arquivo Texto para o Leiturista.
 	 *
@@ -9119,15 +9120,15 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0631] Processar Requisições do Dispositivo Móvel.
+	 * [UC0631] Processar Requisiï¿½ï¿½es do Dispositivo Mï¿½vel.
 	 *
-	 * Atualizar Situação do Arquivo Texto.
+	 * Atualizar Situaï¿½ï¿½o do Arquivo Texto.
 	 *
 	 *
 	 * @author Thiago Nascimento
 	 * @date 14/08/2007
 	 *
-	 * Alterado por Sávio Luiz
+	 * Alterado por Sï¿½vio Luiz
 	 * @date 05/04/2010
 	 *
 	 * @param imei
@@ -9145,7 +9146,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 		String consulta = null;
 
 		try {
-			 // verifica a situação anterior da tabela arquivo texto roteiro empresa dividido
+			 // verifica a situaï¿½ï¿½o anterior da tabela arquivo texto roteiro empresa dividido
 			 consulta = "select id "
 			 		    + " from ArquivoTextoRoteiroEmpresaDivisao a "
 						+ " where a.numeroImei = :imei and "
@@ -9168,7 +9169,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 						.executeUpdate();
 			 }
 
-			 //verifica a situação anterior da tabela arquivo texto roteiro empresa
+			 //verifica a situaï¿½ï¿½o anterior da tabela arquivo texto roteiro empresa
 			 consulta = "select id "
 			 		    + " from ArquivoTextoRoteiroEmpresa a "
 						+ " where a.numeroImei = :imei and "
@@ -9224,15 +9225,15 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0631] Processar Requisições do Dispositivo Móvel.
+	 * [UC0631] Processar Requisiï¿½ï¿½es do Dispositivo Mï¿½vel.
 	 *
-	 * Atualizar Situação do Arquivo Texto.
+	 * Atualizar Situaï¿½ï¿½o do Arquivo Texto.
 	 *
 	 *
 	 * @author Thiago Nascimento
 	 * @date 14/08/2007
 	 *
-	 * Alterado por Sávio Luiz
+	 * Alterado por Sï¿½vio Luiz
 	 * @date 05/04/2010
 	 *
 	 * @param imei
@@ -9268,12 +9269,12 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0631] Processar Requisições do Dispositivo Móvel.
+	 * [UC0631] Processar Requisiï¿½ï¿½es do Dispositivo Mï¿½vel.
 	 *
-	 * Atualizar Situação do Arquivo Texto.
+	 * Atualizar Situaï¿½ï¿½o do Arquivo Texto.
 	 *
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 05/04/2010
 	 *
 	 * @param imei
@@ -9291,7 +9292,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 		try {
 
-			// verifica a situação anterior da tabela arquivo texto roteiro empresa dividido
+			// verifica a situaï¿½ï¿½o anterior da tabela arquivo texto roteiro empresa dividido
 			 consulta = "select a.id "
 			 		    + " from ArquivoTextoRoteiroEmpresaDivisao a "
 			 		    + " inner join a.arquivoTextoRoteiroEmpresa atre "
@@ -9321,8 +9322,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				  .setTimestamp("data", new Date())
 						.executeUpdate();
 			 }else{
-				 //Caso não tenha dados para arquivo divisão
-				 // então verifica a situação anterior da tabela arquivo texto roteiro empresa
+				 //Caso nï¿½o tenha dados para arquivo divisï¿½o
+				 // entï¿½o verifica a situaï¿½ï¿½o anterior da tabela arquivo texto roteiro empresa
 
 				 String sql = "update gcom.micromedicao.ArquivoTextoRoteiroEmpresa "
 						+ " set sitl_id = :idSituacaoTransmissaoLeituraNova "
@@ -9357,7 +9358,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	* [UC0631] Processar Requisições do Dispositivo Móvel.
+	* [UC0631] Processar Requisiï¿½ï¿½es do Dispositivo Mï¿½vel.
 	*
 	* [SB0002] Atualizar o movimento roteiro empresa.
 	*
@@ -9430,10 +9431,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					idLigacaoTipo).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -9457,10 +9458,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.executeUpdate();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -9583,17 +9584,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					+ "left join tipoClieResp.esferaPoder esferaPoderClieResp "
 					+ "left join im.imovelCondominio imoCondominio "
 
-					// SELEÇÃO POR ROTA
+					// SELEï¿½ï¿½O POR ROTA
 					+ "WHERE im.quadra.rota.id = :rota "//and im.id = :idImovel "
 					+ "AND im.rotaAlternativa IS NULL AND im.indicadorExclusao <> 1 "
 
-					// VERIFICANDO SE O IMÓVEL ESTÁ DISPONÍVEL PARA GERAÇÃO DE
+					// VERIFICANDO SE O IMï¿½VEL ESTï¿½ DISPONï¿½VEL PARA GERAï¿½ï¿½O DE
 					// CONSUMO
 					+ "AND ((las.indicadorFaturamentoSituacao = :faturamentoAgua OR "
 					+ "les.indicadorFaturamentoSituacao = :faturamentoEsgoto) "
 
-					// VERIFICA SE O IMÓVEL POSSUI HIDROMETRO NA LIGAÇÃO DE AGUA
-					// OU DE POÇO
+					// VERIFICA SE O IMï¿½VEL POSSUI HIDROMETRO NA LIGAï¿½ï¿½O DE AGUA
+					// OU DE POï¿½O
 					+ "OR  (li.hidrometroInstalacaoHistorico <> null OR "
 					+ "im.hidrometroInstalacaoHistorico <> null)) ";
 
@@ -9604,14 +9605,14 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					LigacaoAguaSituacao.FATURAMENTO_ATIVO).setShort(
 					"faturamentoEsgoto",
 					LigacaoEsgotoSituacao.FATURAMENTO_ATIVO).
-					//setInteger( "idImovel", 12466131 ).
+					//setInteger( "idImovel", 691178 ).
 					list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -9619,11 +9620,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [FS005] - Verificar existência do arquivo texto roteiro empresa.
+	 * [FS005] - Verificar existï¿½ncia do arquivo texto roteiro empresa.
 	 *
-	 * Caso já exista um arquivo texto para o mês de referência informado, mesmo
-	 * roteiro empresa, mesmo grupo de faturamento e sua situação de leitura
-	 * transmissão esteja liberado, exclui o arquivo correspondente e retorna
+	 * Caso jï¿½ exista um arquivo texto para o mï¿½s de referï¿½ncia informado, mesmo
+	 * roteiro empresa, mesmo grupo de faturamento e sua situaï¿½ï¿½o de leitura
+	 * transmissï¿½o esteja liberado, exclui o arquivo correspondente e retorna
 	 * pra o caso se uso que chamou esta funcionalidade.
 	 *
 	 * [UC0627] Gerar Arquivo Texto para Leiturista
@@ -9640,13 +9641,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			Integer idRoteiroEmpresa, Integer idGrupoFaturamento)
 			throws ErroRepositorioException {
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 
 		// Retorno Consulta
 		int qtdRegistrosDeletados = 0;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -9667,10 +9668,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -9684,9 +9685,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			throws ErroRepositorioException {
 
 		String[] retorno = new String[3];
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 		try {
 
@@ -9757,10 +9758,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -9775,9 +9776,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			throws ErroRepositorioException {
 
 		String[] retorno = new String[3];
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 		try {
 
@@ -9851,10 +9852,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -9868,9 +9869,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			throws ErroRepositorioException {
 
 		String[] retorno = new String[3];
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 		try {
 
@@ -9936,10 +9937,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -9952,9 +9953,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			throws ErroRepositorioException {
 
 		String[] retorno = new String[3];
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 		try {
 
@@ -10016,10 +10017,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			retorno[2] = "" + (qtdRotas - qtdComCriterio);
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -10032,9 +10033,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			throws ErroRepositorioException {
 
 		String[] retorno = new String[3];
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 		try {
 
@@ -10086,10 +10087,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -10102,9 +10103,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			throws ErroRepositorioException {
 
 		String[] retorno = new String[3];
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 		try {
 
@@ -10163,10 +10164,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -10184,9 +10185,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			throws ErroRepositorioException {
 
 		String[] retorno = new String[3];
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 		try {
 
@@ -10229,10 +10230,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -10260,7 +10261,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 		try {
 			/*
-			 * Alteração feita para não pegar rotas repetidas Thiago Nascimento
+			 * Alteraï¿½ï¿½o feita para nï¿½o pegar rotas repetidas Thiago Nascimento
 			 * 16/04/2008
 			 */
 			consulta = "select distinct(rota) " + "from Quadra qdra "
@@ -10285,10 +10286,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [FS005] - Verificar existência do arquivo texto roteiro empresa por rota.
+	 * [FS005] - Verificar existï¿½ncia do arquivo texto roteiro empresa por rota.
 	 *
-	 * Caso já exista um arquivo texto para o mês de referência informado, mesma
-	 * rota, mesmo grupo de faturamento e sua situação de leitura transmissão
+	 * Caso jï¿½ exista um arquivo texto para o mï¿½s de referï¿½ncia informado, mesma
+	 * rota, mesmo grupo de faturamento e sua situaï¿½ï¿½o de leitura transmissï¿½o
 	 * esteja liberado, exclui o arquivo correspondente e retorna pra o caso se
 	 * uso que chamou esta funcionalidade.
 	 *
@@ -10306,13 +10307,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			Integer anoMesReferencia, Integer idRota, Integer idGrupoFaturamento)
 			throws ErroRepositorioException {
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 
 		// Retorno Consulta
 		int qtdRegistrosDeletados = 0;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -10325,7 +10326,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Executa o hql
 			/*
-			 * Alteração feita para excluir os arquivos que já forão lidos.
+			 * Alteraï¿½ï¿½o feita para excluir os arquivos que jï¿½ forï¿½o lidos.
 			 * Thiago Nascimento 16/04/2008
 			 */
 			qtdRegistrosDeletados = session.createQuery(consulta).setInteger(
@@ -10338,10 +10339,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -10426,8 +10427,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 		try {
 			/*
-			 * Alteração feita para incluir o código da rota, sequencial de rota
-			 * e a matrícula do funcionario no arquivo gerado para a leitura.
+			 * Alteraï¿½ï¿½o feita para incluir o cï¿½digo da rota, sequencial de rota
+			 * e a matrï¿½cula do funcionario no arquivo gerado para a leitura.
 			 * Thiago Nascimento 01/04/2008
 			 */
 			consulta = "select loca.id, "
@@ -10720,7 +10721,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			String idUnidadeNegocio, String idCobrancaAcao)
 			throws ErroRepositorioException {
 		Session session = HibernateUtil.getSession();
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		try {
 
 			String consulta = "select distinct(rotaCriterio.comp_id.rotaId) from RotaAcaoCriterio rotaCriterio"
@@ -10794,7 +10795,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 *
 	 * [UC0113] Faturar Grupo de Faturamento
 	 *
-	 * @author Sávio LuIz
+	 * @author Sï¿½vio LuIz
 	 * @date 08/11/2007
 	 *
 	 * @param idRota
@@ -10824,10 +10825,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -10835,9 +10836,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Relatório Analise de Consumo
+	 * Relatï¿½rio Analise de Consumo
 	 *
-	 * @author Flávio Leonardo, Ivan Sergio
+	 * @author Flï¿½vio Leonardo, Ivan Sergio
 	 * @date 26/12/2007
 	 * @alteracao: 24/07/2008 - Adicionado a descricao da Leitura Anormalidade
 	 *             Informada
@@ -10871,10 +10872,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					new Integer(anoMes)).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -10882,9 +10883,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Relatório Manter Hidrometro
+	 * Relatï¿½rio Manter Hidrometro
 	 *
-	 * Flávio Leonardo
+	 * Flï¿½vio Leonardo
 	 *
 	 * pesquisa o id do imovel do hidrometro instalado
 	 *
@@ -10907,10 +10908,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					new Integer(hidrometroId)).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -10918,7 +10919,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Busca o Ano Mês de Referencia o grupo de Faturamento fornecido.
+	 * Busca o Ano Mï¿½s de Referencia o grupo de Faturamento fornecido.
 	 *
 	 * [UC0712] Atualizar Leituras e Anormalidades do Celular
 	 *
@@ -10942,10 +10943,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.createQuery(hql.toString()).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return faturamento;
@@ -10953,14 +10954,14 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Busca o Ano Mês de Referencia para a matrícula do Imóvel informada.
+	 * Busca o Ano Mï¿½s de Referencia para a matrï¿½cula do Imï¿½vel informada.
 	 *
 	 * [UC0712] Atualizar Leituras e Anormalidades do Celular
 	 *
-	 * @author Thiago Nascimento, Rômulo Aurélio
+	 * @author Thiago Nascimento, Rï¿½mulo Aurï¿½lio
 	 * @date 11/12/2007, 09/11/2010
 	 *
-	 * Alteração realizada para pegar o grupo correto quando a rota do imovel for alternativa
+	 * Alteraï¿½ï¿½o realizada para pegar o grupo correto quando a rota do imovel for alternativa
 	 *
 	 * @param matricula
 	 * @return
@@ -11033,10 +11034,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return faturamento;
@@ -11044,9 +11045,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Método para a atualização das leituras e Anormalidades do Celular, em que
-	 * atualiza o Movimento do Roteiro de uma Empresa e inserir no Histórico de
-	 * medições.
+	 * Mï¿½todo para a atualizaï¿½ï¿½o das leituras e Anormalidades do Celular, em que
+	 * atualiza o Movimento do Roteiro de uma Empresa e inserir no Histï¿½rico de
+	 * mediï¿½ï¿½es.
 	 *
 	 * [UC0712] Atualizar Leituras e Anormalidades do Celular
 	 *
@@ -11055,7 +11056,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 *
 	 * @param dados
 	 * @param anoMesFaturamento
-	 * @param Usuario - Usuário que está informando a leitura. Caso venha nulo, não ser gravado nada em medição histórico
+	 * @param Usuario - Usuï¿½rio que estï¿½ informando a leitura. Caso venha nulo, nï¿½o ser gravado nada em mediï¿½ï¿½o histï¿½rico
 	 *  
 	 * @throws ErroRepositorioException
 	 */
@@ -11102,8 +11103,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				session.update(imovel);
 				
 			} else {
-				// Histórico de Medição
-				// Verifica se já existe um Historio de Medicao.
+				// Histï¿½rico de Mediï¿½ï¿½o
+				// Verifica se jï¿½ existe um Historio de Medicao.
 				hql = new StringBuffer(
 						"FROM MedicaoHistorico m where (m.imovel.id = ");
 				hql.append(dado.getMatriculaImovel());
@@ -11137,9 +11138,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					medicaoHistorico.setLeituraAnormalidadeInformada(null);
 				}
 
-				// Compara se data de leitura está dentro do intervalo
+				// Compara se data de leitura estï¿½ dentro do intervalo
 				// anoMesFaturamentoAnterior e anoMesFaturamentoPosterior
-				// Caso contrário, dataLeitura recebe a data corrente.
+				// Caso contrï¿½rio, dataLeitura recebe a data corrente.
 				// --------------------------------------------------------------
 				// CRC 826 , CRC892
 				// Alterado por: Yara T. Souza
@@ -11174,7 +11175,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				// Set Leiturista
 				medicaoHistorico.setLeiturista(leit);
 
-				// Set Leituira Situação
+				// Set Leituira Situaï¿½ï¿½o
 				Integer leituraSitucao = LeituraSituacao.NAO_REALIZADA;
 				if (dado.getLeituraHidrometro() != null
 						&& dado.getLeituraHidrometro().intValue() != -1) {
@@ -11193,7 +11194,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					leituraSitucao = LeituraSituacao.NAO_REALIZADA;
 				}
 
-				// Seleciona a Situação da Leitura
+				// Seleciona a Situaï¿½ï¿½o da Leitura
 				hql = new StringBuffer("FROM LeituraSituacao l where l.id =");
 				hql.append(leituraSitucao.toString());
 				medicaoHistorico
@@ -11201,11 +11202,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 								.createQuery(hql.toString()).uniqueResult());
 
 				if (!inserir) {
-					// Atualizar o Histórico Medição
+					// Atualizar o Histï¿½rico Mediï¿½ï¿½o
 					session.update(medicaoHistorico);
 				} else {
-					// Inserir em Histórico Medição
-					// Selecionar Tipo de Medição
+					// Inserir em Histï¿½rico Mediï¿½ï¿½o
+					// Selecionar Tipo de Mediï¿½ï¿½o
 					if (dado.getTipoMedicao() == 0) {
 						String query = "update Imovel set leituraAnormalidade = :ltan";
 
@@ -11311,7 +11312,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 
 							medicaoHistorico.setLeituraAnteriorInformada(null);
-							// Buscar por Leitura Não Realizada
+							// Buscar por Leitura Nï¿½o Realizada
 							hql = new StringBuffer(
 									"FROM LeituraSituacao l where l.id = ");
 							hql.append(LeituraSituacao.NAO_REALIZADA);
@@ -11321,10 +11322,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 											.uniqueResult());
 						}
 
-						// Compara se data de leitura está dentro do intervalo
+						// Compara se data de leitura estï¿½ dentro do intervalo
 						// anoMesFaturamentoAnterior e
 						// anoMesFaturamentoPosterior
-						// Caso contrário, dataLeitura recebe a data corrente.
+						// Caso contrï¿½rio, dataLeitura recebe a data corrente.
 						// --------------------------------------------------------------
 						// CRC 826 , CRC892
 						// Alterado por: Yara T. Souza
@@ -11358,10 +11359,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 							medicaoHistorico.setLeituraAtualInformada(null);
 						}
 
-						// Compara se data de leitura está dentro do intervalo
+						// Compara se data de leitura estï¿½ dentro do intervalo
 						// anoMesFaturamentoAnterior e
 						// anoMesFaturamentoPosterior
-						// Caso contrário, dataLeitura recebe a data corrente.
+						// Caso contrï¿½rio, dataLeitura recebe a data corrente.
 						// --------------------------------------------------------------
 						// CRC 826 , CRC892
 						// Alterado por: Yara T. Souza
@@ -11393,7 +11394,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 									.getLeituraHidrometro());
 						}
 
-						// Set o Numero Cosumo Mês e Informado
+						// Set o Numero Cosumo Mï¿½s e Informado
 						medicaoHistorico.setNumeroConsumoMes(null);
 						medicaoHistorico.setNumeroConsumoInformado(null);
 
@@ -11406,7 +11407,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 								.setLeituraAnormalidadeFaturamento(medicaoHistorico
 										.getLeituraAnormalidadeInformada());
 
-						// Set Hidrometro Instalação histórico
+						// Set Hidrometro Instalaï¿½ï¿½o histï¿½rico
 						if (medicaoHistorico.getMedicaoTipo().getId().equals(
 								MedicaoTipo.LIGACAO_AGUA)) {
 							medicaoHistorico
@@ -11422,13 +11423,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 						// Set Indicador Analisado
 						medicaoHistorico.setIndicadorAnalisado(new Short("2"));
 
-						// Set Cosumo Médio
+						// Set Cosumo Mï¿½dio
 						medicaoHistorico.setConsumoMedioHidrometro(null);
 
-						// Set Ultima Alteração
+						// Set Ultima Alteraï¿½ï¿½o
 						medicaoHistorico.setUltimaAlteracao(new Date());
 						
-						// Caso tenha sido informado, grava o usuário que informou a leitura.
+						// Caso tenha sido informado, grava o usuï¿½rio que informou a leitura.
 						medicaoHistorico.setUsuarioInformouLeitura(usuarioInformouLeitura);
 
 						// Inserir
@@ -11438,10 +11439,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 			session.flush();
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -11450,7 +11451,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 *
 	 * Verifica se houve todos os processamentos do um determinado grupo e
-	 * ano-Mês de Referencia e inserir no cronograma de atividades.
+	 * ano-Mï¿½s de Referencia e inserir no cronograma de atividades.
 	 *
 	 * [UC0712] Atualizar Leituras e Anormalidades do Celular
 	 *
@@ -11542,10 +11543,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				}
 			}
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -11553,8 +11554,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Método que busca a descarição da LeituraAnormalidade que tem o código
-	 * passado como parâmetro.
+	 * Mï¿½todo que busca a descariï¿½ï¿½o da LeituraAnormalidade que tem o cï¿½digo
+	 * passado como parï¿½metro.
 	 *
 	 * [UC0712] Atualizar Leituras e Anormalidades do Celular
 	 *
@@ -11576,10 +11577,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			descricao = (String) session.createQuery(hql.toString())
 					.uniqueResult();
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return descricao;
@@ -11587,7 +11588,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Pesquisar o imovel pela Matrícula.
+	 * Pesquisar o imovel pela Matrï¿½cula.
 	 *
 	 * [UC0101] - Consistir Leituras e Calcular Consumos
 	 *
@@ -11667,10 +11668,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					ClienteRelacaoTipo.RESPONSAVEL.intValue()).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -11738,9 +11739,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 				movimento.setIndicadorConfirmacaoLeitura(new Short((short) dado.getIndicadorConfirmacaoLeitura()));
 
-				//	 Compara se data de leitura está dentro do intervalo
+				//	 Compara se data de leitura estï¿½ dentro do intervalo
 				//	 anoMesFaturamentoAnterior e anoMesFaturamentoPosterior
-				//	 Caso contrário, dataLeitura recebe a data corrente.
+				//	 Caso contrï¿½rio, dataLeitura recebe a data corrente.
 				//	 --------------------------------------------------------------
 				//	 CRC 826 , CRC892
 				//	 Alterado por: Yara T. Souza
@@ -11773,7 +11774,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					}
 				}
 
-				//ULTIMA ALTERAÇÃO
+				//ULTIMA ALTERAï¿½ï¿½O
 				movimento.setUltimaAlteracao(new Date());
 
 				//DATA DE PROCESSAMENTO
@@ -11878,7 +11879,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Buscar Rota a qual o imóvel pertence.
+	 * Buscar Rota a qual o imï¿½vel pertence.
 	 *
 	 * @param matricula
 	 * @return
@@ -11908,7 +11909,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0629] Consultar Arquivo Texto Leitura.
 	 *
-	 * Atualizar Situação do Arquivo Texto.
+	 * Atualizar Situaï¿½ï¿½o do Arquivo Texto.
 	 *
 	 *
 	 * @author Thiago Nascimento
@@ -11946,7 +11947,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Atualizar a situação do Arquivo Roteiro Empresa para 4, para o arquivo
+	 * Atualizar a situaï¿½ï¿½o do Arquivo Roteiro Empresa para 4, para o arquivo
 	 * com grupo, anoMesReferencia, localidade e setor e quadra passados como
 	 * parametros.
 	 *
@@ -12022,7 +12023,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
      * @return
      * @throws ErroRepositorioException
      */
-    public Collection buscarImoveisPorRota(Integer idRota, String empresa, Integer anoMesFaturamento)
+    public Collection buscarImoveisPorRota(Integer idRota, String empresa, Integer anoMesFaturamento, Short indicadorOrdenacao )
                                                                                                      throws ErroRepositorioException {
         Collection retorno = null;
         Session session = HibernateUtil.getSession();
@@ -12089,7 +12090,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
             consulta.append("   LEFT JOIN movimento.leituraAnormalidade leituraAnormalidade ");
             consulta.append("WHERE rota.id = :idRota AND movimento.anoMesMovimento = :anoMesFaturamento ");
 
-            if (empresa.toUpperCase().equals("COMPESA")) {
+/*            if (empresa.toUpperCase().equals("COMPESA")) {
                 consulta.append("ORDER BY movimento.numeroSequencialRota,empresa.id,localidade.id,movimento,movimento.numeroQuadra,movimento.numeroLoteImovel,movimento.numeroSubloteImovel");
             } else {
                 if (empresa.toUpperCase().equals("COSAMA")) {
@@ -12102,7 +12103,25 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
             // + "order by
             // localidade.id,setorComercial.codigo,quadra.numeroQuadra,imovel.lote,imovel.subLote,
             // imovel.numeroImovel";
+*/
+			if (indicadorOrdenacao != null
+					&& indicadorOrdenacao.equals(ConstantesSistema.NAO)) {
+				if (empresa.toUpperCase().equals("COMPESA")) {
+					consulta.append(" order by movimento.numeroSequencialRota,movimento.empresa.id,imovel.localidade.id,movimento.codigoSetorComercial,movimento.numeroQuadra,movimento.numeroLoteImovel,movimento.numeroSubloteImovel");
+				} else if (empresa.toUpperCase().equals("COSANPA")) {
+					consulta.append(" order by imovel.localidade.id, movimento.codigoSetorComercial, movimento.codigoRota, movimento.numeroQuadra, movimento.numeroLoteImovel");
+				} else {
+					consulta.append(" ORDER BY imovel.localidade.id, movimento.codigoSetorComercial, movimento.numeroQuadra, imovel.lote, imovel.subLote");
+				}
+			} else {
+				if (empresa.toUpperCase().equals("COSAMA")) {
 
+					consulta.append(" ORDER BY imovel.localidade.id, movimento.codigoRota, movimento.codigoSetorComercial, movimento.numeroQuadra, imovel.lote, imovel.subLote ");
+				} else {
+					consulta.append(" ORDER BY imovel.localidade.id, movimento.codigoSetorComercial, movimento.codigoRota, imovel.numeroSequencialRota,movimento.numeroSubloteImovel ");
+				}
+			}  
+			
             retorno = session.createQuery(consulta.toString())
                              .setInteger("idRota", idRota)
                              .setInteger("anoMesFaturamento", anoMesFaturamento)
@@ -12154,10 +12173,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(6).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -12207,10 +12226,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -12220,7 +12239,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 *
-	 * [SB0006] - Obter dados dos tipos de medição
+	 * [SB0006] - Obter dados dos tipos de mediï¿½ï¿½o
 	 *
 	 * @author Raphael Rossiter
 	 * @date 30/04/2008
@@ -12260,10 +12279,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -12271,7 +12290,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Remove a Relação de Leiturista com a Rota
+	 * Remove a Relaï¿½ï¿½o de Leiturista com a Rota
 	 *
 	 * @autor Thiago Nascimento
 	 *
@@ -12298,10 +12317,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			session.flush();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -12337,10 +12356,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -12371,10 +12390,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -12382,7 +12401,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Retorno o valor máximo do Id do Leiturista.
+	 * Retorno o valor mï¿½ximo do Id do Leiturista.
 	 *
 	 * @author Thiago Nascimento
 	 * @return
@@ -12399,10 +12418,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -12449,10 +12468,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -12460,19 +12479,19 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * [UC0781] - Informar Consumo por Área
+	 * [UC0781] - Informar Consumo por ï¿½rea
 	 *
 	 * <Identificador e nome do caso de uso>
 	 *
-	 * <Breve descrição sobre o subfluxo>
+	 * <Breve descriï¿½ï¿½o sobre o subfluxo>
 	 *
 	 * <Identificador e nome do subfluxo>
 	 *
-	 * <Breve descrição sobre o fluxo secundário>
+	 * <Breve descriï¿½ï¿½o sobre o fluxo secundï¿½rio>
 	 *
-	 * <Identificador e nome do fluxo secundário>
+	 * <Identificador e nome do fluxo secundï¿½rio>
 	 *
-	 * @author Rômulo Aurélio
+	 * @author Rï¿½mulo Aurï¿½lio
 	 * @date 21/05/2008
 	 *
 	 * @param anoMesReferenciaInformado
@@ -12496,10 +12515,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -12509,9 +12528,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0805] - Gerar Aviso de Anormalidade
 	 *
-	 * Pesquisa os dados necessérios para a geração do relatório
+	 * Pesquisa os dados necessï¿½rios para a geraï¿½ï¿½o do relatï¿½rio
 	 *
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 03/06/2008
 	 *
 	 * @param colecaoImoveis
@@ -12593,10 +12612,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 							"colecaoImoveis", colecaoImoveis).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -12606,9 +12625,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0805] - Gerar Aviso de Anormalidade
 	 *
-	 * Pesquisa os dados necessérios para a geração do relatório
+	 * Pesquisa os dados necessï¿½rios para a geraï¿½ï¿½o do relatï¿½rio
 	 *
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 28/06/2008
 	 *
 	 * @param gerarDadosLeituraHelper
@@ -12743,10 +12762,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.addScalar("idImovel", Hibernate.STRING).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -12756,9 +12775,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0805] - Gerar Aviso de Anormalidade
 	 *
-	 * Pesquisa a quantidade de registros do relatório
+	 * Pesquisa a quantidade de registros do relatï¿½rio
 	 *
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 28/06/2008
 	 *
 	 * @param gerarDadosLeituraHelper
@@ -12812,10 +12831,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -12825,9 +12844,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0805] - Gerar Aviso de Anormalidade
 	 *
-	 * Pesquisa os dados necessérios para a geração do relatório
+	 * Pesquisa os dados necessï¿½rios para a geraï¿½ï¿½o do relatï¿½rio
 	 *
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 03/06/2008
 	 *
 	 * @param colecaoImoveis
@@ -12998,10 +13017,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setInteger("anoMes", anoMes).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -13573,9 +13592,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0082] - Registrar Leituras e Anormalidades
 	 *
-	 * Obter o leiturista do imóvel
+	 * Obter o leiturista do imï¿½vel
 	 *
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 01/07/2008
 	 *
 	 * @param idImovel
@@ -13601,10 +13620,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"idImovel", idImovel).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -13612,9 +13631,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0800] - Obter Consumo Não Medido
+	 * [UC0800] - Obter Consumo Nï¿½o Medido
 	 *
-	 * Obter o consumo mínimo associado à faixa de área do imóvel e a categoria
+	 * Obter o consumo mï¿½nimo associado ï¿½ faixa de ï¿½rea do imï¿½vel e a categoria
 	 * ou subcategoria informada
 	 *
 	 * @author Raphael Rossiter
@@ -13660,10 +13679,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -13735,7 +13754,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				faturamentoAtivCronograma = (FaturamentoAtividadeCronograma) session
 						.createQuery(hql.toString()).uniqueResult();
 				if (faturamentoAtivCronograma != null) {
-					// Fazer alteração
+					// Fazer alteraï¿½ï¿½o
 
 
 					faturamentoAtivCronograma.setDataRealizacao(dataRealizacao);
@@ -13766,17 +13785,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
 	}
 
 	/**
-	 * Retorno a quantidade leituras que ainda não foram registradas
+	 * Retorno a quantidade leituras que ainda nï¿½o foram registradas
 	 *
 	 * @data 03/06/2008
 	 * @param anoMes
@@ -13803,17 +13822,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
 	}
 
 	/**
-	 * Retorna as leituras que ainda não foram registradas
+	 * Retorna as leituras que ainda nï¿½o foram registradas
 	 *
 	 * @data 03/06/2008
 	 * @param anoMes
@@ -13838,10 +13857,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			retorno = session.createQuery(hql.toString()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -13850,7 +13869,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * @author Rômulo Aurélio, Raphael Rossiter
+	 * @author Rï¿½mulo Aurï¿½lio, Raphael Rossiter
 	 * @date 17/06/2008, 27/08/2009
 	 *
 	 * @throws ErroRepositorioException
@@ -13975,7 +13994,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					+ "AND imovelPerfil.indicadorGerarDadosLeitura = 1 ";
 
 			/*
-			 * Alteração para ordenar igual ao rol da CAERN Thiago Nascimento
+			 * Alteraï¿½ï¿½o para ordenar igual ao rol da CAERN Thiago Nascimento
 			 * 16/04/2008
 			 */
 			if (empresa.toUpperCase().equals("COMPESA")) {
@@ -13990,10 +14009,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					rota.getId()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -14005,7 +14024,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 *
 	 * [UC0083] Gerar Dados para Leitura
 	 *
-	 * @author Rômulo Aurelio
+	 * @author Rï¿½mulo Aurelio
 	 * @date 28/06/2008
 	 *
 	 * @param anoMesFaturamento
@@ -14062,7 +14081,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 *
 	 * [UC0083] Gerar Dados para Leitura
 	 *
-	 * @author Rômulo Aurelio
+	 * @author Rï¿½mulo Aurelio
 	 * @date 28/06/2008
 	 *
 	 * @param anoMesFaturamento
@@ -14109,9 +14128,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0006] Gerar Relação(ROL) em TXT - CAEMA, JUAZEIRO
+	 * [SB0006] Gerar Relaï¿½ï¿½o(ROL) em TXT - CAEMA, JUAZEIRO
 	 *
-	 * @author Rômulo Aurelio
+	 * @author Rï¿½mulo Aurelio
 	 * @date 02/07/2008
 	 *
 	 * @param idRota
@@ -14161,7 +14180,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 * [UC0083]- Gerar Dados para Leitura Pesquisar Faixa de leitura Falsa
-	 * Author: Rômulo Aurélio Date: 08/07/2008
+	 * Author: Rï¿½mulo Aurï¿½lio Date: 08/07/2008
 	 */
 
 	public LeituraFaixaFalsa pesquisarDadosLeituraFaixaFalsa(
@@ -14190,10 +14209,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 							"amReferencia", anoMes).setMaxResults(1)
 					.uniqueResult();
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -14234,10 +14253,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					new Integer(anoMes)).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -14247,9 +14266,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0002] Gerar Relação(ROL) em TXT
+	 * [SB0002] Gerar Relaï¿½ï¿½o(ROL) em TXT
 	 *
-	 * @author Rômulo Aurélio
+	 * @author Rï¿½mulo Aurï¿½lio
 	 * @date 08/07/2008
 	 *
 	 */
@@ -14307,9 +14326,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0005] Gerar Relação(ROL) em TXT - CAER
+	 * [SB0005] Gerar Relaï¿½ï¿½o(ROL) em TXT - CAER
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 13/08/2007
 	 *
 	 * @param idRota
@@ -14365,7 +14384,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * @author Rômulo Aurélio
+	 * @author Rï¿½mulo Aurï¿½lio
 	 * @date 17/06/2008
 	 *
 	 * @throws ErroRepositorioException
@@ -14486,10 +14505,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					rota.getId()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -14499,7 +14518,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * @author Rômulo Aurélio
+	 * @author Rï¿½mulo Aurï¿½lio
 	 * @date 17/06/2008
 	 *
 	 * @throws ErroRepositorioException
@@ -14620,10 +14639,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					rota.getId()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -14633,9 +14652,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0002] Gerar Relação(ROL) em TXT
+	 * [SB0002] Gerar Relaï¿½ï¿½o(ROL) em TXT
 	 *
-	 * @author Rômulo Aurélio
+	 * @author Rï¿½mulo Aurï¿½lio
 	 * @date 08/07/2008
 	 *
 	 */
@@ -14663,12 +14682,12 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			stmt.executeUpdate(delete);
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -14677,9 +14696,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0002] Gerar Relação(ROL) em TXT
+	 * [SB0002] Gerar Relaï¿½ï¿½o(ROL) em TXT
 	 *
-	 * @author Rômulo Aurélio
+	 * @author Rï¿½mulo Aurï¿½lio
 	 * @date 08/07/2008
 	 *
 	 */
@@ -14711,12 +14730,12 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			qtdRegistrosDeletados = stmt.executeUpdate(delete);
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -14727,9 +14746,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0002] Gerar Relação(ROL) em TXT
+	 * [SB0002] Gerar Relaï¿½ï¿½o(ROL) em TXT
 	 *
-	 * @author Rômulo Aurélio
+	 * @author Rï¿½mulo Aurï¿½lio
 	 * @date 08/07/2008
 	 *
 	 */
@@ -14849,10 +14868,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					rota.getId()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -14862,7 +14881,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0805] - Gerar Aviso de Anormalidade
 	 *
-	 * Pesquisa a quantidade de registros do relatório
+	 * Pesquisa a quantidade de registros do relatï¿½rio
 	 *
 	 * @author Yara T.Souza - Hugo Leonardo
 	 * @date 12/08/2008 - 18/03/2010
@@ -14929,10 +14948,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -14976,10 +14995,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -14987,7 +15006,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0831] Gerar Tabelas para Atualização Cadastral via celular
+	 * [UC0831] Gerar Tabelas para Atualizaï¿½ï¿½o Cadastral via celular
 	 *
 	 * @author Vinicius Medeiros
 	 * @date 20/09/2008
@@ -15059,7 +15078,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 * [UC0629] Retornar Arquivo Txt Leitura
 	 *
 	 *
-	 * @author Rômulo Aurélio
+	 * @author Rï¿½mulo Aurï¿½lio
 	 * @date 06/10/2008
 	 *
 	 */
@@ -15079,10 +15098,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setParameterList("ids", ids).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -15090,11 +15109,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC00083] Gerar Dados para Leitura [FS0006]-Verificar imóveis processados
-	 * na competência
+	 * [UC00083] Gerar Dados para Leitura [FS0006]-Verificar imï¿½veis processados
+	 * na competï¿½ncia
 	 *
 	 * @date 13/10/2008
-	 * @author Rômulo Aurélio
+	 * @author Rï¿½mulo Aurï¿½lio
 	 *
 	 */
 
@@ -15131,10 +15150,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setInteger("anoMes", anoMes).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -15309,7 +15328,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Pesquisar quantidade de imóveis por arquivo texto leitura.
+	 * Pesquisar quantidade de imï¿½veis por arquivo texto leitura.
 	 *
 	 * @author Yara T. Souza
 	 * @date 18/12/2008
@@ -15419,10 +15438,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"idTipoLigacao", Hibernate.INTEGER).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -15528,7 +15547,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 *
 	 * [UC0889] - Alterar datas das leituras
 	 *
-	 * Pesquisamos todos os dados necessários para a alteração das datas
+	 * Pesquisamos todos os dados necessï¿½rios para a alteraï¿½ï¿½o das datas
 	 *
 	 * @author bruno, Mariana Victor
 	 * @date 26/02/2009, 24/02/2011
@@ -15564,10 +15583,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					idGrupoFaturamento).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -15666,7 +15685,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 *
 	 *
-	 * @author Rômulo Aurélio Data: 28/04/2009
+	 * @author Rï¿½mulo Aurï¿½lio Data: 28/04/2009
 	 * @return Description of the Return Value
 	 * @exception ErroRepositorioException
 	 *                Description of the Exception
@@ -15709,20 +15728,20 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		// return retorno;
 		return retorno;
 	}
 
 	/**
 	 *
-	 * @author Rômulo Aurélio Data: 28/04/2009
+	 * @author Rï¿½mulo Aurï¿½lio Data: 28/04/2009
 	 * @return Description of the Return Value
 	 * @exception ErroRepositorioException
 	 *                Description of the Exception
@@ -15760,20 +15779,20 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					10 * numeroPagina).setMaxResults(10).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		// return retorno;
 		return hidrometros;
 	}
 
 	/**
 	 *
-	 * @author Rômulo Aurélio Data: 28/04/2009
+	 * @author Rï¿½mulo Aurï¿½lio Data: 28/04/2009
 	 * @return Description of the Return Value
 	 * @exception ErroRepositorioException
 	 *                Description of the Exception
@@ -15809,13 +15828,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			hidrometros = session.createQuery(consulta).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		// return retorno;
 		return hidrometros;
 	}
@@ -16099,10 +16118,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Método que retorna os consumos de ligacao da agua ou esgoto (tipo
-	 * passado) de um imovel em um determinado período do faturamento.
+	 * Mï¿½todo que retorna os consumos de ligacao da agua ou esgoto (tipo
+	 * passado) de um imovel em um determinado perï¿½odo do faturamento.
 	 *
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 27/07/2009
 	 *
 	 * @param idImovel
@@ -16136,17 +16155,18 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					+ idImovel
 					+ " 	and ligacaoTipo.id = "
 					+ idLigacaoTipo
-					+ " 	and consumoHistorico.referenciaFaturamento between :anoMesInicial and :anoMesFinal ";
+					+ " 	and consumoHistorico.referenciaFaturamento between :anoMesInicial and :anoMesFinal "
+					+ " order by consumoHistorico.referenciaFaturamento desc";
 
 			retorno = (Collection<Object[]>) session.createQuery(consulta)
 					.setInteger("anoMesInicial", anoMesInicial).setInteger(
 							"anoMesFinal", anoMesFinal).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -16156,7 +16176,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Método que retorna os tipos de consumos de um determinado consumo
+	 * Mï¿½todo que retorna os tipos de consumos de um determinado consumo
 	 * historico
 	 *
 	 * @author Tiago Moreno
@@ -16194,10 +16214,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"anoMes", anoMes).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -16206,10 +16226,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0898] Atualizar Autos de Infração com prazo de Recurso Vencido
+	 * [UC0898] Atualizar Autos de Infraï¿½ï¿½o com prazo de Recurso Vencido
 	 *
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 11/05/2009
 	 *
 	 * @param idOS
@@ -16248,7 +16268,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 01/07/2009
 	 *
 	 * @param imovel
@@ -16288,10 +16308,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -16372,16 +16392,16 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					+ "left join tipoClieResp.esferaPoder esferaPoderClieResp "
 					+ "left join im.imovelCondominio imoCondominio "
 
-					// SELEÇÃO POR ROTA ALTERNATIVA
+					// SELEï¿½ï¿½O POR ROTA ALTERNATIVA
 					+ "WHERE rotaAlternativa.id = :rota AND im.indicadorExclusao <> 1 "
 
-					// VERIFICANDO SE O IMÓVEL ESTÁ DISPONÍVEL PARA GERAÇÃO DE
+					// VERIFICANDO SE O IMï¿½VEL ESTï¿½ DISPONï¿½VEL PARA GERAï¿½ï¿½O DE
 					// CONSUMO
 					+ "AND ((im.ligacaoAguaSituacao.indicadorFaturamentoSituacao = :faturamentoAgua OR "
 					+ "im.ligacaoEsgotoSituacao.indicadorFaturamentoSituacao = :faturamentoEsgoto) "
 
-					// VERIFICA SE O IMÓVEL POSSUI HIDROMETRO NA LIGAÇÃO DE AGUA
-					// OU DE POÇO
+					// VERIFICA SE O IMï¿½VEL POSSUI HIDROMETRO NA LIGAï¿½ï¿½O DE AGUA
+					// OU DE POï¿½O
 					+ "OR  (li.hidrometroInstalacaoHistorico <> null OR "
 					+ "im.hidrometroInstalacaoHistorico <> null)) ";
 
@@ -16394,10 +16414,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					LigacaoEsgotoSituacao.FATURAMENTO_ATIVO).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -16405,8 +16425,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Método que retorna os imoveis condominiais e esteja com ligados ou
-	 * cortados a agua e ou ligados com esgoto que possuam hidrometro no poço
+	 * Mï¿½todo que retorna os imoveis condominiais e esteja com ligados ou
+	 * cortados a agua e ou ligados com esgoto que possuam hidrometro no poï¿½o
 	 * das rotas passadas
 	 *
 	 * [UC0103] Efetuar Rateio de Consumo
@@ -16436,16 +16456,16 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					+ "inner join imovel.rotaAlternativa as rotaAlternativa "
 					+ "inner join rotaAlternativa.faturamentoGrupo as ftgr "
 
-					// VERIFICANDO SE É UM IMÓVEL CONDOMÍNIO
+					// VERIFICANDO SE ï¿½ UM IMï¿½VEL CONDOMï¿½NIO
 					+ "WHERE imovel.indicadorImovelCondominio = "
 					+ ConstantesSistema.SIM
 
-					// VERIFICANDO SE O IMÓVEL ESTÁ DISPONÍVEL PARA EFETUAR
+					// VERIFICANDO SE O IMï¿½VEL ESTï¿½ DISPONï¿½VEL PARA EFETUAR
 					// RATEIO
 					+ " AND (imovel.ligacaoAguaSituacao.indicadorFaturamentoSituacao = :faturamentoAgua OR "
 					+ "imovel.ligacaoEsgotoSituacao.indicadorFaturamentoSituacao = :faturamentoEsgoto)"
 
-					// VERIFICANDO SE O IMÓVEL PERTENCE A ROTA
+					// VERIFICANDO SE O IMï¿½VEL PERTENCE A ROTA
 					+ " AND rotaAlternativa.id = :idRota"
 					+ " AND imovel.indicadorExclusao <> 1 "
 					+ " AND NOT EXISTS "
@@ -16460,10 +16480,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"faturamentoEsgoto", ConstantesSistema.SIM.shortValue())
 					.setInteger("idRota", idRota).list();
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -16596,7 +16616,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					+ "AND imovelPerfil.indicadorGerarDadosLeitura = 1 ";
 
 			/*
-			 * Alteração para ordenar igual ao rol da CAERN Thiago Nascimento
+			 * Alteraï¿½ï¿½o para ordenar igual ao rol da CAERN Thiago Nascimento
 			 * 16/04/2008
 			 */
 			if (empresa.toUpperCase().equals("COMPESA")) {
@@ -16611,10 +16631,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					rota.getId()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -16624,7 +16644,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0745] - Gerar Arquivo Texto para Faturamento
 	 *
-	 * [SB0006] - Obter dados dos tipos de medição
+	 * [SB0006] - Obter dados dos tipos de mediï¿½ï¿½o
 	 *
 	 * @author Raphael Rossiter
 	 * @date 30/04/2008
@@ -16687,10 +16707,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -16700,7 +16720,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0038] Inserir Rota [UC0039]Manter Rota
 	 *
-	 * @author Rafael Pinto, Sávio Luiz
+	 * @author Rafael Pinto, Sï¿½vio Luiz
 	 * @date 31/08/2009, 20/08/2013
 	 *
 	 * @param idRota
@@ -16730,10 +16750,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -16742,7 +16762,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0811] Requisições do Dispositivo Móvel da Conta Pré-faturada.
+	 * [UC0811] Requisiï¿½ï¿½es do Dispositivo Mï¿½vel da Conta Prï¿½-faturada.
 	 *
 	 * SB0001 - Baixar Arquivo Texto para o Leiturista
 	 *
@@ -16809,7 +16829,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
     }
 
 	/**
-	 * [UC0811] Requisições do Dispositivo Móvel da Conta Pré-faturada.
+	 * [UC0811] Requisiï¿½ï¿½es do Dispositivo Mï¿½vel da Conta Prï¿½-faturada.
 	 *
 	 * SB0001 - Baixar Arquivo Texto para o Leiturista
 	 *
@@ -16874,11 +16894,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
         return retorno;
     }
 	/**
-	 * [UC0811] Requisições do Dispositivo Móvel da Conta Pré-faturada.
+	 * [UC0811] Requisiï¿½ï¿½es do Dispositivo Mï¿½vel da Conta Prï¿½-faturada.
 	 *
 	 * SB0001 - Baixar Arquivo Texto para o Leiturista
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 29/09/2010
 	 *
 	 * @param imei
@@ -16936,7 +16956,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0002] Gerar Relação(ROL) em TXT
+	 * [SB0002] Gerar Relaï¿½ï¿½o(ROL) em TXT
 	 *
 	 * @author Raphael Rossiter
 	 * @date 17/09/2009
@@ -16964,12 +16984,12 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			qtdRegistrosDeletados = stmt.executeUpdate(delete);
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -16979,9 +16999,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC00083] Gerar Dados para Leitura
 	 *
-	 * [SB0006] Gerar Relação(ROL) em TXT - COSANPA
+	 * [SB0006] Gerar Relaï¿½ï¿½o(ROL) em TXT - COSANPA
 	 *
-	 * @author Rômulo Aurelio
+	 * @author Rï¿½mulo Aurelio
 	 * @date 02/07/2008
 	 *
 	 * @param idRota
@@ -17030,7 +17050,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Pesquisa as rotas que possuem validos para geração do relatorio de
+	 * Pesquisa as rotas que possuem validos para geraï¿½ï¿½o do relatorio de
 	 * acompanhamento de leiturista.
 	 *
 	 * @author Hugo Amorim
@@ -17750,7 +17770,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				sql.append("		IMOVEL.IMOV_NNSEQUENCIALROTA \n");
 				break;
 				
-			//Inscrição	
+			//Inscriï¿½ï¿½o	
 			case 2:	
 				sql.append("		UN.UNEG_ID, \n");
 				sql.append("		LOC.LOCA_ID,  \n");
@@ -17929,7 +17949,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 * Metodo seta os parametros numa determinada consulta e retorna um objeto
-	 * SQLQuery com o sql já com parametros.
+	 * SQLQuery com o sql jï¿½ com parametros.
 	 *
 	 * @since 16/09/2009
 	 * @author Marlon Patrick
@@ -17970,9 +17990,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0082] - Registrar Leituras e Anormalidades
 	 *
-	 * [SB0001] - Gerar Relatório Resumo das Leituras e Anormalidades
+	 * [SB0001] - Gerar Relatï¿½rio Resumo das Leituras e Anormalidades
 	 *
-	 * Pesquisa os dados do relatório do comparativo de leituras e anormalidades
+	 * Pesquisa os dados do relatï¿½rio do comparativo de leituras e anormalidades
 	 *
 	 * @author Arthur Carvalho - Hugo Leonardo      - Magno Gouveia
 	 * @date 13/11/2009 - 18/03/2010				- 21/06/2011
@@ -18070,12 +18090,12 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			List<Integer> anoMesOcorrencias = new ArrayList<Integer>();
 			if(colecaoAnormalidadesLeituras != null){
-				// caso a opção -1 tenha sido selecionada, remove
+				// caso a opï¿½ï¿½o -1 tenha sido selecionada, remove
 				if(colecaoAnormalidadesLeituras.contains(ConstantesSistema.NUMERO_NAO_INFORMADO)){
 					colecaoAnormalidadesLeituras.remove(ConstantesSistema.NUMERO_NAO_INFORMADO);
 				}
 
-				// caso não tenha sido setado o número de ocorrências consecutivas, ou esta seja menor ou igual a 0
+				// caso nï¿½o tenha sido setado o nï¿½mero de ocorrï¿½ncias consecutivas, ou esta seja menor ou igual a 0
 				if(numOcorrenciasConsecutivas == null || numOcorrenciasConsecutivas <= 0){
 					numOcorrenciasConsecutivas = 1;
 				}
@@ -18234,11 +18254,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					rota.getId()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			e.printStackTrace();
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -18248,11 +18268,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 *
 	 * Verifica se houve todos os processamentos do um determinado grupo e
-	 * ano-Mês de Referencia e inserir no cronograma de atividades.
+	 * ano-Mï¿½s de Referencia e inserir no cronograma de atividades.
 	 *
 	 * [UC0840] - Atualizar Faturamento do Movimento Celular
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 01/12/2009
 	 *
 	 * @param grupo
@@ -18264,7 +18284,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			throws ErroRepositorioException {
 		Session session = HibernateUtil.getSession();
 		try {
-			// Verifica ja foi atualizado a data de realização do gronograma
+			// Verifica ja foi atualizado a data de realizaï¿½ï¿½o do gronograma
 			// para a atividade de Registrar
 			// Leituras e Anormalidades
 			StringBuffer hql = new StringBuffer(
@@ -18330,10 +18350,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				}
 			}
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -18434,10 +18454,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					idConsumoAnormalidade).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -18445,7 +18465,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Método que retorna os dados necessários para efetuar o rateio de um
+	 * Mï¿½todo que retorna os dados necessï¿½rios para efetuar o rateio de um
 	 * imovel condominio e seus imoveis vinculados
 	 *
 	 * [UC0103] Efetuar Rateio de Consumo
@@ -18455,7 +18475,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 *
 	 * @param idImovel
 	 *            id do imovel condominio
-	 * @return Imovel Encapsulado dentro da colação os dados retornados
+	 * @return Imovel Encapsulado dentro da colaï¿½ï¿½o os dados retornados
 	 */
 	public Collection pesquisarImovelCondominio(Integer idImovel)
 			throws ErroRepositorioException {
@@ -18472,16 +18492,16 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					+ "imovel.ligacaoAguaSituacao.indicadorFaturamentoSituacao, "// 3
 					+ "imovel.ligacaoEsgotoSituacao.indicadorFaturamentoSituacao "// 4
 					+ "from gcom.cadastro.imovel.Imovel imovel "
-					// VERIFICANDO SE É UM IMÓVEL CONDOMÍNIO
+					// VERIFICANDO SE ï¿½ UM IMï¿½VEL CONDOMï¿½NIO
 					+ "WHERE imovel.id = :id";
 
 			retorno = session.createQuery(consulta).setInteger("id", idImovel)
 					.list();
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -18489,10 +18509,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Buscar Rota a partir da Matrícula de um Imóvel e anoMesFaturamentoGrupo.
+	 * Buscar Rota a partir da Matrï¿½cula de um Imï¿½vel e anoMesFaturamentoGrupo.
 	 *
 	 *
-	 * @author Rômulo Aurélio
+	 * @author Rï¿½mulo Aurï¿½lio
 	 * @date 03/02/2010
 	 *
 	 * @param dados
@@ -18525,13 +18545,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 		} catch (HibernateException e) {
 
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 
 		} finally {
 
-			// fecha a sessão
+			// fecha a sessï¿½o
 
 			HibernateUtil.closeSession(session);
 
@@ -18569,10 +18589,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -18580,7 +18600,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 	
 	/**
-	 * Exclui Arquivos que estão na situação passada como parametro para serem
+	 * Exclui Arquivos que estï¿½o na situaï¿½ï¿½o passada como parametro para serem
 	 * gerando novamente.
 	 *
 	 * @author Hugo Amorim
@@ -18595,13 +18615,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			Integer anoMesReferencia, Integer idRota, Integer idGrupoFaturamento)
 			throws ErroRepositorioException {
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 
 		// Retorno Consulta
 		ArquivoTextoRoteiroEmpresa arquivoTextoRoteiroEmpresa = null;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -18619,10 +18639,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -18630,7 +18650,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Exclui Arquivos que estão na situação passada como parametro para serem
+	 * Exclui Arquivos que estï¿½o na situaï¿½ï¿½o passada como parametro para serem
 	 * gerando novamente.
 	 *
 	 * @author Hugo Amorim
@@ -18645,13 +18665,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			Integer anoMesReferencia, Integer idRoteiroEmpresa,
 			Integer idGrupoFaturamento) throws ErroRepositorioException {
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 
 		// Retorno Consulta
 		ArquivoTextoRoteiroEmpresa arquivoTextoRoteiroEmpresa = null;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -18669,10 +18689,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -18680,7 +18700,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Exclui Arquivos que estão na situação passada como parametro para serem
+	 * Exclui Arquivos que estï¿½o na situaï¿½ï¿½o passada como parametro para serem
 	 * gerando novamente.
 	 *
 	 * @author Hugo Amorim
@@ -18695,13 +18715,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			Integer anoMesReferencia, Integer idGrupoFaturamento)
 			throws ErroRepositorioException {
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 
 		// Retorno Consulta
 		ArquivoTextoRoteiroEmpresa arquivoTextoRoteiroEmpresa = null;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -18717,10 +18737,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -18738,13 +18758,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	public String pesquisarAnormalidadesImovel(Integer idImovel,
 			String indicadorAguaEsgoto) throws ErroRepositorioException {
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 
 		// Retorno Consulta
 		String retorno = null;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -18769,10 +18789,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -18780,7 +18800,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Método que retorna as datas de leituas anteriores e atuais.
+	 * Mï¿½todo que retorna as datas de leituas anteriores e atuais.
 	 *
 	 * @author Tiago Moreno
 	 * @date 25/02/2010
@@ -18811,10 +18831,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -18835,13 +18855,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			Integer anoMesReferencia, Integer idGrupoFaturamento)
 			throws ErroRepositorioException {
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 
 		// Retorno Consulta
 		Collection<Rota> ColecaoRota = null;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -18876,10 +18896,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -18919,10 +18939,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"idImovel", idImovel).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -18933,8 +18953,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 * [UC0820] Atualizar Faturamento do Movimento Celular
      * [SB002] Incluir Medicao
      *
-     * Método criado para atualizar apenas os campos necessários para
-     * medição histórico.
+     * Mï¿½todo criado para atualizar apenas os campos necessï¿½rios para
+     * mediï¿½ï¿½o histï¿½rico.
      *
      * @author Bruno Barros
      * @date 31/03/2010
@@ -19041,7 +19061,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC1000] Informar Medidor de Energia por Rota.
 	 *
-	 * Obtém a quantidade de imoveis de acordo com o filtro.
+	 * Obtï¿½m a quantidade de imoveis de acordo com o filtro.
 	 *
 	 * @author Hugo Leonardo
 	 * @date 09/03/2010
@@ -19122,10 +19142,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			retorno = (Integer) query.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -19246,7 +19266,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
     /**
-	 * [UC0997] Gerar Resumo de Ligações por Capacidade de Hidrômetro.
+	 * [UC0997] Gerar Resumo de Ligaï¿½ï¿½es por Capacidade de Hidrï¿½metro.
 	 *
 	 * @author Hugo Leonardo
 	 * @date 30/03/2010
@@ -19351,7 +19371,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			consulta +=	" ) A ";
 
-			// AGRUPAMENTO POR TIPO DE TOTALIZAÇÃO
+			// AGRUPAMENTO POR TIPO DE TOTALIZAï¿½ï¿½O
 			  String orderBy = " order by";
 			  String groupBy = " group by";
 
@@ -19436,7 +19456,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	 /**
-	 * [UC0997] Gerar Resumo de Ligações por Capacidade de Hidrômetro.
+	 * [UC0997] Gerar Resumo de Ligaï¿½ï¿½es por Capacidade de Hidrï¿½metro.
 	 *
 	 * @author Hugo Leonardo
 	 * @date 30/03/2010
@@ -19507,20 +19527,20 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 *
 	 * [UC0091] Alterar Dados para Faturamento
 	 *
-	 * 	[FS0015]  Verificar Imóvel Impressão Simultânea
+	 * 	[FS0015]  Verificar Imï¿½vel Impressï¿½o Simultï¿½nea
 	 *
 	 * @author Hugo Amorim
 	 * @date 08/04/2010
 	 */
 	public boolean verificarExistenciaArquivoDeImpressao(Integer idImovel,
 			Integer tipoMedicao)throws ErroRepositorioException{
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 
 		// Retorno Consulta
 		boolean retorno = false;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -19550,10 +19570,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -19561,8 +19581,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Retorna uma coleção com os dados das medicoes e consumos da ligação de Esgoto do imóvel
-	 * para impressão do relatorio na funionalidade Consultar Imóvel
+	 * Retorna uma coleï¿½ï¿½o com os dados das medicoes e consumos da ligaï¿½ï¿½o de Esgoto do imï¿½vel
+	 * para impressï¿½o do relatorio na funionalidade Consultar Imï¿½vel
 	 *
 	 * @date 07/05/2010
 	 */
@@ -19618,10 +19638,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				.list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -19637,11 +19657,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	public Collection pesquisarMedicaoTipo(Integer idImovel, Integer anoMesReferencia)
 		throws ErroRepositorioException{
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 		Collection retorno = null;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 	try {
@@ -19660,10 +19680,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 		// Erro no hibernate
 	} catch (HibernateException e) {
-		// Levanta a exceção para a próxima camada
+		// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 		throw new ErroRepositorioException(e, "Erro no Hibernate");
 	} finally {
-		// Fecha a sessão com o hibernate
+		// Fecha a sessï¿½o com o hibernate
 		HibernateUtil.closeSession(session);
 	}
 
@@ -19672,7 +19692,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 
 	/**
-	 * [UC1022] Relatório de Notificação de Débitos para Impressão Simultânea
+	 * [UC1022] Relatï¿½rio de Notificaï¿½ï¿½o de Dï¿½bitos para Impressï¿½o Simultï¿½nea
 	 *
 	 * @author Daniel Alves
 	 * @date 19/05/2010
@@ -19680,12 +19700,12 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	public Collection pesquisarNotificacaoDebitosImpressaoSimultanea(
 			RelatorioNotificacaoDebitosImpressaoSimultaneaHelper filtro
 			)throws ErroRepositorioException{
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 
 		Collection retorno = null;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -19748,10 +19768,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -19765,7 +19785,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 */
 	public HidrometroInstalacaoHistorico verificaExistenciaDeHidrometroInstalado(Integer idImovel, MedicaoTipo medicaoTipo) throws ErroRepositorioException{
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 		HidrometroInstalacaoHistorico hidrometroInstalacaoHistorico = null;
 		String condicao = null;
@@ -19774,10 +19794,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 		Map parameters = new HashMap();
 
 		Collection retorno = null;
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
-		//Caso seja ligação de água
+		//Caso seja ligaï¿½ï¿½o de ï¿½gua
 		if (medicaoTipo.getId().intValue() == MedicaoTipo.LIGACAO_AGUA
 				.intValue()) {
 			condicao = "where hidInsHis.ligacaoAgua = :idImovel";
@@ -19825,10 +19845,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -19845,11 +19865,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	public HidrometroCapacidade pesquisarCapacidadeHidrometro( String numeroHidrometro )
 		throws ErroRepositorioException{
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 		HidrometroCapacidade retorno = null;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 
@@ -19866,10 +19886,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -19877,7 +19897,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-     * UC1027 - Exibir Consultar Arquivo Texto Leitura Divisão.
+     * UC1027 - Exibir Consultar Arquivo Texto Leitura Divisï¿½o.
      *
      * @author Hugo Leonardo
      * @created 04/06/2010
@@ -19911,7 +19931,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * UC1027 - Exibir Consultar Arquivo Texto Leitura Divisão.
+	 * UC1027 - Exibir Consultar Arquivo Texto Leitura Divisï¿½o.
      *
      * @author Hugo Leonardo
      * @created 04/06/2010
@@ -19984,10 +20004,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					imovel.getId()).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -20024,10 +20044,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -20035,7 +20055,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Exclue todos os registros da tabela de atualização
+	 * Exclue todos os registros da tabela de atualizaï¿½ï¿½o
      * de sequencial de rota
      *
 	 * @author bruno
@@ -20061,17 +20081,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
                     .executeUpdate();
 
         } catch (HibernateException e) {
-            // levanta a exceção para a próxima camada
+            // levanta a exceï¿½ï¿½o para a prï¿½xima camada
             throw new ErroRepositorioException(e, "Erro no Hibernate");
         } finally {
-            // fecha a sessão
+            // fecha a sessï¿½o
             HibernateUtil.closeSession(session);
         }
     }
 
     /**
      *
-     * Seleciona todos os imóveis de uma determinada
+     * Seleciona todos os imï¿½veis de uma determinada
      * rota / ano mes.
      *
      * @author Bruno Barros
@@ -20100,10 +20120,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
                         setInteger("idRota",  idRota).
                         setInteger("anoMesReferenciaGrupoFaturamento",  anoMesReferenciaGrupoFaturamento ).list();
         } catch (HibernateException e) {
-            // levanta a exceção para a próxima camada
+            // levanta a exceï¿½ï¿½o para a prï¿½xima camada
             throw new ErroRepositorioException(e, "Erro no Hibernate");
         } finally {
-            // fecha a sessão
+            // fecha a sessï¿½o
             HibernateUtil.closeSession(session);
         }
 
@@ -20112,7 +20132,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
     /**
 	 *
-	 * Obter rota do imóvel através do código da rota
+	 * Obter rota do imï¿½vel atravï¿½s do cï¿½digo da rota
 	 * do sequencial e da localidade .
 	 *
 	 * @author Breno Santos
@@ -20147,10 +20167,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setInteger("codRota", codRota).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -20158,7 +20178,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
     /**
-	 * Obter rota do imóvel através do intervalor de localidade,setor e numero da quadra .
+	 * Obter rota do imï¿½vel atravï¿½s do intervalor de localidade,setor e numero da quadra .
 	 *
 	 * @author Rafael Pinto
 	 * @date 16/05/2011
@@ -20204,10 +20224,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				.setInteger("numeroQuadraFinal", numeroQuadraFinal).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -20216,7 +20236,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 * Remover todos os Itens de Servico do Contrato
-	 * [UC1055] - Informar Valor de Item de Serviço Por Contrato
+	 * [UC1055] - Informar Valor de Item de Serviï¿½o Por Contrato
 	 *
 	 * @author Hugo Leonardo
 	 * @date 03/08/2010
@@ -20238,16 +20258,16 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.executeUpdate();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 	}
 
 	/**
-	 * [UC1054] - Gerar Relatório Boletim de Medição
+	 * [UC1054] - Gerar Relatï¿½rio Boletim de Mediï¿½ï¿½o
 	 *
 	 * @author Hugo Leonardo
 	 * @date 05/08/2010
@@ -20395,13 +20415,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				consulta += " mrem.empr_id = " + helper.getEmpresa();
 			}
 
-			// Número Contrato
+			// Nï¿½mero Contrato
 			if(helper.getNumeroContrato() != null && !helper.getNumeroContrato().equals("")){
 
 				consulta += " and cese.cese_id = " + helper.getNumeroContrato();
 			}
 
-			// Gerência
+			// Gerï¿½ncia
 			if(helper.getGerenciaRegional() != null && !helper.getGerenciaRegional().equals("")){
 
 				consulta += " and mrem.greg_id = " + helper.getGerenciaRegional();
@@ -20456,7 +20476,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC1054] - Gerar Relatório Boletim de Medição
+	 * [UC1054] - Gerar Relatï¿½rio Boletim de Mediï¿½ï¿½o
 	 *
 	 * @author Hugo Leonardo
 	 * @date 06/08/2010
@@ -20480,14 +20500,14 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			empresas = session.createQuery(consulta).setDate("data", new Date()).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return empresas;
 	}
 
@@ -20609,10 +20629,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				.list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -20622,15 +20642,15 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Verifica se uma rota em questão está com
-	 * os arquivos de impressão simultanea divididos
+	 * Verifica se uma rota em questï¿½o estï¿½ com
+	 * os arquivos de impressï¿½o simultanea divididos
 	 *
 	 * @autor Bruno Barros.
 	 * @date 26/08/2010
 	 *
 	 * @param idRota - Id da rota a ser pesquisada
 	 *
-	 * @return boolean - A rota está dividida
+	 * @return boolean - A rota estï¿½ dividida
 	 */
 	public boolean isRotaDividida( Integer idRota, Integer anoMesFaturamento )
 		throws ErroRepositorioException{
@@ -20657,10 +20677,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -20669,21 +20689,21 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Verifica de imovel é medido ou não-medido
+	 * Verifica de imovel ï¿½ medido ou nï¿½o-medido
 	 *
 	 * 	retorna true se medido
-	 * 			false se não-medido
+	 * 			false se nï¿½o-medido
 	 *
 	 * @author Hugo Amorim
 	 * @date 26/08/2010
 	 */
 	public boolean verificarSituacaoMedicao(Integer idImovel)throws ErroRepositorioException{
 
-			// Cria uma sessão com o hibernate
+			// Cria uma sessï¿½o com o hibernate
 			Session session = HibernateUtil.getSession();
 			boolean retorno = false;
 
-			// Cria a variável que vai conter o hql
+			// Cria a variï¿½vel que vai conter o hql
 			String consulta;
 
 		try {
@@ -20715,10 +20735,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -20726,28 +20746,28 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Verificar se a leitura de para impressão
-	 * simultanea de um determinado imóvel/ano mes chegou
+	 * Verificar se a leitura de para impressï¿½o
+	 * simultanea de um determinado imï¿½vel/ano mes chegou
 	 *
 	 *
 	 * 	retorna
 	 * 		true Se chegou
-	 * 		false Se não chegou
+	 * 		false Se nï¿½o chegou
 	 *
 	 * @author Bruno Barros
 	 * @date 31/08/2010
 	 *
-	 * @param String matricula - Matricula do imóvel a ser pesquisado
+	 * @param String matricula - Matricula do imï¿½vel a ser pesquisado
 	 * @param Integer anoMesFaruramento - Ano mes do faturamento a ser pesquisado
 	 */
 	public boolean verificarExistenciaLeituraImpressaoSimultanea(String matricula,
 			Integer anoMesFaturamento) throws ErroRepositorioException {
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 		Integer retorno = null;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -20767,10 +20787,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -20779,9 +20799,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Verifica quais os imóveis para uma determinada
+	 * Verifica quais os imï¿½veis para uma determinada
 	 * cujo as releituras foram solicitadas, e que
-	 * ainda não foram enviadas, para um determinado
+	 * ainda nï¿½o foram enviadas, para um determinado
 	 * ano mes de referencia
 	 *
 	 * @author Bruno Barros
@@ -20790,18 +20810,18 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 * @param idRota - Id da rota a ser pesquisada
 	 * @param anoMesReferencia - Ano mes de referencia
 	 *
-	 * @return Collection<ReleituraMobile> - Coleção com os registros
+	 * @return Collection<ReleituraMobile> - Coleï¿½ï¿½o com os registros
 	 *
 	 * @throws ErroRepositorioException
 	 */
 	public Collection<ReleituraMobile> pesquisarImoveisReleituraMobileSolicitada( Integer idRota, Integer anoMesReferencia )
 		throws ErroRepositorioException{
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 		Collection<ReleituraMobile> retorno = null;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -20823,10 +20843,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -20865,10 +20885,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -20877,7 +20897,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Pesquisa os imóveis para a tela de Filtrar Imoveis para Releitura
+	 * Pesquisa os imï¿½veis para a tela de Filtrar Imoveis para Releitura
 	 *
 	 * @author Bruno Barros
 	 * @date 14/09/2010
@@ -20895,11 +20915,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			String idRota,
 			String idQuadra,
 			String idEmpresa) throws ErroRepositorioException{
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 		Collection<ReleituraMobile> retorno = null;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -20975,10 +20995,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -21015,10 +21035,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -21047,7 +21067,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				"  case when ( la.hidi_id is not null or imo.hidi_id is not null ) then "+
 				"   'SIM' " +
 				"  else " +
-				"    'NÃO'" +
+				"    'Nï¿½O'" +
 				"  end as medido, ";
 
 
@@ -21137,10 +21157,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 							.setInteger("anoMesReferencia",	anoMesReferencia).list();
 			}
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -21159,7 +21179,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 * @param anoMesReferencia
 	 * @param indicadorContaImpressa
 	 * @param indicadorMedido
-	 * @return Colecao com as informações necessarias para o prenchimento da tela.
+	 * @return Colecao com as informaï¿½ï¿½es necessarias para o prenchimento da tela.
 	 *
 	 */
 	public Collection<Object[]> pesquisarImoveisMonitorarLeiturasTransmitidas(
@@ -21190,18 +21210,18 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				"		  CASE WHEN ( cnta.CNTA_ID is not null ) THEN " +
 				"             CASE " +
 				"				WHEN ( cnta.cnta_vlagua + cnta.cnta_vlesgoto + cnta.cnta_vldebitos + cnta.cnta_vlimpostos - cnta.cnta_vlcreditos ) >= sp.parm_vlminemitirboleto THEN  " +
-				"					'Valor é maior que R$' || to_char( sp.parm_vlminemitirboleto, '9999' ) " +
+				"					'Valor ï¿½ maior que R$' || to_char( sp.parm_vlminemitirboleto, '9999' ) " +
 				"				WHEN ( ( sp.parm_nmabreviadoempresa = 'COMPESA' and ( imo.icte_id is null or imo.icte_id in ( 1, 3 ) ) ) or " +
 				"		       				 ( sp.parm_nmabreviadoempresa = 'CAERN' and ( imo.icte_id is null or imo.icte_id = 9 ) ) ) THEN " +
-				"					'Endereço alternativo' " +
+				"					'Endereï¿½o alternativo' " +
 				"				ELSE " +
 				"					'Normal' " +
 				"			END " +
 				"         ELSE "+
 		        "          CASE WHEN ( cnta_histo.cnhi_vlagua + cnta_histo.cnhi_vlesgoto + cnta_histo.cnhi_vldebitos + cnta_histo.cnhi_vlimpostos - cnta_histo.cnhi_vlcreditos ) >= sp.parm_vlminemitirboleto THEN "+
-		        "            'Valor é maior que R$' || to_char( sp.parm_vlminemitirboleto, '9999' ) "+
+		        "            'Valor ï¿½ maior que R$' || to_char( sp.parm_vlminemitirboleto, '9999' ) "+
 		        "          WHEN ( ( sp.parm_nmabreviadoempresa = 'COMPESA' and ( imo.icte_id is null or imo.icte_id in ( 1, 3 ) ) ) or ( sp.parm_nmabreviadoempresa = 'CAERN' and ( imo.icte_id is null or imo.icte_id = 9 ) ) ) THEN "+
-		        "            'Endereço alternativo' "+
+		        "            'Endereï¿½o alternativo' "+
 		        "          ELSE "+
 		        "          'Normal' "+
 		        "          END "+
@@ -21370,10 +21390,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				( Collection<Object[]>)query.list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -21383,7 +21403,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC0933] Alterar Leiturista do Arquivo Texto para Leitura
 	 *
-	 * @author Tiago Nascimento, Rômulo Aurélio
+	 * @author Tiago Nascimento, Rï¿½mulo Aurï¿½lio
 	 * @Data ??/??/????,  27/10/2010
 	 *
 	 */
@@ -21416,16 +21436,16 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * Verifica se uma rota em questão está com
-	 * os arquivos de impressão simultanea divididos com a
-	 * situação diferente da situação enviada como parâmetro
+	 * Verifica se uma rota em questï¿½o estï¿½ com
+	 * os arquivos de impressï¿½o simultanea divididos com a
+	 * situaï¿½ï¿½o diferente da situaï¿½ï¿½o enviada como parï¿½metro
 	 *
-	 * @autor Sávio Luiz.
+	 * @autor Sï¿½vio Luiz.
 	 * @date 30/09/2010
 	 *
 	 * @param idRota - Id da rota a ser pesquisada
 	 *
-	 * @return boolean - A rota está dividida
+	 * @return boolean - A rota estï¿½ dividida
 	 */
 	public boolean verificarExistenciaArquivosDivididosSituacaoDiferente( Integer idRota, Integer anoMesFaturamento, Integer[] idsSituacaoTransmissao )
 		throws ErroRepositorioException{
@@ -21453,10 +21473,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -21541,10 +21561,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -21617,10 +21637,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				retorno = (Integer) query.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -21699,10 +21719,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -21742,10 +21762,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -21775,10 +21795,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -21787,12 +21807,12 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * UC1027 - Exibir Consultar Arquivo Texto Leitura Divisão.
+	 * UC1027 - Exibir Consultar Arquivo Texto Leitura Divisï¿½o.
 	 *
 	 * Avalia se existe algum arquivo dividido liberado para o leiturista do arquivo
 	 * passado no parametro.
 	 *
-	 * @autor Sávio Luiz
+	 * @autor Sï¿½vio Luiz
 	 * @date 04/10/2010
 	 *
 	 * @param idArquivo
@@ -21820,10 +21840,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -21833,12 +21853,12 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * UC1027 - Exibir Consultar Arquivo Texto Leitura Divisão.
+	 * UC1027 - Exibir Consultar Arquivo Texto Leitura Divisï¿½o.
 	 *
 	 * Avalia se existe algum arquivo dividido liberado para o leiturista do arquivo
 	 * passado no parametro.
 	 *
-	 * @autor Sávio Luiz
+	 * @autor Sï¿½vio Luiz
 	 * @date 04/10/2010
 	 *
 	 * @param idArquivo
@@ -21864,10 +21884,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -21877,11 +21897,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	/**
 	 *
-	 * UC1027 - Exibir Consultar Arquivo Texto Leitura Divisão.
+	 * UC1027 - Exibir Consultar Arquivo Texto Leitura Divisï¿½o.
 	 *
-	 * Pesquisa o leiturista do arquivo que será liberado.
+	 * Pesquisa o leiturista do arquivo que serï¿½ liberado.
 	 *
-	 * @autor Sávio Luiz
+	 * @autor Sï¿½vio Luiz
 	 * @date 04/10/2010
 	 *
 	 * @param idArquivo
@@ -21895,7 +21915,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			Session session = HibernateUtil.getSession();
 			try {
 				StringBuffer hql = null;
-				// caso o arquivo texto seja dividido, então consulta o leiturista pelo arquivo dividido
+				// caso o arquivo texto seja dividido, entï¿½o consulta o leiturista pelo arquivo dividido
 				if(arquivoDividido){
 					hql = new StringBuffer(
 						"select a2.leiturista.id from ArquivoTextoRoteiroEmpresaDivisao a2 where a2.id =");
@@ -21909,10 +21929,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 
 			} catch (HibernateException e) {
-				// levanta a exceção para a próxima camada
+				// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 				throw new ErroRepositorioException(e, "Erro no Hibernate");
 			} finally {
-				// fecha a sessão
+				// fecha a sessï¿½o
 				HibernateUtil.closeSession(session);
 			}
 
@@ -21925,20 +21945,20 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 *
 	 * [UC0091] Alterar Dados para Faturamento
 	 *
-	 * 	[FS0015]  Verificar Imóvel Impressão Simultânea
+	 * 	[FS0015]  Verificar Imï¿½vel Impressï¿½o Simultï¿½nea
 	 *
-	 * @author Rômulo Aurélio
+	 * @author Rï¿½mulo Aurï¿½lio
 	 * @date 08/11/2010
 	 */
 	public boolean verificarExistenciaArquivoDeImpressaoRotaAlternativa(Integer idImovel,
 			Integer tipoMedicao)throws ErroRepositorioException{
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 
 		// Retorno Consulta
 		boolean retorno = false;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -21967,10 +21987,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -21979,7 +21999,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 
 	/**
-	 * [UCXXXX] - Obter Volume Médio Água ou Esgoto
+	 * [UCXXXX] - Obter Volume Mï¿½dio ï¿½gua ou Esgoto
 	 *
 	 * @author Ivan Sergio
 	 * @data 13/12/2010
@@ -22021,10 +22041,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				.list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -22033,10 +22053,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	 /**
 	 *
-	 * Obter rota do imóvel através do código da rota
+	 * Obter rota do imï¿½vel atravï¿½s do cï¿½digo da rota
 	 * do sequencial e da localidade .
 	 *
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @date 13/08/2010
 	 *
 	 * @param codRota, sequencial, localidade
@@ -22071,10 +22091,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setInteger("codRota", codRota).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -22102,24 +22122,24 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 		try {
 
 			String sql =
-				"select \n" +
-				"  ch.imov_id, \n" +
-				"  imo.iper_id, \n" +
-				"  ch.csan_id, \n" +
-				"  imo.loca_id, \n" +
-				"  imo.stcm_id, \n" +
-				"  imo.qdra_id, \n" +
-				"  imo.IMOV_NNCOORDENADAY, \n" +
-				"  imo.IMOV_NNCOORDENADAX \n" +
-				"from \n" +
-				"  micromedicao.CONSUMO_HISTORICO ch \n" +
-				"  inner join micromedicao.CONSUMO_ANORM_ACAO caa on ( ch.CSAN_ID = caa.CSAN_ID and ( caa.STEP_IDMES1 is not null or caa.STEP_IDMES2 is not null or caa.STEP_IDMES3 is not null ) ) \n" +
-				"  inner join cadastro.imovel imo on ( imo.imov_id = ch.imov_id ) \n" +
-				"  inner join cadastro.quadra qua on ( qua.qdra_id = imo.qdra_id ) \n" +
-				"where \n" +
-				"  ch.CSHI_AMFATURAMENTO = " + anoMesFaturamento + " and \n " +
-				"  ch.lgti_id = " + LigacaoTipo.LIGACAO_AGUA + " and \n " +
-				"  ( qua.ROTA_ID = " + rota.getId() + " or imo.ROTA_IDALTERNATIVA = " + rota.getId() + " ) \n";
+				"select " +
+				"  ch.imov_id, " +
+				"  imo.iper_id, " +
+				"  ch.csan_id, " +
+				"  imo.loca_id, " +
+				"  imo.stcm_id, " +
+				"  imo.qdra_id, " +
+				"  imo.IMOV_NNCOORDENADAY, " +
+				"  imo.IMOV_NNCOORDENADAX " +
+				"from " +
+				"  micromedicao.CONSUMO_HISTORICO ch " +
+				"  inner join micromedicao.CONSUMO_ANORM_ACAO caa on ( ch.CSAN_ID = caa.CSAN_ID and ( caa.STEP_IDMES1 is not null or caa.STEP_IDMES2 is not null or caa.STEP_IDMES3 is not null ) ) " +
+				"  inner join cadastro.imovel imo on ( imo.imov_id = ch.imov_id ) " +
+				"  inner join cadastro.quadra qua on ( qua.qdra_id = imo.qdra_id ) " +
+				"where " +
+				"  ch.CSHI_AMFATURAMENTO = " + anoMesFaturamento + " and  " +
+				"  ch.lgti_id = " + LigacaoTipo.LIGACAO_AGUA + " and  " +
+				"  ( qua.ROTA_ID = " + rota.getId() + " or imo.ROTA_IDALTERNATIVA = " + rota.getId() + " ) ";
 
 			Collection colecaoConsulta = session.createSQLQuery(sql)
 					.addScalar("imov_id", Hibernate.INTEGER)
@@ -22158,21 +22178,21 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 * @return
 	 * @throws ControladorException
 	 */
-	public Collection
+	public Object[]
 		verificarExistenciaConsumoAnormalidadeAcaoImovel(
-				Integer idConsumoAnormalidadeAcao,
+				Integer idConsumoAnormalidade,
 				Integer idCategoria,
 				Integer idPerfilImovel )
 		throws ErroRepositorioException{
 		Session session = HibernateUtil.getSession();
 
-		Collection retorno = null;
+		Object[] retorno = null;
 
 		try {
 
 			String sql =
 				"select " +
-				"  caa.CSAN_ID, " +
+				"  ca.CSAN_DSCONSUMOANORMALIDADE, " +
 				"  caa.STEP_IDMES1, " +
 				"  caa.STEP_IDMES2, " +
 				"  caa.STEP_IDMES3 " +
@@ -22180,12 +22200,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				"  micromedicao.CONSUMO_ANORM_ACAO caa " +
 				"  inner join micromedicao.CONSUMO_HISTORICO ch on ( caa.CSAN_ID = ch.CSAN_ID ) " +
 				"  inner join cadastro.imovel imo on ( imo.IMOV_ID = ch.IMOV_ID ) " +
+				"  inner join micromedicao.CONSUMO_ANORMALIDADE ca on ( caa.CSAN_ID = ca.CSAN_ID ) " +
 				"where " +
 				"  ( caa.STEP_IDMES1 is not null or caa.STEP_IDMES2 is not null or caa.STEP_IDMES3 is not null ) and " +
 				"  ch.lgti_id = " + LigacaoTipo.LIGACAO_AGUA + " \n ";
 
-			if ( idConsumoAnormalidadeAcao != null ){
-				sql += "  and caa.CSAN_ID = " + idConsumoAnormalidadeAcao;
+			if ( idConsumoAnormalidade != null ){
+				sql += "  and caa.CSAN_ID = " + idConsumoAnormalidade;
 			} else {
 				sql += "  and caa.CSAN_ID is null ";
 			}
@@ -22202,12 +22223,12 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 				sql += "  and caa.IPER_ID is null";
 			}
 
-			retorno = (Collection) session.createSQLQuery(sql)
-					.addScalar("CSAN_ID", Hibernate.INTEGER)
+			retorno = (Object[]) session.createSQLQuery(sql)
+					.addScalar("CSAN_DSCONSUMOANORMALIDADE", Hibernate.STRING)
 					.addScalar("STEP_IDMES1", Hibernate.INTEGER)
 					.addScalar("STEP_IDMES2", Hibernate.INTEGER)
 					.addScalar("STEP_IDMES3", Hibernate.INTEGER)
-					.list();
+					.setMaxResults(1).uniqueResult();
 
 
 		} catch (HibernateException e) {
@@ -22227,7 +22248,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 * micromedicao.CONSUMO_HISTORICO e SOTG_ID=SOTG_ID da tabela
 	 * atendimentopublico.SOLICITACAO_TIPO para SOTP_ID=SOTP_ID da
 	 * tabela atendimentopublico.SOLICITACAO_TIPO_ESPEC para
-	 * STEP_ID=Especificação do Tipo de Solicitação
+	 * STEP_ID=Especificaï¿½ï¿½o do Tipo de Solicitaï¿½ï¿½o
 	 *
 	 * @author Bruno Barros
 	 * @date 16/02/2011
@@ -22269,10 +22290,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -22315,10 +22336,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"idImovelCondominio", idImovelCondominio).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -22361,10 +22382,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"idImoveis", idImoveis).setInteger("anoMes", anoMes).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -22385,13 +22406,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			FiltroRelatorioLeituraConsultarArquivosTextoHelper helper)
 		throws ErroRepositorioException {
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 
 		// Retorno Consulta
 		Collection<Object[]> retorno = null;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -22490,10 +22511,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -22514,13 +22535,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			FiltroRelatorioLeituraConsultarArquivosTextoHelper helper)
 		throws ErroRepositorioException {
 
-		// Cria uma sessão com o hibernate
+		// Cria uma sessï¿½o com o hibernate
 		Session session = HibernateUtil.getSession();
 
 		// Retorno Consulta
 		Integer retorno = null;
 
-		// Cria a variável que vai conter o hql
+		// Cria a variï¿½vel que vai conter o hql
 		String consulta;
 
 		try {
@@ -22588,10 +22609,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 			// Erro no hibernate
 		} catch (HibernateException e) {
-			// Levanta a exceção para a próxima camada
+			// Levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// Fecha a sessão com o hibernate
+			// Fecha a sessï¿½o com o hibernate
 			HibernateUtil.closeSession(session);
 		}
 
@@ -22641,11 +22662,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 
 	/**
-	 * [UC0157] Simular Cálculo da Conta
+	 * [UC0157] Simular Cï¿½lculo da Conta
 	 *
-	 * [SB0005] - Determinar consumo mínimo da subcategoria por pontos de utilização
+	 * [SB0005] - Determinar consumo mï¿½nimo da subcategoria por pontos de utilizaï¿½ï¿½o
 	 *
-	 * Obter o consumo mínimo associado ao ponto de utilização e a subcategoria informada
+	 * Obter o consumo mï¿½nimo associado ao ponto de utilizaï¿½ï¿½o e a subcategoria informada
 	 *
 	 * @author Mariana Victor
 	 * @date 23/05/2011
@@ -22692,10 +22713,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -22703,9 +22724,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0000] Obter Consumo Não Medido por Parâmetro
+	 * [UC0000] Obter Consumo Nï¿½o Medido por Parï¿½metro
 	 *
-	 * Obter o consumo mínimo associado ao ponto de utilização e a subcategoria informada
+	 * Obter o consumo mï¿½nimo associado ao ponto de utilizaï¿½ï¿½o e a subcategoria informada
 	 *
 	 * @author Mariana Victor
 	 * @date 23/05/2011
@@ -22752,10 +22773,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -22763,9 +22784,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC0000] Obter Consumo Não Medido por Parâmetro
+	 * [UC0000] Obter Consumo Nï¿½o Medido por Parï¿½metro
 	 *
-	 * 2.1.1. , 2.2.1. - Caso exista consumo mínimo da subcategoria
+	 * 2.1.1. , 2.2.1. - Caso exista consumo mï¿½nimo da subcategoria
 	 *
 	 * @author Mariana Victor
 	 * @date 23/05/2011
@@ -22795,10 +22816,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -22806,17 +22827,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * <b>[UC1180] Relatório Imóveis com Leituristas</b>:
+	 * <b>[UC1180] Relatï¿½rio Imï¿½veis com Leituristas</b>:
 	 *
 	 * <ul>
 	 * 		<li>
-	 * 			<b>[SB0001] Gerar Relatório do Tipo 1</b>: Quantitativo de imóveis com leituras através da WEB
+	 * 			<b>[SB0001] Gerar Relatï¿½rio do Tipo 1</b>: Quantitativo de imï¿½veis com leituras atravï¿½s da WEB
 	 * 		</li>
 	 * 		<li>
-	 * 			<b>[SB0002] Gerar Relatório do Tipo 2</b>: Quantitativo de imóveis sem leituras através da ISC e WEB
+	 * 			<b>[SB0002] Gerar Relatï¿½rio do Tipo 2</b>: Quantitativo de imï¿½veis sem leituras atravï¿½s da ISC e WEB
 	 * 		</li>
 	 * 		<li>
-	 * 			<b>[SB0003] Gerar Relatório do Tipo 3</b>: Quantitativo de imóveis que estão na rota mas não foram recebidos através da ISC</p>
+	 * 			<b>[SB0003] Gerar Relatï¿½rio do Tipo 3</b>: Quantitativo de imï¿½veis que estï¿½o na rota mas nï¿½o foram recebidos atravï¿½s da ISC</p>
 	 * 		</li>
 	 * </ul>
 	 *
@@ -22962,11 +22983,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * <b>[UC1180] Relatório Imóveis com Leituristas</b>:
+	 * <b>[UC1180] Relatï¿½rio Imï¿½veis com Leituristas</b>:
 	 *
 	 * <ul>
 	 * 		<li>
-	 * 			<b>[SB0003] Gerar Relatório do Tipo 3</b>: Quantitativo de imóveis que estão na rota mas não foram recebidos através da ISC</p>
+	 * 			<b>[SB0003] Gerar Relatï¿½rio do Tipo 3</b>: Quantitativo de imï¿½veis que estï¿½o na rota mas nï¿½o foram recebidos atravï¿½s da ISC</p>
 	 * 		</li>
 	 * </ul>
 	 *
@@ -23035,17 +23056,17 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * <b>[UC1180] Relatório Imóveis com Leituristas</b>:
+	 * <b>[UC1180] Relatï¿½rio Imï¿½veis com Leituristas</b>:
 	 *
 	 * <ul>
 	 * 		<li>
-	 * 			<b>[SB0004] Gerar Relatório do Tipo 4</b>: Relação de imóveis com leituras não recebidas através da ISC</b>
+	 * 			<b>[SB0004] Gerar Relatï¿½rio do Tipo 4</b>: Relaï¿½ï¿½o de imï¿½veis com leituras nï¿½o recebidas atravï¿½s da ISC</b>
 	 * 		</li>
 	 * 		<li>
-	 * 			<b>[SB0005] Gerar Relatório do Tipo 5</b>: Relação de imóveis não medidos que não estão na rota de ISC</b>
+	 * 			<b>[SB0005] Gerar Relatï¿½rio do Tipo 5</b>: Relaï¿½ï¿½o de imï¿½veis nï¿½o medidos que nï¿½o estï¿½o na rota de ISC</b>
 	 * 		</li>
 	 * 		<li>
-	 * 			<b>[SB0006] Gerar Relatório do Tipo 6</b>: Relação de imóveis medidos que não estão na rota de ISC</b>
+	 * 			<b>[SB0006] Gerar Relatï¿½rio do Tipo 6</b>: Relaï¿½ï¿½o de imï¿½veis medidos que nï¿½o estï¿½o na rota de ISC</b>
 	 * 		</li>
 	 * </ul>
 	 *
@@ -23233,11 +23254,11 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * <b>[UC1180] Relatório Imóveis com Leituristas</b>:
+	 * <b>[UC1180] Relatï¿½rio Imï¿½veis com Leituristas</b>:
 	 *
 	 * <ul>
 	 * 		<li>
-	 * 			<b>[SB0007] Gerar Relatório do Tipo 7</b>: Quantitativo de imóveis com leituras enviado e recebidos</b>
+	 * 			<b>[SB0007] Gerar Relatï¿½rio do Tipo 7</b>: Quantitativo de imï¿½veis com leituras enviado e recebidos</b>
 	 * 		</li>
 	 * </ul>
 	 *
@@ -23386,7 +23407,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 
 	/**
-	 * [UC0713] Emitir Ordem de Serviço Seletiva
+	 * [UC0713] Emitir Ordem de Serviï¿½o Seletiva
 	 * [SB0002] Gerar TXT
 	 *
 	 * @author Vivianne Sousa
@@ -23425,7 +23446,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 
 	/**
-	 * [UC0713] Emitir Ordem de Serviço Seletiva
+	 * [UC0713] Emitir Ordem de Serviï¿½o Seletiva
 	 * [SB0002] Gerar TXT
 	 *
 	 * @author Vivianne Sousa
@@ -23467,13 +23488,13 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					"idImovel", idImovel).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return retorno;
 	}
 
@@ -23760,8 +23781,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
     }
     
     /**
-     * Retorna o anoMesFaturamentoSituacaoFim do histórico 
-     * da situação de faturamento para o imóvel informado
+     * Retorna o anoMesFaturamentoSituacaoFim do histï¿½rico 
+     * da situaï¿½ï¿½o de faturamento para o imï¿½vel informado
      * 
      * @author Erivan Sousa
      * @since 30/05/2012
@@ -23804,7 +23825,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 * @param idLigacaoTipo
 	 *
 	 * @return valor medio de consumo historico
-	 * do ultimo mes registrado daquele imovél
+	 * do ultimo mes registrado daquele imovï¿½l
 	 * @throws ErroRepositorioException
 	 */
 	public Integer obterConsumoMedioEmConsumoHistoricoUltimoMes(Integer idImovel, Integer idLigacaoTipo) throws ErroRepositorioException{
@@ -23832,10 +23853,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					idLigacaoTipo).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -23874,10 +23895,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			
 			
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		 
@@ -23887,7 +23908,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	 }
 
 	/**
-	 * [UC0077] Manter Hidrômetro
+	 * [UC0077] Manter Hidrï¿½metro
 	 * 
 	 * @author Mariana Victor
 	 * @date 22/12/2011
@@ -23914,18 +23935,18 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return retorno;
 	}
 
 	/**
-	 * [UC0077] Manter Hidrômetro
+	 * [UC0077] Manter Hidrï¿½metro
 	 * 
 	 * @author Mariana Victor
 	 * @date 22/12/2011
@@ -23961,19 +23982,19 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(10).list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		// return retorno;
 		return hidrometros;
 	}
 
 	/**
-	 * [UC0079] Movimentar Hidrômetro
+	 * [UC0079] Movimentar Hidrï¿½metro
 	 * 
 	 * @author Mariana Victor
 	 * @date 23/12/2011
@@ -24007,20 +24028,20 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return hidrometros;
 	}
 
 	/**
-	 * [UC0077] Manter Hidrômetro
+	 * [UC0077] Manter Hidrï¿½metro
 	 * 
-	 * [FS0009] - Verificar existência do número do tombamento
+	 * [FS0009] - Verificar existï¿½ncia do nï¿½mero do tombamento
 	 * 
 	 * @author Mariana Victor
 	 * @date 23/12/2011
@@ -24049,21 +24070,21 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 			}
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return retorno;
 	}
 
 	/**
-	 * [UC0077] Manter Hidrômetro
+	 * [UC0077] Manter Hidrï¿½metro
 	 * 
-	 * Pesquisa uma coleção de hidrômetros de acordo com o tombamento, 
-	 * para geração do relatório. 
+	 * Pesquisa uma coleï¿½ï¿½o de hidrï¿½metros de acordo com o tombamento, 
+	 * para geraï¿½ï¿½o do relatï¿½rio. 
 	 * 
 	 * @author Mariana Victor
 	 * @date 26/12/2011
@@ -24094,21 +24115,21 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.list();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return hidrometros;
 	}
 	
 	/**
-	 * Método que retorna o id do imóvel área comum e que esteja em movimento_roteiro_empresa (verificar 
-	 * se esse imóvel foi feito a leitura na referência informada)
+	 * Mï¿½todo que retorna o id do imï¿½vel ï¿½rea comum e que esteja em movimento_roteiro_empresa (verificar 
+	 * se esse imï¿½vel foi feito a leitura na referï¿½ncia informada)
 	 * 
-	 * @author Sávio Luiz
+	 * @author Sï¿½vio Luiz
 	 * @since 29/12/2011
 	 * 
 	 * @param idImovelCondomio
@@ -24138,10 +24159,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					 				   .uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		
@@ -24151,7 +24172,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	
 	/**
 	 * 
-	 * [UC1055] Informar Valor de Item de Serviço Por Contrato
+	 * [UC1055] Informar Valor de Item de Serviï¿½o Por Contrato
 	 * 
 	 * @param id
 	 * @return
@@ -24177,10 +24198,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 							 .list();
 			
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		
@@ -24189,8 +24210,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 *[UC1177] Verifica se existe consumo histórico para o imóvel de acordo com o tipo
-	 * de ligação
+	 *[UC1177] Verifica se existe consumo histï¿½rico para o imï¿½vel de acordo com o tipo
+	 * de ligaï¿½ï¿½o
 	 *
 	 *
 	 * @author Fernanda Almeida
@@ -24229,7 +24250,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * Método que irá obter a menor data entre as leituras anteriores dos imoveis
+	 * Mï¿½todo que irï¿½ obter a menor data entre as leituras anteriores dos imoveis
 	 * vinculados ao grupo de faturamenteo passado como parametro
 	 * 
 	 * @param idFaturamentoGrupo
@@ -24274,7 +24295,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	
 	/**
 	 *
-	 * Obter rota do imóvel através do id do imóvel
+	 * Obter rota do imï¿½vel atravï¿½s do id do imï¿½vel
 	 *
 	 * @author Rodrigo Cabral
 	 * @date 06/03/2013
@@ -24306,10 +24327,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setInteger("idImovel", idImovel).setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 
@@ -24317,9 +24338,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 	
 	/**
-	 * [UC0631] Processar Requisições do Dispositivo Móvel.
+	 * [UC0631] Processar Requisiï¿½ï¿½es do Dispositivo Mï¿½vel.
 	 *
-	 * Atualizar Situação do Arquivo Texto sem levar em consideração a situação anterior
+	 * Atualizar Situaï¿½ï¿½o do Arquivo Texto sem levar em consideraï¿½ï¿½o a situaï¿½ï¿½o anterior
 	 *
 	 *
 	 * @author Fernanda Almeida
@@ -24384,7 +24405,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 	
 	/**
-	 * [UC 1517] - Baixa Automatica Dos Pagamentos Não Classificados
+	 * [UC 1517] - Baixa Automatica Dos Pagamentos Nï¿½o Classificados
 	 * [SB 0002] - Analisar Conta
 	 * 
 	 * @author Davi Menezes
@@ -24461,7 +24482,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	
 	/**
 	 * Vincular o consumo do macro com o consumo do micro nos casos onde o rateio tenha sido cobrado em campo mas no
-	 * retorno do celular o GSAN não tenha conseguido atualizar o faturamento. Lembrando que essa vinculação só será
+	 * retorno do celular o GSAN nï¿½o tenha conseguido atualizar o faturamento. Lembrando que essa vinculaï¿½ï¿½o sï¿½ serï¿½
 	 * feita quando rodar o batch consistir leituras e calcular consumos
 	 * 
 	 * @author Raphael Rossiter
@@ -24539,10 +24560,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.setMaxResults(1).uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
 		return retorno;
@@ -24550,7 +24571,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	
 	/**
 	 * Vincular o consumo do macro com o consumo do micro nos casos onde o rateio tenha sido cobrado em campo mas no
-	 * retorno do celular o GSAN não tenha conseguido atualizar o faturamento. Lembrando que essa vinculação só será
+	 * retorno do celular o GSAN nï¿½o tenha conseguido atualizar o faturamento. Lembrando que essa vinculaï¿½ï¿½o sï¿½ serï¿½
 	 * feita quando rodar o batch consistir leituras e calcular consumos
 	 * 
 	 * @author Raphael Rossiter
@@ -24586,9 +24607,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	
 	
 	/**
-	 * [UC1393] Processar Requisições do Dispositivo Móvel Atualização Cadastral.
+	 * [UC1393] Processar Requisiï¿½ï¿½es do Dispositivo Mï¿½vel Atualizaï¿½ï¿½o Cadastral.
 	 * 
-	 * Baixa o arquivo texto na situação liberado.
+	 * Baixa o arquivo texto na situaï¿½ï¿½o liberado.
 	 * 
 	 * @author Anderson Cabral
 	 * @date 27/11/2012
@@ -24641,9 +24662,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
     }
 
 	/**
-	 * [UC1662] - Filtrar Imóvel Condomínio Medição Individualizada
+	 * [UC1662] - Filtrar Imï¿½vel Condomï¿½nio Mediï¿½ï¿½o Individualizada
 	 * 
-	 * @author Fábio Silva
+	 * @author Fï¿½bio Silva
 	 * @date 19/01/2015
 	 * 
 	 * @param form
@@ -24677,9 +24698,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC1662] - Filtrar Imóvel Condomínio Medição Individualizada
+	 * [UC1662] - Filtrar Imï¿½vel Condomï¿½nio Mediï¿½ï¿½o Individualizada
 	 * 
-	 * @author Fábio Silva
+	 * @author Fï¿½bio Silva
 	 * @date 19/01/2015
 	 * 
 	 * @param form
@@ -24897,9 +24918,9 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 *  UC1297 Atualizar Dados Cadastrais Para Imóveis Inconsistentes
+	 *  UC1297 Atualizar Dados Cadastrais Para Imï¿½veis Inconsistentes
 	 * 
-	 * @author Vivianne Sousa, Bruno Sá Barreto
+	 * @author Vivianne Sousa, Bruno Sï¿½ Barreto
 	 * @date 26/07/2012
 	 */
 	public String pesquisarNumeroHidrometroImovel(Integer idImovel,Integer idMedicaoTipo)
@@ -24930,22 +24951,22 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 					.uniqueResult();
 
 		} catch (HibernateException e) {
-			// levanta a exceção para a próxima camada
+			// levanta a exceï¿½ï¿½o para a prï¿½xima camada
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
 		} finally {
-			// fecha a sessão
+			// fecha a sessï¿½o
 			HibernateUtil.closeSession(session);
 		}
-		// retorna a coleção de atividades pesquisada(s)
+		// retorna a coleï¿½ï¿½o de atividades pesquisada(s)
 		return retorno;
 	}
 	
 	/**
-	 * [UC1393] Processar Requisições do Dispositivo Móvel Atualização Cadastral.
+	 * [UC1393] Processar Requisiï¿½ï¿½es do Dispositivo Mï¿½vel Atualizaï¿½ï¿½o Cadastral.
 	 * 
-	 * Baixa o arquivo texto na situação liberado.
+	 * Baixa o arquivo texto na situaï¿½ï¿½o liberado.
 	 * 
-	 * @author Bruno Sá Barreto
+	 * @author Bruno Sï¿½ Barreto
 	 * @date 11/12/2014
 	 *  
 	 * @param login, senha
@@ -24988,7 +25009,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	
 	/**
 	 * [UC1669] Atualizar Dados nas Tabelas Resumos Grenciais Faturamento
-	 * @author Fábio Aguiar
+	 * @author Fï¿½bio Aguiar
 	 * @date 30/01/2015
 	 * 
 	 * @throws ErroRepositorioException
@@ -25015,10 +25036,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 	
 	/**
-	 * [UC 1366] - Alterar Vínculo Clientes com Imóvel e Contas
+	 * [UC 1366] - Alterar Vï¿½nculo Clientes com Imï¿½vel e Contas
 	 * [IT 0001] - Obter Data de Leitura
 	 * 
-	 *  @author Rafael Corrêa
+	 *  @author Rafael Corrï¿½a
 	 *  @date 24/04/2015
 	 */
 	public Date obterDataLeituraMovimentoRoteiroEmpresa(Integer idImovel, Integer anoMesReferencia)
@@ -25051,10 +25072,10 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 	
 	/**
-	 * [UC 1366] - Alterar Vínculo Clientes com Imóvel e Contas
+	 * [UC 1366] - Alterar Vï¿½nculo Clientes com Imï¿½vel e Contas
 	 * [IT 0001] - Obter Data de Leitura
 	 * 
-	 *  @author Rafael Corrêa
+	 *  @author Rafael Corrï¿½a
 	 *  @date 24/04/2015
 	 */
 	public Date obterDataLeituraMedicaoHistorico(Integer idImovel, Integer anoMesReferencia)
@@ -25089,7 +25110,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	/**
 	 * [UC1125] - Filtrar Dados Rejeitados Telemetria 
 	 * 
-	 * @author Fábio Aguiar
+	 * @author Fï¿½bio Aguiar
 	 * @date 28/04/2015
 	 * @param idImovel
 	 * */
@@ -25241,8 +25262,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 	
 	/**
-	 * [UC1680] - Retornar Dados Imóvel Telemetria Via WebService
-	 * [IT0002] - Pesquisar Dados Imóvel Conta
+	 * [UC1680] - Retornar Dados Imï¿½vel Telemetria Via WebService
+	 * [IT0002] - Pesquisar Dados Imï¿½vel Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 29/04/2015
@@ -25274,8 +25295,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 	
 	/**
-	 * [UC1680] - Retornar Dados Imóvel Telemetria Via WebService
-	 * [IT0002] - Pesquisar Dados Imóvel Conta
+	 * [UC1680] - Retornar Dados Imï¿½vel Telemetria Via WebService
+	 * [IT0002] - Pesquisar Dados Imï¿½vel Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 30/04/2015
@@ -25310,8 +25331,8 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 
 	/**
-	 * [UC1680] - Retornar Dados Imóvel Telemetria Via WebService
-	 * [IT0002] - Pesquisar Dados Imóvel Conta
+	 * [UC1680] - Retornar Dados Imï¿½vel Telemetria Via WebService
+	 * [IT0002] - Pesquisar Dados Imï¿½vel Conta
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 30/04/2015
@@ -25349,7 +25370,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	
 	
 	/**
-	 * [UC1682] - Relatório Sintético de Hidrômetros por Faixa de Idade
+	 * [UC1682] - Relatï¿½rio Sintï¿½tico de Hidrï¿½metros por Faixa de Idade
 	 * @author Vivianne Sousa
 	 * @date 05/06/2015
 	 * @throws ErroRepositorioException	
@@ -25414,7 +25435,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 
 	
 	/**
-	 * [UC1682] - Relatório Sintético de Hidrômetros por Faixa de Idade
+	 * [UC1682] - Relatï¿½rio Sintï¿½tico de Hidrï¿½metros por Faixa de Idade
 	 * @author Vivianne Sousa
 	 * @date 05/06/2015
 	 * @throws ErroRepositorioException	
@@ -25483,7 +25504,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 		return retorno;
 	}
 	/**
-	 * [UC1682] - Relatório Sintético de Hidrômetros por Faixa de Idade
+	 * [UC1682] - Relatï¿½rio Sintï¿½tico de Hidrï¿½metros por Faixa de Idade
 	 * @author Vivianne Sousa
 	 * @date 05/06/2015
 	 * @throws ErroRepositorioException	
@@ -25558,7 +25579,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 	
 	/**
-	 * [UC1682] - Relatório Sintético de Hidrômetros por Faixa de Idade
+	 * [UC1682] - Relatï¿½rio Sintï¿½tico de Hidrï¿½metros por Faixa de Idade
 	 * @author Vivianne Sousa
 	 * @date 05/06/2015
 	 * @throws ErroRepositorioException	
@@ -25639,7 +25660,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 		return retorno;
 	}
 	/**
-	 * [UC1683] - Relatório Analítico de Hidrômetros por Faixa de Idade
+	 * [UC1683] - Relatï¿½rio Analï¿½tico de Hidrï¿½metros por Faixa de Idade
 	 * @author Vivianne Sousa
 	 * @date 09/06/2015
 	 * @throws ErroRepositorioException	
@@ -25733,7 +25754,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	}
 	
 	/**
-	 * [UC1682] - Relatório Sintético de Hidrômetros por Faixa de Idade
+	 * [UC1682] - Relatï¿½rio Sintï¿½tico de Hidrï¿½metros por Faixa de Idade
 	 * @author Vivianne Sousa
 	 * @date 05/06/2015
 	 *
@@ -25842,7 +25863,7 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 	
 	
 	/**
-	 * [UC0000] - Gerar Dados Financeiros da Atualização Cadastral 
+	 * [UC0000] - Gerar Dados Financeiros da Atualizaï¿½ï¿½o Cadastral 
 	 * @author Vivianne Sousa
 	 * @date 22/07/2015
 	 *
@@ -25877,4 +25898,61 @@ public class RepositorioMicromedicaoHBM implements IRepositorioMicromedicao {
 		}
 		return retorno;
 	}
+	
+	/**
+	 * [UC0840] Atualizar Conta Prï¿½-faturada
+	 * [SB0006] - Pesquisa motivo de revisï¿½o
+	 * Autor Vivianne Sousa
+	 * Data: 28/10/2015
+	 */
+	public Integer obterAnormalidadeConsumoAnoMes(Integer idImovel,
+			Integer anoMes, Integer idLigacaoTipo) throws ErroRepositorioException{
+		
+		Session session = HibernateUtil.getSession();
+		Integer retorno = null;
+		try{
+			String sql = " select ch.csan_id as anormalidade" +
+					     " from micromedicao.consumo_historico ch" +
+					     " where ch.imov_id = :idImovel " +
+					     " and ch.lgti_id = :idLigacaoAgua " +
+					     " and ch.cshi_amfaturamento = :anoMesFaturamento " ;
+			
+			retorno = (Integer)session.createSQLQuery(sql)
+					 .addScalar("anormalidade", Hibernate.INTEGER)
+					 .setInteger("idImovel", idImovel)
+					 .setInteger("idLigacaoAgua", idLigacaoTipo)
+					 .setInteger("anoMesFaturamento", anoMes)
+					 .setMaxResults(1).uniqueResult();
+			
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+		return retorno;		
+	 }
+	
+	public Integer obterRotaIdImovel(Integer matricula, Integer anoMes) throws ErroRepositorioException {
+		Integer retorno = null;
+		Session session = HibernateUtil.getSession();
+		
+		try {
+			String sql = "Select mrem.rota.id FROM MovimentoRoteiroEmpresa as mrem "
+					+ " WHERE mrem.anoMesMovimento =  :anoMes "
+					+ " AND mrem.imovel = :matricula ";
+
+			retorno = (Integer) session.createQuery(sql)
+					.setInteger("matricula", matricula)
+					.setInteger("anoMes", anoMes)
+					.uniqueResult();
+
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException("Erro no Hibernate");
+
+		} finally {
+
+			HibernateUtil.closeSession(session);
+		}
+		return retorno;
+	}	
 }

@@ -404,12 +404,12 @@ public class ExibirConsultarParcelamentoDebitoAction extends
 		  * Caso o parcelamento tenha dados de cartão de crédito não confirmados pela operadora (PACC_ICONFIRMADOOPERADORA da tabela 
 		  * PARCELAMENTO_PAGAMENTO_CARTAO_CREDITO com PARC_ID = PARC_ID do parcelamento selecionado com valor igual 2 (Não))
 		  */
-		 if (codigoParcelamento != null && !codigoParcelamento.equals("")){
-			 boolean habilitarBotaoDesfazer = fachada.parcelamentoPagamentoCartaoCreditoJaConfirmado(Integer.valueOf(codigoParcelamento));
-			 if (!habilitarBotaoDesfazer){
+//		 if (codigoParcelamento != null && !codigoParcelamento.equals("")){
+//			 boolean habilitarBotaoDesfazer = fachada.parcelamentoPagamentoCartaoCreditoJaConfirmado(Integer.valueOf(codigoParcelamento));
+//			 if (!habilitarBotaoDesfazer){
 				 httpServletRequest.setAttribute("habilitarBotaoDesfazer", "SIM");
-			 }
-		 }
+//			 }
+//		 }
 		 
 		return retorno;
 	}

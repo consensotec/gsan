@@ -237,7 +237,11 @@ public class EfetuarMudancaSituacaoFaturamentoLigacaoEsgotoAction extends
 			if(!Util.isVazioOrNulo(colecaoMotivoCorte)){
 				motivoCorte = (MotivoCorte) Util.retonarObjetoDeColecao(colecaoMotivoCorte);				
 				ligacaoEsgoto.setMotivoCorte(motivoCorte);
-				ligacaoEsgoto.setDataCorteLigacaoEsgoto(ordemServico.getDataEncerramento());
+				if (ordemServico.getDataEncerramento() != null && !ordemServico.getDataEncerramento().equals("")){
+					ligacaoEsgoto.setDataCorteLigacaoEsgoto(ordemServico.getDataEncerramento());
+				}else{
+					ligacaoEsgoto.setDataCorteLigacaoEsgoto(Util.converteStringParaDate(mudancaFaturamentoLigacaoAguaActionForm.getDataMudanca()));
+				}
 			}	
 			
 		}else if(ordemServico.getServicoTipo().getId().equals(ServicoTipo.TIPO_TAMPONAMENTO_LIGACAO_ESGOTO) &&
@@ -252,7 +256,12 @@ public class EfetuarMudancaSituacaoFaturamentoLigacaoEsgotoAction extends
 			if(!Util.isVazioOrNulo(colecaoMotivoSupressao)){
 				supressaoMotivo = (SupressaoMotivo) Util.retonarObjetoDeColecao(colecaoMotivoSupressao);
 				ligacaoEsgoto.setSupressaoMotivo(supressaoMotivo);
-				ligacaoEsgoto.setDataSupressaoLigacaoEsgoto(ordemServico.getDataEncerramento());
+				if (ordemServico.getDataEncerramento() != null && !ordemServico.getDataEncerramento().equals("")){
+					ligacaoEsgoto.setDataSupressaoLigacaoEsgoto(ordemServico.getDataEncerramento());
+				}else{
+					ligacaoEsgoto.setDataSupressaoLigacaoEsgoto(Util.converteStringParaDate(mudancaFaturamentoLigacaoAguaActionForm.getDataMudanca()));
+				}
+				
 			}
 		}
 		

@@ -135,6 +135,11 @@ public class RelatorioExtratoDebito extends TarefaRelatorio {
 	public RelatorioExtratoDebito(Usuario usuario) {
 		super(usuario,ConstantesRelatorios.RELATORIO_EXTRATO_DEBITO);
 	}
+	
+	@Deprecated
+	public RelatorioExtratoDebito() {
+		super(null, "");
+	}
 
 	private Collection<RelatorioExtratoDebitoBean> inicializarBeanRelatorio(
 			ExtratoDebitoRelatorioHelper extratoDebitoRelatorioHelper, 

@@ -27,6 +27,16 @@ public class IncluirConfirmacaoParcelamentoHelper implements Serializable {
 	private Collection<CreditoARealizar> colecaoCreditoARealizar;
 	
 	public IncluirConfirmacaoParcelamentoHelper(){}
+	
+	public IncluirConfirmacaoParcelamentoHelper(Parcelamento parcelamento,
+			Collection<ParcelamentoPagamentoCartaoCredito> colecaoParcelamentoPagamentoCartaoCredito,
+			Collection<DebitoACobrar> colecaoDebitoACobrar, Collection<CreditoARealizar> colecaoCreditoARealizar) {
+		super();
+		this.parcelamento = parcelamento;
+		this.colecaoParcelamentoPagamentoCartaoCredito = colecaoParcelamentoPagamentoCartaoCredito;
+		this.colecaoDebitoACobrar = colecaoDebitoACobrar;
+		this.colecaoCreditoARealizar = colecaoCreditoARealizar;
+	}
 
 	public Parcelamento getParcelamento() {
 		return parcelamento;

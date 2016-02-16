@@ -1,15 +1,20 @@
 package gcom.relatorio.cobranca.cobrancaporresultado;
 
 import gcom.cadastro.sistemaparametro.SistemaParametro;
+import gcom.cobranca.bean.RelatorioBoletimMedicaoAcompanhamentoHelper;
 import gcom.fachada.Fachada;
 import gcom.relatorio.ConstantesRelatorios;
 import gcom.relatorio.RelatorioDataSource;
 import gcom.seguranca.acesso.usuario.Usuario;
 import gcom.tarefa.TarefaException;
 import gcom.tarefa.TarefaRelatorio;
+import gcom.util.ConstantesSistema;
+import gcom.util.Util;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +24,11 @@ public class RelatorioPenalidadesIndiceAtuacaoSucessoFinanceiro extends TarefaRe
 		
 		public RelatorioPenalidadesIndiceAtuacaoSucessoFinanceiro(Usuario usuario) {
 			super(usuario, ConstantesRelatorios.RELATORIO_PENALIDADES_INDICE_ATUACAO_SUCESSO);
+		}
+
+		@Deprecated
+		public RelatorioPenalidadesIndiceAtuacaoSucessoFinanceiro() {
+			super(null, "");
 		}
 		
 		public Object executar() throws TarefaException {

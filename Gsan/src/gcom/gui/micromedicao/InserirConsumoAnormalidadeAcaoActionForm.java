@@ -146,6 +146,14 @@ public class InserirConsumoAnormalidadeAcaoActionForm extends ValidatorActionFor
     private String descricaoContaMensagemMes3;
     
     private String indicadorUso;
+    
+    private String motivoRevisaoMes1;
+    
+    private String motivoRevisaoMes2;
+    
+    private String motivoRevisaoMes3;
+    
+    private String indicadorCobrancaConsumoNormal;
 
 	public String getConsumoAnormalidade() {
 		return consumoAnormalidade;
@@ -376,17 +384,36 @@ public class InserirConsumoAnormalidadeAcaoActionForm extends ValidatorActionFor
 			String solicitacaoTipoEspecificacaoMes1) {
 		this.solicitacaoTipoEspecificacaoMes1 = solicitacaoTipoEspecificacaoMes1;
 	}
-    
-    
 
-    
-    
+	public String getMotivoRevisaoMes1() {
+		return motivoRevisaoMes1;
+	}
 
-    
+	public void setMotivoRevisaoMes1(String motivoRevisaoMes1) {
+		this.motivoRevisaoMes1 = motivoRevisaoMes1;
+	}
 
-    
+	public String getMotivoRevisaoMes2() {
+		return motivoRevisaoMes2;
+	}
 
-   
-    
-   
+	public void setMotivoRevisaoMes2(String motivoRevisaoMes2) {
+		this.motivoRevisaoMes2 = motivoRevisaoMes2;
+	}
+
+	public String getMotivoRevisaoMes3() {
+		return motivoRevisaoMes3;
+	}
+
+	public void setMotivoRevisaoMes3(String motivoRevisaoMes3) {
+		this.motivoRevisaoMes3 = motivoRevisaoMes3;
+	}
+
+	public String getIndicadorCobrancaConsumoNormal() {
+		return indicadorCobrancaConsumoNormal;
+	}
+
+	public void setIndicadorCobrancaConsumoNormal(String indicadorConsumoNomal) {
+		this.indicadorCobrancaConsumoNormal = indicadorConsumoNomal;
+	}
 }

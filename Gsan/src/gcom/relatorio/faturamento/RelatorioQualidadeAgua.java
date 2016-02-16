@@ -34,6 +34,11 @@ public class RelatorioQualidadeAgua extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_BAIRRO_MANTER);
 	}
 
+	@Deprecated
+	public RelatorioQualidadeAgua() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

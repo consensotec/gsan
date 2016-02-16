@@ -77,6 +77,7 @@ package gcom.atendimentopublico.ordemservico;
 
 import gcom.atendimentopublico.registroatendimento.AtendimentoMotivoEncerramento;
 import gcom.cobranca.CobrancaSituacao;
+import gcom.cobranca.DocumentoTipo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -171,6 +172,8 @@ public class FiscalizacaoSituacao implements Serializable {
     private Integer numeroPrazoIrregularidade;
     
     private Integer numeroConsumoMedio;
+    
+    private DocumentoTipo documentoTipo; 
     
     public final static short INDICADOR_SIM = new Short("1");
 
@@ -534,37 +537,25 @@ public class FiscalizacaoSituacao implements Serializable {
 		this.indicadorSuspenderContratoDemanda = indicadorSuspenderContratoDemanda;
 	}
 
-
-
 	public Short getIndicadorUtilizaQtdMesesCalculo() {
 		return indicadorUtilizaQtdMesesCalculo;
 	}
-
-
 
 	public void setIndicadorUtilizaQtdMesesCalculo(Short indicadorUtilizaQtdMesesCalculo) {
 		this.indicadorUtilizaQtdMesesCalculo = indicadorUtilizaQtdMesesCalculo;
 	}
 
-
-
 	public Integer getNumeroPrazoIrregularidade() {
 		return numeroPrazoIrregularidade;
 	}
-
-
 
 	public void setNumeroPrazoIrregularidade(Integer numeroPrazoIrregularidade) {
 		this.numeroPrazoIrregularidade = numeroPrazoIrregularidade;
 	}
 
-
-
 	public Short getIndicadorIrregularidade() {
 		return indicadorIrregularidade;
 	}
-
-
 
 	public void setIndicadorIrregularidade(Short indicadorIrregularidade) {
 		this.indicadorIrregularidade = indicadorIrregularidade;
@@ -577,4 +568,13 @@ public class FiscalizacaoSituacao implements Serializable {
 	public void setNumeroConsumoMedio(Integer numeroConsumoMedio) {
 		this.numeroConsumoMedio = numeroConsumoMedio;
 	}
+
+	public DocumentoTipo getDocumentoTipo() {
+		return documentoTipo;
+	}
+
+	public void setDocumentoTipo(DocumentoTipo documentoTipo) {
+		this.documentoTipo = documentoTipo;
+	}
+	
 }

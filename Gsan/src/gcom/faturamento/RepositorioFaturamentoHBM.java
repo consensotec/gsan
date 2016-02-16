@@ -160,6 +160,8 @@ import gcom.micromedicao.MovimentoRoteiroEmpresa;
 import gcom.micromedicao.Rota;
 import gcom.micromedicao.ServicoTipoCelular;
 import gcom.micromedicao.SituacaoTransmissaoLeitura;
+import gcom.micromedicao.consumo.ConsumoAnormalidade;
+import gcom.micromedicao.consumo.ConsumoAnormalidadeAcao;
 import gcom.micromedicao.consumo.ConsumoHistorico;
 import gcom.micromedicao.consumo.ConsumoTipo;
 import gcom.micromedicao.consumo.LigacaoTipo;
@@ -7290,7 +7292,7 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 					+ " left join la.hidrometroInstalacaoHistorico hihAgua "
 					+ " left join imovel.hidrometroInstalacaoHistorico hihPoco "
 					
-					+ " WHERE rota.id = :rotaId and imovel.rotaAlternativa IS NULL AND imovel.id = 3368810 ";
+					+ " WHERE rota.id = :rotaId and imovel.rotaAlternativa IS NULL ";
 			
 				/*
 				 * RM 1272 - A pedido de Eduardo Borges
@@ -9510,8 +9512,11 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 						+ "crar_tmultimaalteracao = :dataAtual ";
 					if(creditoARealizar.getAnoMesUltimaPrestacao() != null && !creditoARealizar.getAnoMesUltimaPrestacao().equals("")){
 						atualizarImovel += " , crar_amultimaprestacao = " + creditoARealizar.getAnoMesUltimaPrestacao();
+					} else {
+						atualizarImovel += " , crar_amultimaprestacao = null " ;
 					}
-						atualizarImovel += " where crar_id = :idCreditoARelizar";
+					
+					atualizarImovel += " where crar_id = :idCreditoARelizar";
 
 				session.createQuery(atualizarImovel).setShort(
 						"numeroPrestacao",
@@ -9536,7 +9541,10 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 						+ "crar_tmultimaalteracao = :dataAtual";
 					if(creditoARealizar.getAnoMesUltimaPrestacao() != null && !creditoARealizar.getAnoMesUltimaPrestacao().equals("")){
 						atualizarImovel += " , crar_amultimaprestacao = " + creditoARealizar.getAnoMesUltimaPrestacao();
+					} else {
+						atualizarImovel += " , crar_amultimaprestacao = null " ;
 					}
+					
 						atualizarImovel += " where crar_id = :idCreditoARelizar";
 
 					session.createQuery(atualizarImovel).setShort(
@@ -9564,6 +9572,14 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 						+ "crar_vlresidualmesanterior = :valorMesAnterior, crar_tmultimaalteracao = :dataAtual ";
 					if(creditoARealizar.getAnoMesUltimaPrestacao() != null && !creditoARealizar.getAnoMesUltimaPrestacao().equals("")){
 						atualizarImovel += " , crar_amultimaprestacao = " + creditoARealizar.getAnoMesUltimaPrestacao();
+					} else {
+						atualizarImovel += " , crar_amultimaprestacao = null " ;
+					}
+					
+					if(creditoARealizar.getAnoMesReferenciaPrestacao() != null && !creditoARealizar.getAnoMesReferenciaPrestacao().equals("")){
+						atualizarImovel += " , crar_amreferenciaprestacao = " + creditoARealizar.getAnoMesReferenciaPrestacao();
+					} else {
+						atualizarImovel += " , crar_amreferenciaprestacao = null " ;
 					}
 						atualizarImovel += " where crar_id = :idCreditoARelizar";
 
@@ -9585,6 +9601,14 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 						+ "crar_tmultimaalteracao = :dataAtual ";
 					if(creditoARealizar.getAnoMesUltimaPrestacao() != null && !creditoARealizar.getAnoMesUltimaPrestacao().equals("")){
 						atualizarImovel += " , crar_amultimaprestacao = " + creditoARealizar.getAnoMesUltimaPrestacao();
+					} else {
+						atualizarImovel += " , crar_amultimaprestacao = null " ;
+					}
+					
+					if(creditoARealizar.getAnoMesReferenciaPrestacao() != null && !creditoARealizar.getAnoMesReferenciaPrestacao().equals("")){
+						atualizarImovel += " , crar_amreferenciaprestacao = " + creditoARealizar.getAnoMesReferenciaPrestacao();
+					} else {
+						atualizarImovel += " , crar_amreferenciaprestacao = null " ;
 					}
 						atualizarImovel += " where crar_id = :idCreditoARelizar";
 
@@ -10061,7 +10085,8 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 					+ "ligacaoEsgotoSituacao.lest_dsligacaoesgotosituacao as descricaoLigEsgotoSit, "// 29
 					+ "cnt.cnta_pcesgoto as percentualEsgoto, "// 30
 					+ "contaImpressao.clie_idresponsavel as idClienteResponsavel, "// 31
-					+ "imovel.imov_nmimovel as nomeImovel "// 32
+					+ "imovel.imov_nmimovel as nomeImovel, "// 32
+					+ "imovel.imov_icdebitoconta as icdebitoconta " //33
 					+ "from cadastro.cliente_conta cliCnt "
 					+ "inner join faturamento.conta cnt on cliCnt.cnta_id=cnt.cnta_id "
 					+ "inner join faturamento.conta_impressao contaImpressao on cnt.cnta_id = contaImpressao.cnta_id "
@@ -10128,7 +10153,9 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 										"descricaoLigEsgotoSit", Hibernate.STRING)
 								.addScalar("percentualEsgoto", Hibernate.BIG_DECIMAL)
 								.addScalar("idClienteResponsavel", Hibernate.INTEGER)
-								.addScalar("nomeImovel", Hibernate.STRING).setDate("data",
+								.addScalar("nomeImovel", Hibernate.STRING)
+								.addScalar("icdebitoconta", Hibernate.SHORT)
+								.setDate("data",
 										Util.criarData(16, 05, 2007)).setInteger(
 										"indicadorNomeConta", ConstantesSistema.INDICADOR_USO_ATIVO)
 								.setInteger("referencia", anoMesReferencia).setInteger(
@@ -10169,7 +10196,9 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 										"descricaoLigEsgotoSit", Hibernate.STRING)
 								.addScalar("percentualEsgoto", Hibernate.BIG_DECIMAL)
 								.addScalar("idClienteResponsavel", Hibernate.INTEGER)
-								.addScalar("nomeImovel", Hibernate.STRING).setDate("data",
+								.addScalar("nomeImovel", Hibernate.STRING)
+								.addScalar("icdebitoconta", Hibernate.SHORT)
+								.setDate("data",
 										Util.criarData(16, 05, 2007)).setInteger(
 												"indicadorNomeConta", ConstantesSistema.INDICADOR_USO_ATIVO)
 								.setInteger("referencia", anoMesReferencia).setInteger(
@@ -10362,7 +10391,8 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 					+ "ligacaoEsgotoSituacao.lest_dsligacaoesgotosituacao as descricaoLigEsgotoSit, "// 29
 					+ "cnt.cnta_pcesgoto as percentualEsgoto, "// 30
 					+ "contaImpressao.clie_idresponsavel as idClienteResponsavel, "// 31
-					+ "imovel.imov_nmimovel as nomeImovel "// 32
+					+ "imovel.imov_nmimovel as nomeImovel, "// 32
+					+ "imovel.imov_icdebitoconta as icdebitoconta " //33
 					+ "from cadastro.cliente_conta cliCnt "
 					+ "inner join faturamento.conta cnt on cliCnt.cnta_id=cnt.cnta_id "
 					+ "inner join faturamento.conta_impressao contaImpressao on cnt.cnta_id = contaImpressao.cnta_id "
@@ -10426,7 +10456,9 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 										"descricaoLigEsgotoSit", Hibernate.STRING)
 								.addScalar("percentualEsgoto", Hibernate.BIG_DECIMAL)
 								.addScalar("idClienteResponsavel", Hibernate.INTEGER)
-								.addScalar("nomeImovel", Hibernate.STRING).setInteger(
+								.addScalar("nomeImovel", Hibernate.STRING)
+								.addScalar("icdebitoconta", Hibernate.SHORT)
+								.setInteger(
 										"idEmpresa", idEmpresa).setInteger("idUsuario",
 										ClienteRelacaoTipo.USUARIO).setInteger(
 										"referencia", anoMesReferencia)
@@ -10467,7 +10499,9 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 										"descricaoLigEsgotoSit", Hibernate.STRING)
 								.addScalar("percentualEsgoto", Hibernate.BIG_DECIMAL)
 								.addScalar("idClienteResponsavel", Hibernate.INTEGER)
-								.addScalar("nomeImovel", Hibernate.STRING).setInteger(
+								.addScalar("nomeImovel", Hibernate.STRING)
+								.addScalar("icdebitoconta", Hibernate.SHORT)
+								.setInteger(
 										"idEmpresa", idEmpresa).setInteger("idUsuario",
 										ClienteRelacaoTipo.USUARIO).setInteger(
 										"referencia", anoMesReferencia)
@@ -45680,7 +45714,9 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 					+ "  crar.crar_amcobrancacredito as amCobrancaCredito, "
 					+ "  crog.crog_id as idCreditoOrigem, "
 					+ "  crar.crar_nnparcelabonus as numeroParcelaBonus, "
-					+ "  crar.crar_vlresidualconcedidomes as vlResidualConsedidoMes "
+					+ "  crar.crar_vlresidualconcedidomes as vlResidualConsedidoMes, "
+					+ "  crar.crar_amreferenciaprestacao, "
+					+ "  crar.crar_amultimaprestacao "
 					+ " from "
 					+ "  faturamento.credito_a_realizar crar "
 					+ " inner join faturamento.debito_credito_situacao dcst on crar.dcst_idatual=dcst.dcst_id "
@@ -45714,6 +45750,10 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 							Hibernate.INTEGER).addScalar("numeroParcelaBonus",
 							Hibernate.SHORT)
 							.addScalar("vlResidualConsedidoMes",Hibernate.BIG_DECIMAL)
+							.addScalar("crar_amreferenciaprestacao",
+							Hibernate.INTEGER)
+							.addScalar("crar_amultimaprestacao",
+							Hibernate.INTEGER)
 							.setInteger("idCreditoARealizar",
 									IdCreditoARealizar).setInteger("anoMesFaturamento",anoMesFaturamento)
 									.list();
@@ -47240,7 +47280,13 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 			if(conta.getNumeroLeituraAnterior() != null && !conta.getNumeroLeituraAnterior().equals("")){
 				update = update + " ,cnta_nnleituraanterior= " + conta.getNumeroLeituraAnterior();
 			}
-				
+			//RM 14869 - 29/10/2015	
+			if(conta.getDataRevisao() != null){
+				update = update +
+						" ,cnta_dtrevisao= " + Util.obterSQLDataAtual() + 
+						" ,cmrv_id= " + conta.getContaMotivoRevisao().getId();
+			}
+
 				update = update + " WHERE cnta_id = :idConta ";
 			
 			session.createQuery(update).
@@ -50949,7 +50995,8 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 					+ "ligacaoEsgotoSituacao.lest_dsligacaoesgotosituacao as descricaoLigEsgotoSit, "// 29
 					+ "cnt.cnta_pcesgoto as percentualEsgoto, "// 30
 					+ "contaImpressao.clie_idresponsavel as idClienteResponsavel, "// 31
-					+ "imovel.imov_nmimovel as nomeImovel "// 32
+					+ "imovel.imov_nmimovel as nomeImovel, "// 32
+					+ "imovel.imov_icdebitoconta as icdebitoconta " //33
 					+ "from cadastro.cliente_conta cliCnt "
 					+ "inner join faturamento.conta cnt on cliCnt.cnta_id=cnt.cnta_id "
 					+ "inner join faturamento.conta_impressao contaImpressao on cnt.cnta_id = contaImpressao.cnta_id "
@@ -51012,6 +51059,7 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 					.addScalar("percentualEsgoto", Hibernate.BIG_DECIMAL)
 					.addScalar("idClienteResponsavel", Hibernate.INTEGER)
 					.addScalar("nomeImovel", Hibernate.STRING)
+					.addScalar("icdebitoconta", Hibernate.SHORT)
 					.setDate("data",Util.criarData(16, 05, 2007))
 					.setInteger("indicadorNomeConta", ConstantesSistema.INDICADOR_USO_ATIVO)
 					.setInteger("referencia", anoMesReferencia)
@@ -51083,7 +51131,8 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 					+ "ligacaoEsgotoSituacao.lest_dsligacaoesgotosituacao as descricaoLigEsgotoSit, "// 29
 					+ "cnt.cnta_pcesgoto as percentualEsgoto, "// 30
 					+ "contaImpressao.clie_idresponsavel as idClienteResponsavel, "// 31
-					+ "imovel.imov_nmimovel as nomeImovel "// 32
+					+ "imovel.imov_nmimovel as nomeImovel, "// 32
+					+ "imovel.imov_icdebitoconta as icdebitoconta " //33
 					+ "from cadastro.cliente_conta cliCnt "
 					+ "inner join faturamento.conta cnt on cliCnt.cnta_id=cnt.cnta_id "
 					+ "inner join faturamento.conta_impressao contaImpressao on cnt.cnta_id = contaImpressao.cnta_id "
@@ -51140,7 +51189,9 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 							"descricaoLigEsgotoSit", Hibernate.STRING)
 					.addScalar("percentualEsgoto", Hibernate.BIG_DECIMAL)
 					.addScalar("idClienteResponsavel", Hibernate.INTEGER)
-					.addScalar("nomeImovel", Hibernate.STRING).setInteger(
+					.addScalar("nomeImovel", Hibernate.STRING)
+					.addScalar("icdebitoconta", Hibernate.SHORT)
+					.setInteger(
 							"idEmpresa", idEmpresa).setInteger("indicadorNomeConta",
 							ConstantesSistema.INDICADOR_USO_ATIVO).setInteger(
 							"referencia", anoMesReferencia)
@@ -54758,7 +54809,8 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 					"where imov.indicadorExclusao = :indicadorExclusao " +
 					"and icte.id in(:braille , :brailleResponsavel )" +
 					"and cnta.referencia = :anoMesFaturamento  " +
-					"and cnta.debitoCreditoSituacaoAtual.id IN(:normal, :incluida, :retificada) " ; 
+					"and cnta.debitoCreditoSituacaoAtual.id IN(:normal, :incluida, :retificada) " +
+					"and cnta.contaMotivoRevisao is null and cnta.dataRevisao is null " ; 
 			
 			if(faturamentoGrupo != null && faturamentoGrupo.getId() != null ){
 				consulta = consulta + "and cnta.faturamentoGrupo.id = :idFaturamentoGrupoParms ";
@@ -64910,5 +64962,119 @@ public class RepositorioFaturamentoHBM implements IRepositorioFaturamento {
 		}
 
 		return retorno;		
+	}
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Pesquisa o identificado a localidade de uma guia de pagamento
+	 * 
+	 * @author Jean Varela
+	 * @date 06/10/2015
+	 */
+	public Integer pesquisarIdLocalidadeGuiaPagamento(Integer idGuiaPagamento) throws ErroRepositorioException{
+		Integer retorno = null;
+
+		Session session = HibernateUtil.getSession();
+		String consulta;
+		
+		try {
+			
+			  consulta = "select loca_id "
+				       + "FROM faturamento.guia_pagamento "
+					   + "where gpag_id = :idGuiaPagamento";
+			  
+			  
+			  retorno = (Integer) ((SQLQuery) session.createSQLQuery(consulta))
+					    .addScalar("loca_id", Hibernate.INTEGER)
+					    .setInteger("idGuiaPagamento", idGuiaPagamento)
+					    .setMaxResults(1).uniqueResult();
+			  
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		} 
+		
+		return retorno;
+	}
+	
+	/**
+	 * [UC0348] Emitir Contas
+	 * 
+	 * Verifica se motivo de revisão da conta é igual ao motivo de revisão da anormalidade estouro de consumo 
+	 * 
+	 * @author Vivianne Sousa
+	 * @date 21/10/2015
+	 */
+	public Integer pesquisarMotivoRevisaoContaAnormalidadeConsumo(Integer idConta) throws ErroRepositorioException{
+		Integer retorno = null;
+
+		Session session = HibernateUtil.getSession();
+		String consulta;
+		
+		try {
+			
+			  consulta = "select cnta.cmrv_id as motivoRevisao "
+					+ "from faturamento.conta cnta "
+					+ "inner join micromedicao.consumo_anorm_acao csaa on " 
+					+ "     (csaa.cmrv_idmes1 = cnta.cmrv_id OR csaa.cmrv_idmes2 = cnta.cmrv_id OR csaa.cmrv_idmes3 = cnta.cmrv_id) "
+					+ "where cnta_id = :idConta ";
+			  
+			  retorno = (Integer) ((SQLQuery) session.createSQLQuery(consulta))
+					    .addScalar("motivoRevisao", Hibernate.INTEGER)
+					    .setInteger("idConta", idConta)
+					    .setMaxResults(1).uniqueResult();
+			  
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		} 
+		
+		return retorno;
+	}
+	
+	/**
+	 * [UC0113] - Faturar Grupo de Faturamento
+	 * [SB0006] - Gerar Dados da Conta
+	 * 
+	 * Determina o tipo de conta que será associado na impressão da conta
+	 * 
+	 * @author Vivianne Sousa
+	 * @date 27/10/2015
+	 */
+	public boolean verificarMotivoRevisaoEstouroConsumo (Integer idContaMotivoRevisao) throws ErroRepositorioException{
+		boolean retorno = false;
+
+		Session session = HibernateUtil.getSession();
+		String consulta;
+		Integer resultado = null;
+		
+		try {
+			  consulta = "select csaa.csaa_id as id "
+					+ "from micromedicao.consumo_anorm_acao csaa  " 
+					+ "where csaa.csan_id = :estouroAnormalidade " 
+					+ "AND (csaa.cmrv_idmes1 = :idContaMotivoRevisao "
+					+ "OR csaa.cmrv_idmes2 = :idContaMotivoRevisao " 
+					+ "OR csaa.cmrv_idmes3 = :idContaMotivoRevisao) " ;
+			  
+			  resultado = (Integer) ((SQLQuery) session.createSQLQuery(consulta))
+					    .addScalar("id", Hibernate.INTEGER)
+					    .setInteger("idContaMotivoRevisao", idContaMotivoRevisao)
+					    .setInteger("estouroAnormalidade", ConsumoAnormalidade.ESTOURO_CONSUMO)
+					    .setMaxResults(1).uniqueResult();
+			  
+			  if(resultado != null){
+				  retorno = true;
+			  }
+			  
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		} 
+		
+		return retorno;
 	}
 }

@@ -161,7 +161,7 @@ public class ValidarSituacaoEspecialFaturamentoInserirAtualizarAction extends
 
 				Integer anoMesInicial = fachada
 						.validarMesAnoReferencia(transferirActionFormParaHelper(situacaoEspecialFaturamentoActionForm,usuarioLogado));
-				if (anoMesInicial > (anoMesReferenciaInicial)) {
+				if (anoMesInicial.intValue() > anoMesReferenciaInicial.intValue()) {
 
 					throw new ActionServletException(
 							"atencao.mes.ano.anterior.mes.ano.corrente.imovel");

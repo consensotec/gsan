@@ -112,6 +112,11 @@ public class RelatorioEmitirGuiaPagamento extends TarefaRelatorio {
 	public RelatorioEmitirGuiaPagamento(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_GUIA_PAGAMENTO_EMITIR);
 	}
+	
+	@Deprecated
+	public RelatorioEmitirGuiaPagamento() {
+		super(null, "");
+	}
 
 	private Collection<RelatorioEmitirGuiaPagamentoBean> inicializarBeanRelatorio(
 			Collection<GuiaPagamentoRelatorioHelper> dadosRelatorio) {

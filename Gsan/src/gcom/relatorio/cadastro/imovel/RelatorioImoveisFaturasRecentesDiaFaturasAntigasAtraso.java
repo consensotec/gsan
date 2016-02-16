@@ -108,6 +108,11 @@ public class RelatorioImoveisFaturasRecentesDiaFaturasAntigasAtraso extends Tare
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_FATURAS_RECENTES_DIA_FATURAS_ANTIGAS_ATRASO);
 	}
 
+	@Deprecated
+	public RelatorioImoveisFaturasRecentesDiaFaturasAntigasAtraso() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

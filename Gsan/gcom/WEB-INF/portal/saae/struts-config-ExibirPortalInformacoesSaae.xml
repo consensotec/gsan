@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="ExibirInformacoesPortalSaaeActionForm"
+			type="gcom.gui.portal.saae.ExibirInformacoesPortalSaaeActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="ExibirInformacoesPortalSaaeActionForm"
+			type="gcom.gui.portal.saae.ExibirInformacoesPortalSaaeAction"
+			validate="false" scope="session"
+			path="/exibirInformacoesPortalSaaeAction">
+
+			<forward name="exibirInformacoesPortalSaaeAction"
+				path="/jsp/portal/saae/informacoes_portal_saae.jsp" />
+
+			<forward name="exibirInformacoesParcelamentoDebitoPortalSaaeAction"
+				path="/jsp/portal/saae/informacoes_parcelamento_debito_portal_saae.jsp" />
+			
+			<forward name="exibirValidarCertidaoNegativaDebitoPortalSaaeAction"
+				path="/jsp/portal/saae/validar_certidao_negativa_debito_portal_saae.jsp" />
+			
+		</action>
+		
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>
+

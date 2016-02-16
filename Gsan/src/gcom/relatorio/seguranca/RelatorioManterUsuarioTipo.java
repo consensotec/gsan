@@ -118,6 +118,11 @@ public class RelatorioManterUsuarioTipo extends TarefaRelatorio {
 	public RelatorioManterUsuarioTipo(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_USUARIO_TIPO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterUsuarioTipo() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

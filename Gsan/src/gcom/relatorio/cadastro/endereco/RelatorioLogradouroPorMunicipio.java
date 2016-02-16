@@ -32,6 +32,12 @@ public class RelatorioLogradouroPorMunicipio extends TarefaRelatorio{
 		super(usuario, ConstantesRelatorios.RELATORIO_LOGRADOURO_POR_MUNICIPIO);
 	}
 
+	@Deprecated
+	public RelatorioLogradouroPorMunicipio() {
+		super(null, "");
+	}
+
+
 	@Override
 	public Object executar() throws TarefaException {
 		// ------------------------------------

@@ -109,6 +109,11 @@ public class RelatorioAcompanhamentoFaturamento extends TarefaRelatorio {
 	public RelatorioAcompanhamentoFaturamento(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_ACOMPANHAMENTO_FATURAMENTO);
 	}
+	
+	@Deprecated
+	public RelatorioAcompanhamentoFaturamento() {
+		super(null, "");
+	}
 
 	/**
 	 * <<Descrição do método>>

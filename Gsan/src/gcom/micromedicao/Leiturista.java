@@ -167,6 +167,10 @@ public class Leiturista extends ObjetoTransacao implements Comparable<Leiturista
         this.indicadorAgenteComercial = indicadorAgenteComercial;
     }
 
+    public Leiturista(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return this.id;
     }

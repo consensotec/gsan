@@ -132,6 +132,11 @@ public class RelatorioAcompanhamentoClientesNegativadosSintetico extends TarefaR
 		super(usuario, contantesRelatorio);
 	}
 
+	@Deprecated
+	public RelatorioAcompanhamentoClientesNegativadosSintetico() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

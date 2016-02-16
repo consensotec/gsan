@@ -124,6 +124,11 @@ public class RelatorioRoteiroProgramacao extends TarefaRelatorio {
 	public RelatorioRoteiroProgramacao(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_ROTEIRO_PROGRAMACAO);
 	}
+	
+	@Deprecated
+	public RelatorioRoteiroProgramacao() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

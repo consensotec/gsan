@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<global-forwards />
+
+	<action-mappings>
+		<action 
+			type="gcom.gui.portal.comum.cartaocredito.RegistrarRetornoDadosCartaoCreditoAction"
+			validate="false" path="/registrarRetornoDadosCartaoCreditoAction">
+			<forward name="retornoPgtoCartoCredito" path="/jsp/portal/saae/parcelamento_debitos_cartao_credito_retorno_portal_saae.jsp"/>
+		</action>
+	</action-mappings>
+</struts-config>

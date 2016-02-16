@@ -37,6 +37,7 @@
 	<property name="lib.servlet" value="lib/Servlet" />
 	<property name="lib.sqlite" value="lib/Sqlite"/>
 	<property name="lib.struts" value="lib/Struts1.1" />
+	<property name="lib.retrofit" value="lib/retrofit" />
 
 	<path id="project.class.path">
 		<pathelement location="${lib.axis}/axiom-api-1.2.12.jar"/>
@@ -114,6 +115,7 @@
 		<pathelement location="${lib.pdfbox}/jempbox-1.8.8.jar"/>
 		<pathelement location="${lib.pdfbox}/fontbox-1.8.8.jar"/>
 		<pathelement location="${lib.driver}/vertica-jdk5-6.1.2-0.jar" />
+		<pathelement location="${lib.retrofit}/retrofit-1.9.0.jar" />
 	</path>
 
 	<target name="javacompile">
@@ -212,6 +214,7 @@
 				<include name="**/*.xml" />
 				<include name="**/*.zip" />
 				<include name="**/*.hs" />
+				<include name="**/*.ico" />
 				<exclude name="WEB-INF/" />
 			</fileset>
 			<fileset dir="gcom">
@@ -263,6 +266,9 @@
 				<include name="*.jar"/>
 			</lib>
 			<lib dir="${lib.driver}">
+				<include name="*.jar"/>
+			</lib>
+			<lib dir="${lib.retrofit}">
 				<include name="*.jar"/>
 			</lib>
 		</war>
@@ -334,6 +340,9 @@
 				<include name="*.jar" />
 			</fileset>
 			<fileset dir="${lib.driver}">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${lib.retrofit}">
 				<include name="*.jar" />
 			</fileset>
 		</copy>

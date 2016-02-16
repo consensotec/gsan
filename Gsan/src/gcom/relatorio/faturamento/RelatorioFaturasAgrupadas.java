@@ -117,6 +117,11 @@ public class RelatorioFaturasAgrupadas extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_FATURAS_AGRUPADAS);
 	}
 
+	@Deprecated
+	public RelatorioFaturasAgrupadas() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

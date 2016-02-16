@@ -100,6 +100,11 @@ public class RelatorioManterRetornoControleHidrometro extends TarefaRelatorio {
 	public RelatorioManterRetornoControleHidrometro(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_RETORNO_CONTROLE_HIDROMETRO);
 	}
+	
+	@Deprecated
+	public RelatorioManterRetornoControleHidrometro() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

@@ -159,11 +159,12 @@ public class InserirContratoParcelamentoPorClienteAction extends GcomAction {
 
 			BigDecimal valorContaSelecaoTotal = (BigDecimal) sessao.getAttribute("valorContaSelecaoTotal");
 			BigDecimal valorContaComAcrescimo = (BigDecimal) sessao.getAttribute("valorContaAcrescimoSelecaoTotal");
+			BigDecimal valorDebitosACobrarSelecao = (BigDecimal) sessao.getAttribute("valorDebitosACobrarSelecao");
 			
 			SistemaParametro sistemaParametro = fachada.pesquisarParametrosDoSistema();
 			
 			InserirContratoParcelamentoValoresParcelasHelper helper = Fachada.getInstancia()
-				.calcularValoresParcelasContratoParcelamento(valorContaSelecaoTotal, valorContaComAcrescimo, 
+				.calcularValoresParcelasContratoParcelamento(valorContaSelecaoTotal, valorContaComAcrescimo,valorDebitosACobrarSelecao, 
 					indicadorDebitoAcresc, contratoCadastrar.getIndicadorParcelamentoJuros().toString(), 
 					new BigDecimal(juros.replace(",", ".")), 1, Integer.parseInt(form.getPacerlaAdd()));
 
@@ -182,9 +183,9 @@ public class InserirContratoParcelamentoPorClienteAction extends GcomAction {
 			contratoCadastrar.setValorJurosParcelamento(jurosVal);
 			
 			if(jurosVal != null && jurosVal.floatValue() > 0.0){
-				contratoCadastrar.setValorDebitoAtualizado(valorParcelado.subtract(jurosVal));
+				contratoCadastrar.setValorDebitoAtualizado(valorParcelado.subtract(jurosVal).add(valorDebitosACobrarSelecao));
 			}else{
-				contratoCadastrar.setValorDebitoAtualizado(valorParcelado);
+				contratoCadastrar.setValorDebitoAtualizado(valorParcelado.add(valorDebitosACobrarSelecao));
 			}
 			
 		}else{
@@ -195,7 +196,8 @@ public class InserirContratoParcelamentoPorClienteAction extends GcomAction {
 			}else{
 				valorParcelado = valorConta;
 			}
-			contratoCadastrar.setValorDebitoAtualizado(valorParcelado);
+			BigDecimal valorDebitosACobrarSelecao = (BigDecimal) sessao.getAttribute("valorDebitosACobrarSelecao");
+			contratoCadastrar.setValorDebitoAtualizado(valorParcelado.add( valorDebitosACobrarSelecao ));
 		}
 		
 		Integer anoMesReferenciaFaturamento = Util.formataAnoMes(new Date());
@@ -234,9 +236,10 @@ public class InserirContratoParcelamentoPorClienteAction extends GcomAction {
 					
 					BigDecimal valorContaComAcrescimo = (BigDecimal) sessao.getAttribute("valorContaAcrescimoSelecaoTotal");
 					BigDecimal valorContaSelecaoTotal = (BigDecimal) sessao.getAttribute("valorContaSelecaoTotal");
+					BigDecimal valorDebitosACobrarSelecao = (BigDecimal) sessao.getAttribute("valorDebitosACobrarSelecao");
 					
 					InserirContratoParcelamentoValoresParcelasHelper helper = fachada
-						.calcularValoresParcelasContratoParcelamentoRD(valorContaSelecaoTotal, valorContaComAcrescimo, 
+						.calcularValoresParcelasContratoParcelamentoRD(valorContaSelecaoTotal, valorContaComAcrescimo, valorDebitosACobrarSelecao,
 								form.getIndicadorDebitoAcresc(), form.getIndicadorParcelJuros(), contratoCadastrar, 
 								quantidadePrestacoes);
 
@@ -527,6 +530,7 @@ public class InserirContratoParcelamentoPorClienteAction extends GcomAction {
 
 				BigDecimal valorContaSelecao = (BigDecimal) sessao.getAttribute("valorContaSelecao");
 				BigDecimal valorContaComAcrescimo = (BigDecimal) sessao.getAttribute("valorContaAcrescimoSelecao");
+				BigDecimal valorDebitosACobrarSelecao = (BigDecimal) sessao.getAttribute("valorDebitosACobrarSelecao");
 				
 				Collection<QuantidadePrestacoesRDHelper> colecaoQuantidadePrestacoesRDHelper = 
 					new ArrayList<QuantidadePrestacoesRDHelper>();
@@ -536,7 +540,7 @@ public class InserirContratoParcelamentoPorClienteAction extends GcomAction {
 					QuantidadePrestacoesRDHelper quantidadePrestacoesRDHelper = new QuantidadePrestacoesRDHelper();
 					
 					InserirContratoParcelamentoValoresParcelasHelper helper = fachada
-						.calcularValoresParcelasContratoParcelamentoRD(valorContaSelecao, valorContaComAcrescimo, 
+						.calcularValoresParcelasContratoParcelamentoRD(valorContaSelecao, valorContaComAcrescimo, valorDebitosACobrarSelecao,
 								form.getIndicadorDebitoAcresc(), form.getIndicadorParcelJuros(), contratoCadastrar, 
 								quantidadePrestacoes);
 					

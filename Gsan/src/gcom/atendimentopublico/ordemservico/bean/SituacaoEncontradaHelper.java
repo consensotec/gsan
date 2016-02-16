@@ -90,6 +90,8 @@ public class SituacaoEncontradaHelper {
 	private short geracaoDebito;
 	private Date dataFiscalizacao;
 	private Short indicadorDebitoOrdemServicoFiscSit;
+	private Integer idDocumentoCobranca;
+	private Integer codigoDocumentoEntregue;
 	
 	public FiscalizacaoSituacao getFiscalizacaoSituacao() {
 		return fiscalizacaoSituacao;
@@ -118,6 +120,17 @@ public class SituacaoEncontradaHelper {
 			Short indicadorDebitoOrdemServicoFiscSit) {
 		this.indicadorDebitoOrdemServicoFiscSit = indicadorDebitoOrdemServicoFiscSit;
 	}
-	
+	public Integer getIdDocumentoCobranca() {
+		return idDocumentoCobranca;
+	}
+	public void setIdDocumentoCobranca(Integer idDocumentoCobranca) {
+		this.idDocumentoCobranca = idDocumentoCobranca;
+	}
+	public Integer getCodigoDocumentoEntregue() {
+		return codigoDocumentoEntregue;
+	}
+	public void setCodigoDocumentoEntregue(Integer codigoDocumentoEntregue) {
+		this.codigoDocumentoEntregue = codigoDocumentoEntregue;
+	}
 	
 }

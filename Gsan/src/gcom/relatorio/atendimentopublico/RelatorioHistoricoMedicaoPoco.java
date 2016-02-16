@@ -106,6 +106,11 @@ public class RelatorioHistoricoMedicaoPoco extends TarefaRelatorio {
 	public RelatorioHistoricoMedicaoPoco(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_HISTORICO_MEDICAO_POCO);
 	}
+	
+	@Deprecated
+	public RelatorioHistoricoMedicaoPoco() {
+		super(null, "");
+	}
 
 	private Collection<RelatorioHistoricoMedicaoPocoBean> inicializarBeanRelatorio(Collection dadosRelatorio2) {
 

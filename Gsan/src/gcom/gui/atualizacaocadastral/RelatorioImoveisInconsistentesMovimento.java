@@ -1,5 +1,12 @@
 package gcom.gui.atualizacaocadastral;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import gcom.cadastro.sistemaparametro.SistemaParametro;
 import gcom.fachada.Fachada;
 import gcom.gui.ActionServletException;
@@ -10,13 +17,6 @@ import gcom.tarefa.TarefaException;
 import gcom.tarefa.TarefaRelatorio;
 import gcom.util.Util;
 import gcom.util.agendadortarefas.AgendadorTarefas;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 /**
  * [UC 1297] - Relatório Imóveis Inconsistentes - Atualização Cadastral
@@ -33,6 +33,11 @@ public class RelatorioImoveisInconsistentesMovimento extends TarefaRelatorio {
 	
 	public RelatorioImoveisInconsistentesMovimento(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_INCONSISTENTES_MOVIMENTO);
+	}
+	
+	@Deprecated
+	public RelatorioImoveisInconsistentesMovimento(){
+		super(null, "");
 	}
 	
 	@Override

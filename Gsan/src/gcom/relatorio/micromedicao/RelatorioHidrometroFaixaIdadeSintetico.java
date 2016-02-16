@@ -127,6 +127,11 @@ public class RelatorioHidrometroFaixaIdadeSintetico extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_HIDROMETRO_FAIXA_IDADE_SINTETICO);
 	}
 
+	@Deprecated
+	public RelatorioHidrometroFaixaIdadeSintetico() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 
 		Integer idFuncionalidadeIniciada = this.getIdFuncionalidadeIniciada();

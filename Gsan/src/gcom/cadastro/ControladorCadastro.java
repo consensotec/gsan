@@ -7899,13 +7899,13 @@ public class ControladorCadastro implements SessionBean {
 				}
 
 				// Código Logradouro
-				if (element[8] != null) {
-					imovelAtualizacaoCadastral
-							.setIdLogradouro((Integer) element[8]);
-				} else if (element[9] != null) {
+				if (element[9] != null) {
 					imovelAtualizacaoCadastral
 							.setIdLogradouro((Integer) element[9]);
-				}
+				}else if (element[8] != null) {
+					imovelAtualizacaoCadastral
+					.setIdLogradouro((Integer) element[8]);
+				} 
 
 				// Logradouro
 				Collection colecaoEndereco = getControladorEndereco()
@@ -21541,10 +21541,10 @@ public class ControladorCadastro implements SessionBean {
 				if (element[8] != null) {
 					imovelAtualizacaoCadastral
 							.setIdLogradouro(((Integer) element[8]).longValue());
-				} else if (element[9] != null) {
+				}else if (element[9] != null) {
 					imovelAtualizacaoCadastral
 							.setIdLogradouro(((Integer) element[9]).longValue());
-				}
+				}	
 
 				// Observação
 				imovelAtualizacaoCadastral.setObservacao(null);
@@ -29276,7 +29276,7 @@ public class ControladorCadastro implements SessionBean {
 		boolean inserirRetornoPendente = false;
 		boolean inserirRetornoSucesso = false;
 
-		Long idLogradouro = imovel.getLogradouroBairro().getLogradouro()
+		Long idLogradouro = imovel.getLogradouroCep().getLogradouro()
 				.getId().longValue();
 		Integer cdCep = imovel.getLogradouroCep().getCep().getCodigo();
 		Integer idBairro = imovel.getLogradouroBairro().getBairro().getId();

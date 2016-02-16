@@ -100,6 +100,11 @@ public class RelatorioMonitorarLeituraMobile extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_MONITORAR_LEITURA_MOBILE);
 	}
 
+	@Deprecated
+	public RelatorioMonitorarLeituraMobile() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

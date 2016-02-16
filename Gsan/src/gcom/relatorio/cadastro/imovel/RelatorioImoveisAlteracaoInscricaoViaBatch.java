@@ -90,7 +90,6 @@ import gcom.tarefa.TarefaRelatorio;
 import gcom.util.ControladorException;
 import gcom.util.Util;
 import gcom.util.agendadortarefas.AgendadorTarefas;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -112,6 +111,11 @@ public class RelatorioImoveisAlteracaoInscricaoViaBatch extends TarefaRelatorio 
 	
 	public RelatorioImoveisAlteracaoInscricaoViaBatch(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_ALTERACAO_INSCRICAO_VIA_BATCH);
+	}
+
+	@Deprecated
+	public RelatorioImoveisAlteracaoInscricaoViaBatch() {
+		super(null, "");
 	}
 
 	/**

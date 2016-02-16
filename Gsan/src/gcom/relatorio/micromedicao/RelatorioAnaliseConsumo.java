@@ -111,6 +111,12 @@ public class RelatorioAnaliseConsumo extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_ANALISE_CONSUMO);
 	}
 	
+	@Deprecated
+	public RelatorioAnaliseConsumo() {
+		super(null, "");
+	}
+
+	
 	private Collection<RelatorioAnaliseConsumoBean> inicializarBeanRelatorio(
 			Collection colecaoAnaliseConsumoHelper, String mesAnoPesquisa,
 			boolean verificaLeituraAtual) {

@@ -39,6 +39,11 @@ public class RelatorioRotasOnlinePorEmpresa extends TarefaRelatorio {
 
 	private static final long serialVersionUID = 1L;
 	
+	@Deprecated
+	public RelatorioRotasOnlinePorEmpresa() {
+		super(null, "");
+	}
+	
 	public RelatorioRotasOnlinePorEmpresa(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_ROTAS_ONLINE_POR_EMPRESA);
 	}

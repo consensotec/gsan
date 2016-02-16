@@ -118,6 +118,11 @@ public class RelatorioManterFaturamentoGrupo extends TarefaRelatorio {
 	public RelatorioManterFaturamentoGrupo(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_FATURAMENTO_GRUPO);
 	}
+	
+	@Deprecated
+	public RelatorioManterFaturamentoGrupo() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

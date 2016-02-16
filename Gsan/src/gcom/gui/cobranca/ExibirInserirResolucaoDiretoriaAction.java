@@ -124,7 +124,7 @@ public class ExibirInserirResolucaoDiretoriaAction extends GcomAction {
 		inserirResolucaoDiretoriaActionForm.setIndicadorNegociacaoSoAVista(ConstantesSistema.NAO.toString());
 		inserirResolucaoDiretoriaActionForm.setIndicadorDescontoSoEmContaAVista(ConstantesSistema.NAO.toString());
 		inserirResolucaoDiretoriaActionForm.setIndicadorParcelamentoLojaVirtual(ConstantesSistema.NAO.toString());
-		
+		inserirResolucaoDiretoriaActionForm.setIndicadorParcelamentoCartaoCredito(ConstantesSistema.NAO.toString());
 		return retorno;
 
 	}

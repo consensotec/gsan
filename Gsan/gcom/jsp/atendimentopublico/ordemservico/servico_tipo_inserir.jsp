@@ -1119,6 +1119,21 @@
 					<td align="left"><label> <html:radio property="atividadeUnica"
 						value="2" /> <strong>Não</strong></label></td>
 				</tr>
+			
+				<!--  Indicador do Serviço de cobrança -->
+						<tr>
+							<td><strong><span class="style2">Indicador  Serviço de cobrança:<font color="#FF0000">*</font></span></strong></td>
+							<td align="left" width="20%">
+								<label> 
+									<html:radio	property="indicadorServicoCobranca" value="1" /><strong>Sim</strong>
+								</label>
+							</td>
+							<td align="left">
+								<label> 
+									<html:radio property="indicadorServicoCobranca" value="2" /><strong>Não</strong>
+								</label>
+							</td>
+						</tr>
 				
 				<!-- Atividades do Tipo de Serviço -->
 

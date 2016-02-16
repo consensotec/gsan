@@ -128,7 +128,7 @@ public class AtualizarContratoParcelamentoPorClienteAction extends GcomAction {
 		
 		List<DebitosClienteHelper> listaDebitosContas = (List<DebitosClienteHelper>) sessao.getAttribute("listaDebitos");
 		List<DebitosClienteHelper> listaDebitosACobrar = (List<DebitosClienteHelper>) sessao.getAttribute("listaDebitosACobrar");
-
+		
 		if (listaDebitosContas != null && !listaDebitosContas.isEmpty()) {
 			listaDebitos.addAll(listaDebitosContas);
 		}
@@ -177,6 +177,7 @@ public class AtualizarContratoParcelamentoPorClienteAction extends GcomAction {
 
 			BigDecimal valorContaSelecao = (BigDecimal) sessao.getAttribute("valorContaSelecao");
 			BigDecimal acrescimo = (BigDecimal) sessao.getAttribute("valorContaAcrescimoSelecao");
+			BigDecimal valorDebitosACobrarSelecao = (BigDecimal) sessao.getAttribute("valorDebitosACobrarSelecao");
 
 			Integer numeroParcelas = null;
 			if (form.getPacerlaAdd() != null
@@ -188,7 +189,7 @@ public class AtualizarContratoParcelamentoPorClienteAction extends GcomAction {
 			}
 			
 			InserirContratoParcelamentoValoresParcelasHelper helper = Fachada.getInstancia()
-				.calcularValoresParcelasContratoParcelamento(valorContaSelecao, acrescimo, 
+				.calcularValoresParcelasContratoParcelamento(valorContaSelecao, acrescimo, valorDebitosACobrarSelecao,
 					contratoAtualizar.getIndicadorDebitosAcrescimos().toString(), 
 					contratoAtualizar.getIndicadorParcelamentoJuros().toString(), 
 					jurosFormatado, 1, numeroParcelas.intValue());
@@ -209,9 +210,9 @@ public class AtualizarContratoParcelamentoPorClienteAction extends GcomAction {
 			}
 			
 			if(jurosVal != null && jurosVal.floatValue() > 0.0){
-				contratoAtualizar.setValorDebitoAtualizado(valorParcelado.subtract(jurosVal));
+				contratoAtualizar.setValorDebitoAtualizado(valorParcelado.subtract(jurosVal).add( valorDebitosACobrarSelecao ));
 			}else{
-				contratoAtualizar.setValorDebitoAtualizado(valorParcelado);
+				contratoAtualizar.setValorDebitoAtualizado(valorParcelado.add( valorDebitosACobrarSelecao ));
 			}
 			
 		}else{
@@ -222,7 +223,8 @@ public class AtualizarContratoParcelamentoPorClienteAction extends GcomAction {
 			}else{
 				valorParcelado = valorConta;
 			}
-			contratoAtualizar.setValorDebitoAtualizado(valorParcelado);
+			BigDecimal valorDebitosACobrarSelecao = (BigDecimal) sessao.getAttribute("valorDebitosACobrarSelecao");			
+			contratoAtualizar.setValorDebitoAtualizado(valorParcelado.add( valorDebitosACobrarSelecao ) );
 		}
 		
 		contratoAtualizar.setValorJurosParcelamento(jurosVal);
@@ -257,6 +259,7 @@ public class AtualizarContratoParcelamentoPorClienteAction extends GcomAction {
 				if(quantidadePrestacoesRDHelper.getIdQuantidadePrestacoes().intValue() ==  Integer.parseInt(form.getParcelaSelecao())){
 					BigDecimal valorContaSelecao = (BigDecimal) sessao.getAttribute("valorContaSelecao");
 					BigDecimal valorContaComAcrescimo = (BigDecimal) sessao.getAttribute("valorContaAcrescimoSelecao");
+					BigDecimal valorDebitosACobrarSelecao = (BigDecimal) sessao.getAttribute("valorDebitosACobrarSelecao");
 					
 					FiltroQuantidadePrestacoes filtroQuantidadePrestacoes = new FiltroQuantidadePrestacoes();
 					filtroQuantidadePrestacoes.adicionarParametro(new ParametroSimples(FiltroQuantidadePrestacoes.ID, quantidadePrestacoesRDHelper.getIdQuantidadePrestacoes()));
@@ -265,6 +268,7 @@ public class AtualizarContratoParcelamentoPorClienteAction extends GcomAction {
 					
 					InserirContratoParcelamentoValoresParcelasHelper helper = fachada
 					.calcularValoresParcelasContratoParcelamentoRD(valorContaSelecao, valorContaComAcrescimo, 
+							valorDebitosACobrarSelecao,
 							form.getIndicadorDebitoAcresc(), form.getIndicadorParcelJuros(), contratoAtualizar, 
 							quantidadePrestacoes);
 
@@ -501,7 +505,6 @@ public class AtualizarContratoParcelamentoPorClienteAction extends GcomAction {
 			sessao.setAttribute("valorAcrescSelecao",BigDecimal.ZERO);
 			sessao.setAttribute("valorContaComAcrescimoSelecao",BigDecimal.ZERO);
 		}
-
 		
 		if(form.getDebitosSelecao() != null && form.getDebitosSelecao().length > 0){
 			
@@ -557,6 +560,7 @@ public class AtualizarContratoParcelamentoPorClienteAction extends GcomAction {
 
 				BigDecimal valorContaSelecao = (BigDecimal) sessao.getAttribute("valorContaSelecao");
 				BigDecimal valorContaComAcrescimo = (BigDecimal) sessao.getAttribute("valorContaAcrescimoSelecao");
+				BigDecimal valorDebitosACobrarSelecao = (BigDecimal) sessao.getAttribute("valorDebitosACobrarSelecao");
 				
 				Collection<QuantidadePrestacoesRDHelper> colecaoQuantidadePrestacoesRDHelper = 
 					new ArrayList<QuantidadePrestacoesRDHelper>();
@@ -567,6 +571,7 @@ public class AtualizarContratoParcelamentoPorClienteAction extends GcomAction {
 					
 					InserirContratoParcelamentoValoresParcelasHelper helper = fachada
 						.calcularValoresParcelasContratoParcelamentoRD(valorContaSelecao, valorContaComAcrescimo, 
+								valorDebitosACobrarSelecao,
 								form.getIndicadorDebitoAcresc(), form.getIndicadorParcelJuros(), contratoAtualizar, 
 								quantidadePrestacoes);
 					

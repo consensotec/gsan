@@ -110,6 +110,11 @@ public class RelatorioPagamentoEntidadesBeneficentesAnalitico extends TarefaRela
 		super(usuario,
 				ConstantesRelatorios.RELATORIO_PAGAMENTO_ENTIDADES_BENEFICENTES_ANALITICO);
 	}
+
+	@Deprecated
+	public RelatorioPagamentoEntidadesBeneficentesAnalitico() {
+		super(null, "");
+	}
 	
 	@Override
 	public int calcularTotalRegistrosRelatorio() {

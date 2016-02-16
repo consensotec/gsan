@@ -116,7 +116,13 @@ public class RelatorioOSFiscalizacao extends TarefaRelatorio {
 	public RelatorioOSFiscalizacao(Usuario usuario, String nomeRelatorio) {
 		super(usuario, nomeRelatorio);
 	}
-
+	
+	@Deprecated
+	public RelatorioOSFiscalizacao() {
+		super(null, "");
+	}
+	
+	
 	protected Collection<RelatorioOSFiscalizacaoBean> inicializarBeanRelatorio(
 			Collection colecaoEmitirContaHelper, Collection colecaoOSReferidaRetornoTipo) {
 		

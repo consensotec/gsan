@@ -122,6 +122,11 @@ public class RelatorioManterRota extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_ROTA_MANTER);
 	}
 
+	@Deprecated
+	public RelatorioManterRota() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

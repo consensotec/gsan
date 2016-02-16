@@ -78,8 +78,10 @@ package gcom.relatorio.faturamento;
 import gcom.batch.Relatorio;
 import gcom.cadastro.sistemaparametro.SistemaParametro;
 import gcom.fachada.Fachada;
+import gcom.gui.ActionServletException;
 import gcom.relatorio.ConstantesRelatorios;
 import gcom.relatorio.RelatorioDataSource;
+import gcom.relatorio.RelatorioVazioException;
 import gcom.seguranca.acesso.usuario.Usuario;
 import gcom.tarefa.TarefaException;
 import gcom.tarefa.TarefaRelatorio;
@@ -105,7 +107,12 @@ public class RelatorioAnaliticoFaturamento extends TarefaRelatorio {
 	public RelatorioAnaliticoFaturamento(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_ANALITICO_FATURAMENTO);
 	}
-
+	
+	@Deprecated
+	public RelatorioAnaliticoFaturamento() {
+		super(null, "");
+	}
+	
 	private Collection<RelatorioAnaliticoFaturamentoBean> inicializarBeanRelatorio(
 			Collection colecaoAnaliticoRelatorio) {
 		

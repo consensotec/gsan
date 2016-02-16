@@ -15,7 +15,7 @@
 <script language="JavaScript" src="<bean:message key="caminho.js"/>util.js" ></script>
 <script language="JavaScript" src="<bean:message key="caminho.js"/>Calendario.js" ></script>
 <script language="JavaScript" src="<bean:message key="caminho.js"/>validacao/regras_validator.js"></script>
-
+<script src="<bean:message key="caminho.js"/>jquery/jquery.js"></script>
 <html:javascript staticJavascript="false"  formName="FiltrarRelatorioDividaAtivaActionForm" />
 
 <script LANGUAGE="JavaScript">
@@ -27,7 +27,12 @@
 			validaMesAno(form.periodoAtualizacaoInicial, form.periodoAtualizacaoFinal, "Período de Amortização");
 
 			if(form.indicadorTipoRelatorio[0].checked){
-				botaoAvancarTelaEspera('/gsan/gerarRelatorioDividaAtivaAmortizadaAction.do');
+				if (form.indicadorRelatorioSinteticoAnalitico[0].checked || 
+					form.indicadorRelatorioSinteticoAnalitico[1].checked){
+					botaoAvancarTelaEspera('/gsan/gerarRelatorioDividaAtivaAmortizadaAction.do');
+				}else{
+					alert("Selecione Relatório Analítico ou Sintético.")
+				}
 			}else{
 				botaoAvancarTelaEspera('/gsan/gerarRelatorioDividaAtivaParceladaAction.do');
 			}
@@ -66,12 +71,13 @@
 			form.periodoAtualizacaoInicial.value = "";
 			form.periodoAtualizacaoFinal.value = "";
 			form.periodoAtualizacaoInicial.readOnly = true;
-			form.periodoAtualizacaoFinal.readOnly = true;
+			form.periodoAtualizacaoFinal.readOnly = true; 
 		} else {
 			form.periodoAtualizacaoInicial.readOnly = false;
 			form.periodoAtualizacaoFinal.readOnly = false;
 		}
 	}
+	
 	
 </script>
 </head>
@@ -145,25 +151,33 @@
       </tr>	
      
 	<tr>
-		<td><strong>Tipo do Relatório:<font color="FF0000">*</font>
-		</strong>
-		</td>
-		<td><html:radio property="indicadorTipoRelatorio" value="1" tabindex="1" onchange="verificarBloqueioPeriodoAmortizacao()" />
+		<td><strong>Tipo do Relatório:<font color="FF0000">*</font></strong></td>
+		<td>
+			<html:radio property="indicadorTipoRelatorio" value="1" tabindex="1" onchange="verificarBloqueioPeriodoAmortizacao()" />
 				<strong>Amortização</strong> 
 			<html:radio	property="indicadorTipoRelatorio" value="2" tabindex="2" onchange="verificarBloqueioPeriodoAmortizacao()" />
-			<strong>Parcelamento</strong>
+				<strong>Parcelamento</strong>
 		</td>
 		<td>&nbsp;</td>
 	</tr>
      
      <tr>
-		<td><strong>Indicador de Intra:<font color="FF0000">*</font>
-		</strong>
+		<td ><strong>Indicador de Intra:<font color="FF0000">*</font></strong></td>
+		<td>
+			<html:radio property="indicadorIntra" value="1" tabindex="1" /><strong>Sim</strong> 
+			<html:radio	property="indicadorIntra" value="2" tabindex="2" /><strong>Não</strong>
+			<html:radio	property="indicadorIntra" value="3" tabindex="3" /><strong>Ambos</strong>
 		</td>
-		<td><html:radio property="indicadorIntra" value="1" tabindex="3" />
-				<strong>Sim</strong> 
-			<html:radio	property="indicadorIntra" value="2" tabindex="4" />
-			<strong>Não</strong>
+		<td>&nbsp;</td>
+	</tr>
+	
+	<tr id="divRelatorioAnaliticoSintetico">
+		<td>
+			<strong>Tipo de Relatório :<font color="FF0000">*</font></strong>
+		</td>
+		<td>
+			<html:radio property="indicadorRelatorioSinteticoAnalitico" value="1" tabindex="3" /><strong>Analítico</strong> 
+			<html:radio	property="indicadorRelatorioSinteticoAnalitico" value="2" tabindex="4" /><strong>Sintético</strong>
 		</td>
 		<td>&nbsp;</td>
 	</tr>
@@ -263,5 +277,24 @@
 </html:form>
 </div>
 <%@ include file="/jsp/util/telaespera.jsp"%>
+
+<script>
+	$(function() {
+		verificaRelatorioAnaliticoSintetico();
+	});
+
+	$('input[type=radio][name=indicadorTipoRelatorio]').change(function() {
+		verificaRelatorioAnaliticoSintetico();
+	});
+	
+	function verificaRelatorioAnaliticoSintetico(){
+		if ($('input:radio[name=indicadorTipoRelatorio]:checked').val() == "1"){
+			$("#divRelatorioAnaliticoSintetico").show();
+		}else{			
+			$('input[name=indicadorRelatorioSinteticoAnalitico]').attr('checked', '');
+			$('#divRelatorioAnaliticoSintetico').hide();
+		}
+	}
+</script>
 </body>
 </html:html>

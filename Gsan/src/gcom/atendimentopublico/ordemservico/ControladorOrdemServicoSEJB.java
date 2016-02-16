@@ -301,6 +301,7 @@ import gcom.util.ServiceLocatorException;
 import gcom.util.SistemaException;
 import gcom.util.Util;
 import gcom.util.ZipUtil;
+import gcom.util.email.ErroEmailException;
 import gcom.util.email.ServicosEmail;
 import gcom.util.filtro.ComparacaoTexto;
 import gcom.util.filtro.Filtro;
@@ -4292,7 +4293,7 @@ public class ControladorOrdemServicoSEJB implements SessionBean {
 				if(!temPermissaoEspecial && indicadorAtividade.equals(ConstantesSistema.SIM)){
 					if (colecaoManterDadosAtividadesOrdemServicoHelper == null ||
 					  colecaoManterDadosAtividadesOrdemServicoHelper .isEmpty()) {
-						
+						sessionContext.setRollbackOnly();
 					  throw new ControladorException("atencao.required", null,"Atividades"); 
 					}
 				}
@@ -5164,6 +5165,7 @@ public class ControladorOrdemServicoSEJB implements SessionBean {
 	
 				filtroOrdemServico.adicionarParametro(new ParametroSimples(
 						FiltroOrdemServico.ID, idOSReferencia));
+				filtroOrdemServico.adicionarCaminhoParaCarregamentoEntidade(FiltroOrdemServico.COBRANCA_DOCUMENTO);
 	
 				Collection<OrdemServico> colecaoOSReferencia = getControladorUtil().pesquisar(
 						filtroOrdemServico, OrdemServico.class.getName());
@@ -16783,7 +16785,7 @@ public class ControladorOrdemServicoSEJB implements SessionBean {
 			ServicosEmail.enviarMensagemArquivoAnexado(emailRemetente,
 					emailReceptor, tituloMensagem, corpoMensagem,compactado);
 
-		} catch (IOException e) {
+		} catch (ErroEmailException e) {
 			throw new ControladorException("erro.sistema", e);
 		} catch (Exception e) {
 			throw new ControladorException("erro.sistema", e);
@@ -24771,6 +24773,27 @@ public class ControladorOrdemServicoSEJB implements SessionBean {
 		} catch (ErroRepositorioException e) {
 			sessionContext.setRollbackOnly();
 			throw new ControladorException("erro.sistema", e);
+		}
+		return retorno;
+	}
+	
+	/**
+	 * [UC1695] - Instalar/Substituir/Retirar Hidrômetro em Lote
+	 *
+	 * @author Rodrigo Cabral
+	 * @date 23/11/2015
+	 * 
+	 */
+	public OrdemServico pesquisarOrdemServicoHidrometro(Integer idOS)
+			throws ControladorException {
+		OrdemServico retorno = null;
+		try {
+			retorno = repositorioOrdemServico
+					.pesquisarOrdemServicoHidrometro(idOS);
+		} catch (ErroRepositorioException ex) {
+			sessionContext.setRollbackOnly();
+			ex.printStackTrace();
+			throw new ControladorException("erro.sistema", ex);
 		}
 		return retorno;
 	}

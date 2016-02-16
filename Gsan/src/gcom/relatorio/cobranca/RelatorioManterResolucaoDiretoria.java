@@ -108,6 +108,11 @@ public class RelatorioManterResolucaoDiretoria extends TarefaRelatorio {
 	public RelatorioManterResolucaoDiretoria(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_RESOLUCAO_DIRETORIA_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterResolucaoDiretoria() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

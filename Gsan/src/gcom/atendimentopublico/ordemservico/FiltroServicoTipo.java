@@ -141,5 +141,5 @@ public class FiltroServicoTipo extends Filtro implements Serializable {
     public static final String INDICADOR_PROGRAMACAO_AUTOMATICA = "indicadorProgramacaoAutomatica";
     
     public static final String INDICADOR_CORRECAO_ANORMALIDADE = "indicadorCorrecaoAnormalidade";
-    
+    public final static String INDICADOR_SERVICO_COBRANCA = "indicadorServicoCobranca";
 }

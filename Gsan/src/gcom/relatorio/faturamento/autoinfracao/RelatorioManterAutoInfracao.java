@@ -35,6 +35,11 @@ public class RelatorioManterAutoInfracao extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_AUTOS_INFRACAO_MANTER);
 	}
 
+	@Deprecated
+	public RelatorioManterAutoInfracao() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

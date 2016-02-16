@@ -111,6 +111,11 @@ public class RelatorioContasBaixadasContabilmente extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_CONTAS_BAIXADAS_CONTABILMENTE);
 	}
 
+	@Deprecated
+	public RelatorioContasBaixadasContabilmente() {
+		super(null, "");
+	}
+
 	public Collection<RelatorioContasBaixadasContabilmenteBean> inicializarBeanRelatorio(
 			Integer referenciaInicial, Integer referenciaFinal,
 			Short periodicidade) throws ControladorException {

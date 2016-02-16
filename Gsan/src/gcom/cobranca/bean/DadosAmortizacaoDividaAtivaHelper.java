@@ -100,6 +100,7 @@ public class DadosAmortizacaoDividaAtivaHelper implements Serializable {
 	private String tipoAmortizacao;
 	private BigDecimal valorDebitoAmortizado;
 	private String tipo;
+	private Integer idTipoAmortizacao;
 	
 	public Integer getIdLocalidade() {
 		return idLocalidade;
@@ -161,5 +162,10 @@ public class DadosAmortizacaoDividaAtivaHelper implements Serializable {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-
+	public Integer getIdTipoAmortizacao() {
+		return idTipoAmortizacao;
+	}
+	public void setIdTipoAmortizacao(Integer idTipoAmortizacao) {
+		this.idTipoAmortizacao = idTipoAmortizacao;
+	}
 }

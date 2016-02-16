@@ -107,6 +107,11 @@ public class RelatorioManterCobrancaGrupo extends TarefaRelatorio {
 	public RelatorioManterCobrancaGrupo(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_COBRANCA_GRUPO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterCobrancaGrupo() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

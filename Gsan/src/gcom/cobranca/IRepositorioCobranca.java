@@ -110,6 +110,7 @@ import gcom.cobranca.parcelamento.ParcDesctoInativVista;
 import gcom.cobranca.parcelamento.Parcelamento;
 import gcom.cobranca.parcelamento.ParcelamentoDescontoInatividade;
 import gcom.cobranca.parcelamento.ParcelamentoFaixaValor;
+import gcom.cobranca.parcelamento.ParcelamentoPagamentoCartaoCredito;
 import gcom.cobranca.parcelamento.ParcelamentoQuantidadeReparcelamento;
 import gcom.faturamento.conta.Conta;
 import gcom.faturamento.conta.ContaGeral;
@@ -8115,7 +8116,7 @@ public interface IRepositorioCobranca {
 	 * @author Vivianne Sousa
 	 * @date 04/05/2015
 	 */
-	public Collection<DebitoACobrar> pesquisarDebitoACobrarDoParcelamento(Integer idParcelamento) throws ErroRepositorioException;
+	public Collection<DebitoACobrar> pesquisarDebitoACobrarParcelamento(Integer idParcelamento,Integer idDebitoCreditoSituacao) throws ErroRepositorioException;
 	
 	/**
 	 * [UC0927] - Confirmar Cartão de Crédito/Débito
@@ -8124,7 +8125,7 @@ public interface IRepositorioCobranca {
 	 * @author Vivianne Sousa
 	 * @date 04/05/2015
 	 */
-	public Collection<CreditoARealizar> pesquisarCreditoARealizarDoParcelamento(Integer idParcelamento) throws ErroRepositorioException;
+	public Collection<CreditoARealizar> pesquisarCreditoARealizarParcelamento(Integer idParcelamento,Integer idDebitoCreditoSituacao) throws ErroRepositorioException;
 	
 	/**
 	 * [UC0927] - Confirmar Cartão de Crédito/Débito
@@ -8166,4 +8167,69 @@ public interface IRepositorioCobranca {
 	 * @date 11/05/2015
 	 */
 	public void removerGuiaPagamento(Integer idGuiaPagamento)throws ErroRepositorioException;
+	
+	/**
+	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 *
+	 * @author Vivianne Sousa
+	 * @date 16/09/2015
+	 */
+	public ParcelamentoPagamentoCartaoCredito pesquisarParcelamentoPagamentoCartaoCredito(Integer idParcelamento)
+			throws ErroRepositorioException ;
+	
+	/**
+	 * [UC0213] Desfazer Parcelamentos Débito
+	 * 
+	 * @author Vivianne Sousa
+	 * @date 06/10/2015
+	 */
+	public void deletarPagamentoCartaoCreditoItem(Integer idParcPagCartaoCredito)
+			throws ErroRepositorioException;
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * @author Jean Varela
+	 * @date 07/10/2015
+	 */
+	public Date pesquisarDataParcelamentoGuiaPagamento(int idGuiaPagamento) throws ErroRepositorioException;
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * @author Jean Varela
+	 * @date 07/10/2015
+	 */
+	public String pesquisarIdentificadorTransacaoParaPagamentoGuiaPagamento(int idGuiaPagamento) throws ErroRepositorioException;
+
+
+	/**
+	 * [UC1700] Relatório Consultar Arquivo Retorno Cobranca
+	 *
+	 * @author João Pedro Medeiros
+	 * @date 24/11/2015
+	 */
+	public Collection<Object[]> obterRelatorioConsultarArquivoRetornoCobranca(Date dataVencimentoInicial, Date dataVencimentoFinal)
+		throws ErroRepositorioException;
+	
+	/**
+	 *[UC1498] - Consultar Arquivo Texto de Ordens de Serviço para Smartphone (Novo)
+	 *[IT0018] Exibir Lista de Grupos de Cobrança
+	 *
+	 * @author Jean Varela
+	 * @date 08/12/2015
+	 */
+	public Collection<Object[]> pesquisaGrupoCobrancaPorEmpresa(Integer idEmpresa) throws ErroRepositorioException;
+
+	
+	/**
+	 * [UC1585] - Emitir Relatório Sintetico Dívida Ativa Amortizada.
+	 * 
+	 * @author Joao Pedro Medeiros
+	 * @created 04/01/2016
+	 * 
+	 */
+	public Collection<Object[]> obterDadosAmortizacoesDividaAtivaSintetico(Date dataInscricaoInicial,
+			Date dataInscricaoFinal, Date dataAmortizacaoInicial, Date dataAmortizacaoFinal, Integer idImovel,
+			Short indicadorIntra) throws ErroRepositorioException;
 }

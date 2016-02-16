@@ -94,6 +94,8 @@ public class DadosFinanceirosAtualizacaoCadastralDM implements Serializable {
 	private Integer idLocalidade;
 	private Integer codSetorAntes;
 	private Integer numQuadraAntes;
+	private Integer loteAntes;
+	private Integer subloteAntes;
 	private Integer matricula;
 	private String nomeClienteAntes;
 	private Integer qtdeEconomiaResAntes;
@@ -107,6 +109,8 @@ public class DadosFinanceirosAtualizacaoCadastralDM implements Serializable {
 	private String numHidrometroAntes;
 	private Integer codSetorDepois;
 	private Integer numQuadraDepois;
+	private Integer loteDepois;
+	private Integer subloteDepois;
 	private String nomeClienteDepois;
 	private Integer qtdeEconomiaResDepois;
 	private Integer qtdeEconomiaComDepois;
@@ -130,6 +134,7 @@ public class DadosFinanceirosAtualizacaoCadastralDM implements Serializable {
 	private Short alteracaoSituacaoAgua;
 	private Short alteracaoSituacaoEsgoto;
 	private Short alteracaoHidrometro;
+	private Short alteracaoInscricao;
 	private Short rgIncluido;
 	private Short rgAlterado;
 	private Short cpfCnpjAlterado;
@@ -145,8 +150,7 @@ public class DadosFinanceirosAtualizacaoCadastralDM implements Serializable {
 	private BigDecimal valorMulta;
 	private BigDecimal valorConsumoFraudado;
 
-	private Integer idLocalizacaoAntes;
-	private Integer idLocalizacaoDepois;
+	private Integer idLocalizacao;
 	private Integer idSitAguaAntes;
 	private Integer idSitAguaDepois;
 	private Integer idSitEsgotoAntes;
@@ -154,6 +158,8 @@ public class DadosFinanceirosAtualizacaoCadastralDM implements Serializable {
 	private Integer idTempo;
 	private Integer idUsuario;
 	private Integer idTarifa;
+	//indicador de comando finalizado
+	private Integer idIndicador;
 	
 	private String descLigAguaAntes;
 	private String descLigAguaDepois;
@@ -183,6 +189,8 @@ public class DadosFinanceirosAtualizacaoCadastralDM implements Serializable {
 		idLocalidade = (Integer) array[4];
 		codSetorAntes = (Integer) array[5];
 		numQuadraAntes = (Integer) array[6];
+		loteAntes = (Integer) array[61];
+		subloteAntes = (Integer) array[62];
 		matricula = (Integer) array[7];
 		nomeClienteAntes = (String) array[8];
 		qtdeEconomiaResAntes = (Integer) array[9];
@@ -208,6 +216,8 @@ public class DadosFinanceirosAtualizacaoCadastralDM implements Serializable {
 		//Caso indicador de aprovado seja igual a 1(SIM) os campos recebem o valor do ambiente virtual 2, caso contrário recebe o mesmo valor da IDA.
 		codSetorDepois = icAprovaInscricao.equals(ConstantesSistema.SIM) ? (Integer) array[24] : codSetorAntes;
 		numQuadraDepois = icAprovaInscricao.equals(ConstantesSistema.SIM) ? (Integer) array[25] : numQuadraAntes;
+		loteDepois = icAprovaInscricao.equals(ConstantesSistema.SIM) ? (Integer) array[63] : loteAntes;
+		subloteDepois = icAprovaInscricao.equals(ConstantesSistema.SIM) ? (Integer) array[64] : subloteAntes;
 		nomeClienteDepois = (icAprovaCpfCnpj.equals(ConstantesSistema.SIM) && icAprovaCliente.equals(ConstantesSistema.SIM)) ? (String) array[26] : nomeClienteAntes;
 		qtdeEconomiaResDepois = (icAprovaCategoria.equals(ConstantesSistema.NAO) || icAprovaEconomia.equals(ConstantesSistema.NAO)) ? qtdeEconomiaResAntes : (Integer) array[27];
 		qtdeEconomiaComDepois = (icAprovaCategoria.equals(ConstantesSistema.NAO) || icAprovaEconomia.equals(ConstantesSistema.NAO)) ? qtdeEconomiaComAntes : (Integer) array[28];
@@ -247,19 +257,20 @@ public class DadosFinanceirosAtualizacaoCadastralDM implements Serializable {
 
 		if(codSetorAntes == null){
 			//Imóvel novo
-			alteracaoSubcategoria =  ConstantesSistema.NAO;
-			alteracaoNome =  ConstantesSistema.NAO;
+			alteracaoSubcategoria = ConstantesSistema.NAO;
+			alteracaoNome = ConstantesSistema.NAO;
 			alteracaoEndereco = ConstantesSistema.NAO;
-			alteracaoCategoria =  ConstantesSistema.NAO;
-			alteracaoEconomia =  ConstantesSistema.NAO;
-			alteracaoSituacaoAgua =  ConstantesSistema.NAO;
-			alteracaoSituacaoEsgoto =  ConstantesSistema.NAO;
-			alteracaoHidrometro =  ConstantesSistema.NAO;
-			rgIncluido =  ConstantesSistema.NAO;
-			rgAlterado =  ConstantesSistema.NAO;
-			cpfCnpjIncluido =  ConstantesSistema.NAO;
-			cpfCnpjExcluido =  ConstantesSistema.NAO;
-			cpfCnpjAlterado =  ConstantesSistema.NAO;
+			alteracaoCategoria = ConstantesSistema.NAO;
+			alteracaoEconomia = ConstantesSistema.NAO;
+			alteracaoSituacaoAgua = ConstantesSistema.NAO;
+			alteracaoSituacaoEsgoto = ConstantesSistema.NAO;
+			alteracaoHidrometro = ConstantesSistema.NAO;
+			alteracaoInscricao = ConstantesSistema.NAO;
+			rgIncluido = ConstantesSistema.NAO;
+			rgAlterado = ConstantesSistema.NAO;
+			cpfCnpjIncluido = ConstantesSistema.NAO;
+			cpfCnpjExcluido = ConstantesSistema.NAO;
+			cpfCnpjAlterado = ConstantesSistema.NAO;
 			
 		}else{
 			
@@ -294,6 +305,11 @@ public class DadosFinanceirosAtualizacaoCadastralDM implements Serializable {
 			alteracaoSituacaoAgua = comparar(sitAguaAntes, sitAguaDepois) ? ConstantesSistema.NAO : ConstantesSistema.SIM;
 			alteracaoSituacaoEsgoto = comparar(sitEsgotoAntes, sitEsgotoDepois) ? ConstantesSistema.NAO : ConstantesSistema.SIM;
 			alteracaoHidrometro = comparar(numHidrometroAntes, numHidrometroDepois) ? ConstantesSistema.NAO : ConstantesSistema.SIM;
+			
+			alteracaoInscricao = (comparar(codSetorAntes, codSetorDepois) &&
+					comparar(numQuadraAntes, numQuadraDepois) &&
+					comparar(loteAntes, loteDepois) &&
+					comparar(subloteAntes, subloteDepois)) ? ConstantesSistema.NAO : ConstantesSistema.SIM;
 
 			rgIncluido = (Util.verificarVazio(numRGAntes) && Util.verificarNaoVazio(numRGDepois)) ? ConstantesSistema.SIM : ConstantesSistema.NAO;
 			rgAlterado = (rgIncluido == 1 || comparar(numRGAntes, numRGDepois)) ? ConstantesSistema.NAO : ConstantesSistema.SIM;
@@ -747,20 +763,12 @@ public class DadosFinanceirosAtualizacaoCadastralDM implements Serializable {
 		this.valorConsumoFraudado = valorConsumoFraudado;
 	}
 
-	public Integer getIdLocalizacaoAntes() {
-		return idLocalizacaoAntes;
+	public Integer getIdLocalizacao() {
+		return idLocalizacao;
 	}
 
-	public void setIdLocalizacaoAntes(Integer idLocalizacaoAntes) {
-		this.idLocalizacaoAntes = idLocalizacaoAntes;
-	}
-
-	public Integer getIdLocalizacaoDepois() {
-		return idLocalizacaoDepois;
-	}
-
-	public void setIdLocalizacaoDepois(Integer idLocalizacaoDepois) {
-		this.idLocalizacaoDepois = idLocalizacaoDepois;
+	public void setIdLocalizacao(Integer idLocalizacao) {
+		this.idLocalizacao = idLocalizacao;
 	}
 
 	public Short getAlteracaoHidrometro() {
@@ -890,4 +898,53 @@ public class DadosFinanceirosAtualizacaoCadastralDM implements Serializable {
 	public void setDescTarifa(String descTarifa) {
 		this.descTarifa = descTarifa;
 	}
+
+	public Integer getLoteAntes() {
+		return loteAntes;
+	}
+
+	public void setLoteAntes(Integer loteAntes) {
+		this.loteAntes = loteAntes;
+	}
+
+	public Integer getSubloteAntes() {
+		return subloteAntes;
+	}
+
+	public void setSubloteAntes(Integer subloteAntes) {
+		this.subloteAntes = subloteAntes;
+	}
+
+	public Integer getLoteDepois() {
+		return loteDepois;
+	}
+
+	public void setLoteDepois(Integer loteDepois) {
+		this.loteDepois = loteDepois;
+	}
+
+	public Integer getSubloteDepois() {
+		return subloteDepois;
+	}
+
+	public void setSubloteDepois(Integer subloteDepois) {
+		this.subloteDepois = subloteDepois;
+	}
+
+	public Short getAlteracaoInscricao() {
+		return alteracaoInscricao;
+	}
+
+	public void setAlteracaoInscricao(Short alteracaoInscricao) {
+		this.alteracaoInscricao = alteracaoInscricao;
+	}
+
+	public Integer getIdIndicador() {
+		return idIndicador;
+	}
+
+	public void setIdIndicador(Integer idIndicador) {
+		this.idIndicador = idIndicador;
+	}
+
 }

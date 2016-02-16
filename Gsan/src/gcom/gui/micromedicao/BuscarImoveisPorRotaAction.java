@@ -171,11 +171,14 @@ public class BuscarImoveisPorRotaAction extends GcomAction {
                         + rota.getSetorComercial().getLocalidade().getId() + "." + rota.getSetorComercial().getCodigo()
                         + "." + rota.getCodigo();
                 form.setDescricaoRota(descricao);
+                
+                Short indicadorOrdenacao =  form.getIndicadorOrdenacao();
 
                 Collection<DadosMovimentacao> dados = fachada.buscarImoveisPorRota(rota,
                                                                                    rota.getFaturamentoGrupo()
                                                                                        .getAnoMesReferencia(), 
-                                                                                   form.getTipo().trim().equals("1"));
+                                                                                   form.getTipo().trim().equals("1"),
+                                                                                   indicadorOrdenacao );
 
                 if (dados != null && !dados.isEmpty()) {
 

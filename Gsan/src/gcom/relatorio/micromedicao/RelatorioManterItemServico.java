@@ -117,6 +117,11 @@ public class RelatorioManterItemServico extends TarefaRelatorio {
 	public RelatorioManterItemServico(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_ITEM_SERVICO);
 	}
+	
+	@Deprecated
+	public RelatorioManterItemServico() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

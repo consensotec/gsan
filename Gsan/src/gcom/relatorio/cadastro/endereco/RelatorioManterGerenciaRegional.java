@@ -122,6 +122,11 @@ public class RelatorioManterGerenciaRegional extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_LOGRADOURO_MANTER);
 	}
 
+	@Deprecated
+	public RelatorioManterGerenciaRegional() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

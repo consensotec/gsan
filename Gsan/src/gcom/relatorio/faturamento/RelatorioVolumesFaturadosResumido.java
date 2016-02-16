@@ -111,6 +111,11 @@ public class RelatorioVolumesFaturadosResumido extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_VOLUMES_FATURADOS_RESUMIDO);
 	}
 
+	@Deprecated
+	public RelatorioVolumesFaturadosResumido() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

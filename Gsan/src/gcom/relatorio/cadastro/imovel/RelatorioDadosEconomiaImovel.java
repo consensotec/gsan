@@ -119,6 +119,11 @@ public class RelatorioDadosEconomiaImovel extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_DADOS_ECONOMIA_IMOVEL);
 	}
 
+	@Deprecated
+	public RelatorioDadosEconomiaImovel() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 
 		// ------------------------------------

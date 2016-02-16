@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	
+	<form-beans>
+		<form-bean name="EfetuarParcelamentoDebitosPortalSaaeActionForm"
+			type="gcom.gui.portal.saae.EfetuarParcelamentoDebitosPortalSaaeActionForm" />
+	</form-beans>
+	
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="EfetuarParcelamentoDebitosPortalSaaeActionForm"
+			type="gcom.gui.portal.saae.ExibirEfetuarParcelamentoDebitosPortalSaaeAction"
+			validate="false" scope="session" path="/exibirEfetuarParcelamentoDebitosPortalSaaeAction">
+			<forward name="efetuarParcelamento"
+				path="/jsp/portal/saae/parcelamento_debitos_efetuar_portal_saae.jsp"/>
+			<forward name="voltarParaServicos"
+				path="/exibirServicosPortalSaaeAction.do?method=servicos" />
+			<forward name="matriculaPossuiParcelamentoNaoQuitado"
+				path="/jsp/portal/saae/servicos.jsp"/>
+			<forward name="imovelSemDebitos"
+				path="/jsp/portal/saae/servicos.jsp"/>
+			<forward name="debitoParceladoMesCorrente"
+				path="/jsp/portal/saae/servicos.jsp"/>
+			<forward name="imovelNaoPossuiPerfilParcelamento"
+				path="/jsp/portal/saae/servicos.jsp"/>
+			<forward name="telaServico"
+				path="/jsp/portal/saae/servicos.jsp"/>				
+		</action>
+		
+		<action name="EfetuarParcelamentoDebitosPortalSaaeActionForm"
+			type="gcom.gui.portal.saae.EfetuarParcelamentoDebitosPortalSaaeAction"
+			validate="false" scope="session"
+			path="/efetuarParcelamentoDebitosPortalSaaeAction">
+			
+			<forward name="recarregarPagina" path="/exibirEfetuarParcelamentoDebitosPortalSaaeAction.do"/>
+			<forward name="gerarDocumentos" path="/gerarRelatorioDocumentosParcelamentoPortalSaaeAction.do"/>	
+			<forward name="parcelamentoJaEfetuadoVoltarPaginaServicos" path="/jsp/portal/saae/servicos.jsp"/>
+			<forward name="parcelamentoCartaoCredito" path="/jsp/portal/saae/parcelamento_debitos_cartao_credito_portal_saae.jsp"/>
+		</action>
+		
+		<action name="EfetuarParcelamentoDebitosPortalSaaeActionForm"
+			type="gcom.gui.portal.saae.GerarRelatorioDocumentosParcelamentoPortalSaaeAction"
+			validate="false" scope="session"
+			path="/gerarRelatorioDocumentosParcelamentoPortalSaaeAction">
+		</action>
+		
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>

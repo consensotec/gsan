@@ -112,6 +112,11 @@ public class RelatorioBoletimCadastro extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_BOLETIM_CADASTRO);
 	}
 
+	@Deprecated
+	public RelatorioBoletimCadastro() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

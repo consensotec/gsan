@@ -4503,4 +4503,79 @@ public interface IRepositorioOrdemServico {
 	 * */		
 	public Boolean osComfoto(int idOrdemServico)  throws ErroRepositorioException;
 	
+
+	/**
+	 * [UC0457] Encerrar Ordem de Serviço
+	 * 
+	 * @author Hugo Azevedo
+	 * @date 10/12/2013
+	 */
+	public Collection<ServicoTipo> pesquisarServicoTipo()throws ErroRepositorioException;
+	
+	/**
+	 * autor:Jonathan Marcos
+	 * data:31/10/2013
+	 * [UC1484] Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * @param idOrdemServico
+	 * @return
+	 * @throws ErroRepositorioException
+	 */
+	public Integer obterRegistroAtendimento(Integer idOrdemServico) throws ErroRepositorioException;
+	
+	/**
+	 * autor:Jonathan Marcos
+	 * data:31/10/2013
+	 * [UC1484] Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * @param idOrdemServico
+	 * @return
+	 * @throws ErroRepositorioException
+	 */
+	public Integer obterTipoMedicao(Integer idOrdemServico)	throws ErroRepositorioException;
+	
+	/**
+	 * autor:Jonathan Marcos
+	 * data:01/11/2013
+	 * [UC1484] Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * @param tipoMedicao,idOrdemServico
+	 * @return
+	 * @throws ErroRepositorioException
+	 */
+	public Integer obterTipoHidrometro(Integer tipoMedicao,Integer idOrdemServico) throws ErroRepositorioException;
+	
+	/**
+	 * autor:Jonathan Marcos
+	 * data:01/11/2013
+	 * [UC1484] Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * @param idOrdemServico
+	 * @return
+	 * @throws ErroRepositorioException
+	 */
+	public Object[] obterNumeroLeitura(Integer idOrdemServico,Integer tipoMedicao) throws ErroRepositorioException;
+	
+	/**
+	 * autor:Jonathan Marcos
+	 * data:01/11/2013
+	 * [UC1484] Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * @param tipoHidrometro,tipoMedicao,idOrdemServico
+	 * @return
+	 * @throws ErroRepositorioException
+	 */
+	public Object[] obterDadosHidrometros(Integer tipoHidrometro,Integer tipoMedicao,Integer idOrdemServico) throws ErroRepositorioException;
+	
+	/**
+	 * [UC01484] - Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * 
+	 * @author Vivianne Sousa	
+	 * @date 20/11/2015
+	 */
+	public Collection<ServicoTipoBoletim> pesquisarServicoTipoBoletim() throws ErroRepositorioException;
+
+	/**
+	 * [UC1695] - Instalar/Substituir/Retirar Hidrômetro em Lote
+	 *
+	 * @author Rodrigo Cabral
+	 * @date 23/11/2015
+	 * 
+	 */
+	public OrdemServico pesquisarOrdemServicoHidrometro(Integer idOS) throws ErroRepositorioException;
 }

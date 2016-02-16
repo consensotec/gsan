@@ -131,6 +131,11 @@ public class RelatorioDocumentosParcelamentoPortalCaer extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_DOCUMENTOS_PARCELAMENTO_LOJA_VIRTUAL_CAER);
 	}
 
+	@Deprecated
+	public RelatorioDocumentosParcelamentoPortalCaer() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 
 		// ------------------------------------

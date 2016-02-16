@@ -118,6 +118,11 @@ public class RelatorioManterDivisaoEsgoto extends TarefaRelatorio {
 	public RelatorioManterDivisaoEsgoto(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_DIVISAO_ESGOTO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterDivisaoEsgoto() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

@@ -109,6 +109,7 @@ import gcom.faturamento.conta.ContaCategoriaConsumoFaixaHistorico;
 import gcom.faturamento.conta.ContaCategoriaHistorico;
 import gcom.faturamento.conta.ContaImpressao;
 import gcom.faturamento.conta.ContaMotivoRetificacao;
+import gcom.faturamento.conta.ContaMotivoRevisao;
 import gcom.faturamento.conta.ContaTipo;
 import gcom.faturamento.conta.FiltroContaImpressao;
 import gcom.faturamento.credito.CreditoRealizado;
@@ -1234,6 +1235,7 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 
 				// recebe todos as contas da lista
 				StringBuilder contasTxtLista = null;
+				StringBuilder cartasTxtListaConta = null;
 				Map<Integer, Integer> mapAtualizaSequencial = null;
 
 				// i=0;Coleï¿½ï¿½o de contas com estouros de consumo
@@ -1262,7 +1264,7 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 					boolean flagPesquisarFichaCompensacao = false;
 
 					contasTxtLista = new StringBuilder();
-					// cartasTxtListaConta = new StringBuilder();
+					cartasTxtListaConta = new StringBuilder();
 					
 					SistemaParametro sistemaParametro = getControladorUtil()
 						.pesquisarParametrosDoSistema();
@@ -1327,39 +1329,24 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 
 							if (mapContasDivididasOrdenada != null) {
 								int countOrdem = 0;
-								while (countOrdem < mapContasDivididasOrdenada
-										.size()) {
-									Map<EmitirContaHelper, EmitirContaHelper> mapContasDivididas = mapContasDivididasOrdenada
-											.get(countOrdem);
-
-									Iterator iteratorConta = mapContasDivididas
-											.keySet().iterator();
-
+								while (countOrdem < mapContasDivididasOrdenada.size()) {
+									Map<EmitirContaHelper, EmitirContaHelper> mapContasDivididas = mapContasDivididasOrdenada.get(countOrdem);
+									Iterator iteratorConta = mapContasDivididas.keySet().iterator();
 									// int count = 0;
 									while (iteratorConta.hasNext()) {
-
 										emitirContaHelper = null;
-
 										int situacao = 0;
-
-										emitirContaHelper = (EmitirContaHelper) iteratorConta
-												.next();
+										emitirContaHelper = (EmitirContaHelper) iteratorConta.next();
 										while (situacao < 2) {
 											if (situacao == 0) {
 												situacao = 1;
-												// [SB0020] - Gerar
-												// Arquivo
-												// TXT
-												// das
-												// Cartas
-												if (tipoConta == 0
-														|| tipoConta == 1) {
+												// [SB0020] - Gerar Arquivo TXT das Cartas
+												if (tipoConta == 0 || tipoConta == 1) {
 													sequencialCarta += 1;
 												}
 												sequencialImpressao += 1;
 											} else {
-												emitirContaHelper = mapContasDivididas
-														.get(emitirContaHelper);
+												emitirContaHelper = mapContasDivididas.get(emitirContaHelper);
 												situacao = 2;
 											}
 
@@ -1372,113 +1359,99 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 											StringBuilder contaTxt = new StringBuilder();
 
 											if (emitirContaHelper != null) {
+				                            	
+			                                     // [SB0020] - Gerar Arquivo TXT das Cartas
+												boolean gerarMsgEstouroConsumo = gerarMsgEstouroConsumo(emitirContaHelper.getIdConta());
+												if(gerarMsgEstouroConsumo){
+                                                    cartasTxtListaConta.append(gerarArquivoTxtCartas(emitirContaHelper,sequencialCarta,situacao));
+                                                    cartasTxtListaConta.append(System.getProperty("line.separator"));
+												}else{
 												
-												
-												
-												String descricaoLocalidade = emitirContaHelper.getDescricaoLocalidade();
-												contaTxt.append(Util.completaString(descricaoLocalidade,30));
-												contaTxt.append(Util.adicionarZerosEsquedaNumero(3,
-														emitirContaHelper.getCodigoSetorComercialConta().toString()));
-
-												Imovel imovelEmitido = getControladorImovel()
-														.pesquisarImovel(emitirContaHelper.getIdImovel());
-
-												contaTxt.append(Util.adicionarZerosEsquedaNumero(
-														2,imovelEmitido.getQuadra().getRota().getCodigo().toString()));
-
-												contaTxt.append(".");
-
-												contaTxt.append(Util.adicionarZerosEsquedaNumero(4,
-														imovelEmitido.getNumeroSequencialRota().toString()));
-
-												contaTxt.append(Util.adicionarZerosEsquedaNumero(8,
-														emitirContaHelper.getIdImovel().toString()));
-
-												// caso a coleï¿½ï¿½o de contas seja de entrega
-												// para o cliente responsï¿½vel
-												if (tipoConta == 3 || tipoConta == 4) {
-													String nomeClienteUsuario = null;
-													if (emitirContaHelper.getNomeImovel() != null
-															&& !emitirContaHelper.getNomeImovel().equals("")) {
-														nomeClienteUsuario = emitirContaHelper.getNomeImovel();
-
+													String descricaoLocalidade = emitirContaHelper.getDescricaoLocalidade();
+													contaTxt.append(Util.completaString(descricaoLocalidade,30));
+													contaTxt.append(Util.adicionarZerosEsquedaNumero(3,
+															emitirContaHelper.getCodigoSetorComercialConta().toString()));
+	
+													Imovel imovelEmitido = getControladorImovel()
+															.pesquisarImovel(emitirContaHelper.getIdImovel());
+	
+													contaTxt.append(Util.adicionarZerosEsquedaNumero(
+															2,imovelEmitido.getQuadra().getRota().getCodigo().toString()));
+	
+													contaTxt.append(".");
+	
+													contaTxt.append(Util.adicionarZerosEsquedaNumero(4,
+															imovelEmitido.getNumeroSequencialRota().toString()));
+	
+													contaTxt.append(Util.adicionarZerosEsquedaNumero(8,
+															emitirContaHelper.getIdImovel().toString()));
+	
+													// caso a coleï¿½ï¿½o de contas seja de entrega
+													// para o cliente responsï¿½vel
+													if (tipoConta == 3 || tipoConta == 4) {
+														String nomeClienteUsuario = null;
+														if (emitirContaHelper.getNomeImovel() != null
+																&& !emitirContaHelper.getNomeImovel().equals("")) {
+															nomeClienteUsuario = emitirContaHelper.getNomeImovel();
+	
+														} else {
+															
+															nomeClienteUsuario = this.obterNomeCliente(emitirContaHelper.getIdConta());
+															
+														}
+														contaTxt.append(Util.completaString(nomeClienteUsuario,30));
 													} else {
-														
-														nomeClienteUsuario = this.obterNomeCliente(emitirContaHelper.getIdConta());
-														
+														contaTxt.append(Util.completaString(
+																emitirContaHelper.getNomeCliente(),30));
 													}
-													contaTxt.append(Util.completaString(nomeClienteUsuario,30));
-												} else {
-													contaTxt.append(Util.completaString(
-															emitirContaHelper.getNomeCliente(),30));
-												}
-
-												String[] enderecoImovel = getControladorEndereco()
-														.pesquisarEnderecoFormatadoDividido(
-																emitirContaHelper.getIdImovel());
-
-												// endereï¿½o
-												contaTxt.append(Util.completaString(enderecoImovel[0],60));
-
-												// bairro
-												contaTxt.append(Util.completaString(enderecoImovel[3],30));
-
-												// numero indice turbidez da qualidade agua
-
-												// numero cloro residual da qualidade agua
-
-												FiltroLocalidade filtroLocalidade = new FiltroLocalidade();
-
-												filtroLocalidade.adicionarParametro(new ParametroSimples(
-														FiltroLocalidade.ID,emitirContaHelper.getIdLocalidade()));
-
-												filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep");
-												filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.cep");
-												filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro");
-												filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTipo");
-												filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTitulo");
-												filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
-												filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro");
-												filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro");
-												filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio");
-												filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio.unidadeFederacao");
-												filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
-
-												
-												Collection cLocalidade = (Collection) getControladorUtil().pesquisar(
-														filtroLocalidade,Localidade.class.getName());
-												
-												Localidade localidade = (Localidade) cLocalidade.iterator().next();
-
-												FiltroQualidadeAgua filtroQualidadeAgua = new FiltroQualidadeAgua();
-
-												Collection colecaoQualidadeAgua = null;
-
-												filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
-														FiltroQualidadeAgua.LOCALIDADE_ID,localidade.getId()));
-												
-												filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
-														FiltroQualidadeAgua.SETOR_COMERCIAL_ID,
-														emitirContaHelper.getIdSetorComercial().toString()));
-												
-												filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
-														FiltroQualidadeAgua.ANO_MES_REFERENCIA,emitirContaHelper.getAmReferencia()));
-												
-												filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
-												
-												colecaoQualidadeAgua = getControladorUtil().pesquisar(
-														filtroQualidadeAgua,QualidadeAgua.class.getName());
-
-												if (colecaoQualidadeAgua == null || colecaoQualidadeAgua.isEmpty()) {
+	
+													String[] enderecoImovel = getControladorEndereco()
+															.pesquisarEnderecoFormatadoDividido(
+																	emitirContaHelper.getIdImovel());
+	
+													// endereï¿½o
+													contaTxt.append(Util.completaString(enderecoImovel[0],60));
+	
+													// bairro
+													contaTxt.append(Util.completaString(enderecoImovel[3],30));
+	
+													// numero indice turbidez da qualidade agua
+	
+													// numero cloro residual da qualidade agua
+	
+													FiltroLocalidade filtroLocalidade = new FiltroLocalidade();
+	
+													filtroLocalidade.adicionarParametro(new ParametroSimples(
+															FiltroLocalidade.ID,emitirContaHelper.getIdLocalidade()));
+	
+													filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep");
+													filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.cep");
+													filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro");
+													filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTipo");
+													filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTitulo");
+													filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
+													filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro");
+													filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro");
+													filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio");
+													filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio.unidadeFederacao");
+													filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
+	
 													
-													filtroQualidadeAgua.limparListaParametros();
+													Collection cLocalidade = (Collection) getControladorUtil().pesquisar(
+															filtroLocalidade,Localidade.class.getName());
 													
-													colecaoQualidadeAgua = null;
+													Localidade localidade = (Localidade) cLocalidade.iterator().next();
+	
+													FiltroQualidadeAgua filtroQualidadeAgua = new FiltroQualidadeAgua();
+	
+													Collection colecaoQualidadeAgua = null;
+	
 													filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
 															FiltroQualidadeAgua.LOCALIDADE_ID,localidade.getId()));
 													
-													filtroQualidadeAgua.adicionarParametro(new ParametroNulo(
-															FiltroQualidadeAgua.SETOR_COMERCIAL_ID));
+													filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
+															FiltroQualidadeAgua.SETOR_COMERCIAL_ID,
+															emitirContaHelper.getIdSetorComercial().toString()));
 													
 													filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
 															FiltroQualidadeAgua.ANO_MES_REFERENCIA,emitirContaHelper.getAmReferencia()));
@@ -1486,670 +1459,690 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 													filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
 													
 													colecaoQualidadeAgua = getControladorUtil().pesquisar(
-															filtroQualidadeAgua, QualidadeAgua.class.getName());
-												}
-												
-												if (colecaoQualidadeAgua == null || colecaoQualidadeAgua.isEmpty()) {
-													
-													filtroQualidadeAgua.limparListaParametros();
-													
-													colecaoQualidadeAgua = null;
-													filtroQualidadeAgua.adicionarParametro(new ParametroNulo(
-															FiltroQualidadeAgua.LOCALIDADE_ID));
-													
-													filtroQualidadeAgua.adicionarParametro(new ParametroNulo(
-															FiltroQualidadeAgua.SETOR_COMERCIAL_ID));
-													
-													filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
-															FiltroQualidadeAgua.ANO_MES_REFERENCIA,emitirContaHelper.getAmReferencia()));
-													
-													filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
-													
-													colecaoQualidadeAgua = getControladorUtil().pesquisar(
-															filtroQualidadeAgua, QualidadeAgua.class.getName());
-												}
-
-												if (colecaoQualidadeAgua != null && !colecaoQualidadeAgua.isEmpty()) {
-													
-													QualidadeAgua qualidadeAgua = (QualidadeAgua) colecaoQualidadeAgua.iterator().next();
-
-													// fonte
-													if (qualidadeAgua.getFonteCaptacao() != null) {
-														contaTxt.append(Util.completaString(qualidadeAgua.getFonteCaptacao().getDescricao(),30));
-													} else {
-														contaTxt.append(Util.completaString(" ",30));
-													}
-													
-													// cloro
-													if (qualidadeAgua.getNumeroCloroResidual() != null
-															&& !qualidadeAgua.getNumeroCloroResidual().equals(0)) {
-														contaTxt.append(Util.completaString(
-																qualidadeAgua.getNumeroCloroResidual().toString(),3));
-													} else {
-														contaTxt.append(Util.completaString(" ",3));
-													}
-
-													// coliformes
-													if (qualidadeAgua.getNumeroIndiceColiformesTotais() != null
-															&& !qualidadeAgua.getNumeroIndiceColiformesTotais().equals(0)) {
-														contaTxt.append(Util.completaString(
-															qualidadeAgua.getNumeroIndiceColiformesTotais().toString(),8));
-													} else {
-														contaTxt.append(Util.completaString(" ", 8));
-													}
-
-													// nitrato
-													if (qualidadeAgua.getNumeroNitrato() != null
-															&& !qualidadeAgua.getNumeroNitrato().equals(0)) {
-														contaTxt.append(Util.completaString(
-																qualidadeAgua.getNumeroNitrato().toString(),4));
-													} else {
-														contaTxt.append(Util.completaString(" ",4));
-													}
-
-													// //ph
-													if (qualidadeAgua.getNumeroIndicePh() != null
-															&& !qualidadeAgua.getNumeroIndicePh().equals(0)) {
-														contaTxt.append(Util.completaString(
-																qualidadeAgua.getNumeroIndicePh().toString(),4));
-													} else {
-														contaTxt.append(Util.completaString(" ",4));
-													}
-
-													// //turbidez
-													if (qualidadeAgua.getNumeroIndiceTurbidez() != null
-															&& !qualidadeAgua.getNumeroIndiceTurbidez().equals(0)) {
-														contaTxt.append(Util.completaString(
-														qualidadeAgua.getNumeroIndiceTurbidez().toString(),4));
-													} else {
-														contaTxt.append(Util.completaString(" ",4));
-													}
-
-												} else {
-													contaTxt.append(Util.completaString(" ", 53));
-												}
-
-												Collection colecaoSubCategoria = getControladorImovel()
-														.obterQuantidadeEconomiasSubCategoria(imovelEmitido.getId());
-
-												String economias = "";
-
-												for (Iterator iter = colecaoSubCategoria.iterator(); iter.hasNext();) {
-													Subcategoria subcategoria = (Subcategoria) iter.next();
-													
-													//agora a subcategoria ja tem o id da categoria no codigo.
-													economias = economias + Util.adicionarZerosEsquedaNumero(
-														3, subcategoria.getCodigo()+ "") + "/"
-														+ Util.adicionarZerosEsquedaNumero(3,
-												        subcategoria.getQuantidadeEconomias().toString()) + " ";
-
-												}
-
-
-												contaTxt.append(Util.adicionarZerosEsquedaNumero(
-													7,quantidadeContas + ""));
-
-												contaTxt.append(Util.completaString(localidade.getDescricao(),30));
-
-												contaTxt.append(Util.completaString(localidade
-													.getEnderecoFormatadoTituloAbreviado(),35));
-
-												contaTxt.append(Util.completaString(localidade.getFone(),20));
-
-												contaTxt.append(Util.completaString("0800-84-0195",15));
-
-												// cria um objeto conta para calcular o valor da conta
-												Conta conta = new Conta();
-												conta.setValorAgua(emitirContaHelper.getValorAgua());
-												conta.setValorEsgoto(emitirContaHelper.getValorEsgoto());
-												conta.setValorCreditos(emitirContaHelper.getValorCreditos());
-												conta.setDebitos(emitirContaHelper.getDebitos());
-												conta.setValorImposto(emitirContaHelper.getValorImpostos());
-
-												BigDecimal valorConta = conta.getValorTotalContaBigDecimal();
-
-												// [SB0018 - Gerar Linhas das Demais Contas]
-												String anoMesString = "" + emitirContaHelper.getAmReferencia();
-												// formata ano mes para mes ano
-
-												String mesNumero = anoMesString.substring(4, 6);
-
-												String mesExtenso = Util.retornaDescricaoMes(
-													new Integer(mesNumero).intValue()).toUpperCase();
-												String dataExtensa = mesExtenso	+ "/"
-														+ anoMesString.substring(0, 4);
-
-												String mesAnoFormatado = anoMesString.substring(4, 6)+ anoMesString														.substring(0, 4);
-												Integer digitoVerificadorConta = new Integer(""
-														+ emitirContaHelper.getDigitoVerificadorConta());
-												String representacaoNumericaCodBarra = null;
-
-												representacaoNumericaCodBarra = this.getControladorArrecadacao()
-														.obterRepresentacaoNumericaCodigoBarra(
-																3,
-																valorConta,
-																emitirContaHelper.getIdLocalidade(),
-																emitirContaHelper.getIdImovel(),
-																mesAnoFormatado,
-																digitoVerificadorConta,
-																null, null,
-																null, null,
-																null, null,
-																null);
-
-												contaTxt.append(Util.completaString(
-														representacaoNumericaCodBarra,48));
-
-												// determinar Mensagem
-												String[] parmsPartesConta = obterMensagemConta3Partes(
-														emitirContaHelper,sistemaParametro);
-
-												String primeiraParte = parmsPartesConta[0];
-												String segundaParte = parmsPartesConta[1];
-												String terceiraParte = parmsPartesConta[2];
-
-												contaTxt.append(Util.completaString(primeiraParte,65));
-												contaTxt.append(Util.completaString(segundaParte,65));
-												contaTxt.append(Util.completaString(terceiraParte,65));
-
-												contaTxt.append(System.getProperty("line.separator"));
-
-												contaTxt.append(Util.completaString(descricaoLocalidade,30));
-
-												contaTxt.append(Util.adicionarZerosEsquedaNumero(2,
-													imovelEmitido.getQuadra().getRota().getCodigo().toString()));
-
-												contaTxt.append(".");
-
-												contaTxt.append(Util.adicionarZerosEsquedaNumero(4,
-													imovelEmitido.getNumeroSequencialRota().toString()));
-
-												Imovel imovel = new Imovel();
-												Localidade localidade2 = new Localidade();
-												localidade2.setId(emitirContaHelper.getIdLocalidade());
-												imovel.setLocalidade(localidade2);
-												SetorComercial setorComercial = new SetorComercial();
-												setorComercial.setCodigo(emitirContaHelper.getCodigoSetorComercialConta());
-												imovel.setSetorComercial(setorComercial);
-												Quadra quadra = new Quadra();
-												quadra.setNumeroQuadra(emitirContaHelper.getIdQuadraConta());
-												imovel.setQuadra(quadra);
-												imovel.setLote(emitirContaHelper.getLoteConta());
-												imovel.setSubLote(emitirContaHelper.getSubLoteConta());
-
-												String inscricao = imovel.getInscricaoFormatada();
-
-												imovel = null;
-
-												setorComercial = null;
-												quadra = null;
-
-												contaTxt.append(Util.completaString(inscricao, 20));
-												contaTxt.append(Util.completaString(" ", 12));
-
-												String mesAnoReferencia = Util.formatarAnoMesParaMesAno(
-														emitirContaHelper.getAmReferencia());
-
-												contaTxt.append(Util.completaString(mesAnoReferencia,9));
-
-												// data de vencimento da conta
-												String dataVencimento = Util.formatarData(
-														emitirContaHelper.getDataVencimentoConta());
-
-												contaTxt.append(Util.completaString(dataVencimento,10));
-
-												String valorContaString = Util.formatarMoedaReal(valorConta);
-
-												// valor da conta
-												/*FiltroContaImpressao filtroContaImpressao = new FiltroContaImpressao();
-												filtroContaImpressao.adicionarParametro(new ParametroSimples(
-																FiltroContaImpressao.ID,
-																emitirContaHelper.getIdConta().toString()));
-												filtroContaImpressao.adicionarCaminhoParaCarregamentoEntidade("contaTipo");*/
-
-												//System.out.println("Filtro conta Impressao");
-												/*Collection<ContaImpressao> cContaIm = getControladorUtil()
-													.pesquisar(filtroContaImpressao,ContaImpressao.class.getName());*/
-
-												//System.out.println("Saiu conta Impressao");
-												/*ContaImpressao contaImpressao = cContaIm.iterator().next();*/
-												
-												Integer contaTipo = repositorioFaturamento.consultarContaTipodeContaImpressao(emitirContaHelper.getIdConta()); /*contaImpressao.getContaTipo().getId();*/
-
-												contaTxt.append(Util.completaStringComEspacoAEsquerda(
-																		valorContaString,15));
-
-												if (contaTipo.equals(ContaTipo.CONTA_DEBITO_AUTOMATICO)
-													|| contaTipo.equals(ContaTipo.CONTA_DEBITO_AUTO_COM_CLIENTE_RESP.intValue())) {
-
-													contaTxt.append(Util.completaString("NãO PODE SER PAGO EM BANCO",65));
-													contaTxt.append(Util.completaString("DÉBITO AUTOMÁTICO EM CONTA CORRENTE",65));
-
-												} else {
-
-													contaTxt.append(Util.completaString(" ", 65));
-													contaTxt.append(Util.completaString(" ", 65));
-												}
-
-												// Mï¿½s/Ano referï¿½ncia da conta digito verificador
-
-												contaTxt.append(Util.completaString(dataExtensa,14));
-
-												contaTxt.append(Util.adicionarZerosEsquedaNumero(8,
-														imovelEmitido.getId().toString()));
-
-												contaTxt.append(Util.completaString(
-													emitirContaHelper.getIdLocalidade().toString(),3));
-
-												contaTxt.append(Util.adicionarZerosEsquedaNumero(3,
-													emitirContaHelper.getCodigoSetorComercialConta().toString()));
-
-												contaTxt.append(Util.adicionarZerosEsquedaNumero(3,
-													emitirContaHelper.getIdQuadraConta().toString()));
-
-												contaTxt.append(Util.adicionarZerosEsquedaNumero(4,
-													emitirContaHelper.getLoteConta().toString()));
-
-												contaTxt.append(Util.completaString(Util.adicionarZerosEsquedaNumero(2,
-																emitirContaHelper.getSubLoteConta().toString()), 2));
-												
-												// DIGITO ?????
-												contaTxt.append(Util.adicionarZerosEsquedaNumero(1, "0"));
-
-												Integer[] parmSituacao = determinarTipoLigacaoMedicao(emitirContaHelper);
-												Integer tipoLigacao = parmSituacao[0];
-												Integer tipoMedicao = parmSituacao[1];
-
-												Object[] parmsMedicaoHistorico = obterDadosMedicaoConta(
-														emitirContaHelper,tipoMedicao);
-												// Leitura Anterior
-												String leituraAnterior = "";
-												// Leitura Atual
-												String leituraAtual = "";
-												// Data Leitura Anterior
-												String dataLeituraAnterior = "";
-												// Leitura Anterior
-												String dataLeituraAtual = "";
-
-												if (parmsMedicaoHistorico != null) {
-
-													if (parmsMedicaoHistorico[0] != null) {
-														leituraAnterior = "" + (Integer) parmsMedicaoHistorico[0];
-													}
-
-													if (parmsMedicaoHistorico[1] != null) {
-														leituraAtual = "" + (Integer) parmsMedicaoHistorico[1];
-													}
-
-													if (parmsMedicaoHistorico[3] != null) {
-														dataLeituraAnterior = Util.formatarData((Date) parmsMedicaoHistorico[3]);
-													}
-
-													if (parmsMedicaoHistorico[2] != null) {
-														dataLeituraAtual = Util.formatarData((Date) parmsMedicaoHistorico[2]);
-													}
-
-												}
-												
-												Object[] parmsConsumoHistorico = null;
-												
-												String consumoMedio = "";
-												if (tipoLigacao != null) {
-													try {
+															filtroQualidadeAgua,QualidadeAgua.class.getName());
+	
+													if (colecaoQualidadeAgua == null || colecaoQualidadeAgua.isEmpty()) {
 														
-														parmsConsumoHistorico = repositorioMicromedicao
-															.obterDadosConsumoConta(emitirContaHelper.getIdImovel(),
-															emitirContaHelper.getAmReferencia(),tipoLigacao);
-
-													} catch (ErroRepositorioException e) {
-														sessionContext.setRollbackOnly();
-														throw new ControladorException("erro.sistema",e);
+														filtroQualidadeAgua.limparListaParametros();
+														
+														colecaoQualidadeAgua = null;
+														filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
+																FiltroQualidadeAgua.LOCALIDADE_ID,localidade.getId()));
+														
+														filtroQualidadeAgua.adicionarParametro(new ParametroNulo(
+																FiltroQualidadeAgua.SETOR_COMERCIAL_ID));
+														
+														filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
+																FiltroQualidadeAgua.ANO_MES_REFERENCIA,emitirContaHelper.getAmReferencia()));
+														
+														filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
+														
+														colecaoQualidadeAgua = getControladorUtil().pesquisar(
+																filtroQualidadeAgua, QualidadeAgua.class.getName());
 													}
-
-													if (parmsConsumoHistorico != null) {
-														// Consumo mï¿½dio
-														if (parmsConsumoHistorico[2] != null) {
-															consumoMedio = "" + (Integer) parmsConsumoHistorico[2];
+													
+													if (colecaoQualidadeAgua == null || colecaoQualidadeAgua.isEmpty()) {
+														
+														filtroQualidadeAgua.limparListaParametros();
+														
+														colecaoQualidadeAgua = null;
+														filtroQualidadeAgua.adicionarParametro(new ParametroNulo(
+																FiltroQualidadeAgua.LOCALIDADE_ID));
+														
+														filtroQualidadeAgua.adicionarParametro(new ParametroNulo(
+																FiltroQualidadeAgua.SETOR_COMERCIAL_ID));
+														
+														filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
+																FiltroQualidadeAgua.ANO_MES_REFERENCIA,emitirContaHelper.getAmReferencia()));
+														
+														filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
+														
+														colecaoQualidadeAgua = getControladorUtil().pesquisar(
+																filtroQualidadeAgua, QualidadeAgua.class.getName());
+													}
+	
+													if (colecaoQualidadeAgua != null && !colecaoQualidadeAgua.isEmpty()) {
+														
+														QualidadeAgua qualidadeAgua = (QualidadeAgua) colecaoQualidadeAgua.iterator().next();
+	
+														// fonte
+														if (qualidadeAgua.getFonteCaptacao() != null) {
+															contaTxt.append(Util.completaString(qualidadeAgua.getFonteCaptacao().getDescricao(),30));
+														} else {
+															contaTxt.append(Util.completaString(" ",30));
+														}
+														
+														// cloro
+														if (qualidadeAgua.getNumeroCloroResidual() != null
+																&& !qualidadeAgua.getNumeroCloroResidual().equals(0)) {
+															contaTxt.append(Util.completaString(
+																	qualidadeAgua.getNumeroCloroResidual().toString(),3));
+														} else {
+															contaTxt.append(Util.completaString(" ",3));
+														}
+	
+														// coliformes
+														if (qualidadeAgua.getNumeroIndiceColiformesTotais() != null
+																&& !qualidadeAgua.getNumeroIndiceColiformesTotais().equals(0)) {
+															contaTxt.append(Util.completaString(
+																qualidadeAgua.getNumeroIndiceColiformesTotais().toString(),8));
+														} else {
+															contaTxt.append(Util.completaString(" ", 8));
+														}
+	
+														// nitrato
+														if (qualidadeAgua.getNumeroNitrato() != null
+																&& !qualidadeAgua.getNumeroNitrato().equals(0)) {
+															contaTxt.append(Util.completaString(
+																	qualidadeAgua.getNumeroNitrato().toString(),4));
+														} else {
+															contaTxt.append(Util.completaString(" ",4));
+														}
+	
+														// //ph
+														if (qualidadeAgua.getNumeroIndicePh() != null
+																&& !qualidadeAgua.getNumeroIndicePh().equals(0)) {
+															contaTxt.append(Util.completaString(
+																	qualidadeAgua.getNumeroIndicePh().toString(),4));
+														} else {
+															contaTxt.append(Util.completaString(" ",4));
+														}
+	
+														// //turbidez
+														if (qualidadeAgua.getNumeroIndiceTurbidez() != null
+																&& !qualidadeAgua.getNumeroIndiceTurbidez().equals(0)) {
+															contaTxt.append(Util.completaString(
+															qualidadeAgua.getNumeroIndiceTurbidez().toString(),4));
+														} else {
+															contaTxt.append(Util.completaString(" ",4));
+														}
+	
+													} else {
+														contaTxt.append(Util.completaString(" ", 53));
+													}
+	
+													Collection colecaoSubCategoria = getControladorImovel()
+															.obterQuantidadeEconomiasSubCategoria(imovelEmitido.getId());
+	
+													String economias = "";
+	
+													for (Iterator iter = colecaoSubCategoria.iterator(); iter.hasNext();) {
+														Subcategoria subcategoria = (Subcategoria) iter.next();
+														
+														//agora a subcategoria ja tem o id da categoria no codigo.
+														economias = economias + Util.adicionarZerosEsquedaNumero(
+															3, subcategoria.getCodigo()+ "") + "/"
+															+ Util.adicionarZerosEsquedaNumero(3,
+													        subcategoria.getQuantidadeEconomias().toString()) + " ";
+	
+													}
+	
+	
+													contaTxt.append(Util.adicionarZerosEsquedaNumero(
+														7,quantidadeContas + ""));
+	
+													contaTxt.append(Util.completaString(localidade.getDescricao(),30));
+	
+													contaTxt.append(Util.completaString(localidade
+														.getEnderecoFormatadoTituloAbreviado(),35));
+	
+													contaTxt.append(Util.completaString(localidade.getFone(),20));
+	
+													contaTxt.append(Util.completaString("0800-84-0195",15));
+	
+													// cria um objeto conta para calcular o valor da conta
+													Conta conta = new Conta();
+													conta.setValorAgua(emitirContaHelper.getValorAgua());
+													conta.setValorEsgoto(emitirContaHelper.getValorEsgoto());
+													conta.setValorCreditos(emitirContaHelper.getValorCreditos());
+													conta.setDebitos(emitirContaHelper.getDebitos());
+													conta.setValorImposto(emitirContaHelper.getValorImpostos());
+	
+													BigDecimal valorConta = conta.getValorTotalContaBigDecimal();
+	
+													// [SB0018 - Gerar Linhas das Demais Contas]
+													String anoMesString = "" + emitirContaHelper.getAmReferencia();
+													// formata ano mes para mes ano
+	
+													String mesNumero = anoMesString.substring(4, 6);
+	
+													String mesExtenso = Util.retornaDescricaoMes(
+														new Integer(mesNumero).intValue()).toUpperCase();
+													String dataExtensa = mesExtenso	+ "/"
+															+ anoMesString.substring(0, 4);
+	
+													String mesAnoFormatado = anoMesString.substring(4, 6)+ anoMesString														.substring(0, 4);
+													Integer digitoVerificadorConta = new Integer(""
+															+ emitirContaHelper.getDigitoVerificadorConta());
+													String representacaoNumericaCodBarra = null;
+	
+													representacaoNumericaCodBarra = this.getControladorArrecadacao()
+															.obterRepresentacaoNumericaCodigoBarra(
+																	3,
+																	valorConta,
+																	emitirContaHelper.getIdLocalidade(),
+																	emitirContaHelper.getIdImovel(),
+																	mesAnoFormatado,
+																	digitoVerificadorConta,
+																	null, null,
+																	null, null,
+																	null, null,
+																	null);
+	
+													contaTxt.append(Util.completaString(
+															representacaoNumericaCodBarra,48));
+	
+													// determinar Mensagem
+													String[] parmsPartesConta = obterMensagemConta3Partes(
+															emitirContaHelper,sistemaParametro);
+	
+													String primeiraParte = parmsPartesConta[0];
+													String segundaParte = parmsPartesConta[1];
+													String terceiraParte = parmsPartesConta[2];
+	
+													contaTxt.append(Util.completaString(primeiraParte,65));
+													contaTxt.append(Util.completaString(segundaParte,65));
+													contaTxt.append(Util.completaString(terceiraParte,65));
+	
+													contaTxt.append(System.getProperty("line.separator"));
+	
+													contaTxt.append(Util.completaString(descricaoLocalidade,30));
+	
+													contaTxt.append(Util.adicionarZerosEsquedaNumero(2,
+														imovelEmitido.getQuadra().getRota().getCodigo().toString()));
+	
+													contaTxt.append(".");
+	
+													contaTxt.append(Util.adicionarZerosEsquedaNumero(4,
+														imovelEmitido.getNumeroSequencialRota().toString()));
+	
+													Imovel imovel = new Imovel();
+													Localidade localidade2 = new Localidade();
+													localidade2.setId(emitirContaHelper.getIdLocalidade());
+													imovel.setLocalidade(localidade2);
+													SetorComercial setorComercial = new SetorComercial();
+													setorComercial.setCodigo(emitirContaHelper.getCodigoSetorComercialConta());
+													imovel.setSetorComercial(setorComercial);
+													Quadra quadra = new Quadra();
+													quadra.setNumeroQuadra(emitirContaHelper.getIdQuadraConta());
+													imovel.setQuadra(quadra);
+													imovel.setLote(emitirContaHelper.getLoteConta());
+													imovel.setSubLote(emitirContaHelper.getSubLoteConta());
+	
+													String inscricao = imovel.getInscricaoFormatada();
+	
+													imovel = null;
+	
+													setorComercial = null;
+													quadra = null;
+	
+													contaTxt.append(Util.completaString(inscricao, 20));
+													contaTxt.append(Util.completaString(" ", 12));
+	
+													String mesAnoReferencia = Util.formatarAnoMesParaMesAno(
+															emitirContaHelper.getAmReferencia());
+	
+													contaTxt.append(Util.completaString(mesAnoReferencia,9));
+	
+													// data de vencimento da conta
+													String dataVencimento = Util.formatarData(
+															emitirContaHelper.getDataVencimentoConta());
+	
+													contaTxt.append(Util.completaString(dataVencimento,10));
+	
+													String valorContaString = Util.formatarMoedaReal(valorConta);
+	
+													// valor da conta
+													/*FiltroContaImpressao filtroContaImpressao = new FiltroContaImpressao();
+													filtroContaImpressao.adicionarParametro(new ParametroSimples(
+																	FiltroContaImpressao.ID,
+																	emitirContaHelper.getIdConta().toString()));
+													filtroContaImpressao.adicionarCaminhoParaCarregamentoEntidade("contaTipo");*/
+	
+													//System.out.println("Filtro conta Impressao");
+													/*Collection<ContaImpressao> cContaIm = getControladorUtil()
+														.pesquisar(filtroContaImpressao,ContaImpressao.class.getName());*/
+	
+													//System.out.println("Saiu conta Impressao");
+													/*ContaImpressao contaImpressao = cContaIm.iterator().next();*/
+													
+													Integer contaTipo = repositorioFaturamento.consultarContaTipodeContaImpressao(emitirContaHelper.getIdConta()); /*contaImpressao.getContaTipo().getId();*/
+	
+													contaTxt.append(Util.completaStringComEspacoAEsquerda(
+																			valorContaString,15));
+	
+													if (contaTipo.equals(ContaTipo.CONTA_DEBITO_AUTOMATICO)
+														|| contaTipo.equals(ContaTipo.CONTA_DEBITO_AUTO_COM_CLIENTE_RESP.intValue())) {
+	
+														contaTxt.append(Util.completaString("NãO PODE SER PAGO EM BANCO",65));
+														contaTxt.append(Util.completaString("DÉBITO AUTOMÁTICO EM CONTA CORRENTE",65));
+	
+													} else {
+	
+														contaTxt.append(Util.completaString(" ", 65));
+														contaTxt.append(Util.completaString(" ", 65));
+													}
+	
+													// Mï¿½s/Ano referï¿½ncia da conta digito verificador
+	
+													contaTxt.append(Util.completaString(dataExtensa,14));
+	
+													contaTxt.append(Util.adicionarZerosEsquedaNumero(8,
+															imovelEmitido.getId().toString()));
+	
+													contaTxt.append(Util.completaString(
+														emitirContaHelper.getIdLocalidade().toString(),3));
+	
+													contaTxt.append(Util.adicionarZerosEsquedaNumero(3,
+														emitirContaHelper.getCodigoSetorComercialConta().toString()));
+	
+													contaTxt.append(Util.adicionarZerosEsquedaNumero(3,
+														emitirContaHelper.getIdQuadraConta().toString()));
+	
+													contaTxt.append(Util.adicionarZerosEsquedaNumero(4,
+														emitirContaHelper.getLoteConta().toString()));
+	
+													contaTxt.append(Util.completaString(Util.adicionarZerosEsquedaNumero(2,
+																	emitirContaHelper.getSubLoteConta().toString()), 2));
+													
+													// DIGITO ?????
+													contaTxt.append(Util.adicionarZerosEsquedaNumero(1, "0"));
+	
+													Integer[] parmSituacao = determinarTipoLigacaoMedicao(emitirContaHelper);
+													Integer tipoLigacao = parmSituacao[0];
+													Integer tipoMedicao = parmSituacao[1];
+	
+													Object[] parmsMedicaoHistorico = obterDadosMedicaoConta(
+															emitirContaHelper,tipoMedicao);
+													// Leitura Anterior
+													String leituraAnterior = "";
+													// Leitura Atual
+													String leituraAtual = "";
+													// Data Leitura Anterior
+													String dataLeituraAnterior = "";
+													// Leitura Anterior
+													String dataLeituraAtual = "";
+	
+													if (parmsMedicaoHistorico != null) {
+	
+														if (parmsMedicaoHistorico[0] != null) {
+															leituraAnterior = "" + (Integer) parmsMedicaoHistorico[0];
+														}
+	
+														if (parmsMedicaoHistorico[1] != null) {
+															leituraAtual = "" + (Integer) parmsMedicaoHistorico[1];
+														}
+	
+														if (parmsMedicaoHistorico[3] != null) {
+															dataLeituraAnterior = Util.formatarData((Date) parmsMedicaoHistorico[3]);
+														}
+	
+														if (parmsMedicaoHistorico[2] != null) {
+															dataLeituraAtual = Util.formatarData((Date) parmsMedicaoHistorico[2]);
+														}
+	
+													}
+													
+													Object[] parmsConsumoHistorico = null;
+													
+													String consumoMedio = "";
+													if (tipoLigacao != null) {
+														try {
+															
+															parmsConsumoHistorico = repositorioMicromedicao
+																.obterDadosConsumoConta(emitirContaHelper.getIdImovel(),
+																emitirContaHelper.getAmReferencia(),tipoLigacao);
+	
+														} catch (ErroRepositorioException e) {
+															sessionContext.setRollbackOnly();
+															throw new ControladorException("erro.sistema",e);
+														}
+	
+														if (parmsConsumoHistorico != null) {
+															// Consumo mï¿½dio
+															if (parmsConsumoHistorico[2] != null) {
+																consumoMedio = "" + (Integer) parmsConsumoHistorico[2];
+															}
 														}
 													}
-												}
-
-												// Data Leitura Atual
-												contaTxt.append(Util.completaString(dataLeituraAtual,5));
-												contaTxt.append(Util.completaString(leituraAnterior,6));
-
-												// Leitura Atual
-												contaTxt.append(Util.completaString(leituraAtual,6));
-
-												String diasConsumo = "";
-
-												if (!dataLeituraAnterior.equals("") && !dataLeituraAtual.equals("")) {
-													diasConsumo = "" + Util.obterQuantidadeDiasEntreDuasDatas(
-														(Date) parmsMedicaoHistorico[3],(Date) parmsMedicaoHistorico[2]);
-												}
-
-												String[] parmsConsumo = obterConsumoFaturadoConsumoMedioDiario(
-														emitirContaHelper,tipoMedicao,diasConsumo);
-												String consumoFaturamento = parmsConsumo[0];
-
-												// Consumo faturado
-												contaTxt.append(Util.completaString(consumoFaturamento,5));
-												contaTxt.append(Util.completaString(consumoMedio,5));
-
-												contaTxt.append(Util.completaString(this.obterConsumoAnterior(
-													emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
-													6, tipoLigacao, tipoMedicao).toString(),12));
-												contaTxt.append(Util.completaString(this.obterConsumoAnterior(
-													emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
-													5, tipoLigacao, tipoMedicao).toString(),12));
-												contaTxt.append(Util.completaString(this.obterConsumoAnterior(
-                                                    emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
-													4,tipoLigacao,tipoMedicao).toString(),12));
-												contaTxt.append(Util.completaString(this.obterConsumoAnterior(
-													emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
-													3,tipoLigacao,tipoMedicao).toString(),12));
-												contaTxt.append(Util.completaString(this.obterConsumoAnterior(
-													emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
-													2,tipoLigacao,tipoMedicao).toString(),12));
-												contaTxt.append(Util.completaString(this.obterConsumoAnterior(
-													emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
-													1,tipoLigacao,tipoMedicao).toString(),12));
-
-												contaTxt.append(Util.completaString(economias, 24));
-
-												ObterDebitoImovelOuClienteHelper obterDebitoImovelOuClienteHelper = this
-														.obterDebitoImovelOuClienteHelper(emitirContaHelper,sistemaParametro);
-
-												if (obterDebitoImovelOuClienteHelper != null
-													&& ((obterDebitoImovelOuClienteHelper.getColecaoGuiasPagamentoValores() != null 
-													&& !obterDebitoImovelOuClienteHelper.getColecaoGuiasPagamentoValores().isEmpty()) 
-													|| (obterDebitoImovelOuClienteHelper.getColecaoContasValores() != null 
-													&& !obterDebitoImovelOuClienteHelper.getColecaoContasValores().isEmpty()))) {
-													Collection colecaoContasValores = obterDebitoImovelOuClienteHelper
-															.getColecaoContasValores();
-
-													if (colecaoContasValores != null && !colecaoContasValores.isEmpty()) {
-														if (colecaoContasValores.size() > 5) {
-															contaTxt.append(Util.completaString("HÁ MAIS DE CINCO CONTAS EM ATRASO",40));
-														} else {
-															String contasAtraso = "";
-															for (Iterator iter = colecaoContasValores.iterator(); iter.hasNext();) {
-																ContaValoresHelper contasValores = (ContaValoresHelper) iter.next();
-																contasAtraso = contasAtraso+ contasValores.
-																	getConta().getFormatarAnoMesParaMesAno()+ " ";
+	
+													// Data Leitura Atual
+													contaTxt.append(Util.completaString(dataLeituraAtual,5));
+													contaTxt.append(Util.completaString(leituraAnterior,6));
+	
+													// Leitura Atual
+													contaTxt.append(Util.completaString(leituraAtual,6));
+	
+													String diasConsumo = "";
+	
+													if (!dataLeituraAnterior.equals("") && !dataLeituraAtual.equals("")) {
+														diasConsumo = "" + Util.obterQuantidadeDiasEntreDuasDatas(
+															(Date) parmsMedicaoHistorico[3],(Date) parmsMedicaoHistorico[2]);
+													}
+	
+													String[] parmsConsumo = obterConsumoFaturadoConsumoMedioDiario(
+															emitirContaHelper,tipoMedicao,diasConsumo);
+													String consumoFaturamento = parmsConsumo[0];
+	
+													// Consumo faturado
+													contaTxt.append(Util.completaString(consumoFaturamento,5));
+													contaTxt.append(Util.completaString(consumoMedio,5));
+	
+													contaTxt.append(Util.completaString(this.obterConsumoAnterior(
+														emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
+														6, tipoLigacao, tipoMedicao).toString(),12));
+													contaTxt.append(Util.completaString(this.obterConsumoAnterior(
+														emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
+														5, tipoLigacao, tipoMedicao).toString(),12));
+													contaTxt.append(Util.completaString(this.obterConsumoAnterior(
+	                                                    emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
+														4,tipoLigacao,tipoMedicao).toString(),12));
+													contaTxt.append(Util.completaString(this.obterConsumoAnterior(
+														emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
+														3,tipoLigacao,tipoMedicao).toString(),12));
+													contaTxt.append(Util.completaString(this.obterConsumoAnterior(
+														emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
+														2,tipoLigacao,tipoMedicao).toString(),12));
+													contaTxt.append(Util.completaString(this.obterConsumoAnterior(
+														emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
+														1,tipoLigacao,tipoMedicao).toString(),12));
+	
+													contaTxt.append(Util.completaString(economias, 24));
+	
+													ObterDebitoImovelOuClienteHelper obterDebitoImovelOuClienteHelper = this
+															.obterDebitoImovelOuClienteHelper(emitirContaHelper,sistemaParametro);
+	
+													if (obterDebitoImovelOuClienteHelper != null
+														&& ((obterDebitoImovelOuClienteHelper.getColecaoGuiasPagamentoValores() != null 
+														&& !obterDebitoImovelOuClienteHelper.getColecaoGuiasPagamentoValores().isEmpty()) 
+														|| (obterDebitoImovelOuClienteHelper.getColecaoContasValores() != null 
+														&& !obterDebitoImovelOuClienteHelper.getColecaoContasValores().isEmpty()))) {
+														Collection colecaoContasValores = obterDebitoImovelOuClienteHelper
+																.getColecaoContasValores();
+	
+														if (colecaoContasValores != null && !colecaoContasValores.isEmpty()) {
+															if (colecaoContasValores.size() > 5) {
+																contaTxt.append(Util.completaString("HÁ MAIS DE CINCO CONTAS EM ATRASO",40));
+															} else {
+																String contasAtraso = "";
+																for (Iterator iter = colecaoContasValores.iterator(); iter.hasNext();) {
+																	ContaValoresHelper contasValores = (ContaValoresHelper) iter.next();
+																	contasAtraso = contasAtraso+ contasValores.
+																		getConta().getFormatarAnoMesParaMesAno()+ " ";
+																}
+																contaTxt.append(Util.completaString(contasAtraso,40));
 															}
-															contaTxt.append(Util.completaString(contasAtraso,40));
+														} else {
+															contaTxt.append(Util.completaString("",40));
 														}
 													} else {
 														contaTxt.append(Util.completaString("",40));
 													}
-												} else {
-													contaTxt.append(Util.completaString("",40));
-												}
-
-												if (imovelEmitido.getLigacaoAgua() != null) {
-
-													if (imovelEmitido.getLigacaoAgua().getHidrometroInstalacaoHistorico() != null) {
-
-														if (imovelEmitido.getLigacaoAgua()
-															.getHidrometroInstalacaoHistorico().getHidrometro() != null) {
-
-															contaTxt.append(Util.completaString(imovelEmitido.getLigacaoAgua()
-															.getHidrometroInstalacaoHistorico().getHidrometro().getNumero(),10));
+	
+													if (imovelEmitido.getLigacaoAgua() != null) {
+	
+														if (imovelEmitido.getLigacaoAgua().getHidrometroInstalacaoHistorico() != null) {
+	
+															if (imovelEmitido.getLigacaoAgua()
+																.getHidrometroInstalacaoHistorico().getHidrometro() != null) {
+	
+																contaTxt.append(Util.completaString(imovelEmitido.getLigacaoAgua()
+																.getHidrometroInstalacaoHistorico().getHidrometro().getNumero(),10));
+															} else {
+																contaTxt.append(Util.completaString(" ",10));
+															}
+	
 														} else {
 															contaTxt.append(Util.completaString(" ",10));
 														}
-
+	
 													} else {
-														contaTxt.append(Util.completaString(" ",10));
+														contaTxt.append(Util.completaString(" ", 10));
 													}
-
-												} else {
-													contaTxt.append(Util.completaString(" ", 10));
-												}
-
-												Collection colecaoContaCategoriaConsumoFaixa = null;
-												try {
-
-													colecaoContaCategoriaConsumoFaixa = repositorioFaturamento
-													.pesquisarContaCategoriaConsumoFaixa(emitirContaHelper.getIdConta());
-
-												} catch (ErroRepositorioException e) {
-													throw new ControladorException("erro.sistema", e);
-												}
-
-												Integer consumoExcesso = 0;
-												Integer consumoMinimo = 0;
-												BigDecimal valorExcesso = new BigDecimal("0.0");
-												BigDecimal valorMinimo = new BigDecimal("0.0");
-
-												if (colecaoContaCategoriaConsumoFaixa == null
-														|| colecaoContaCategoriaConsumoFaixa.isEmpty()) {
-
-													consumoMinimo = emitirContaHelper.getConsumoAgua();
-													valorMinimo = emitirContaHelper.getValorAgua();
-												} else {
-													if (!emitirContaHelper.getConsumoAgua().equals(0)) {
-														for (Iterator iter = colecaoContaCategoriaConsumoFaixa
-																.iterator(); iter.hasNext();) {
-
-															ContaCategoriaConsumoFaixa contaCategoriaConsumoFaixa = (ContaCategoriaConsumoFaixa) iter.next();
-															if (contaCategoriaConsumoFaixa.getConsumoAgua() != null) {
-																for (Iterator iteration = colecaoSubCategoria.iterator(); iteration.hasNext();) {
-																	Subcategoria subCategoriaEmitir = (Subcategoria) iteration.next();
-
-																	if (contaCategoriaConsumoFaixa.getSubcategoria().getId()
-																			.equals(subCategoriaEmitir.getId())) {
-																		consumoExcesso = consumoExcesso
-																		+ contaCategoriaConsumoFaixa.getConsumoAgua()
-																		* subCategoriaEmitir.getQuantidadeEconomias();
-
-																		valorExcesso = valorExcesso.add(contaCategoriaConsumoFaixa.getValorAgua()
-																		.multiply(new BigDecimal(subCategoriaEmitir.getQuantidadeEconomias())));
+	
+													Collection colecaoContaCategoriaConsumoFaixa = null;
+													try {
+	
+														colecaoContaCategoriaConsumoFaixa = repositorioFaturamento
+														.pesquisarContaCategoriaConsumoFaixa(emitirContaHelper.getIdConta());
+	
+													} catch (ErroRepositorioException e) {
+														throw new ControladorException("erro.sistema", e);
+													}
+	
+													Integer consumoExcesso = 0;
+													Integer consumoMinimo = 0;
+													BigDecimal valorExcesso = new BigDecimal("0.0");
+													BigDecimal valorMinimo = new BigDecimal("0.0");
+	
+													if (colecaoContaCategoriaConsumoFaixa == null
+															|| colecaoContaCategoriaConsumoFaixa.isEmpty()) {
+	
+														consumoMinimo = emitirContaHelper.getConsumoAgua();
+														valorMinimo = emitirContaHelper.getValorAgua();
+													} else {
+														if (!emitirContaHelper.getConsumoAgua().equals(0)) {
+															for (Iterator iter = colecaoContaCategoriaConsumoFaixa
+																	.iterator(); iter.hasNext();) {
+	
+																ContaCategoriaConsumoFaixa contaCategoriaConsumoFaixa = (ContaCategoriaConsumoFaixa) iter.next();
+																if (contaCategoriaConsumoFaixa.getConsumoAgua() != null) {
+																	for (Iterator iteration = colecaoSubCategoria.iterator(); iteration.hasNext();) {
+																		Subcategoria subCategoriaEmitir = (Subcategoria) iteration.next();
+	
+																		if (contaCategoriaConsumoFaixa.getSubcategoria().getId()
+																				.equals(subCategoriaEmitir.getId())) {
+																			consumoExcesso = consumoExcesso
+																			+ contaCategoriaConsumoFaixa.getConsumoAgua()
+																			* subCategoriaEmitir.getQuantidadeEconomias();
+	
+																			valorExcesso = valorExcesso.add(contaCategoriaConsumoFaixa.getValorAgua()
+																			.multiply(new BigDecimal(subCategoriaEmitir.getQuantidadeEconomias())));
+																		}
+	
 																	}
-
 																}
 															}
 														}
+	
+														valorMinimo = emitirContaHelper.getValorAgua().subtract(valorExcesso);
+														consumoMinimo = emitirContaHelper.getConsumoAgua()- consumoExcesso;
+	
 													}
-
-													valorMinimo = emitirContaHelper.getValorAgua().subtract(valorExcesso);
-													consumoMinimo = emitirContaHelper.getConsumoAgua()- consumoExcesso;
-
-												}
-
-												int i = 0;
-												BigDecimal valorNullo = new BigDecimal("0.00");
-												Integer consumoNullo = new Integer(0);
-
-												if (!valorMinimo.equals(valorNullo)) {
-													if (!consumoMinimo.equals(consumoNullo)) {
-														contaTxt.append("TARIFA MÍNIMA ÁGUA            "); // 30
-														contaTxt.append(Util.completaString(consumoMinimo+ " M3",24));
-														contaTxt.append(Util.completaStringComEspacoAEsquerda(
-																Util.formatarMoedaReal(valorMinimo),12));
-													} else {
-														contaTxt.append("TARIFA MÍNIMA ÁGUA            "); // 30
-														contaTxt.append(Util.completaString(consumoMinimo+ "   ",24));
-														contaTxt.append(Util.completaStringComEspacoAEsquerda(
-																Util.formatarMoedaReal(valorMinimo),12));
-													}
-													i++;
-												}
-
-												if (!consumoExcesso.equals(consumoNullo)) {
-													contaTxt.append("TARIFA EXCESSO ÁGUA           "); // 30
-													contaTxt.append(Util.completaString(consumoExcesso + " M3",24));
-													contaTxt.append(Util.completaStringComEspacoAEsquerda(
-															Util.formatarMoedaReal(valorExcesso),12));
-													i++;
-												}
-
-												if (!emitirContaHelper.getPercentualEsgotoConta().equals(valorNullo)) {
-													contaTxt.append("TARIFA ESGOTO                 "); // 30
-													contaTxt.append(Util.completaString(
-														emitirContaHelper.getPercentualEsgotoConta()+ "%",24));
-													contaTxt.append(Util.completaStringComEspacoAEsquerda(
-														Util.formatarMoedaReal(emitirContaHelper.getValorEsgoto()),12));
-													i++;
-												}
-
-												if (!emitirContaHelper.getValorCreditos().equals(valorNullo)) {
-													contaTxt.append("CRÉDITOS E DESCONTOS          "); // 30
-													contaTxt.append(Util.completaString(" ", 24));
-													contaTxt.append(Util.completaStringComEspacoAEsquerda(
-														Util.formatarMoedaReal(emitirContaHelper.getValorCreditos()),12));
-													i++;
-												}
-
-												if (!emitirContaHelper.getValorImpostos().equals(valorNullo)) {
-													contaTxt.append("IMPOSTOS DEDUZIDOS            "); // 30
-													contaTxt.append(Util.completaString(" ", 24));
-													contaTxt.append(Util.completaStringComEspacoAEsquerda(
-														Util.formatarMoedaReal(emitirContaHelper.getValorImpostos()),12));
-													i++;
-												}
-
-												// setando os servicos
-
-												Conta contaId = new Conta();
-												contaId.setId(emitirContaHelper.getIdConta());
-
-												Collection<DebitoCobradoAgrupadoHelper> cDebitoCobrado = this
-														.obterDebitosCobradosContaCAERN(contaId);
-
-												int quantidadeLinhasSobrando = 10 - i;
-
-												if (cDebitoCobrado != null && !cDebitoCobrado.isEmpty()) {
-
-													int quantidadeDebitos = cDebitoCobrado.size();
-
-													if (quantidadeLinhasSobrando >= quantidadeDebitos) {
-
-														for (Iterator iter = cDebitoCobrado.iterator(); iter.hasNext();) {
-															DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter.next();
-
-															contaTxt.append(Util.completaString(debitoCobrado.getDescricaoDebitoTipo(),30)); // 30
-															contaTxt.append(Util.completaString(debitoCobrado.getNumeroPrestacaoDebito() 
-																+ "/" + debitoCobrado.getNumeroPrestacao(),24));
+	
+													int i = 0;
+													BigDecimal valorNullo = new BigDecimal("0.00");
+													Integer consumoNullo = new Integer(0);
+	
+													if (!valorMinimo.equals(valorNullo)) {
+														if (!consumoMinimo.equals(consumoNullo)) {
+															contaTxt.append("TARIFA MÍNIMA ÁGUA            "); // 30
+															contaTxt.append(Util.completaString(consumoMinimo+ " M3",24));
 															contaTxt.append(Util.completaStringComEspacoAEsquerda(
-																Util.formatarMoedaReal(debitoCobrado.getValorDebito()),12));
-
-															i++;
+																	Util.formatarMoedaReal(valorMinimo),12));
+														} else {
+															contaTxt.append("TARIFA MÍNIMA ÁGUA            "); // 30
+															contaTxt.append(Util.completaString(consumoMinimo+ "   ",24));
+															contaTxt.append(Util.completaStringComEspacoAEsquerda(
+																	Util.formatarMoedaReal(valorMinimo),12));
 														}
-
-													} else {
-														Iterator iter = cDebitoCobrado.iterator();
-														int contador = 1;
-														BigDecimal valorAcumulado = new BigDecimal("0.00");
-														boolean temOutros = false;
-														while (iter.hasNext()) {
-															DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter.next();
-
-															if (quantidadeLinhasSobrando > contador) {
+														i++;
+													}
+	
+													if (!consumoExcesso.equals(consumoNullo)) {
+														contaTxt.append("TARIFA EXCESSO ÁGUA           "); // 30
+														contaTxt.append(Util.completaString(consumoExcesso + " M3",24));
+														contaTxt.append(Util.completaStringComEspacoAEsquerda(
+																Util.formatarMoedaReal(valorExcesso),12));
+														i++;
+													}
+	
+													if (!emitirContaHelper.getPercentualEsgotoConta().equals(valorNullo)) {
+														contaTxt.append("TARIFA ESGOTO                 "); // 30
+														contaTxt.append(Util.completaString(
+															emitirContaHelper.getPercentualEsgotoConta()+ "%",24));
+														contaTxt.append(Util.completaStringComEspacoAEsquerda(
+															Util.formatarMoedaReal(emitirContaHelper.getValorEsgoto()),12));
+														i++;
+													}
+	
+													if (!emitirContaHelper.getValorCreditos().equals(valorNullo)) {
+														contaTxt.append("CRÉDITOS E DESCONTOS          "); // 30
+														contaTxt.append(Util.completaString(" ", 24));
+														contaTxt.append(Util.completaStringComEspacoAEsquerda(
+															Util.formatarMoedaReal(emitirContaHelper.getValorCreditos()),12));
+														i++;
+													}
+	
+													if (!emitirContaHelper.getValorImpostos().equals(valorNullo)) {
+														contaTxt.append("IMPOSTOS DEDUZIDOS            "); // 30
+														contaTxt.append(Util.completaString(" ", 24));
+														contaTxt.append(Util.completaStringComEspacoAEsquerda(
+															Util.formatarMoedaReal(emitirContaHelper.getValorImpostos()),12));
+														i++;
+													}
+	
+													// setando os servicos
+	
+													Conta contaId = new Conta();
+													contaId.setId(emitirContaHelper.getIdConta());
+	
+													Collection<DebitoCobradoAgrupadoHelper> cDebitoCobrado = this
+															.obterDebitosCobradosContaCAERN(contaId);
+	
+													int quantidadeLinhasSobrando = 10 - i;
+	
+													if (cDebitoCobrado != null && !cDebitoCobrado.isEmpty()) {
+	
+														int quantidadeDebitos = cDebitoCobrado.size();
+	
+														if (quantidadeLinhasSobrando >= quantidadeDebitos) {
+	
+															for (Iterator iter = cDebitoCobrado.iterator(); iter.hasNext();) {
+																DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter.next();
+	
 																contaTxt.append(Util.completaString(debitoCobrado.getDescricaoDebitoTipo(),30)); // 30
-																contaTxt.append(Util.completaString(debitoCobrado.getNumeroPrestacaoDebito()
+																contaTxt.append(Util.completaString(debitoCobrado.getNumeroPrestacaoDebito() 
 																	+ "/" + debitoCobrado.getNumeroPrestacao(),24));
 																contaTxt.append(Util.completaStringComEspacoAEsquerda(
 																	Util.formatarMoedaReal(debitoCobrado.getValorDebito()),12));
+	
 																i++;
-															} else {
-
-																valorAcumulado = valorAcumulado.add(debitoCobrado.getValorDebito());
-																temOutros = true;
 															}
-
-															contador++;
-														}
-														if (temOutros) {
-															contaTxt.append("OUTROS SERVIÇOS               "); // 30
-															contaTxt.append(Util.completaString(" ",24));
-															contaTxt.append(Util.completaStringComEspacoAEsquerda(
-																Util.formatarMoedaReal(valorAcumulado),12));
-															i++;
+	
+														} else {
+															Iterator iter = cDebitoCobrado.iterator();
+															int contador = 1;
+															BigDecimal valorAcumulado = new BigDecimal("0.00");
+															boolean temOutros = false;
+															while (iter.hasNext()) {
+																DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter.next();
+	
+																if (quantidadeLinhasSobrando > contador) {
+																	contaTxt.append(Util.completaString(debitoCobrado.getDescricaoDebitoTipo(),30)); // 30
+																	contaTxt.append(Util.completaString(debitoCobrado.getNumeroPrestacaoDebito()
+																		+ "/" + debitoCobrado.getNumeroPrestacao(),24));
+																	contaTxt.append(Util.completaStringComEspacoAEsquerda(
+																		Util.formatarMoedaReal(debitoCobrado.getValorDebito()),12));
+																	i++;
+																} else {
+	
+																	valorAcumulado = valorAcumulado.add(debitoCobrado.getValorDebito());
+																	temOutros = true;
+																}
+	
+																contador++;
+															}
+															if (temOutros) {
+																contaTxt.append("OUTROS SERVIÇOS               "); // 30
+																contaTxt.append(Util.completaString(" ",24));
+																contaTxt.append(Util.completaStringComEspacoAEsquerda(
+																	Util.formatarMoedaReal(valorAcumulado),12));
+																i++;
+															}
 														}
 													}
-												}
-
-												int quantidadeLinhasServicosSobraram = 10 - i;
-												contaTxt.append(Util.completaString(" ",quantidadeLinhasServicosSobraram * 66));
-
-												// [SB0018 - Gerar Linhas das DemaisContas]
-												anoMesString = "" + emitirContaHelper.getAmReferencia();
-												// formata ano mes para mes ano
-												mesAnoFormatado = anoMesString.substring(4, 6)
-														+ anoMesString.substring(0, 4);
-												digitoVerificadorConta = new Integer(""
-														+ emitirContaHelper.getDigitoVerificadorConta());
-												representacaoNumericaCodBarra = null;
-
-												representacaoNumericaCodBarra = this
-														.getControladorArrecadacao()
-														.obterRepresentacaoNumericaCodigoBarra(
-																3,
-																valorConta,
-																emitirContaHelper.getIdLocalidade(),
-																emitirContaHelper.getIdImovel(),
-																mesAnoFormatado,
-																digitoVerificadorConta,
-																null, null,
-																null, null,
-																null, null,
-																null);
-
-												contaTxt.append(Util.completaString(representacaoNumericaCodBarra,48));
-
-												contaTxt.append(Util.completaString(" ", 66)); // Rodapï¿½,
+	
+													int quantidadeLinhasServicosSobraram = 10 - i;
+													contaTxt.append(Util.completaString(" ",quantidadeLinhasServicosSobraram * 66));
+	
+													// [SB0018 - Gerar Linhas das DemaisContas]
+													anoMesString = "" + emitirContaHelper.getAmReferencia();
+													// formata ano mes para mes ano
+													mesAnoFormatado = anoMesString.substring(4, 6)
+															+ anoMesString.substring(0, 4);
+													digitoVerificadorConta = new Integer(""
+															+ emitirContaHelper.getDigitoVerificadorConta());
+													representacaoNumericaCodBarra = null;
+	
+													representacaoNumericaCodBarra = this
+															.getControladorArrecadacao()
+															.obterRepresentacaoNumericaCodigoBarra(
+																	3,
+																	valorConta,
+																	emitirContaHelper.getIdLocalidade(),
+																	emitirContaHelper.getIdImovel(),
+																	mesAnoFormatado,
+																	digitoVerificadorConta,
+																	null, null,
+																	null, null,
+																	null, null,
+																	null);
+	
+													contaTxt.append(Util.completaString(representacaoNumericaCodBarra,48));
+	
+													contaTxt.append(Util.completaString(" ", 66)); // Rodapï¿½,
+													
+													//Alteraï¿½ï¿½o por Tiago Moreno - 23/01/2009 - Determinacao judicial (Nitrato)
+													
+													Conta contaEmitida = new Conta();
+													
+													contaEmitida.setId(emitirContaHelper.getIdConta());
+													
+													CreditoRealizado creditoRealizado = repositorioFaturamento.pesquisarCreditoRealizadoNitrato(contaEmitida);
+	
+													if (creditoRealizado != null){
+														contaTxt.append(Util.completaString("Por decisão judicial de 15/05/08 - proc. 001.07.200202-7, esta conta inclui um desconto de 50% no valor da água. R$" 
+																+ Util.completaString(Util.formatarMoedaReal(creditoRealizado.getValorCredito()), 13), 160));
+													} else {
+														contaTxt.append(Util.completaString(" ", 160));
+													}
+	
+													// Impostos
+													BigDecimal baseCalculo = emitirContaHelper.getValorBaseCalculo();
+													BigDecimal valorPIS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_PIS);
+													BigDecimal valorCONFINS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_CONFINS);
+	
+													contaTxt.append(Util.completaString(Util.formatarMoedaReal(baseCalculo), 15));
+													contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_PIS_TEXTO, 5));
+													contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorPIS), 15));
+													contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_CONFINS_TEXTO, 5));
+													contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorCONFINS), 15));
+	
+													contasTxtLista.append(contaTxt.toString());
+	
+													conta = null;
+	
+													StringBuilder teste = new StringBuilder();
+													teste.append(contaTxt);
+	
+													// PEDRO 19/10/2006
+													contaTxt = null;
+													// enquanto estiver
+													// proximo
+													// if
+													// (iteratorConta.hasNext())
+													// {
+													contasTxtLista.append(System.getProperty("line.separator"));
+													contadorTeste = contadorTeste + 1;
+													System.out.println("===Contador Emitir===>" + contadorTeste);
+	
+													// adiciona o id da conta e o sequencial
+													// no para serem atualizados
+													mapAtualizaSequencial.put(emitirContaHelper.getIdConta(),sequencialImpressao);
 												
-												//Alteraï¿½ï¿½o por Tiago Moreno - 23/01/2009 - Determinacao judicial (Nitrato)
 												
-												Conta contaEmitida = new Conta();
-												
-												contaEmitida.setId(emitirContaHelper.getIdConta());
-												
-												CreditoRealizado creditoRealizado = repositorioFaturamento.pesquisarCreditoRealizadoNitrato(contaEmitida);
-
-												if (creditoRealizado != null){
-													contaTxt.append(Util.completaString("Por decisão judicial de 15/05/08 - proc. 001.07.200202-7, esta conta inclui um desconto de 50% no valor da água. R$" 
-															+ Util.completaString(Util.formatarMoedaReal(creditoRealizado.getValorCredito()), 13), 160));
-												} else {
-													contaTxt.append(Util.completaString(" ", 160));
-												}
-
-												// Impostos
-												BigDecimal baseCalculo = emitirContaHelper.getValorBaseCalculo();
-												BigDecimal valorPIS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_PIS);
-												BigDecimal valorCONFINS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_CONFINS);
-
-												contaTxt.append(Util.completaString(Util.formatarMoedaReal(baseCalculo), 15));
-												contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_PIS_TEXTO, 5));
-												contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorPIS), 15));
-												contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_CONFINS_TEXTO, 5));
-												contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorCONFINS), 15));
-
-												contasTxtLista.append(contaTxt.toString());
-
-												conta = null;
-
-												StringBuilder teste = new StringBuilder();
-												teste.append(contaTxt);
-
-												// PEDRO 19/10/2006
-												contaTxt = null;
-												// enquanto estiver
-												// proximo
-												// if
-												// (iteratorConta.hasNext())
-												// {
-												contasTxtLista.append(System.getProperty("line.separator"));
-												contadorTeste = contadorTeste + 1;
-												System.out.println("===Contador Emitir===>" + contadorTeste);
-
-												// adiciona o id da conta e o sequencial
-												// no para serem atualizados
-												mapAtualizaSequencial.put(emitirContaHelper.getIdConta(),sequencialImpressao);
-											
-												
+											    }
 											}// fim do laï¿½o que verifica se o
 											// helper ï¿½ diferente de nulo
 
@@ -2174,15 +2167,25 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 
 					String idGrupoFaturamento = "G" + faturamentoGrupo.getId();
 					String mesReferencia = "_Fat" + anoMesReferenciaFaturamento.toString().substring(4, 6);
-					String nomeZip = null;
 
-					nomeZip = "CONTA_N" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
-
+					String nomeZip = "CONTA_N" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
+					String nomeZipCartaConta = "CARTA_CONTA_ESTOURO" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
+					
 					BufferedWriter out = null;
 					ZipOutputStream zos = null;
 
-					File compactadoTipo = new File(nomeZip + ".zip");
+					File compactadoTipoCarta = null;
+
+                    File compactadoTipo = new File(nomeZip + ".zip");
+                    if (nomeZipCartaConta != null) {
+                        compactadoTipoCarta = new File(nomeZipCartaConta + ".zip");
+                    }
+                    
 					File leituraTipo = new File(nomeZip + ".txt");
+					File leituraTipoCarta = null;
+	                if (nomeZipCartaConta != null) {
+	                    leituraTipoCarta = new File(nomeZipCartaConta + ".txt");
+	                }
 
 					if (contasTxtLista != null && contasTxtLista.length() != 0) {
 						// fim de arquivo
@@ -2198,12 +2201,31 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 						out.close();
 					}
 
+					
+                    if (cartasTxtListaConta != null && cartasTxtListaConta.length() != 0) {
+                        // fim de arquivo
+                        contasTxtLista.append("\u0004");
+                        // ************ TIPO N *************
+
+                        zos = new ZipOutputStream(new FileOutputStream(compactadoTipoCarta));
+                        out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(leituraTipoCarta.getAbsolutePath())));
+                        out.write(cartasTxtListaConta.toString());
+                        out.flush();
+                        ZipUtil.adicionarArquivo(zos, leituraTipoCarta);
+                        zos.close();
+                        out.close();
+                        leituraTipoCarta.delete();
+                    }
+					
+					
 					// limpa todos os campos
 					nomeZip = null;
 					out = null;
 					zos = null;
 					compactadoTipo = null;
 					leituraTipo = null;
+                    leituraTipoCarta = null;
+                    cartasTxtListaConta = null;
 					contasTxtLista = null;
 
 					tipoConta++;
@@ -2293,7 +2315,7 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 
 				// recebe todos as contas da lista
 				StringBuilder contasTxtLista = null;
-
+				StringBuilder cartasTxtListaConta = null;
 				Map<Integer, Integer> mapAtualizaSequencial = null;
 
 				// i=0;Coleï¿½ï¿½o de contas com estouros de consumo
@@ -2316,7 +2338,7 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 					boolean flagPesquisarFichaCompensacao = false;
 					
 					contasTxtLista = new StringBuilder();
-					// cartasTxtListaConta = new StringBuilder();
+					cartasTxtListaConta = new StringBuilder();
 					
 					SistemaParametro sistemaParametro = getControladorUtil()
 						.pesquisarParametrosDoSistema();
@@ -2408,13 +2430,8 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 										while (situacao < 2) {
 											if (situacao == 0) {
 												situacao = 1;
-												// [SB0020] - Gerar
-												// Arquivo
-												// TXT
-												// das
-												// Cartas
-												if (tipoConta == 0
-														|| tipoConta == 1) {
+												// [SB0020] - Gerar Arquivo TXT das Cartas
+												if (tipoConta == 0 || tipoConta == 1) {
 													sequencialCarta += 1;
 												}
 												sequencialImpressao += 1;
@@ -2425,1069 +2442,1081 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 											}
 
 											quantidadeContas++;
-											// Sï¿½ para exibir no console
-											// a
-											// quantidade de
-											// contas
+											// São para exibir no console a quantidade de contas
 
 											StringBuilder contaTxt = new StringBuilder();
 
 											if (emitirContaHelper != null) {
 
-												// }
-												// count = count + 1;
-												// caso o [FS0006 -
-												// Verificar
-												// espaï¿½os
-												// para
-												// descriï¿½ï¿½o
-												// dos
-												// serviï¿½os e
-												// tarifas totalmente
-												// preenchido]
-												// --Linha 1-- //
-												// nome da localidade
-												// Inicia a Construcao da String
-												String descricaoLocalidade = emitirContaHelper
-														.getDescricaoLocalidade();
-												contaTxt
-														.append(Util
-																.completaString(
-																		descricaoLocalidade,
-																		30));
-												contaTxt
-														.append(Util
-																.adicionarZerosEsquedaNumero(
-																		3,
-																		emitirContaHelper
-																				.getCodigoSetorComercialConta()
-																				.toString()));
-
-												Imovel imovelEmitido = getControladorImovel()
-														.pesquisarImovel(
-																emitirContaHelper
-																		.getIdImovel());
-
-												contaTxt
-														.append(Util
-																.adicionarZerosEsquedaNumero(
-																		2,
-																		imovelEmitido
-																				.getQuadra()
-																				.getRota()
-																				.getCodigo()
-																				.toString()));
-
-												contaTxt.append(".");
-
-												contaTxt
-														.append(Util
-																.adicionarZerosEsquedaNumero(
-																		4,
-																		imovelEmitido
-																				.getNumeroSequencialRota()
-																				.toString()));
-
-												contaTxt
-														.append(Util
-																.adicionarZerosEsquedaNumero(
-																		8,
-																		emitirContaHelper
-																				.getIdImovel()
-																				.toString()));
-
-												// caso a coleï¿½ï¿½o de
-												// contas
-												// seja
-												// de
-												// entrega
-												// para
-												// o
-												// cliente
-												// responsï¿½vel
-												if (tipoConta == 3
-														|| tipoConta == 4) {
-													String nomeClienteUsuario = null;
-													if (emitirContaHelper
-															.getNomeImovel() != null
-															&& !emitirContaHelper
-																	.getNomeImovel()
-																	.equals("")) {
-														nomeClienteUsuario = emitirContaHelper
-																.getNomeImovel();
-
-													} else {
-														try {
-															nomeClienteUsuario = repositorioFaturamento
-																	.pesquisarNomeClienteUsuarioConta(emitirContaHelper
-																			.getIdConta());
-
-														} catch (ErroRepositorioException e) {
-															throw new ControladorException(
-																	"erro.sistema",
-																	e);
-														}
-													}
+												 // [SB0020] - Gerar Arquivo TXT das Cartas
+												boolean gerarMsgEstouroConsumo = gerarMsgEstouroConsumo(emitirContaHelper.getIdConta());
+												if(gerarMsgEstouroConsumo){
+                                                    cartasTxtListaConta.append(gerarArquivoTxtCartas(emitirContaHelper,sequencialCarta,situacao));
+                                                    cartasTxtListaConta.append(System.getProperty("line.separator"));
+												}else{
+													
+													// }
+													// count = count + 1;
+													// caso o [FS0006 -
+													// Verificar
+													// espaï¿½os
+													// para
+													// descriï¿½ï¿½o
+													// dos
+													// serviï¿½os e
+													// tarifas totalmente
+													// preenchido]
+													// --Linha 1-- //
+													// nome da localidade
+													// Inicia a Construcao da String
+													String descricaoLocalidade = emitirContaHelper
+															.getDescricaoLocalidade();
 													contaTxt
 															.append(Util
 																	.completaString(
-																			nomeClienteUsuario,
+																			descricaoLocalidade,
 																			30));
-												} else {
 													contaTxt
 															.append(Util
-																	.completaString(
+																	.adicionarZerosEsquedaNumero(
+																			3,
 																			emitirContaHelper
-																					.getNomeCliente(),
+																					.getCodigoSetorComercialConta()
+																					.toString()));
+	
+													Imovel imovelEmitido = getControladorImovel()
+															.pesquisarImovel(
+																	emitirContaHelper
+																			.getIdImovel());
+	
+													contaTxt
+															.append(Util
+																	.adicionarZerosEsquedaNumero(
+																			2,
+																			imovelEmitido
+																					.getQuadra()
+																					.getRota()
+																					.getCodigo()
+																					.toString()));
+	
+													contaTxt.append(".");
+	
+													contaTxt
+															.append(Util
+																	.adicionarZerosEsquedaNumero(
+																			4,
+																			imovelEmitido
+																					.getNumeroSequencialRota()
+																					.toString()));
+	
+													contaTxt
+															.append(Util
+																	.adicionarZerosEsquedaNumero(
+																			8,
+																			emitirContaHelper
+																					.getIdImovel()
+																					.toString()));
+	
+													// caso a coleï¿½ï¿½o de
+													// contas
+													// seja
+													// de
+													// entrega
+													// para
+													// o
+													// cliente
+													// responsï¿½vel
+													if (tipoConta == 3
+															|| tipoConta == 4) {
+														String nomeClienteUsuario = null;
+														if (emitirContaHelper
+																.getNomeImovel() != null
+																&& !emitirContaHelper
+																		.getNomeImovel()
+																		.equals("")) {
+															nomeClienteUsuario = emitirContaHelper
+																	.getNomeImovel();
+	
+														} else {
+															try {
+																nomeClienteUsuario = repositorioFaturamento
+																		.pesquisarNomeClienteUsuarioConta(emitirContaHelper
+																				.getIdConta());
+	
+															} catch (ErroRepositorioException e) {
+																throw new ControladorException(
+																		"erro.sistema",
+																		e);
+															}
+														}
+														contaTxt
+																.append(Util
+																		.completaString(
+																				nomeClienteUsuario,
+																				30));
+													} else {
+														contaTxt
+																.append(Util
+																		.completaString(
+																				emitirContaHelper
+																						.getNomeCliente(),
+																				30));
+													}
+	
+													String[] enderecoImovel = getControladorEndereco()
+															.pesquisarEnderecoFormatadoDividido(
+																	emitirContaHelper
+																			.getIdImovel());
+	
+													// endereï¿½o
+													contaTxt
+															.append(Util
+																	.completaString(
+																			enderecoImovel[0],
+																			60));
+	
+													// bairro
+													contaTxt
+															.append(Util
+																	.completaString(
+																			enderecoImovel[3],
 																			30));
-												}
-
-												String[] enderecoImovel = getControladorEndereco()
-														.pesquisarEnderecoFormatadoDividido(
-																emitirContaHelper
-																		.getIdImovel());
-
-												// endereï¿½o
-												contaTxt
-														.append(Util
-																.completaString(
-																		enderecoImovel[0],
-																		60));
-
-												// bairro
-												contaTxt
-														.append(Util
-																.completaString(
-																		enderecoImovel[3],
-																		30));
-
-
-
-												FiltroLocalidade filtroLocalidade = new FiltroLocalidade();
-
-												filtroLocalidade
-														.adicionarParametro(new ParametroSimples(
-																FiltroLocalidade.ID,
-																emitirContaHelper
-																		.getIdLocalidade()));
-
-												filtroLocalidade
-														.adicionarCaminhoParaCarregamentoEntidade("logradouroCep");
-												filtroLocalidade
-														.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.cep");
-												filtroLocalidade
-														.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro");
-												filtroLocalidade
-														.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTipo");
-												filtroLocalidade
-														.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTitulo");
-												filtroLocalidade
-														.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
-												filtroLocalidade
-														.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro");
-												filtroLocalidade
-														.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro");
-												filtroLocalidade
-														.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio");
-												filtroLocalidade
-														.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio.unidadeFederacao");
-												filtroLocalidade
-														.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
-
-												Collection cLocalidade = (Collection) getControladorUtil()
-														.pesquisar(
-																filtroLocalidade,
-																Localidade.class
-																		.getName());
-												Localidade localidade = (Localidade) cLocalidade
-														.iterator().next();
-
-												FiltroQualidadeAgua filtroQualidadeAgua = new FiltroQualidadeAgua();
-
-												Collection colecaoQualidadeAgua = null;
-
-												filtroQualidadeAgua
-														.adicionarParametro(new ParametroSimples(
-																FiltroQualidadeAgua.LOCALIDADE_ID,
-																localidade
-																		.getId()));
-												filtroQualidadeAgua
-														.adicionarParametro(new ParametroSimples(
-																FiltroQualidadeAgua.SETOR_COMERCIAL_ID,
-																emitirContaHelper
-																		.getIdSetorComercial()));
-												filtroQualidadeAgua
-														.adicionarParametro(new ParametroSimples(
-																FiltroQualidadeAgua.ANO_MES_REFERENCIA,
-																emitirContaHelper
-																		.getAmReferencia()));
-												
-												filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
-
-												colecaoQualidadeAgua = getControladorUtil()
-														.pesquisar(
-																filtroQualidadeAgua,
-																QualidadeAgua.class
-																		.getName());
-
-												if (colecaoQualidadeAgua == null
-														|| colecaoQualidadeAgua
-																.isEmpty()) {
-													filtroQualidadeAgua
-															.limparListaParametros();
-													colecaoQualidadeAgua = null;
+	
+	
+	
+													FiltroLocalidade filtroLocalidade = new FiltroLocalidade();
+	
+													filtroLocalidade
+															.adicionarParametro(new ParametroSimples(
+																	FiltroLocalidade.ID,
+																	emitirContaHelper
+																			.getIdLocalidade()));
+	
+													filtroLocalidade
+															.adicionarCaminhoParaCarregamentoEntidade("logradouroCep");
+													filtroLocalidade
+															.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.cep");
+													filtroLocalidade
+															.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro");
+													filtroLocalidade
+															.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTipo");
+													filtroLocalidade
+															.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTitulo");
+													filtroLocalidade
+															.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
+													filtroLocalidade
+															.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro");
+													filtroLocalidade
+															.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro");
+													filtroLocalidade
+															.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio");
+													filtroLocalidade
+															.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio.unidadeFederacao");
+													filtroLocalidade
+															.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
+	
+													Collection cLocalidade = (Collection) getControladorUtil()
+															.pesquisar(
+																	filtroLocalidade,
+																	Localidade.class
+																			.getName());
+													Localidade localidade = (Localidade) cLocalidade
+															.iterator().next();
+	
+													FiltroQualidadeAgua filtroQualidadeAgua = new FiltroQualidadeAgua();
+	
+													Collection colecaoQualidadeAgua = null;
+	
 													filtroQualidadeAgua
 															.adicionarParametro(new ParametroSimples(
 																	FiltroQualidadeAgua.LOCALIDADE_ID,
 																	localidade
 																			.getId()));
-													
 													filtroQualidadeAgua
-													.adicionarParametro(new ParametroNulo(
-															FiltroQualidadeAgua.SETOR_COMERCIAL_ID));
-													
+															.adicionarParametro(new ParametroSimples(
+																	FiltroQualidadeAgua.SETOR_COMERCIAL_ID,
+																	emitirContaHelper
+																			.getIdSetorComercial()));
 													filtroQualidadeAgua
 															.adicionarParametro(new ParametroSimples(
 																	FiltroQualidadeAgua.ANO_MES_REFERENCIA,
 																	emitirContaHelper
 																			.getAmReferencia()));
-													filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
 													
+													filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
+	
 													colecaoQualidadeAgua = getControladorUtil()
 															.pesquisar(
 																	filtroQualidadeAgua,
 																	QualidadeAgua.class
 																			.getName());
-												}
-												
-												if (colecaoQualidadeAgua == null
-														|| colecaoQualidadeAgua
-																.isEmpty()) {
-													filtroQualidadeAgua
-															.limparListaParametros();
-													colecaoQualidadeAgua = null;
-													
-													filtroQualidadeAgua
-															.adicionarParametro(new ParametroNulo(
-																	FiltroQualidadeAgua.LOCALIDADE_ID));
-													
-													filtroQualidadeAgua
-													.adicionarParametro(new ParametroNulo(
-															FiltroQualidadeAgua.SETOR_COMERCIAL_ID));
-													
-													filtroQualidadeAgua
-															.adicionarParametro(new ParametroSimples(
-																	FiltroQualidadeAgua.ANO_MES_REFERENCIA,
-																	emitirContaHelper
-																			.getAmReferencia()));
-													filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
-													
-													colecaoQualidadeAgua = getControladorUtil()
-															.pesquisar(
-																	filtroQualidadeAgua,
-																	QualidadeAgua.class
-																			.getName());
-												}												
-
-												if (colecaoQualidadeAgua != null
-														&& !colecaoQualidadeAgua
-																.isEmpty()) {
-													QualidadeAgua qualidadeAgua = (QualidadeAgua) colecaoQualidadeAgua
-															.iterator().next();
-
-													// fonte
-													if (qualidadeAgua.getFonteCaptacao() != null) {
-														contaTxt.append(
-															Util.completaString(qualidadeAgua.getFonteCaptacao().getDescricao(),30));
-													} else {
-														contaTxt.append(Util.completaString(" ",30));
-													}
-													
-													// cloro
-													if (qualidadeAgua
-															.getNumeroCloroResidual() != null
-															&& !qualidadeAgua
-																	.getNumeroCloroResidual()
-																	.equals(0)) {
-														contaTxt
-																.append(Util
-																		.completaString(
-																				qualidadeAgua
-																						.getNumeroCloroResidual()
-																						.toString(),
-																				3));
-													} else {
-														contaTxt
-																.append(Util
-																		.completaString(
-																				" ",
-																				3));
-													}
-
-													// coliformes
-													if (qualidadeAgua
-															.getNumeroIndiceColiformesTotais() != null
-															&& !qualidadeAgua
-																	.getNumeroIndiceColiformesTotais()
-																	.equals(0)) {
-														contaTxt
-																.append(Util
-																		.completaString(
-																				qualidadeAgua
-																						.getNumeroIndiceColiformesTotais()
-																						.toString(),
-																				8));
-													} else {
-														contaTxt
-																.append(Util
-																		.completaString(
-																				" ",
-																				8));
-													}
-
-													// nitrato
-													if (qualidadeAgua
-															.getNumeroNitrato() != null
-															&& !qualidadeAgua
-																	.getNumeroNitrato()
-																	.equals(0)) {
-														contaTxt
-																.append(Util
-																		.completaString(
-																				qualidadeAgua
-																						.getNumeroNitrato()
-																						.toString(),
-																				4));
-													} else {
-														contaTxt
-																.append(Util
-																		.completaString(
-																				" ",
-																				4));
-													}
-
-													// //ph
-													if (qualidadeAgua
-															.getNumeroIndicePh() != null
-															&& !qualidadeAgua
-																	.getNumeroIndicePh()
-																	.equals(0)) {
-														contaTxt
-																.append(Util
-																		.completaString(
-																				qualidadeAgua
-																						.getNumeroIndicePh()
-																						.toString(),
-																				4));
-													} else {
-														contaTxt
-																.append(Util
-																		.completaString(
-																				" ",
-																				4));
-													}
-
-													// //turbidez
-													if (qualidadeAgua
-															.getNumeroIndiceTurbidez() != null
-															&& !qualidadeAgua
-																	.getNumeroIndiceTurbidez()
-																	.equals(0)) {
-														contaTxt
-																.append(Util
-																		.completaString(
-																				qualidadeAgua
-																						.getNumeroIndiceTurbidez()
-																						.toString(),
-																				4));
-													} else {
-														contaTxt
-																.append(Util
-																		.completaString(
-																				" ",
-																				4));
-													}
-
-												} else {
-													contaTxt.append(Util
-															.completaString(
-																	" ", 53));
-												}
-
-												Collection colecaoSubCategoria = getControladorImovel()
-														.obterQuantidadeEconomiasSubCategoria(
-																imovelEmitido
-																		.getId());
-
-												String economias = "";
-
-												for (Iterator iter = colecaoSubCategoria
-														.iterator(); iter
-														.hasNext();) {
-													Subcategoria subcategoria = (Subcategoria) iter
-															.next();
-
-													economias = economias
-															+ Util
-																	.adicionarZerosEsquedaNumero(
-																			3,
-																			subcategoria
-																					.getCodigo()
-																					+ "")
-															+ "/"
-															+ Util
-																	.adicionarZerosEsquedaNumero(
-																			3,
-																			subcategoria
-																					.getQuantidadeEconomias()
-																					.toString())
-															+ " ";
-
-												}
-
-												contaTxt
-														.append(Util
-																.adicionarZerosEsquedaNumero(
-																		7,
-																		quantidadeContas
-																				+ ""));
-
-												contaTxt
-														.append(Util
-																.completaString(
-																		localidade
-																				.getDescricao(),
-																		30));
-
-												contaTxt
-														.append(Util
-																.completaString(
-																		localidade
-																				.getEnderecoFormatadoTituloAbreviado(),
-																		35));
-
-												contaTxt
-														.append(Util
-																.completaString(
-																		localidade
-																				.getFone(),
-																		20));
-
-												contaTxt.append(Util
-														.completaString(
-																"0800-84-0195",
-																15));
-
-												// cria um objeto conta
-												// para
-												// calcular o
-												// valor da
-												// conta
-												Conta conta = new Conta();
-												conta
-														.setValorAgua(emitirContaHelper
-																.getValorAgua());
-												conta
-														.setValorEsgoto(emitirContaHelper
-																.getValorEsgoto());
-												conta
-														.setValorCreditos(emitirContaHelper
-																.getValorCreditos());
-												conta
-														.setDebitos(emitirContaHelper
-																.getDebitos());
-												conta
-														.setValorImposto(emitirContaHelper
-																.getValorImpostos());
-
-												BigDecimal valorConta = conta
-														.getValorTotalContaBigDecimal();
-												emitirContaHelper.setValorConta(valorConta);
-
-												// [SB0018 - Gerar
-												// Linhas
-												// das
-												// DemaisContas]
-												String anoMesString = ""
-														+ emitirContaHelper
-																.getAmReferencia();
-												// formata ano mes para mes ano
-
-												String mesNumero = anoMesString
-														.substring(4, 6);
-
-												String mesExtenso = Util
-														.retornaDescricaoMes(
-																new Integer(
-																		mesNumero)
-																		.intValue())
-														.toUpperCase();
-												String dataExtensa = mesExtenso
-														+ "/"
-														+ anoMesString
-																.substring(0, 4);
-
-												String mesAnoFormatado = anoMesString
-														.substring(4, 6)
-														+ anoMesString
-																.substring(0, 4);
-												Integer digitoVerificadorConta = new Integer(
-														""
-																+ emitirContaHelper
-																		.getDigitoVerificadorConta());
-												String representacaoNumericaCodBarra = null;
-
-												representacaoNumericaCodBarra = getControladorArrecadacao()
-														.obterRepresentacaoNumericaCodigoBarra(
-																3,
-																valorConta,
-																emitirContaHelper
-																		.getIdLocalidade(),
-																emitirContaHelper
-																		.getIdImovel(),
-																mesAnoFormatado,
-																digitoVerificadorConta,
-																null, null,
-																null, null,
-																null, null,
-																null);
-
-												contaTxt
-														.append(Util
-																.completaString(
-																		representacaoNumericaCodBarra,
-																		48));
-
-												// determinar Mensagem
-												String[] parmsPartesConta = obterMensagemConta3Partes(
-														emitirContaHelper,
-														sistemaParametro);
-
-												String primeiraParte = parmsPartesConta[0];
-												String segundaParte = parmsPartesConta[1];
-												String terceiraParte = parmsPartesConta[2];
-
-												contaTxt.append(Util
-														.completaString(
-																primeiraParte,
-																65));
-												contaTxt.append(Util
-														.completaString(
-																segundaParte,
-																65));
-												
-												contaTxt.append(Util
-													.completaString(
-														terceiraParte,
-															65));
-
-												contaTxt
-														.append(System
-																.getProperty("line.separator"));
-
-												contaTxt
-														.append(Util
-																.completaString(
-																		descricaoLocalidade,
-																		30));
-
-												contaTxt
-														.append(Util
-																.adicionarZerosEsquedaNumero(
-																		2,
-																		imovelEmitido
-																				.getQuadra()
-																				.getRota()
-																				.getCodigo()
-																				.toString()));
-
-												contaTxt.append(".");
-
-												contaTxt
-														.append(Util
-																.adicionarZerosEsquedaNumero(
-																		4,
-																		imovelEmitido
-																				.getNumeroSequencialRota()
-																				.toString()));
-
-												Imovel imovel = new Imovel();
-												Localidade localidade2 = new Localidade();
-												localidade2
-														.setId(emitirContaHelper
-																.getIdLocalidade());
-												imovel
-														.setLocalidade(localidade2);
-												SetorComercial setorComercial = new SetorComercial();
-												setorComercial
-														.setCodigo(emitirContaHelper
-																.getCodigoSetorComercialConta());
-												imovel
-														.setSetorComercial(setorComercial);
-												Quadra quadra = new Quadra();
-												quadra
-														.setNumeroQuadra(emitirContaHelper
-																.getIdQuadraConta());
-												imovel.setQuadra(quadra);
-												imovel
-														.setLote(emitirContaHelper
-																.getLoteConta());
-												imovel
-														.setSubLote(emitirContaHelper
-																.getSubLoteConta());
-
-												String inscricao = imovel
-														.getInscricaoFormatada();
-
-												imovel = null;
-
-												setorComercial = null;
-												quadra = null;
-
-												contaTxt.append(Util
-														.completaString(
-																inscricao, 20));
-												contaTxt
-														.append(Util
-																.completaString(
-																		" ", 12));
-
-												String mesAnoReferencia = Util
-														.formatarAnoMesParaMesAno(emitirContaHelper
-																.getAmReferencia());
-
-												contaTxt
-														.append(Util
-																.completaString(
-																		mesAnoReferencia,
-																		9));
-
-												// data de vencimento da
-												// conta
-												String dataVencimento = Util
-														.formatarData(emitirContaHelper
-																.getDataVencimentoConta());
-
-												contaTxt.append(Util
-														.completaString(
-																dataVencimento,
-																10));
-
-												String valorContaString = Util
-														.formatarMoedaReal(valorConta);
-
-												// valor da conta
-
-												FiltroContaImpressao filtroContaImpressao = new FiltroContaImpressao();
-												filtroContaImpressao
-														.adicionarParametro(new ParametroSimples(
-																FiltroContaImpressao.ID,
-																emitirContaHelper
-																		.getIdConta()));
-												filtroContaImpressao
-														.adicionarCaminhoParaCarregamentoEntidade("contaTipo");
-
-												Collection<ContaImpressao> cContaIm = getControladorUtil()
-														.pesquisar(
-																filtroContaImpressao,
-																ContaImpressao.class
-																		.getName());
-
-												ContaImpressao contaImpressao = cContaIm
-														.iterator().next();
-												Integer contaTipo = contaImpressao
-														.getContaTipo().getId();
-
-												contaTxt
-														.append(Util
-																.completaStringComEspacoAEsquerda(
-																		valorContaString,
-																		15));
-
-												if (contaTipo
-														.equals(ContaTipo.CONTA_DEBITO_AUTOMATICO)
-														|| contaTipo
-																.equals(ContaTipo.CONTA_DEBITO_AUTO_COM_CLIENTE_RESP
-																		.intValue())) {
-
-													contaTxt
-															.append(Util
-																	.completaString(
-																			"NÃO PODE SER PAGO EM BANCO",
-																			65));
-													contaTxt
-															.append(Util
-																	.completaString(
-																			"DÉBITO AUTOMÁTICO EM CONTA CORRENTE",
-																			65));
-
-												} else {
-
-													contaTxt.append(Util
-															.completaString(
-																	" ", 65));
-													contaTxt.append(Util
-															.completaString(
-																	" ", 65));
-												}
-
-												// Mï¿½s/Ano referï¿½ncia da
-												// conta
-												// digito
-												// verificador
-
-												contaTxt
-														.append(Util
-																.completaString(
-																		dataExtensa,
-																		14));
-
-												contaTxt
-														.append(Util
-																.adicionarZerosEsquedaNumero(
-																		8,
-																		imovelEmitido
-																				.getId()
-																				.toString()));
-
-												contaTxt
-														.append(Util
-																.completaString(
-																		emitirContaHelper
-																				.getIdLocalidade()
-																				.toString(),
-																		3));
-
-												contaTxt
-														.append(Util
-																.adicionarZerosEsquedaNumero(
-																		3,
-																		emitirContaHelper
-																				.getCodigoSetorComercialConta()
-																				.toString()));
-
-												contaTxt
-														.append(Util
-																.adicionarZerosEsquedaNumero(
-																		3,
-																		emitirContaHelper
-																				.getIdQuadraConta()
-																				.toString()));
-
-												contaTxt
-														.append(Util
-																.adicionarZerosEsquedaNumero(
-																		4,
-																		emitirContaHelper
-																				.getLoteConta()
-																				.toString()));
-
-												contaTxt
-														.append(Util
-																.adicionarZerosEsquedaNumero(
-																		2,
-																		emitirContaHelper
-																				.getSubLoteConta()
-																				.toString()));
-												// DIGITO ?????
-												contaTxt
-														.append(Util
-																.adicionarZerosEsquedaNumero(
-																		1, "0"));
-
-												Integer[] parmSituacao = determinarTipoLigacaoMedicao(emitirContaHelper);
-												Integer tipoLigacao = parmSituacao[0];
-												Integer tipoMedicao = parmSituacao[1];
-
-												Object[] parmsMedicaoHistorico = obterDadosMedicaoConta(
-														emitirContaHelper,
-														tipoMedicao);
-												// Leitura Anterior
-												String leituraAnterior = "";
-												// Leitura Atual
-												String leituraAtual = "";
-												// Data Leitura Anterior
-												String dataLeituraAnterior = "";
-												// Leitura Anterior
-												String dataLeituraAtual = "";
-
-												if (parmsMedicaoHistorico != null) {
-
-													if (parmsMedicaoHistorico[0] != null) {
-														leituraAnterior = ""
-																+ (Integer) parmsMedicaoHistorico[0];
-													}
-
-													if (parmsMedicaoHistorico[1] != null) {
-														leituraAtual = ""
-																+ (Integer) parmsMedicaoHistorico[1];
-													}
-
-													if (parmsMedicaoHistorico[3] != null) {
-														dataLeituraAnterior = Util
-																.formatarData((Date) parmsMedicaoHistorico[3]);
-													}
-
-													if (parmsMedicaoHistorico[2] != null) {
-														dataLeituraAtual = Util
-																.formatarData((Date) parmsMedicaoHistorico[2]);
-													}
-
-												}
-												Object[] parmsConsumoHistorico = null;
-												String consumoMedio = "";
-												if (tipoLigacao != null) {
-													try {
-														parmsConsumoHistorico = repositorioMicromedicao
-																.obterDadosConsumoConta(
-																		emitirContaHelper
-																				.getIdImovel(),
-																		emitirContaHelper
-																				.getAmReferencia(),
-																		tipoLigacao);
-
-													} catch (ErroRepositorioException e) {
-														sessionContext
-																.setRollbackOnly();
-														throw new ControladorException(
-																"erro.sistema",
-																e);
-													}
-
-													if (parmsConsumoHistorico != null) {
-														// Consumo mï¿½dio
-														if (parmsConsumoHistorico[2] != null) {
-															consumoMedio = ""
-																	+ (Integer) parmsConsumoHistorico[2];
-														}
-													}
-												}
-
-												// Data Leitura Atual
-												contaTxt
-														.append(Util
-																.completaString(
-																		dataLeituraAtual,
-																		5));
-												contaTxt
-														.append(Util
-																.completaString(
-																		leituraAnterior,
-																		6));
-
-												// Leitura Atual
-												contaTxt
-														.append(Util
-																.completaString(
-																		leituraAtual,
-																		6));
-
-												String diasConsumo = "";
-
-												if (!dataLeituraAnterior
-														.equals("")
-														&& !dataLeituraAtual
-																.equals("")) {
-													diasConsumo = ""
-															+ Util
-																	.obterQuantidadeDiasEntreDuasDatas(
-																			(Date) parmsMedicaoHistorico[3],
-																			(Date) parmsMedicaoHistorico[2]);
-												}
-
-												String[] parmsConsumo = obterConsumoFaturadoConsumoMedioDiario(
-														emitirContaHelper,
-														tipoMedicao,
-														diasConsumo);
-												String consumoFaturamento = parmsConsumo[0];
-
-												// Consumo faturado
-												contaTxt
-														.append(Util
-																.completaString(
-																		consumoFaturamento,
-																		5));
-												contaTxt
-														.append(Util
-																.completaString(
-																		consumoMedio,
-																		5));
-
-												contaTxt
-														.append(Util
-																.completaString(
-																		this
-																				.obterConsumoAnterior(
-																						emitirContaHelper
-																								.getIdImovel(),
-																						emitirContaHelper
-																								.getAmReferencia(),
-																						6,
-																						tipoLigacao,
-																						tipoMedicao)
-																				.toString(),
-																		12));
-												contaTxt
-														.append(Util
-																.completaString(
-																		this
-																				.obterConsumoAnterior(
-																						emitirContaHelper
-																								.getIdImovel(),
-																						emitirContaHelper
-																								.getAmReferencia(),
-																						5,
-																						tipoLigacao,
-																						tipoMedicao)
-																				.toString(),
-																		12));
-												contaTxt
-														.append(Util
-																.completaString(
-																		this
-																				.obterConsumoAnterior(
-																						emitirContaHelper
-																								.getIdImovel(),
-																						emitirContaHelper
-																								.getAmReferencia(),
-																						4,
-																						tipoLigacao,
-																						tipoMedicao)
-																				.toString(),
-																		12));
-												contaTxt
-														.append(Util
-																.completaString(
-																		this
-																				.obterConsumoAnterior(
-																						emitirContaHelper
-																								.getIdImovel(),
-																						emitirContaHelper
-																								.getAmReferencia(),
-																						3,
-																						tipoLigacao,
-																						tipoMedicao)
-																				.toString(),
-																		12));
-												contaTxt
-														.append(Util
-																.completaString(
-																		this
-																				.obterConsumoAnterior(
-																						emitirContaHelper
-																								.getIdImovel(),
-																						emitirContaHelper
-																								.getAmReferencia(),
-																						2,
-																						tipoLigacao,
-																						tipoMedicao)
-																				.toString(),
-																		12));
-												contaTxt
-														.append(Util
-																.completaString(
-																		this
-																				.obterConsumoAnterior(
-																						emitirContaHelper
-																								.getIdImovel(),
-																						emitirContaHelper
-																								.getAmReferencia(),
-																						1,
-																						tipoLigacao,
-																						tipoMedicao)
-																				.toString(),
-																		12));
-
-												contaTxt.append(Util
-														.completaString(
-																economias, 24));
-
-												ObterDebitoImovelOuClienteHelper obterDebitoImovelOuClienteHelper = this
-														.obterDebitoImovelOuClienteHelper(
-																emitirContaHelper,
-																sistemaParametro);
-
-												if (obterDebitoImovelOuClienteHelper != null
-														&& ((obterDebitoImovelOuClienteHelper
-																.getColecaoGuiasPagamentoValores() != null && !obterDebitoImovelOuClienteHelper
-																.getColecaoGuiasPagamentoValores()
-																.isEmpty()) || (obterDebitoImovelOuClienteHelper
-																.getColecaoContasValores() != null && !obterDebitoImovelOuClienteHelper
-																.getColecaoContasValores()
-																.isEmpty()))) {
-													Collection colecaoContasValores = obterDebitoImovelOuClienteHelper
-															.getColecaoContasValores();
-
-													if (colecaoContasValores != null
-															&& !colecaoContasValores
+	
+													if (colecaoQualidadeAgua == null
+															|| colecaoQualidadeAgua
 																	.isEmpty()) {
-														if (colecaoContasValores
-																.size() > 5) {
-															contaTxt
-																	.append(Util
-																			.completaString(
-																					"HÁ MAIS DE CINCO CONTAS EM ATRASO",
-																					40));
+														filtroQualidadeAgua
+																.limparListaParametros();
+														colecaoQualidadeAgua = null;
+														filtroQualidadeAgua
+																.adicionarParametro(new ParametroSimples(
+																		FiltroQualidadeAgua.LOCALIDADE_ID,
+																		localidade
+																				.getId()));
+														
+														filtroQualidadeAgua
+														.adicionarParametro(new ParametroNulo(
+																FiltroQualidadeAgua.SETOR_COMERCIAL_ID));
+														
+														filtroQualidadeAgua
+																.adicionarParametro(new ParametroSimples(
+																		FiltroQualidadeAgua.ANO_MES_REFERENCIA,
+																		emitirContaHelper
+																				.getAmReferencia()));
+														filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
+														
+														colecaoQualidadeAgua = getControladorUtil()
+																.pesquisar(
+																		filtroQualidadeAgua,
+																		QualidadeAgua.class
+																				.getName());
+													}
+													
+													if (colecaoQualidadeAgua == null
+															|| colecaoQualidadeAgua
+																	.isEmpty()) {
+														filtroQualidadeAgua
+																.limparListaParametros();
+														colecaoQualidadeAgua = null;
+														
+														filtroQualidadeAgua
+																.adicionarParametro(new ParametroNulo(
+																		FiltroQualidadeAgua.LOCALIDADE_ID));
+														
+														filtroQualidadeAgua
+														.adicionarParametro(new ParametroNulo(
+																FiltroQualidadeAgua.SETOR_COMERCIAL_ID));
+														
+														filtroQualidadeAgua
+																.adicionarParametro(new ParametroSimples(
+																		FiltroQualidadeAgua.ANO_MES_REFERENCIA,
+																		emitirContaHelper
+																				.getAmReferencia()));
+														filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
+														
+														colecaoQualidadeAgua = getControladorUtil()
+																.pesquisar(
+																		filtroQualidadeAgua,
+																		QualidadeAgua.class
+																				.getName());
+													}												
+	
+													if (colecaoQualidadeAgua != null
+															&& !colecaoQualidadeAgua
+																	.isEmpty()) {
+														QualidadeAgua qualidadeAgua = (QualidadeAgua) colecaoQualidadeAgua
+																.iterator().next();
+	
+														// fonte
+														if (qualidadeAgua.getFonteCaptacao() != null) {
+															contaTxt.append(
+																Util.completaString(qualidadeAgua.getFonteCaptacao().getDescricao(),30));
 														} else {
-															String contasAtraso = "";
-															for (Iterator iter = colecaoContasValores
-																	.iterator(); iter
-																	.hasNext();) {
-																ContaValoresHelper contasValores = (ContaValoresHelper) iter
-																		.next();
-																contasAtraso = contasAtraso
-																		+ contasValores
-																				.getConta()
-																				.getFormatarAnoMesParaMesAno()
-																		+ " ";
-															}
+															contaTxt.append(Util.completaString(" ",30));
+														}
+														
+														// cloro
+														if (qualidadeAgua
+																.getNumeroCloroResidual() != null
+																&& !qualidadeAgua
+																		.getNumeroCloroResidual()
+																		.equals(0)) {
 															contaTxt
 																	.append(Util
 																			.completaString(
-																					contasAtraso,
-																					40));
+																					qualidadeAgua
+																							.getNumeroCloroResidual()
+																							.toString(),
+																					3));
+														} else {
+															contaTxt
+																	.append(Util
+																			.completaString(
+																					" ",
+																					3));
 														}
+	
+														// coliformes
+														if (qualidadeAgua
+																.getNumeroIndiceColiformesTotais() != null
+																&& !qualidadeAgua
+																		.getNumeroIndiceColiformesTotais()
+																		.equals(0)) {
+															contaTxt
+																	.append(Util
+																			.completaString(
+																					qualidadeAgua
+																							.getNumeroIndiceColiformesTotais()
+																							.toString(),
+																					8));
+														} else {
+															contaTxt
+																	.append(Util
+																			.completaString(
+																					" ",
+																					8));
+														}
+	
+														// nitrato
+														if (qualidadeAgua
+																.getNumeroNitrato() != null
+																&& !qualidadeAgua
+																		.getNumeroNitrato()
+																		.equals(0)) {
+															contaTxt
+																	.append(Util
+																			.completaString(
+																					qualidadeAgua
+																							.getNumeroNitrato()
+																							.toString(),
+																					4));
+														} else {
+															contaTxt
+																	.append(Util
+																			.completaString(
+																					" ",
+																					4));
+														}
+	
+														// //ph
+														if (qualidadeAgua
+																.getNumeroIndicePh() != null
+																&& !qualidadeAgua
+																		.getNumeroIndicePh()
+																		.equals(0)) {
+															contaTxt
+																	.append(Util
+																			.completaString(
+																					qualidadeAgua
+																							.getNumeroIndicePh()
+																							.toString(),
+																					4));
+														} else {
+															contaTxt
+																	.append(Util
+																			.completaString(
+																					" ",
+																					4));
+														}
+	
+														// //turbidez
+														if (qualidadeAgua
+																.getNumeroIndiceTurbidez() != null
+																&& !qualidadeAgua
+																		.getNumeroIndiceTurbidez()
+																		.equals(0)) {
+															contaTxt
+																	.append(Util
+																			.completaString(
+																					qualidadeAgua
+																							.getNumeroIndiceTurbidez()
+																							.toString(),
+																					4));
+														} else {
+															contaTxt
+																	.append(Util
+																			.completaString(
+																					" ",
+																					4));
+														}
+	
 													} else {
+														contaTxt.append(Util
+																.completaString(
+																		" ", 53));
+													}
+	
+													Collection colecaoSubCategoria = getControladorImovel()
+															.obterQuantidadeEconomiasSubCategoria(
+																	imovelEmitido
+																			.getId());
+	
+													String economias = "";
+	
+													for (Iterator iter = colecaoSubCategoria
+															.iterator(); iter
+															.hasNext();) {
+														Subcategoria subcategoria = (Subcategoria) iter
+																.next();
+	
+														economias = economias
+																+ Util
+																		.adicionarZerosEsquedaNumero(
+																				3,
+																				subcategoria
+																						.getCodigo()
+																						+ "")
+																+ "/"
+																+ Util
+																		.adicionarZerosEsquedaNumero(
+																				3,
+																				subcategoria
+																						.getQuantidadeEconomias()
+																						.toString())
+																+ " ";
+	
+													}
+	
+													contaTxt
+															.append(Util
+																	.adicionarZerosEsquedaNumero(
+																			7,
+																			quantidadeContas
+																					+ ""));
+	
+													contaTxt
+															.append(Util
+																	.completaString(
+																			localidade
+																					.getDescricao(),
+																			30));
+	
+													contaTxt
+															.append(Util
+																	.completaString(
+																			localidade
+																					.getEnderecoFormatadoTituloAbreviado(),
+																			35));
+	
+													contaTxt
+															.append(Util
+																	.completaString(
+																			localidade
+																					.getFone(),
+																			20));
+	
+													contaTxt.append(Util
+															.completaString(
+																	"0800-84-0195",
+																	15));
+	
+													// cria um objeto conta
+													// para
+													// calcular o
+													// valor da
+													// conta
+													Conta conta = new Conta();
+													conta
+															.setValorAgua(emitirContaHelper
+																	.getValorAgua());
+													conta
+															.setValorEsgoto(emitirContaHelper
+																	.getValorEsgoto());
+													conta
+															.setValorCreditos(emitirContaHelper
+																	.getValorCreditos());
+													conta
+															.setDebitos(emitirContaHelper
+																	.getDebitos());
+													conta
+															.setValorImposto(emitirContaHelper
+																	.getValorImpostos());
+	
+													BigDecimal valorConta = conta
+															.getValorTotalContaBigDecimal();
+													emitirContaHelper.setValorConta(valorConta);
+	
+													// [SB0018 - Gerar
+													// Linhas
+													// das
+													// DemaisContas]
+													String anoMesString = ""
+															+ emitirContaHelper
+																	.getAmReferencia();
+													// formata ano mes para mes ano
+	
+													String mesNumero = anoMesString
+															.substring(4, 6);
+	
+													String mesExtenso = Util
+															.retornaDescricaoMes(
+																	new Integer(
+																			mesNumero)
+																			.intValue())
+															.toUpperCase();
+													String dataExtensa = mesExtenso
+															+ "/"
+															+ anoMesString
+																	.substring(0, 4);
+	
+													String mesAnoFormatado = anoMesString
+															.substring(4, 6)
+															+ anoMesString
+																	.substring(0, 4);
+													Integer digitoVerificadorConta = new Integer(
+															""
+																	+ emitirContaHelper
+																			.getDigitoVerificadorConta());
+													String representacaoNumericaCodBarra = null;
+	
+													representacaoNumericaCodBarra = getControladorArrecadacao()
+															.obterRepresentacaoNumericaCodigoBarra(
+																	3,
+																	valorConta,
+																	emitirContaHelper
+																			.getIdLocalidade(),
+																	emitirContaHelper
+																			.getIdImovel(),
+																	mesAnoFormatado,
+																	digitoVerificadorConta,
+																	null, null,
+																	null, null,
+																	null, null,
+																	null);
+	
+													contaTxt
+															.append(Util
+																	.completaString(
+																			representacaoNumericaCodBarra,
+																			48));
+	
+													// determinar Mensagem
+													String[] parmsPartesConta = obterMensagemConta3Partes(
+															emitirContaHelper,
+															sistemaParametro);
+	
+													String primeiraParte = parmsPartesConta[0];
+													String segundaParte = parmsPartesConta[1];
+													String terceiraParte = parmsPartesConta[2];
+	
+													contaTxt.append(Util
+															.completaString(
+																	primeiraParte,
+																	65));
+													contaTxt.append(Util
+															.completaString(
+																	segundaParte,
+																	65));
+													
+													contaTxt.append(Util
+														.completaString(
+															terceiraParte,
+																65));
+	
+													contaTxt
+															.append(System
+																	.getProperty("line.separator"));
+	
+													contaTxt
+															.append(Util
+																	.completaString(
+																			descricaoLocalidade,
+																			30));
+	
+													contaTxt
+															.append(Util
+																	.adicionarZerosEsquedaNumero(
+																			2,
+																			imovelEmitido
+																					.getQuadra()
+																					.getRota()
+																					.getCodigo()
+																					.toString()));
+	
+													contaTxt.append(".");
+	
+													contaTxt
+															.append(Util
+																	.adicionarZerosEsquedaNumero(
+																			4,
+																			imovelEmitido
+																					.getNumeroSequencialRota()
+																					.toString()));
+	
+													Imovel imovel = new Imovel();
+													Localidade localidade2 = new Localidade();
+													localidade2
+															.setId(emitirContaHelper
+																	.getIdLocalidade());
+													imovel
+															.setLocalidade(localidade2);
+													SetorComercial setorComercial = new SetorComercial();
+													setorComercial
+															.setCodigo(emitirContaHelper
+																	.getCodigoSetorComercialConta());
+													imovel
+															.setSetorComercial(setorComercial);
+													Quadra quadra = new Quadra();
+													quadra
+															.setNumeroQuadra(emitirContaHelper
+																	.getIdQuadraConta());
+													imovel.setQuadra(quadra);
+													imovel
+															.setLote(emitirContaHelper
+																	.getLoteConta());
+													imovel
+															.setSubLote(emitirContaHelper
+																	.getSubLoteConta());
+	
+													String inscricao = imovel
+															.getInscricaoFormatada();
+	
+													imovel = null;
+	
+													setorComercial = null;
+													quadra = null;
+	
+													contaTxt.append(Util
+															.completaString(
+																	inscricao, 20));
+													contaTxt
+															.append(Util
+																	.completaString(
+																			" ", 12));
+	
+													String mesAnoReferencia = Util
+															.formatarAnoMesParaMesAno(emitirContaHelper
+																	.getAmReferencia());
+	
+													contaTxt
+															.append(Util
+																	.completaString(
+																			mesAnoReferencia,
+																			9));
+	
+													// data de vencimento da
+													// conta
+													String dataVencimento = Util
+															.formatarData(emitirContaHelper
+																	.getDataVencimentoConta());
+	
+													contaTxt.append(Util
+															.completaString(
+																	dataVencimento,
+																	10));
+	
+													String valorContaString = Util
+															.formatarMoedaReal(valorConta);
+	
+													// valor da conta
+	
+													FiltroContaImpressao filtroContaImpressao = new FiltroContaImpressao();
+													filtroContaImpressao
+															.adicionarParametro(new ParametroSimples(
+																	FiltroContaImpressao.ID,
+																	emitirContaHelper
+																			.getIdConta()));
+													filtroContaImpressao
+															.adicionarCaminhoParaCarregamentoEntidade("contaTipo");
+	
+													Collection<ContaImpressao> cContaIm = getControladorUtil()
+															.pesquisar(
+																	filtroContaImpressao,
+																	ContaImpressao.class
+																			.getName());
+	
+													ContaImpressao contaImpressao = cContaIm
+															.iterator().next();
+													Integer contaTipo = contaImpressao
+															.getContaTipo().getId();
+	
+													contaTxt
+															.append(Util
+																	.completaStringComEspacoAEsquerda(
+																			valorContaString,
+																			15));
+	
+													if (contaTipo
+															.equals(ContaTipo.CONTA_DEBITO_AUTOMATICO)
+															|| contaTipo
+																	.equals(ContaTipo.CONTA_DEBITO_AUTO_COM_CLIENTE_RESP
+																			.intValue())) {
+	
 														contaTxt
 																.append(Util
 																		.completaString(
-																				"",
-																				40));
-														/*contaTxt
+																				"NÃO PODE SER PAGO EM BANCO",
+																				65));
+														contaTxt
+																.append(Util
+																		.completaString(
+																				"DÉBITO AUTOMÁTICO EM CONTA CORRENTE",
+																				65));
+	
+													} else {
+	
+														contaTxt.append(Util
+																.completaString(
+																		" ", 65));
+														contaTxt.append(Util
+																.completaString(
+																		" ", 65));
+													}
+	
+													// Mï¿½s/Ano referï¿½ncia da
+													// conta
+													// digito
+													// verificador
+	
+													contaTxt
+															.append(Util
+																	.completaString(
+																			dataExtensa,
+																			14));
+	
+													contaTxt
+															.append(Util
+																	.adicionarZerosEsquedaNumero(
+																			8,
+																			imovelEmitido
+																					.getId()
+																					.toString()));
+	
+													contaTxt
+															.append(Util
+																	.completaString(
+																			emitirContaHelper
+																					.getIdLocalidade()
+																					.toString(),
+																			3));
+	
+													contaTxt
+															.append(Util
+																	.adicionarZerosEsquedaNumero(
+																			3,
+																			emitirContaHelper
+																					.getCodigoSetorComercialConta()
+																					.toString()));
+	
+													contaTxt
+															.append(Util
+																	.adicionarZerosEsquedaNumero(
+																			3,
+																			emitirContaHelper
+																					.getIdQuadraConta()
+																					.toString()));
+	
+													contaTxt
+															.append(Util
+																	.adicionarZerosEsquedaNumero(
+																			4,
+																			emitirContaHelper
+																					.getLoteConta()
+																					.toString()));
+	
+													contaTxt
+															.append(Util
+																	.adicionarZerosEsquedaNumero(
+																			2,
+																			emitirContaHelper
+																					.getSubLoteConta()
+																					.toString()));
+													// DIGITO ?????
+													contaTxt
+															.append(Util
+																	.adicionarZerosEsquedaNumero(
+																			1, "0"));
+	
+													Integer[] parmSituacao = determinarTipoLigacaoMedicao(emitirContaHelper);
+													Integer tipoLigacao = parmSituacao[0];
+													Integer tipoMedicao = parmSituacao[1];
+	
+													Object[] parmsMedicaoHistorico = obterDadosMedicaoConta(
+															emitirContaHelper,
+															tipoMedicao);
+													// Leitura Anterior
+													String leituraAnterior = "";
+													// Leitura Atual
+													String leituraAtual = "";
+													// Data Leitura Anterior
+													String dataLeituraAnterior = "";
+													// Leitura Anterior
+													String dataLeituraAtual = "";
+	
+													if (parmsMedicaoHistorico != null) {
+	
+														if (parmsMedicaoHistorico[0] != null) {
+															leituraAnterior = ""
+																	+ (Integer) parmsMedicaoHistorico[0];
+														}
+	
+														if (parmsMedicaoHistorico[1] != null) {
+															leituraAtual = ""
+																	+ (Integer) parmsMedicaoHistorico[1];
+														}
+	
+														if (parmsMedicaoHistorico[3] != null) {
+															dataLeituraAnterior = Util
+																	.formatarData((Date) parmsMedicaoHistorico[3]);
+														}
+	
+														if (parmsMedicaoHistorico[2] != null) {
+															dataLeituraAtual = Util
+																	.formatarData((Date) parmsMedicaoHistorico[2]);
+														}
+	
+													}
+													Object[] parmsConsumoHistorico = null;
+													String consumoMedio = "";
+													if (tipoLigacao != null) {
+														try {
+															parmsConsumoHistorico = repositorioMicromedicao
+																	.obterDadosConsumoConta(
+																			emitirContaHelper
+																					.getIdImovel(),
+																			emitirContaHelper
+																					.getAmReferencia(),
+																			tipoLigacao);
+	
+														} catch (ErroRepositorioException e) {
+															sessionContext
+																	.setRollbackOnly();
+															throw new ControladorException(
+																	"erro.sistema",
+																	e);
+														}
+	
+														if (parmsConsumoHistorico != null) {
+															// Consumo mï¿½dio
+															if (parmsConsumoHistorico[2] != null) {
+																consumoMedio = ""
+																		+ (Integer) parmsConsumoHistorico[2];
+															}
+														}
+													}
+	
+													// Data Leitura Atual
+													contaTxt
+															.append(Util
+																	.completaString(
+																			dataLeituraAtual,
+																			5));
+													contaTxt
+															.append(Util
+																	.completaString(
+																			leituraAnterior,
+																			6));
+	
+													// Leitura Atual
+													contaTxt
+															.append(Util
+																	.completaString(
+																			leituraAtual,
+																			6));
+	
+													String diasConsumo = "";
+	
+													if (!dataLeituraAnterior
+															.equals("")
+															&& !dataLeituraAtual
+																	.equals("")) {
+														diasConsumo = ""
+																+ Util
+																		.obterQuantidadeDiasEntreDuasDatas(
+																				(Date) parmsMedicaoHistorico[3],
+																				(Date) parmsMedicaoHistorico[2]);
+													}
+	
+													String[] parmsConsumo = obterConsumoFaturadoConsumoMedioDiario(
+															emitirContaHelper,
+															tipoMedicao,
+															diasConsumo);
+													String consumoFaturamento = parmsConsumo[0];
+	
+													// Consumo faturado
+													contaTxt
+															.append(Util
+																	.completaString(
+																			consumoFaturamento,
+																			5));
+													contaTxt
+															.append(Util
+																	.completaString(
+																			consumoMedio,
+																			5));
+	
+													contaTxt
+															.append(Util
+																	.completaString(
+																			this
+																					.obterConsumoAnterior(
+																							emitirContaHelper
+																									.getIdImovel(),
+																							emitirContaHelper
+																									.getAmReferencia(),
+																							6,
+																							tipoLigacao,
+																							tipoMedicao)
+																					.toString(),
+																			12));
+													contaTxt
+															.append(Util
+																	.completaString(
+																			this
+																					.obterConsumoAnterior(
+																							emitirContaHelper
+																									.getIdImovel(),
+																							emitirContaHelper
+																									.getAmReferencia(),
+																							5,
+																							tipoLigacao,
+																							tipoMedicao)
+																					.toString(),
+																			12));
+													contaTxt
+															.append(Util
+																	.completaString(
+																			this
+																					.obterConsumoAnterior(
+																							emitirContaHelper
+																									.getIdImovel(),
+																							emitirContaHelper
+																									.getAmReferencia(),
+																							4,
+																							tipoLigacao,
+																							tipoMedicao)
+																					.toString(),
+																			12));
+													contaTxt
+															.append(Util
+																	.completaString(
+																			this
+																					.obterConsumoAnterior(
+																							emitirContaHelper
+																									.getIdImovel(),
+																							emitirContaHelper
+																									.getAmReferencia(),
+																							3,
+																							tipoLigacao,
+																							tipoMedicao)
+																					.toString(),
+																			12));
+													contaTxt
+															.append(Util
+																	.completaString(
+																			this
+																					.obterConsumoAnterior(
+																							emitirContaHelper
+																									.getIdImovel(),
+																							emitirContaHelper
+																									.getAmReferencia(),
+																							2,
+																							tipoLigacao,
+																							tipoMedicao)
+																					.toString(),
+																			12));
+													contaTxt
+															.append(Util
+																	.completaString(
+																			this
+																					.obterConsumoAnterior(
+																							emitirContaHelper
+																									.getIdImovel(),
+																							emitirContaHelper
+																									.getAmReferencia(),
+																							1,
+																							tipoLigacao,
+																							tipoMedicao)
+																					.toString(),
+																			12));
+	
+													contaTxt.append(Util
+															.completaString(
+																	economias, 24));
+	
+													ObterDebitoImovelOuClienteHelper obterDebitoImovelOuClienteHelper = this
+															.obterDebitoImovelOuClienteHelper(
+																	emitirContaHelper,
+																	sistemaParametro);
+	
+													if (obterDebitoImovelOuClienteHelper != null
+															&& ((obterDebitoImovelOuClienteHelper
+																	.getColecaoGuiasPagamentoValores() != null && !obterDebitoImovelOuClienteHelper
+																	.getColecaoGuiasPagamentoValores()
+																	.isEmpty()) || (obterDebitoImovelOuClienteHelper
+																	.getColecaoContasValores() != null && !obterDebitoImovelOuClienteHelper
+																	.getColecaoContasValores()
+																	.isEmpty()))) {
+														Collection colecaoContasValores = obterDebitoImovelOuClienteHelper
+																.getColecaoContasValores();
+	
+														if (colecaoContasValores != null
+																&& !colecaoContasValores
+																		.isEmpty()) {
+															if (colecaoContasValores
+																	.size() > 5) {
+																contaTxt
+																		.append(Util
+																				.completaString(
+																						"HÁ MAIS DE CINCO CONTAS EM ATRASO",
+																						40));
+															} else {
+																String contasAtraso = "";
+																for (Iterator iter = colecaoContasValores
+																		.iterator(); iter
+																		.hasNext();) {
+																	ContaValoresHelper contasValores = (ContaValoresHelper) iter
+																			.next();
+																	contasAtraso = contasAtraso
+																			+ contasValores
+																					.getConta()
+																					.getFormatarAnoMesParaMesAno()
+																			+ " ";
+																}
+																contaTxt
+																		.append(Util
+																				.completaString(
+																						contasAtraso,
+																						40));
+															}
+														} else {
+															contaTxt
+																	.append(Util
+																			.completaString(
+																					"",
+																					40));
+															/*contaTxt
+															.append(Util
+																	.completaString(
+																			"PARABï¿½NS... Nï¿½O CONSTA Dï¿½BITOS!",
+																			40));*/
+														}
+													} else {
+														contaTxt
 														.append(Util
 																.completaString(
-																		"PARABï¿½NS... Nï¿½O CONSTA Dï¿½BITOS!",
-																		40));*/
+																		"",
+																		40));
 													}
-												} else {
-													contaTxt
-													.append(Util
-															.completaString(
-																	"",
-																	40));
-												}
-
-												if (imovelEmitido
-														.getLigacaoAgua() != null) {
-
+	
 													if (imovelEmitido
-															.getLigacaoAgua()
-															.getHidrometroInstalacaoHistorico() != null) {
-
+															.getLigacaoAgua() != null) {
+	
 														if (imovelEmitido
 																.getLigacaoAgua()
-																.getHidrometroInstalacaoHistorico()
-																.getHidrometro() != null) {
-
-															contaTxt
-																	.append(Util
-																			.completaString(
-																					imovelEmitido
-																							.getLigacaoAgua()
-																							.getHidrometroInstalacaoHistorico()
-																							.getHidrometro()
-																							.getNumero(),
-																					10));
+																.getHidrometroInstalacaoHistorico() != null) {
+	
+															if (imovelEmitido
+																	.getLigacaoAgua()
+																	.getHidrometroInstalacaoHistorico()
+																	.getHidrometro() != null) {
+	
+																contaTxt
+																		.append(Util
+																				.completaString(
+																						imovelEmitido
+																								.getLigacaoAgua()
+																								.getHidrometroInstalacaoHistorico()
+																								.getHidrometro()
+																								.getNumero(),
+																						10));
+															} else {
+																contaTxt
+																		.append(Util
+																				.completaString(
+																						" ",
+																						10));
+															}
+	
 														} else {
 															contaTxt
 																	.append(Util
@@ -3495,285 +3524,239 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 																					" ",
 																					10));
 														}
-
+	
 													} else {
-														contaTxt
-																.append(Util
-																		.completaString(
-																				" ",
-																				10));
+														contaTxt.append(Util
+																.completaString(
+																		" ", 10));
 													}
-
-												} else {
-													contaTxt.append(Util
-															.completaString(
-																	" ", 10));
-												}
-
-												Collection colecaoContaCategoriaConsumoFaixa = null;
-												try {
-													colecaoContaCategoriaConsumoFaixa = repositorioFaturamento
-															.pesquisarContaCategoriaConsumoFaixa(emitirContaHelper
-																	.getIdConta());
-
-												} catch (ErroRepositorioException e) {
-													throw new ControladorException(
-															"erro.sistema", e);
-												}
-
-												Integer consumoExcesso = 0;
-												Integer consumoMinimo = 0;
-												BigDecimal valorExcesso = new BigDecimal(
-														"0.0");
-												BigDecimal valorMinimo = new BigDecimal(
-														"0.0");
-
-												if (colecaoContaCategoriaConsumoFaixa == null
-														|| colecaoContaCategoriaConsumoFaixa
-																.isEmpty()) {
-
-													consumoMinimo = emitirContaHelper
-															.getConsumoAgua();
-													valorMinimo = emitirContaHelper
-															.getValorAgua();
-												} else {
-													if (!emitirContaHelper
-															.getConsumoAgua()
-															.equals(0)) {
-														for (Iterator iter = colecaoContaCategoriaConsumoFaixa
-																.iterator(); iter
-																.hasNext();) {
-
-															ContaCategoriaConsumoFaixa contaCategoriaConsumoFaixa = (ContaCategoriaConsumoFaixa) iter
-																	.next();
-															if (contaCategoriaConsumoFaixa
-																	.getConsumoAgua() != null) {
-																for (Iterator iteration = colecaoSubCategoria
-																		.iterator(); iteration
-																		.hasNext();) {
-																	Subcategoria subCategoriaEmitir = (Subcategoria) iteration
-																			.next();
-
-																	if (contaCategoriaConsumoFaixa
-																			.getSubcategoria()
-																			.getId()
-																			.equals(
-																					subCategoriaEmitir
-																							.getId())) {
-																		consumoExcesso = consumoExcesso
-																				+ contaCategoriaConsumoFaixa
-																						.getConsumoAgua()
-																				* subCategoriaEmitir
-																						.getQuantidadeEconomias();
-
-																		valorExcesso = valorExcesso
-																				.add(contaCategoriaConsumoFaixa
-																						.getValorAgua()
-																						.multiply(
-																								new BigDecimal(
-																										subCategoriaEmitir
-																												.getQuantidadeEconomias())));
+	
+													Collection colecaoContaCategoriaConsumoFaixa = null;
+													try {
+														colecaoContaCategoriaConsumoFaixa = repositorioFaturamento
+																.pesquisarContaCategoriaConsumoFaixa(emitirContaHelper
+																		.getIdConta());
+	
+													} catch (ErroRepositorioException e) {
+														throw new ControladorException(
+																"erro.sistema", e);
+													}
+	
+													Integer consumoExcesso = 0;
+													Integer consumoMinimo = 0;
+													BigDecimal valorExcesso = new BigDecimal(
+															"0.0");
+													BigDecimal valorMinimo = new BigDecimal(
+															"0.0");
+	
+													if (colecaoContaCategoriaConsumoFaixa == null
+															|| colecaoContaCategoriaConsumoFaixa
+																	.isEmpty()) {
+	
+														consumoMinimo = emitirContaHelper
+																.getConsumoAgua();
+														valorMinimo = emitirContaHelper
+																.getValorAgua();
+													} else {
+														if (!emitirContaHelper
+																.getConsumoAgua()
+																.equals(0)) {
+															for (Iterator iter = colecaoContaCategoriaConsumoFaixa
+																	.iterator(); iter
+																	.hasNext();) {
+	
+																ContaCategoriaConsumoFaixa contaCategoriaConsumoFaixa = (ContaCategoriaConsumoFaixa) iter
+																		.next();
+																if (contaCategoriaConsumoFaixa
+																		.getConsumoAgua() != null) {
+																	for (Iterator iteration = colecaoSubCategoria
+																			.iterator(); iteration
+																			.hasNext();) {
+																		Subcategoria subCategoriaEmitir = (Subcategoria) iteration
+																				.next();
+	
+																		if (contaCategoriaConsumoFaixa
+																				.getSubcategoria()
+																				.getId()
+																				.equals(
+																						subCategoriaEmitir
+																								.getId())) {
+																			consumoExcesso = consumoExcesso
+																					+ contaCategoriaConsumoFaixa
+																							.getConsumoAgua()
+																					* subCategoriaEmitir
+																							.getQuantidadeEconomias();
+	
+																			valorExcesso = valorExcesso
+																					.add(contaCategoriaConsumoFaixa
+																							.getValorAgua()
+																							.multiply(
+																									new BigDecimal(
+																											subCategoriaEmitir
+																													.getQuantidadeEconomias())));
+																		}
+	
 																	}
-
 																}
 															}
 														}
+	
+														valorMinimo = emitirContaHelper
+																.getValorAgua()
+																.subtract(
+																		valorExcesso);
+														consumoMinimo = emitirContaHelper
+																.getConsumoAgua()
+																- consumoExcesso;
+	
 													}
-
-													valorMinimo = emitirContaHelper
-															.getValorAgua()
-															.subtract(
-																	valorExcesso);
-													consumoMinimo = emitirContaHelper
-															.getConsumoAgua()
-															- consumoExcesso;
-
-												}
-
-												int i = 0;
-												BigDecimal valorNullo = new BigDecimal(
-														"0.00");
-												Integer consumoNullo = new Integer(
-														0);
-
-												if (!valorMinimo
-														.equals(valorNullo)) {
-													if (!consumoMinimo
+	
+													int i = 0;
+													BigDecimal valorNullo = new BigDecimal(
+															"0.00");
+													Integer consumoNullo = new Integer(
+															0);
+	
+													if (!valorMinimo
+															.equals(valorNullo)) {
+														if (!consumoMinimo
+																.equals(consumoNullo)) {
+															contaTxt
+																	.append("TARIFA MÍNIMA ÁGUA            "); // 30
+															contaTxt
+																	.append(Util
+																			.completaString(
+																					consumoMinimo
+																							+ " M3",
+																					24));
+															contaTxt
+																	.append(Util
+																			.completaStringComEspacoAEsquerda(
+																					Util
+																							.formatarMoedaReal(valorMinimo),
+																					12));
+														} else {
+															contaTxt
+																	.append("TARIFA MÍNIMA ÁGUA            "); // 30
+															contaTxt
+																	.append(Util
+																			.completaString(
+																					consumoMinimo
+																							+ "   ",
+																					24));
+															contaTxt
+																	.append(Util
+																			.completaStringComEspacoAEsquerda(
+																					Util
+																							.formatarMoedaReal(valorMinimo),
+																					12));
+														}
+														i++;
+													}
+	
+													if (!consumoExcesso
 															.equals(consumoNullo)) {
 														contaTxt
-																.append("TARIFA MÍNIMA ÁGUA            "); // 30
+																.append("TARIFA EXCESSO ÁGUA           "); // 30
 														contaTxt
 																.append(Util
 																		.completaString(
-																				consumoMinimo
+																				consumoExcesso
 																						+ " M3",
 																				24));
 														contaTxt
 																.append(Util
 																		.completaStringComEspacoAEsquerda(
 																				Util
-																						.formatarMoedaReal(valorMinimo),
+																						.formatarMoedaReal(valorExcesso),
 																				12));
-													} else {
+														i++;
+													}
+	
+													if (!emitirContaHelper
+															.getPercentualEsgotoConta()
+															.equals(valorNullo)) {
 														contaTxt
-																.append("TARIFA MÍNIMA ÁGUA            "); // 30
+																.append("TARIFA ESGOTO                 "); // 30
 														contaTxt
 																.append(Util
 																		.completaString(
-																				consumoMinimo
-																						+ "   ",
+																				emitirContaHelper
+																						.getPercentualEsgotoConta()
+																						+ "%",
 																				24));
 														contaTxt
 																.append(Util
 																		.completaStringComEspacoAEsquerda(
 																				Util
-																						.formatarMoedaReal(valorMinimo),
+																						.formatarMoedaReal(emitirContaHelper
+																								.getValorEsgoto()),
 																				12));
+														i++;
 													}
-													i++;
-												}
-
-												if (!consumoExcesso
-														.equals(consumoNullo)) {
-													contaTxt
-															.append("TARIFA EXCESSO ÁGUA           "); // 30
-													contaTxt
-															.append(Util
-																	.completaString(
-																			consumoExcesso
-																					+ " M3",
-																			24));
-													contaTxt
-															.append(Util
-																	.completaStringComEspacoAEsquerda(
-																			Util
-																					.formatarMoedaReal(valorExcesso),
-																			12));
-													i++;
-												}
-
-												if (!emitirContaHelper
-														.getPercentualEsgotoConta()
-														.equals(valorNullo)) {
-													contaTxt
-															.append("TARIFA ESGOTO                 "); // 30
-													contaTxt
-															.append(Util
-																	.completaString(
-																			emitirContaHelper
-																					.getPercentualEsgotoConta()
-																					+ "%",
-																			24));
-													contaTxt
-															.append(Util
-																	.completaStringComEspacoAEsquerda(
-																			Util
-																					.formatarMoedaReal(emitirContaHelper
-																							.getValorEsgoto()),
-																			12));
-													i++;
-												}
-
-												if (!emitirContaHelper
-														.getValorCreditos()
-														.equals(valorNullo)) {
-													contaTxt
-														.append("CRÉDITOS E DESCONTOS          "); // 30
-													contaTxt.append(Util
-															.completaString(
-																	" ", 24));
-													contaTxt
-															.append(Util
-																	.completaStringComEspacoAEsquerda(
-																			Util
-																					.formatarMoedaReal(emitirContaHelper
-																							.getValorCreditos()),
-																			12));
-													i++;
-												}
-
-												if (!emitirContaHelper
-														.getValorImpostos()
-														.equals(valorNullo)) {
-													contaTxt
-															.append("IMPOSTOS DEDUZIDOS            "); // 30
-													contaTxt.append(Util
-															.completaString(
-																	" ", 24));
-													contaTxt
-															.append(Util
-																	.completaStringComEspacoAEsquerda(
-																			Util
-																					.formatarMoedaReal(emitirContaHelper
-																							.getValorImpostos()),
-																			12));
-													i++;
-												}
-
-												// setando os servicos
-
-												Conta contaId = new Conta();
-												contaId.setId(emitirContaHelper
-														.getIdConta());
-
-												Collection<DebitoCobradoAgrupadoHelper> cDebitoCobrado = this
-														.obterDebitosCobradosContaCAERN(contaId);
-
-												int quantidadeLinhasSobrando = 10 - i;
-
-												if (cDebitoCobrado != null
-														&& !cDebitoCobrado
-																.isEmpty()) {
-
-													int quantidadeDebitos = cDebitoCobrado
-															.size();
-
-													if (quantidadeLinhasSobrando >= quantidadeDebitos) {
-
-														for (Iterator iter = cDebitoCobrado
-																.iterator(); iter
-																.hasNext();) {
-															DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter
-																	.next();
-
-															contaTxt
-																	.append(Util
-																			.completaString(
-																					debitoCobrado
-																							.getDescricaoDebitoTipo(),
-																					30)); // 30
-															contaTxt
-																	.append(Util
-																			.completaString(
-																					debitoCobrado
-																							.getNumeroPrestacaoDebito()
-																							+ "/"
-																							+ debitoCobrado
-																									.getNumeroPrestacao(),
-																					24));
-															contaTxt
-																	.append(Util
-																			.completaStringComEspacoAEsquerda(
-																					Util
-																							.formatarMoedaReal(debitoCobrado
-																									.getValorDebito()),
-																					12));
-
-															i++;
-														}
-
-													} else {
-														Iterator iter = cDebitoCobrado
-																.iterator();
-														int contador = 1;
-														BigDecimal valorAcumulado = new BigDecimal(
-																"0.00");
-														boolean temOutros = false;
-														while (iter.hasNext()) {
-															DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter
-																	.next();
-
-															if (quantidadeLinhasSobrando > contador) {
+	
+													if (!emitirContaHelper
+															.getValorCreditos()
+															.equals(valorNullo)) {
+														contaTxt
+															.append("CRÉDITOS E DESCONTOS          "); // 30
+														contaTxt.append(Util
+																.completaString(
+																		" ", 24));
+														contaTxt
+																.append(Util
+																		.completaStringComEspacoAEsquerda(
+																				Util
+																						.formatarMoedaReal(emitirContaHelper
+																								.getValorCreditos()),
+																				12));
+														i++;
+													}
+	
+													if (!emitirContaHelper
+															.getValorImpostos()
+															.equals(valorNullo)) {
+														contaTxt
+																.append("IMPOSTOS DEDUZIDOS            "); // 30
+														contaTxt.append(Util
+																.completaString(
+																		" ", 24));
+														contaTxt
+																.append(Util
+																		.completaStringComEspacoAEsquerda(
+																				Util
+																						.formatarMoedaReal(emitirContaHelper
+																								.getValorImpostos()),
+																				12));
+														i++;
+													}
+	
+													// setando os servicos
+	
+													Conta contaId = new Conta();
+													contaId.setId(emitirContaHelper
+															.getIdConta());
+	
+													Collection<DebitoCobradoAgrupadoHelper> cDebitoCobrado = this
+															.obterDebitosCobradosContaCAERN(contaId);
+	
+													int quantidadeLinhasSobrando = 10 - i;
+	
+													if (cDebitoCobrado != null
+															&& !cDebitoCobrado
+																	.isEmpty()) {
+	
+														int quantidadeDebitos = cDebitoCobrado
+																.size();
+	
+														if (quantidadeLinhasSobrando >= quantidadeDebitos) {
+	
+															for (Iterator iter = cDebitoCobrado
+																	.iterator(); iter
+																	.hasNext();) {
+																DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter
+																		.next();
+	
 																contaTxt
 																		.append(Util
 																				.completaString(
@@ -3796,142 +3779,182 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 																								.formatarMoedaReal(debitoCobrado
 																										.getValorDebito()),
 																						12));
+	
 																i++;
-															} else {
-
-																valorAcumulado = valorAcumulado
-																		.add(debitoCobrado
-																				.getValorDebito());
-																temOutros = true;
 															}
-
-															contador++;
-														}
-														if (temOutros) {
-															contaTxt
-																	.append("OUTROS SERVIÇOS               "); // 30
-															contaTxt
-																	.append(Util
-																			.completaString(
-																					" ",
-																					24));
-															contaTxt
-																	.append(Util
-																			.completaStringComEspacoAEsquerda(
-																					Util
-																							.formatarMoedaReal(valorAcumulado),
-																					12));
-															i++;
+	
+														} else {
+															Iterator iter = cDebitoCobrado
+																	.iterator();
+															int contador = 1;
+															BigDecimal valorAcumulado = new BigDecimal(
+																	"0.00");
+															boolean temOutros = false;
+															while (iter.hasNext()) {
+																DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter
+																		.next();
+	
+																if (quantidadeLinhasSobrando > contador) {
+																	contaTxt
+																			.append(Util
+																					.completaString(
+																							debitoCobrado
+																									.getDescricaoDebitoTipo(),
+																							30)); // 30
+																	contaTxt
+																			.append(Util
+																					.completaString(
+																							debitoCobrado
+																									.getNumeroPrestacaoDebito()
+																									+ "/"
+																									+ debitoCobrado
+																											.getNumeroPrestacao(),
+																							24));
+																	contaTxt
+																			.append(Util
+																					.completaStringComEspacoAEsquerda(
+																							Util
+																									.formatarMoedaReal(debitoCobrado
+																											.getValorDebito()),
+																							12));
+																	i++;
+																} else {
+	
+																	valorAcumulado = valorAcumulado
+																			.add(debitoCobrado
+																					.getValorDebito());
+																	temOutros = true;
+																}
+	
+																contador++;
+															}
+															if (temOutros) {
+																contaTxt
+																		.append("OUTROS SERVIÇOS               "); // 30
+																contaTxt
+																		.append(Util
+																				.completaString(
+																						" ",
+																						24));
+																contaTxt
+																		.append(Util
+																				.completaStringComEspacoAEsquerda(
+																						Util
+																								.formatarMoedaReal(valorAcumulado),
+																						12));
+																i++;
+															}
 														}
 													}
+	
+													int quantidadeLinhasServicosSobraram = 10 - i;
+													contaTxt
+															.append(Util
+																	.completaString(
+																			" ",
+																			quantidadeLinhasServicosSobraram * 66));
+	
+													// [SB0018 - Gerar
+													// Linhas
+													// das
+													// DemaisContas]
+													anoMesString = ""
+															+ emitirContaHelper
+																	.getAmReferencia();
+													// formata ano mes para mes ano
+													mesAnoFormatado = anoMesString
+															.substring(4, 6)
+															+ anoMesString
+																	.substring(0, 4);
+													digitoVerificadorConta = new Integer(
+															""
+																	+ emitirContaHelper
+																			.getDigitoVerificadorConta());
+													representacaoNumericaCodBarra = null;
+	
+													representacaoNumericaCodBarra = getControladorArrecadacao()
+															.obterRepresentacaoNumericaCodigoBarra(
+																	3,
+																	valorConta,
+																	emitirContaHelper
+																			.getIdLocalidade(),
+																	emitirContaHelper
+																			.getIdImovel(),
+																	mesAnoFormatado,
+																	digitoVerificadorConta,
+																	null, null,
+																	null, null,
+																	null, null,
+																	null);
+	
+													contaTxt
+															.append(Util
+																	.completaString(
+																			representacaoNumericaCodBarra,
+																			48));
+	
+													contaTxt
+															.append(Util
+																	.completaString(
+																			" ", 66)); // Rodapï¿½,
+													
+													//Alteraï¿½ï¿½o por Tiago Moreno - 23/01/2009 - Determinacao judicial (Nitrato)
+													
+													Conta contaEmitida = new Conta();
+													
+													contaEmitida.setId(emitirContaHelper.getIdConta());
+													
+													CreditoRealizado creditoRealizado = repositorioFaturamento.pesquisarCreditoRealizadoNitrato(contaEmitida);
+													
+													if (creditoRealizado != null){
+														contaTxt.append(Util.completaString("Por decisão judicial de 15/05/08 - proc. 001.07.200202-7, esta conta inclui um desconto de 50% no valor da água. R$" 
+																+ Util.completaString(Util.formatarMoedaReal(creditoRealizado.getValorCredito()), 13), 160));
+													} else {
+														contaTxt.append(Util.completaString(" ", 160));
+													}
+													
+													// Impostos
+													BigDecimal baseCalculo = emitirContaHelper.getValorBaseCalculo();
+													BigDecimal valorPIS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_PIS);
+													BigDecimal valorCONFINS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_CONFINS);
+	
+													contaTxt.append(Util.completaString(Util.formatarMoedaReal(baseCalculo), 15));
+													contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_PIS_TEXTO, 5));
+													contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorPIS), 15));
+													contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_CONFINS_TEXTO, 5));
+													contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorCONFINS), 15));
+	
+													contasTxtLista.append(contaTxt
+															.toString());
+	
+													conta = null;
+	
+													StringBuilder teste = new StringBuilder();
+													teste.append(contaTxt);
+	
+													// PEDRO 19/10/2006
+													contaTxt = null;
+													// enquanto estiver
+													// proximo
+													// if
+													// (iteratorConta.hasNext())
+													// {
+													contasTxtLista
+															.append(System
+																	.getProperty("line.separator"));
+	
+													// adiciona o id da
+													// conta e o sequencial
+													// no para serem
+													// atualizados
+													mapAtualizaSequencial.put(
+															emitirContaHelper
+																	.getIdConta(),
+															sequencialImpressao);
+													
+													System.out.println("EMITIR CONTAS ORGÃO PÚBLICO ----> Seq: " + sequencialImpressao);
+													
 												}
-
-												int quantidadeLinhasServicosSobraram = 10 - i;
-												contaTxt
-														.append(Util
-																.completaString(
-																		" ",
-																		quantidadeLinhasServicosSobraram * 66));
-
-												// [SB0018 - Gerar
-												// Linhas
-												// das
-												// DemaisContas]
-												anoMesString = ""
-														+ emitirContaHelper
-																.getAmReferencia();
-												// formata ano mes para mes ano
-												mesAnoFormatado = anoMesString
-														.substring(4, 6)
-														+ anoMesString
-																.substring(0, 4);
-												digitoVerificadorConta = new Integer(
-														""
-																+ emitirContaHelper
-																		.getDigitoVerificadorConta());
-												representacaoNumericaCodBarra = null;
-
-												representacaoNumericaCodBarra = getControladorArrecadacao()
-														.obterRepresentacaoNumericaCodigoBarra(
-																3,
-																valorConta,
-																emitirContaHelper
-																		.getIdLocalidade(),
-																emitirContaHelper
-																		.getIdImovel(),
-																mesAnoFormatado,
-																digitoVerificadorConta,
-																null, null,
-																null, null,
-																null, null,
-																null);
-
-												contaTxt
-														.append(Util
-																.completaString(
-																		representacaoNumericaCodBarra,
-																		48));
-
-												contaTxt
-														.append(Util
-																.completaString(
-																		" ", 66)); // Rodapï¿½,
-												
-												//Alteraï¿½ï¿½o por Tiago Moreno - 23/01/2009 - Determinacao judicial (Nitrato)
-												
-												Conta contaEmitida = new Conta();
-												
-												contaEmitida.setId(emitirContaHelper.getIdConta());
-												
-												CreditoRealizado creditoRealizado = repositorioFaturamento.pesquisarCreditoRealizadoNitrato(contaEmitida);
-												
-												if (creditoRealizado != null){
-													contaTxt.append(Util.completaString("Por decisão judicial de 15/05/08 - proc. 001.07.200202-7, esta conta inclui um desconto de 50% no valor da água. R$" 
-															+ Util.completaString(Util.formatarMoedaReal(creditoRealizado.getValorCredito()), 13), 160));
-												} else {
-													contaTxt.append(Util.completaString(" ", 160));
-												}
-												
-												// Impostos
-												BigDecimal baseCalculo = emitirContaHelper.getValorBaseCalculo();
-												BigDecimal valorPIS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_PIS);
-												BigDecimal valorCONFINS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_CONFINS);
-
-												contaTxt.append(Util.completaString(Util.formatarMoedaReal(baseCalculo), 15));
-												contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_PIS_TEXTO, 5));
-												contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorPIS), 15));
-												contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_CONFINS_TEXTO, 5));
-												contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorCONFINS), 15));
-
-												contasTxtLista.append(contaTxt
-														.toString());
-
-												conta = null;
-
-												StringBuilder teste = new StringBuilder();
-												teste.append(contaTxt);
-
-												// PEDRO 19/10/2006
-												contaTxt = null;
-												// enquanto estiver
-												// proximo
-												// if
-												// (iteratorConta.hasNext())
-												// {
-												contasTxtLista
-														.append(System
-																.getProperty("line.separator"));
-
-												// adiciona o id da
-												// conta e o sequencial
-												// no para serem
-												// atualizados
-												mapAtualizaSequencial.put(
-														emitirContaHelper
-																.getIdConta(),
-														sequencialImpressao);
-												
-												System.out.println("EMITIR CONTAS ORGÃO PÚBLICO ----> Seq: " + sequencialImpressao);
 												
 											}// fim do laï¿½o que
 											// verifica
@@ -3968,14 +3991,24 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 
 					}// fim laï¿½o if da paginaï¿½ï¿½o
 
-					String nomeZip = null;
-					nomeZip = "CONTA_ClientesResponsavel_Emp" + idEmpresa + "-";
-
+					String nomeZip = "CONTA_ClientesResponsavel_Emp" + idEmpresa + "-";
+					String nomeZipCartaConta = "CARTA_CONTA_ESTOURO_ClientesResponsavel_Emp" + idEmpresa + "-";
+					
 					BufferedWriter out = null;
 					ZipOutputStream zos = null;
 
-					File compactadoTipo = new File(nomeZip + ".zip");
+					File compactadoTipoCarta = null;
+
+                    File compactadoTipo = new File(nomeZip + ".zip");
+                    if (nomeZipCartaConta != null) {
+                        compactadoTipoCarta = new File(nomeZipCartaConta + ".zip");
+                    }
+                    
 					File leituraTipo = new File(nomeZip + ".txt");
+					File leituraTipoCarta = null;
+	                if (nomeZipCartaConta != null) {
+	                    leituraTipoCarta = new File(nomeZipCartaConta + ".txt");
+	                }
 
 					if (contasTxtLista != null && contasTxtLista.length() != 0) {
 						// fim de arquivo
@@ -3994,13 +4027,29 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 						out.close();
 					}
 
-					// limpa todos os campos
+                    if (cartasTxtListaConta != null && cartasTxtListaConta.length() != 0) {
+                        // fim de arquivo
+                        contasTxtLista.append("\u0004");
+                        // ************ TIPO N *************
+
+                        zos = new ZipOutputStream(new FileOutputStream(compactadoTipoCarta));
+                        out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(leituraTipoCarta.getAbsolutePath())));
+                        out.write(cartasTxtListaConta.toString());
+                        out.flush();
+                        ZipUtil.adicionarArquivo(zos, leituraTipoCarta);
+                        zos.close();
+                        out.close();
+                        leituraTipoCarta.delete();
+                    }
+					
+        			// limpa todos os campos
 					nomeZip = null;
 					out = null;
 					zos = null;
 					compactadoTipo = null;
 					leituraTipo = null;
-
+                    leituraTipoCarta = null;
+                    cartasTxtListaConta = null;
 					contasTxtLista = null;
 
 					tipoConta++;
@@ -6694,8 +6743,10 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 	 * @param
 	 * @throws ControladorException
 	 */
-	public void gerarDebitoACobrarTaxaEmissaoConta(Integer idImovel,
+	public int gerarDebitoACobrarTaxaEmissaoConta(Integer idImovel,
 			int anoMesReferencia) throws ControladorException {
+		
+		Integer id;
 
 		try {
 
@@ -6873,6 +6924,8 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 					.inserir(debitoACobrar);
 
 			debitoACobrar.setId(idDebitoACobrar);
+			
+			id = idDebitoACobrar;
 
 			// Recupera Categorias por Imï¿½vel
 			Collection<Categoria> colecaoCategoria = this
@@ -6890,6 +6943,8 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 			sessionContext.setRollbackOnly();
 			throw new ControladorException("erro.sistema", ex);
 		}
+		
+		return id;
 	}
 
 	
@@ -8340,57 +8395,36 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 	 * @throws ControladorException
 	 */
 	protected ContaTipo obterContaTipoParaContaImpressao(Conta conta,
-			Integer idClienteResponsavel, Imovel imovel) {
-
-		ContaTipo contaTipo = new ContaTipo();
-
-		contaTipo.setId(ContaTipo.CONTA_NORMAL);
-
-		// Comentado por Raphael Rossiter em 01/03/2007 (Analista Responsï¿½vel:
-		// Aryed)
-
-		/*
-		 * else if (idClienteResponsavel != null) {
-		 * 
-		 * contaTipo.setId(ContaTipo.CONTA_CLIENTE_RESPONSAVEL); }
-		 */
-
-		// Colocado por Raphael Rossiter em 01/03/2007 (Analista Responsï¿½vel:
-		// Aryed)
-		if (idClienteResponsavel != null
-				&& imovel.getIndicadorDebitoConta().shortValue() == ConstantesSistema.NAO
-						.shortValue()) {
-
-			contaTipo.setId(ContaTipo.CONTA_CLIENTE_RESPONSAVEL);
+			Integer idClienteResponsavel, Imovel imovel) throws ControladorException{
+		try{
+			ContaTipo contaTipo = new ContaTipo();
+			contaTipo.setId(ContaTipo.CONTA_NORMAL);
+	
+			if (idClienteResponsavel != null && imovel.getIndicadorDebitoConta().shortValue() == ConstantesSistema.NAO.shortValue()) {
+	
+				contaTipo.setId(ContaTipo.CONTA_CLIENTE_RESPONSAVEL);
+			}
+			else if (idClienteResponsavel != null && imovel.getIndicadorDebitoConta().shortValue() == ConstantesSistema.SIM.shortValue()) {
+	
+				contaTipo.setId(ContaTipo.CONTA_DEBITO_AUTO_COM_CLIENTE_RESP);
+			}
+			else if (idClienteResponsavel == null && imovel.getIndicadorDebitoConta().shortValue() == ConstantesSistema.SIM.shortValue()) {
+	
+				contaTipo.setId(ContaTipo.CONTA_DEBITO_AUTOMATICO);
+				
+			}
+			if (conta.getContaMotivoRevisao() != null){
+				boolean motivoRevisaoEstouroConsumo = repositorioFaturamento.verificarMotivoRevisaoEstouroConsumo(conta.getContaMotivoRevisao().getId());
+				
+				if(motivoRevisaoEstouroConsumo || conta.getContaMotivoRevisao().getId().equals(ContaMotivoRevisao.REVISAO_AUTOMATICA_ESTOURO_CONSUMO)){
+					contaTipo.setId(ContaTipo.CONTA_RETIDA_POR_EC);
+				}
+			}
+			return contaTipo;
+		} catch (ErroRepositorioException e) {
+			sessionContext.setRollbackOnly();
+			throw new ControladorException("erro.sistema", e);
 		}
-
-		else if (idClienteResponsavel != null
-				&& imovel.getIndicadorDebitoConta().shortValue() == ConstantesSistema.SIM
-						.shortValue()) {
-
-			contaTipo.setId(ContaTipo.CONTA_DEBITO_AUTO_COM_CLIENTE_RESP);
-		}
-
-		// Comentado por Raphael Rossiter em 01/03/2007 (Analista Responsï¿½vel:
-		// Aryed)
-
-		/*
-		 * else if (imovel.getIndicadorDebitoConta() != null &&
-		 * imovel.getIndicadorDebitoConta().equals( ConstantesSistema.SIM)) {
-		 * 
-		 * contaTipo.setId(ContaTipo.CONTA_DEBITO_AUTOMATICO); }
-		 */
-
-		// Colocado por Raphael Rossiter em 01/03/2007 (Analista Responsï¿½vel:
-		// Aryed)
-		else if (idClienteResponsavel == null
-				&& imovel.getIndicadorDebitoConta().shortValue() == ConstantesSistema.SIM
-						.shortValue()) {
-
-			contaTipo.setId(ContaTipo.CONTA_DEBITO_AUTOMATICO);
-		}
-
-		return contaTipo;
 	}
 	
 	
@@ -8722,12 +8756,15 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
                 
                 // recebe todos as contas da lista
                 StringBuilder contasTxtLista = null;
+                StringBuilder cartasTxtListaConta = null;
                 Map<Integer, Integer> mapAtualizaSequencial = null;
 
                 try {
 
-                    Integer sequencialImpressao = 0;
+                	Integer sequencialImpressao = 0;
+                    Integer sequencialCarta = 0;
                     contasTxtLista = new StringBuilder();
+                    cartasTxtListaConta = new StringBuilder();
 
                     mapAtualizaSequencial = new HashMap();
                     
@@ -8738,7 +8775,7 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
                         Iterator iteratorConta = colecaoEmitirContaHelper.iterator();
 
                         while (iteratorConta.hasNext()) {
-
+                        	int situacao = 0;
                             emitirContaHelper = null;
                             emitirContaHelper = (EmitirContaHelper) iteratorConta.next();
                             
@@ -8747,114 +8784,107 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
                             // Sï¿½ para exibir no console a quantidade de contas
 
                             if (emitirContaHelper != null) {
-
-                                StringBuilder contaTxt = new StringBuilder();
-                                
-                                String descricaoLocalidade = emitirContaHelper.getDescricaoLocalidade();
-								contaTxt.append(Util.completaString(descricaoLocalidade,30));
-								contaTxt.append(Util.adicionarZerosEsquedaNumero(3,
-										emitirContaHelper.getCodigoSetorComercialConta().toString()));
-
-								Imovel imovelEmitido = getControladorImovel()
-										.pesquisarImovel(emitirContaHelper.getIdImovel());
-
-								contaTxt.append(Util.adicionarZerosEsquedaNumero(
-										2,imovelEmitido.getQuadra().getRota().getCodigo().toString()));
-
-								contaTxt.append(".");
-
-								contaTxt.append(Util.adicionarZerosEsquedaNumero(4,
-										imovelEmitido.getNumeroSequencialRota().toString()));
-
-								contaTxt.append(Util.adicionarZerosEsquedaNumero(8,
-										emitirContaHelper.getIdImovel().toString()));
-
-								// caso a coleï¿½ï¿½o de contas seja de entrega
-								// para o cliente responsï¿½vel
-								String nomeClienteUsuario = null;
-								if (tipoConta == 3 || tipoConta == 4) {
-									if (emitirContaHelper.getNomeImovel() != null
-											&& !emitirContaHelper.getNomeImovel().equals("")) {
-										nomeClienteUsuario = emitirContaHelper.getNomeImovel();
-
-									} else {
-										try {
-											nomeClienteUsuario = repositorioFaturamento
-													.pesquisarNomeClienteUsuarioConta(
-													emitirContaHelper.getIdConta());
-
-										} catch (ErroRepositorioException e) {
-											throw new ControladorException("erro.sistema",e);
+                            	
+                            	// [SB0020] - Gerar Arquivo TXT das Cartas
+								boolean gerarMsgEstouroConsumo = gerarMsgEstouroConsumo(emitirContaHelper.getIdConta());
+								if(gerarMsgEstouroConsumo){
+									sequencialCarta += 1;
+                                    cartasTxtListaConta.append(gerarArquivoTxtCartas(emitirContaHelper,sequencialCarta,situacao));
+                                    cartasTxtListaConta.append(System.getProperty("line.separator"));
+                                    
+                                }else{
+                                	
+	                                StringBuilder contaTxt = new StringBuilder();
+	                                
+	                                String descricaoLocalidade = emitirContaHelper.getDescricaoLocalidade();
+									contaTxt.append(Util.completaString(descricaoLocalidade,30));
+									contaTxt.append(Util.adicionarZerosEsquedaNumero(3,
+											emitirContaHelper.getCodigoSetorComercialConta().toString()));
+	
+									Imovel imovelEmitido = getControladorImovel()
+											.pesquisarImovel(emitirContaHelper.getIdImovel());
+	
+									contaTxt.append(Util.adicionarZerosEsquedaNumero(
+											2,imovelEmitido.getQuadra().getRota().getCodigo().toString()));
+	
+									contaTxt.append(".");
+	
+									contaTxt.append(Util.adicionarZerosEsquedaNumero(4,
+											imovelEmitido.getNumeroSequencialRota().toString()));
+	
+									contaTxt.append(Util.adicionarZerosEsquedaNumero(8,
+											emitirContaHelper.getIdImovel().toString()));
+	
+									// caso a coleï¿½ï¿½o de contas seja de entrega
+									// para o cliente responsï¿½vel
+									String nomeClienteUsuario = null;
+									if (tipoConta == 3 || tipoConta == 4) {
+										if (emitirContaHelper.getNomeImovel() != null
+												&& !emitirContaHelper.getNomeImovel().equals("")) {
+											nomeClienteUsuario = emitirContaHelper.getNomeImovel();
+	
+										} else {
+											try {
+												nomeClienteUsuario = repositorioFaturamento
+														.pesquisarNomeClienteUsuarioConta(
+														emitirContaHelper.getIdConta());
+	
+											} catch (ErroRepositorioException e) {
+												throw new ControladorException("erro.sistema",e);
+											}
 										}
+										contaTxt.append(Util.completaString(nomeClienteUsuario,30));
+									} else {
+										contaTxt.append(Util.completaString(
+												emitirContaHelper.getNomeCliente(),30));
 									}
-									contaTxt.append(Util.completaString(nomeClienteUsuario,30));
-								} else {
-									contaTxt.append(Util.completaString(
-											emitirContaHelper.getNomeCliente(),30));
-								}
-
-								String[] enderecoImovel = getControladorEndereco()
-										.pesquisarEnderecoFormatadoDividido(
-												emitirContaHelper.getIdImovel());
-
-								// endereï¿½o
-								contaTxt.append(Util.completaString(enderecoImovel[0],60));
-
-								// bairro
-								contaTxt.append(Util.completaString(enderecoImovel[3],30));
-
-								// numero indice turbidez da qualidade agua
-
-								// numero cloro residual da qualidade agua
-
-								FiltroLocalidade filtroLocalidade = new FiltroLocalidade();
-
-								filtroLocalidade.adicionarParametro(new ParametroSimples(
-										FiltroLocalidade.ID,emitirContaHelper.getIdLocalidade()));
-
-								filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep");
-								filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.cep");
-								filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro");
-								filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTipo");
-								filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTitulo");
-								filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
-								filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro");
-								filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro");
-								filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio");
-								filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio.unidadeFederacao");
-								filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
-
-								Collection cLocalidade = (Collection) getControladorUtil().pesquisar(
-										filtroLocalidade,Localidade.class.getName());
-								
-								Localidade localidade = (Localidade) cLocalidade.iterator().next();
-
-								FiltroQualidadeAgua filtroQualidadeAgua = new FiltroQualidadeAgua();
-
-								Collection colecaoQualidadeAgua = null;
-
-								filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
-										FiltroQualidadeAgua.LOCALIDADE_ID,localidade.getId()));
-								
-								filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
-										FiltroQualidadeAgua.SETOR_COMERCIAL_ID,
-										emitirContaHelper.getIdSetorComercial()));
-								
-								filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
-										FiltroQualidadeAgua.ANO_MES_REFERENCIA,emitirContaHelper.getAmReferencia()));
-								
-								filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
-								
-								colecaoQualidadeAgua = getControladorUtil().pesquisar(
-										filtroQualidadeAgua,QualidadeAgua.class.getName());
-
-								if (colecaoQualidadeAgua == null || colecaoQualidadeAgua.isEmpty()) {
+	
+									String[] enderecoImovel = getControladorEndereco()
+											.pesquisarEnderecoFormatadoDividido(
+													emitirContaHelper.getIdImovel());
+	
+									// endereï¿½o
+									contaTxt.append(Util.completaString(enderecoImovel[0],60));
+	
+									// bairro
+									contaTxt.append(Util.completaString(enderecoImovel[3],30));
+	
+									// numero indice turbidez da qualidade agua
+	
+									// numero cloro residual da qualidade agua
+	
+									FiltroLocalidade filtroLocalidade = new FiltroLocalidade();
+	
+									filtroLocalidade.adicionarParametro(new ParametroSimples(
+											FiltroLocalidade.ID,emitirContaHelper.getIdLocalidade()));
+	
+									filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep");
+									filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.cep");
+									filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro");
+									filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTipo");
+									filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTitulo");
+									filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
+									filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro");
+									filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro");
+									filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio");
+									filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio.unidadeFederacao");
+									filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
+	
+									Collection cLocalidade = (Collection) getControladorUtil().pesquisar(
+											filtroLocalidade,Localidade.class.getName());
 									
-									filtroQualidadeAgua.limparListaParametros();
-									
-									colecaoQualidadeAgua = null;
+									Localidade localidade = (Localidade) cLocalidade.iterator().next();
+	
+									FiltroQualidadeAgua filtroQualidadeAgua = new FiltroQualidadeAgua();
+	
+									Collection colecaoQualidadeAgua = null;
+	
 									filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
 											FiltroQualidadeAgua.LOCALIDADE_ID,localidade.getId()));
+									
+									filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
+											FiltroQualidadeAgua.SETOR_COMERCIAL_ID,
+											emitirContaHelper.getIdSetorComercial()));
 									
 									filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
 											FiltroQualidadeAgua.ANO_MES_REFERENCIA,emitirContaHelper.getAmReferencia()));
@@ -8862,776 +8892,792 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 									filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
 									
 									colecaoQualidadeAgua = getControladorUtil().pesquisar(
-											filtroQualidadeAgua, QualidadeAgua.class.getName());
-								}
-
-								if (colecaoQualidadeAgua != null && !colecaoQualidadeAgua.isEmpty()) {
+											filtroQualidadeAgua,QualidadeAgua.class.getName());
+	
+									if (colecaoQualidadeAgua == null || colecaoQualidadeAgua.isEmpty()) {
+										
+										filtroQualidadeAgua.limparListaParametros();
+										
+										colecaoQualidadeAgua = null;
+										filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
+												FiltroQualidadeAgua.LOCALIDADE_ID,localidade.getId()));
+										
+										filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
+												FiltroQualidadeAgua.ANO_MES_REFERENCIA,emitirContaHelper.getAmReferencia()));
+										
+										filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
+										
+										colecaoQualidadeAgua = getControladorUtil().pesquisar(
+												filtroQualidadeAgua, QualidadeAgua.class.getName());
+									}
+	
+									if (colecaoQualidadeAgua != null && !colecaoQualidadeAgua.isEmpty()) {
+										
+										QualidadeAgua qualidadeAgua = (QualidadeAgua) colecaoQualidadeAgua.iterator().next();
+	
+										// fonte
+										if (qualidadeAgua.getFonteCaptacao() != null) {
+											contaTxt.append(Util.completaString(qualidadeAgua.getFonteCaptacao().getDescricao(),30));
+										} else {
+											contaTxt.append(Util.completaString(" ",30));
+										}
+										
+										// cloro
+										if (qualidadeAgua.getNumeroCloroResidual() != null
+												&& !qualidadeAgua.getNumeroCloroResidual().equals(0)) {
+											contaTxt.append(Util.completaString(
+													qualidadeAgua.getNumeroCloroResidual().toString(),3));
+										} else {
+											contaTxt.append(Util.completaString(" ",3));
+										}
+	
+										// coliformes
+										if (qualidadeAgua.getNumeroIndiceColiformesTotais() != null
+												&& !qualidadeAgua.getNumeroIndiceColiformesTotais().equals(0)) {
+											contaTxt.append(Util.completaString(
+												qualidadeAgua.getNumeroIndiceColiformesTotais().toString(),8));
+										} else {
+											contaTxt.append(Util.completaString(" ", 8));
+										}
+	
+										// nitrato
+										if (qualidadeAgua.getNumeroNitrato() != null
+												&& !qualidadeAgua.getNumeroNitrato().equals(0)) {
+											contaTxt.append(Util.completaString(
+													qualidadeAgua.getNumeroNitrato().toString(),4));
+										} else {
+											contaTxt.append(Util.completaString(" ",4));
+										}
+	
+										// //ph
+										if (qualidadeAgua.getNumeroIndicePh() != null
+												&& !qualidadeAgua.getNumeroIndicePh().equals(0)) {
+											contaTxt.append(Util.completaString(
+													qualidadeAgua.getNumeroIndicePh().toString(),4));
+										} else {
+											contaTxt.append(Util.completaString(" ",4));
+										}
+	
+										// //turbidez
+										if (qualidadeAgua.getNumeroIndiceTurbidez() != null
+												&& !qualidadeAgua.getNumeroIndiceTurbidez().equals(0)) {
+											contaTxt.append(Util.completaString(
+											qualidadeAgua.getNumeroIndiceTurbidez().toString(),4));
+										} else {
+											contaTxt.append(Util.completaString(" ",4));
+										}
+	
+									} else {
+										contaTxt.append(Util.completaString(" ", 53));
+									}
+	
+									Collection colecaoSubCategoria = getControladorImovel()
+											.obterQuantidadeEconomiasSubCategoria(imovelEmitido.getId());
+	
+									String economias = "";
+	
+									for (Iterator iter = colecaoSubCategoria.iterator(); iter.hasNext();) {
+										Subcategoria subcategoria = (Subcategoria) iter.next();
+										
+										//agora a subcategoria ja tem o id da categoria no codigo.
+										economias = economias + Util.adicionarZerosEsquedaNumero(
+											3, subcategoria.getCodigo()+ "") + "/"
+											+ Util.adicionarZerosEsquedaNumero(3,
+									        subcategoria.getQuantidadeEconomias().toString()) + " ";
+	
+									}
+	
+	
+									contaTxt.append(Util.adicionarZerosEsquedaNumero(
+										7,quantidadeContas + ""));
+	
+									contaTxt.append(Util.completaString(localidade.getDescricao(),30));
+	
+									contaTxt.append(Util.completaString(localidade
+										.getEnderecoFormatadoTituloAbreviado(),35));
+	
+									contaTxt.append(Util.completaString(localidade.getFone(),20));
+	
+									contaTxt.append(Util.completaString("0800-84-0195",15));
+	
+									// cria um objeto conta para calcular o valor da conta
+									Conta conta = new Conta();
+									conta.setValorAgua(emitirContaHelper.getValorAgua());
+									conta.setValorEsgoto(emitirContaHelper.getValorEsgoto());
+									conta.setValorCreditos(emitirContaHelper.getValorCreditos());
+									conta.setDebitos(emitirContaHelper.getDebitos());
+									conta.setValorImposto(emitirContaHelper.getValorImpostos());
+	
+									BigDecimal valorConta = conta.getValorTotalContaBigDecimal();
+									emitirContaHelper.setValorConta(valorConta);
+	
+									// [SB0018 - Gerar Linhas das Demais Contas]
+									String anoMesString = "" + emitirContaHelper.getAmReferencia();
+									// formata ano mes para mes ano
+	
+									String mesNumero = anoMesString.substring(4, 6);
+	
+									String mesExtenso = Util.retornaDescricaoMes(
+										new Integer(mesNumero).intValue()).toUpperCase();
+									String dataExtensa = mesExtenso	+ "/"
+											+ anoMesString.substring(0, 4);
+	
+	//								String mesAnoFormatado = anoMesString.substring(4, 6)+ anoMesString														.substring(0, 4);
+	//								Integer digitoVerificadorConta = new Integer(""
+	//										+ emitirContaHelper.getDigitoVerificadorConta());
+	//								String representacaoNumericaCodBarra = null;
+	//
+	//								representacaoNumericaCodBarra = this.getControladorArrecadacao()
+	//										.obterRepresentacaoNumericaCodigoBarra(
+	//												3,
+	//												valorConta,
+	//												emitirContaHelper.getIdLocalidade(),
+	//												emitirContaHelper.getIdImovel(),
+	//												mesAnoFormatado,
+	//												digitoVerificadorConta,
+	//												null, null,
+	//												null, null,
+	//												null, null,
+	//												null);
+	//
+	//								contaTxt.append(Util.completaString(
+	//										representacaoNumericaCodBarra,48));
+									contaTxt.append(Util.completaString("",48));
+	
+									// determinar Mensagem
+									String[] parmsPartesConta = obterMensagemConta3Partes(
+											emitirContaHelper,sistemaParametro);
+	
+									String primeiraParte = parmsPartesConta[0];
+									String segundaParte = parmsPartesConta[1];
+									String terceiraParte = parmsPartesConta[2];
+	
+									contaTxt.append(Util.completaString(primeiraParte,65));
+									contaTxt.append(Util.completaString(segundaParte,65));
+									contaTxt.append(Util.completaString(terceiraParte,65));
+	
+	
+									contaTxt.append(System.getProperty("line.separator"));
+	
+									contaTxt.append(Util.completaString(descricaoLocalidade,30));
+	
+									contaTxt.append(Util.adicionarZerosEsquedaNumero(2,
+										imovelEmitido.getQuadra().getRota().getCodigo().toString()));
+	
+									contaTxt.append(".");
+	
+									contaTxt.append(Util.adicionarZerosEsquedaNumero(4,
+										imovelEmitido.getNumeroSequencialRota().toString()));
+	
+									Imovel imovel = new Imovel();
+									Localidade localidade2 = new Localidade();
+									localidade2.setId(emitirContaHelper.getIdLocalidade());
+									imovel.setLocalidade(localidade2);
+									SetorComercial setorComercial = new SetorComercial();
+									setorComercial.setCodigo(emitirContaHelper.getCodigoSetorComercialConta());
+									imovel.setSetorComercial(setorComercial);
+									Quadra quadra = new Quadra();
+									quadra.setNumeroQuadra(emitirContaHelper.getIdQuadraConta());
+									imovel.setQuadra(quadra);
+									imovel.setLote(emitirContaHelper.getLoteConta());
+									imovel.setSubLote(emitirContaHelper.getSubLoteConta());
+	
+									String inscricao = imovel.getInscricaoFormatada();
+	
+									imovel = null;
+	
+									setorComercial = null;
+									quadra = null;
+	
+									contaTxt.append(Util.completaString(inscricao, 20));
+									contaTxt.append(Util.completaString(" ", 12));
+	
+									String mesAnoReferencia = Util.formatarAnoMesParaMesAno(
+											emitirContaHelper.getAmReferencia());
+	
+									contaTxt.append(Util.completaString(mesAnoReferencia,9));
+	
+									// data de vencimento da conta
+									String dataVencimento = Util.formatarData(
+											emitirContaHelper.getDataVencimentoConta());
+	
+									contaTxt.append(Util.completaString(dataVencimento,10));
+	
+									String valorContaString = Util.formatarMoedaReal(valorConta);
+	
+									// valor da conta
+									FiltroContaImpressao filtroContaImpressao = new FiltroContaImpressao();
+									filtroContaImpressao.adicionarParametro(new ParametroSimples(
+													FiltroContaImpressao.ID,
+													emitirContaHelper.getIdConta()));
+									filtroContaImpressao.adicionarCaminhoParaCarregamentoEntidade("contaTipo");
+	
+									Collection<ContaImpressao> cContaIm = getControladorUtil()
+										.pesquisar(filtroContaImpressao,ContaImpressao.class.getName());
+	
+									ContaImpressao contaImpressao = cContaIm.iterator().next();
+									Integer contaTipo = contaImpressao.getContaTipo().getId();
+	
+									contaTxt.append(Util.completaStringComEspacoAEsquerda(
+															valorContaString,15));
+	
+									if (contaTipo.equals(ContaTipo.CONTA_DEBITO_AUTOMATICO)
+										|| contaTipo.equals(ContaTipo.CONTA_DEBITO_AUTO_COM_CLIENTE_RESP.intValue())) {
+	
+										contaTxt.append(Util.completaString("NÃO PODE SER PAGO EM BANCO",65));
+										contaTxt.append(Util.completaString("DÉBITO AUTOMÁTICO EM CONTA CORRENTE",65));
+	
+									} else {
+	
+										contaTxt.append(Util.completaString(" ", 65));
+										contaTxt.append(Util.completaString(" ", 65));
+									}
+	
+									// Mï¿½s/Ano referï¿½ncia da conta digito verificador
+	
+									contaTxt.append(Util.completaString(dataExtensa,14));
+	
+									contaTxt.append(Util.adicionarZerosEsquedaNumero(8,
+											imovelEmitido.getId().toString()));
+	
+									contaTxt.append(Util.completaString(
+										emitirContaHelper.getIdLocalidade().toString(),3));
+	
+									contaTxt.append(Util.adicionarZerosEsquedaNumero(3,
+										emitirContaHelper.getCodigoSetorComercialConta().toString()));
+	
+									contaTxt.append(Util.adicionarZerosEsquedaNumero(3,
+										emitirContaHelper.getIdQuadraConta().toString()));
+	
+									contaTxt.append(Util.adicionarZerosEsquedaNumero(4,
+										emitirContaHelper.getLoteConta().toString()));
+	
+									contaTxt.append(Util.completaString(Util.adicionarZerosEsquedaNumero(2,
+													emitirContaHelper.getSubLoteConta().toString()), 2));
 									
-									QualidadeAgua qualidadeAgua = (QualidadeAgua) colecaoQualidadeAgua.iterator().next();
-
-									// fonte
-									if (qualidadeAgua.getFonteCaptacao() != null) {
-										contaTxt.append(Util.completaString(qualidadeAgua.getFonteCaptacao().getDescricao(),30));
-									} else {
-										contaTxt.append(Util.completaString(" ",30));
+									// DIGITO ?????
+									contaTxt.append(Util.adicionarZerosEsquedaNumero(1, "0"));
+	
+									Integer[] parmSituacao = determinarTipoLigacaoMedicao(emitirContaHelper);
+									Integer tipoLigacao = parmSituacao[0];
+									Integer tipoMedicao = parmSituacao[1];
+	
+									Object[] parmsMedicaoHistorico = obterDadosMedicaoConta(
+											emitirContaHelper,tipoMedicao);
+									// Leitura Anterior
+									String leituraAnterior = "";
+									// Leitura Atual
+									String leituraAtual = "";
+									// Data Leitura Anterior
+									String dataLeituraAnterior = "";
+									// Leitura Anterior
+									String dataLeituraAtual = "";
+	
+									if (parmsMedicaoHistorico != null) {
+	
+										if (parmsMedicaoHistorico[0] != null) {
+											leituraAnterior = "" + (Integer) parmsMedicaoHistorico[0];
+										}
+	
+										if (parmsMedicaoHistorico[1] != null) {
+											leituraAtual = "" + (Integer) parmsMedicaoHistorico[1];
+										}
+	
+										if (parmsMedicaoHistorico[3] != null) {
+											dataLeituraAnterior = Util.formatarData((Date) parmsMedicaoHistorico[3]);
+										}
+	
+										if (parmsMedicaoHistorico[2] != null) {
+											dataLeituraAtual = Util.formatarData((Date) parmsMedicaoHistorico[2]);
+										}
+	
 									}
 									
-									// cloro
-									if (qualidadeAgua.getNumeroCloroResidual() != null
-											&& !qualidadeAgua.getNumeroCloroResidual().equals(0)) {
-										contaTxt.append(Util.completaString(
-												qualidadeAgua.getNumeroCloroResidual().toString(),3));
-									} else {
-										contaTxt.append(Util.completaString(" ",3));
-									}
-
-									// coliformes
-									if (qualidadeAgua.getNumeroIndiceColiformesTotais() != null
-											&& !qualidadeAgua.getNumeroIndiceColiformesTotais().equals(0)) {
-										contaTxt.append(Util.completaString(
-											qualidadeAgua.getNumeroIndiceColiformesTotais().toString(),8));
-									} else {
-										contaTxt.append(Util.completaString(" ", 8));
-									}
-
-									// nitrato
-									if (qualidadeAgua.getNumeroNitrato() != null
-											&& !qualidadeAgua.getNumeroNitrato().equals(0)) {
-										contaTxt.append(Util.completaString(
-												qualidadeAgua.getNumeroNitrato().toString(),4));
-									} else {
-										contaTxt.append(Util.completaString(" ",4));
-									}
-
-									// //ph
-									if (qualidadeAgua.getNumeroIndicePh() != null
-											&& !qualidadeAgua.getNumeroIndicePh().equals(0)) {
-										contaTxt.append(Util.completaString(
-												qualidadeAgua.getNumeroIndicePh().toString(),4));
-									} else {
-										contaTxt.append(Util.completaString(" ",4));
-									}
-
-									// //turbidez
-									if (qualidadeAgua.getNumeroIndiceTurbidez() != null
-											&& !qualidadeAgua.getNumeroIndiceTurbidez().equals(0)) {
-										contaTxt.append(Util.completaString(
-										qualidadeAgua.getNumeroIndiceTurbidez().toString(),4));
-									} else {
-										contaTxt.append(Util.completaString(" ",4));
-									}
-
-								} else {
-									contaTxt.append(Util.completaString(" ", 53));
-								}
-
-								Collection colecaoSubCategoria = getControladorImovel()
-										.obterQuantidadeEconomiasSubCategoria(imovelEmitido.getId());
-
-								String economias = "";
-
-								for (Iterator iter = colecaoSubCategoria.iterator(); iter.hasNext();) {
-									Subcategoria subcategoria = (Subcategoria) iter.next();
+									Object[] parmsConsumoHistorico = null;
 									
-									//agora a subcategoria ja tem o id da categoria no codigo.
-									economias = economias + Util.adicionarZerosEsquedaNumero(
-										3, subcategoria.getCodigo()+ "") + "/"
-										+ Util.adicionarZerosEsquedaNumero(3,
-								        subcategoria.getQuantidadeEconomias().toString()) + " ";
-
-								}
-
-
-								contaTxt.append(Util.adicionarZerosEsquedaNumero(
-									7,quantidadeContas + ""));
-
-								contaTxt.append(Util.completaString(localidade.getDescricao(),30));
-
-								contaTxt.append(Util.completaString(localidade
-									.getEnderecoFormatadoTituloAbreviado(),35));
-
-								contaTxt.append(Util.completaString(localidade.getFone(),20));
-
-								contaTxt.append(Util.completaString("0800-84-0195",15));
-
-								// cria um objeto conta para calcular o valor da conta
-								Conta conta = new Conta();
-								conta.setValorAgua(emitirContaHelper.getValorAgua());
-								conta.setValorEsgoto(emitirContaHelper.getValorEsgoto());
-								conta.setValorCreditos(emitirContaHelper.getValorCreditos());
-								conta.setDebitos(emitirContaHelper.getDebitos());
-								conta.setValorImposto(emitirContaHelper.getValorImpostos());
-
-								BigDecimal valorConta = conta.getValorTotalContaBigDecimal();
-								emitirContaHelper.setValorConta(valorConta);
-
-								// [SB0018 - Gerar Linhas das Demais Contas]
-								String anoMesString = "" + emitirContaHelper.getAmReferencia();
-								// formata ano mes para mes ano
-
-								String mesNumero = anoMesString.substring(4, 6);
-
-								String mesExtenso = Util.retornaDescricaoMes(
-									new Integer(mesNumero).intValue()).toUpperCase();
-								String dataExtensa = mesExtenso	+ "/"
-										+ anoMesString.substring(0, 4);
-
-//								String mesAnoFormatado = anoMesString.substring(4, 6)+ anoMesString														.substring(0, 4);
-//								Integer digitoVerificadorConta = new Integer(""
-//										+ emitirContaHelper.getDigitoVerificadorConta());
-//								String representacaoNumericaCodBarra = null;
-//
-//								representacaoNumericaCodBarra = this.getControladorArrecadacao()
-//										.obterRepresentacaoNumericaCodigoBarra(
-//												3,
-//												valorConta,
-//												emitirContaHelper.getIdLocalidade(),
-//												emitirContaHelper.getIdImovel(),
-//												mesAnoFormatado,
-//												digitoVerificadorConta,
-//												null, null,
-//												null, null,
-//												null, null,
-//												null);
-//
-//								contaTxt.append(Util.completaString(
-//										representacaoNumericaCodBarra,48));
-								contaTxt.append(Util.completaString("",48));
-
-								// determinar Mensagem
-								String[] parmsPartesConta = obterMensagemConta3Partes(
-										emitirContaHelper,sistemaParametro);
-
-								String primeiraParte = parmsPartesConta[0];
-								String segundaParte = parmsPartesConta[1];
-								String terceiraParte = parmsPartesConta[2];
-
-								contaTxt.append(Util.completaString(primeiraParte,65));
-								contaTxt.append(Util.completaString(segundaParte,65));
-								contaTxt.append(Util.completaString(terceiraParte,65));
-
-
-								contaTxt.append(System.getProperty("line.separator"));
-
-								contaTxt.append(Util.completaString(descricaoLocalidade,30));
-
-								contaTxt.append(Util.adicionarZerosEsquedaNumero(2,
-									imovelEmitido.getQuadra().getRota().getCodigo().toString()));
-
-								contaTxt.append(".");
-
-								contaTxt.append(Util.adicionarZerosEsquedaNumero(4,
-									imovelEmitido.getNumeroSequencialRota().toString()));
-
-								Imovel imovel = new Imovel();
-								Localidade localidade2 = new Localidade();
-								localidade2.setId(emitirContaHelper.getIdLocalidade());
-								imovel.setLocalidade(localidade2);
-								SetorComercial setorComercial = new SetorComercial();
-								setorComercial.setCodigo(emitirContaHelper.getCodigoSetorComercialConta());
-								imovel.setSetorComercial(setorComercial);
-								Quadra quadra = new Quadra();
-								quadra.setNumeroQuadra(emitirContaHelper.getIdQuadraConta());
-								imovel.setQuadra(quadra);
-								imovel.setLote(emitirContaHelper.getLoteConta());
-								imovel.setSubLote(emitirContaHelper.getSubLoteConta());
-
-								String inscricao = imovel.getInscricaoFormatada();
-
-								imovel = null;
-
-								setorComercial = null;
-								quadra = null;
-
-								contaTxt.append(Util.completaString(inscricao, 20));
-								contaTxt.append(Util.completaString(" ", 12));
-
-								String mesAnoReferencia = Util.formatarAnoMesParaMesAno(
-										emitirContaHelper.getAmReferencia());
-
-								contaTxt.append(Util.completaString(mesAnoReferencia,9));
-
-								// data de vencimento da conta
-								String dataVencimento = Util.formatarData(
-										emitirContaHelper.getDataVencimentoConta());
-
-								contaTxt.append(Util.completaString(dataVencimento,10));
-
-								String valorContaString = Util.formatarMoedaReal(valorConta);
-
-								// valor da conta
-								FiltroContaImpressao filtroContaImpressao = new FiltroContaImpressao();
-								filtroContaImpressao.adicionarParametro(new ParametroSimples(
-												FiltroContaImpressao.ID,
-												emitirContaHelper.getIdConta()));
-								filtroContaImpressao.adicionarCaminhoParaCarregamentoEntidade("contaTipo");
-
-								Collection<ContaImpressao> cContaIm = getControladorUtil()
-									.pesquisar(filtroContaImpressao,ContaImpressao.class.getName());
-
-								ContaImpressao contaImpressao = cContaIm.iterator().next();
-								Integer contaTipo = contaImpressao.getContaTipo().getId();
-
-								contaTxt.append(Util.completaStringComEspacoAEsquerda(
-														valorContaString,15));
-
-								if (contaTipo.equals(ContaTipo.CONTA_DEBITO_AUTOMATICO)
-									|| contaTipo.equals(ContaTipo.CONTA_DEBITO_AUTO_COM_CLIENTE_RESP.intValue())) {
-
-									contaTxt.append(Util.completaString("NÃO PODE SER PAGO EM BANCO",65));
-									contaTxt.append(Util.completaString("DÉBITO AUTOMÁTICO EM CONTA CORRENTE",65));
-
-								} else {
-
-									contaTxt.append(Util.completaString(" ", 65));
-									contaTxt.append(Util.completaString(" ", 65));
-								}
-
-								// Mï¿½s/Ano referï¿½ncia da conta digito verificador
-
-								contaTxt.append(Util.completaString(dataExtensa,14));
-
-								contaTxt.append(Util.adicionarZerosEsquedaNumero(8,
-										imovelEmitido.getId().toString()));
-
-								contaTxt.append(Util.completaString(
-									emitirContaHelper.getIdLocalidade().toString(),3));
-
-								contaTxt.append(Util.adicionarZerosEsquedaNumero(3,
-									emitirContaHelper.getCodigoSetorComercialConta().toString()));
-
-								contaTxt.append(Util.adicionarZerosEsquedaNumero(3,
-									emitirContaHelper.getIdQuadraConta().toString()));
-
-								contaTxt.append(Util.adicionarZerosEsquedaNumero(4,
-									emitirContaHelper.getLoteConta().toString()));
-
-								contaTxt.append(Util.completaString(Util.adicionarZerosEsquedaNumero(2,
-												emitirContaHelper.getSubLoteConta().toString()), 2));
-								
-								// DIGITO ?????
-								contaTxt.append(Util.adicionarZerosEsquedaNumero(1, "0"));
-
-								Integer[] parmSituacao = determinarTipoLigacaoMedicao(emitirContaHelper);
-								Integer tipoLigacao = parmSituacao[0];
-								Integer tipoMedicao = parmSituacao[1];
-
-								Object[] parmsMedicaoHistorico = obterDadosMedicaoConta(
-										emitirContaHelper,tipoMedicao);
-								// Leitura Anterior
-								String leituraAnterior = "";
-								// Leitura Atual
-								String leituraAtual = "";
-								// Data Leitura Anterior
-								String dataLeituraAnterior = "";
-								// Leitura Anterior
-								String dataLeituraAtual = "";
-
-								if (parmsMedicaoHistorico != null) {
-
-									if (parmsMedicaoHistorico[0] != null) {
-										leituraAnterior = "" + (Integer) parmsMedicaoHistorico[0];
-									}
-
-									if (parmsMedicaoHistorico[1] != null) {
-										leituraAtual = "" + (Integer) parmsMedicaoHistorico[1];
-									}
-
-									if (parmsMedicaoHistorico[3] != null) {
-										dataLeituraAnterior = Util.formatarData((Date) parmsMedicaoHistorico[3]);
-									}
-
-									if (parmsMedicaoHistorico[2] != null) {
-										dataLeituraAtual = Util.formatarData((Date) parmsMedicaoHistorico[2]);
-									}
-
-								}
-								
-								Object[] parmsConsumoHistorico = null;
-								
-								String consumoMedio = "";
-								if (tipoLigacao != null) {
-									try {
-										parmsConsumoHistorico = repositorioMicromedicao
-											.obterDadosConsumoConta(emitirContaHelper.getIdImovel(),
-											emitirContaHelper.getAmReferencia(),tipoLigacao);
-
-									} catch (ErroRepositorioException e) {
-										sessionContext.setRollbackOnly();
-										throw new ControladorException("erro.sistema",e);
-									}
-
-									if (parmsConsumoHistorico != null) {
-										// Consumo mï¿½dio
-										if (parmsConsumoHistorico[2] != null) {
-											consumoMedio = "" + (Integer) parmsConsumoHistorico[2];
+									String consumoMedio = "";
+									if (tipoLigacao != null) {
+										try {
+											parmsConsumoHistorico = repositorioMicromedicao
+												.obterDadosConsumoConta(emitirContaHelper.getIdImovel(),
+												emitirContaHelper.getAmReferencia(),tipoLigacao);
+	
+										} catch (ErroRepositorioException e) {
+											sessionContext.setRollbackOnly();
+											throw new ControladorException("erro.sistema",e);
+										}
+	
+										if (parmsConsumoHistorico != null) {
+											// Consumo mï¿½dio
+											if (parmsConsumoHistorico[2] != null) {
+												consumoMedio = "" + (Integer) parmsConsumoHistorico[2];
+											}
 										}
 									}
-								}
-
-								// Data Leitura Atual
-								contaTxt.append(Util.completaString(dataLeituraAtual,5));
-								contaTxt.append(Util.completaString(leituraAnterior,6));
-
-								// Leitura Atual
-								contaTxt.append(Util.completaString(leituraAtual,6));
-
-								String diasConsumo = "";
-
-								if (!dataLeituraAnterior.equals("") && !dataLeituraAtual.equals("")) {
-									diasConsumo = "" + Util.obterQuantidadeDiasEntreDuasDatas(
-										(Date) parmsMedicaoHistorico[3],(Date) parmsMedicaoHistorico[2]);
-								}
-
-								String[] parmsConsumo = obterConsumoFaturadoConsumoMedioDiario(
-										emitirContaHelper,tipoMedicao,diasConsumo);
-								String consumoFaturamento = parmsConsumo[0];
-
-								// Consumo faturado
-								contaTxt.append(Util.completaString(consumoFaturamento,5));
-								contaTxt.append(Util.completaString(consumoMedio,5));
-
-								contaTxt.append(Util.completaString(this.obterConsumoAnterior(
-									emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
-									6, tipoLigacao, tipoMedicao).toString(),12));
-								contaTxt.append(Util.completaString(this.obterConsumoAnterior(
-									emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
-									5, tipoLigacao, tipoMedicao).toString(),12));
-								contaTxt.append(Util.completaString(this.obterConsumoAnterior(
-                                    emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
-									4,tipoLigacao,tipoMedicao).toString(),12));
-								contaTxt.append(Util.completaString(this.obterConsumoAnterior(
-									emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
-									3,tipoLigacao,tipoMedicao).toString(),12));
-								contaTxt.append(Util.completaString(this.obterConsumoAnterior(
-									emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
-									2,tipoLigacao,tipoMedicao).toString(),12));
-								contaTxt.append(Util.completaString(this.obterConsumoAnterior(
-									emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
-									1,tipoLigacao,tipoMedicao).toString(),12));
-
-								contaTxt.append(Util.completaString(economias, 24));
-
-								ObterDebitoImovelOuClienteHelper obterDebitoImovelOuClienteHelper = this
-										.obterDebitoImovelOuClienteHelper(emitirContaHelper,sistemaParametro);
-
-								if (obterDebitoImovelOuClienteHelper != null
-									&& ((obterDebitoImovelOuClienteHelper.getColecaoGuiasPagamentoValores() != null 
-									&& !obterDebitoImovelOuClienteHelper.getColecaoGuiasPagamentoValores().isEmpty()) 
-									|| (obterDebitoImovelOuClienteHelper.getColecaoContasValores() != null 
-									&& !obterDebitoImovelOuClienteHelper.getColecaoContasValores().isEmpty()))) {
-									Collection colecaoContasValores = obterDebitoImovelOuClienteHelper
-											.getColecaoContasValores();
-
-									if (colecaoContasValores != null && !colecaoContasValores.isEmpty()) {
-										if (colecaoContasValores.size() > 5) {
-											contaTxt.append(Util.completaString("HÁ MAIS DE CINCO CONTAS EM ATRASO",40));
-										} else {
-											String contasAtraso = "";
-											for (Iterator iter = colecaoContasValores.iterator(); iter.hasNext();) {
-												ContaValoresHelper contasValores = (ContaValoresHelper) iter.next();
-												contasAtraso = contasAtraso+ contasValores.
-													getConta().getFormatarAnoMesParaMesAno()+ " ";
+	
+									// Data Leitura Atual
+									contaTxt.append(Util.completaString(dataLeituraAtual,5));
+									contaTxt.append(Util.completaString(leituraAnterior,6));
+	
+									// Leitura Atual
+									contaTxt.append(Util.completaString(leituraAtual,6));
+	
+									String diasConsumo = "";
+	
+									if (!dataLeituraAnterior.equals("") && !dataLeituraAtual.equals("")) {
+										diasConsumo = "" + Util.obterQuantidadeDiasEntreDuasDatas(
+											(Date) parmsMedicaoHistorico[3],(Date) parmsMedicaoHistorico[2]);
+									}
+	
+									String[] parmsConsumo = obterConsumoFaturadoConsumoMedioDiario(
+											emitirContaHelper,tipoMedicao,diasConsumo);
+									String consumoFaturamento = parmsConsumo[0];
+	
+									// Consumo faturado
+									contaTxt.append(Util.completaString(consumoFaturamento,5));
+									contaTxt.append(Util.completaString(consumoMedio,5));
+	
+									contaTxt.append(Util.completaString(this.obterConsumoAnterior(
+										emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
+										6, tipoLigacao, tipoMedicao).toString(),12));
+									contaTxt.append(Util.completaString(this.obterConsumoAnterior(
+										emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
+										5, tipoLigacao, tipoMedicao).toString(),12));
+									contaTxt.append(Util.completaString(this.obterConsumoAnterior(
+	                                    emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
+										4,tipoLigacao,tipoMedicao).toString(),12));
+									contaTxt.append(Util.completaString(this.obterConsumoAnterior(
+										emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
+										3,tipoLigacao,tipoMedicao).toString(),12));
+									contaTxt.append(Util.completaString(this.obterConsumoAnterior(
+										emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
+										2,tipoLigacao,tipoMedicao).toString(),12));
+									contaTxt.append(Util.completaString(this.obterConsumoAnterior(
+										emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),
+										1,tipoLigacao,tipoMedicao).toString(),12));
+	
+									contaTxt.append(Util.completaString(economias, 24));
+	
+									ObterDebitoImovelOuClienteHelper obterDebitoImovelOuClienteHelper = this
+											.obterDebitoImovelOuClienteHelper(emitirContaHelper,sistemaParametro);
+	
+									if (obterDebitoImovelOuClienteHelper != null
+										&& ((obterDebitoImovelOuClienteHelper.getColecaoGuiasPagamentoValores() != null 
+										&& !obterDebitoImovelOuClienteHelper.getColecaoGuiasPagamentoValores().isEmpty()) 
+										|| (obterDebitoImovelOuClienteHelper.getColecaoContasValores() != null 
+										&& !obterDebitoImovelOuClienteHelper.getColecaoContasValores().isEmpty()))) {
+										Collection colecaoContasValores = obterDebitoImovelOuClienteHelper
+												.getColecaoContasValores();
+	
+										if (colecaoContasValores != null && !colecaoContasValores.isEmpty()) {
+											if (colecaoContasValores.size() > 5) {
+												contaTxt.append(Util.completaString("HÁ MAIS DE CINCO CONTAS EM ATRASO",40));
+											} else {
+												String contasAtraso = "";
+												for (Iterator iter = colecaoContasValores.iterator(); iter.hasNext();) {
+													ContaValoresHelper contasValores = (ContaValoresHelper) iter.next();
+													contasAtraso = contasAtraso+ contasValores.
+														getConta().getFormatarAnoMesParaMesAno()+ " ";
+												}
+												contaTxt.append(Util.completaString(contasAtraso,40));
 											}
-											contaTxt.append(Util.completaString(contasAtraso,40));
+										} else {
+											contaTxt.append(Util.completaString("",40));
 										}
 									} else {
 										contaTxt.append(Util.completaString("",40));
 									}
-								} else {
-									contaTxt.append(Util.completaString("",40));
-								}
-
-								if (imovelEmitido.getLigacaoAgua() != null) {
-
-									if (imovelEmitido.getLigacaoAgua().getHidrometroInstalacaoHistorico() != null) {
-
-										if (imovelEmitido.getLigacaoAgua()
-											.getHidrometroInstalacaoHistorico().getHidrometro() != null) {
-
-											contaTxt.append(Util.completaString(imovelEmitido.getLigacaoAgua()
-											.getHidrometroInstalacaoHistorico().getHidrometro().getNumero(),10));
+	
+									if (imovelEmitido.getLigacaoAgua() != null) {
+	
+										if (imovelEmitido.getLigacaoAgua().getHidrometroInstalacaoHistorico() != null) {
+	
+											if (imovelEmitido.getLigacaoAgua()
+												.getHidrometroInstalacaoHistorico().getHidrometro() != null) {
+	
+												contaTxt.append(Util.completaString(imovelEmitido.getLigacaoAgua()
+												.getHidrometroInstalacaoHistorico().getHidrometro().getNumero(),10));
+											} else {
+												contaTxt.append(Util.completaString(" ",10));
+											}
+	
 										} else {
 											contaTxt.append(Util.completaString(" ",10));
 										}
-
+	
 									} else {
-										contaTxt.append(Util.completaString(" ",10));
+										contaTxt.append(Util.completaString(" ", 10));
 									}
-
-								} else {
-									contaTxt.append(Util.completaString(" ", 10));
-								}
-
-								Collection colecaoContaCategoriaConsumoFaixa = null;
-								try {
-									colecaoContaCategoriaConsumoFaixa = repositorioFaturamento
-									.pesquisarContaCategoriaConsumoFaixa(emitirContaHelper.getIdConta());
-
-								} catch (ErroRepositorioException e) {
-									throw new ControladorException("erro.sistema", e);
-								}
-
-								Integer consumoExcesso = 0;
-								Integer consumoMinimo = 0;
-								BigDecimal valorExcesso = new BigDecimal("0.0");
-								BigDecimal valorMinimo = new BigDecimal("0.0");
-
-								if (colecaoContaCategoriaConsumoFaixa == null
-										|| colecaoContaCategoriaConsumoFaixa.isEmpty()) {
-
-									consumoMinimo = emitirContaHelper.getConsumoAgua();
-									valorMinimo = emitirContaHelper.getValorAgua();
-								} else {
-									if (!emitirContaHelper.getConsumoAgua().equals(0)) {
-										for (Iterator iter = colecaoContaCategoriaConsumoFaixa
-												.iterator(); iter.hasNext();) {
-
-											ContaCategoriaConsumoFaixa contaCategoriaConsumoFaixa = (ContaCategoriaConsumoFaixa) iter.next();
-											if (contaCategoriaConsumoFaixa.getConsumoAgua() != null) {
-												for (Iterator iteration = colecaoSubCategoria.iterator(); iteration.hasNext();) {
-													Subcategoria subCategoriaEmitir = (Subcategoria) iteration.next();
-
-													if (contaCategoriaConsumoFaixa.getSubcategoria().getId()
-															.equals(subCategoriaEmitir.getId())) {
-														consumoExcesso = consumoExcesso
-														+ contaCategoriaConsumoFaixa.getConsumoAgua()
-														* subCategoriaEmitir.getQuantidadeEconomias();
-
-														valorExcesso = valorExcesso.add(contaCategoriaConsumoFaixa.getValorAgua()
-														.multiply(new BigDecimal(subCategoriaEmitir.getQuantidadeEconomias())));
+	
+									Collection colecaoContaCategoriaConsumoFaixa = null;
+									try {
+										colecaoContaCategoriaConsumoFaixa = repositorioFaturamento
+										.pesquisarContaCategoriaConsumoFaixa(emitirContaHelper.getIdConta());
+	
+									} catch (ErroRepositorioException e) {
+										throw new ControladorException("erro.sistema", e);
+									}
+	
+									Integer consumoExcesso = 0;
+									Integer consumoMinimo = 0;
+									BigDecimal valorExcesso = new BigDecimal("0.0");
+									BigDecimal valorMinimo = new BigDecimal("0.0");
+	
+									if (colecaoContaCategoriaConsumoFaixa == null
+											|| colecaoContaCategoriaConsumoFaixa.isEmpty()) {
+	
+										consumoMinimo = emitirContaHelper.getConsumoAgua();
+										valorMinimo = emitirContaHelper.getValorAgua();
+									} else {
+										if (!emitirContaHelper.getConsumoAgua().equals(0)) {
+											for (Iterator iter = colecaoContaCategoriaConsumoFaixa
+													.iterator(); iter.hasNext();) {
+	
+												ContaCategoriaConsumoFaixa contaCategoriaConsumoFaixa = (ContaCategoriaConsumoFaixa) iter.next();
+												if (contaCategoriaConsumoFaixa.getConsumoAgua() != null) {
+													for (Iterator iteration = colecaoSubCategoria.iterator(); iteration.hasNext();) {
+														Subcategoria subCategoriaEmitir = (Subcategoria) iteration.next();
+	
+														if (contaCategoriaConsumoFaixa.getSubcategoria().getId()
+																.equals(subCategoriaEmitir.getId())) {
+															consumoExcesso = consumoExcesso
+															+ contaCategoriaConsumoFaixa.getConsumoAgua()
+															* subCategoriaEmitir.getQuantidadeEconomias();
+	
+															valorExcesso = valorExcesso.add(contaCategoriaConsumoFaixa.getValorAgua()
+															.multiply(new BigDecimal(subCategoriaEmitir.getQuantidadeEconomias())));
+														}
+	
 													}
-
 												}
 											}
 										}
+	
+										valorMinimo = emitirContaHelper.getValorAgua().subtract(valorExcesso);
+										consumoMinimo = emitirContaHelper.getConsumoAgua()- consumoExcesso;
+	
 									}
-
-									valorMinimo = emitirContaHelper.getValorAgua().subtract(valorExcesso);
-									consumoMinimo = emitirContaHelper.getConsumoAgua()- consumoExcesso;
-
-								}
-
-								int i = 0;
-								BigDecimal valorNullo = new BigDecimal("0.00");
-								Integer consumoNullo = new Integer(0);
-
-								if (!valorMinimo.equals(valorNullo)) {
-									if (!consumoMinimo.equals(consumoNullo)) {
-										contaTxt.append("TARIFA MÍNIMA ÁGUA            "); // 30
-										contaTxt.append(Util.completaString(consumoMinimo+ " M3",24));
-										contaTxt.append(Util.completaStringComEspacoAEsquerda(
-												Util.formatarMoedaReal(valorMinimo),12));
-									} else {
-										contaTxt.append("TARIFA MÍNIMA ÁGUA            "); // 30
-										contaTxt.append(Util.completaString(consumoMinimo+ "   ",24));
-										contaTxt.append(Util.completaStringComEspacoAEsquerda(
-												Util.formatarMoedaReal(valorMinimo),12));
-									}
-									i++;
-								}
-
-								if (!consumoExcesso.equals(consumoNullo)) {
-									contaTxt.append("TARIFA EXCESSO ÁGUA           "); // 30
-									contaTxt.append(Util.completaString(consumoExcesso + " M3",24));
-									contaTxt.append(Util.completaStringComEspacoAEsquerda(
-											Util.formatarMoedaReal(valorExcesso),12));
-									i++;
-								}
-
-								if (!emitirContaHelper.getPercentualEsgotoConta().equals(valorNullo)) {
-									contaTxt.append("TARIFA ESGOTO                 "); // 30
-									contaTxt.append(Util.completaString(
-										emitirContaHelper.getPercentualEsgotoConta()+ "%",24));
-									contaTxt.append(Util.completaStringComEspacoAEsquerda(
-										Util.formatarMoedaReal(emitirContaHelper.getValorEsgoto()),12));
-									i++;
-								}
-
-								if (!emitirContaHelper.getValorCreditos().equals(valorNullo)) {
-									contaTxt.append("CRÉDITOS E DESCONTOS          "); // 30
-									contaTxt.append(Util.completaString(" ", 24));
-									contaTxt.append(Util.completaStringComEspacoAEsquerda(
-										Util.formatarMoedaReal(emitirContaHelper.getValorCreditos()),12));
-									i++;
-								}
-
-								if (!emitirContaHelper.getValorImpostos().equals(valorNullo)) {
-									contaTxt.append("IMPOSTOS DEDUZIDOS            "); // 30
-									contaTxt.append(Util.completaString(" ", 24));
-									contaTxt.append(Util.completaStringComEspacoAEsquerda(
-										Util.formatarMoedaReal(emitirContaHelper.getValorImpostos()),12));
-									i++;
-								}
-
-								// setando os servicos
-
-								Conta contaId = new Conta();
-								contaId.setId(emitirContaHelper.getIdConta());
-
-								Collection<DebitoCobradoAgrupadoHelper> cDebitoCobrado = this
-										.obterDebitosCobradosContaCAERN(contaId);
-
-								int quantidadeLinhasSobrando = 10 - i;
-
-								if (cDebitoCobrado != null && !cDebitoCobrado.isEmpty()) {
-
-									int quantidadeDebitos = cDebitoCobrado.size();
-
-									if (quantidadeLinhasSobrando >= quantidadeDebitos) {
-
-										for (Iterator iter = cDebitoCobrado.iterator(); iter.hasNext();) {
-											DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter.next();
-
-											contaTxt.append(Util.completaString(debitoCobrado.getDescricaoDebitoTipo(),30)); // 30
-											contaTxt.append(Util.completaString(debitoCobrado.getNumeroPrestacaoDebito() 
-												+ "/" + debitoCobrado.getNumeroPrestacao(),24));
+	
+									int i = 0;
+									BigDecimal valorNullo = new BigDecimal("0.00");
+									Integer consumoNullo = new Integer(0);
+	
+									if (!valorMinimo.equals(valorNullo)) {
+										if (!consumoMinimo.equals(consumoNullo)) {
+											contaTxt.append("TARIFA MÍNIMA ÁGUA            "); // 30
+											contaTxt.append(Util.completaString(consumoMinimo+ " M3",24));
 											contaTxt.append(Util.completaStringComEspacoAEsquerda(
-												Util.formatarMoedaReal(debitoCobrado.getValorDebito()),12));
-
-											i++;
+													Util.formatarMoedaReal(valorMinimo),12));
+										} else {
+											contaTxt.append("TARIFA MÍNIMA ÁGUA            "); // 30
+											contaTxt.append(Util.completaString(consumoMinimo+ "   ",24));
+											contaTxt.append(Util.completaStringComEspacoAEsquerda(
+													Util.formatarMoedaReal(valorMinimo),12));
 										}
-
-									} else {
-										Iterator iter = cDebitoCobrado.iterator();
-										int contador = 1;
-										BigDecimal valorAcumulado = new BigDecimal("0.00");
-										boolean temOutros = false;
-										while (iter.hasNext()) {
-											DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter.next();
-
-											if (quantidadeLinhasSobrando > contador) {
+										i++;
+									}
+	
+									if (!consumoExcesso.equals(consumoNullo)) {
+										contaTxt.append("TARIFA EXCESSO ÁGUA           "); // 30
+										contaTxt.append(Util.completaString(consumoExcesso + " M3",24));
+										contaTxt.append(Util.completaStringComEspacoAEsquerda(
+												Util.formatarMoedaReal(valorExcesso),12));
+										i++;
+									}
+	
+									if (!emitirContaHelper.getPercentualEsgotoConta().equals(valorNullo)) {
+										contaTxt.append("TARIFA ESGOTO                 "); // 30
+										contaTxt.append(Util.completaString(
+											emitirContaHelper.getPercentualEsgotoConta()+ "%",24));
+										contaTxt.append(Util.completaStringComEspacoAEsquerda(
+											Util.formatarMoedaReal(emitirContaHelper.getValorEsgoto()),12));
+										i++;
+									}
+	
+									if (!emitirContaHelper.getValorCreditos().equals(valorNullo)) {
+										contaTxt.append("CRÉDITOS E DESCONTOS          "); // 30
+										contaTxt.append(Util.completaString(" ", 24));
+										contaTxt.append(Util.completaStringComEspacoAEsquerda(
+											Util.formatarMoedaReal(emitirContaHelper.getValorCreditos()),12));
+										i++;
+									}
+	
+									if (!emitirContaHelper.getValorImpostos().equals(valorNullo)) {
+										contaTxt.append("IMPOSTOS DEDUZIDOS            "); // 30
+										contaTxt.append(Util.completaString(" ", 24));
+										contaTxt.append(Util.completaStringComEspacoAEsquerda(
+											Util.formatarMoedaReal(emitirContaHelper.getValorImpostos()),12));
+										i++;
+									}
+	
+									// setando os servicos
+	
+									Conta contaId = new Conta();
+									contaId.setId(emitirContaHelper.getIdConta());
+	
+									Collection<DebitoCobradoAgrupadoHelper> cDebitoCobrado = this
+											.obterDebitosCobradosContaCAERN(contaId);
+	
+									int quantidadeLinhasSobrando = 10 - i;
+	
+									if (cDebitoCobrado != null && !cDebitoCobrado.isEmpty()) {
+	
+										int quantidadeDebitos = cDebitoCobrado.size();
+	
+										if (quantidadeLinhasSobrando >= quantidadeDebitos) {
+	
+											for (Iterator iter = cDebitoCobrado.iterator(); iter.hasNext();) {
+												DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter.next();
+	
 												contaTxt.append(Util.completaString(debitoCobrado.getDescricaoDebitoTipo(),30)); // 30
-												contaTxt.append(Util.completaString(debitoCobrado.getNumeroPrestacaoDebito()
+												contaTxt.append(Util.completaString(debitoCobrado.getNumeroPrestacaoDebito() 
 													+ "/" + debitoCobrado.getNumeroPrestacao(),24));
 												contaTxt.append(Util.completaStringComEspacoAEsquerda(
 													Util.formatarMoedaReal(debitoCobrado.getValorDebito()),12));
+	
 												i++;
-											} else {
-
-												valorAcumulado = valorAcumulado.add(debitoCobrado.getValorDebito());
-												temOutros = true;
 											}
-
-											contador++;
-										}
-										if (temOutros) {
-											contaTxt.append("OUTROS SERVIÇOS               "); // 30
-											contaTxt.append(Util.completaString(" ",24));
-											contaTxt.append(Util.completaStringComEspacoAEsquerda(
-												Util.formatarMoedaReal(valorAcumulado),12));
-											i++;
+	
+										} else {
+											Iterator iter = cDebitoCobrado.iterator();
+											int contador = 1;
+											BigDecimal valorAcumulado = new BigDecimal("0.00");
+											boolean temOutros = false;
+											while (iter.hasNext()) {
+												DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter.next();
+	
+												if (quantidadeLinhasSobrando > contador) {
+													contaTxt.append(Util.completaString(debitoCobrado.getDescricaoDebitoTipo(),30)); // 30
+													contaTxt.append(Util.completaString(debitoCobrado.getNumeroPrestacaoDebito()
+														+ "/" + debitoCobrado.getNumeroPrestacao(),24));
+													contaTxt.append(Util.completaStringComEspacoAEsquerda(
+														Util.formatarMoedaReal(debitoCobrado.getValorDebito()),12));
+													i++;
+												} else {
+	
+													valorAcumulado = valorAcumulado.add(debitoCobrado.getValorDebito());
+													temOutros = true;
+												}
+	
+												contador++;
+											}
+											if (temOutros) {
+												contaTxt.append("OUTROS SERVIÇOS               "); // 30
+												contaTxt.append(Util.completaString(" ",24));
+												contaTxt.append(Util.completaStringComEspacoAEsquerda(
+													Util.formatarMoedaReal(valorAcumulado),12));
+												i++;
+											}
 										}
 									}
-								}
-
-								int quantidadeLinhasServicosSobraram = 10 - i;
-								contaTxt.append(Util.completaString(" ",quantidadeLinhasServicosSobraram * 66));
-
-								// [SB0018 - Gerar Linhas das DemaisContas]
-//								anoMesString = "" + emitirContaHelper.getAmReferencia();
-//								// formata ano mes para mes ano
-//								mesAnoFormatado = anoMesString.substring(4, 6)
-//										+ anoMesString.substring(0, 4);
-//								digitoVerificadorConta = new Integer(""
-//										+ emitirContaHelper.getDigitoVerificadorConta());
-//								representacaoNumericaCodBarra = null;
-//
-//								representacaoNumericaCodBarra = this
-//										.getControladorArrecadacao()
-//										.obterRepresentacaoNumericaCodigoBarra(
-//												3,
-//												valorConta,
-//												emitirContaHelper.getIdLocalidade(),
-//												emitirContaHelper.getIdImovel(),
-//												mesAnoFormatado,
-//												digitoVerificadorConta,
-//												null, null,
-//												null, null,
-//												null, null,
-//												null);
-//
-//								contaTxt.append(Util.completaString(representacaoNumericaCodBarra,48));
-								
-								contaTxt.append(Util.completaString(" ",48));
-
-								contaTxt.append(Util.completaString(" ", 66)); // Rodapï¿½,
-								
-								//Alteraï¿½ï¿½o por Tiago Moreno - 23/01/2009 - Determinacao judicial (Nitrato)
-								
-								Conta contaEmitida = new Conta();
-								
-								contaEmitida.setId(emitirContaHelper.getIdConta());
-								
-								CreditoRealizado creditoRealizado = repositorioFaturamento.pesquisarCreditoRealizadoNitrato(contaEmitida);
-								
-								if (creditoRealizado != null){
-									contaTxt.append(Util.completaString("Por decisão judicial de 15/05/08 - proc. 001.07.200202-7, esta conta inclui um desconto de 50% no valor da água. R$" 
-											+ Util.completaString(Util.formatarMoedaReal(creditoRealizado.getValorCredito()), 13), 160));
-								} else {
-									contaTxt.append(Util.completaString(" ", 160));
-								}
-								
-								//*****************************************************
-                                // cï¿½digo do banco
-                                contaTxt.append("001-9");
-                                
-                                // representaï¿½ï¿½o numï¿½rica do cï¿½digo de barras
-                                // [SB0030 - Obter representaï¿½ï¿½o numï¿½rica do cï¿½digo de barras 
-                                // da Ficha de Compensaï¿½ï¿½o]
-                                String nossoNumero = obterNossoNumeroFichaCompensacao("1",emitirContaHelper.getIdConta().toString()).toString() ;
-                                String nossoNumeroSemDV = nossoNumero.toString().substring(0,17);
-                                
-                                //RM100 - Colocar fixo o fator de vencimento 0000
-                                //Date dataVencimentoMais90 = Util.adicionarNumeroDiasDeUmaData(new Date(),90);
-                                //String fatorVencimento = obterFatorVencimento(dataVencimentoMais90);
-                                String fatorVencimento = null;
-                                
-                                String numeroCarteira = ConstantesSistema.CARTEIRA_FICHA_COMPENSACAO;
-                                
-                                Integer qtdContasDebitoCarteiraMovimento = 
-                                	getControladorArrecadacao().verificarExistenciaContaDebitoCarteiraMovimento(emitirContaHelper.getIdConta());
-                                
-                                if(qtdContasDebitoCarteiraMovimento > 0){
-                                	numeroCarteira = ConstantesSistema.CARTEIRA_17_FICHA_COMPENSACAO;
-                                	
-                                	nossoNumero = obterNossoNumeroFichaCompensacaoCart17("1", emitirContaHelper.getIdConta().toString()).toString(); 
-                                	nossoNumeroSemDV = nossoNumero.toString().substring(0,17);
-                                	emitirContaHelper.setNossoNumero(nossoNumero);
-                                	Date dataVencimentoMais15 = Util.adicionarNumeroDiasDeUmaData(new Date(), 15);
-                                    fatorVencimento = obterFatorVencimento(dataVencimentoMais15);
-                                }
-                                
-                                String especificacaoCodigoBarra = 
-                                    getControladorArrecadacao().obterEspecificacaoCodigoBarraFichaCompensacao(
-                                    ConstantesSistema.CODIGO_BANCO_FICHA_COMPENSACAO, ConstantesSistema.CODIGO_MOEDA_FICHA_COMPENSACAO, 
-                                    emitirContaHelper.getValorConta(), nossoNumeroSemDV.toString(),
-                                    numeroCarteira, fatorVencimento);
-                                
-                                String representacaoNumericaCodigoBarraFichaCompensacao = 
-                                    getControladorArrecadacao().
-                                    obterRepresentacaoNumericaCodigoBarraFichaCompensacao(especificacaoCodigoBarra);
-                                
-                                contaTxt.append(representacaoNumericaCodigoBarraFichaCompensacao); 
-                                
-                                // local de pagamento
-                                contaTxt.append(Util.completaString("PAGÁVEL EM QUALQUER BANCO ATÉ O VENCIMENTO",45));
-                                
-                                // vencimento
-                                contaTxt.append(Util.completaString("Contra-apresentação",20));
-                                
-                                // cedente
-                                contaTxt.append(Util.completaString("CAERN-Companhia de Águas e Esgotos do RN",50));
-                                
-                                // agï¿½ncia/cï¿½digo cedente
-                                contaTxt.append("3795-8/9121-9");
-                                
-                                // data do documento
-                                contaTxt.append(Util.formatarData(new Date()));
-                                
-                                String matriculaImovelFormatada = Util.retornaMatriculaImovelFormatada(emitirContaHelper.getIdImovel());
-                                // nï¿½mero do documento
-                                contaTxt.append(Util.completaString(matriculaImovelFormatada,10));
-                                
-                                // espï¿½cie do documento
-                                contaTxt.append("FAT");
-                                
-                                // aceite
-                                contaTxt.append("N");
-                                
-                                // data do processamento
-                                contaTxt.append(Util.formatarData(new Date()));
-                                
-                                // nosso nï¿½mero com DV
-                                contaTxt.append(nossoNumero);
-                                
-                                // carteira
-                                contaTxt.append(numeroCarteira);
-                                
-                                // valor do documento
-                                contaTxt.append(Util.completaStringComEspacoAEsquerda(valorContaString,14));
-                                
-                                // Sacado - linha 1.a
-                                if (nomeClienteUsuario != null && 
-                                        !nomeClienteUsuario.equalsIgnoreCase("")){
-                                    contaTxt.append(Util.completaString(nomeClienteUsuario,30));
-                                }else {
-                                    contaTxt.append(Util.completaString(emitirContaHelper.getNomeCliente(), 30));
-                                }
-                                
-                                // Sacado - linha 1.b
-                                contaTxt.append(Util.completaString("   Matrícula: ",16));
-                                
-                                // Sacado - linha 1.c
-                                contaTxt.append(Util.completaString(matriculaImovelFormatada,9));
-                                
-                                // Sacado - linha 1.d
-                                contaTxt.append(Util.completaString("   Fatura: ",14));
-                                
-                                // Sacado - linha 1.d
-                                // Dï¿½gito verificador da conta
-                                String digitoVerificador = "" + emitirContaHelper.getDigitoVerificadorConta();
-                                contaTxt.append(Util.completaString(mesAnoReferencia+ "-"+ digitoVerificador,9));
-
-                                // Sacado - linha 2.a
-//                                contaTxt.append(Util.completaString(enderecoImovel,50));
-                        		// endereï¿½o
-								contaTxt.append(Util.completaString(enderecoImovel[0],60));
-								// bairro
-								contaTxt.append(Util.completaString(enderecoImovel[3],30));
-                                
-                                
-                                
-                                // cï¿½digo de barras
-                                if(especificacaoCodigoBarra != null && !especificacaoCodigoBarra.equals("")){
-                                    // Cria o objeto para gerar o cï¿½digode barras no
-                                    // padrï¿½o intercalado 2 de 5
-                                    Interleaved2of5 codigoBarraIntercalado2de5 = new Interleaved2of5();
-                                    
-                                    contaTxt.append(Util.completaString(codigoBarraIntercalado2de5
-                                                        .encodeValue(especificacaoCodigoBarra), 112));
-                                    
-                                }else{
-                                	 contaTxt.append(Util.completaString(" ", 112));
-                                }
-                                
-                                if(imovelEmitido.getCodigoDebitoAutomatico() != null){
-                                	contaTxt.append(Util.completaString(imovelEmitido.getCodigoDebitoAutomatico().toString(),9));	
-                                }
-
-								//*****************************************************
-
-								// Impostos
-								BigDecimal baseCalculo = emitirContaHelper.getValorBaseCalculo();
-								BigDecimal valorPIS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_PIS);
-								BigDecimal valorCONFINS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_CONFINS);
-
-								contaTxt.append(Util.completaString(Util.formatarMoedaReal(baseCalculo), 15));
-								contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_PIS_TEXTO, 5));
-								contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorPIS), 15));
-								contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_CONFINS_TEXTO, 5));
-								contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorCONFINS), 15));
-
-								contasTxtLista.append(contaTxt.toString());
-
-								conta = null;
-
-								StringBuilder teste = new StringBuilder();
-								teste.append(contaTxt);
-
-								// PEDRO 19/10/2006
-								contaTxt = null;
-								// enquanto estiver
-								// proximo
-								// if
-								// (iteratorConta.hasNext())
-								// {
-								contasTxtLista.append(System.getProperty("line.separator"));
-
-								// adiciona o id da conta e o sequencial
-								// no para serem atualizados
-								mapAtualizaSequencial.put(emitirContaHelper.getIdConta(),sequencialImpressao);
-
+	
+									int quantidadeLinhasServicosSobraram = 10 - i;
+									contaTxt.append(Util.completaString(" ",quantidadeLinhasServicosSobraram * 66));
+	
+									// [SB0018 - Gerar Linhas das DemaisContas]
+	//								anoMesString = "" + emitirContaHelper.getAmReferencia();
+	//								// formata ano mes para mes ano
+	//								mesAnoFormatado = anoMesString.substring(4, 6)
+	//										+ anoMesString.substring(0, 4);
+	//								digitoVerificadorConta = new Integer(""
+	//										+ emitirContaHelper.getDigitoVerificadorConta());
+	//								representacaoNumericaCodBarra = null;
+	//
+	//								representacaoNumericaCodBarra = this
+	//										.getControladorArrecadacao()
+	//										.obterRepresentacaoNumericaCodigoBarra(
+	//												3,
+	//												valorConta,
+	//												emitirContaHelper.getIdLocalidade(),
+	//												emitirContaHelper.getIdImovel(),
+	//												mesAnoFormatado,
+	//												digitoVerificadorConta,
+	//												null, null,
+	//												null, null,
+	//												null, null,
+	//												null);
+	//
+	//								contaTxt.append(Util.completaString(representacaoNumericaCodBarra,48));
+									
+									contaTxt.append(Util.completaString(" ",48));
+	
+									contaTxt.append(Util.completaString(" ", 66)); // Rodapï¿½,
+									
+									//Alteraï¿½ï¿½o por Tiago Moreno - 23/01/2009 - Determinacao judicial (Nitrato)
+									
+									Conta contaEmitida = new Conta();
+									
+									contaEmitida.setId(emitirContaHelper.getIdConta());
+									
+									CreditoRealizado creditoRealizado = repositorioFaturamento.pesquisarCreditoRealizadoNitrato(contaEmitida);
+									
+									if (creditoRealizado != null){
+										contaTxt.append(Util.completaString("Por decisão judicial de 15/05/08 - proc. 001.07.200202-7, esta conta inclui um desconto de 50% no valor da água. R$" 
+												+ Util.completaString(Util.formatarMoedaReal(creditoRealizado.getValorCredito()), 13), 160));
+									} else {
+										contaTxt.append(Util.completaString(" ", 160));
+									}
+									
+									//*****************************************************
+	                                // cï¿½digo do banco
+	                                contaTxt.append("001-9");
+	                                
+	                                // representaï¿½ï¿½o numï¿½rica do cï¿½digo de barras
+	                                // [SB0030 - Obter representaï¿½ï¿½o numï¿½rica do cï¿½digo de barras 
+	                                // da Ficha de Compensaï¿½ï¿½o]
+	                                String nossoNumero = obterNossoNumeroFichaCompensacao("1",emitirContaHelper.getIdConta().toString()).toString() ;
+	                                String nossoNumeroSemDV = nossoNumero.toString().substring(0,17);
+	                                
+	                                //RM100 - Colocar fixo o fator de vencimento 0000
+	                                //Date dataVencimentoMais90 = Util.adicionarNumeroDiasDeUmaData(new Date(),90);
+	                                //String fatorVencimento = obterFatorVencimento(dataVencimentoMais90);
+	                                String fatorVencimento = null;
+	                                
+	                                String numeroCarteira = ConstantesSistema.CARTEIRA_FICHA_COMPENSACAO;
+	                                
+	                                Integer qtdContasDebitoCarteiraMovimento = 
+	                                	getControladorArrecadacao().verificarExistenciaContaDebitoCarteiraMovimento(emitirContaHelper.getIdConta());
+	                                
+	                                if(qtdContasDebitoCarteiraMovimento > 0){
+	                                	numeroCarteira = ConstantesSistema.CARTEIRA_17_FICHA_COMPENSACAO;
+	                                	
+	                                	nossoNumero = obterNossoNumeroFichaCompensacaoCart17("1", emitirContaHelper.getIdConta().toString()).toString(); 
+	                                	nossoNumeroSemDV = nossoNumero.toString().substring(0,17);
+	                                	emitirContaHelper.setNossoNumero(nossoNumero);
+	                                	Date dataVencimentoMais15 = Util.adicionarNumeroDiasDeUmaData(new Date(), 15);
+	                                    fatorVencimento = obterFatorVencimento(dataVencimentoMais15);
+	                                }
+	                                
+	                                String especificacaoCodigoBarra = 
+	                                    getControladorArrecadacao().obterEspecificacaoCodigoBarraFichaCompensacao(
+	                                    ConstantesSistema.CODIGO_BANCO_FICHA_COMPENSACAO, ConstantesSistema.CODIGO_MOEDA_FICHA_COMPENSACAO, 
+	                                    emitirContaHelper.getValorConta(), nossoNumeroSemDV.toString(),
+	                                    numeroCarteira, fatorVencimento);
+	                                
+	                                String representacaoNumericaCodigoBarraFichaCompensacao = 
+	                                    getControladorArrecadacao().
+	                                    obterRepresentacaoNumericaCodigoBarraFichaCompensacao(especificacaoCodigoBarra);
+	                                
+	                                contaTxt.append(representacaoNumericaCodigoBarraFichaCompensacao); 
+	                                
+	                                // local de pagamento
+	                                contaTxt.append(Util.completaString("PAGÁVEL EM QUALQUER BANCO ATÉ O VENCIMENTO",45));
+	                                
+	                                // vencimento
+	                                contaTxt.append(Util.completaString("Contra-apresentação",20));
+	                                
+	                                // cedente
+	                                contaTxt.append(Util.completaString("CAERN-Companhia de Águas e Esgotos do RN",50));
+	                                
+	                                // agï¿½ncia/cï¿½digo cedente
+	                                contaTxt.append("3795-8/9121-9");
+	                                
+	                                // data do documento
+	                                contaTxt.append(Util.formatarData(new Date()));
+	                                
+	                                String matriculaImovelFormatada = Util.retornaMatriculaImovelFormatada(emitirContaHelper.getIdImovel());
+	                                // nï¿½mero do documento
+	                                contaTxt.append(Util.completaString(matriculaImovelFormatada,10));
+	                                
+	                                // espï¿½cie do documento
+	                                contaTxt.append("FAT");
+	                                
+	                                // aceite
+	                                contaTxt.append("N");
+	                                
+	                                // data do processamento
+	                                contaTxt.append(Util.formatarData(new Date()));
+	                                
+	                                // nosso nï¿½mero com DV
+	                                contaTxt.append(nossoNumero);
+	                                
+	                                // carteira
+	                                contaTxt.append(numeroCarteira);
+	                                
+	                                // valor do documento
+	                                contaTxt.append(Util.completaStringComEspacoAEsquerda(valorContaString,14));
+	                                
+	                                // Sacado - linha 1.a
+	                                if (nomeClienteUsuario != null && 
+	                                        !nomeClienteUsuario.equalsIgnoreCase("")){
+	                                    contaTxt.append(Util.completaString(nomeClienteUsuario,30));
+	                                }else {
+	                                    contaTxt.append(Util.completaString(emitirContaHelper.getNomeCliente(), 30));
+	                                }
+	                                
+	                                // Sacado - linha 1.b
+	                                contaTxt.append(Util.completaString("   Matrícula: ",16));
+	                                
+	                                // Sacado - linha 1.c
+	                                contaTxt.append(Util.completaString(matriculaImovelFormatada,9));
+	                                
+	                                // Sacado - linha 1.d
+	                                contaTxt.append(Util.completaString("   Fatura: ",14));
+	                                
+	                                // Sacado - linha 1.d
+	                                // Dï¿½gito verificador da conta
+	                                String digitoVerificador = "" + emitirContaHelper.getDigitoVerificadorConta();
+	                                contaTxt.append(Util.completaString(mesAnoReferencia+ "-"+ digitoVerificador,9));
+	
+	                                // Sacado - linha 2.a
+	//                                contaTxt.append(Util.completaString(enderecoImovel,50));
+	                        		// endereï¿½o
+									contaTxt.append(Util.completaString(enderecoImovel[0],60));
+									// bairro
+									contaTxt.append(Util.completaString(enderecoImovel[3],30));
+	                                
+	                                
+	                                
+	                                // cï¿½digo de barras
+	                                if(especificacaoCodigoBarra != null && !especificacaoCodigoBarra.equals("")){
+	                                    // Cria o objeto para gerar o cï¿½digode barras no
+	                                    // padrï¿½o intercalado 2 de 5
+	                                    Interleaved2of5 codigoBarraIntercalado2de5 = new Interleaved2of5();
+	                                    
+	                                    contaTxt.append(Util.completaString(codigoBarraIntercalado2de5
+	                                                        .encodeValue(especificacaoCodigoBarra), 112));
+	                                    
+	                                }else{
+	                                	 contaTxt.append(Util.completaString(" ", 112));
+	                                }
+	                                
+	                                if(imovelEmitido.getCodigoDebitoAutomatico() != null){
+	                                	contaTxt.append(Util.completaString(imovelEmitido.getCodigoDebitoAutomatico().toString(),9));	
+	                                }
+	
+									//*****************************************************
+	
+									// Impostos
+									BigDecimal baseCalculo = emitirContaHelper.getValorBaseCalculo();
+									BigDecimal valorPIS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_PIS);
+									BigDecimal valorCONFINS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_CONFINS);
+	
+									contaTxt.append(Util.completaString(Util.formatarMoedaReal(baseCalculo), 15));
+									contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_PIS_TEXTO, 5));
+									contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorPIS), 15));
+									contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_CONFINS_TEXTO, 5));
+									contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorCONFINS), 15));
+	
+									contasTxtLista.append(contaTxt.toString());
+	
+									conta = null;
+	
+									StringBuilder teste = new StringBuilder();
+									teste.append(contaTxt);
+	
+									// PEDRO 19/10/2006
+									contaTxt = null;
+									// enquanto estiver
+									// proximo
+									// if
+									// (iteratorConta.hasNext())
+									// {
+									contasTxtLista.append(System.getProperty("line.separator"));
+	
+									// adiciona o id da conta e o sequencial
+									// no para serem atualizados
+									mapAtualizaSequencial.put(emitirContaHelper.getIdConta(),sequencialImpressao);
+                            	}	
 
                             }// fim do laï¿½o que verifica se o
                             // helper ï¿½ diferente de nulo
@@ -9655,36 +9701,51 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
                         idGrupoFaturamento = "G" + faturamentoGrupo.getId();
                     }
 
-                    String mesReferencia = "_Fat"
-                            + anoMesReferenciaFaturamento.toString().substring(4, 6);
+                    String mesReferencia = "_Fat" + anoMesReferenciaFaturamento.toString().substring(4, 6);
                     String nomeZip = null;
+                    String nomeZipCartaConta = null;
 
                     switch (tipoConta) {
                     case 0:
                         nomeZip = "BOLETO_E" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
+                        nomeZipCartaConta = "CARTA_BOLETO_ESTOURO" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
                         break;
                     case 1:
                         nomeZip = "BOLETO_A" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
                         break;
                     case 2:
                         nomeZip = "BOLETO_D" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
+                        nomeZipCartaConta = "CARTA_BOLETO_ESTOURO" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
                         break;
                     case 3:
                         nomeZip = "BOLETO_N_R" + "_" + idGrupoFaturamento + mesReferencia + "-";
+                        nomeZipCartaConta = "CARTA_BOLETO_ESTOURO" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
                         break;
                     case 4:
                         nomeZip = "BOLETO_D_R" + "_" + idGrupoFaturamento + mesReferencia + "-";
+                        nomeZipCartaConta = "CARTA_BOLETO_ESTOURO" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
                         break;
                     case 5:
                         nomeZip = "BOLETO_N" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
+                        nomeZipCartaConta = "CARTA_BOLETO_ESTOURO" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
                         break;
                     }
 
                     BufferedWriter out = null;
                     ZipOutputStream zos = null;
-                    File compactadoTipo = new File(nomeZip + ".zip");
-                    File leituraTipo = new File(nomeZip + ".txt");
+                    File compactadoTipoCarta = null;
 
+                    File compactadoTipo = new File(nomeZip + ".zip");
+                    if (nomeZipCartaConta != null) {
+                        compactadoTipoCarta = new File(nomeZipCartaConta + ".zip");
+                    }
+                    
+                    File leituraTipo = new File(nomeZip + ".txt");
+                    File leituraTipoCarta = null;
+                    if (nomeZipCartaConta != null) {
+                        leituraTipoCarta = new File(nomeZipCartaConta + ".txt");
+                    }
+                    
                     if (contasTxtLista != null && contasTxtLista.length() != 0) {
                         // fim de arquivo
                         contasTxtLista.append("\u0004");
@@ -9700,13 +9761,32 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
                         out.close();
                         leituraTipo.delete();
                     }
+                    
+                    if (cartasTxtListaConta != null && cartasTxtListaConta.length() != 0) {
+                        // fim de arquivo
+                        contasTxtLista.append("\u0004");
+                        // ************ TIPO N *************
 
+                        zos = new ZipOutputStream(new FileOutputStream(compactadoTipoCarta));
+                        out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(leituraTipoCarta.getAbsolutePath())));
+                        out.write(cartasTxtListaConta.toString());
+                        out.flush();
+                        ZipUtil.adicionarArquivo(zos, leituraTipoCarta);
+                        zos.close();
+                        out.close();
+                        leituraTipoCarta.delete();
+                    }
+                    
                     // limpa todos os campos
                     nomeZip = null;
+                    nomeZipCartaConta = null;
                     out = null;
                     zos = null;
                     compactadoTipo = null;
+                    compactadoTipoCarta = null;
                     leituraTipo = null;
+                    leituraTipoCarta = null;
+                    cartasTxtListaConta = null;
                     contasTxtLista = null;
 
                     tipoConta++;
@@ -9765,13 +9845,15 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
                 
                 // recebe todos as contas da lista
                 StringBuilder contasTxtLista = null;
+                StringBuilder cartasTxtListaConta = null;
                 Map<Integer, Integer> mapAtualizaSequencial = null;
 
                 try {
 
                     Integer sequencialImpressao = 0;
-
+                    Integer sequencialCarta = 0;
                     contasTxtLista = new StringBuilder();
+                    cartasTxtListaConta = new StringBuilder();
 
                     mapAtualizaSequencial = new HashMap();
                     
@@ -9784,206 +9866,183 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
                         while (iteratorConta.hasNext()) {
 
                             emitirContaHelper = null;
+                            int situacao = 0;
 
                             emitirContaHelper = (EmitirContaHelper) iteratorConta.next();
-                            
                             sequencialImpressao += 1;
                             quantidadeContas++;
 
                             if (emitirContaHelper != null) {
-
-                                StringBuilder contaTxt = new StringBuilder();
-                                
-								String descricaoLocalidade = emitirContaHelper
-										.getDescricaoLocalidade();
-								contaTxt
-										.append(Util
-												.completaString(
-														descricaoLocalidade,
-														30));
-								contaTxt
-										.append(Util
-												.adicionarZerosEsquedaNumero(
-														3,
-														emitirContaHelper
-																.getCodigoSetorComercialConta()
-																.toString()));
-		
-								Imovel imovelEmitido = getControladorImovel()
-										.pesquisarImovel(
-												emitirContaHelper
-														.getIdImovel());
-		
-								contaTxt
-										.append(Util
-												.adicionarZerosEsquedaNumero(
-														2,
-														imovelEmitido
-																.getQuadra()
-																.getRota()
-																.getCodigo()
-																.toString()));
-		
-								contaTxt.append(".");
-		
-								contaTxt
-										.append(Util
-												.adicionarZerosEsquedaNumero(
-														4,
-														imovelEmitido
-																.getNumeroSequencialRota()
-																.toString()));
-		
-								contaTxt
-										.append(Util
-												.adicionarZerosEsquedaNumero(
-														8,
-														emitirContaHelper
-																.getIdImovel()
-																.toString()));
-		
-								// caso a coleï¿½ï¿½o de
-								// contas
-								// seja
-								// de
-								// entrega
-								// para
-								// o
-								// cliente
-								// responsï¿½vel
-								String nomeClienteUsuario = null;
-								if (tipoConta == 3
-										|| tipoConta == 4) {
-									
-									if (emitirContaHelper
-											.getNomeImovel() != null
-											&& !emitirContaHelper
-													.getNomeImovel()
-													.equals("")) {
-										nomeClienteUsuario = emitirContaHelper
-												.getNomeImovel();
-		
-									} else {
-										try {
-											nomeClienteUsuario = repositorioFaturamento
-													.pesquisarNomeClienteUsuarioConta(emitirContaHelper
-															.getIdConta());
-		
-										} catch (ErroRepositorioException e) {
-											throw new ControladorException(
-													"erro.sistema",
-													e);
-										}
-									}
+                            	
+                                // [SB0020] - Gerar Arquivo TXT das Cartas
+								boolean gerarMsgEstouroConsumo = gerarMsgEstouroConsumo(emitirContaHelper.getIdConta());
+								if(gerarMsgEstouroConsumo){
+								   sequencialCarta += 1;
+                                   cartasTxtListaConta.append(gerarArquivoTxtCartas(emitirContaHelper,sequencialCarta,situacao));
+                                   cartasTxtListaConta.append(System.getProperty("line.separator"));
+								}else{
+	
+	                                StringBuilder contaTxt = new StringBuilder();
+	                                
+									String descricaoLocalidade = emitirContaHelper
+											.getDescricaoLocalidade();
 									contaTxt
 											.append(Util
 													.completaString(
-															nomeClienteUsuario,
+															descricaoLocalidade,
 															30));
-								} else {
 									contaTxt
 											.append(Util
-													.completaString(
+													.adicionarZerosEsquedaNumero(
+															3,
 															emitirContaHelper
-																	.getNomeCliente(),
+																	.getCodigoSetorComercialConta()
+																	.toString()));
+			
+									Imovel imovelEmitido = getControladorImovel()
+											.pesquisarImovel(
+													emitirContaHelper
+															.getIdImovel());
+			
+									contaTxt
+											.append(Util
+													.adicionarZerosEsquedaNumero(
+															2,
+															imovelEmitido
+																	.getQuadra()
+																	.getRota()
+																	.getCodigo()
+																	.toString()));
+			
+									contaTxt.append(".");
+			
+									contaTxt
+											.append(Util
+													.adicionarZerosEsquedaNumero(
+															4,
+															imovelEmitido
+																	.getNumeroSequencialRota()
+																	.toString()));
+			
+									contaTxt
+											.append(Util
+													.adicionarZerosEsquedaNumero(
+															8,
+															emitirContaHelper
+																	.getIdImovel()
+																	.toString()));
+			
+									// caso a coleï¿½ï¿½o de
+									// contas
+									// seja
+									// de
+									// entrega
+									// para
+									// o
+									// cliente
+									// responsï¿½vel
+									String nomeClienteUsuario = null;
+									if (tipoConta == 3
+											|| tipoConta == 4) {
+										
+										if (emitirContaHelper
+												.getNomeImovel() != null
+												&& !emitirContaHelper
+														.getNomeImovel()
+														.equals("")) {
+											nomeClienteUsuario = emitirContaHelper
+													.getNomeImovel();
+			
+										} else {
+											try {
+												nomeClienteUsuario = repositorioFaturamento
+														.pesquisarNomeClienteUsuarioConta(emitirContaHelper
+																.getIdConta());
+			
+											} catch (ErroRepositorioException e) {
+												throw new ControladorException(
+														"erro.sistema",
+														e);
+											}
+										}
+										contaTxt
+												.append(Util
+														.completaString(
+																nomeClienteUsuario,
+																30));
+									} else {
+										contaTxt
+												.append(Util
+														.completaString(
+																emitirContaHelper
+																		.getNomeCliente(),
+																30));
+									}
+			
+									String[] enderecoImovel = getControladorEndereco()
+											.pesquisarEnderecoFormatadoDividido(
+													emitirContaHelper
+															.getIdImovel());
+			
+									// endereï¿½o
+									contaTxt
+											.append(Util
+													.completaString(
+															enderecoImovel[0],
+															60));
+			
+									// bairro
+									contaTxt
+											.append(Util
+													.completaString(
+															enderecoImovel[3],
 															30));
-								}
-		
-								String[] enderecoImovel = getControladorEndereco()
-										.pesquisarEnderecoFormatadoDividido(
-												emitirContaHelper
-														.getIdImovel());
-		
-								// endereï¿½o
-								contaTxt
-										.append(Util
-												.completaString(
-														enderecoImovel[0],
-														60));
-		
-								// bairro
-								contaTxt
-										.append(Util
-												.completaString(
-														enderecoImovel[3],
-														30));
-		
-		
-		
-								FiltroLocalidade filtroLocalidade = new FiltroLocalidade();
-		
-								filtroLocalidade
-										.adicionarParametro(new ParametroSimples(
-												FiltroLocalidade.ID,
-												emitirContaHelper
-														.getIdLocalidade()));
-		
-								filtroLocalidade
-										.adicionarCaminhoParaCarregamentoEntidade("logradouroCep");
-								filtroLocalidade
-										.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.cep");
-								filtroLocalidade
-										.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro");
-								filtroLocalidade
-										.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTipo");
-								filtroLocalidade
-										.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTitulo");
-								filtroLocalidade
-										.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
-								filtroLocalidade
-										.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro");
-								filtroLocalidade
-										.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro");
-								filtroLocalidade
-										.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio");
-								filtroLocalidade
-										.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio.unidadeFederacao");
-								filtroLocalidade
-										.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
-		
-								Collection cLocalidade = (Collection) getControladorUtil()
-										.pesquisar(
-												filtroLocalidade,
-												Localidade.class
-														.getName());
-								Localidade localidade = (Localidade) cLocalidade
-										.iterator().next();
-		
-								FiltroQualidadeAgua filtroQualidadeAgua = new FiltroQualidadeAgua();
-		
-								Collection colecaoQualidadeAgua = null;
-		
-								filtroQualidadeAgua
-										.adicionarParametro(new ParametroSimples(
-												FiltroQualidadeAgua.LOCALIDADE_ID,
-												localidade
-														.getId()));
-								filtroQualidadeAgua
-										.adicionarParametro(new ParametroSimples(
-												FiltroQualidadeAgua.SETOR_COMERCIAL_ID,
-												emitirContaHelper
-														.getIdSetorComercial()
-														));
-								filtroQualidadeAgua
-										.adicionarParametro(new ParametroSimples(
-												FiltroQualidadeAgua.ANO_MES_REFERENCIA,
-												emitirContaHelper
-														.getAmReferencia()));
-								
-								filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
-		
-								colecaoQualidadeAgua = getControladorUtil()
-										.pesquisar(
-												filtroQualidadeAgua,
-												QualidadeAgua.class
-														.getName());
-		
-								if (colecaoQualidadeAgua == null
-										|| colecaoQualidadeAgua
-												.isEmpty()) {
-									filtroQualidadeAgua
-											.limparListaParametros();
-									colecaoQualidadeAgua = null;
+			
+			
+			
+									FiltroLocalidade filtroLocalidade = new FiltroLocalidade();
+			
+									filtroLocalidade
+											.adicionarParametro(new ParametroSimples(
+													FiltroLocalidade.ID,
+													emitirContaHelper
+															.getIdLocalidade()));
+			
+									filtroLocalidade
+											.adicionarCaminhoParaCarregamentoEntidade("logradouroCep");
+									filtroLocalidade
+											.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.cep");
+									filtroLocalidade
+											.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro");
+									filtroLocalidade
+											.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTipo");
+									filtroLocalidade
+											.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTitulo");
+									filtroLocalidade
+											.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
+									filtroLocalidade
+											.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro");
+									filtroLocalidade
+											.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro");
+									filtroLocalidade
+											.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio");
+									filtroLocalidade
+											.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio.unidadeFederacao");
+									filtroLocalidade
+											.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
+			
+									Collection cLocalidade = (Collection) getControladorUtil()
+											.pesquisar(
+													filtroLocalidade,
+													Localidade.class
+															.getName());
+									Localidade localidade = (Localidade) cLocalidade
+											.iterator().next();
+			
+									FiltroQualidadeAgua filtroQualidadeAgua = new FiltroQualidadeAgua();
+			
+									Collection colecaoQualidadeAgua = null;
+			
 									filtroQualidadeAgua
 											.adicionarParametro(new ParametroSimples(
 													FiltroQualidadeAgua.LOCALIDADE_ID,
@@ -9991,814 +10050,853 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 															.getId()));
 									filtroQualidadeAgua
 											.adicionarParametro(new ParametroSimples(
+													FiltroQualidadeAgua.SETOR_COMERCIAL_ID,
+													emitirContaHelper
+															.getIdSetorComercial()
+															));
+									filtroQualidadeAgua
+											.adicionarParametro(new ParametroSimples(
 													FiltroQualidadeAgua.ANO_MES_REFERENCIA,
 													emitirContaHelper
 															.getAmReferencia()));
-									filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
 									
+									filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
+			
 									colecaoQualidadeAgua = getControladorUtil()
 											.pesquisar(
 													filtroQualidadeAgua,
 													QualidadeAgua.class
 															.getName());
-								}
-		
-								if (colecaoQualidadeAgua != null
-										&& !colecaoQualidadeAgua
-												.isEmpty()) {
-									QualidadeAgua qualidadeAgua = (QualidadeAgua) colecaoQualidadeAgua
-											.iterator().next();
-		
-									// fonte
-									if (qualidadeAgua.getFonteCaptacao() != null) {
-										contaTxt.append(
-											Util.completaString(qualidadeAgua.getFonteCaptacao().getDescricao(),30));
-									} else {
-										contaTxt.append(Util.completaString(" ",30));
-									}
-									
-									// cloro
-									if (qualidadeAgua
-											.getNumeroCloroResidual() != null
-											&& !qualidadeAgua
-													.getNumeroCloroResidual()
-													.equals(0)) {
-										contaTxt
-												.append(Util
-														.completaString(
-																qualidadeAgua
-																		.getNumeroCloroResidual()
-																		.toString(),
-																3));
-									} else {
-										contaTxt
-												.append(Util
-														.completaString(
-																" ",
-																3));
-									}
-		
-									// coliformes
-									if (qualidadeAgua
-											.getNumeroIndiceColiformesTotais() != null
-											&& !qualidadeAgua
-													.getNumeroIndiceColiformesTotais()
-													.equals(0)) {
-										contaTxt
-												.append(Util
-														.completaString(
-																qualidadeAgua
-																		.getNumeroIndiceColiformesTotais()
-																		.toString(),
-																8));
-									} else {
-										contaTxt
-												.append(Util
-														.completaString(
-																" ",
-																8));
-									}
-		
-									// nitrato
-									if (qualidadeAgua
-											.getNumeroNitrato() != null
-											&& !qualidadeAgua
-													.getNumeroNitrato()
-													.equals(0)) {
-										contaTxt
-												.append(Util
-														.completaString(
-																qualidadeAgua
-																		.getNumeroNitrato()
-																		.toString(),
-																4));
-									} else {
-										contaTxt
-												.append(Util
-														.completaString(
-																" ",
-																4));
-									}
-		
-									// //ph
-									if (qualidadeAgua
-											.getNumeroIndicePh() != null
-											&& !qualidadeAgua
-													.getNumeroIndicePh()
-													.equals(0)) {
-										contaTxt
-												.append(Util
-														.completaString(
-																qualidadeAgua
-																		.getNumeroIndicePh()
-																		.toString(),
-																4));
-									} else {
-										contaTxt
-												.append(Util
-														.completaString(
-																" ",
-																4));
-									}
-		
-									// //turbidez
-									if (qualidadeAgua
-											.getNumeroIndiceTurbidez() != null
-											&& !qualidadeAgua
-													.getNumeroIndiceTurbidez()
-													.equals(0)) {
-										contaTxt
-												.append(Util
-														.completaString(
-																qualidadeAgua
-																		.getNumeroIndiceTurbidez()
-																		.toString(),
-																4));
-									} else {
-										contaTxt
-												.append(Util
-														.completaString(
-																" ",
-																4));
-									}
-		
-								} else {
-									contaTxt.append(Util
-											.completaString(
-													" ", 53));
-								}
-		
-								Collection colecaoSubCategoria = getControladorImovel()
-										.obterQuantidadeEconomiasSubCategoria(
-												imovelEmitido
-														.getId());
-		
-								String economias = "";
-		
-								for (Iterator iter = colecaoSubCategoria
-										.iterator(); iter
-										.hasNext();) {
-									Subcategoria subcategoria = (Subcategoria) iter
-											.next();
-		
-									economias = economias
-											+ Util
-													.adicionarZerosEsquedaNumero(
-															3,
-															subcategoria
-																	.getCodigo()
-																	+ "")
-											+ "/"
-											+ Util
-													.adicionarZerosEsquedaNumero(
-															3,
-															subcategoria
-																	.getQuantidadeEconomias()
-																	.toString())
-											+ " ";
-		
-								}
-		
-								contaTxt
-										.append(Util
-												.adicionarZerosEsquedaNumero(
-														7,
-														quantidadeContas
-																+ ""));
-		
-								contaTxt
-										.append(Util
-												.completaString(
-														localidade
-																.getDescricao(),
-														30));
-		
-								contaTxt
-										.append(Util
-												.completaString(
-														localidade
-																.getEnderecoFormatadoTituloAbreviado(),
-														35));
-		
-								contaTxt
-										.append(Util
-												.completaString(
-														localidade
-																.getFone(),
-														20));
-		
-								contaTxt.append(Util
-										.completaString(
-												"0800-84-0195",
-												15));
-		
-								// cria um objeto conta
-								// para
-								// calcular o
-								// valor da
-								// conta
-								Conta conta = new Conta();
-								conta
-										.setValorAgua(emitirContaHelper
-												.getValorAgua());
-								conta
-										.setValorEsgoto(emitirContaHelper
-												.getValorEsgoto());
-								conta
-										.setValorCreditos(emitirContaHelper
-												.getValorCreditos());
-								conta
-										.setDebitos(emitirContaHelper
-												.getDebitos());
-								conta
-										.setValorImposto(emitirContaHelper
-												.getValorImpostos());
-		
-								BigDecimal valorConta = conta
-										.getValorTotalContaBigDecimal();
-								emitirContaHelper.setValorConta(valorConta);
-		
-								// [SB0018 - Gerar
-								// Linhas
-								// das
-								// DemaisContas]
-								String anoMesString = ""
-										+ emitirContaHelper
-												.getAmReferencia();
-								// formata ano mes para mes ano
-		
-								String mesNumero = anoMesString
-										.substring(4, 6);
-		
-								String mesExtenso = Util
-										.retornaDescricaoMes(
-												new Integer(
-														mesNumero)
-														.intValue())
-										.toUpperCase();
-								String dataExtensa = mesExtenso
-										+ "/"
-										+ anoMesString
-												.substring(0, 4);
-		
-//								String mesAnoFormatado = anoMesString
-//										.substring(4, 6)
-//										+ anoMesString
-//												.substring(0, 4);
-//								Integer digitoVerificadorConta = new Integer(
-//										""
-//												+ emitirContaHelper
-//														.getDigitoVerificadorConta());
-//								String representacaoNumericaCodBarra = null;
-//		
-//								representacaoNumericaCodBarra = getControladorArrecadacao()
-//										.obterRepresentacaoNumericaCodigoBarra(
-//												3,
-//												valorConta,
-//												emitirContaHelper
-//														.getIdLocalidade(),
-//												emitirContaHelper
-//														.getIdImovel(),
-//												mesAnoFormatado,
-//												digitoVerificadorConta,
-//												null, null,
-//												null, null,
-//												null, null,
-//												null);
-//		
-//								contaTxt
-//										.append(Util
-//												.completaString(
-//														representacaoNumericaCodBarra,
-//														48));
-								
-								contaTxt.append(Util.completaString("",	48));
-		
-								// determinar Mensagem
-								String[] parmsPartesConta = obterMensagemConta3Partes(
-										emitirContaHelper,
-										sistemaParametro);
-		
-								String primeiraParte = parmsPartesConta[0];
-								String segundaParte = parmsPartesConta[1];
-		
-								contaTxt.append(Util
-										.completaString(
-												primeiraParte,
-												65));
-								contaTxt.append(Util
-										.completaString(
-												segundaParte,
-												65));
-		
-								contaTxt
-										.append(System
-												.getProperty("line.separator"));
-		
-								contaTxt
-										.append(Util
-												.completaString(
-														descricaoLocalidade,
-														30));
-		
-								contaTxt
-										.append(Util
-												.adicionarZerosEsquedaNumero(
-														2,
-														imovelEmitido
-																.getQuadra()
-																.getRota()
-																.getCodigo()
-																.toString()));
-		
-								contaTxt.append(".");
-		
-								contaTxt
-										.append(Util
-												.adicionarZerosEsquedaNumero(
-														4,
-														imovelEmitido
-																.getNumeroSequencialRota()
-																.toString()));
-		
-								Imovel imovel = new Imovel();
-								Localidade localidade2 = new Localidade();
-								localidade2
-										.setId(emitirContaHelper
-												.getIdLocalidade());
-								imovel
-										.setLocalidade(localidade2);
-								SetorComercial setorComercial = new SetorComercial();
-								setorComercial
-										.setCodigo(emitirContaHelper
-												.getCodigoSetorComercialConta());
-								imovel
-										.setSetorComercial(setorComercial);
-								Quadra quadra = new Quadra();
-								quadra
-										.setNumeroQuadra(emitirContaHelper
-												.getIdQuadraConta());
-								imovel.setQuadra(quadra);
-								imovel
-										.setLote(emitirContaHelper
-												.getLoteConta());
-								imovel
-										.setSubLote(emitirContaHelper
-												.getSubLoteConta());
-		
-								String inscricao = imovel
-										.getInscricaoFormatada();
-		
-								imovel = null;
-		
-								setorComercial = null;
-								quadra = null;
-		
-								contaTxt.append(Util
-										.completaString(
-												inscricao, 20));
-								contaTxt
-										.append(Util
-												.completaString(
-														" ", 12));
-		
-								String mesAnoReferencia = Util
-										.formatarAnoMesParaMesAno(emitirContaHelper
-												.getAmReferencia());
-		
-								contaTxt
-										.append(Util
-												.completaString(
-														mesAnoReferencia,
-														9));
-		
-								// data de vencimento da
-								// conta
-								String dataVencimento = Util
-										.formatarData(emitirContaHelper
-												.getDataVencimentoConta());
-		
-								contaTxt.append(Util
-										.completaString(
-												dataVencimento,
-												10));
-		
-								String valorContaString = Util
-										.formatarMoedaReal(valorConta);
-		
-								// valor da conta
-		
-								FiltroContaImpressao filtroContaImpressao = new FiltroContaImpressao();
-								filtroContaImpressao
-										.adicionarParametro(new ParametroSimples(
-												FiltroContaImpressao.ID,
-												emitirContaHelper
-														.getIdConta()
-														));
-								filtroContaImpressao
-										.adicionarCaminhoParaCarregamentoEntidade("contaTipo");
-		
-								Collection<ContaImpressao> cContaIm = getControladorUtil()
-										.pesquisar(
-												filtroContaImpressao,
-												ContaImpressao.class
-														.getName());
-		
-								ContaImpressao contaImpressao = cContaIm
-										.iterator().next();
-								Integer contaTipo = contaImpressao
-										.getContaTipo().getId();
-		
-								contaTxt
-										.append(Util
-												.completaStringComEspacoAEsquerda(
-														valorContaString,
-														15));
-		
-								if (contaTipo
-										.equals(ContaTipo.CONTA_DEBITO_AUTOMATICO)
-										|| contaTipo
-												.equals(ContaTipo.CONTA_DEBITO_AUTO_COM_CLIENTE_RESP
-														.intValue())) {
-		
-									contaTxt
-											.append(Util
-													.completaString(
-															"NÃO PODE SER PAGO EM BANCO",
-															65));
-									contaTxt
-											.append(Util
-													.completaString(
-															"DÉBITO AUTOMÁTICO EM CONTA CORRENTE",
-															65));
-		
-								} else {
-		
-									contaTxt.append(Util
-											.completaString(
-													" ", 65));
-									contaTxt.append(Util
-											.completaString(
-													" ", 65));
-								}
-		
-								// Mï¿½s/Ano referï¿½ncia da
-								// conta
-								// digito
-								// verificador
-		
-								contaTxt
-										.append(Util
-												.completaString(
-														dataExtensa,
-														14));
-		
-								contaTxt
-										.append(Util
-												.adicionarZerosEsquedaNumero(
-														8,
-														imovelEmitido
-																.getId()
-																.toString()));
-		
-								contaTxt
-										.append(Util
-												.completaString(
-														emitirContaHelper
-																.getIdLocalidade()
-																.toString(),
-														3));
-		
-								contaTxt
-										.append(Util
-												.adicionarZerosEsquedaNumero(
-														3,
-														emitirContaHelper
-																.getCodigoSetorComercialConta()
-																.toString()));
-		
-								contaTxt
-										.append(Util
-												.adicionarZerosEsquedaNumero(
-														3,
-														emitirContaHelper
-																.getIdQuadraConta()
-																.toString()));
-		
-								contaTxt
-										.append(Util
-												.adicionarZerosEsquedaNumero(
-														4,
-														emitirContaHelper
-																.getLoteConta()
-																.toString()));
-		
-								contaTxt
-										.append(Util
-												.adicionarZerosEsquedaNumero(
-														2,
-														emitirContaHelper
-																.getSubLoteConta()
-																.toString()));
-								// DIGITO ?????
-								contaTxt
-										.append(Util
-												.adicionarZerosEsquedaNumero(
-														1, "0"));
-		
-								Integer[] parmSituacao = determinarTipoLigacaoMedicao(emitirContaHelper);
-								Integer tipoLigacao = parmSituacao[0];
-								Integer tipoMedicao = parmSituacao[1];
-		
-								Object[] parmsMedicaoHistorico = obterDadosMedicaoConta(
-										emitirContaHelper,
-										tipoMedicao);
-								// Leitura Anterior
-								String leituraAnterior = "";
-								// Leitura Atual
-								String leituraAtual = "";
-								// Data Leitura Anterior
-								String dataLeituraAnterior = "";
-								// Leitura Anterior
-								String dataLeituraAtual = "";
-		
-								if (parmsMedicaoHistorico != null) {
-		
-									if (parmsMedicaoHistorico[0] != null) {
-										leituraAnterior = ""
-												+ (Integer) parmsMedicaoHistorico[0];
-									}
-		
-									if (parmsMedicaoHistorico[1] != null) {
-										leituraAtual = ""
-												+ (Integer) parmsMedicaoHistorico[1];
-									}
-		
-									if (parmsMedicaoHistorico[3] != null) {
-										dataLeituraAnterior = Util
-												.formatarData((Date) parmsMedicaoHistorico[3]);
-									}
-		
-									if (parmsMedicaoHistorico[2] != null) {
-										dataLeituraAtual = Util
-												.formatarData((Date) parmsMedicaoHistorico[2]);
-									}
-		
-								}
-								Object[] parmsConsumoHistorico = null;
-								String consumoMedio = "";
-								if (tipoLigacao != null) {
-									try {
-										parmsConsumoHistorico = repositorioMicromedicao
-												.obterDadosConsumoConta(
-														emitirContaHelper
-																.getIdImovel(),
-														emitirContaHelper
-																.getAmReferencia(),
-														tipoLigacao);
-		
-									} catch (ErroRepositorioException e) {
-										sessionContext
-												.setRollbackOnly();
-										throw new ControladorException(
-												"erro.sistema",
-												e);
-									}
-		
-									if (parmsConsumoHistorico != null) {
-										// Consumo mï¿½dio
-										if (parmsConsumoHistorico[2] != null) {
-											consumoMedio = ""
-													+ (Integer) parmsConsumoHistorico[2];
-										}
-									}
-								}
-		
-								// Data Leitura Atual
-								contaTxt
-										.append(Util
-												.completaString(
-														dataLeituraAtual,
-														5));
-								contaTxt
-										.append(Util
-												.completaString(
-														leituraAnterior,
-														6));
-		
-								// Leitura Atual
-								contaTxt
-										.append(Util
-												.completaString(
-														leituraAtual,
-														6));
-		
-								String diasConsumo = "";
-		
-								if (!dataLeituraAnterior
-										.equals("")
-										&& !dataLeituraAtual
-												.equals("")) {
-									diasConsumo = ""
-											+ Util
-													.obterQuantidadeDiasEntreDuasDatas(
-															(Date) parmsMedicaoHistorico[3],
-															(Date) parmsMedicaoHistorico[2]);
-								}
-		
-								String[] parmsConsumo = obterConsumoFaturadoConsumoMedioDiario(
-										emitirContaHelper,
-										tipoMedicao,
-										diasConsumo);
-								String consumoFaturamento = parmsConsumo[0];
-		
-								// Consumo faturado
-								contaTxt
-										.append(Util
-												.completaString(
-														consumoFaturamento,
-														5));
-								contaTxt
-										.append(Util
-												.completaString(
-														consumoMedio,
-														5));
-		
-								contaTxt
-										.append(Util
-												.completaString(
-														this
-																.obterConsumoAnterior(
-																		emitirContaHelper
-																				.getIdImovel(),
-																		emitirContaHelper
-																				.getAmReferencia(),
-																		6,
-																		tipoLigacao,
-																		tipoMedicao)
-																.toString(),
-														12));
-								contaTxt
-										.append(Util
-												.completaString(
-														this
-																.obterConsumoAnterior(
-																		emitirContaHelper
-																				.getIdImovel(),
-																		emitirContaHelper
-																				.getAmReferencia(),
-																		5,
-																		tipoLigacao,
-																		tipoMedicao)
-																.toString(),
-														12));
-								contaTxt
-										.append(Util
-												.completaString(
-														this
-																.obterConsumoAnterior(
-																		emitirContaHelper
-																				.getIdImovel(),
-																		emitirContaHelper
-																				.getAmReferencia(),
-																		4,
-																		tipoLigacao,
-																		tipoMedicao)
-																.toString(),
-														12));
-								contaTxt
-										.append(Util
-												.completaString(
-														this
-																.obterConsumoAnterior(
-																		emitirContaHelper
-																				.getIdImovel(),
-																		emitirContaHelper
-																				.getAmReferencia(),
-																		3,
-																		tipoLigacao,
-																		tipoMedicao)
-																.toString(),
-														12));
-								contaTxt
-										.append(Util
-												.completaString(
-														this
-																.obterConsumoAnterior(
-																		emitirContaHelper
-																				.getIdImovel(),
-																		emitirContaHelper
-																				.getAmReferencia(),
-																		2,
-																		tipoLigacao,
-																		tipoMedicao)
-																.toString(),
-														12));
-								contaTxt
-										.append(Util
-												.completaString(
-														this
-																.obterConsumoAnterior(
-																		emitirContaHelper
-																				.getIdImovel(),
-																		emitirContaHelper
-																				.getAmReferencia(),
-																		1,
-																		tipoLigacao,
-																		tipoMedicao)
-																.toString(),
-														12));
-		
-								contaTxt.append(Util
-										.completaString(
-												economias, 24));
-		
-								ObterDebitoImovelOuClienteHelper obterDebitoImovelOuClienteHelper = this
-										.obterDebitoImovelOuClienteHelper(
-												emitirContaHelper,
-												sistemaParametro);
-		
-								if (obterDebitoImovelOuClienteHelper != null
-										&& ((obterDebitoImovelOuClienteHelper
-												.getColecaoGuiasPagamentoValores() != null && !obterDebitoImovelOuClienteHelper
-												.getColecaoGuiasPagamentoValores()
-												.isEmpty()) || (obterDebitoImovelOuClienteHelper
-												.getColecaoContasValores() != null && !obterDebitoImovelOuClienteHelper
-												.getColecaoContasValores()
-												.isEmpty()))) {
-									Collection colecaoContasValores = obterDebitoImovelOuClienteHelper
-											.getColecaoContasValores();
-		
-									if (colecaoContasValores != null
-											&& !colecaoContasValores
+			
+									if (colecaoQualidadeAgua == null
+											|| colecaoQualidadeAgua
 													.isEmpty()) {
-										if (colecaoContasValores
-												.size() > 5) {
-											contaTxt
-													.append(Util
-															.completaString(
-																	"HÁ MAIS DE CINCO CONTAS EM ATRASO",
-																	40));
+										filtroQualidadeAgua
+												.limparListaParametros();
+										colecaoQualidadeAgua = null;
+										filtroQualidadeAgua
+												.adicionarParametro(new ParametroSimples(
+														FiltroQualidadeAgua.LOCALIDADE_ID,
+														localidade
+																.getId()));
+										filtroQualidadeAgua
+												.adicionarParametro(new ParametroSimples(
+														FiltroQualidadeAgua.ANO_MES_REFERENCIA,
+														emitirContaHelper
+																.getAmReferencia()));
+										filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
+										
+										colecaoQualidadeAgua = getControladorUtil()
+												.pesquisar(
+														filtroQualidadeAgua,
+														QualidadeAgua.class
+																.getName());
+									}
+			
+									if (colecaoQualidadeAgua != null
+											&& !colecaoQualidadeAgua
+													.isEmpty()) {
+										QualidadeAgua qualidadeAgua = (QualidadeAgua) colecaoQualidadeAgua
+												.iterator().next();
+			
+										// fonte
+										if (qualidadeAgua.getFonteCaptacao() != null) {
+											contaTxt.append(
+												Util.completaString(qualidadeAgua.getFonteCaptacao().getDescricao(),30));
 										} else {
-											String contasAtraso = "";
-											for (Iterator iter = colecaoContasValores
-													.iterator(); iter
-													.hasNext();) {
-												ContaValoresHelper contasValores = (ContaValoresHelper) iter
-														.next();
-												contasAtraso = contasAtraso
-														+ contasValores
-																.getConta()
-																.getFormatarAnoMesParaMesAno()
-														+ " ";
-											}
+											contaTxt.append(Util.completaString(" ",30));
+										}
+										
+										// cloro
+										if (qualidadeAgua
+												.getNumeroCloroResidual() != null
+												&& !qualidadeAgua
+														.getNumeroCloroResidual()
+														.equals(0)) {
 											contaTxt
 													.append(Util
 															.completaString(
-																	contasAtraso,
-																	40));
+																	qualidadeAgua
+																			.getNumeroCloroResidual()
+																			.toString(),
+																	3));
+										} else {
+											contaTxt
+													.append(Util
+															.completaString(
+																	" ",
+																	3));
 										}
+			
+										// coliformes
+										if (qualidadeAgua
+												.getNumeroIndiceColiformesTotais() != null
+												&& !qualidadeAgua
+														.getNumeroIndiceColiformesTotais()
+														.equals(0)) {
+											contaTxt
+													.append(Util
+															.completaString(
+																	qualidadeAgua
+																			.getNumeroIndiceColiformesTotais()
+																			.toString(),
+																	8));
+										} else {
+											contaTxt
+													.append(Util
+															.completaString(
+																	" ",
+																	8));
+										}
+			
+										// nitrato
+										if (qualidadeAgua
+												.getNumeroNitrato() != null
+												&& !qualidadeAgua
+														.getNumeroNitrato()
+														.equals(0)) {
+											contaTxt
+													.append(Util
+															.completaString(
+																	qualidadeAgua
+																			.getNumeroNitrato()
+																			.toString(),
+																	4));
+										} else {
+											contaTxt
+													.append(Util
+															.completaString(
+																	" ",
+																	4));
+										}
+			
+										// //ph
+										if (qualidadeAgua
+												.getNumeroIndicePh() != null
+												&& !qualidadeAgua
+														.getNumeroIndicePh()
+														.equals(0)) {
+											contaTxt
+													.append(Util
+															.completaString(
+																	qualidadeAgua
+																			.getNumeroIndicePh()
+																			.toString(),
+																	4));
+										} else {
+											contaTxt
+													.append(Util
+															.completaString(
+																	" ",
+																	4));
+										}
+			
+										// //turbidez
+										if (qualidadeAgua
+												.getNumeroIndiceTurbidez() != null
+												&& !qualidadeAgua
+														.getNumeroIndiceTurbidez()
+														.equals(0)) {
+											contaTxt
+													.append(Util
+															.completaString(
+																	qualidadeAgua
+																			.getNumeroIndiceTurbidez()
+																			.toString(),
+																	4));
+										} else {
+											contaTxt
+													.append(Util
+															.completaString(
+																	" ",
+																	4));
+										}
+			
 									} else {
+										contaTxt.append(Util
+												.completaString(
+														" ", 53));
+									}
+			
+									Collection colecaoSubCategoria = getControladorImovel()
+											.obterQuantidadeEconomiasSubCategoria(
+													imovelEmitido
+															.getId());
+			
+									String economias = "";
+			
+									for (Iterator iter = colecaoSubCategoria
+											.iterator(); iter
+											.hasNext();) {
+										Subcategoria subcategoria = (Subcategoria) iter
+												.next();
+			
+										economias = economias
+												+ Util
+														.adicionarZerosEsquedaNumero(
+																3,
+																subcategoria
+																		.getCodigo()
+																		+ "")
+												+ "/"
+												+ Util
+														.adicionarZerosEsquedaNumero(
+																3,
+																subcategoria
+																		.getQuantidadeEconomias()
+																		.toString())
+												+ " ";
+			
+									}
+			
+									contaTxt
+											.append(Util
+													.adicionarZerosEsquedaNumero(
+															7,
+															quantidadeContas
+																	+ ""));
+			
+									contaTxt
+											.append(Util
+													.completaString(
+															localidade
+																	.getDescricao(),
+															30));
+			
+									contaTxt
+											.append(Util
+													.completaString(
+															localidade
+																	.getEnderecoFormatadoTituloAbreviado(),
+															35));
+			
+									contaTxt
+											.append(Util
+													.completaString(
+															localidade
+																	.getFone(),
+															20));
+			
+									contaTxt.append(Util
+											.completaString(
+													"0800-84-0195",
+													15));
+			
+									// cria um objeto conta
+									// para
+									// calcular o
+									// valor da
+									// conta
+									Conta conta = new Conta();
+									conta
+											.setValorAgua(emitirContaHelper
+													.getValorAgua());
+									conta
+											.setValorEsgoto(emitirContaHelper
+													.getValorEsgoto());
+									conta
+											.setValorCreditos(emitirContaHelper
+													.getValorCreditos());
+									conta
+											.setDebitos(emitirContaHelper
+													.getDebitos());
+									conta
+											.setValorImposto(emitirContaHelper
+													.getValorImpostos());
+			
+									BigDecimal valorConta = conta
+											.getValorTotalContaBigDecimal();
+									emitirContaHelper.setValorConta(valorConta);
+			
+									// [SB0018 - Gerar
+									// Linhas
+									// das
+									// DemaisContas]
+									String anoMesString = ""
+											+ emitirContaHelper
+													.getAmReferencia();
+									// formata ano mes para mes ano
+			
+									String mesNumero = anoMesString
+											.substring(4, 6);
+			
+									String mesExtenso = Util
+											.retornaDescricaoMes(
+													new Integer(
+															mesNumero)
+															.intValue())
+											.toUpperCase();
+									String dataExtensa = mesExtenso
+											+ "/"
+											+ anoMesString
+													.substring(0, 4);
+			
+	//								String mesAnoFormatado = anoMesString
+	//										.substring(4, 6)
+	//										+ anoMesString
+	//												.substring(0, 4);
+	//								Integer digitoVerificadorConta = new Integer(
+	//										""
+	//												+ emitirContaHelper
+	//														.getDigitoVerificadorConta());
+	//								String representacaoNumericaCodBarra = null;
+	//		
+	//								representacaoNumericaCodBarra = getControladorArrecadacao()
+	//										.obterRepresentacaoNumericaCodigoBarra(
+	//												3,
+	//												valorConta,
+	//												emitirContaHelper
+	//														.getIdLocalidade(),
+	//												emitirContaHelper
+	//														.getIdImovel(),
+	//												mesAnoFormatado,
+	//												digitoVerificadorConta,
+	//												null, null,
+	//												null, null,
+	//												null, null,
+	//												null);
+	//		
+	//								contaTxt
+	//										.append(Util
+	//												.completaString(
+	//														representacaoNumericaCodBarra,
+	//														48));
+									
+									contaTxt.append(Util.completaString("",	48));
+			
+									// determinar Mensagem
+									String[] parmsPartesConta = obterMensagemConta3Partes(
+											emitirContaHelper,
+											sistemaParametro);
+			
+									String primeiraParte = parmsPartesConta[0];
+									String segundaParte = parmsPartesConta[1];
+			
+									contaTxt.append(Util
+											.completaString(
+													primeiraParte,
+													65));
+									contaTxt.append(Util
+											.completaString(
+													segundaParte,
+													65));
+			
+									contaTxt
+											.append(System
+													.getProperty("line.separator"));
+			
+									contaTxt
+											.append(Util
+													.completaString(
+															descricaoLocalidade,
+															30));
+			
+									contaTxt
+											.append(Util
+													.adicionarZerosEsquedaNumero(
+															2,
+															imovelEmitido
+																	.getQuadra()
+																	.getRota()
+																	.getCodigo()
+																	.toString()));
+			
+									contaTxt.append(".");
+			
+									contaTxt
+											.append(Util
+													.adicionarZerosEsquedaNumero(
+															4,
+															imovelEmitido
+																	.getNumeroSequencialRota()
+																	.toString()));
+			
+									Imovel imovel = new Imovel();
+									Localidade localidade2 = new Localidade();
+									localidade2
+											.setId(emitirContaHelper
+													.getIdLocalidade());
+									imovel
+											.setLocalidade(localidade2);
+									SetorComercial setorComercial = new SetorComercial();
+									setorComercial
+											.setCodigo(emitirContaHelper
+													.getCodigoSetorComercialConta());
+									imovel
+											.setSetorComercial(setorComercial);
+									Quadra quadra = new Quadra();
+									quadra
+											.setNumeroQuadra(emitirContaHelper
+													.getIdQuadraConta());
+									imovel.setQuadra(quadra);
+									imovel
+											.setLote(emitirContaHelper
+													.getLoteConta());
+									imovel
+											.setSubLote(emitirContaHelper
+													.getSubLoteConta());
+			
+									String inscricao = imovel
+											.getInscricaoFormatada();
+			
+									imovel = null;
+			
+									setorComercial = null;
+									quadra = null;
+			
+									contaTxt.append(Util
+											.completaString(
+													inscricao, 20));
+									contaTxt
+											.append(Util
+													.completaString(
+															" ", 12));
+			
+									String mesAnoReferencia = Util
+											.formatarAnoMesParaMesAno(emitirContaHelper
+													.getAmReferencia());
+			
+									contaTxt
+											.append(Util
+													.completaString(
+															mesAnoReferencia,
+															9));
+			
+									// data de vencimento da
+									// conta
+									String dataVencimento = Util
+											.formatarData(emitirContaHelper
+													.getDataVencimentoConta());
+			
+									contaTxt.append(Util
+											.completaString(
+													dataVencimento,
+													10));
+			
+									String valorContaString = Util
+											.formatarMoedaReal(valorConta);
+			
+									// valor da conta
+			
+									FiltroContaImpressao filtroContaImpressao = new FiltroContaImpressao();
+									filtroContaImpressao
+											.adicionarParametro(new ParametroSimples(
+													FiltroContaImpressao.ID,
+													emitirContaHelper
+															.getIdConta()
+															));
+									filtroContaImpressao
+											.adicionarCaminhoParaCarregamentoEntidade("contaTipo");
+			
+									Collection<ContaImpressao> cContaIm = getControladorUtil()
+											.pesquisar(
+													filtroContaImpressao,
+													ContaImpressao.class
+															.getName());
+			
+									ContaImpressao contaImpressao = cContaIm
+											.iterator().next();
+									Integer contaTipo = contaImpressao
+											.getContaTipo().getId();
+			
+									contaTxt
+											.append(Util
+													.completaStringComEspacoAEsquerda(
+															valorContaString,
+															15));
+			
+									if (contaTipo
+											.equals(ContaTipo.CONTA_DEBITO_AUTOMATICO)
+											|| contaTipo
+													.equals(ContaTipo.CONTA_DEBITO_AUTO_COM_CLIENTE_RESP
+															.intValue())) {
+			
 										contaTxt
 												.append(Util
 														.completaString(
-																"",
-																40));
-										/*contaTxt
+																"NÃO PODE SER PAGO EM BANCO",
+																65));
+										contaTxt
+												.append(Util
+														.completaString(
+																"DÉBITO AUTOMÁTICO EM CONTA CORRENTE",
+																65));
+			
+									} else {
+			
+										contaTxt.append(Util
+												.completaString(
+														" ", 65));
+										contaTxt.append(Util
+												.completaString(
+														" ", 65));
+									}
+			
+									// Mï¿½s/Ano referï¿½ncia da
+									// conta
+									// digito
+									// verificador
+			
+									contaTxt
+											.append(Util
+													.completaString(
+															dataExtensa,
+															14));
+			
+									contaTxt
+											.append(Util
+													.adicionarZerosEsquedaNumero(
+															8,
+															imovelEmitido
+																	.getId()
+																	.toString()));
+			
+									contaTxt
+											.append(Util
+													.completaString(
+															emitirContaHelper
+																	.getIdLocalidade()
+																	.toString(),
+															3));
+			
+									contaTxt
+											.append(Util
+													.adicionarZerosEsquedaNumero(
+															3,
+															emitirContaHelper
+																	.getCodigoSetorComercialConta()
+																	.toString()));
+			
+									contaTxt
+											.append(Util
+													.adicionarZerosEsquedaNumero(
+															3,
+															emitirContaHelper
+																	.getIdQuadraConta()
+																	.toString()));
+			
+									contaTxt
+											.append(Util
+													.adicionarZerosEsquedaNumero(
+															4,
+															emitirContaHelper
+																	.getLoteConta()
+																	.toString()));
+			
+									contaTxt
+											.append(Util
+													.adicionarZerosEsquedaNumero(
+															2,
+															emitirContaHelper
+																	.getSubLoteConta()
+																	.toString()));
+									// DIGITO ?????
+									contaTxt
+											.append(Util
+													.adicionarZerosEsquedaNumero(
+															1, "0"));
+			
+									Integer[] parmSituacao = determinarTipoLigacaoMedicao(emitirContaHelper);
+									Integer tipoLigacao = parmSituacao[0];
+									Integer tipoMedicao = parmSituacao[1];
+			
+									Object[] parmsMedicaoHistorico = obterDadosMedicaoConta(
+											emitirContaHelper,
+											tipoMedicao);
+									// Leitura Anterior
+									String leituraAnterior = "";
+									// Leitura Atual
+									String leituraAtual = "";
+									// Data Leitura Anterior
+									String dataLeituraAnterior = "";
+									// Leitura Anterior
+									String dataLeituraAtual = "";
+			
+									if (parmsMedicaoHistorico != null) {
+			
+										if (parmsMedicaoHistorico[0] != null) {
+											leituraAnterior = ""
+													+ (Integer) parmsMedicaoHistorico[0];
+										}
+			
+										if (parmsMedicaoHistorico[1] != null) {
+											leituraAtual = ""
+													+ (Integer) parmsMedicaoHistorico[1];
+										}
+			
+										if (parmsMedicaoHistorico[3] != null) {
+											dataLeituraAnterior = Util
+													.formatarData((Date) parmsMedicaoHistorico[3]);
+										}
+			
+										if (parmsMedicaoHistorico[2] != null) {
+											dataLeituraAtual = Util
+													.formatarData((Date) parmsMedicaoHistorico[2]);
+										}
+			
+									}
+									Object[] parmsConsumoHistorico = null;
+									String consumoMedio = "";
+									if (tipoLigacao != null) {
+										try {
+											parmsConsumoHistorico = repositorioMicromedicao
+													.obterDadosConsumoConta(
+															emitirContaHelper
+																	.getIdImovel(),
+															emitirContaHelper
+																	.getAmReferencia(),
+															tipoLigacao);
+			
+										} catch (ErroRepositorioException e) {
+											sessionContext
+													.setRollbackOnly();
+											throw new ControladorException(
+													"erro.sistema",
+													e);
+										}
+			
+										if (parmsConsumoHistorico != null) {
+											// Consumo mï¿½dio
+											if (parmsConsumoHistorico[2] != null) {
+												consumoMedio = ""
+														+ (Integer) parmsConsumoHistorico[2];
+											}
+										}
+									}
+			
+									// Data Leitura Atual
+									contaTxt
+											.append(Util
+													.completaString(
+															dataLeituraAtual,
+															5));
+									contaTxt
+											.append(Util
+													.completaString(
+															leituraAnterior,
+															6));
+			
+									// Leitura Atual
+									contaTxt
+											.append(Util
+													.completaString(
+															leituraAtual,
+															6));
+			
+									String diasConsumo = "";
+			
+									if (!dataLeituraAnterior
+											.equals("")
+											&& !dataLeituraAtual
+													.equals("")) {
+										diasConsumo = ""
+												+ Util
+														.obterQuantidadeDiasEntreDuasDatas(
+																(Date) parmsMedicaoHistorico[3],
+																(Date) parmsMedicaoHistorico[2]);
+									}
+			
+									String[] parmsConsumo = obterConsumoFaturadoConsumoMedioDiario(
+											emitirContaHelper,
+											tipoMedicao,
+											diasConsumo);
+									String consumoFaturamento = parmsConsumo[0];
+			
+									// Consumo faturado
+									contaTxt
+											.append(Util
+													.completaString(
+															consumoFaturamento,
+															5));
+									contaTxt
+											.append(Util
+													.completaString(
+															consumoMedio,
+															5));
+			
+									contaTxt
+											.append(Util
+													.completaString(
+															this
+																	.obterConsumoAnterior(
+																			emitirContaHelper
+																					.getIdImovel(),
+																			emitirContaHelper
+																					.getAmReferencia(),
+																			6,
+																			tipoLigacao,
+																			tipoMedicao)
+																	.toString(),
+															12));
+									contaTxt
+											.append(Util
+													.completaString(
+															this
+																	.obterConsumoAnterior(
+																			emitirContaHelper
+																					.getIdImovel(),
+																			emitirContaHelper
+																					.getAmReferencia(),
+																			5,
+																			tipoLigacao,
+																			tipoMedicao)
+																	.toString(),
+															12));
+									contaTxt
+											.append(Util
+													.completaString(
+															this
+																	.obterConsumoAnterior(
+																			emitirContaHelper
+																					.getIdImovel(),
+																			emitirContaHelper
+																					.getAmReferencia(),
+																			4,
+																			tipoLigacao,
+																			tipoMedicao)
+																	.toString(),
+															12));
+									contaTxt
+											.append(Util
+													.completaString(
+															this
+																	.obterConsumoAnterior(
+																			emitirContaHelper
+																					.getIdImovel(),
+																			emitirContaHelper
+																					.getAmReferencia(),
+																			3,
+																			tipoLigacao,
+																			tipoMedicao)
+																	.toString(),
+															12));
+									contaTxt
+											.append(Util
+													.completaString(
+															this
+																	.obterConsumoAnterior(
+																			emitirContaHelper
+																					.getIdImovel(),
+																			emitirContaHelper
+																					.getAmReferencia(),
+																			2,
+																			tipoLigacao,
+																			tipoMedicao)
+																	.toString(),
+															12));
+									contaTxt
+											.append(Util
+													.completaString(
+															this
+																	.obterConsumoAnterior(
+																			emitirContaHelper
+																					.getIdImovel(),
+																			emitirContaHelper
+																					.getAmReferencia(),
+																			1,
+																			tipoLigacao,
+																			tipoMedicao)
+																	.toString(),
+															12));
+			
+									contaTxt.append(Util
+											.completaString(
+													economias, 24));
+			
+									ObterDebitoImovelOuClienteHelper obterDebitoImovelOuClienteHelper = this
+											.obterDebitoImovelOuClienteHelper(
+													emitirContaHelper,
+													sistemaParametro);
+			
+									if (obterDebitoImovelOuClienteHelper != null
+											&& ((obterDebitoImovelOuClienteHelper
+													.getColecaoGuiasPagamentoValores() != null && !obterDebitoImovelOuClienteHelper
+													.getColecaoGuiasPagamentoValores()
+													.isEmpty()) || (obterDebitoImovelOuClienteHelper
+													.getColecaoContasValores() != null && !obterDebitoImovelOuClienteHelper
+													.getColecaoContasValores()
+													.isEmpty()))) {
+										Collection colecaoContasValores = obterDebitoImovelOuClienteHelper
+												.getColecaoContasValores();
+			
+										if (colecaoContasValores != null
+												&& !colecaoContasValores
+														.isEmpty()) {
+											if (colecaoContasValores
+													.size() > 5) {
+												contaTxt
+														.append(Util
+																.completaString(
+																		"HÁ MAIS DE CINCO CONTAS EM ATRASO",
+																		40));
+											} else {
+												String contasAtraso = "";
+												for (Iterator iter = colecaoContasValores
+														.iterator(); iter
+														.hasNext();) {
+													ContaValoresHelper contasValores = (ContaValoresHelper) iter
+															.next();
+													contasAtraso = contasAtraso
+															+ contasValores
+																	.getConta()
+																	.getFormatarAnoMesParaMesAno()
+															+ " ";
+												}
+												contaTxt
+														.append(Util
+																.completaString(
+																		contasAtraso,
+																		40));
+											}
+										} else {
+											contaTxt
+													.append(Util
+															.completaString(
+																	"",
+																	40));
+											/*contaTxt
+											.append(Util
+													.completaString(
+															"PARABï¿½NS... Nï¿½O CONSTA Dï¿½BITOS!",
+															40));*/
+										}
+									} else {
+										contaTxt
 										.append(Util
 												.completaString(
-														"PARABï¿½NS... Nï¿½O CONSTA Dï¿½BITOS!",
-														40));*/
+														"",
+														40));
 									}
-								} else {
-									contaTxt
-									.append(Util
-											.completaString(
-													"",
-													40));
-								}
-		
-								if (imovelEmitido
-										.getLigacaoAgua() != null) {
-		
+			
 									if (imovelEmitido
-											.getLigacaoAgua()
-											.getHidrometroInstalacaoHistorico() != null) {
-		
+											.getLigacaoAgua() != null) {
+			
 										if (imovelEmitido
 												.getLigacaoAgua()
-												.getHidrometroInstalacaoHistorico()
-												.getHidrometro() != null) {
-		
-											contaTxt
-													.append(Util
-															.completaString(
-																	imovelEmitido
-																			.getLigacaoAgua()
-																			.getHidrometroInstalacaoHistorico()
-																			.getHidrometro()
-																			.getNumero(),
-																	10));
+												.getHidrometroInstalacaoHistorico() != null) {
+			
+											if (imovelEmitido
+													.getLigacaoAgua()
+													.getHidrometroInstalacaoHistorico()
+													.getHidrometro() != null) {
+			
+												contaTxt
+														.append(Util
+																.completaString(
+																		imovelEmitido
+																				.getLigacaoAgua()
+																				.getHidrometroInstalacaoHistorico()
+																				.getHidrometro()
+																				.getNumero(),
+																		10));
+											} else {
+												contaTxt
+														.append(Util
+																.completaString(
+																		" ",
+																		10));
+											}
+			
 										} else {
 											contaTxt
 													.append(Util
@@ -10806,285 +10904,239 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 																	" ",
 																	10));
 										}
-		
+			
 									} else {
-										contaTxt
-												.append(Util
-														.completaString(
-																" ",
-																10));
+										contaTxt.append(Util
+												.completaString(
+														" ", 10));
 									}
-		
-								} else {
-									contaTxt.append(Util
-											.completaString(
-													" ", 10));
-								}
-		
-								Collection colecaoContaCategoriaConsumoFaixa = null;
-								try {
-									colecaoContaCategoriaConsumoFaixa = repositorioFaturamento
-											.pesquisarContaCategoriaConsumoFaixa(emitirContaHelper
-													.getIdConta());
-		
-								} catch (ErroRepositorioException e) {
-									throw new ControladorException(
-											"erro.sistema", e);
-								}
-		
-								Integer consumoExcesso = 0;
-								Integer consumoMinimo = 0;
-								BigDecimal valorExcesso = new BigDecimal(
-										"0.0");
-								BigDecimal valorMinimo = new BigDecimal(
-										"0.0");
-		
-								if (colecaoContaCategoriaConsumoFaixa == null
-										|| colecaoContaCategoriaConsumoFaixa
-												.isEmpty()) {
-		
-									consumoMinimo = emitirContaHelper
-											.getConsumoAgua();
-									valorMinimo = emitirContaHelper
-											.getValorAgua();
-								} else {
-									if (!emitirContaHelper
-											.getConsumoAgua()
-											.equals(0)) {
-										for (Iterator iter = colecaoContaCategoriaConsumoFaixa
-												.iterator(); iter
-												.hasNext();) {
-		
-											ContaCategoriaConsumoFaixa contaCategoriaConsumoFaixa = (ContaCategoriaConsumoFaixa) iter
-													.next();
-											if (contaCategoriaConsumoFaixa
-													.getConsumoAgua() != null) {
-												for (Iterator iteration = colecaoSubCategoria
-														.iterator(); iteration
-														.hasNext();) {
-													Subcategoria subCategoriaEmitir = (Subcategoria) iteration
-															.next();
-		
-													if (contaCategoriaConsumoFaixa
-															.getSubcategoria()
-															.getId()
-															.equals(
-																	subCategoriaEmitir
-																			.getId())) {
-														consumoExcesso = consumoExcesso
-																+ contaCategoriaConsumoFaixa
-																		.getConsumoAgua()
-																* subCategoriaEmitir
-																		.getQuantidadeEconomias();
-		
-														valorExcesso = valorExcesso
-																.add(contaCategoriaConsumoFaixa
-																		.getValorAgua()
-																		.multiply(
-																				new BigDecimal(
-																						subCategoriaEmitir
-																								.getQuantidadeEconomias())));
+			
+									Collection colecaoContaCategoriaConsumoFaixa = null;
+									try {
+										colecaoContaCategoriaConsumoFaixa = repositorioFaturamento
+												.pesquisarContaCategoriaConsumoFaixa(emitirContaHelper
+														.getIdConta());
+			
+									} catch (ErroRepositorioException e) {
+										throw new ControladorException(
+												"erro.sistema", e);
+									}
+			
+									Integer consumoExcesso = 0;
+									Integer consumoMinimo = 0;
+									BigDecimal valorExcesso = new BigDecimal(
+											"0.0");
+									BigDecimal valorMinimo = new BigDecimal(
+											"0.0");
+			
+									if (colecaoContaCategoriaConsumoFaixa == null
+											|| colecaoContaCategoriaConsumoFaixa
+													.isEmpty()) {
+			
+										consumoMinimo = emitirContaHelper
+												.getConsumoAgua();
+										valorMinimo = emitirContaHelper
+												.getValorAgua();
+									} else {
+										if (!emitirContaHelper
+												.getConsumoAgua()
+												.equals(0)) {
+											for (Iterator iter = colecaoContaCategoriaConsumoFaixa
+													.iterator(); iter
+													.hasNext();) {
+			
+												ContaCategoriaConsumoFaixa contaCategoriaConsumoFaixa = (ContaCategoriaConsumoFaixa) iter
+														.next();
+												if (contaCategoriaConsumoFaixa
+														.getConsumoAgua() != null) {
+													for (Iterator iteration = colecaoSubCategoria
+															.iterator(); iteration
+															.hasNext();) {
+														Subcategoria subCategoriaEmitir = (Subcategoria) iteration
+																.next();
+			
+														if (contaCategoriaConsumoFaixa
+																.getSubcategoria()
+																.getId()
+																.equals(
+																		subCategoriaEmitir
+																				.getId())) {
+															consumoExcesso = consumoExcesso
+																	+ contaCategoriaConsumoFaixa
+																			.getConsumoAgua()
+																	* subCategoriaEmitir
+																			.getQuantidadeEconomias();
+			
+															valorExcesso = valorExcesso
+																	.add(contaCategoriaConsumoFaixa
+																			.getValorAgua()
+																			.multiply(
+																					new BigDecimal(
+																							subCategoriaEmitir
+																									.getQuantidadeEconomias())));
+														}
+			
 													}
-		
 												}
 											}
 										}
+			
+										valorMinimo = emitirContaHelper
+												.getValorAgua()
+												.subtract(
+														valorExcesso);
+										consumoMinimo = emitirContaHelper
+												.getConsumoAgua()
+												- consumoExcesso;
+			
 									}
-		
-									valorMinimo = emitirContaHelper
-											.getValorAgua()
-											.subtract(
-													valorExcesso);
-									consumoMinimo = emitirContaHelper
-											.getConsumoAgua()
-											- consumoExcesso;
-		
-								}
-		
-								int i = 0;
-								BigDecimal valorNullo = new BigDecimal(
-										"0.00");
-								Integer consumoNullo = new Integer(
-										0);
-		
-								if (!valorMinimo
-										.equals(valorNullo)) {
-									if (!consumoMinimo
+			
+									int i = 0;
+									BigDecimal valorNullo = new BigDecimal(
+											"0.00");
+									Integer consumoNullo = new Integer(
+											0);
+			
+									if (!valorMinimo
+											.equals(valorNullo)) {
+										if (!consumoMinimo
+												.equals(consumoNullo)) {
+											contaTxt
+													.append("TARIFA MíNIMA ÁGUA            "); // 30
+											contaTxt
+													.append(Util
+															.completaString(
+																	consumoMinimo
+																			+ " M3",
+																	24));
+											contaTxt
+													.append(Util
+															.completaStringComEspacoAEsquerda(
+																	Util
+																			.formatarMoedaReal(valorMinimo),
+																	12));
+										} else {
+											contaTxt
+													.append("TARIFA MÍNIMA ÁGUA            "); // 30
+											contaTxt
+													.append(Util
+															.completaString(
+																	consumoMinimo
+																			+ "   ",
+																	24));
+											contaTxt
+													.append(Util
+															.completaStringComEspacoAEsquerda(
+																	Util
+																			.formatarMoedaReal(valorMinimo),
+																	12));
+										}
+										i++;
+									}
+			
+									if (!consumoExcesso
 											.equals(consumoNullo)) {
 										contaTxt
-												.append("TARIFA MíNIMA ÁGUA            "); // 30
+												.append("TARIFA EXCESSO ÁGUA           "); // 30
 										contaTxt
 												.append(Util
 														.completaString(
-																consumoMinimo
+																consumoExcesso
 																		+ " M3",
 																24));
 										contaTxt
 												.append(Util
 														.completaStringComEspacoAEsquerda(
 																Util
-																		.formatarMoedaReal(valorMinimo),
+																		.formatarMoedaReal(valorExcesso),
 																12));
-									} else {
+										i++;
+									}
+			
+									if (!emitirContaHelper
+											.getPercentualEsgotoConta()
+											.equals(valorNullo)) {
 										contaTxt
-												.append("TARIFA MÍNIMA ÁGUA            "); // 30
+												.append("TARIFA ESGOTO                 "); // 30
 										contaTxt
 												.append(Util
 														.completaString(
-																consumoMinimo
-																		+ "   ",
+																emitirContaHelper
+																		.getPercentualEsgotoConta()
+																		+ "%",
 																24));
 										contaTxt
 												.append(Util
 														.completaStringComEspacoAEsquerda(
 																Util
-																		.formatarMoedaReal(valorMinimo),
+																		.formatarMoedaReal(emitirContaHelper
+																				.getValorEsgoto()),
 																12));
+										i++;
 									}
-									i++;
-								}
-		
-								if (!consumoExcesso
-										.equals(consumoNullo)) {
-									contaTxt
-											.append("TARIFA EXCESSO ÁGUA           "); // 30
-									contaTxt
-											.append(Util
-													.completaString(
-															consumoExcesso
-																	+ " M3",
-															24));
-									contaTxt
-											.append(Util
-													.completaStringComEspacoAEsquerda(
-															Util
-																	.formatarMoedaReal(valorExcesso),
-															12));
-									i++;
-								}
-		
-								if (!emitirContaHelper
-										.getPercentualEsgotoConta()
-										.equals(valorNullo)) {
-									contaTxt
-											.append("TARIFA ESGOTO                 "); // 30
-									contaTxt
-											.append(Util
-													.completaString(
-															emitirContaHelper
-																	.getPercentualEsgotoConta()
-																	+ "%",
-															24));
-									contaTxt
-											.append(Util
-													.completaStringComEspacoAEsquerda(
-															Util
-																	.formatarMoedaReal(emitirContaHelper
-																			.getValorEsgoto()),
-															12));
-									i++;
-								}
-		
-								if (!emitirContaHelper
-										.getValorCreditos()
-										.equals(valorNullo)) {
-									contaTxt
-										.append("CRÉDITOS E DESCONTOS          "); // 30
-									contaTxt.append(Util
-											.completaString(
-													" ", 24));
-									contaTxt
-											.append(Util
-													.completaStringComEspacoAEsquerda(
-															Util
-																	.formatarMoedaReal(emitirContaHelper
-																			.getValorCreditos()),
-															12));
-									i++;
-								}
-		
-								if (!emitirContaHelper
-										.getValorImpostos()
-										.equals(valorNullo)) {
-									contaTxt
-											.append("IMPOSTOS DEDUZIDOS            "); // 30
-									contaTxt.append(Util
-											.completaString(
-													" ", 24));
-									contaTxt
-											.append(Util
-													.completaStringComEspacoAEsquerda(
-															Util
-																	.formatarMoedaReal(emitirContaHelper
-																			.getValorImpostos()),
-															12));
-									i++;
-								}
-		
-								// setando os servicos
-		
-								Conta contaId = new Conta();
-								contaId.setId(emitirContaHelper
-										.getIdConta());
-		
-								Collection<DebitoCobradoAgrupadoHelper> cDebitoCobrado = this
-										.obterDebitosCobradosContaCAERN(contaId);
-		
-								int quantidadeLinhasSobrando = 10 - i;
-		
-								if (cDebitoCobrado != null
-										&& !cDebitoCobrado
-												.isEmpty()) {
-		
-									int quantidadeDebitos = cDebitoCobrado
-											.size();
-		
-									if (quantidadeLinhasSobrando >= quantidadeDebitos) {
-		
-										for (Iterator iter = cDebitoCobrado
-												.iterator(); iter
-												.hasNext();) {
-											DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter
-													.next();
-		
-											contaTxt
-													.append(Util
-															.completaString(
-																	debitoCobrado
-																			.getDescricaoDebitoTipo(),
-																	30)); // 30
-											contaTxt
-													.append(Util
-															.completaString(
-																	debitoCobrado
-																			.getNumeroPrestacaoDebito()
-																			+ "/"
-																			+ debitoCobrado
-																					.getNumeroPrestacao(),
-																	24));
-											contaTxt
-													.append(Util
-															.completaStringComEspacoAEsquerda(
-																	Util
-																			.formatarMoedaReal(debitoCobrado
-																					.getValorDebito()),
-																	12));
-		
-											i++;
-										}
-		
-									} else {
-										Iterator iter = cDebitoCobrado
-												.iterator();
-										int contador = 1;
-										BigDecimal valorAcumulado = new BigDecimal(
-												"0.00");
-										boolean temOutros = false;
-										while (iter.hasNext()) {
-											DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter
-													.next();
-		
-											if (quantidadeLinhasSobrando > contador) {
+			
+									if (!emitirContaHelper
+											.getValorCreditos()
+											.equals(valorNullo)) {
+										contaTxt
+											.append("CRÉDITOS E DESCONTOS          "); // 30
+										contaTxt.append(Util
+												.completaString(
+														" ", 24));
+										contaTxt
+												.append(Util
+														.completaStringComEspacoAEsquerda(
+																Util
+																		.formatarMoedaReal(emitirContaHelper
+																				.getValorCreditos()),
+																12));
+										i++;
+									}
+			
+									if (!emitirContaHelper
+											.getValorImpostos()
+											.equals(valorNullo)) {
+										contaTxt
+												.append("IMPOSTOS DEDUZIDOS            "); // 30
+										contaTxt.append(Util
+												.completaString(
+														" ", 24));
+										contaTxt
+												.append(Util
+														.completaStringComEspacoAEsquerda(
+																Util
+																		.formatarMoedaReal(emitirContaHelper
+																				.getValorImpostos()),
+																12));
+										i++;
+									}
+			
+									// setando os servicos
+			
+									Conta contaId = new Conta();
+									contaId.setId(emitirContaHelper
+											.getIdConta());
+			
+									Collection<DebitoCobradoAgrupadoHelper> cDebitoCobrado = this
+											.obterDebitosCobradosContaCAERN(contaId);
+			
+									int quantidadeLinhasSobrando = 10 - i;
+			
+									if (cDebitoCobrado != null
+											&& !cDebitoCobrado
+													.isEmpty()) {
+			
+										int quantidadeDebitos = cDebitoCobrado
+												.size();
+			
+										if (quantidadeLinhasSobrando >= quantidadeDebitos) {
+			
+											for (Iterator iter = cDebitoCobrado
+													.iterator(); iter
+													.hasNext();) {
+												DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter
+														.next();
+			
 												contaTxt
 														.append(Util
 																.completaString(
@@ -11107,267 +11159,305 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
 																				.formatarMoedaReal(debitoCobrado
 																						.getValorDebito()),
 																		12));
+			
 												i++;
-											} else {
-		
-												valorAcumulado = valorAcumulado
-														.add(debitoCobrado
-																.getValorDebito());
-												temOutros = true;
 											}
-		
-											contador++;
-										}
-										if (temOutros) {
-											contaTxt
-													.append("OUTROS SERVIÇOS               "); // 30
-											contaTxt
-													.append(Util
-															.completaString(
-																	" ",
-																	24));
-											contaTxt
-													.append(Util
-															.completaStringComEspacoAEsquerda(
-																	Util
-																			.formatarMoedaReal(valorAcumulado),
-																	12));
-											i++;
+			
+										} else {
+											Iterator iter = cDebitoCobrado
+													.iterator();
+											int contador = 1;
+											BigDecimal valorAcumulado = new BigDecimal(
+													"0.00");
+											boolean temOutros = false;
+											while (iter.hasNext()) {
+												DebitoCobradoAgrupadoHelper debitoCobrado = (DebitoCobradoAgrupadoHelper) iter
+														.next();
+			
+												if (quantidadeLinhasSobrando > contador) {
+													contaTxt
+															.append(Util
+																	.completaString(
+																			debitoCobrado
+																					.getDescricaoDebitoTipo(),
+																			30)); // 30
+													contaTxt
+															.append(Util
+																	.completaString(
+																			debitoCobrado
+																					.getNumeroPrestacaoDebito()
+																					+ "/"
+																					+ debitoCobrado
+																							.getNumeroPrestacao(),
+																			24));
+													contaTxt
+															.append(Util
+																	.completaStringComEspacoAEsquerda(
+																			Util
+																					.formatarMoedaReal(debitoCobrado
+																							.getValorDebito()),
+																			12));
+													i++;
+												} else {
+			
+													valorAcumulado = valorAcumulado
+															.add(debitoCobrado
+																	.getValorDebito());
+													temOutros = true;
+												}
+			
+												contador++;
+											}
+											if (temOutros) {
+												contaTxt
+														.append("OUTROS SERVIÇOS               "); // 30
+												contaTxt
+														.append(Util
+																.completaString(
+																		" ",
+																		24));
+												contaTxt
+														.append(Util
+																.completaStringComEspacoAEsquerda(
+																		Util
+																				.formatarMoedaReal(valorAcumulado),
+																		12));
+												i++;
+											}
 										}
 									}
+			
+									int quantidadeLinhasServicosSobraram = 10 - i;
+									contaTxt
+											.append(Util
+													.completaString(
+															" ",
+															quantidadeLinhasServicosSobraram * 66));
+			
+									// [SB0018 - Gerar
+									// Linhas
+									// das
+									// DemaisContas]
+									anoMesString = ""
+											+ emitirContaHelper
+													.getAmReferencia();
+									// formata ano mes para mes ano
+	//								mesAnoFormatado = anoMesString
+	//										.substring(4, 6)
+	//										+ anoMesString
+	//												.substring(0, 4);
+	//								digitoVerificadorConta = new Integer(
+	//										""
+	//												+ emitirContaHelper
+	//														.getDigitoVerificadorConta());
+	//								representacaoNumericaCodBarra = null;
+	//		
+	//								representacaoNumericaCodBarra = getControladorArrecadacao()
+	//										.obterRepresentacaoNumericaCodigoBarra(
+	//												3,
+	//												valorConta,
+	//												emitirContaHelper
+	//														.getIdLocalidade(),
+	//												emitirContaHelper
+	//														.getIdImovel(),
+	//												mesAnoFormatado,
+	//												digitoVerificadorConta,
+	//												null, null,
+	//												null, null,
+	//												null, null,
+	//												null);
+	//		
+	//								contaTxt.append(Util.completaString(representacaoNumericaCodBarra,48));
+									contaTxt.append(Util.completaString(" ",48));
+									
+									contaTxt
+											.append(Util
+													.completaString(
+															" ", 66)); // Rodapï¿½,
+									
+									//Alteraï¿½ï¿½o por Tiago Moreno - 23/01/2009 - Determinacao judicial (Nitrato)
+									
+									Conta contaEmitida = new Conta();
+									
+									contaEmitida.setId(emitirContaHelper.getIdConta());
+									
+									CreditoRealizado creditoRealizado = repositorioFaturamento.pesquisarCreditoRealizadoNitrato(contaEmitida);
+									
+									if (creditoRealizado != null){
+										contaTxt.append(Util.completaString("Por decisão judicial de 15/05/08 - proc. 001.07.200202-7, esta conta inclui um desconto de 50% no valor da água. R$" 
+												+ Util.completaString(Util.formatarMoedaReal(creditoRealizado.getValorCredito()), 13), 160));
+									} else {
+										contaTxt.append(Util.completaString(" ", 160));
+									}
+									
+									
+									//*****************************************************
+	                                // cï¿½digo do banco
+	                                contaTxt.append("001-9");
+	                                
+	                                // representaï¿½ï¿½o numï¿½rica do cï¿½digo de barras
+	                                // [SB0030 - Obter representaï¿½ï¿½o numï¿½rica do cï¿½digo de barras 
+	                                // da Ficha de Compensaï¿½ï¿½o]
+	                                String nossoNumero = obterNossoNumeroFichaCompensacao("1",emitirContaHelper.getIdConta().toString()).toString();
+	                                String nossoNumeroSemDV = nossoNumero.toString().substring(0,17);
+	                                
+	                                //RM100 - Colocar fixo o fator de vencimento 0000
+	                                //Date dataVencimentoMais90 = Util.adicionarNumeroDiasDeUmaData(new Date(),90);
+	                                //String fatorVencimento = obterFatorVencimento(dataVencimentoMais90);
+	                                String fatorVencimento = null;
+	                                
+	                                String numeroCarteira = ConstantesSistema.CARTEIRA_FICHA_COMPENSACAO;
+	                                
+	                                Integer qtdContasDebitoCarteiraMovimento = 
+	                                	getControladorArrecadacao().verificarExistenciaContaDebitoCarteiraMovimento(emitirContaHelper.getIdConta());
+	                                
+	                                if(qtdContasDebitoCarteiraMovimento > 0){
+	                                	numeroCarteira = ConstantesSistema.CARTEIRA_17_FICHA_COMPENSACAO;
+	                                	
+	                                	nossoNumero = obterNossoNumeroFichaCompensacaoCart17("1", emitirContaHelper.getIdConta().toString()).toString();
+	                                	nossoNumeroSemDV = nossoNumero.toString().substring(0,17);
+	                                	emitirContaHelper.setNossoNumero(nossoNumero);
+	                                	Date dataVencimentoMais15 = Util.adicionarNumeroDiasDeUmaData(new Date(), 15);
+	                                    fatorVencimento = obterFatorVencimento(dataVencimentoMais15);
+	                                }
+	
+	                                String especificacaoCodigoBarra = 
+	                                    getControladorArrecadacao().obterEspecificacaoCodigoBarraFichaCompensacao(
+	                                    ConstantesSistema.CODIGO_BANCO_FICHA_COMPENSACAO, ConstantesSistema.CODIGO_MOEDA_FICHA_COMPENSACAO, 
+	                                    emitirContaHelper.getValorConta(), nossoNumeroSemDV.toString(),
+	                                    numeroCarteira, fatorVencimento);
+	                                
+	                                String representacaoNumericaCodigoBarraFichaCompensacao = 
+	                                    getControladorArrecadacao().
+	                                    obterRepresentacaoNumericaCodigoBarraFichaCompensacao(especificacaoCodigoBarra);
+	                                
+	                                contaTxt.append(representacaoNumericaCodigoBarraFichaCompensacao); 
+	                                
+	                                // local de pagamento
+	                                contaTxt.append(Util.completaString("PAGÁVEL EM QUALQUER BANCO ATÉ O VENCIMENTO",45));
+	                                
+	                                // vencimento
+	                                contaTxt.append(Util.completaString("Contra-apresentação",20));
+	                                
+	                                // cedente
+	                                contaTxt.append(Util.completaString("CAERN-Companhia de Águas e Esgotos do RN",50));
+	                                
+	                                // agï¿½ncia/cï¿½digo cedente
+	                                contaTxt.append("3795-8/6961-2");
+	                                
+	                                // data do documento
+	                                contaTxt.append(Util.formatarData(new Date()));
+	                                
+	                                String matriculaImovelFormatada = Util.retornaMatriculaImovelFormatada(emitirContaHelper.getIdImovel());
+	                                // nï¿½mero do documento
+	                                contaTxt.append(Util.completaString(matriculaImovelFormatada,10));
+	                                
+	                                // espï¿½cie do documento
+	                                contaTxt.append("FAT");
+	                                
+	                                // aceite
+	                                contaTxt.append("N");
+	                                
+	                                // data do processamento
+	                                contaTxt.append(Util.formatarData(new Date()));
+	                                
+	                                // nosso nï¿½mero com DV
+	                                contaTxt.append(nossoNumero);
+	                                
+	                                // carteira
+	                                contaTxt.append(numeroCarteira);
+	                                
+	                                // valor do documento
+	                                contaTxt.append(Util.completaStringComEspacoAEsquerda(valorContaString,14));
+	                                
+	                                // Sacado - linha 1.a
+	                                if (nomeClienteUsuario != null && 
+	                                        !nomeClienteUsuario.equalsIgnoreCase("")){
+	                                    contaTxt.append(Util.completaString(nomeClienteUsuario,30));
+	                                }else {
+	                                    contaTxt.append(Util.completaString(emitirContaHelper.getNomeCliente(), 30));
+	                                }
+	                                
+	                                // Sacado - linha 1.b
+	                                contaTxt.append(Util.completaString("   Matrícula: ",16));
+	                                
+	                                // Sacado - linha 1.c
+	                                contaTxt.append(Util.completaString(matriculaImovelFormatada,9));
+	                                
+	                                // Sacado - linha 1.d
+	                                contaTxt.append(Util.completaString("   Fatura: ",14));
+	                                
+	                                // Sacado - linha 1.d
+	                                // Dï¿½gito verificador da conta
+	                                String digitoVerificador = "" + emitirContaHelper.getDigitoVerificadorConta();
+	                                contaTxt.append(Util.completaString(mesAnoReferencia+ "-"+ digitoVerificador,9));
+	
+	                                // Sacado - linha 2.a
+	//                                contaTxt.append(Util.completaString(enderecoImovel,50));
+	                        		// endereï¿½o
+									contaTxt.append(Util.completaString(enderecoImovel[0],60));
+									// bairro
+									contaTxt.append(Util.completaString(enderecoImovel[3],30));
+	                                
+	                                // cï¿½digo de barras
+	                                if(especificacaoCodigoBarra != null && !especificacaoCodigoBarra.equals("")){
+	                                    // Cria o objeto para gerar o cï¿½digode barras no
+	                                    // padrï¿½o intercalado 2 de 5
+	                                    Interleaved2of5 codigoBarraIntercalado2de5 = new Interleaved2of5();
+	                                    
+	                                    contaTxt.append(Util.completaString(codigoBarraIntercalado2de5
+	                                                        .encodeValue(especificacaoCodigoBarra), 112));
+	                                    
+	                                }else{
+	                                	 contaTxt.append(Util.completaString(" ", 112));
+	                                }
+	
+	                                if(imovelEmitido.getCodigoDebitoAutomatico() != null){
+	                                	contaTxt.append(Util.completaString(imovelEmitido.getCodigoDebitoAutomatico().toString(),9));	
+	                                }
+	                                
+	                                
+									//*****************************************************
+									
+									// Impostos
+									BigDecimal baseCalculo = emitirContaHelper.getValorBaseCalculo();
+									BigDecimal valorPIS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_PIS);
+									BigDecimal valorCONFINS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_CONFINS);
+	
+									contaTxt.append(Util.completaString(Util.formatarMoedaReal(baseCalculo), 15));
+									contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_PIS_TEXTO, 5));
+									contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorPIS), 15));
+									contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_CONFINS_TEXTO, 5));
+									contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorCONFINS), 15));
+			
+									contasTxtLista.append(contaTxt
+											.toString());
+			
+									conta = null;
+			
+									StringBuilder teste = new StringBuilder();
+									teste.append(contaTxt);
+			
+									// PEDRO 19/10/2006
+									contaTxt = null;
+									// enquanto estiver
+									// proximo
+									// if
+									// (iteratorConta.hasNext())
+									// {
+									contasTxtLista
+											.append(System
+													.getProperty("line.separator"));
+			
+									// adiciona o id da
+									// conta e o sequencial
+									// no para serem
+									// atualizados
+									mapAtualizaSequencial.put(
+											emitirContaHelper
+													.getIdConta(),
+											sequencialImpressao);
 								}
-		
-								int quantidadeLinhasServicosSobraram = 10 - i;
-								contaTxt
-										.append(Util
-												.completaString(
-														" ",
-														quantidadeLinhasServicosSobraram * 66));
-		
-								// [SB0018 - Gerar
-								// Linhas
-								// das
-								// DemaisContas]
-								anoMesString = ""
-										+ emitirContaHelper
-												.getAmReferencia();
-								// formata ano mes para mes ano
-//								mesAnoFormatado = anoMesString
-//										.substring(4, 6)
-//										+ anoMesString
-//												.substring(0, 4);
-//								digitoVerificadorConta = new Integer(
-//										""
-//												+ emitirContaHelper
-//														.getDigitoVerificadorConta());
-//								representacaoNumericaCodBarra = null;
-//		
-//								representacaoNumericaCodBarra = getControladorArrecadacao()
-//										.obterRepresentacaoNumericaCodigoBarra(
-//												3,
-//												valorConta,
-//												emitirContaHelper
-//														.getIdLocalidade(),
-//												emitirContaHelper
-//														.getIdImovel(),
-//												mesAnoFormatado,
-//												digitoVerificadorConta,
-//												null, null,
-//												null, null,
-//												null, null,
-//												null);
-//		
-//								contaTxt.append(Util.completaString(representacaoNumericaCodBarra,48));
-								contaTxt.append(Util.completaString(" ",48));
-								
-								contaTxt
-										.append(Util
-												.completaString(
-														" ", 66)); // Rodapï¿½,
-								
-								//Alteraï¿½ï¿½o por Tiago Moreno - 23/01/2009 - Determinacao judicial (Nitrato)
-								
-								Conta contaEmitida = new Conta();
-								
-								contaEmitida.setId(emitirContaHelper.getIdConta());
-								
-								CreditoRealizado creditoRealizado = repositorioFaturamento.pesquisarCreditoRealizadoNitrato(contaEmitida);
-								
-								if (creditoRealizado != null){
-									contaTxt.append(Util.completaString("Por decisão judicial de 15/05/08 - proc. 001.07.200202-7, esta conta inclui um desconto de 50% no valor da água. R$" 
-											+ Util.completaString(Util.formatarMoedaReal(creditoRealizado.getValorCredito()), 13), 160));
-								} else {
-									contaTxt.append(Util.completaString(" ", 160));
-								}
-								
-								
-								//*****************************************************
-                                // cï¿½digo do banco
-                                contaTxt.append("001-9");
-                                
-                                // representaï¿½ï¿½o numï¿½rica do cï¿½digo de barras
-                                // [SB0030 - Obter representaï¿½ï¿½o numï¿½rica do cï¿½digo de barras 
-                                // da Ficha de Compensaï¿½ï¿½o]
-                                String nossoNumero = obterNossoNumeroFichaCompensacao("1",emitirContaHelper.getIdConta().toString()).toString();
-                                String nossoNumeroSemDV = nossoNumero.toString().substring(0,17);
-                                
-                                //RM100 - Colocar fixo o fator de vencimento 0000
-                                //Date dataVencimentoMais90 = Util.adicionarNumeroDiasDeUmaData(new Date(),90);
-                                //String fatorVencimento = obterFatorVencimento(dataVencimentoMais90);
-                                String fatorVencimento = null;
-                                
-                                String numeroCarteira = ConstantesSistema.CARTEIRA_FICHA_COMPENSACAO;
-                                
-                                Integer qtdContasDebitoCarteiraMovimento = 
-                                	getControladorArrecadacao().verificarExistenciaContaDebitoCarteiraMovimento(emitirContaHelper.getIdConta());
-                                
-                                if(qtdContasDebitoCarteiraMovimento > 0){
-                                	numeroCarteira = ConstantesSistema.CARTEIRA_17_FICHA_COMPENSACAO;
-                                	
-                                	nossoNumero = obterNossoNumeroFichaCompensacaoCart17("1", emitirContaHelper.getIdConta().toString()).toString();
-                                	nossoNumeroSemDV = nossoNumero.toString().substring(0,17);
-                                	emitirContaHelper.setNossoNumero(nossoNumero);
-                                	Date dataVencimentoMais15 = Util.adicionarNumeroDiasDeUmaData(new Date(), 15);
-                                    fatorVencimento = obterFatorVencimento(dataVencimentoMais15);
-                                }
-
-                                String especificacaoCodigoBarra = 
-                                    getControladorArrecadacao().obterEspecificacaoCodigoBarraFichaCompensacao(
-                                    ConstantesSistema.CODIGO_BANCO_FICHA_COMPENSACAO, ConstantesSistema.CODIGO_MOEDA_FICHA_COMPENSACAO, 
-                                    emitirContaHelper.getValorConta(), nossoNumeroSemDV.toString(),
-                                    numeroCarteira, fatorVencimento);
-                                
-                                String representacaoNumericaCodigoBarraFichaCompensacao = 
-                                    getControladorArrecadacao().
-                                    obterRepresentacaoNumericaCodigoBarraFichaCompensacao(especificacaoCodigoBarra);
-                                
-                                contaTxt.append(representacaoNumericaCodigoBarraFichaCompensacao); 
-                                
-                                // local de pagamento
-                                contaTxt.append(Util.completaString("PAGÁVEL EM QUALQUER BANCO ATÉ O VENCIMENTO",45));
-                                
-                                // vencimento
-                                contaTxt.append(Util.completaString("Contra-apresentação",20));
-                                
-                                // cedente
-                                contaTxt.append(Util.completaString("CAERN-Companhia de Águas e Esgotos do RN",50));
-                                
-                                // agï¿½ncia/cï¿½digo cedente
-                                contaTxt.append("3795-8/6961-2");
-                                
-                                // data do documento
-                                contaTxt.append(Util.formatarData(new Date()));
-                                
-                                String matriculaImovelFormatada = Util.retornaMatriculaImovelFormatada(emitirContaHelper.getIdImovel());
-                                // nï¿½mero do documento
-                                contaTxt.append(Util.completaString(matriculaImovelFormatada,10));
-                                
-                                // espï¿½cie do documento
-                                contaTxt.append("FAT");
-                                
-                                // aceite
-                                contaTxt.append("N");
-                                
-                                // data do processamento
-                                contaTxt.append(Util.formatarData(new Date()));
-                                
-                                // nosso nï¿½mero com DV
-                                contaTxt.append(nossoNumero);
-                                
-                                // carteira
-                                contaTxt.append(numeroCarteira);
-                                
-                                // valor do documento
-                                contaTxt.append(Util.completaStringComEspacoAEsquerda(valorContaString,14));
-                                
-                                // Sacado - linha 1.a
-                                if (nomeClienteUsuario != null && 
-                                        !nomeClienteUsuario.equalsIgnoreCase("")){
-                                    contaTxt.append(Util.completaString(nomeClienteUsuario,30));
-                                }else {
-                                    contaTxt.append(Util.completaString(emitirContaHelper.getNomeCliente(), 30));
-                                }
-                                
-                                // Sacado - linha 1.b
-                                contaTxt.append(Util.completaString("   Matrícula: ",16));
-                                
-                                // Sacado - linha 1.c
-                                contaTxt.append(Util.completaString(matriculaImovelFormatada,9));
-                                
-                                // Sacado - linha 1.d
-                                contaTxt.append(Util.completaString("   Fatura: ",14));
-                                
-                                // Sacado - linha 1.d
-                                // Dï¿½gito verificador da conta
-                                String digitoVerificador = "" + emitirContaHelper.getDigitoVerificadorConta();
-                                contaTxt.append(Util.completaString(mesAnoReferencia+ "-"+ digitoVerificador,9));
-
-                                // Sacado - linha 2.a
-//                                contaTxt.append(Util.completaString(enderecoImovel,50));
-                        		// endereï¿½o
-								contaTxt.append(Util.completaString(enderecoImovel[0],60));
-								// bairro
-								contaTxt.append(Util.completaString(enderecoImovel[3],30));
-                                
-                                // cï¿½digo de barras
-                                if(especificacaoCodigoBarra != null && !especificacaoCodigoBarra.equals("")){
-                                    // Cria o objeto para gerar o cï¿½digode barras no
-                                    // padrï¿½o intercalado 2 de 5
-                                    Interleaved2of5 codigoBarraIntercalado2de5 = new Interleaved2of5();
-                                    
-                                    contaTxt.append(Util.completaString(codigoBarraIntercalado2de5
-                                                        .encodeValue(especificacaoCodigoBarra), 112));
-                                    
-                                }else{
-                                	 contaTxt.append(Util.completaString(" ", 112));
-                                }
-
-                                if(imovelEmitido.getCodigoDebitoAutomatico() != null){
-                                	contaTxt.append(Util.completaString(imovelEmitido.getCodigoDebitoAutomatico().toString(),9));	
-                                }
-                                
-                                
-								//*****************************************************
-								
-								// Impostos
-								BigDecimal baseCalculo = emitirContaHelper.getValorBaseCalculo();
-								BigDecimal valorPIS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_PIS);
-								BigDecimal valorCONFINS = baseCalculo.multiply(ConstantesSistema.PERCENTUAL_CONFINS);
-
-								contaTxt.append(Util.completaString(Util.formatarMoedaReal(baseCalculo), 15));
-								contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_PIS_TEXTO, 5));
-								contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorPIS), 15));
-								contaTxt.append(Util.completaString(ConstantesSistema.PERCENTUAL_CONFINS_TEXTO, 5));
-								contaTxt.append(Util.completaString(Util.formatarMoedaReal(valorCONFINS), 15));
-		
-								contasTxtLista.append(contaTxt
-										.toString());
-		
-								conta = null;
-		
-								StringBuilder teste = new StringBuilder();
-								teste.append(contaTxt);
-		
-								// PEDRO 19/10/2006
-								contaTxt = null;
-								// enquanto estiver
-								// proximo
-								// if
-								// (iteratorConta.hasNext())
-								// {
-								contasTxtLista
-										.append(System
-												.getProperty("line.separator"));
-		
-								// adiciona o id da
-								// conta e o sequencial
-								// no para serem
-								// atualizados
-								mapAtualizaSequencial.put(
-										emitirContaHelper
-												.getIdConta(),
-										sequencialImpressao);
-
                             }// fim do laï¿½o que verifica se o
                             // helper ï¿½ diferente de nulo
                         }// fim laï¿½o while do iterator do objeto helper
@@ -11390,32 +11480,48 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
                     String mesReferencia = "_Fat"
                             + anoMesReferenciaFaturamento.toString().substring(4, 6);
                     String nomeZip = null;
+                    String nomeZipCartaConta = null;
 
                     switch (tipoConta) {
                     case 0:
                         nomeZip = "BOLETO_E" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
+                        nomeZipCartaConta = "CARTA_BOLETO_ESTOURO" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
                         break;
                     case 1:
                         nomeZip = "BOLETO_A" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
                         break;
                     case 2:
                         nomeZip = "BOLETO_D" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
+                        nomeZipCartaConta = "CARTA_BOLETO_ESTOURO" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
                         break;
                     case 3:
                         nomeZip = "BOLETO_N_R" + "_" + idGrupoFaturamento + mesReferencia + "-";
+                        nomeZipCartaConta = "CARTA_BOLETO_ESTOURO" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
                         break;
                     case 4:
                         nomeZip = "BOLETO_D_R" + "_" + idGrupoFaturamento + mesReferencia + "-";
+                        nomeZipCartaConta = "CARTA_BOLETO_ESTOURO" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
                         break;
                     case 5:
                         nomeZip = "BOLETO_N" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
+                        nomeZipCartaConta = "CARTA_BOLETO_ESTOURO" + "_" + idGrupoFaturamento + mesReferencia + "_Emp" + idEmpresa + "-";
                         break;
                     }
 
                     BufferedWriter out = null;
                     ZipOutputStream zos = null;
+                    File compactadoTipoCarta = null;
+
                     File compactadoTipo = new File(nomeZip + ".zip");
+                    if (nomeZipCartaConta != null) {
+                        compactadoTipoCarta = new File(nomeZipCartaConta + ".zip");
+                    }
+                    
                     File leituraTipo = new File(nomeZip + ".txt");
+                    File leituraTipoCarta = null;
+                    if (nomeZipCartaConta != null) {
+                        leituraTipoCarta = new File(nomeZipCartaConta + ".txt");
+                    }
 
                     if (contasTxtLista != null && contasTxtLista.length() != 0) {
                         // fim de arquivo
@@ -11433,12 +11539,31 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
                         leituraTipo.delete();
                     }
 
+                    if (cartasTxtListaConta != null && cartasTxtListaConta.length() != 0) {
+                        // fim de arquivo
+                        contasTxtLista.append("\u0004");
+                        // ************ TIPO N *************
+
+                        zos = new ZipOutputStream(new FileOutputStream(compactadoTipoCarta));
+                        out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(leituraTipoCarta.getAbsolutePath())));
+                        out.write(cartasTxtListaConta.toString());
+                        out.flush();
+                        ZipUtil.adicionarArquivo(zos, leituraTipoCarta);
+                        zos.close();
+                        out.close();
+                        leituraTipoCarta.delete();
+                    }
+
                     // limpa todos os campos
                     nomeZip = null;
+                    nomeZipCartaConta = null;
                     out = null;
                     zos = null;
                     compactadoTipo = null;
+                    compactadoTipoCarta = null;
                     leituraTipo = null;
+                    leituraTipoCarta = null;
+                    cartasTxtListaConta = null;
                     contasTxtLista = null;
 
                     tipoConta++;
@@ -11532,4 +11657,403 @@ public class ControladorFaturamentoCAERNSEJB extends ControladorFaturamento
     }
     
 
+	/**
+	 * Metódo responsável por emitir os txts das contas.
+	 * 
+	 * [UC0348] Emitir Contas
+	 * [SB00000] Gerar Arquivo TXT das Cartas
+	 * 
+	 * @author Vivianne Sousa
+	 * @date 05/12/2006
+	 * 
+	 * @param colecaoConta
+	 * @throws ControladorException
+	 */
+	public StringBuilder gerarArquivoTxtCartas(EmitirContaHelper emitirContaHelper, 
+			Integer sequencial, int situacao) throws ControladorException {
+
+		StringBuilder linhasArquivoTxtCartas = new StringBuilder();
+
+		try {
+			Integer contaTipo = repositorioFaturamento.consultarContaTipodeContaImpressao(emitirContaHelper.getIdConta()); 
+			SistemaParametro sistemaParametro = getControladorUtil().pesquisarParametrosDoSistema();
+			
+			String descricaoLocalidade = emitirContaHelper.getDescricaoLocalidade();
+			linhasArquivoTxtCartas.append(Util.completaString(descricaoLocalidade,30));
+			linhasArquivoTxtCartas.append(Util.adicionarZerosEsquedaNumero(3, emitirContaHelper.getCodigoSetorComercialConta().toString()));
+			Imovel imovelEmitido = getControladorImovel().pesquisarImovel(emitirContaHelper.getIdImovel());
+			linhasArquivoTxtCartas.append(Util.adicionarZerosEsquedaNumero(2, imovelEmitido.getQuadra().getRota().getCodigo().toString()));
+			linhasArquivoTxtCartas.append(".");
+			linhasArquivoTxtCartas.append(Util.adicionarZerosEsquedaNumero(4, imovelEmitido.getNumeroSequencialRota().toString()));
+			linhasArquivoTxtCartas.append(Util.adicionarZerosEsquedaNumero(8, emitirContaHelper.getIdImovel().toString()));
+
+			// caso a coleção de contas seja de entrega para o cliente responsável
+			if(contaTipo.equals(ContaTipo.CONTA_CLIENTE_RESPONSAVEL) || contaTipo.equals(ContaTipo.CONTA_DEBITO_AUTOMATICO)){
+				String nomeClienteUsuario = null;
+				if (emitirContaHelper.getNomeImovel() != null && !emitirContaHelper.getNomeImovel().equals("")) {
+					nomeClienteUsuario = emitirContaHelper.getNomeImovel();
+				} else {
+					nomeClienteUsuario = this.obterNomeCliente(emitirContaHelper.getIdConta());
+				}
+				linhasArquivoTxtCartas.append(Util.completaString(nomeClienteUsuario,30));
+			} else {
+				linhasArquivoTxtCartas.append(Util.completaString(emitirContaHelper.getNomeCliente(),30));
+			}
+
+			String[] enderecoImovel = getControladorEndereco().pesquisarEnderecoFormatadoDividido(emitirContaHelper.getIdImovel());
+			// endereço
+			linhasArquivoTxtCartas.append(Util.completaString(enderecoImovel[0],60));
+			// bairro
+			linhasArquivoTxtCartas.append(Util.completaString(enderecoImovel[3],30));
+
+			FiltroLocalidade filtroLocalidade = new FiltroLocalidade();
+			filtroLocalidade.adicionarParametro(new ParametroSimples(FiltroLocalidade.ID,emitirContaHelper.getIdLocalidade()));
+			filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep");
+			filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.cep");
+			filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro");
+			filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTipo");
+			filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroCep.logradouro.logradouroTitulo");
+			filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
+			filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro");
+			filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro");
+			filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio");
+			filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("logradouroBairro.bairro.municipio.unidadeFederacao");
+			filtroLocalidade.adicionarCaminhoParaCarregamentoEntidade("enderecoReferencia");
+			Collection cLocalidade = (Collection) getControladorUtil().pesquisar(filtroLocalidade,Localidade.class.getName());
+			Localidade localidade = (Localidade) cLocalidade.iterator().next();
+
+			//Qualidade de Água
+			FiltroQualidadeAgua filtroQualidadeAgua = new FiltroQualidadeAgua();
+			filtroQualidadeAgua.adicionarParametro(new ParametroSimples(FiltroQualidadeAgua.LOCALIDADE_ID,localidade.getId()));
+			filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
+					FiltroQualidadeAgua.SETOR_COMERCIAL_ID,	emitirContaHelper.getIdSetorComercial().toString()));
+			filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
+					FiltroQualidadeAgua.ANO_MES_REFERENCIA,emitirContaHelper.getAmReferencia()));
+			filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
+			Collection colecaoQualidadeAgua = getControladorUtil().pesquisar(filtroQualidadeAgua,QualidadeAgua.class.getName());
+
+			if (colecaoQualidadeAgua == null || colecaoQualidadeAgua.isEmpty()) {
+				filtroQualidadeAgua.limparListaParametros();
+				colecaoQualidadeAgua = null;
+				filtroQualidadeAgua.adicionarParametro(new ParametroSimples(FiltroQualidadeAgua.LOCALIDADE_ID,localidade.getId()));
+				filtroQualidadeAgua.adicionarParametro(new ParametroNulo(FiltroQualidadeAgua.SETOR_COMERCIAL_ID));
+				filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
+						FiltroQualidadeAgua.ANO_MES_REFERENCIA,emitirContaHelper.getAmReferencia()));
+				filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
+				colecaoQualidadeAgua = getControladorUtil().pesquisar(filtroQualidadeAgua, QualidadeAgua.class.getName());
+			}
+			
+			if (colecaoQualidadeAgua == null || colecaoQualidadeAgua.isEmpty()) {
+				filtroQualidadeAgua.limparListaParametros();
+				colecaoQualidadeAgua = null;
+				filtroQualidadeAgua.adicionarParametro(new ParametroNulo(FiltroQualidadeAgua.LOCALIDADE_ID));
+				filtroQualidadeAgua.adicionarParametro(new ParametroNulo(FiltroQualidadeAgua.SETOR_COMERCIAL_ID));
+				filtroQualidadeAgua.adicionarParametro(new ParametroSimples(
+						FiltroQualidadeAgua.ANO_MES_REFERENCIA,emitirContaHelper.getAmReferencia()));
+				filtroQualidadeAgua.adicionarCaminhoParaCarregamentoEntidade("fonteCaptacao");
+				colecaoQualidadeAgua = getControladorUtil().pesquisar(filtroQualidadeAgua, QualidadeAgua.class.getName());
+			}
+
+			if (colecaoQualidadeAgua != null && !colecaoQualidadeAgua.isEmpty()) {
+				QualidadeAgua qualidadeAgua = (QualidadeAgua) colecaoQualidadeAgua.iterator().next();
+				// fonte
+				if (qualidadeAgua.getFonteCaptacao() != null) {
+					linhasArquivoTxtCartas.append(Util.completaString(qualidadeAgua.getFonteCaptacao().getDescricao(),30));
+				} else {
+					linhasArquivoTxtCartas.append(Util.completaString(" ",30));
+				}
+				// cloro
+				if (qualidadeAgua.getNumeroCloroResidual() != null && !qualidadeAgua.getNumeroCloroResidual().equals(0)) {
+					linhasArquivoTxtCartas.append(Util.completaString(qualidadeAgua.getNumeroCloroResidual().toString(),3));
+				} else {
+					linhasArquivoTxtCartas.append(Util.completaString(" ",3));
+				}
+				// coliformes
+				if (qualidadeAgua.getNumeroIndiceColiformesTotais() != null	&& !qualidadeAgua.getNumeroIndiceColiformesTotais().equals(0)) {
+					linhasArquivoTxtCartas.append(Util.completaString(qualidadeAgua.getNumeroIndiceColiformesTotais().toString(),8));
+				} else {
+					linhasArquivoTxtCartas.append(Util.completaString(" ", 8));
+				}
+				// nitrato
+				if (qualidadeAgua.getNumeroNitrato() != null && !qualidadeAgua.getNumeroNitrato().equals(0)) {
+					linhasArquivoTxtCartas.append(Util.completaString(qualidadeAgua.getNumeroNitrato().toString(),4));
+				} else {
+					linhasArquivoTxtCartas.append(Util.completaString(" ",4));
+				}
+				//ph
+				if (qualidadeAgua.getNumeroIndicePh() != null && !qualidadeAgua.getNumeroIndicePh().equals(0)) {
+					linhasArquivoTxtCartas.append(Util.completaString(qualidadeAgua.getNumeroIndicePh().toString(),4));
+				} else {
+					linhasArquivoTxtCartas.append(Util.completaString(" ",4));
+				}
+				// //turbidez
+				if (qualidadeAgua.getNumeroIndiceTurbidez() != null	&& !qualidadeAgua.getNumeroIndiceTurbidez().equals(0)) {
+					linhasArquivoTxtCartas.append(Util.completaString(qualidadeAgua.getNumeroIndiceTurbidez().toString(),4));
+				} else {
+					linhasArquivoTxtCartas.append(Util.completaString(" ",4));
+				}
+			} else {
+				linhasArquivoTxtCartas.append(Util.completaString(" ", 53));
+			}
+
+			Collection colecaoSubCategoria = getControladorImovel().obterQuantidadeEconomiasSubCategoria(imovelEmitido.getId());
+			String economias = "";
+			for (Iterator iter = colecaoSubCategoria.iterator(); iter.hasNext();) {
+				Subcategoria subcategoria = (Subcategoria) iter.next();
+				//agora a subcategoria ja tem o id da categoria no codigo.
+				economias = economias + Util.adicionarZerosEsquedaNumero(3, subcategoria.getCodigo()+ "") + "/"
+					+ Util.adicionarZerosEsquedaNumero(3, subcategoria.getQuantidadeEconomias().toString()) + " ";
+			}
+			//quantidadeContas
+			linhasArquivoTxtCartas.append(Util.completaString(sequencial.toString(),7));
+			linhasArquivoTxtCartas.append(Util.completaString(localidade.getDescricao(),30));
+			linhasArquivoTxtCartas.append(Util.completaString(localidade.getEnderecoFormatadoTituloAbreviado(),35));
+			linhasArquivoTxtCartas.append(Util.completaString(localidade.getFone(),20));
+			linhasArquivoTxtCartas.append(Util.completaString("0800-84-0195",15));
+
+			// cria um objeto conta para calcular o valor da conta
+			Conta conta = new Conta();
+			conta.setValorAgua(emitirContaHelper.getValorAgua());
+			conta.setValorEsgoto(emitirContaHelper.getValorEsgoto());
+			conta.setValorCreditos(emitirContaHelper.getValorCreditos());
+			conta.setDebitos(emitirContaHelper.getDebitos());
+			conta.setValorImposto(emitirContaHelper.getValorImpostos());
+
+			//representacaoNumericaCodBarra
+			linhasArquivoTxtCartas.append(Util.completaString("",48));
+
+			// determinar Mensagem
+			String[] parmsPartesConta = obterMensagemConta3Partes(emitirContaHelper,sistemaParametro);
+			String primeiraParte = parmsPartesConta[0];
+			String segundaParte = parmsPartesConta[1];
+			String terceiraParte = parmsPartesConta[2];
+			linhasArquivoTxtCartas.append(Util.completaString(primeiraParte,65));
+			linhasArquivoTxtCartas.append(Util.completaString(segundaParte,65));
+			linhasArquivoTxtCartas.append(Util.completaString(terceiraParte,65));
+
+			linhasArquivoTxtCartas.append(System.getProperty("line.separator"));
+
+			linhasArquivoTxtCartas.append(Util.completaString(descricaoLocalidade,30));
+			linhasArquivoTxtCartas.append(Util.adicionarZerosEsquedaNumero(2,
+				imovelEmitido.getQuadra().getRota().getCodigo().toString()));
+			linhasArquivoTxtCartas.append(".");
+			linhasArquivoTxtCartas.append(Util.adicionarZerosEsquedaNumero(4,
+				imovelEmitido.getNumeroSequencialRota().toString()));
+
+			Imovel imovel = new Imovel();
+			Localidade localidade2 = new Localidade();
+			localidade2.setId(emitirContaHelper.getIdLocalidade());
+			imovel.setLocalidade(localidade2);
+			SetorComercial setorComercial = new SetorComercial();
+			setorComercial.setCodigo(emitirContaHelper.getCodigoSetorComercialConta());
+			imovel.setSetorComercial(setorComercial);
+			Quadra quadra = new Quadra();
+			quadra.setNumeroQuadra(emitirContaHelper.getIdQuadraConta());
+			imovel.setQuadra(quadra);
+			imovel.setLote(emitirContaHelper.getLoteConta());
+			imovel.setSubLote(emitirContaHelper.getSubLoteConta());
+
+			String inscricao = imovel.getInscricaoFormatada();
+			imovel = null;
+			setorComercial = null;
+			quadra = null;
+			linhasArquivoTxtCartas.append(Util.completaString(inscricao, 20));
+			linhasArquivoTxtCartas.append(Util.completaString(" ", 12));
+
+			String mesAnoReferencia = Util.formatarAnoMesParaMesAno(emitirContaHelper.getAmReferencia());
+			linhasArquivoTxtCartas.append(Util.completaString(mesAnoReferencia,9));
+
+			//dataVencimento
+			linhasArquivoTxtCartas.append(Util.completaString("",10));
+			
+			//valorContaString
+			linhasArquivoTxtCartas.append(Util.completaStringComEspacoAEsquerda("",15));
+
+			if (contaTipo.equals(ContaTipo.CONTA_DEBITO_AUTOMATICO)
+				|| contaTipo.equals(ContaTipo.CONTA_DEBITO_AUTO_COM_CLIENTE_RESP.intValue())) {
+
+				linhasArquivoTxtCartas.append(Util.completaString("NãO PODE SER PAGO EM BANCO",65));
+				linhasArquivoTxtCartas.append(Util.completaString("DÉBITO AUTOMÁTICO EM CONTA CORRENTE",65));
+			} else {
+				linhasArquivoTxtCartas.append(Util.completaString(" ", 65));
+				linhasArquivoTxtCartas.append(Util.completaString(" ", 65));
+			}
+
+			String anoMesString = "" + emitirContaHelper.getAmReferencia();
+			String mesNumero = anoMesString.substring(4, 6);
+			String mesExtenso = Util.retornaDescricaoMes(new Integer(mesNumero).intValue()).toUpperCase();
+			String dataExtensa = mesExtenso	+ "/" + anoMesString.substring(0, 4);
+			linhasArquivoTxtCartas.append(Util.completaString(dataExtensa,14));
+			
+			linhasArquivoTxtCartas.append(Util.adicionarZerosEsquedaNumero(8, imovelEmitido.getId().toString()));
+			linhasArquivoTxtCartas.append(Util.completaString(emitirContaHelper.getIdLocalidade().toString(),3));
+			linhasArquivoTxtCartas.append(Util.adicionarZerosEsquedaNumero(3, emitirContaHelper.getCodigoSetorComercialConta().toString()));
+			linhasArquivoTxtCartas.append(Util.adicionarZerosEsquedaNumero(3, emitirContaHelper.getIdQuadraConta().toString()));
+			linhasArquivoTxtCartas.append(Util.adicionarZerosEsquedaNumero(4, emitirContaHelper.getLoteConta().toString()));
+			linhasArquivoTxtCartas.append(Util.completaString(Util.adicionarZerosEsquedaNumero(2,
+							emitirContaHelper.getSubLoteConta().toString()), 2));
+			
+			// DIGITO ?????
+			linhasArquivoTxtCartas.append(Util.adicionarZerosEsquedaNumero(1, "0"));
+
+			Integer[] parmSituacao = determinarTipoLigacaoMedicao(emitirContaHelper);
+			Integer tipoLigacao = parmSituacao[0];
+			Integer tipoMedicao = parmSituacao[1];
+
+			Object[] parmsMedicaoHistorico = obterDadosMedicaoConta(emitirContaHelper,tipoMedicao);
+			String leituraAnterior = "";
+			String leituraAtual = "";
+			String dataLeituraAnterior = "";
+			String dataLeituraAtual = "";
+
+			if (parmsMedicaoHistorico != null) {
+				if (parmsMedicaoHistorico[0] != null) {
+					leituraAnterior = "" + (Integer) parmsMedicaoHistorico[0];
+				}
+				if (parmsMedicaoHistorico[1] != null) {
+					leituraAtual = "" + (Integer) parmsMedicaoHistorico[1];
+				}
+				if (parmsMedicaoHistorico[3] != null) {
+					dataLeituraAnterior = Util.formatarData((Date) parmsMedicaoHistorico[3]);
+				}
+				if (parmsMedicaoHistorico[2] != null) {
+					dataLeituraAtual = Util.formatarData((Date) parmsMedicaoHistorico[2]);
+				}
+			}
+			
+			Object[] parmsConsumoHistorico = null;
+			
+			String consumoMedio = "";
+			if (tipoLigacao != null) {
+				parmsConsumoHistorico = repositorioMicromedicao.obterDadosConsumoConta(
+						emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),tipoLigacao);
+				if (parmsConsumoHistorico != null) {
+					// Consumo médio
+					if (parmsConsumoHistorico[2] != null) {
+						consumoMedio = "" + (Integer) parmsConsumoHistorico[2];
+					}
+				}
+			}
+
+			// Data Leitura Atual
+			linhasArquivoTxtCartas.append(Util.completaString(dataLeituraAtual,5));
+			linhasArquivoTxtCartas.append(Util.completaString(leituraAnterior,6));
+
+			// Leitura Atual
+			linhasArquivoTxtCartas.append(Util.completaString(leituraAtual,6));
+
+			String diasConsumo = "";
+			if (!dataLeituraAnterior.equals("") && !dataLeituraAtual.equals("")) {
+				diasConsumo = "" + Util.obterQuantidadeDiasEntreDuasDatas((Date) parmsMedicaoHistorico[3],(Date) parmsMedicaoHistorico[2]);
+			}
+			String[] parmsConsumo = obterConsumoFaturadoConsumoMedioDiario(emitirContaHelper,tipoMedicao,diasConsumo);
+			String consumoFaturamento = parmsConsumo[0];
+
+			// Consumo faturado
+			linhasArquivoTxtCartas.append(Util.completaString(consumoFaturamento,5));
+			linhasArquivoTxtCartas.append(Util.completaString(consumoMedio,5));
+
+			linhasArquivoTxtCartas.append(Util.completaString(this.obterConsumoAnterior(
+				emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),6, tipoLigacao, tipoMedicao).toString(),12));
+			linhasArquivoTxtCartas.append(Util.completaString(this.obterConsumoAnterior(
+				emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),5, tipoLigacao, tipoMedicao).toString(),12));
+			linhasArquivoTxtCartas.append(Util.completaString(this.obterConsumoAnterior(
+                emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),4,tipoLigacao,tipoMedicao).toString(),12));
+			linhasArquivoTxtCartas.append(Util.completaString(this.obterConsumoAnterior(
+				emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),3,tipoLigacao,tipoMedicao).toString(),12));
+			linhasArquivoTxtCartas.append(Util.completaString(this.obterConsumoAnterior(
+				emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),2,tipoLigacao,tipoMedicao).toString(),12));
+			linhasArquivoTxtCartas.append(Util.completaString(this.obterConsumoAnterior(
+				emitirContaHelper.getIdImovel(),emitirContaHelper.getAmReferencia(),1,tipoLigacao,tipoMedicao).toString(),12));
+
+			linhasArquivoTxtCartas.append(Util.completaString(economias, 24));
+
+			ObterDebitoImovelOuClienteHelper obterDebitoImovelOuClienteHelper = this
+					.obterDebitoImovelOuClienteHelper(emitirContaHelper,sistemaParametro);
+
+			if (obterDebitoImovelOuClienteHelper != null
+				&& ((obterDebitoImovelOuClienteHelper.getColecaoGuiasPagamentoValores() != null 
+				&& !obterDebitoImovelOuClienteHelper.getColecaoGuiasPagamentoValores().isEmpty()) 
+				|| (obterDebitoImovelOuClienteHelper.getColecaoContasValores() != null 
+				&& !obterDebitoImovelOuClienteHelper.getColecaoContasValores().isEmpty()))) {
+				Collection colecaoContasValores = obterDebitoImovelOuClienteHelper.getColecaoContasValores();
+
+				if (colecaoContasValores != null && !colecaoContasValores.isEmpty()) {
+					if (colecaoContasValores.size() > 5) {
+						linhasArquivoTxtCartas.append(Util.completaString("HÁ MAIS DE CINCO CONTAS EM ATRASO",40));
+					} else {
+						String contasAtraso = "";
+						for (Iterator iter = colecaoContasValores.iterator(); iter.hasNext();) {
+							ContaValoresHelper contasValores = (ContaValoresHelper) iter.next();
+							contasAtraso = contasAtraso+ contasValores.getConta().getFormatarAnoMesParaMesAno()+ " ";
+						}
+						linhasArquivoTxtCartas.append(Util.completaString(contasAtraso,40));
+					}
+				} else {
+					linhasArquivoTxtCartas.append(Util.completaString("",40));
+				}
+			} else {
+				linhasArquivoTxtCartas.append(Util.completaString("",40));
+			}
+
+			if (imovelEmitido.getLigacaoAgua() != null) {
+				if (imovelEmitido.getLigacaoAgua().getHidrometroInstalacaoHistorico() != null) {
+					if (imovelEmitido.getLigacaoAgua().getHidrometroInstalacaoHistorico().getHidrometro() != null) {
+						linhasArquivoTxtCartas.append(Util.completaString(imovelEmitido.getLigacaoAgua()
+								.getHidrometroInstalacaoHistorico().getHidrometro().getNumero(),10));
+					} else {
+						linhasArquivoTxtCartas.append(Util.completaString(" ",10));
+					}
+				} else {
+					linhasArquivoTxtCartas.append(Util.completaString(" ",10));
+				}
+			} else {
+				linhasArquivoTxtCartas.append(Util.completaString(" ", 10));
+			}
+
+			linhasArquivoTxtCartas.append(Util.completaString("Em " + dataLeituraAtual + ", foi  registrada uma leitura de " + leituraAtual + " m3 no",66)); 
+			linhasArquivoTxtCartas.append(Util.completaString("hidrômetro  de  seu imóvel, acarretando um  consumo  muito",66));
+			linhasArquivoTxtCartas.append(Util.completaString("superior ao esperado.",66));
+			linhasArquivoTxtCartas.append(Util.completaString("Para  evitar maiores transtornos, a CAERN reteve sua conta",66)); 
+			linhasArquivoTxtCartas.append(Util.completaString("para análise, a qual lhe será enviada posteriormente.",66));
+			linhasArquivoTxtCartas.append(Util.completaString("Para maiores informações, consulte a Loja Virtual em nosso",66));
+			linhasArquivoTxtCartas.append(Util.completaString("site ou ligue para um dos números de telefone indicados em",66)); 
+			linhasArquivoTxtCartas.append(Util.completaString("sua conta.",66));
+			linhasArquivoTxtCartas.append(Util.completaString("Recomendamos verificar a existência de vazamentos em seu imóvel.",66)); 
+			
+			if (emitirContaHelper.getIndicadorDebitoConta().equals(ConstantesSistema.SIM)) {
+				linhasArquivoTxtCartas.append(Util.completaString("### Não será debitado em conta corrente ###", 66));	
+			}else{
+				linhasArquivoTxtCartas.append(Util.completaString(" ", 66));	
+			}
+			
+			//representacaoNumericaCodBarra
+			linhasArquivoTxtCartas.append(Util.completaString("",48));
+			linhasArquivoTxtCartas.append(Util.completaString(" ", 66)); // Rodapé,
+			
+			Conta contaEmitida = new Conta();
+			contaEmitida.setId(emitirContaHelper.getIdConta());
+			CreditoRealizado creditoRealizado = repositorioFaturamento.pesquisarCreditoRealizadoNitrato(contaEmitida);
+
+			if (creditoRealizado != null){
+				linhasArquivoTxtCartas.append(Util.completaString("Por decisão judicial de 15/05/08 - proc. 001.07.200202-7, esta conta inclui um desconto de 50% no valor da água. R$" 
+						+ Util.completaString(Util.formatarMoedaReal(creditoRealizado.getValorCredito()), 13), 160));
+			} else {
+				linhasArquivoTxtCartas.append(Util.completaString(" ", 160));
+			}
+
+			// Impostos
+			linhasArquivoTxtCartas.append(Util.completaString("", 15));
+			linhasArquivoTxtCartas.append(Util.completaString("", 5));
+			linhasArquivoTxtCartas.append(Util.completaString("", 15));
+			linhasArquivoTxtCartas.append(Util.completaString("", 5));
+			linhasArquivoTxtCartas.append(Util.completaString("", 15));
+
+			return linhasArquivoTxtCartas;
+
+		} catch (ErroRepositorioException e) {
+			throw new ControladorException("erro.sistema", e);
+		}
+	}
+    
 }

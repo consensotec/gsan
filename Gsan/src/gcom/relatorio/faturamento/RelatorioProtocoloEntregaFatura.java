@@ -104,6 +104,11 @@ public class RelatorioProtocoloEntregaFatura extends TarefaRelatorio {
 	public RelatorioProtocoloEntregaFatura(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_PROTOCOLO_ENTREGA_FATURA);
 	}
+
+	@Deprecated
+	public RelatorioProtocoloEntregaFatura() {
+		super(null, "");
+	}
 	
 	/**
 	 * < <Descrição do método>>

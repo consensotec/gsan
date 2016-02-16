@@ -14,7 +14,6 @@ import gcom.util.ConstantesSistema;
 import gcom.util.ControladorException;
 import gcom.util.Util;
 import gcom.util.agendadortarefas.AgendadorTarefas;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,6 +42,11 @@ public class RelatorioResumoDadosCas extends TarefaRelatorio {
 	
 	public RelatorioResumoDadosCas(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_RESUMO_DADOS_CAS);
+	}
+
+	@Deprecated
+	public RelatorioResumoDadosCas() {
+		super(null, "");
 	}
 
 	public Object executar() throws TarefaException {

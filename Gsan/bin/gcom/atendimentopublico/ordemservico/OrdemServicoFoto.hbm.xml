@@ -21,5 +21,7 @@
 		<property name="fotoOrdemServico" type="binary" column="osft_imfoto" length="-1" not-null="true"/>
 		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="osft_tmultimaalteracao" not-null="true" length="6"/>
 		<property name="observacaoFoto" type="java.lang.String" column="osft_dsobservacao" length="200"/>
+		<property name="coordenadaX" type="java.math.BigDecimal" column="osft_nncoordenadax" not-null="false" length="24"/> 
+		<property name="coordenadaY" type="java.math.BigDecimal" column="osft_nncoordenaday" not-null="false" length="24"/> 
 	</class>
 </hibernate-mapping>

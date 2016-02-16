@@ -122,6 +122,11 @@ public class RelatorioContasRetificadas extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_CONTAS_RETIFICADAS);
 	}
 
+	@Deprecated
+	public RelatorioContasRetificadas() {
+		super(null, "");
+	}
+
 	//classe temporária criada para o totalizador geral dos anos. 
 	private class TotaisAno {
 		private String ano;

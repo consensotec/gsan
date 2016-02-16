@@ -109,6 +109,7 @@ import gcom.cadastro.sistemaparametro.SistemaParametro;
 import gcom.cadastro.tarifasocial.TarifaSocialCarta;
 import gcom.cadastro.tarifasocial.TarifaSocialComandoCarta;
 import gcom.cadastro.tarifasocial.TarifaSocialDadoEconomia;
+import gcom.cobranca.CobrancaGrupo;
 import gcom.cobranca.CobrancaSituacao;
 import gcom.cobranca.CobrancaSituacaoTipo;
 import gcom.cobranca.DocumentoTipo;
@@ -10523,7 +10524,7 @@ public class RepositorioImovelHBM implements IRepositorioImovel {
 								.toString())) {
 
 			consulta = consulta
-					+ " cadastro_ocorrencia.cocr_id = :idCadastroOcorrencia  and  ";
+					+ " imovel_cad_ocorrencia.cocr_id = :idCadastroOcorrencia  and  ";
 
 		}
 
@@ -11128,6 +11129,8 @@ public class RepositorioImovelHBM implements IRepositorioImovel {
 			}
 
 			SQLQuery query = session.createSQLQuery(consulta);
+			
+			System.out.println( consulta );
 
 			informarDadosQueryFiltrarImovelOutrosCriterio(query,
 					idImovelCondominio, idImovelPrincipal,
@@ -12439,7 +12442,7 @@ public class RepositorioImovelHBM implements IRepositorioImovel {
 								.toString())) {
 
 			innerJoin = innerJoin
-					+ " left join cadastro.cadastro_ocorrencia on cadastro.imovel.cocr_id = cadastro.cadastro_ocorrencia.cocr_id ";
+					+ " left join cadastro.imovel_cad_ocorrencia on cadastro.imovel.imov_id = cadastro.imovel_cad_ocorrencia.imov_id ";
 
 		}
 
@@ -28233,7 +28236,7 @@ public class RepositorioImovelHBM implements IRepositorioImovel {
 																		// 2
 					+ "from ClienteImovel clienteImovel "
 					+ "left join clienteImovel.cliente cliente "
-					+ "where clienteImovel.imovel.id = :idImovel and clienteImovel.imovel.indicadorExclusao != 1 and "
+					+ "where clienteImovel.imovel.id = :idImovel and "
 					+ "clienteImovel.clienteRelacaoTipo.id = :idClienteUsuario and clienteImovel.dataFimRelacao is null ";
 
 			retorno = (Object[]) session
@@ -37741,5 +37744,36 @@ public class RepositorioImovelHBM implements IRepositorioImovel {
 		}
 
 		return retorno;
+	}
+	
+	/**
+	 * [UC01484] - Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * 
+	 * @author Vivianne Sousa	
+	 * @date 03/12/2015
+	 */
+	public Rota pesquisarRotaImovel(Integer idImovel) throws ErroRepositorioException {
+		Rota retorno = null;
+		Session session = HibernateUtil.getSession();
+		String consulta = "";
+
+		try {
+			consulta = "select rota from Imovel imovel"
+					+ " inner join imovel.quadra quadra"
+					+ " inner join quadra.rota rota"
+					+ " inner join fetch rota.cobrancaGrupo cobrancaGrupo"
+					+ " where imovel.id =:idImovel";
+
+			retorno = (Rota) session.createQuery(consulta)
+					.setInteger("idImovel", idImovel).setMaxResults(1)
+					.uniqueResult();
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+
+		return retorno;
+
 	}
 }

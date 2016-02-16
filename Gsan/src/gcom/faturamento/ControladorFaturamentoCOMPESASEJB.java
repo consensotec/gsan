@@ -630,8 +630,10 @@ public class ControladorFaturamentoCOMPESASEJB extends ControladorFaturamento im
 	 * @param
 	 * @throws ControladorException
 	 */
-	public void gerarDebitoACobrarTaxaEmissaoConta(Integer idImovel,
+	public int gerarDebitoACobrarTaxaEmissaoConta(Integer idImovel,
 			int anoMesReferencia) throws ControladorException {
+		
+		int id;
 
 		try {
 
@@ -849,6 +851,8 @@ public class ControladorFaturamentoCOMPESASEJB extends ControladorFaturamento im
 					.inserir(debitoACobrar);
 
 			debitoACobrar.setId(idDebitoACobrar);
+			
+			id = idDebitoACobrar;
 
 			// Recupera Categorias por Imóvel
 			Collection<Categoria> colecaoCategoria = this
@@ -866,6 +870,8 @@ public class ControladorFaturamentoCOMPESASEJB extends ControladorFaturamento im
 			sessionContext.setRollbackOnly();
 			throw new ControladorException("erro.sistema", ex);
 		}
+		
+		return id;
 	}
 	
 	/**

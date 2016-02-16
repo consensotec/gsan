@@ -88,6 +88,7 @@ import gcom.util.filtro.Filtro;
 import gcom.util.filtro.GeradorHQLCondicional;
 import gcom.util.filtro.PersistenciaUtil;
 
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -147,7 +148,13 @@ public class RepositorioUtilHBM implements IRepositorioUtil {
 
 	public int registroMaximo(Class classe) throws ErroRepositorioException {
 		Session session = HibernateUtil.getSession();
-
+		/** Retorna o único registro do novo SistemaParametros.
+		 * 
+		 * @return Descrição do retorno
+		 * @exception ErroRepositorioException
+		 *                Descrição da exceção
+		 */
+	
 		try {
 
 			Query query = session.createQuery("select count(*) from "
@@ -312,6 +319,34 @@ public class RepositorioUtilHBM implements IRepositorioUtil {
 			HibernateUtil.closeSession(session);
 		}
 	}
+	
+	public ParametroSistema pesquisarParametrosDoSistemaNovo(String constante)
+			throws ErroRepositorioException {
+		Session session = HibernateUtil.getSession();
+
+		try {
+			
+			Collection colParmSitema = null;
+			
+			Query query = session.createQuery("select parametroSistema from ParametroSistema parametroSistema "
+					+ "where parametroSistema.codigoConstante like :constante");
+			colParmSitema = query
+					.setString("constante", constante)
+					.list();
+			
+			ParametroSistema parmSistema = null;
+			
+			if(!Util.isVazioOrNulo(colParmSitema)){
+				parmSistema = (ParametroSistema)colParmSitema.iterator().next();
+			}
+			
+			return parmSistema;
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
 
 	/**
 	 * Permite a inserção de um objeto mapeado.
@@ -401,7 +436,27 @@ public class RepositorioUtilHBM implements IRepositorioUtil {
 		} finally {
 			HibernateUtil.closeSession(session);
 		}
+	}
 
+	/**
+	 * Retorna a instância persistida da classe informada, ou null se não encontrada.
+	 * 
+	 * @author André Miranda
+	 * @date 03/12/2015
+	 * 
+	 * @param classe Classe da instância a ser pesquisada
+	 * @return id Chave primária
+	 * @throws ErroRepositorioException
+	 */
+	public <T extends Object> T pesquisar(Class<T> classe, Serializable id) throws ErroRepositorioException {
+		Session session = HibernateUtil.getSession();
+		try {
+			return (T) session.get(classe, id);
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
 	}
 
 	/**
@@ -443,6 +498,8 @@ public class RepositorioUtilHBM implements IRepositorioUtil {
 		// retorna a coleção de atividades pesquisada(s)
 		return retorno;
 	}
+
+
 	/**
 	 * < <Descrição do método>>
 	 * 

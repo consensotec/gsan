@@ -114,9 +114,13 @@ import java.util.Map;
 
 public class RelatorioManterHidrometroDiametro extends TarefaRelatorio {
 	private static final long serialVersionUID = 1L;
-	
 	public RelatorioManterHidrometroDiametro(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_HIDROMETRO_DIAMETRO);
+	}
+	
+	@Deprecated
+	public RelatorioManterHidrometroDiametro() {
+		super(null, "");
 	}
 
 	/**

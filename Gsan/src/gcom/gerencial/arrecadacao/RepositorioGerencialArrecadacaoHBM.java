@@ -78,6 +78,7 @@ package gcom.gerencial.arrecadacao;
 import gcom.arrecadacao.DevolucaoSituacao;
 import gcom.cobranca.DocumentoTipo;
 import gcom.util.ConstantesSistema;
+import gcom.util.ControladorException;
 import gcom.util.ErroRepositorioException;
 import gcom.util.HibernateUtil;
 
@@ -2785,5 +2786,24 @@ public class RepositorioGerencialArrecadacaoHBM implements IRepositorioGerencial
 		}
 		
 	}
+	
+	public void migrarResumosAnaliticos() throws ErroRepositorioException, SQLException {
+
+		Session session = HibernateUtil.getSessionGerencial();
+		Connection con = null;
+		String sql = "";
+		try {
+			con = session.connection();
+			sql = " select admindb.sp_migra_resumo_analitico() ";
+			PreparedStatement pstm = con.prepareStatement(sql); 
+			pstm.executeQuery();
+
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+
+	}	
 	
 }

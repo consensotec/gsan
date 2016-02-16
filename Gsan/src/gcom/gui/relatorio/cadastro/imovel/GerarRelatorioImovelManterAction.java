@@ -103,7 +103,6 @@ import gcom.cadastro.imovel.EloAnormalidade;
 import gcom.cadastro.imovel.FiltroCadastroOcorrencia;
 import gcom.cadastro.imovel.FiltroCategoria;
 import gcom.cadastro.imovel.FiltroEloAnormalidade;
-import gcom.cadastro.imovel.FiltroImovel;
 import gcom.cadastro.imovel.FiltroPocoTipo;
 import gcom.cadastro.imovel.FiltroSubCategoria;
 import gcom.cadastro.imovel.Imovel;
@@ -137,18 +136,17 @@ import gcom.relatorio.ExibidorProcessamentoTarefaRelatorio;
 import gcom.relatorio.cadastro.imovel.RelatorioManterImovel;
 import gcom.relatorio.cadastro.imovel.RelatorioManterImovelOutrosCriterios;
 import gcom.seguranca.acesso.usuario.Usuario;
+import gcom.seguranca.parametrosistema.FiltroParametroSistema;
+import gcom.seguranca.parametrosistema.ParametroSistema;
 import gcom.tarefa.TarefaRelatorio;
 import gcom.util.ConstantesSistema;
 import gcom.util.Util;
 import gcom.util.filtro.FiltroParametro;
-import gcom.util.filtro.Intervalo;
 import gcom.util.filtro.ParametroNulo;
 import gcom.util.filtro.ParametroSimples;
 import gcom.util.filtro.ParametroSimplesDiferenteDe;
-import gcom.util.filtro.ParametroSimplesIn;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -323,7 +321,10 @@ public class GerarRelatorioImovelManterAction extends
 						.pesquisarObjetoLocalidadeRelatorio(new Integer(
 								idLocalidadeOrigem));
 
-			}
+			} 
+//			else {
+//				throw new ActionServletException( "atencao.campo_texto.obrigatorio", null, "localidade inicial" );
+//			}
 
 			// Localidade Final
 
@@ -355,7 +356,10 @@ public class GerarRelatorioImovelManterAction extends
 								codigoSetorComercialOrigem), new Integer(
 								idLocalidadeOrigem));
 
-			}
+			} 
+//			else {
+//				throw new ActionServletException( "atencao.campo_texto.obrigatorio", null, "setor comercial inicial" );
+//			}
 
 			// Setor Comercial Final
 
@@ -2146,6 +2150,22 @@ public class GerarRelatorioImovelManterAction extends
 				numeroImovelFinal, 
 				false, 
 				false);
+			
+			FiltroParametroSistema filtroParametro = new FiltroParametroSistema();
+			filtroParametro.adicionarParametro(new ParametroSimples(FiltroParametroSistema.CODIGO_CONSTANTE, 
+					ParametroSistema.QTD_MAX_RELATORIO_IMOVEIS));
+			
+			Collection colParametro = fachada.pesquisar(filtroParametro, ParametroSistema.class.getName());
+			String valorParametro = null;
+			if(colParametro != null && !colParametro.isEmpty()){
+				valorParametro = ((ParametroSistema)colParametro.iterator().next()).getValorParametro();
+				
+				if(imoveisLista != null && imoveisLista.size() > Integer.parseInt(valorParametro)){
+					throw new ActionServletException(
+							"atencao.relatorio_imoveis_maior_que_limite", null,"");
+				}
+
+			}
 			
 			relatorioManterImovel.addParametro("imoveisLista", imoveisLista);	
 			relatorioManterImovel.addParametro("filtroClienteImovel",

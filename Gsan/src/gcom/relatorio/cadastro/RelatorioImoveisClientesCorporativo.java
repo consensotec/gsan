@@ -76,7 +76,9 @@
 package gcom.relatorio.cadastro;
 
 import gcom.batch.Relatorio;
+import gcom.cadastro.cliente.ClienteImovel;
 import gcom.cadastro.cliente.ClienteRelacaoTipo;
+import gcom.cadastro.cliente.FiltroClienteImovel;
 import gcom.cadastro.cliente.FiltroClienteRelacaoTipo;
 import gcom.cadastro.imovel.Imovel;
 import gcom.cadastro.sistemaparametro.SistemaParametro;
@@ -109,6 +111,11 @@ public class RelatorioImoveisClientesCorporativo extends TarefaRelatorio {
 		
 	public RelatorioImoveisClientesCorporativo(Usuario usuario) {		
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_DOACOES_IMOVEL);
+	}
+	
+	@Deprecated
+	public RelatorioImoveisClientesCorporativo() {
+		super(null, "");
 	}
 
 	/**

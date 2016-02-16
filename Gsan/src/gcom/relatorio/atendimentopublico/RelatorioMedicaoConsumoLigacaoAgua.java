@@ -109,6 +109,11 @@ public class RelatorioMedicaoConsumoLigacaoAgua extends TarefaRelatorio {
 	public RelatorioMedicaoConsumoLigacaoAgua(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MEDICAO_CONSUMO_LIGACAO_AGUA);
 	}
+	
+	@Deprecated
+	public RelatorioMedicaoConsumoLigacaoAgua() {
+		super(null, "");
+	}
 
 	private Collection<RelatorioMedicaoConsumoLigacaoAguaBean> inicializarBeanRelatorio(
 			Collection<MedicaoHistorico> dadosRelatorio, Collection<ImovelMicromedicao> dadosRelatorio2) {

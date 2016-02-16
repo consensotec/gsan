@@ -372,6 +372,8 @@ public class GerarRelatorioImovelEnderecoAction extends ExibidorProcessamentoTar
 				&& imovelOutrosCriteriosActionForm.getOrdenacaoRelatorio().equals("rota")) {
 		
 			ordenacaoRelatorio = imovelOutrosCriteriosActionForm.getOrdenacaoRelatorio();
+		} else {
+			ordenacaoRelatorio = "endereco";
 		}
 		
 		

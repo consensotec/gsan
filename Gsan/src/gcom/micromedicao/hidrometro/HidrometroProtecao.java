@@ -86,6 +86,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 /** @author Hibernate CodeGenerator */
 public class HidrometroProtecao extends ObjetoTransacao {
 	private static final long serialVersionUID = 1L;
+	
+	 public final static Integer CAIXA_METALICA = new Integer(3);
+	
     /** identifier field */
     private Integer id;
 

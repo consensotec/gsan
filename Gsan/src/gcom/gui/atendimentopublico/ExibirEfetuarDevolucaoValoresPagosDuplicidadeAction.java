@@ -360,7 +360,7 @@ public class ExibirEfetuarDevolucaoValoresPagosDuplicidadeAction extends GcomAct
 								
 								helper.setValorCreditoConta(helper.getValorCreditoConta().add(valorDevolucao));
 								helper.setValorAtualConta(conta.getValorTotal().subtract(helper.getValorCreditoConta()));
-								if (iteratorPagamentos.hasNext()){
+								if (helper.getConta().getId() != idContaASerRetificada){
 									colecaoContaASerRetificada.add(helper);
 								}
 								//Crédito Realizado
@@ -442,9 +442,14 @@ public class ExibirEfetuarDevolucaoValoresPagosDuplicidadeAction extends GcomAct
 						}
 						
 						valorDevolucao = helper.getValorAtualConta();
+						CreditosHelper creditoASerTransferidoUltimo = null;
 						
 						if(valorDevolucao.compareTo(ConstantesSistema.VALOR_ZERO) == 1){
 							if(valorSaldo.compareTo(helper.getValorAtualConta()) == 1){
+								
+								if(valorDevolucao.equals(helper.getValorAtualConta()) && valorSaldo.compareTo(ConstantesSistema.VALOR_ZERO) == 1){
+									creditoASerTransferidoUltimo = montarObjetoCreditosHelper(pagamento.getAnoMesReferenciaPagamento(), valorDevolucao,conta.getId());
+								}
 								
 								valorDevolucao = valorDevolucao.subtract(helper.getValorAtualConta());
 								valorSaldo = valorSaldo.subtract(helper.getValorAtualConta());
@@ -452,20 +457,28 @@ public class ExibirEfetuarDevolucaoValoresPagosDuplicidadeAction extends GcomAct
 								helper.setValorCreditoConta(helper.getValorCreditoConta().add(helper.getValorAtualConta()));
 								helper.setValorAtualConta(conta.getValorTotalContaBigDecimal().subtract(helper.getValorCreditoConta()));
 								
-								if (!mudouConta){
-									colecaoCreditoASerTransferido.remove(creditoASerTransferido);
-								}
+//								if (!mudouConta){
+//									colecaoCreditoASerTransferido.remove(creditoASerTransferido);
+//								}
 								creditoASerTransferido = montarObjetoCreditosHelper(pagamento.getAnoMesReferenciaPagamento(),conta.getValorTotalContaBigDecimal(),conta.getId());
 								if (mudouConta){
-								colecaoContaASerRetificada.add(helper);
-								
-								//Crédito Realizado
-								
-								colecaoCreditoASerTransferido.add(creditoASerTransferido);
-								mudouConta = false;
+									colecaoContaASerRetificada.add(helper);
+									
+									//Crédito Realizado
+									if(creditoASerTransferidoUltimo != null){
+										colecaoCreditoASerTransferido.add(creditoASerTransferidoUltimo);
+									}else{
+										colecaoCreditoASerTransferido.add(creditoASerTransferido);
+									}
+									
+									mudouConta = false;
 								} else if (!mudouConta){
 									
-									colecaoCreditoASerTransferido.add(creditoASerTransferido);
+									if(creditoASerTransferidoUltimo != null){
+										colecaoCreditoASerTransferido.add(creditoASerTransferidoUltimo);
+									}else{
+										colecaoCreditoASerTransferido.add(creditoASerTransferido);
+									}
 								}
 								
 								valorAtualConta = helper.getValorAtualConta();
@@ -476,9 +489,9 @@ public class ExibirEfetuarDevolucaoValoresPagosDuplicidadeAction extends GcomAct
 								
 								helper.setValorCreditoConta(helper.getValorCreditoConta().add(valorSaldo));
 								helper.setValorAtualConta(helper.getValorAtualConta().subtract(valorSaldo));
-								if (!mudouConta){
-									colecaoCreditoASerTransferido.remove(creditoASerTransferido);
-								}
+//								if (!mudouConta){
+//									colecaoCreditoASerTransferido.remove(creditoASerTransferido);
+//								}
 								creditoASerTransferido = montarObjetoCreditosHelper(pagamento.getAnoMesReferenciaPagamento(),valorSaldo,conta.getId());
 								
 								if (mudouConta){

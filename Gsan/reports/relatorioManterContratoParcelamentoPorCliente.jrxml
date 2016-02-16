@@ -872,7 +872,7 @@
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Opaque"
-						x="143"
+						x="162"
 						y="54"
 						width="141"
 						height="10"
@@ -894,7 +894,7 @@
 						mode="Opaque"
 						x="5"
 						y="54"
-						width="137"
+						width="156"
 						height="10"
 						forecolor="#000000"
 						backcolor="#FFFFFF"

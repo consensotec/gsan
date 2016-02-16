@@ -111,6 +111,11 @@ public class RelatorioSolicitacaoAcesso extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_SOLICITACAO_ACESSO);
 	}
 
+	@Deprecated
+	public RelatorioSolicitacaoAcesso() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

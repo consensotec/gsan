@@ -107,6 +107,11 @@ public class RelatorioParametrosContabeisArrecadacao extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_PARAMETROS_CONTABEIS_ARRECADACAO);
 	}
 	
+	@Deprecated
+	public RelatorioParametrosContabeisArrecadacao() {
+		super(null, "");
+	}
+	
 	/**
 	 * Método que executa a tarefa
 	 * 

@@ -83,6 +83,7 @@ import gcom.seguranca.acesso.usuario.UsuarioAcaoUsuarioHelper;
 import gcom.seguranca.parametrosistema.ParametroSistema;
 import gcom.util.filtro.Filtro;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -195,6 +196,18 @@ public interface IRepositorioUtil {
 
 	public Object inserirOuAtualizar(Object objeto)
 			throws ErroRepositorioException;
+
+	/**
+	 * Retorna a instância persistida da classe informada, ou null se não encontrada.
+	 * 
+	 * @author André Miranda
+	 * @date 03/12/2015
+	 * 
+	 * @param classe Classe da instância a ser pesquisada
+	 * @return id Chave primária
+	 * @throws ErroRepositorioException
+	 */
+	public <T extends Object> T pesquisar(Class<T> classe, Serializable id) throws ErroRepositorioException;
 
 	public Collection pesquisar(Collection ids, Filtro filtro,
 			String pacoteNomeObjeto) throws ErroRepositorioException;
@@ -329,4 +342,7 @@ public interface IRepositorioUtil {
 	 * @date 17/04/2015
 	 */
 	public String obterValorParametro(String codigoConstante) throws ErroRepositorioException;
+	
+	public ParametroSistema pesquisarParametrosDoSistemaNovo(String constante)
+			throws ErroRepositorioException;
 }

@@ -123,6 +123,11 @@ public class RelatorioManterMensagemConta extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_MENSAGEM_CONTA_MANTER);
 	}
 
+	@Deprecated
+	public RelatorioManterMensagemConta() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

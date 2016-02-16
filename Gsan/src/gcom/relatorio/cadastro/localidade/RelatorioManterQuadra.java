@@ -130,6 +130,11 @@ public class RelatorioManterQuadra extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_QUADRA_MANTER);
 	}
 
+	@Deprecated
+	public RelatorioManterQuadra() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

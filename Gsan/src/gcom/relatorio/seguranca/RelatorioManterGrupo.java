@@ -118,6 +118,11 @@ public class RelatorioManterGrupo extends TarefaRelatorio {
 	public RelatorioManterGrupo(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_GRUPO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterGrupo() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

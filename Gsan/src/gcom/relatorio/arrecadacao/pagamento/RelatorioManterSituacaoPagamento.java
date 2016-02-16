@@ -117,6 +117,11 @@ public class RelatorioManterSituacaoPagamento extends TarefaRelatorio {
 	public RelatorioManterSituacaoPagamento(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_SITUACAO_PAGAMENTO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterSituacaoPagamento() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

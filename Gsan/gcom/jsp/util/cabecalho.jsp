@@ -1,5 +1,36 @@
 <link REL="SHORTCUT ICON" HREF="<bean:message key="caminho.imagens"/>icoGSAN.ico"> 
 
+    <script language="JavaScript">
+    	(function() {
+    	  var chaveAnalytics;
+
+    	  <%if("CAER".equals(getServletContext().getAttribute("nomeEmpresa"))){ %>
+    	  chaveAnalytics = 'UA-60594060-8';
+    	  <% } else if ("SAAE".equals(getServletContext().getAttribute("nomeEmpresa"))){ %>
+    	  chaveAnalytics = 'UA-60594060-10';
+    	  <% } else if ("CAEMA".equals(getServletContext().getAttribute("nomeEmpresa"))){ %>
+    	  chaveAnalytics = 'UA-60594060-7';
+    	  <% } else if ("COSAMA".equals(getServletContext().getAttribute("nomeEmpresa"))){ %>
+    	  chaveAnalytics = 'UA-60594060-9';
+    	  <% } %>
+
+    	  if (chaveAnalytics) {
+    	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    	    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    	    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    	    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    	    ga('create', chaveAnalytics, 'auto');
+    	    ga('send', 'pageview');
+    	  }
+    	}());
+    </script>  
+
+	<!-- CAERN 
+    <script language="JavaScript" src="javascript/functions.js"></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    CAERN -->    
+
 <logic:notPresent scope="session" name="origemGIS">
 	<table width="770" border="0" cellspacing="5" cellpadding="0">
 		<tr>

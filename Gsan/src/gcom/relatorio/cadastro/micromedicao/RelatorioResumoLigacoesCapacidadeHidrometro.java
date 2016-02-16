@@ -109,6 +109,11 @@ public class RelatorioResumoLigacoesCapacidadeHidrometro extends TarefaRelatorio
 		super(usuario, ConstantesRelatorios.RELATORIO_RESUMO_LIGACOES_CAPACIDADE_HIDROMETRO);
 	}
 
+	@Deprecated
+	public RelatorioResumoLigacoesCapacidadeHidrometro() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

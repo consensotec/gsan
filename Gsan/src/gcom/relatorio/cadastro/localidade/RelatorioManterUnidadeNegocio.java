@@ -109,6 +109,11 @@ public class RelatorioManterUnidadeNegocio extends TarefaRelatorio {
 	public RelatorioManterUnidadeNegocio(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_UNIDADE_NEGOCIO_MANTER );
 	}
+	
+	@Deprecated
+	public RelatorioManterUnidadeNegocio() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

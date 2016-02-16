@@ -118,6 +118,11 @@ public class RelatorioManterLigacaoAguaSituacao extends TarefaRelatorio {
 	public RelatorioManterLigacaoAguaSituacao(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_LIGACAO_AGUA_SITUACAO);
 	}
+	
+	@Deprecated
+	public RelatorioManterLigacaoAguaSituacao() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

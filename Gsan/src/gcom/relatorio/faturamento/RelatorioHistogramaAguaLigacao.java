@@ -115,6 +115,11 @@ public class RelatorioHistogramaAguaLigacao extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_EMITIR_HISTOGRAMA_AGUA_LIGACAO);
 	}
 
+	@Deprecated
+	public RelatorioHistogramaAguaLigacao() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

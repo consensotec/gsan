@@ -118,6 +118,11 @@ public class RelatorioManterTipoPerfilServico extends TarefaRelatorio {
 	public RelatorioManterTipoPerfilServico(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_TIPO_PERFIL_SERVICO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterTipoPerfilServico() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

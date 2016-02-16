@@ -110,6 +110,11 @@ public class RelatorioContratoPrestacaoServico extends TarefaRelatorio {
 	public RelatorioContratoPrestacaoServico(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_CONTRATO_PRESTACAO_SERVICO);
 	}
+	
+	@Deprecated
+	public RelatorioContratoPrestacaoServico() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

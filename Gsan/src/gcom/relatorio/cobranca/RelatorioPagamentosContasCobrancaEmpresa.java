@@ -114,6 +114,11 @@ public class RelatorioPagamentosContasCobrancaEmpresa extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_PAGAMENTOS_CONTAS_COBRANCA_EMPRESA);
 	}
 
+	@Deprecated
+	public RelatorioPagamentosContasCobrancaEmpresa() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

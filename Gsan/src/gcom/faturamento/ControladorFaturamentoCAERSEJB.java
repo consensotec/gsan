@@ -4494,8 +4494,10 @@ public class ControladorFaturamentoCAERSEJB extends ControladorFaturamento imple
 	 * @param
 	 * @throws ControladorException
 	 */
-	public void gerarDebitoACobrarTaxaEmissaoConta(Integer idImovel,
+	public int gerarDebitoACobrarTaxaEmissaoConta(Integer idImovel,
 			int anoMesReferencia) throws ControladorException {
+		
+		int id;
 
 		try {
 
@@ -4597,6 +4599,8 @@ public class ControladorFaturamentoCAERSEJB extends ControladorFaturamento imple
 			Integer idDebitoACobrar = (Integer) this.getControladorUtil().inserir(debitoACobrar);
 
 			debitoACobrar.setId(idDebitoACobrar);
+			
+			id = idDebitoACobrar;
 
 			// Recupera Categorias por Imóvel
 			Collection<Categoria> colecaoCategoria = this.getControladorImovel().obterQuantidadeEconomiasCategoria(imovel);
@@ -4609,6 +4613,8 @@ public class ControladorFaturamentoCAERSEJB extends ControladorFaturamento imple
 			sessionContext.setRollbackOnly();
 			throw new ControladorException("erro.sistema", ex);
 		}
+		
+		return id;
 	}
 
 	

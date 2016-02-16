@@ -679,6 +679,7 @@ public interface ConstantesSistema {
     String SMTP_INVALIDO = "9.9.9.9";
     
     Short DOCUMENTO_ENTREGUE_AUTO_INFRACAO = new Short("2");
+    Short DOCUMENTO_ENTREGUE_SOLICITACAO_COMPARECIMENTO = new Short("1");
     
     BigDecimal CEM = new BigDecimal("100.00");
     
@@ -809,6 +810,7 @@ public interface ConstantesSistema {
 	public static Short INDICADOR_LIBERADO = new Short((short) 1);
 	public static Short INDICADOR_SUSPENSO = new Short((short) 2);
 	
+	public static String DIRETORIO_GSANEOS = "gsaneos";
 	public static String DIRETORIO_ATUALIZACAO_CADASTRAL_BIN = "atualizacao-cadastral";
 	public static String DIRETORIO_MAPAS_KML_TEMPORARIO = DIRETORIO_ATUALIZACAO_CADASTRAL_BIN+"/mapas"; 
 	public static String NOME_BANCO_SQLITE_ATUALIZACAO_CADASTRAL = "banco_gsanac";
@@ -832,4 +834,6 @@ public interface ConstantesSistema {
 	public static final Integer FOTO_TIPO_LEITURA_ANORMALIDADE = 1;
 	
 	public static final Integer FOTO_TIPO_CONSUMO_ANORMALIDADE = 2;
+	
+	public static final String KEY_WEBSERVICE_CAER = "skQcH2g7fvQ5A3nOo3P2fNPIVFvMm_Qj3VRkMaJzghVEoXS0Dzi6l0C-BuD-JunU";
 }

@@ -114,6 +114,11 @@ public class RelatorioImoveisFaturasAtrasoDescritasLocalizacao extends TarefaRel
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_FATURAS_ATRASO_DESCRITAS_LOCALIZACAO);
 	}
 
+	@Deprecated
+	public RelatorioImoveisFaturasAtrasoDescritasLocalizacao() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 
 		int tipoFormatoRelatorio = (Integer) getParametro("tipoFormatoRelatorio");

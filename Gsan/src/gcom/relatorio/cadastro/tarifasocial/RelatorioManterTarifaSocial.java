@@ -118,6 +118,11 @@ public class RelatorioManterTarifaSocial extends TarefaRelatorio {
 	public RelatorioManterTarifaSocial(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_TARIFA_SOCIAL_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterTarifaSocial() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

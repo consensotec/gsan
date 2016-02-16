@@ -106,6 +106,7 @@ import gcom.batch.arrecadacao.TarefaBatchGerarHistoricoParaEncerrarArrecadacaoMe
 import gcom.batch.arrecadacao.TarefaBatchGerarResumoArrecadacaoAnaliticoDados;
 import gcom.batch.arrecadacao.TarefaBatchGerarResumoArrecadacaoAnaliticoTotais1;
 import gcom.batch.arrecadacao.TarefaBatchGerarResumoArrecadacaoAnaliticoTotais2;
+import gcom.batch.arrecadacao.TarefaBatchGerarResumosArrecadacaoPentaho;
 import gcom.batch.arrecadacao.TarefaBatchInserirPagamentosFaturasEspeciais;
 import gcom.batch.arrecadacao.TarefaBatchRegistrarMovimentoArrecadadores;
 import gcom.batch.arrecadacao.TarefaBatchResumoArrecadacaoAtualizaDados;
@@ -223,6 +224,7 @@ import gcom.batch.faturamento.TarefaBatchGerarResumoReFaturamentoNovo;
 import gcom.batch.faturamento.TarefaBatchGerarResumoReFaturamentoOlap;
 import gcom.batch.faturamento.TarefaBatchGerarResumoSimulacaoFaturamento;
 import gcom.batch.faturamento.TarefaBatchGerarResumoSituacaoEspecialFaturamento;
+import gcom.batch.faturamento.TarefaBatchGerarResumosFaturamentoPentaho;
 import gcom.batch.faturamento.TarefaBatchGerarTaxaEntregaContaOutroEndereco;
 import gcom.batch.faturamento.TarefaBatchGerarTaxaPercentualTarifaMinimaCortado;
 import gcom.batch.faturamento.TarefaBatchGerarTxtImpressaoContasBraille;
@@ -264,6 +266,7 @@ import gcom.batch.gerencial.arrecadacao.TarefaBatchExecutarCargaResumoPendenciaP
 import gcom.batch.gerencial.arrecadacao.TarefaBatchGerarResumoArrecadacao;
 import gcom.batch.gerencial.arrecadacao.TarefaBatchGerarResumoArrecadacaoPorAno;
 import gcom.batch.gerencial.arrecadacao.TarefaBatchGerarUnResumoArrecadacaoBD;
+import gcom.batch.gerencial.arrecadacao.TarefaBatchMigrarResumosAnaliticos;
 import gcom.batch.gerencial.cadastro.TarefaBatchGerarResumoColetaEsgoto;
 import gcom.batch.gerencial.cadastro.TarefaBatchGerarResumoColetaEsgotoPorAno;
 import gcom.batch.gerencial.cadastro.TarefaBatchGerarResumoConsumoAgua;
@@ -3348,6 +3351,30 @@ public class ControladorBatchSEJB implements SessionBean {
 
 						getControladorUtil().atualizar(funcionalidadeIniciada);
 						break;
+						
+					case Funcionalidade.BATCH_GERAR_RESUMOS_FATURAMENTO_PENTAHO:
+
+						TarefaBatchGerarResumosFaturamentoPentaho gerarResumosFaturamentoPentaho = new TarefaBatchGerarResumosFaturamentoPentaho(	processoIniciado.getUsuario(),
+																																									funcionalidadeIniciada.getId());
+
+						// Seta o objeto para ser serializado no banco, onde
+						// depois sera executado por uma thread
+						funcionalidadeIniciada.setTarefaBatch(IoUtil.transformarObjetoParaBytes(gerarResumosFaturamentoPentaho));
+
+						getControladorUtil().atualizar(funcionalidadeIniciada);
+						break;
+						
+					case Funcionalidade.BATCH_GERAR_RESUMOS_ARRECADACAO_PENTAHO:
+
+						TarefaBatchGerarResumosArrecadacaoPentaho gerarResumosArrecadacaoPentaho = new TarefaBatchGerarResumosArrecadacaoPentaho(	processoIniciado.getUsuario(),
+																																									funcionalidadeIniciada.getId());
+
+						// Seta o objeto para ser serializado no banco, onde
+						// depois sera executado por uma thread
+						funcionalidadeIniciada.setTarefaBatch(IoUtil.transformarObjetoParaBytes(gerarResumosArrecadacaoPentaho));
+
+						getControladorUtil().atualizar(funcionalidadeIniciada);
+						break;
 
 					case Funcionalidade.BATCH_RESUMO_ARRECADACAO_ATUALIZA_DADOS:
 
@@ -4014,7 +4041,14 @@ public class ControladorBatchSEJB implements SessionBean {
 							funcionalidadeIniciada.setTarefaBatch(IoUtil.transformarObjetoParaBytes(tarefaResumo));
 							getControladorUtil().atualizar(funcionalidadeIniciada);
 							break;
-
+							
+						case Funcionalidade.BATCH_MIGRAR_RESUMOS_ANALITICOS:
+							TarefaBatch tarefaBatchMigrarResumosAnaliticos = new TarefaBatchMigrarResumosAnaliticos(
+									processoIniciado.getUsuario(), funcionalidadeIniciada.getId());
+							
+							funcionalidadeIniciada.setTarefaBatch(IoUtil.transformarObjetoParaBytes(tarefaBatchMigrarResumosAnaliticos));
+							getControladorUtil().atualizar(funcionalidadeIniciada);
+							break;
 						default:
 
 					}
@@ -4562,7 +4596,8 @@ public class ControladorBatchSEJB implements SessionBean {
 
 						TarefaBatchGerarRAOSAnormalidadeConsumo gerarRAOSAnormalidadeConsumo = new TarefaBatchGerarRAOSAnormalidadeConsumo(	processoIniciado.getUsuario(),
 																																			funcionalidadeIniciada.getId());
-
+						gerarRAOSAnormalidadeConsumo.addParametro("sistemaParametro", sistemaParametro);
+						
 						// Seta os parametros para rodar a funcionalidade
 						gerarRAOSAnormalidadeConsumo.addParametro("faturamentoGrupo", faturamentoAtividadeCronograma.getFaturamentoGrupoCronogramaMensal().getFaturamentoGrupo());
 
@@ -5392,7 +5427,16 @@ public class ControladorBatchSEJB implements SessionBean {
 								if (cobrancaAcaoAtividadeComando.getNomeArquivoRelacaoImoveis() == null
 										|| cobrancaAcaoAtividadeComando.getNomeArquivoRelacaoImoveis().equals("")) {
 									if (Util.isVazioOrNulo(colecaoRotas)) {
-										throw new ControladorException("atencao.comando.nao.existe.rotas");
+										
+										FiltroRota filtroRota = new FiltroRota();
+										
+										filtroRota.adicionarParametro(new ParametroSimples(FiltroRota.INDICADOR_USO, ConstantesSistema.SIM));
+										
+										colecaoRotas = getControladorUtil().pesquisar(filtroRota, Rota.class.getName());
+										
+										if(Util.isVazioOrNulo(colecaoRotas)){
+											throw new ControladorException("atencao.comando.nao.existe.rotas");
+										}
 									}
 								}
 							}

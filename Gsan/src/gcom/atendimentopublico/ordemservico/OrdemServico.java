@@ -133,6 +133,10 @@ public class OrdemServico extends ObjetoTransacao {
 	public final static String SELETIVAS_HIDROMETRO = "3";
 	public final static String TODAS = "4";
 
+	public final static Integer ORDEM_SERVICO_COBRANCA = 1;
+	public final static Integer ORDEM_SERVICO_MICROMEDICAO = 2;
+	public final static String DESCRICAO_ORDEM_SERVICO_COBRANCA = "O.S. DE COBRANÇA";
+
     /** identifier field */
     private Integer id;
 

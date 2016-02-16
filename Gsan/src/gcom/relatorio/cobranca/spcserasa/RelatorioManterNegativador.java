@@ -130,6 +130,11 @@ public class RelatorioManterNegativador extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_NEGATIVADOR);
 	}
 
+	@Deprecated
+	public RelatorioManterNegativador() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

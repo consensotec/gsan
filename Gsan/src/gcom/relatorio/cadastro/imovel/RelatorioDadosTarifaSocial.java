@@ -89,6 +89,11 @@ public class RelatorioDadosTarifaSocial extends TarefaRelatorio {
 	public RelatorioDadosTarifaSocial(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_DADOS_TARIFA_SOCIAL);
 	}
+	
+	@Deprecated
+	public RelatorioDadosTarifaSocial() {
+		super(null, "");
+	}
 
 	public Object executar() throws TarefaException {
 

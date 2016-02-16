@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2007-2007 the GSAN – Sistema Integrado de Gestão de Serviços de Saneamento
+* Copyright (C) 2007-2007 the GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
 *
 * This file is part of GSAN, an integrated service management system for Sanitation
 *
@@ -14,11 +14,11 @@
 *
 * You should have received a copy of the GNU General Public License
 * along with this program; if not, write to the Free Software
-* Foundation, Inc., 59 Temple Place – Suite 330, Boston, MA 02111-1307, USA
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
 */
 
 /*
-* GSAN – Sistema Integrado de Gestão de Serviços de Saneamento
+* GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
 * Copyright (C) <2007> 
 * Adriano Britto Siqueira
 * Alexandre Santos Cabral
@@ -88,7 +88,6 @@ import java.util.Date;
 
 @ControleAlteracao()
 public class ParcelamentoPagamentoCartaoCredito extends ObjetoTransacao {
-
 	private static final long serialVersionUID = 1L;
 	
 	public static final int ATRIBUTOS_PARCELAMENTO_PAGAMENTO_CARTAO_CREDITO_ATUALIZAR = 1594;
@@ -140,6 +139,14 @@ public class ParcelamentoPagamentoCartaoCredito extends ObjetoTransacao {
 	private BigDecimal valorConfirmadoOperadora;
 
 	private byte[] comprovantePagamento;
+
+	private String numeroPedido;
+	private byte[] conteudoConcluirParcelamento;
+
+	private String identificacaoRequisicao;
+	private String codigoComprovanteVenda;
+	private String email;
+	private String identificacaoPagamento;
 
 	public Integer getAnoMesValidade() {
 		return anoMesValidade;
@@ -269,7 +276,6 @@ public class ParcelamentoPagamentoCartaoCredito extends ObjetoTransacao {
 		this.indicadorConfirmadoOperadora = indicadorConfirmadoOperadora;
 	}
 	
-	
 	@Override
 	public String getDescricaoParaRegistroTransacao() {
 		return getId() + "";
@@ -288,7 +294,6 @@ public class ParcelamentoPagamentoCartaoCredito extends ObjetoTransacao {
 	}
 	
 	public Filtro retornaFiltro() {
-		
 		FiltroParcelamentoPagamentoCartaoCredito filtroParcelamentoPagamentoCartaoCredito = new FiltroParcelamentoPagamentoCartaoCredito();
 		
 		filtroParcelamentoPagamentoCartaoCredito.adicionarParametro(new ParametroSimples(FiltroParcelamentoPagamentoCartaoCredito.ID, this.getId()));
@@ -320,5 +325,53 @@ public class ParcelamentoPagamentoCartaoCredito extends ObjetoTransacao {
 
 	public void setComprovantePagamento(byte[] comprovantePagamento) {
 		this.comprovantePagamento = comprovantePagamento;
+	}
+
+	public String getNumeroPedido() {
+		return numeroPedido;
+	}
+
+	public void setNumeroPedido(String numeroPedido) {
+		this.numeroPedido = numeroPedido;
+	}
+
+	public byte[] getConteudoConcluirParcelamento() {
+		return conteudoConcluirParcelamento;
+	}
+
+	public void setConteudoConcluirParcelamento(byte[] conteudoConcluirParcelamento) {
+		this.conteudoConcluirParcelamento = conteudoConcluirParcelamento;
+	}
+
+	public String getIdentificacaoRequisicao() {
+		return identificacaoRequisicao;
+	}
+
+	public void setIdentificacaoRequisicao(String identificacaoRequisicao) {
+		this.identificacaoRequisicao = identificacaoRequisicao;
+	}
+
+	public String getCodigoComprovanteVenda() {
+		return codigoComprovanteVenda;
+	}
+
+	public void setCodigoComprovanteVenda(String codigoComprovanteVenda) {
+		this.codigoComprovanteVenda = codigoComprovanteVenda;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getIdentificacaoPagamento() {
+		return identificacaoPagamento;
+	}
+
+	public void setIdentificacaoPagamento(String identificacaoPagamento) {
+		this.identificacaoPagamento = identificacaoPagamento;
 	}
 }

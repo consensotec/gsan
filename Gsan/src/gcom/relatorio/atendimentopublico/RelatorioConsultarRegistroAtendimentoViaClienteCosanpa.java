@@ -109,6 +109,11 @@ public class RelatorioConsultarRegistroAtendimentoViaClienteCosanpa extends Tare
 		super(usuario,
 				ConstantesRelatorios.RELATORIO_CONSULTAR_REGISTRO_ATENDIMENTO_VIA_CLIENTE_COSANPA);
 	}
+	
+	@Deprecated
+	public RelatorioConsultarRegistroAtendimentoViaClienteCosanpa() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

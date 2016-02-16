@@ -85,6 +85,8 @@
 			column="svtp_icencautomaticoraqdoencos" not-null="true" length="2" />
 		<property name="indicadorCorrecaoAnormalidade" type="java.lang.Short"
 			column="svtp_iccorrecaoanormalidade" not-null="true" length="2" />
+		<property name="indicadorServicoCobranca" type="java.lang.Short"
+			column="svtp_icservicocobranca" not-null="true" length="2" />
 			
 			
 		<!-- Associations -->

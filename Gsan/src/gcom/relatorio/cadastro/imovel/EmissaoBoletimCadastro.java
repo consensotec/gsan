@@ -96,6 +96,11 @@ public class EmissaoBoletimCadastro extends TarefaRelatorio {
 	public EmissaoBoletimCadastro(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.BOLETIM_CADASTRO);
 	}
+	
+	@Deprecated
+	public EmissaoBoletimCadastro() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

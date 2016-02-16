@@ -181,7 +181,16 @@
 			type="java.math.BigDecimal"
 			column="mcpf_nncoordenaday"
 			not-null="false" 
+		/>		
+		
+		<property 
+			name="numeroMesMotivoRevisao"
+			type="java.lang.Short"
+			column="mcpf_nnmesmotivorevisao"
+			not-null="false" 
 		/>
+		
+		
 		
 		<!-- Associations -->
 		<!-- bi-directional one-to-many association to MovimentoContaPrefaturadaCategoria -->

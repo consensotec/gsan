@@ -103,5 +103,14 @@
     	<column name="amen_id" />
 	</many-to-one>
 	
+	<many-to-one
+        name="documentoTipo"
+	    class="gcom.cobranca.DocumentoTipo"
+	    update="false"
+	    insert="false"
+	>
+    	<column name="dotp_id" />
+	</many-to-one>
+	
 	</class>
 </hibernate-mapping>

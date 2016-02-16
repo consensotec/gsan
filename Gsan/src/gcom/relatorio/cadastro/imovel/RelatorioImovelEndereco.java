@@ -112,6 +112,11 @@ public class RelatorioImovelEndereco extends TarefaRelatorio {
 		super(usuario,
 				ConstantesRelatorios.RELATORIO_IMOVEL_ENDERECO);
 	}
+	
+	@Deprecated
+	public RelatorioImovelEndereco() {
+		super(null, "");
+	}
 
 	/**
 	 * <<Descrição do método>>

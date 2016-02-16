@@ -110,6 +110,11 @@ public class RelatorioNotificacaoDebito extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_NOTIFICACAO_DEBITO);
 	}
 
+	@Deprecated
+	public RelatorioNotificacaoDebito() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

@@ -86,6 +86,8 @@ import gcom.cadastro.imovel.FiltroCategoria;
 import gcom.cadastro.imovel.FiltroImovelPerfil;
 import gcom.cadastro.imovel.ImovelPerfil;
 import gcom.fachada.Fachada;
+import gcom.faturamento.conta.ContaMotivoRevisao;
+import gcom.faturamento.conta.FiltroContaMotivoRevisao;
 import gcom.gui.GcomAction;
 import gcom.micromedicao.consumo.ConsumoAnormalidade;
 import gcom.micromedicao.consumo.ConsumoAnormalidadeAcao;
@@ -247,15 +249,21 @@ public class ExibirAtualizarConsumoAnormalidadeAcaoAction extends GcomAction {
 		
 		sessao.setAttribute("colecaoSolicitacaoTipo", colecaoSolicitacaoTipo);
 		
-
-		
-		
+		//Colecação motivo revisao
+		FiltroContaMotivoRevisao filtroContaMotivoRevisao = new FiltroContaMotivoRevisao();
+		filtroContaMotivoRevisao.adicionarParametro(new ParametroSimples(FiltroContaMotivoRevisao.INDICADOR_USO,1));
+		Collection colecaoMotivoRevisao = fachada.pesquisar(filtroContaMotivoRevisao, ContaMotivoRevisao.class.getName());
+		sessao.setAttribute("colecaoMotivoRevisao",colecaoMotivoRevisao);
+	
 		ConsumoAnormalidadeAcao consumoAnormalidadeAcao = null;
 		
 		if (codigo != null && !codigo.trim().equals("") && Integer.parseInt(codigo) > 0) {
 		
 			form.setConsumoAnormalidadeAcaoId(codigo);
 			FiltroConsumoAnormalidadeAcao filtroConsumoAnormalidadeAcao = new FiltroConsumoAnormalidadeAcao();
+			filtroConsumoAnormalidadeAcao.adicionarCaminhoParaCarregamentoEntidade("contaMotivoRevisaoMes1");
+			filtroConsumoAnormalidadeAcao.adicionarCaminhoParaCarregamentoEntidade("contaMotivoRevisaoMes2");
+			filtroConsumoAnormalidadeAcao.adicionarCaminhoParaCarregamentoEntidade("contaMotivoRevisaoMes3");
 			
 			filtroConsumoAnormalidadeAcao.adicionarParametro(new ParametroSimples(FiltroConsumoAnormalidadeAcao.ID, codigo));
 			
@@ -282,13 +290,22 @@ public class ExibirAtualizarConsumoAnormalidadeAcaoAction extends GcomAction {
 				form.setNumerofatorConsumoMes1(consumoAnormalidadeAcao.getNumerofatorConsumoMes1().toString());
 				form.setNumerofatorConsumoMes2(consumoAnormalidadeAcao.getNumerofatorConsumoMes2().toString());
 				form.setNumerofatorConsumoMes3(consumoAnormalidadeAcao.getNumerofatorConsumoMes3().toString());
-				form.setIndicadorGeracaoCartaMes1(consumoAnormalidadeAcao.getIndicadorGeracaoCartaMes1().toString());
-				form.setIndicadorGeracaoCartaMes2(consumoAnormalidadeAcao.getIndicadorGeracaoCartaMes2().toString());
-				form.setIndicadorGeracaoCartaMes3(consumoAnormalidadeAcao.getIndicadorGeracaoCartaMes3().toString());
+				
+				if (form.getIndicadorGeracaoCartaMes1() == null){
+					form.setIndicadorGeracaoCartaMes1(consumoAnormalidadeAcao.getIndicadorGeracaoCartaMes1().toString());
+				}
+				
+				if (form.getIndicadorGeracaoCartaMes2() == null){
+					form.setIndicadorGeracaoCartaMes2(consumoAnormalidadeAcao.getIndicadorGeracaoCartaMes2().toString());
+				}
+				
+				if (form.getIndicadorGeracaoCartaMes3() == null){
+					form.setIndicadorGeracaoCartaMes3(consumoAnormalidadeAcao.getIndicadorGeracaoCartaMes3().toString());
+				}
 
-				if (consumoAnormalidadeAcao.getServicoTipoMes1() != null && !consumoAnormalidadeAcao.getServicoTipoMes1().getId().equals("")
-						&& httpServletRequest.getParameter("menu") != null && httpServletRequest.getParameter("menu").equals("sim") ) {
-					
+				
+				if (consumoAnormalidadeAcao.getServicoTipoMes1() != null && (form.getIdServicoTipoMes1() == null ||
+					(httpServletRequest.getParameter("filtrar") != null && httpServletRequest.getParameter("filtrar").equals("sim")))){			
 					form.setIdServicoTipoMes1(consumoAnormalidadeAcao.getServicoTipoMes1().getId().toString());
 					FiltroServicoTipo filtroServicoTipo = new FiltroServicoTipo();
 					filtroServicoTipo.adicionarParametro(new ParametroSimples(FiltroServicoTipo.ID, form.getIdServicoTipoMes1()));
@@ -297,9 +314,8 @@ public class ExibirAtualizarConsumoAnormalidadeAcaoAction extends GcomAction {
 					form.setDesServicoTipoMes1(servicoTipo.getDescricao());
 				}
 				
-				if (consumoAnormalidadeAcao.getServicoTipoMes2() != null && !consumoAnormalidadeAcao.getServicoTipoMes2().getId().equals("")
-						&& httpServletRequest.getParameter("menu") != null && httpServletRequest.getParameter("menu").equals("sim")){
-					
+				if (consumoAnormalidadeAcao.getServicoTipoMes2() != null && (form.getIdServicoTipoMes2() == null ||
+					(httpServletRequest.getParameter("filtrar") != null && httpServletRequest.getParameter("filtrar").equals("sim")))){					
 					form.setIdServicoTipoMes2(consumoAnormalidadeAcao.getServicoTipoMes2().getId().toString());
 					FiltroServicoTipo filtroServicoTipo = new FiltroServicoTipo();
 					filtroServicoTipo.adicionarParametro(new ParametroSimples(FiltroServicoTipo.ID, form.getIdServicoTipoMes2()));
@@ -309,10 +325,8 @@ public class ExibirAtualizarConsumoAnormalidadeAcaoAction extends GcomAction {
 				
 				}
 				
-				
-				if (consumoAnormalidadeAcao.getServicoTipoMes3() != null && !consumoAnormalidadeAcao.getServicoTipoMes3().getId().equals("")
-						&& httpServletRequest.getParameter("menu") != null && httpServletRequest.getParameter("menu").equals("sim")){
-					
+				if (consumoAnormalidadeAcao.getServicoTipoMes3() != null  && (form.getIdServicoTipoMes3() == null ||
+					(httpServletRequest.getParameter("filtrar") != null && httpServletRequest.getParameter("filtrar").equals("sim")))){
 					form.setIdServicoTipoMes3(consumoAnormalidadeAcao.getServicoTipoMes3().getId().toString());
 					FiltroServicoTipo filtroServicoTipo = new FiltroServicoTipo();
 					filtroServicoTipo.adicionarParametro(new ParametroSimples(FiltroServicoTipo.ID, form.getIdServicoTipoMes3()));
@@ -322,8 +336,8 @@ public class ExibirAtualizarConsumoAnormalidadeAcaoAction extends GcomAction {
 				}
 				
 				
-				if (consumoAnormalidadeAcao.getServicoTipoMes1() != null && !consumoAnormalidadeAcao.getServicoTipoMes1().getId().equals("")
-						&& httpServletRequest.getParameter("menu") != null && httpServletRequest.getParameter("menu").equals("sim")){
+				if (form.getSolicitacaoTipoEspecificacaoMes1() == null && consumoAnormalidadeAcao.getServicoTipoMes1() != null 
+					&& !consumoAnormalidadeAcao.getServicoTipoMes1().getId().equals("")){
 				
 					
 					FiltroSolicitacaoTipoEspecificacao filtroSolicitacaoTipoEspecificacaoMes1 = new FiltroSolicitacaoTipoEspecificacao();
@@ -343,8 +357,8 @@ public class ExibirAtualizarConsumoAnormalidadeAcaoAction extends GcomAction {
 					
 				}
 				
-				if (consumoAnormalidadeAcao.getServicoTipoMes2() != null && !consumoAnormalidadeAcao.getServicoTipoMes2().getId().equals("")
-						&& httpServletRequest.getParameter("menu") != null && httpServletRequest.getParameter("menu").equals("sim")){
+				if (form.getSolicitacaoTipoMes2() == null && consumoAnormalidadeAcao.getServicoTipoMes2() != null 
+					&& !consumoAnormalidadeAcao.getServicoTipoMes2().getId().equals("")){
 					
 					
 					FiltroSolicitacaoTipoEspecificacao filtroSolicitacaoTipoEspecificacaoMes2 = new FiltroSolicitacaoTipoEspecificacao();
@@ -363,8 +377,8 @@ public class ExibirAtualizarConsumoAnormalidadeAcaoAction extends GcomAction {
 		
 				}
 				
-				if (consumoAnormalidadeAcao.getServicoTipoMes3() != null && !consumoAnormalidadeAcao.getServicoTipoMes3().getId().equals("")
-						&& httpServletRequest.getParameter("menu") != null && httpServletRequest.getParameter("menu").equals("sim")){
+				if (form.getSolicitacaoTipoMes3() == null && consumoAnormalidadeAcao.getServicoTipoMes3() != null && 
+					!consumoAnormalidadeAcao.getServicoTipoMes3().getId().equals("")){
 					
 					FiltroSolicitacaoTipoEspecificacao filtroSolicitacaoTipoEspecificacaoMes3 = new FiltroSolicitacaoTipoEspecificacao();
 					filtroSolicitacaoTipoEspecificacaoMes3.adicionarParametro(new ParametroSimples(
@@ -382,26 +396,16 @@ public class ExibirAtualizarConsumoAnormalidadeAcaoAction extends GcomAction {
 
 				}
 				
-				
-				if (consumoAnormalidadeAcao.getServicoTipoMes1() != null && !consumoAnormalidadeAcao.getServicoTipoMes1().getId().equals("")
-						&& httpServletRequest.getParameter("menu") != null && httpServletRequest.getParameter("menu").equals("sim")){
-					
-					form.setSolicitacaoTipoEspecificacaoMes1(consumoAnormalidadeAcao.getSolicitacaoTipoEspecificacaoMes1().getId().toString());
-					
+				if (consumoAnormalidadeAcao.getServicoTipoMes1() != null && !consumoAnormalidadeAcao.getServicoTipoMes1().getId().equals("")){					
+					form.setSolicitacaoTipoEspecificacaoMes1(consumoAnormalidadeAcao.getSolicitacaoTipoEspecificacaoMes1().getId().toString());					
 				}
 				
-				if (consumoAnormalidadeAcao.getServicoTipoMes2() != null && !consumoAnormalidadeAcao.getServicoTipoMes2().getId().equals("")
-						&& httpServletRequest.getParameter("menu") != null && httpServletRequest.getParameter("menu").equals("sim")){
-					
-					form.setSolicitacaoTipoEspecificacaoMes2(consumoAnormalidadeAcao.getSolicitacaoTipoEspecificacaoMes2().getId().toString());
-				
+				if (consumoAnormalidadeAcao.getServicoTipoMes2() != null && !consumoAnormalidadeAcao.getServicoTipoMes2().getId().equals("")){					
+					form.setSolicitacaoTipoEspecificacaoMes2(consumoAnormalidadeAcao.getSolicitacaoTipoEspecificacaoMes2().getId().toString());				
 				}
 				
-				if (consumoAnormalidadeAcao.getServicoTipoMes3() != null && !consumoAnormalidadeAcao.getServicoTipoMes3().getId().equals("")
-						&& httpServletRequest.getParameter("menu") != null && httpServletRequest.getParameter("menu").equals("sim")){
-					
-					form.setSolicitacaoTipoEspecificacaoMes3(consumoAnormalidadeAcao.getSolicitacaoTipoEspecificacaoMes3().getId().toString());
-					
+				if (consumoAnormalidadeAcao.getServicoTipoMes3() != null && !consumoAnormalidadeAcao.getServicoTipoMes3().getId().equals("")){					
+					form.setSolicitacaoTipoEspecificacaoMes3(consumoAnormalidadeAcao.getSolicitacaoTipoEspecificacaoMes3().getId().toString());					
 				}
 				
 				form.setDescricaoContaMensagemMes1(consumoAnormalidadeAcao.getDescricaoContaMensagemMes1());
@@ -409,6 +413,7 @@ public class ExibirAtualizarConsumoAnormalidadeAcaoAction extends GcomAction {
 				form.setDescricaoContaMensagemMes3(consumoAnormalidadeAcao.getDescricaoContaMensagemMes3());
 				form.setIndicadorUso(consumoAnormalidadeAcao.getIndicadorUso().toString());
 				
+				form.setIndicadorValidarRetificacao(consumoAnormalidadeAcao.getIndicadorValidarRetificacao().toString());
 				
 				//coleção tipo de solicitação especificação para o 1º mês
 				   
@@ -464,6 +469,26 @@ public class ExibirAtualizarConsumoAnormalidadeAcaoAction extends GcomAction {
 						filtroSolicitacaoTipoEspecificacao3, 
 						SolicitacaoTipoEspecificacao.class.getName());
 				sessao.setAttribute("colecaoSolicitacaoTipoEspecificacaoMes3", colecaoSolicitacaoTipoEspecificacaoMes3);
+				
+				if (consumoAnormalidadeAcao.getContaMotivoRevisaoMes1() != null && (form.getMotivoRevisaoMes1() == null ||
+					(httpServletRequest.getParameter("filtrar") != null && httpServletRequest.getParameter("filtrar").equals("sim")))){
+					form.setMotivoRevisaoMes1(consumoAnormalidadeAcao.getContaMotivoRevisaoMes1().getId().toString());
+				}
+				
+				if (consumoAnormalidadeAcao.getContaMotivoRevisaoMes2() != null && (form.getMotivoRevisaoMes2() == null ||
+					(httpServletRequest.getParameter("filtrar") != null && httpServletRequest.getParameter("filtrar").equals("sim")))){
+					form.setMotivoRevisaoMes2(consumoAnormalidadeAcao.getContaMotivoRevisaoMes2().getId().toString());
+				}
+				
+				if (consumoAnormalidadeAcao.getContaMotivoRevisaoMes3() != null && (form.getMotivoRevisaoMes3() == null ||
+					(httpServletRequest.getParameter("filtrar") != null && httpServletRequest.getParameter("filtrar").equals("sim")))){
+					form.setMotivoRevisaoMes3(consumoAnormalidadeAcao.getContaMotivoRevisaoMes3().getId().toString());
+				}
+				
+				if (consumoAnormalidadeAcao.getIndicadorCobrancaConsumoNormal() != null && (form.getIndicadorCobrancaConsumoNormal() == null ||
+					(httpServletRequest.getParameter("filtrar") != null && httpServletRequest.getParameter("filtrar").equals("sim")))){
+					form.setIndicadorCobrancaConsumoNormal(consumoAnormalidadeAcao.getIndicadorCobrancaConsumoNormal().toString());
+				}
 			}
 			
 			

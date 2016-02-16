@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RelatorioDeclaracaoAnualQuitacaoDebitos extends TarefaRelatorio {
@@ -32,6 +33,11 @@ public class RelatorioDeclaracaoAnualQuitacaoDebitos extends TarefaRelatorio {
 	public RelatorioDeclaracaoAnualQuitacaoDebitos(Usuario usuario,String nomeRelatorio) {
 		
 		super(usuario, nomeRelatorio);
+	}
+
+	@Deprecated
+	public RelatorioDeclaracaoAnualQuitacaoDebitos() {
+		super(null, "");
 	}
 	
 	@Override

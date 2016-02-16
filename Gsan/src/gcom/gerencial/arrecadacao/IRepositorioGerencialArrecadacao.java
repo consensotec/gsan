@@ -75,6 +75,7 @@
 */  
 package gcom.gerencial.arrecadacao;
 
+import gcom.util.ControladorException;
 import gcom.util.ErroRepositorioException;
 
 import java.sql.SQLException;
@@ -392,5 +393,17 @@ public interface IRepositorioGerencialArrecadacao {
 	 * @throws SQLException 
 	 */
 	public void gerarResumoArrecadacao() throws ErroRepositorioException, SQLException;
+	
+	
+	/**
+	 * Batch criado para migrar todos os resumos analiticos 
+	 * do banco comercial para o gerencial
+	 * 
+	 * @autor Bruno Barros
+	 * 
+	 * @param idFuncionalidadeIniciada
+	 * @throws ControladorException
+	 */		
+	public void migrarResumosAnaliticos() throws ErroRepositorioException, SQLException;	
 
 }

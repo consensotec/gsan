@@ -1,78 +1,78 @@
 /*
-* Copyright (C) 2007-2007 the GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
-*
-* This file is part of GSAN, an integrated service management system for Sanitation
-*
-* GSAN is free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License.
-*
-* GSAN is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program; if not, write to the Free Software
-* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
-*/
+ * Copyright (C) 2007-2007 the GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
+ *
+ * This file is part of GSAN, an integrated service management system for Sanitation
+ *
+ * GSAN is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License.
+ *
+ * GSAN is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
+ */
 
 /*
-* GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
-* Copyright (C) <2007> 
-* Adriano Britto Siqueira
-* Alexandre Santos Cabral
-* Ana Carolina Alves Breda
-* Ana Maria Andrade Cavalcante
-* Aryed Lins de Araújo
-* Bruno Leonardo Rodrigues Barros
-* Carlos Elmano Rodrigues Ferreira
-* Cláudio de Andrade Lira
-* Denys Guimarães Guenes Tavares
-* Eduardo Breckenfeld da Rosa Borges
-* Fabíola Gomes de Araújo
-* Flávio Leonardo Cavalcanti Cordeiro
-* Francisco do Nascimento Júnior
-* Homero Sampaio Cavalcanti
-* Ivan Sérgio da Silva Júnior
-* José Edmar de Siqueira
-* José Thiago Tenório Lopes
-* Kássia Regina Silvestre de Albuquerque
-* Leonardo Luiz Vieira da Silva
-* Márcio Roberto Batista da Silva
-* Maria de Fátima Sampaio Leite
-* Micaela Maria Coelho de Araújo
-* Nelson Mendonça de Carvalho
-* Newton Morais e Silva
-* Pedro Alexandre Santos da Silva Filho
-* Rafael Corrêa Lima e Silva
-* Rafael Francisco Pinto
-* Rafael Koury Monteiro
-* Rafael Palermo de Araújo
-* Raphael Veras Rossiter
-* Roberto Sobreira Barbalho
-* Rodrigo Avellar Silveira
-* Rosana Carvalho Barbosa
-* Sávio Luiz de Andrade Cavalcante
-* Tai Mu Shih
-* Thiago Augusto Souza do Nascimento
-* Tiago Moreno Rodrigues
-* Vivianne Barbosa Sousa
-*
-* Este programa é software livre; você pode redistribuí-lo e/ou
-* modificá-lo sob os termos de Licença Pública Geral GNU, conforme
-* publicada pela Free Software Foundation; versão 2 da
-* Licença.
-* Este programa é distribuído na expectativa de ser útil, mas SEM
-* QUALQUER GARANTIA; sem mesmo a garantia implícita de
-* COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
-* PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
-* detalhes.
-* Você deve ter recebido uma cópia da Licença Pública Geral GNU
-* junto com este programa; se não, escreva para Free Software
-* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
-* 02111-1307, USA.
-*/  
+ * GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
+ * Copyright (C) <2007> 
+ * Adriano Britto Siqueira
+ * Alexandre Santos Cabral
+ * Ana Carolina Alves Breda
+ * Ana Maria Andrade Cavalcante
+ * Aryed Lins de Araújo
+ * Bruno Leonardo Rodrigues Barros
+ * Carlos Elmano Rodrigues Ferreira
+ * Cláudio de Andrade Lira
+ * Denys Guimarães Guenes Tavares
+ * Eduardo Breckenfeld da Rosa Borges
+ * Fabíola Gomes de Araújo
+ * Flávio Leonardo Cavalcanti Cordeiro
+ * Francisco do Nascimento Júnior
+ * Homero Sampaio Cavalcanti
+ * Ivan Sérgio da Silva Júnior
+ * José Edmar de Siqueira
+ * José Thiago Tenório Lopes
+ * Kássia Regina Silvestre de Albuquerque
+ * Leonardo Luiz Vieira da Silva
+ * Márcio Roberto Batista da Silva
+ * Maria de Fátima Sampaio Leite
+ * Micaela Maria Coelho de Araújo
+ * Nelson Mendonça de Carvalho
+ * Newton Morais e Silva
+ * Pedro Alexandre Santos da Silva Filho
+ * Rafael Corrêa Lima e Silva
+ * Rafael Francisco Pinto
+ * Rafael Koury Monteiro
+ * Rafael Palermo de Araújo
+ * Raphael Veras Rossiter
+ * Roberto Sobreira Barbalho
+ * Rodrigo Avellar Silveira
+ * Rosana Carvalho Barbosa
+ * Sávio Luiz de Andrade Cavalcante
+ * Tai Mu Shih
+ * Thiago Augusto Souza do Nascimento
+ * Tiago Moreno Rodrigues
+ * Vivianne Barbosa Sousa
+ *
+ * Este programa é software livre; você pode redistribuí-lo e/ou
+ * modificá-lo sob os termos de Licença Pública Geral GNU, conforme
+ * publicada pela Free Software Foundation; versão 2 da
+ * Licença.
+ * Este programa é distribuído na expectativa de ser útil, mas SEM
+ * QUALQUER GARANTIA; sem mesmo a garantia implícita de
+ * COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+ * PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+ * detalhes.
+ * Você deve ter recebido uma cópia da Licença Pública Geral GNU
+ * junto com este programa; se não, escreva para Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ * 02111-1307, USA.
+ */
 package gcom.relatorio.arrecadacao;
 
 import gcom.arrecadacao.aviso.bean.AvisoBancarioHelper;
@@ -81,8 +81,13 @@ import gcom.arrecadacao.pagamento.Pagamento;
 import gcom.arrecadacao.pagamento.PagamentoSituacao;
 import gcom.batch.Relatorio;
 import gcom.cadastro.cliente.Cliente;
+import gcom.cadastro.cliente.EsferaPoder;
+import gcom.cadastro.cliente.FiltroEsferaPoder;
+import gcom.cadastro.imovel.Categoria;
+import gcom.cadastro.imovel.FiltroCategoria;
 import gcom.cadastro.sistemaparametro.SistemaParametro;
 import gcom.cobranca.DocumentoTipo;
+import gcom.cobranca.FiltroCobrancaAcaoAtividadeCronograma;
 import gcom.fachada.Fachada;
 import gcom.gui.ActionServletException;
 import gcom.relatorio.ConstantesRelatorios;
@@ -95,6 +100,8 @@ import gcom.util.ConstantesSistema;
 import gcom.util.ControladorException;
 import gcom.util.Util;
 import gcom.util.agendadortarefas.AgendadorTarefas;
+import gcom.util.filtro.ConectorOr;
+import gcom.util.filtro.ParametroSimples;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -113,11 +120,17 @@ import java.util.Map;
  */
 public class RelatorioPagamento extends TarefaRelatorio {
 	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Construtor da classe RelatorioAnaliseFisicoQuimicaAgua
 	 */
 	public RelatorioPagamento(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_PAGAMENTO);
+	}
+
+	@Deprecated
+	public RelatorioPagamento() {
+		super(null, "");
 	}
 
 	/**
@@ -177,15 +190,16 @@ public class RelatorioPagamento extends TarefaRelatorio {
 		String[] idsDocumentoTipo = (String[]) getParametro("idsDocumentoTipo");
 		String[] idsDebitoTipo = (String[]) getParametro("idsDebitoTipo");
 		String opcaoPagamento = (String) getParametro("opcaoPagamento");
-        
-        String valorPagamentoInicial = (String) getParametro("valorPagamentoInicial");
-        String valorPagamentoFinal = (String) getParametro("valorPagamentoFinal");
-        
-        Cliente clie = null;
-        if(Util.verificarIdNaoVazio(idImovel)){
-        	clie = fachada.pesquisarClienteUsuarioImovel(Integer.parseInt(idImovel));
-        }
-        
+		String[] idsCategoria = (String[]) getParametro("idsCategoria");
+		String[] idsEsferaPoder = (String[]) getParametro("idsEsferaPoder");
+
+		String valorPagamentoInicial = (String) getParametro("valorPagamentoInicial");
+		String valorPagamentoFinal = (String) getParametro("valorPagamentoFinal");
+
+		Cliente clie = null;
+		if (Util.verificarIdNaoVazio(idImovel)) {
+			clie = fachada.pesquisarClienteUsuarioImovel(Integer.parseInt(idImovel));
+		}
 
 		if (relatorioConsultarAvisoBancario) {
 			colecaoPagamentos = avisoBancarioHelper.getColecaoPagamentos();
@@ -193,8 +207,7 @@ public class RelatorioPagamento extends TarefaRelatorio {
 
 			if (idImovel != null && !idImovel.equals("")) {
 				if (opcaoPagamento != null && opcaoPagamento.equals("ambos")) {
-					colecaoPagamentos = fachada
-							.pesquisarPagamentoImovelAmbosRelatorio(idImovel);
+					colecaoPagamentos = fachada.pesquisarPagamentoImovelAmbosRelatorio(idImovel);
 				} else {
 					colecaoPagamentos = fachada
 							.pesquisarPagamentoImovelRelatorio(idImovel,
@@ -208,42 +221,46 @@ public class RelatorioPagamento extends TarefaRelatorio {
 									dataPagamentoInicial, dataPagamentoFinal,
 									idsPagamentoSituacao, idsDebitoTipo,
 									idsArrecadacaoForma, idsDocumentoTipo,
-                                    valorPagamentoInicial,
-                                    valorPagamentoFinal);
+									valorPagamentoInicial, valorPagamentoFinal,
+									null,null);
 				}
 			} else if (idCliente != null && !idCliente.equals("")) {
-				
-				if (opcaoPagamento != null && opcaoPagamento.equals("atual") 
-						|| (opcaoPagamento.equals("ambos"))) {
-					
-					colecaoPagamentos = fachada.pesquisarPagamentoClienteRelatorio(
-							idImovel, idCliente, clienteRelacaoTipo,
-							localidadeInicial, localidadeFinal, idAvisoBancario,
-							idMovimentoArrecadador, periodoArrecadacaoInicial,
-							periodoArrecadacaoFinal, periodoPagamentoInicial,
-							periodoPagamentoFinal, dataPagamentoInicial,
-							dataPagamentoFinal, idsPagamentoSituacao,
-							idsDebitoTipo, idsArrecadacaoForma, idsDocumentoTipo,
-	                        valorPagamentoInicial,
-	                        valorPagamentoFinal);
-				} 
-				
-				if (opcaoPagamento != null && opcaoPagamento.equals("historico")
-						|| (opcaoPagamento.equals("ambos"))){
-					
-					colecaoPagamentosClienteHistorico = fachada.pesquisarPagamentoHistoricoClienteRelatorio(
-						idImovel, idCliente, clienteRelacaoTipo,
-						localidadeInicial, localidadeFinal, idAvisoBancario,
-						idMovimentoArrecadador, periodoArrecadacaoInicial,
-						periodoArrecadacaoFinal, periodoPagamentoInicial,
-						periodoPagamentoFinal, dataPagamentoInicial,
-						dataPagamentoFinal, idsPagamentoSituacao,
-						idsDebitoTipo, idsArrecadacaoForma, idsDocumentoTipo,
-                        valorPagamentoInicial,
-                        valorPagamentoFinal);
-					
+
+				if (opcaoPagamento != null && opcaoPagamento.equals("atual") || (opcaoPagamento.equals("ambos"))) {
+
+					colecaoPagamentos = fachada
+							.pesquisarPagamentoClienteRelatorio(idImovel,
+									idCliente, clienteRelacaoTipo,
+									localidadeInicial, localidadeFinal,
+									idAvisoBancario, idMovimentoArrecadador,
+									periodoArrecadacaoInicial,
+									periodoArrecadacaoFinal,
+									periodoPagamentoInicial,
+									periodoPagamentoFinal,
+									dataPagamentoInicial, dataPagamentoFinal,
+									idsPagamentoSituacao, idsDebitoTipo,
+									idsArrecadacaoForma, idsDocumentoTipo,
+									valorPagamentoInicial, valorPagamentoFinal);
+				}
+
+				if (opcaoPagamento != null && opcaoPagamento.equals("historico") || (opcaoPagamento.equals("ambos"))) {
+
+					colecaoPagamentosClienteHistorico = fachada
+							.pesquisarPagamentoHistoricoClienteRelatorio(
+									idImovel, idCliente, clienteRelacaoTipo,
+									localidadeInicial, localidadeFinal,
+									idAvisoBancario, idMovimentoArrecadador,
+									periodoArrecadacaoInicial,
+									periodoArrecadacaoFinal,
+									periodoPagamentoInicial,
+									periodoPagamentoFinal,
+									dataPagamentoInicial, dataPagamentoFinal,
+									idsPagamentoSituacao, idsDebitoTipo,
+									idsArrecadacaoForma, idsDocumentoTipo,
+									valorPagamentoInicial, valorPagamentoFinal);
+
 					colecaoPagamentos.addAll(colecaoPagamentosClienteHistorico);
-					
+
 					colecaoPagamentosHistoricoClienteGuiaPagamento = fachada
 							.pesquisarPagamentoHistoricoClienteGuiaPagamentoRelatorio(
 									idImovel, idCliente, clienteRelacaoTipo,
@@ -252,13 +269,13 @@ public class RelatorioPagamento extends TarefaRelatorio {
 									periodoArrecadacaoInicial,
 									periodoArrecadacaoFinal,
 									periodoPagamentoInicial,
-									periodoPagamentoFinal, dataPagamentoInicial,
-									dataPagamentoFinal, idsPagamentoSituacao,
-									idsDebitoTipo, idsArrecadacaoForma,
-									idsDocumentoTipo);
-					
+									periodoPagamentoFinal,
+									dataPagamentoInicial, dataPagamentoFinal,
+									idsPagamentoSituacao, idsDebitoTipo,
+									idsArrecadacaoForma, idsDocumentoTipo);
+
 					colecaoPagamentos.addAll(colecaoPagamentosHistoricoClienteGuiaPagamento);
-					
+
 				}
 			} else if (idAvisoBancario != null && !idAvisoBancario.equals("")) {
 				colecaoPagamentos = fachada
@@ -272,10 +289,8 @@ public class RelatorioPagamento extends TarefaRelatorio {
 								dataPagamentoInicial, dataPagamentoFinal,
 								idsPagamentoSituacao, idsDebitoTipo,
 								idsArrecadacaoForma, idsDocumentoTipo,
-                                valorPagamentoInicial,
-                                valorPagamentoFinal);
-			} else if (idMovimentoArrecadador != null
-					&& !idMovimentoArrecadador.equals("")) {
+								valorPagamentoInicial, valorPagamentoFinal);
+			} else if (idMovimentoArrecadador != null && !idMovimentoArrecadador.equals("")) {
 				colecaoPagamentos = fachada
 						.pesquisarPagamentoMovimentoArrecadadorRelatorio(
 								idImovel, idCliente, clienteRelacaoTipo,
@@ -287,11 +302,9 @@ public class RelatorioPagamento extends TarefaRelatorio {
 								dataPagamentoInicial, dataPagamentoFinal,
 								idsPagamentoSituacao, idsDebitoTipo,
 								idsArrecadacaoForma, idsDocumentoTipo,
-                                valorPagamentoInicial,
-                                valorPagamentoFinal);
+								valorPagamentoInicial, valorPagamentoFinal);
 			} else {
-				// verifica se é para pesquisar no atual, no historico ou em
-				// ambos
+				// verifica se é para pesquisar no atual, no historico ou em ambos
 				if (opcaoPagamento != null && opcaoPagamento.equals("atual")) {
 					colecaoPagamentos = fachada
 							.pesquisarPagamentoLocalidadeRelatorio(idImovel,
@@ -305,10 +318,8 @@ public class RelatorioPagamento extends TarefaRelatorio {
 									dataPagamentoInicial, dataPagamentoFinal,
 									idsPagamentoSituacao, idsDebitoTipo,
 									idsArrecadacaoForma, idsDocumentoTipo,
-                                    valorPagamentoInicial,
-                                    valorPagamentoFinal);
-				} else if (opcaoPagamento != null
-						&& opcaoPagamento.equals("historico")) {
+									valorPagamentoInicial, valorPagamentoFinal,idsCategoria,idsEsferaPoder);
+				} else if (opcaoPagamento != null && opcaoPagamento.equals("historico")) {
 					colecaoPagamentos = fachada
 							.pesquisarPagamentoHistoricoLocalidadeRelatorio(
 									idImovel, idCliente, clienteRelacaoTipo,
@@ -321,11 +332,9 @@ public class RelatorioPagamento extends TarefaRelatorio {
 									dataPagamentoInicial, dataPagamentoFinal,
 									idsPagamentoSituacao, idsDebitoTipo,
 									idsArrecadacaoForma, idsDocumentoTipo,
-                                    valorPagamentoInicial,
-                                    valorPagamentoFinal);
+									valorPagamentoInicial, valorPagamentoFinal,idsCategoria,idsEsferaPoder);
 
-				} else if (opcaoPagamento != null
-						&& opcaoPagamento.equals("ambos")) {
+				} else if (opcaoPagamento != null && opcaoPagamento.equals("ambos")) {
 					colecaoPagamentos = fachada
 							.pesquisarPagamentoLocalidadeAmbosRelatorio(
 									idImovel, idCliente, clienteRelacaoTipo,
@@ -338,10 +347,8 @@ public class RelatorioPagamento extends TarefaRelatorio {
 									dataPagamentoInicial, dataPagamentoFinal,
 									idsPagamentoSituacao, idsDebitoTipo,
 									idsArrecadacaoForma, idsDocumentoTipo,
-                                    valorPagamentoInicial,
-                                    valorPagamentoFinal);
+									valorPagamentoInicial, valorPagamentoFinal,idsCategoria,idsEsferaPoder);
 				}
-
 			}
 		}
 
@@ -360,55 +367,49 @@ public class RelatorioPagamento extends TarefaRelatorio {
 		int qtdePagamentosDuploExcessoContas = 0;
 		BigDecimal valorPagamentosDuploExcessoContas = new BigDecimal("0.00");
 		int qtdePagamentosDocumentoInexistenteContas = 0;
-		BigDecimal valorPagamentosDocumentoInexistenteContas = new BigDecimal(
-				"0.00");
+		BigDecimal valorPagamentosDocumentoInexistenteContas = new BigDecimal("0.00");
 		int qtdePagamentosBaixarValorExcedenteContas = 0;
-		BigDecimal valorPagamentosBaixarValorExcedenteContas = new BigDecimal(
-				"0.00");
+		BigDecimal valorPagamentosBaixarValorExcedenteContas = new BigDecimal("0.00");
 		int qtdePagamentosValorNaoConfereContas = 0;
 		BigDecimal valorPagamentosValorNaoConfereContas = new BigDecimal("0.00");
 		int qtdePagamentosDuploExcessoDevolvidoContas = 0;
-		BigDecimal valorPagamentosDuploExcessoDevolvidoContas = new BigDecimal(
-				"0.00");
-
+		BigDecimal valorPagamentosDuploExcessoDevolvidoContas = new BigDecimal("0.00");
+		int qtdePagamentosDocumentoContabilizarContas = 0;
+		BigDecimal valorPagamentosDocumentoContabilizarContas = new BigDecimal("0.00");
+		int qtdePagamentosContas = 0;
+		BigDecimal valorPagamentosContas = new BigDecimal("0.00");
 		int qtdePagamentosClassificadoGuiasPagamento = 0;
-		BigDecimal valorPagamentosClassificadoGuiasPagamento = new BigDecimal(
-				"0.00");
+		BigDecimal valorPagamentosClassificadoGuiasPagamento = new BigDecimal("0.00");
 		int qtdePagamentosDuploExcessoGuiasPagamento = 0;
-		BigDecimal valorPagamentosDuploExcessoGuiasPagamento = new BigDecimal(
-				"0.00");
+		BigDecimal valorPagamentosDuploExcessoGuiasPagamento = new BigDecimal("0.00");
 		int qtdePagamentosDocumentoInexistenteGuiasPagamento = 0;
-		BigDecimal valorPagamentosDocumentoInexistenteGuiasPagamento = new BigDecimal(
-				"0.00");
+		BigDecimal valorPagamentosDocumentoInexistenteGuiasPagamento = new BigDecimal("0.00");
 		int qtdePagamentosBaixarValorExcedenteGuiasPagamento = 0;
-		BigDecimal valorPagamentosBaixarValorExcedenteGuiasPagamento = new BigDecimal(
-				"0.00");
+		BigDecimal valorPagamentosBaixarValorExcedenteGuiasPagamento = new BigDecimal("0.00");
 		int qtdePagamentosValorNaoConfereGuiasPagamento = 0;
-		BigDecimal valorPagamentosValorNaoConfereGuiasPagamento = new BigDecimal(
-				"0.00");
+		BigDecimal valorPagamentosValorNaoConfereGuiasPagamento = new BigDecimal("0.00");
 		int qtdePagamentosDuploExcessoDevolvidoGuiasPagamento = 0;
-		BigDecimal valorPagamentosDuploExcessoDevolvidoGuiasPagamento = new BigDecimal(
-				"0.00");
-
+		BigDecimal valorPagamentosDuploExcessoDevolvidoGuiasPagamento = new BigDecimal("0.00");
+		int qtdePagamentosDocumentoContabilizarGuiasPagamento = 0;
+		BigDecimal valorPagamentosDocumentoContabilizarGuiasPagamento = new BigDecimal("0.00");
+		int qtdePagamentosGuiasPagamento = 0;
+		BigDecimal valorPagamentosGuiasPagamento = new BigDecimal("0.00");
 		int qtdePagamentosClassificadoDebitosACobrar = 0;
-		BigDecimal valorPagamentosClassificadoDebitosACobrar = new BigDecimal(
-				"0.00");
+		BigDecimal valorPagamentosClassificadoDebitosACobrar = new BigDecimal("0.00");
 		int qtdePagamentosDuploExcessoDebitosACobrar = 0;
-		BigDecimal valorPagamentosDuploExcessoDebitosACobrar = new BigDecimal(
-				"0.00");
+		BigDecimal valorPagamentosDuploExcessoDebitosACobrar = new BigDecimal("0.00");
 		int qtdePagamentosDocumentoInexistenteDebitosACobrar = 0;
-		BigDecimal valorPagamentosDocumentoInexistenteDebitosACobrar = new BigDecimal(
-				"0.00");
+		BigDecimal valorPagamentosDocumentoInexistenteDebitosACobrar = new BigDecimal("0.00");
 		int qtdePagamentosBaixarValorExcedenteDebitosACobrar = 0;
-		BigDecimal valorPagamentosBaixarValorExcedenteDebitosACobrar = new BigDecimal(
-				"0.00");
+		BigDecimal valorPagamentosBaixarValorExcedenteDebitosACobrar = new BigDecimal("0.00");
 		int qtdePagamentosValorNaoConfereDebitosACobrar = 0;
-		BigDecimal valorPagamentosValorNaoConfereDebitosACobrar = new BigDecimal(
-				"0.00");
+		BigDecimal valorPagamentosValorNaoConfereDebitosACobrar = new BigDecimal("0.00");
 		int qtdePagamentosDuploExcessoDevolvidoDebitosACobrar = 0;
-		BigDecimal valorPagamentosDuploExcessoDevolvidoDebitosACobrar = new BigDecimal(
-				"0.00");
-
+		BigDecimal valorPagamentosDuploExcessoDevolvidoDebitosACobrar = new BigDecimal("0.00");
+		int qtdePagamentosDocumentoContabilizarDebitosACobrar = 0;
+		BigDecimal valorPagamentosDocumentoContabilizarDebitosACobrar = new BigDecimal("0.00");
+		int qtdePagamentosDebitosACobrar = 0;
+		BigDecimal valorPagamentosDebitosACobrar = new BigDecimal("0.00");
 		int qtdePagamentosClassificado = 0;
 		BigDecimal valorPagamentosClassificado = new BigDecimal("0.00");
 		int qtdePagamentosDuploExcesso = 0;
@@ -421,58 +422,51 @@ public class RelatorioPagamento extends TarefaRelatorio {
 		BigDecimal valorPagamentosValorNaoConfere = new BigDecimal("0.00");
 		int qtdePagamentosDuploExcessoDevolvido = 0;
 		BigDecimal valorPagamentosDuploExcessoDevolvido = new BigDecimal("0.00");
+		int qtdePagamentosDocumentoContabilizar = 0;
+		BigDecimal valorPagamentosDocumentoContabilizar = new BigDecimal("0.00");
+
+		int qtdePagamentos = 0;
+		BigDecimal valorPagamentos = new BigDecimal("0.00");
 
 		if (relatorioConsultarAvisoBancario) {
 
 			if (colecaoPagamentos != null && !colecaoPagamentos.isEmpty()) {
 				// coloca a coleção de parâmetros da analise no iterator
-				Iterator colecaoPagamentosIterator = colecaoPagamentos
-						.iterator();
+				Iterator colecaoPagamentosIterator = colecaoPagamentos.iterator();
 
 				// laço para criar a coleção de parâmetros da analise
 				while (colecaoPagamentosIterator.hasNext()) {
 
-					Pagamento pagamento = (Pagamento) colecaoPagamentosIterator
-							.next();
+					Pagamento pagamento = (Pagamento) colecaoPagamentosIterator.next();
 
 					String tipoDocumento = "";
-					if (pagamento.getDocumentoTipo() != null
-							&& pagamento.getDocumentoTipo()
-									.getDescricaoAbreviado() != null) {
-						tipoDocumento = pagamento.getDocumentoTipo()
-								.getDescricaoAbreviado();
+					if (pagamento.getDocumentoTipo() != null && pagamento.getDocumentoTipo().getDescricaoAbreviado() != null) {
+						tipoDocumento = pagamento.getDocumentoTipo().getDescricaoAbreviado();
 					}
 
 					String dataPagamento = "";
 					if (pagamento.getDataPagamento() != null) {
-						dataPagamento = Util.formatarData(pagamento
-								.getDataPagamento());
+						dataPagamento = Util.formatarData(pagamento.getDataPagamento());
 					}
 
 					String localidade = "";
-					if (pagamento.getLocalidade() != null
-							&& pagamento.getLocalidade().getId() != null) {
-						localidade = pagamento.getLocalidade().getId()
-								.toString();
+					if (pagamento.getLocalidade() != null && pagamento.getLocalidade().getId() != null) {
+						localidade = pagamento.getLocalidade().getId().toString();
 					}
 
 					String matricula = "";
-					if (pagamento.getImovel() != null
-							&& pagamento.getImovel().getId() != null) {
+					if (pagamento.getImovel() != null && pagamento.getImovel().getId() != null) {
 						matricula = pagamento.getImovel().getId().toString();
 					}
 
 					String codigoCliente = "";
-					if (pagamento.getCliente() != null
-							&& pagamento.getCliente().getId() != null) {
-						codigoCliente = pagamento.getCliente().getId()
-								.toString();
+					if (pagamento.getCliente() != null && pagamento.getCliente().getId() != null) {
+						codigoCliente = pagamento.getCliente().getId().toString();
 					}
 
 					String referencia = "";
 					if (pagamento.getAnoMesReferenciaPagamento() != null) {
-						referencia = pagamento
-								.getFormatarAnoMesPagamentoParaMesAno();
+						referencia = pagamento.getFormatarAnoMesPagamentoParaMesAno();
 					}
 
 					String debito = "";
@@ -483,60 +477,43 @@ public class RelatorioPagamento extends TarefaRelatorio {
 
 					String valorPagamento = "";
 					if (pagamento.getValorPagamento() != null) {
-						valorPagamento = Util.formatarMoedaReal(pagamento
-								.getValorPagamento());
+						valorPagamento = Util.formatarMoedaReal(pagamento.getValorPagamento());
 					}
 
 					String situacaoAtual = "";
 					if (pagamento.getPagamentoSituacaoAtual() != null
-							&& pagamento.getPagamentoSituacaoAtual()
-									.getDescricaoAbreviada() != null) {
-						situacaoAtual = pagamento.getPagamentoSituacaoAtual()
-								.getDescricaoAbreviada();
+							&& pagamento.getPagamentoSituacaoAtual().getDescricaoAbreviada() != null) {
+						situacaoAtual = pagamento.getPagamentoSituacaoAtual().getDescricaoAbreviada();
 					}
-					
+
 					boolean indicadorHistorico = false;
-					if ( pagamento.getIndicadorPagamento() == ConstantesSistema.SIM ) {
+					if (pagamento.getIndicadorPagamento() == ConstantesSistema.SIM) {
 						indicadorHistorico = true;
 					}
-					
 
 					relatorioBean = new RelatorioPagamentoBean(
-
-					// Tipo de Documento
+							// Tipo de Documento
 							tipoDocumento,
-
 							// Data do Pagamento
 							dataPagamento,
-
 							// Localidade
 							localidade,
-
 							// Matrícula do Imóvel
 							matricula,
-
 							// Código do Cliente
 							codigoCliente,
-
 							// Referência do Pagamento
 							referencia,
-
 							// Débito
 							debito,
-
 							// Valor Pagamento
 							valorPagamento,
-
 							// Situação Atual
 							situacaoAtual,
-
 							// Indicador Histórico
 							indicadorHistorico);
-
 					relatorioBeans.add(relatorioBean);
-
 				}
-
 			}
 
 		} else {
@@ -544,130 +521,98 @@ public class RelatorioPagamento extends TarefaRelatorio {
 			// se a coleção de parâmetros da analise não for vazia
 			if (colecaoPagamentos != null && !colecaoPagamentos.isEmpty()) {
 				// coloca a coleção de parâmetros da analise no iterator
-				Iterator colecaoPagamentosIterator = colecaoPagamentos
-						.iterator();
+				Iterator colecaoPagamentosIterator = colecaoPagamentos.iterator();
 
 				// laço para criar a coleção de parâmetros da analise
 				while (colecaoPagamentosIterator.hasNext()) {
 
-					PagamentoRelatorioHelper pagamentoRelatorioHelper = (PagamentoRelatorioHelper) colecaoPagamentosIterator
-							.next();
-					//
-					// (pagamento.getGuiaPagamento() == null && pagamento
-					// .getAnoMesReferenciaPagamento() != null)
-					// ||
-
-					// Verifica o tipo do documento do pagamento e calcula a
-					// quantidade de pagamentos de cada tipo e o somatório do
-					// valor
-					// dos pagamentos
+					PagamentoRelatorioHelper pagamentoRelatorioHelper = (PagamentoRelatorioHelper) colecaoPagamentosIterator.next();
+					// Verifica o tipo do documento do pagamento e calcula a quantidade de 
+					// pagamentos de cada tipo e o somatório do valor dos pagamentos
 
 					// Conta
-					if (pagamentoRelatorioHelper.getIdDocumentoTipo().equals(
-							DocumentoTipo.CONTA)) {
-
+					if (pagamentoRelatorioHelper.getIdDocumentoTipo().equals(DocumentoTipo.CONTA)) {
 						// Pagamento Classificado
-						if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual() == null
-								|| pagamentoRelatorioHelper
-										.getIdSituacaoPagamentoAtual()
-										.equals(
-												PagamentoSituacao.PAGAMENTO_CLASSIFICADO)) {
+						if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual() == null
+								|| pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.PAGAMENTO_CLASSIFICADO)) {
 							qtdePagamentosClassificadoContas = qtdePagamentosClassificadoContas + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosClassificadoContas = valorPagamentosClassificadoContas
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
-
 						// Pagamento em Duplicidade
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual()
-								.equals(
-										PagamentoSituacao.PAGAMENTO_EM_DUPLICIDADE)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.PAGAMENTO_EM_DUPLICIDADE)) {
 							qtdePagamentosDuploExcessoContas = qtdePagamentosDuploExcessoContas + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosDuploExcessoContas = valorPagamentosDuploExcessoContas
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
-
 						// Documento Inexistente
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual()
-								.equals(PagamentoSituacao.DOCUMENTO_INEXISTENTE)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.DOCUMENTO_INEXISTENTE)) {
 							qtdePagamentosDocumentoInexistenteContas = qtdePagamentosDocumentoInexistenteContas + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosDocumentoInexistenteContas = valorPagamentosDocumentoInexistenteContas
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
-
 						// Baixar Valor Excedente
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual().equals(
-										PagamentoSituacao.VALOR_A_BAIXAR)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.VALOR_A_BAIXAR)) {
 							qtdePagamentosBaixarValorExcedenteContas = qtdePagamentosBaixarValorExcedenteContas + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosBaixarValorExcedenteContas = valorPagamentosBaixarValorExcedenteContas
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
 
 						// Valor Não Confere
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual().equals(
-										PagamentoSituacao.VALOR_NAO_CONFERE)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.VALOR_NAO_CONFERE)) {
 							qtdePagamentosValorNaoConfereContas = qtdePagamentosValorNaoConfereContas + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosValorNaoConfereContas = valorPagamentosValorNaoConfereContas
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
-
 						// Pagamento Duplo em Excesso
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual()
-								.equals(
-										PagamentoSituacao.DUPLICIDADE_EXCESSO_DEVOLVIDO)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.DUPLICIDADE_EXCESSO_DEVOLVIDO)) {
 							qtdePagamentosDuploExcessoDevolvidoContas = qtdePagamentosDuploExcessoDevolvidoContas + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosDuploExcessoDevolvidoContas = valorPagamentosDuploExcessoDevolvidoContas
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
+						}
+						// Documento a Contabilizar
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.DOCUMENTO_A_CONTABILIZAR)) {
+							qtdePagamentosDocumentoContabilizarContas = qtdePagamentosDocumentoContabilizarContas + 1;
+							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
+								valorPagamentosDocumentoContabilizarContas = valorPagamentosDocumentoContabilizarContas
+										.add(pagamentoRelatorioHelper.getValorPagamento());
+							}
+						}
+						// Total de documentos / valor dos pagamentos de contas
+						qtdePagamentosContas++;
+						if (pagamentoRelatorioHelper.getValorPagamento() != null) {
+							valorPagamentosContas = valorPagamentosContas.add(pagamentoRelatorioHelper.getValorPagamento());
 						}
 					}
 
 					// Débito a Cobrar
-					else if (pagamentoRelatorioHelper.getIdDocumentoTipo()
-							.equals(DocumentoTipo.DEBITO_A_COBRAR)) {
+					else if (pagamentoRelatorioHelper.getIdDocumentoTipo().equals(DocumentoTipo.DEBITO_A_COBRAR)) {
 
 						// Pagamento Classificado
-						if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual() == null
-								|| pagamentoRelatorioHelper
-										.getIdSituacaoPagamentoAtual()
-										.equals(
-												PagamentoSituacao.PAGAMENTO_CLASSIFICADO)) {
+						if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual() == null
+								|| pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.PAGAMENTO_CLASSIFICADO)) {
 							qtdePagamentosClassificadoDebitosACobrar = qtdePagamentosClassificadoDebitosACobrar + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosClassificadoDebitosACobrar = valorPagamentosClassificadoDebitosACobrar
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
-
 						// Pagamento em Duplicidade
 						else if (pagamentoRelatorioHelper
 								.getIdSituacaoPagamentoAtual()
-								.equals(
-										PagamentoSituacao.PAGAMENTO_EM_DUPLICIDADE)) {
+								.equals(PagamentoSituacao.PAGAMENTO_EM_DUPLICIDADE)) {
 							qtdePagamentosDuploExcessoDebitosACobrar = qtdePagamentosDuploExcessoDebitosACobrar + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosDuploExcessoDebitosACobrar = valorPagamentosDuploExcessoDebitosACobrar
@@ -675,622 +620,428 @@ public class RelatorioPagamento extends TarefaRelatorio {
 												.getValorPagamento());
 							}
 						}
-
 						// Documento Inexistente
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual()
-								.equals(PagamentoSituacao.DOCUMENTO_INEXISTENTE)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.DOCUMENTO_INEXISTENTE)) {
 							qtdePagamentosDocumentoInexistenteDebitosACobrar = qtdePagamentosDocumentoInexistenteDebitosACobrar + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosDocumentoInexistenteDebitosACobrar = valorPagamentosDocumentoInexistenteDebitosACobrar
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
-
 						// Baixar Valor Excedente
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual().equals(
-										PagamentoSituacao.VALOR_A_BAIXAR)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.VALOR_A_BAIXAR)) {
 							qtdePagamentosBaixarValorExcedenteDebitosACobrar = qtdePagamentosBaixarValorExcedenteDebitosACobrar + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosBaixarValorExcedenteDebitosACobrar = valorPagamentosBaixarValorExcedenteDebitosACobrar
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
-
 						// Valor Não Confere
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual().equals(
-										PagamentoSituacao.VALOR_NAO_CONFERE)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.VALOR_NAO_CONFERE)) {
 							qtdePagamentosValorNaoConfereDebitosACobrar = qtdePagamentosValorNaoConfereDebitosACobrar + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosValorNaoConfereDebitosACobrar = valorPagamentosValorNaoConfereDebitosACobrar
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
-
 						// Pagamento Duplo em Excesso
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual()
-								.equals(
-										PagamentoSituacao.DUPLICIDADE_EXCESSO_DEVOLVIDO)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.DUPLICIDADE_EXCESSO_DEVOLVIDO)) {
 							qtdePagamentosDuploExcessoDevolvidoDebitosACobrar = qtdePagamentosDuploExcessoDevolvidoDebitosACobrar + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosDuploExcessoDevolvidoDebitosACobrar = valorPagamentosDuploExcessoDevolvidoDebitosACobrar
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
+						}
+						// Documento a Contabilizar
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.DOCUMENTO_A_CONTABILIZAR)) {
+							qtdePagamentosDocumentoContabilizarDebitosACobrar = qtdePagamentosDocumentoContabilizarDebitosACobrar + 1;
+							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
+								valorPagamentosDocumentoContabilizarDebitosACobrar = valorPagamentosDocumentoContabilizarDebitosACobrar
+										.add(pagamentoRelatorioHelper.getValorPagamento());
+							}
+						}
+						// Total de documentos / valor dos pagamentos de Debitos a Cobrar
+						qtdePagamentosDebitosACobrar++;
+						if (pagamentoRelatorioHelper.getValorPagamento() != null) {
+							valorPagamentosDebitosACobrar = valorPagamentosDebitosACobrar.add(pagamentoRelatorioHelper.getValorPagamento());
 						}
 					}
 
 					// Guia Pagamento
-					else if (pagamentoRelatorioHelper.getIdDocumentoTipo()
-							.equals(DocumentoTipo.GUIA_PAGAMENTO)) {
+					else if (pagamentoRelatorioHelper.getIdDocumentoTipo().equals(DocumentoTipo.GUIA_PAGAMENTO)) {
 
 						// Pagamento Classificado
-						if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual() == null
-								|| pagamentoRelatorioHelper
-										.getIdSituacaoPagamentoAtual()
-										.equals(
-												PagamentoSituacao.PAGAMENTO_CLASSIFICADO)) {
+						if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual() == null
+								|| pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.PAGAMENTO_CLASSIFICADO)) {
 							qtdePagamentosClassificadoGuiasPagamento = qtdePagamentosClassificadoGuiasPagamento + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosClassificadoGuiasPagamento = valorPagamentosClassificadoGuiasPagamento
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
-
 						// Pagamento em Duplicidade
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual()
-								.equals(
-										PagamentoSituacao.PAGAMENTO_EM_DUPLICIDADE)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.PAGAMENTO_EM_DUPLICIDADE)) {
 							qtdePagamentosDuploExcessoGuiasPagamento = qtdePagamentosDuploExcessoGuiasPagamento + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosDuploExcessoGuiasPagamento = valorPagamentosDuploExcessoGuiasPagamento
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
-
 						// Documento Inexistente
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual()
-								.equals(PagamentoSituacao.DOCUMENTO_INEXISTENTE)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.DOCUMENTO_INEXISTENTE)) {
 							qtdePagamentosDocumentoInexistenteGuiasPagamento = qtdePagamentosDocumentoInexistenteGuiasPagamento + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosDocumentoInexistenteGuiasPagamento = valorPagamentosDocumentoInexistenteGuiasPagamento
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
-
 						// Baixar Valor Excedente
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual().equals(
-										PagamentoSituacao.VALOR_A_BAIXAR)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.VALOR_A_BAIXAR)) {
 							qtdePagamentosBaixarValorExcedenteGuiasPagamento = qtdePagamentosBaixarValorExcedenteGuiasPagamento + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosBaixarValorExcedenteGuiasPagamento = valorPagamentosBaixarValorExcedenteGuiasPagamento
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
-
 						// Valor Não Confere
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual().equals(
-										PagamentoSituacao.VALOR_NAO_CONFERE)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.VALOR_NAO_CONFERE)) {
 							qtdePagamentosValorNaoConfereGuiasPagamento = qtdePagamentosValorNaoConfereGuiasPagamento + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosValorNaoConfereGuiasPagamento = valorPagamentosValorNaoConfereGuiasPagamento
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
-
 						// Pagamento Duplo em Excesso
-						else if (pagamentoRelatorioHelper
-								.getIdSituacaoPagamentoAtual()
-								.equals(
-										PagamentoSituacao.DUPLICIDADE_EXCESSO_DEVOLVIDO)) {
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.DUPLICIDADE_EXCESSO_DEVOLVIDO)) {
 							qtdePagamentosDuploExcessoDevolvidoGuiasPagamento = qtdePagamentosDuploExcessoDevolvidoGuiasPagamento + 1;
 							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
 								valorPagamentosDuploExcessoDevolvidoGuiasPagamento = valorPagamentosDuploExcessoDevolvidoGuiasPagamento
-										.add(pagamentoRelatorioHelper
-												.getValorPagamento());
+										.add(pagamentoRelatorioHelper.getValorPagamento());
 							}
 						}
+						// Documento a Contabilizar
+						else if (pagamentoRelatorioHelper.getIdSituacaoPagamentoAtual().equals(PagamentoSituacao.DOCUMENTO_A_CONTABILIZAR)) {
+							qtdePagamentosDocumentoContabilizarGuiasPagamento = qtdePagamentosDocumentoContabilizarGuiasPagamento + 1;
+							if (pagamentoRelatorioHelper.getValorPagamento() != null) {
+								valorPagamentosDocumentoContabilizarGuiasPagamento = valorPagamentosDocumentoContabilizarGuiasPagamento
+										.add(pagamentoRelatorioHelper.getValorPagamento());
+							}
+						}
+						// Total de documentos / valor dos pagamentos de Guias de Pagamento
+						qtdePagamentosGuiasPagamento++;
+						if (pagamentoRelatorioHelper.getValorPagamento() != null) {
+							valorPagamentosGuiasPagamento = valorPagamentosGuiasPagamento.add(pagamentoRelatorioHelper.getValorPagamento());
+						}						
 					}
 
-					String valorDocumento = Util
-							.formatarMoedaReal(pagamentoRelatorioHelper
-									.getValorTotalDocumento());
+					String valorDocumento = Util.formatarMoedaReal(pagamentoRelatorioHelper.getValorTotalDocumento());
 					
 					String valorAgua = "0,00";
-
-					if(pagamentoRelatorioHelper.getValorAgua() != null){
-						valorAgua = Util
-							.formatarMoedaReal(pagamentoRelatorioHelper
-									.getValorAgua());
+					if (pagamentoRelatorioHelper.getValorAgua() != null) {
+						valorAgua = Util.formatarMoedaReal(pagamentoRelatorioHelper.getValorAgua());
 					}
-					
+
 					String valorEsgoto = "0,00";
-					
-					if(pagamentoRelatorioHelper.getValorEsgoto() != null){
-						valorEsgoto = Util
-							.formatarMoedaReal(pagamentoRelatorioHelper
-									.getValorEsgoto());
-					}	
-					
-					String valorCredito = "0,00";
-
-					if(pagamentoRelatorioHelper.getValorCreditos() != null){
-						valorCredito = Util
-							.formatarMoedaReal(pagamentoRelatorioHelper
-									.getValorCreditos());
+					if (pagamentoRelatorioHelper.getValorEsgoto() != null) {
+						valorEsgoto = Util.formatarMoedaReal(pagamentoRelatorioHelper.getValorEsgoto());
 					}
-					
-					String valorDebito = "0,00";
 
-					if (pagamentoRelatorioHelper.getDebitos() != null){
-						
+					String valorCredito = "0,00";
+					if (pagamentoRelatorioHelper.getValorCreditos() != null) {
+						valorCredito = Util.formatarMoedaReal(pagamentoRelatorioHelper.getValorCreditos());
+					}
+
+					String valorDebito = "0,00";
+					if (pagamentoRelatorioHelper.getDebitos() != null) {
 						valorDebito = Util.formatarMoedaReal(pagamentoRelatorioHelper.getDebitos());
 					}
-					
-					
 
 					// Cria o objeto que será impresso no relatório setando os
-					// campos que serão mostrados e fazendo as verificações para
-					// evitar NullPointerException
-
+					// campos que serão mostrados e fazendo as verificações para evitar NullPointerException
 					if (relatorioConsultarImovel) {
-						
-								relatorioBean = new RelatorioPagamentoBean(
 
+						relatorioBean = new RelatorioPagamentoBean(
 								// Matrícula do Imóvel ou Código do Cliente
-								pagamentoRelatorioHelper.getIdImovel()
-										.toString(),
-
+								pagamentoRelatorioHelper.getIdImovel().toString(),
 								// Inscricao do Imóvel ou Nome do Cliente
-								fachada
-										.pesquisarInscricaoImovelExcluidoOuNao(pagamentoRelatorioHelper
-												.getIdImovel()),
-
+								fachada.pesquisarInscricaoImovelExcluidoOuNao(pagamentoRelatorioHelper.getIdImovel()),
 								// Data Pagamento
-								pagamentoRelatorioHelper.getDataPagamento() == null ? ""
-										: Util
-												.formatarData(pagamentoRelatorioHelper
-														.getDataPagamento()),
-
+								pagamentoRelatorioHelper.getDataPagamento() == null ? "" : Util.formatarData(pagamentoRelatorioHelper.getDataPagamento()),
 								// Mês/Ano
-								pagamentoRelatorioHelper
-										.getAnoMesReferenciaPagamento() == null ? ""
-										: Util
-												.formatarAnoMesParaMesAno(pagamentoRelatorioHelper
-														.getAnoMesReferenciaPagamento()),
-
+								pagamentoRelatorioHelper.getAnoMesReferenciaPagamento() == null ? "" : Util.formatarAnoMesParaMesAno(pagamentoRelatorioHelper.getAnoMesReferenciaPagamento()),
 								// Tipo de Débito
-								pagamentoRelatorioHelper
-										.getDescricaoTipoDebito() == null ? ""
-										: pagamentoRelatorioHelper
-												.getDescricaoTipoDebito(),
-
+								pagamentoRelatorioHelper.getDescricaoTipoDebito() == null ? "" : pagamentoRelatorioHelper.getDescricaoTipoDebito(),
 								// Valor do Documento
 								valorDocumento,
-								
-								//valor Agua
+								// valor Agua
 								valorAgua,
-								
-								//Valor Esgoto
+								// Valor Esgoto
 								valorEsgoto,
-
 								// Valor Pagamento
-								pagamentoRelatorioHelper.getValorPagamento() == null ? ""
-										: Util
-												.formatarMoedaReal(pagamentoRelatorioHelper
-														.getValorPagamento()),
-
+								pagamentoRelatorioHelper.getValorPagamento() == null ? "" : Util.formatarMoedaReal(pagamentoRelatorioHelper.getValorPagamento()),
 								// Situação Atual
-								pagamentoRelatorioHelper
-										.getDescricaoSituacaoPagamentoAtual() == null ? ""
-										: pagamentoRelatorioHelper
-												.getDescricaoSituacaoPagamentoAtual(),
-
+								pagamentoRelatorioHelper.getDescricaoSituacaoPagamentoAtual() == null ? "" : pagamentoRelatorioHelper.getDescricaoSituacaoPagamentoAtual(),
 								// Situação Anterior
-								pagamentoRelatorioHelper
-										.getDescricaoSituacaoPagamentoAnterior() == null ? ""
-										: pagamentoRelatorioHelper
-												.getDescricaoSituacaoPagamentoAnterior(),
-
+								pagamentoRelatorioHelper.getDescricaoSituacaoPagamentoAnterior() == null ? "" : pagamentoRelatorioHelper.getDescricaoSituacaoPagamentoAnterior(),
 								// Tipo Documento
-								pagamentoRelatorioHelper
-										.getDescricaoDocumentoTipo() == null ? ""
-										: pagamentoRelatorioHelper
-												.getDescricaoDocumentoTipo(),
-												
-						        // Valor dos Débitos
+								pagamentoRelatorioHelper.getDescricaoDocumentoTipo() == null ? "" : pagamentoRelatorioHelper.getDescricaoDocumentoTipo(),
+								// Valor dos Débitos
 								valorDebito,
-										
-						        // Valor do Crédito
+								// Valor do Crédito
 								valorCredito,
-								
 								clie == null ? "" : clie.getNome());
-						
+
 					} else {
 
 						relatorioBean = new RelatorioPagamentoBean(
-
 								// Gerência Regional
-								pagamentoRelatorioHelper
-										.getIdGerenciaRegional() == null ? ""
-										: pagamentoRelatorioHelper
-												.getIdGerenciaRegional()
-												+ " - "
-												+ pagamentoRelatorioHelper
-														.getNomeGerenciaRegional(),
-
+								pagamentoRelatorioHelper.getIdGerenciaRegional() == null ? ""
+										: pagamentoRelatorioHelper.getIdGerenciaRegional() + " - " + pagamentoRelatorioHelper.getNomeGerenciaRegional(),
 								// Localidade
-								pagamentoRelatorioHelper.getIdLocalidade()
-										.toString()
-										+ " - "
-										+ pagamentoRelatorioHelper
-												.getDescricaoLocalidade(),
-
+								pagamentoRelatorioHelper.getIdLocalidade().toString() + " - " + pagamentoRelatorioHelper.getDescricaoLocalidade(),
 								// Matrícula do Imóvel ou Código do Cliente
-								pagamentoRelatorioHelper.getIdImovel() == null ? pagamentoRelatorioHelper
-										.getIdCliente().toString()
-										: pagamentoRelatorioHelper
-												.getIdImovel().toString(),
-
+								pagamentoRelatorioHelper.getIdImovel() == null ? pagamentoRelatorioHelper.getIdCliente().toString() : pagamentoRelatorioHelper.getIdImovel().toString(),
 								// Inscricao do Imóvel ou Nome do Cliente
-								pagamentoRelatorioHelper.getIdImovel() == null ? pagamentoRelatorioHelper
-										.getNomeCliente()
-										: fachada
-												.pesquisarInscricaoImovel(pagamentoRelatorioHelper
-														.getIdImovel()),
-
+								pagamentoRelatorioHelper.getIdImovel() == null ? pagamentoRelatorioHelper.getNomeCliente()
+										: fachada.pesquisarInscricaoImovel(pagamentoRelatorioHelper.getIdImovel()),
 								// Arrecadador
-								pagamentoRelatorioHelper.getNomeArrecadador() == null ? ""
-										: pagamentoRelatorioHelper
-												.getNomeArrecadador(),
-
+								pagamentoRelatorioHelper.getNomeArrecadador() == null ? "" : pagamentoRelatorioHelper.getNomeArrecadador(),
 								// Data Pagamento
-								pagamentoRelatorioHelper.getDataPagamento() == null ? ""
-										: Util
-												.formatarData(pagamentoRelatorioHelper
-														.getDataPagamento()),
-
+								pagamentoRelatorioHelper.getDataPagamento() == null ? "" : Util.formatarData(pagamentoRelatorioHelper.getDataPagamento()),
 								// Mês/Ano
-								pagamentoRelatorioHelper
-										.getAnoMesReferenciaPagamento() == null ? ""
-										: Util
-												.formatarAnoMesParaMesAno(pagamentoRelatorioHelper
-														.getAnoMesReferenciaPagamento()),
-
+								pagamentoRelatorioHelper.getAnoMesReferenciaPagamento() == null ? ""
+										: Util.formatarAnoMesParaMesAno(pagamentoRelatorioHelper.getAnoMesReferenciaPagamento()),
 								// Tipo de Débito
-								pagamentoRelatorioHelper
-										.getDescricaoTipoDebito() == null ? ""
-										: pagamentoRelatorioHelper
-												.getDescricaoTipoDebito(),
-
+								pagamentoRelatorioHelper.getDescricaoTipoDebito() == null ? "" : pagamentoRelatorioHelper.getDescricaoTipoDebito(),
 								// Valor do Documento
 								valorDocumento,
-								
-								//valor Agua
+								// valor Agua
 								valorAgua,
-								
-								//Valor Esgoto
+								// Valor Esgoto
 								valorEsgoto,
-
 								// Valor Pagamento
-								pagamentoRelatorioHelper.getValorPagamento() == null ? ""
-										: Util
-												.formatarMoedaReal(pagamentoRelatorioHelper
-														.getValorPagamento()),
-
+								pagamentoRelatorioHelper.getValorPagamento() == null ? "" : Util.formatarMoedaReal(pagamentoRelatorioHelper.getValorPagamento()),
 								// Situação Atual
-								pagamentoRelatorioHelper
-										.getDescricaoSituacaoPagamentoAtual() == null ? ""
-										: pagamentoRelatorioHelper
-												.getDescricaoSituacaoPagamentoAtual());
-
+								pagamentoRelatorioHelper.getDescricaoSituacaoPagamentoAtual() == null ? "" : pagamentoRelatorioHelper.getDescricaoSituacaoPagamentoAtual());
 					}
-
 					// adiciona o bean a coleção
 					relatorioBeans.add(relatorioBean);
 				}
-
 			}
-
 		}
 		// __________________________________________________________________
 
 		// Parâmetros do relatório
 		Map parametros = new HashMap();
 
-		// adiciona os parâmetros do relatório
-		// adiciona o laudo da análise
-		SistemaParametro sistemaParametro = fachada
-				.pesquisarParametrosDoSistema();
+		// adiciona os parâmetros do relatório adiciona o laudo da análise
+		SistemaParametro sistemaParametro = fachada.pesquisarParametrosDoSistema();
 
 		parametros.put("imagem", sistemaParametro.getImagemRelatorio());
-
 		if (relatorioConsultarAvisoBancario) {
-			
 			// Arrecadador
 			if (avisoBancarioHelper.getCodigoNomeArrecadador() != null) {
-				parametros.put("arrecadador", avisoBancarioHelper.getCodigoNomeArrecadador());
+				parametros.put("arrecadador",avisoBancarioHelper.getCodigoNomeArrecadador());
 			} else {
 				parametros.put("arrecadador", "");
 			}
-			
 			// Data do Lançamento
 			if (avisoBancarioHelper.getAvisoBancario().getDataLancamento() != null) {
 				parametros.put("dataLancamento", Util.formatarData(avisoBancarioHelper.getAvisoBancario().getDataLancamento()));
 			} else {
 				parametros.put("dataLancamento", "");
 			}
-			
 			// Sequencial
-			 if (avisoBancarioHelper.getAvisoBancario().getNumeroSequencial() != null) {
-				 parametros.put("sequencial", avisoBancarioHelper
-				        	.getAvisoBancario().getNumeroSequencial().toString()); 
-			 } else {
-				 parametros.put("sequencial", "");
-			 }
-			 
-			 // Número do Documento
-			 if (avisoBancarioHelper.getAvisoBancario().getNumeroDocumento() != 0){
-				 parametros.put("numeroDocumento", String.valueOf(avisoBancarioHelper
-				        	.getAvisoBancario().getNumeroDocumento()));
-			 } else {
-				 parametros.put("numeroDocumento", "");
-			 }
+			if (avisoBancarioHelper.getAvisoBancario().getNumeroSequencial() != null) {
+				parametros.put("sequencial", avisoBancarioHelper.getAvisoBancario().getNumeroSequencial().toString());
+			} else {
+				parametros.put("sequencial", "");
+			}
+			// Número do Documento
+			if (avisoBancarioHelper.getAvisoBancario().getNumeroDocumento() != 0) {
+				parametros.put("numeroDocumento", String.valueOf(avisoBancarioHelper.getAvisoBancario().getNumeroDocumento()));
+			} else {
+				parametros.put("numeroDocumento", "");
+			}
+		} else {
+			// Seta os parâmetros de acordo com o que o usuário digitou ou de acordo
+			// com a qtde de devoluções de cada tipo e seus respectivos valores
+			if (pagamentoParametrosInicial.getAnoMesReferenciaPagamento() != null) {
+				parametros.put("periodoAnoMes", Util.formatarAnoMesParaMesAno(pagamentoParametrosInicial.getAnoMesReferenciaPagamento())
+					+ " a " + Util.formatarAnoMesParaMesAno(pagamentoParametrosFinal.getAnoMesReferenciaPagamento()));
+			} else {
+				parametros.put("periodoAnoMes", "");
+			}
+			if (pagamentoParametrosInicial.getDataPagamento() != null) {
+				parametros.put("periodoPagamento", Util.formatarData(pagamentoParametrosInicial.getDataPagamento())
+					+ " a " + Util.formatarData(pagamentoParametrosFinal.getDataPagamento()));
+			} else {
+				parametros.put("periodoPagamento", "");
+			}
+
+			// o valor total das devoluções de cada tipo será o valor de todas as
+			// devoluções desse tipo presente em cada tipo de documento, assim,
+			// adiciona-se os valores a ele para achar o resultado
+			qtdePagamentosClassificado = qtdePagamentosClassificado
+					+ qtdePagamentosClassificadoContas
+					+ qtdePagamentosClassificadoDebitosACobrar
+					+ qtdePagamentosClassificadoGuiasPagamento;
+
+			valorPagamentosClassificado = valorPagamentosClassificado
+					.add(valorPagamentosClassificadoContas.add(valorPagamentosClassificadoDebitosACobrar
+						 .add(valorPagamentosClassificadoGuiasPagamento)));
+
+			qtdePagamentosDuploExcesso = qtdePagamentosDuploExcesso
+					+ qtdePagamentosDuploExcessoContas
+					+ qtdePagamentosDuploExcessoDebitosACobrar
+					+ qtdePagamentosDuploExcessoGuiasPagamento;
+
+			valorPagamentosDuploExcesso = valorPagamentosDuploExcesso
+					.add(valorPagamentosDuploExcessoContas.add(valorPagamentosDuploExcessoDebitosACobrar
+						 .add(valorPagamentosDuploExcessoGuiasPagamento)));
+
+			qtdePagamentosDocumentoInexistente = qtdePagamentosDocumentoInexistente
+					+ qtdePagamentosDocumentoInexistenteContas
+					+ qtdePagamentosDocumentoInexistenteDebitosACobrar
+					+ qtdePagamentosDocumentoInexistenteGuiasPagamento;
+
+			valorPagamentosDocumentoInexistente = valorPagamentosDocumentoInexistente
+					.add(valorPagamentosDocumentoInexistenteContas
+						 .add(valorPagamentosDocumentoInexistenteDebitosACobrar
+							  .add(valorPagamentosDocumentoInexistenteGuiasPagamento)));
+
+			qtdePagamentosBaixarValorExcedente = qtdePagamentosBaixarValorExcedente
+					+ qtdePagamentosBaixarValorExcedenteContas
+					+ qtdePagamentosBaixarValorExcedenteDebitosACobrar
+					+ qtdePagamentosBaixarValorExcedenteGuiasPagamento;
+
+			valorPagamentosBaixarValorExcedente = valorPagamentosBaixarValorExcedente
+					.add(valorPagamentosBaixarValorExcedenteContas
+						 .add(valorPagamentosBaixarValorExcedenteDebitosACobrar
+						 	  .add(valorPagamentosBaixarValorExcedenteGuiasPagamento)));
+
+			qtdePagamentosValorNaoConfere = qtdePagamentosValorNaoConfere
+					+ qtdePagamentosValorNaoConfereContas
+					+ qtdePagamentosValorNaoConfereDebitosACobrar
+					+ qtdePagamentosValorNaoConfereGuiasPagamento;
+
+			valorPagamentosValorNaoConfere = valorPagamentosValorNaoConfere
+					.add(valorPagamentosValorNaoConfereContas.add(valorPagamentosValorNaoConfereDebitosACobrar
+						 .add(valorPagamentosValorNaoConfereGuiasPagamento)));
+
+			qtdePagamentosDuploExcessoDevolvido = qtdePagamentosDuploExcessoDevolvido
+					+ qtdePagamentosDuploExcessoDevolvidoContas
+					+ qtdePagamentosDuploExcessoDevolvidoDebitosACobrar
+					+ qtdePagamentosDuploExcessoDevolvidoGuiasPagamento;
+
+			valorPagamentosDuploExcessoDevolvido = valorPagamentosDuploExcessoDevolvido
+					.add(valorPagamentosDuploExcessoDevolvidoContas
+						 .add(valorPagamentosDuploExcessoDevolvidoDebitosACobrar
+						  	  .add(valorPagamentosDuploExcessoDevolvidoGuiasPagamento)));
 			
-		} else {
-		
-		// Seta os parâmetros de acordo com o que o usuário digitou ou de acordo
-		// com a qtde de devoluções de cada tipo e seus respectivos valores
-		if (pagamentoParametrosInicial.getAnoMesReferenciaPagamento() != null) {
-			parametros.put("periodoAnoMes", Util
-					.formatarAnoMesParaMesAno(pagamentoParametrosInicial
-							.getAnoMesReferenciaPagamento())
-					+ " a "
-					+ Util.formatarAnoMesParaMesAno(pagamentoParametrosFinal
-							.getAnoMesReferenciaPagamento()));
+			qtdePagamentosDocumentoContabilizar = qtdePagamentosDocumentoContabilizar
+					+ qtdePagamentosDocumentoContabilizarContas
+					+ qtdePagamentosDocumentoContabilizarDebitosACobrar
+					+ qtdePagamentosDocumentoContabilizarGuiasPagamento;
 
-		} else {
-			parametros.put("periodoAnoMes", "");
-		}
+			valorPagamentosDocumentoContabilizar = valorPagamentosDocumentoContabilizar
+					.add(valorPagamentosDocumentoContabilizarContas
+						 .add(valorPagamentosDocumentoContabilizarDebitosACobrar
+							  .add(valorPagamentosDocumentoContabilizarGuiasPagamento)));
+			
+			qtdePagamentos = qtdePagamentos
+					+ qtdePagamentosContas
+					+ qtdePagamentosDebitosACobrar
+					+ qtdePagamentosGuiasPagamento;
+			
+			valorPagamentos = valorPagamentos.add(valorPagamentosContas
+				.add(valorPagamentosDebitosACobrar.add(valorPagamentosGuiasPagamento)));			
 
-		if (pagamentoParametrosInicial.getDataPagamento() != null) {
-			parametros.put("periodoPagamento",
-					Util.formatarData(pagamentoParametrosInicial
-							.getDataPagamento())
-							+ " a "
-							+ Util.formatarData(pagamentoParametrosFinal
-									.getDataPagamento()));
-		} else {
-			parametros.put("periodoPagamento", "");
-		}
-
-		// o valor total das devoluções de cada tipo será o valor de todas as
-		// devoluções desse tipo presente em cada tipo de documento, assim,
-		// adiciona-se os valores a ele para achar o resultado
-		qtdePagamentosClassificado = qtdePagamentosClassificado
-				+ qtdePagamentosClassificadoContas
-				+ qtdePagamentosClassificadoDebitosACobrar
-				+ qtdePagamentosClassificadoGuiasPagamento;
-
-		valorPagamentosClassificado = valorPagamentosClassificado
-				.add(valorPagamentosClassificadoContas
-						.add(valorPagamentosClassificadoDebitosACobrar
-								.add(valorPagamentosClassificadoGuiasPagamento)));
-
-		qtdePagamentosDuploExcesso = qtdePagamentosDuploExcesso
-				+ qtdePagamentosDuploExcessoContas
-				+ qtdePagamentosDuploExcessoDebitosACobrar
-				+ qtdePagamentosDuploExcessoGuiasPagamento;
-
-		valorPagamentosDuploExcesso = valorPagamentosDuploExcesso
-				.add(valorPagamentosDuploExcessoContas
-						.add(valorPagamentosDuploExcessoDebitosACobrar
-								.add(valorPagamentosDuploExcessoGuiasPagamento)));
-
-		qtdePagamentosDocumentoInexistente = qtdePagamentosDocumentoInexistente
-				+ qtdePagamentosDocumentoInexistenteContas
-				+ qtdePagamentosDocumentoInexistenteDebitosACobrar
-				+ qtdePagamentosDocumentoInexistenteGuiasPagamento;
-
-		valorPagamentosDocumentoInexistente = valorPagamentosDocumentoInexistente
-				.add(valorPagamentosDocumentoInexistenteContas
-						.add(valorPagamentosDocumentoInexistenteDebitosACobrar
-								.add(valorPagamentosDocumentoInexistenteGuiasPagamento)));
-
-		qtdePagamentosBaixarValorExcedente = qtdePagamentosBaixarValorExcedente
-				+ qtdePagamentosBaixarValorExcedenteContas
-				+ qtdePagamentosBaixarValorExcedenteDebitosACobrar
-				+ qtdePagamentosBaixarValorExcedenteGuiasPagamento;
-
-		valorPagamentosBaixarValorExcedente = valorPagamentosBaixarValorExcedente
-				.add(valorPagamentosBaixarValorExcedenteContas
-						.add(valorPagamentosBaixarValorExcedenteDebitosACobrar
-								.add(valorPagamentosBaixarValorExcedenteGuiasPagamento)));
-
-		qtdePagamentosValorNaoConfere = qtdePagamentosValorNaoConfere
-				+ qtdePagamentosValorNaoConfereContas
-				+ qtdePagamentosValorNaoConfereDebitosACobrar
-				+ qtdePagamentosValorNaoConfereGuiasPagamento;
-
-		valorPagamentosValorNaoConfere = valorPagamentosValorNaoConfere
-				.add(valorPagamentosValorNaoConfereContas
-						.add(valorPagamentosValorNaoConfereDebitosACobrar
-								.add(valorPagamentosValorNaoConfereGuiasPagamento)));
-
-		qtdePagamentosDuploExcessoDevolvido = qtdePagamentosDuploExcessoDevolvido
-				+ qtdePagamentosDuploExcessoDevolvidoContas
-				+ qtdePagamentosDuploExcessoDevolvidoDebitosACobrar
-				+ qtdePagamentosDuploExcessoDevolvidoGuiasPagamento;
-
-		valorPagamentosDuploExcessoDevolvido = valorPagamentosDuploExcessoDevolvido
-				.add(valorPagamentosDuploExcessoDevolvidoContas
-						.add(valorPagamentosDuploExcessoDevolvidoDebitosACobrar
-								.add(valorPagamentosDuploExcessoDevolvidoGuiasPagamento)));
-
-		parametros.put("qtdePagamentosClassificadoContas", ""
-				+ qtdePagamentosClassificadoContas);
-		parametros.put("valorPagamentosClassificadoContas", Util
-				.formatarMoedaReal(valorPagamentosClassificadoContas));
-		parametros.put("qtdePagamentosDuploExcessoContas", ""
-				+ qtdePagamentosDuploExcessoContas);
-		parametros.put("valorPagamentosDuploExcessoContas", Util
-				.formatarMoedaReal(valorPagamentosDuploExcessoContas));
-		parametros.put("qtdePagamentosDocumentoInexistenteContas", ""
-				+ qtdePagamentosDocumentoInexistenteContas);
-		parametros.put("valorPagamentosDocumentoInexistenteContas", Util
-				.formatarMoedaReal(valorPagamentosDocumentoInexistenteContas));
-		parametros.put("qtdePagamentosBaixarValorExcedenteContas", ""
-				+ qtdePagamentosBaixarValorExcedenteContas);
-		parametros.put("valorPagamentosBaixarValorExcedenteContas", Util
-				.formatarMoedaReal(valorPagamentosBaixarValorExcedenteContas));
-		parametros.put("qtdePagamentosValorNaoConfereContas", ""
-				+ qtdePagamentosValorNaoConfereContas);
-		parametros.put("valorPagamentosValorNaoConfereContas", Util
-				.formatarMoedaReal(valorPagamentosValorNaoConfereContas));
-		parametros.put("qtdePagamentosDuploExcessoDevolvidoContas", ""
-				+ qtdePagamentosDuploExcessoDevolvidoContas);
-		parametros.put("valorPagamentosDuploExcessoDevolvidoContas", Util
-				.formatarMoedaReal(valorPagamentosDuploExcessoDevolvidoContas));
-
-		parametros.put("qtdePagamentosClassificadoGuiasPagamento", ""
-				+ qtdePagamentosClassificadoGuiasPagamento);
-		parametros.put("valorPagamentosClassificadoGuiasPagamento", Util
-				.formatarMoedaReal(valorPagamentosClassificadoGuiasPagamento));
-		parametros.put("qtdePagamentosDuploExcessoGuiasPagamento", ""
-				+ qtdePagamentosDuploExcessoGuiasPagamento);
-		parametros.put("valorPagamentosDuploExcessoGuiasPagamento", Util
-				.formatarMoedaReal(valorPagamentosDuploExcessoGuiasPagamento));
-		parametros.put("qtdePagamentosDocumentoInexistenteGuiasPagamento", ""
-				+ qtdePagamentosDocumentoInexistenteGuiasPagamento);
-		parametros
-				.put(
-						"valorPagamentosDocumentoInexistenteGuiasPagamento",
-						Util
-								.formatarMoedaReal(valorPagamentosDocumentoInexistenteGuiasPagamento));
-		parametros.put("qtdePagamentosBaixarValorExcedenteGuiasPagamento", ""
-				+ qtdePagamentosBaixarValorExcedenteGuiasPagamento);
-		parametros
-				.put(
-						"valorPagamentosBaixarValorExcedenteGuiasPagamento",
-						Util
-								.formatarMoedaReal(valorPagamentosBaixarValorExcedenteGuiasPagamento));
-		parametros.put("qtdePagamentosValorNaoConfereGuiasPagamento", ""
-				+ qtdePagamentosValorNaoConfereGuiasPagamento);
-		parametros
-				.put(
-						"valorPagamentosValorNaoConfereGuiasPagamento",
-						Util
-								.formatarMoedaReal(valorPagamentosValorNaoConfereGuiasPagamento));
-		parametros.put("qtdePagamentosDuploExcessoDevolvidoGuiasPagamento", ""
-				+ qtdePagamentosDuploExcessoDevolvidoGuiasPagamento);
-		parametros
-				.put(
-						"valorPagamentosDuploExcessoDevolvidoGuiasPagamento",
-						Util
-								.formatarMoedaReal(valorPagamentosDuploExcessoDevolvidoGuiasPagamento));
-
-		parametros.put("qtdePagamentosClassificadoDebitosACobrar", ""
-				+ qtdePagamentosClassificadoDebitosACobrar);
-		parametros.put("valorPagamentosClassificadoDebitosACobrar", Util
-				.formatarMoedaReal(valorPagamentosClassificadoDebitosACobrar));
-		parametros.put("qtdePagamentosDuploExcessoDebitosACobrar", ""
-				+ qtdePagamentosDuploExcessoDebitosACobrar);
-		parametros.put("valorPagamentosDuploExcessoDebitosACobrar", Util
-				.formatarMoedaReal(valorPagamentosDuploExcessoDebitosACobrar));
-		parametros.put("qtdePagamentosDocumentoInexistenteDebitosACobrar", ""
-				+ qtdePagamentosDocumentoInexistenteDebitosACobrar);
-		parametros
-				.put(
-						"valorPagamentosDocumentoInexistenteDebitosACobrar",
-						Util
-								.formatarMoedaReal(valorPagamentosDocumentoInexistenteDebitosACobrar));
-		parametros.put("qtdePagamentosBaixarValorExcedenteDebitosACobrar", ""
-				+ qtdePagamentosBaixarValorExcedenteDebitosACobrar);
-		parametros
-				.put(
-						"valorPagamentosBaixarValorExcedenteDebitosACobrar",
-						Util
-								.formatarMoedaReal(valorPagamentosBaixarValorExcedenteDebitosACobrar));
-		parametros.put("qtdePagamentosValorNaoConfereDebitosACobrar", ""
-				+ qtdePagamentosValorNaoConfereDebitosACobrar);
-		parametros
-				.put(
-						"valorPagamentosValorNaoConfereDebitosACobrar",
-						Util
-								.formatarMoedaReal(valorPagamentosValorNaoConfereDebitosACobrar));
-		parametros.put("qtdePagamentosDuploExcessoDevolvidoDebitosACobrar", ""
-				+ qtdePagamentosDuploExcessoDevolvidoDebitosACobrar);
-		parametros
-				.put(
-						"valorPagamentosDuploExcessoDevolvidoDebitosACobrar",
-						Util
-								.formatarMoedaReal(valorPagamentosDuploExcessoDevolvidoDebitosACobrar));
-
-		parametros.put("qtdePagamentosClassificado", ""
-				+ qtdePagamentosClassificado);
-		parametros.put("valorPagamentosClassificado", Util
-				.formatarMoedaReal(valorPagamentosClassificado));
-		parametros.put("qtdePagamentosDuploExcesso", ""
-				+ qtdePagamentosDuploExcesso);
-		parametros.put("valorPagamentosDuploExcesso", Util
-				.formatarMoedaReal(valorPagamentosDuploExcesso));
-		parametros.put("qtdePagamentosDocumentoInexistente", ""
-				+ qtdePagamentosDocumentoInexistente);
-		parametros.put("valorPagamentosDocumentoInexistente", Util
-				.formatarMoedaReal(valorPagamentosDocumentoInexistente));
-		parametros.put("qtdePagamentosBaixarValorExcedente", ""
-				+ qtdePagamentosBaixarValorExcedente);
-		parametros.put("valorPagamentosBaixarValorExcedente", Util
-				.formatarMoedaReal(valorPagamentosBaixarValorExcedente));
-		parametros.put("qtdePagamentosValorNaoConfere", ""
-				+ qtdePagamentosValorNaoConfere);
-		parametros.put("valorPagamentosValorNaoConfere", Util
-				.formatarMoedaReal(valorPagamentosValorNaoConfere));
-		parametros.put("qtdePagamentosDuploExcessoDevolvido", ""
-				+ qtdePagamentosDuploExcessoDevolvido);
-		parametros.put("valorPagamentosDuploExcessoDevolvido", Util
-				.formatarMoedaReal(valorPagamentosDuploExcessoDevolvido));
-		
+			parametros.put("qtdePagamentosClassificadoContas", "" + qtdePagamentosClassificadoContas);
+			parametros.put("valorPagamentosClassificadoContas", Util.formatarMoedaReal(valorPagamentosClassificadoContas));
+			parametros.put("qtdePagamentosDuploExcessoContas", "" + qtdePagamentosDuploExcessoContas);
+			parametros.put("valorPagamentosDuploExcessoContas", Util.formatarMoedaReal(valorPagamentosDuploExcessoContas));
+			parametros.put("qtdePagamentosDocumentoInexistenteContas", ""+ qtdePagamentosDocumentoInexistenteContas);
+			parametros.put("valorPagamentosDocumentoInexistenteContas", Util.formatarMoedaReal(valorPagamentosDocumentoInexistenteContas));
+			parametros.put("qtdePagamentosBaixarValorExcedenteContas", "" + qtdePagamentosBaixarValorExcedenteContas);
+			parametros.put("valorPagamentosBaixarValorExcedenteContas", Util.formatarMoedaReal(valorPagamentosBaixarValorExcedenteContas));
+			parametros.put("qtdePagamentosValorNaoConfereContas", "" + qtdePagamentosValorNaoConfereContas);
+			parametros.put("valorPagamentosValorNaoConfereContas", Util.formatarMoedaReal(valorPagamentosValorNaoConfereContas));
+			parametros.put("qtdePagamentosDuploExcessoDevolvidoContas", ""+ qtdePagamentosDuploExcessoDevolvidoContas);
+			parametros.put("valorPagamentosDuploExcessoDevolvidoContas",Util.formatarMoedaReal(valorPagamentosDuploExcessoDevolvidoContas));
+			parametros.put("qtdePagamentosDocumentoContabilizarContas", "" + qtdePagamentosDocumentoContabilizarContas);
+			parametros.put("valorPagamentosDocumentoContabilizarContas",Util.formatarMoedaReal(valorPagamentosDocumentoContabilizarContas));
+			parametros.put("qtdePagamentosContas", "" + qtdePagamentosContas);
+			parametros.put("valorPagamentosContas",Util.formatarMoedaReal(valorPagamentosContas));
+			parametros.put("qtdePagamentosClassificadoGuiasPagamento", ""+ qtdePagamentosClassificadoGuiasPagamento);
+			parametros.put("valorPagamentosClassificadoGuiasPagamento",Util.formatarMoedaReal(valorPagamentosClassificadoGuiasPagamento));
+			parametros.put("qtdePagamentosDuploExcessoGuiasPagamento", "" + qtdePagamentosDuploExcessoGuiasPagamento);
+			parametros.put("valorPagamentosDuploExcessoGuiasPagamento",Util.formatarMoedaReal(valorPagamentosDuploExcessoGuiasPagamento));
+			parametros.put("qtdePagamentosDocumentoInexistenteGuiasPagamento", "" + qtdePagamentosDocumentoInexistenteGuiasPagamento);
+			parametros.put("valorPagamentosDocumentoInexistenteGuiasPagamento",Util.formatarMoedaReal(valorPagamentosDocumentoInexistenteGuiasPagamento));
+			parametros.put("qtdePagamentosBaixarValorExcedenteGuiasPagamento","" + qtdePagamentosBaixarValorExcedenteGuiasPagamento);
+			parametros.put("valorPagamentosBaixarValorExcedenteGuiasPagamento",Util.formatarMoedaReal(valorPagamentosBaixarValorExcedenteGuiasPagamento));
+			parametros.put("qtdePagamentosValorNaoConfereGuiasPagamento", "" + qtdePagamentosValorNaoConfereGuiasPagamento);
+			parametros.put("valorPagamentosValorNaoConfereGuiasPagamento",Util.formatarMoedaReal(valorPagamentosValorNaoConfereGuiasPagamento));
+			parametros.put("qtdePagamentosDuploExcessoDevolvidoGuiasPagamento", "" + qtdePagamentosDuploExcessoDevolvidoGuiasPagamento);
+			parametros.put("valorPagamentosDuploExcessoDevolvidoGuiasPagamento",Util.formatarMoedaReal(valorPagamentosDuploExcessoDevolvidoGuiasPagamento));
+			parametros.put("qtdePagamentosDocumentoContabilizarGuiasPagamento", "" + qtdePagamentosDocumentoContabilizarGuiasPagamento);
+			parametros.put("valorPagamentosDocumentoContabilizarGuiasPagamento", Util.formatarMoedaReal(valorPagamentosDocumentoContabilizarGuiasPagamento));
+			parametros.put("qtdePagamentosGuiasPagamento", "" + qtdePagamentosGuiasPagamento);
+			parametros.put("valorPagamentosGuiasPagamento",Util.formatarMoedaReal(valorPagamentosGuiasPagamento));
+			parametros.put("qtdePagamentosClassificadoDebitosACobrar", "" + qtdePagamentosClassificadoDebitosACobrar);
+			parametros.put("valorPagamentosClassificadoDebitosACobrar",Util.formatarMoedaReal(valorPagamentosClassificadoDebitosACobrar));
+			parametros.put("qtdePagamentosDuploExcessoDebitosACobrar", ""+ qtdePagamentosDuploExcessoDebitosACobrar);
+			parametros.put("valorPagamentosDuploExcessoDebitosACobrar",Util.formatarMoedaReal(valorPagamentosDuploExcessoDebitosACobrar));
+			parametros.put("qtdePagamentosDocumentoInexistenteDebitosACobrar","" + qtdePagamentosDocumentoInexistenteDebitosACobrar);
+			parametros.put("valorPagamentosDocumentoInexistenteDebitosACobrar",Util.formatarMoedaReal(valorPagamentosDocumentoInexistenteDebitosACobrar));
+			parametros.put("qtdePagamentosBaixarValorExcedenteDebitosACobrar","" + qtdePagamentosBaixarValorExcedenteDebitosACobrar);
+			parametros.put("valorPagamentosBaixarValorExcedenteDebitosACobrar",Util.formatarMoedaReal(valorPagamentosBaixarValorExcedenteDebitosACobrar));
+			parametros.put("qtdePagamentosValorNaoConfereDebitosACobrar", ""+ qtdePagamentosValorNaoConfereDebitosACobrar);
+			parametros.put("valorPagamentosValorNaoConfereDebitosACobrar",Util.formatarMoedaReal(valorPagamentosValorNaoConfereDebitosACobrar));
+			parametros.put("qtdePagamentosDuploExcessoDevolvidoDebitosACobrar","" + qtdePagamentosDuploExcessoDevolvidoDebitosACobrar);
+			parametros.put("valorPagamentosDuploExcessoDevolvidoDebitosACobrar",Util.formatarMoedaReal(valorPagamentosDuploExcessoDevolvidoDebitosACobrar));
+			parametros.put("qtdePagamentosDocumentoContabilizarDebitosACobrar","" + qtdePagamentosDocumentoContabilizarDebitosACobrar);
+			parametros.put("valorPagamentosDocumentoContabilizarDebitosACobrar",Util.formatarMoedaReal(valorPagamentosDocumentoContabilizarDebitosACobrar));
+			parametros.put("qtdePagamentosDebitosACobrar", "" + qtdePagamentosDebitosACobrar);
+			parametros.put("valorPagamentosDebitosACobrar",Util.formatarMoedaReal(valorPagamentosDebitosACobrar));
+			parametros.put("qtdePagamentosClassificado", "" + qtdePagamentosClassificado);
+			parametros.put("valorPagamentosClassificado", Util.formatarMoedaReal(valorPagamentosClassificado));
+			parametros.put("qtdePagamentosDuploExcesso", ""+ qtdePagamentosDuploExcesso);
+			parametros.put("valorPagamentosDuploExcesso",Util.formatarMoedaReal(valorPagamentosDuploExcesso));
+			parametros.put("qtdePagamentosDocumentoInexistente", ""+ qtdePagamentosDocumentoInexistente);
+			parametros.put("valorPagamentosDocumentoInexistente",Util.formatarMoedaReal(valorPagamentosDocumentoInexistente));
+			parametros.put("qtdePagamentosBaixarValorExcedente", "" + qtdePagamentosBaixarValorExcedente);
+			parametros.put("valorPagamentosBaixarValorExcedente",Util.formatarMoedaReal(valorPagamentosBaixarValorExcedente));
+			parametros.put("qtdePagamentosValorNaoConfere", ""+ qtdePagamentosValorNaoConfere);
+			parametros.put("valorPagamentosValorNaoConfere",Util.formatarMoedaReal(valorPagamentosValorNaoConfere));
+			parametros.put("qtdePagamentosDuploExcessoDevolvido", ""+ qtdePagamentosDuploExcessoDevolvido);
+			parametros.put("valorPagamentosDuploExcessoDevolvido", Util.formatarMoedaReal(valorPagamentosDuploExcessoDevolvido));
+			parametros.put("qtdePagamentosDocumentoContabilizar", ""+ qtdePagamentosDocumentoContabilizar);
+			parametros.put("valorPagamentosDocumentoContabilizar", Util.formatarMoedaReal(valorPagamentosDocumentoContabilizar));
+			parametros.put("qtdePagamentos", "" + qtdePagamentos);
+			parametros.put("valorPagamentos",Util.formatarMoedaReal(valorPagamentos));
+			
+			setCategorias(fachada, idsCategoria, parametros);
+			setEsferaPoder(fachada, idsEsferaPoder, parametros);
+			
 		}
 
 		// cria uma instância do dataSource do relatório
 		RelatorioDataSource ds = new RelatorioDataSource(relatorioBeans);
 
 		if (relatorioConsultarImovel) {
-			retorno = this.gerarRelatorio(
-					ConstantesRelatorios.RELATORIO_PAGAMENTO_CONSULTAR_IMOVEL,
-					parametros, ds, tipoFormatoRelatorio);
-		} else if (relatorioConsultarAvisoBancario) { 
-			retorno = this.gerarRelatorio(
-					ConstantesRelatorios.RELATORIO_PAGAMENTO_CONSULTAR_AVISO_BANCARIO,
-					parametros, ds, tipoFormatoRelatorio);
+			retorno = this.gerarRelatorio(ConstantesRelatorios.RELATORIO_PAGAMENTO_CONSULTAR_IMOVEL,parametros, ds, tipoFormatoRelatorio);
+		} else if (relatorioConsultarAvisoBancario) {
+			retorno = this.gerarRelatorio(ConstantesRelatorios.RELATORIO_PAGAMENTO_CONSULTAR_AVISO_BANCARIO,parametros, ds, tipoFormatoRelatorio);
 		} else {
-			retorno = this.gerarRelatorio(
-					ConstantesRelatorios.RELATORIO_PAGAMENTO, parametros, ds,
-					tipoFormatoRelatorio);
+			retorno = this.gerarRelatorio(ConstantesRelatorios.RELATORIO_PAGAMENTO, parametros, ds,tipoFormatoRelatorio);
 		}
 
 		// ------------------------------------
 		// Grava o relatório no sistema
 		try {
-			persistirRelatorioConcluido(retorno, Relatorio.PAGAMENTO,
-					idFuncionalidadeIniciada);
+			persistirRelatorioConcluido(retorno, Relatorio.PAGAMENTO,idFuncionalidadeIniciada);
 		} catch (ControladorException e) {
 			e.printStackTrace();
 			throw new TarefaException("Erro ao gravar relatório no sistema", e);
@@ -1301,6 +1052,75 @@ public class RelatorioPagamento extends TarefaRelatorio {
 		return retorno;
 	}
 
+	/**
+	 * [UCXXXX] - <descrição>
+	
+	 * @author Bruno Sá Barreto
+	 * @date 30/12/2015
+	 *
+	 * @param fachada
+	 * @param idsEsferaPoder
+	 * @param parametros
+	 */
+	private void setEsferaPoder(Fachada fachada, String[] idsEsferaPoder, Map parametros) {
+		int c = 0;
+		if (idsEsferaPoder!= null && !idsEsferaPoder[c].equals("")) {
+			String esferas = "";
+			FiltroEsferaPoder filtroEsferaPoder = new FiltroEsferaPoder();
+			while (c < idsEsferaPoder.length) {
+				if (c + 1 < idsEsferaPoder.length) {
+					filtroEsferaPoder.adicionarParametro(new ParametroSimples(FiltroEsferaPoder.ID,
+							idsEsferaPoder[c],ConectorOr.CONECTOR_OR,idsEsferaPoder.length));
+				} else {
+					filtroEsferaPoder.adicionarParametro(new ParametroSimples(
+							FiltroEsferaPoder.ID,idsEsferaPoder[c]));
+				}
+				c++;
+			}
+			Collection<EsferaPoder> colecaoEsferaPoder = fachada.pesquisar(filtroEsferaPoder, EsferaPoder.class.getName());
+			if(!Util.isVazioOrNulo(colecaoEsferaPoder)){
+				int i = 1;
+				for (EsferaPoder esferaPoder : colecaoEsferaPoder) {
+					esferas += esferaPoder.getDescricao();
+					if (colecaoEsferaPoder.size() > i)
+						esferas += ", ";
+					i++;
+				}
+			}
+			parametros.put("esferaPoder", esferas);
+		}
+	}
+
+
+	private void setCategorias(Fachada fachada, String[] idsCategoria, Map parametros) {
+		int c = 0;
+		if (idsCategoria != null && !idsCategoria[c].equals("")) {
+			String categorias = "";
+			FiltroCategoria filtroCategoria = new FiltroCategoria();
+			while (c < idsCategoria.length) {
+				if (c + 1 < idsCategoria.length) {
+					filtroCategoria.adicionarParametro(new ParametroSimples(FiltroCategoria.CODIGO,
+							idsCategoria[c],ConectorOr.CONECTOR_OR,idsCategoria.length));
+				} else {
+					filtroCategoria.adicionarParametro(new ParametroSimples(
+									FiltroCategoria.CODIGO,idsCategoria[c]));
+				}
+				c++;
+			}
+			Collection<Categoria> colecaoCategorias = fachada.pesquisar(filtroCategoria, Categoria.class.getName());
+			if(!Util.isVazioOrNulo(colecaoCategorias)){
+				int i = 1;
+				for (Categoria categoria : colecaoCategorias) {
+					categorias += categoria.getDescricao();
+					if (colecaoCategorias.size() > i)
+						categorias += ", ";
+					i++;
+				}
+			}
+			parametros.put("categorias", categorias);
+		}
+	}
+	
 	@Override
 	public int calcularTotalRegistrosRelatorio() {
 
@@ -1327,70 +1147,72 @@ public class RelatorioPagamento extends TarefaRelatorio {
 		String[] idsDocumentoTipo = (String[]) getParametro("idsDocumentoTipo");
 		String[] idsDebitoTipo = (String[]) getParametro("idsDebitoTipo");
 		String opcaoPagamento = (String) getParametro("opcaoPagamento");
-        
-        String valorPagamentoInicial = (String) getParametro("valorPagamentoInicial");
-        String valorPagamentoFinal = (String) getParametro("valorPagamentoFinal");
-        
 
+		String valorPagamentoInicial = (String) getParametro("valorPagamentoInicial");
+		String valorPagamentoFinal = (String) getParametro("valorPagamentoFinal");
+		String[] idsCategoria = (String[]) getParametro("idsCategoria");
+		String[] idsEsferaPoder = (String[]) getParametro("idsEsferaPoder");
+		
 		if (idImovel != null && !idImovel.equals("")) {
-			
-			if (opcaoPagamento != null && opcaoPagamento.equals("atual") || (opcaoPagamento
-					.equals("ambos")) ) {
-				
-					i = fachada.pesquisarPagamentoImovelCount(idImovel, idCliente,
-							clienteRelacaoTipo, localidadeInicial, localidadeFinal,
-							idAvisoBancario, idMovimentoArrecadador,
-							periodoArrecadacaoInicial, periodoArrecadacaoFinal,
-							periodoPagamentoInicial, periodoPagamentoFinal,
-							dataPagamentoInicial, dataPagamentoFinal,
-							idsPagamentoSituacao, idsDebitoTipo, idsArrecadacaoForma,
-							idsDocumentoTipo, valorPagamentoInicial, valorPagamentoFinal);
-					
-					if (opcaoPagamento != null && opcaoPagamento.equals("historico") || (opcaoPagamento
-							.equals("ambos"))){
-							i = i + fachada.pesquisarPagamentoHistoricoImovelCount(idImovel,
-								idCliente, clienteRelacaoTipo, localidadeInicial,
-								localidadeFinal, idAvisoBancario, idMovimentoArrecadador,
-								periodoArrecadacaoInicial, periodoArrecadacaoFinal,
-								periodoPagamentoInicial, periodoPagamentoFinal,
-								dataPagamentoInicial, dataPagamentoFinal,
-								idsPagamentoSituacao, idsDebitoTipo,
-								idsArrecadacaoForma, idsDocumentoTipo);
-					}
-				
-			}
-		} else if (idCliente != null && !idCliente.equals("")) {
-			
-			if (opcaoPagamento != null && opcaoPagamento.equals("atual") || (opcaoPagamento
-					.equals("ambos")) ) {
-				
-				i = i + fachada.pesquisarPagamentoImovelCount(idImovel, idCliente,
+
+			if (opcaoPagamento != null && opcaoPagamento.equals("atual") || (opcaoPagamento.equals("ambos"))) {
+
+				i = fachada.pesquisarPagamentoImovelCount(idImovel, idCliente,
 						clienteRelacaoTipo, localidadeInicial, localidadeFinal,
 						idAvisoBancario, idMovimentoArrecadador,
 						periodoArrecadacaoInicial, periodoArrecadacaoFinal,
 						periodoPagamentoInicial, periodoPagamentoFinal,
 						dataPagamentoInicial, dataPagamentoFinal,
-						idsPagamentoSituacao, idsDebitoTipo, idsArrecadacaoForma,
-						idsDocumentoTipo,
-	                    valorPagamentoInicial,
-	                    valorPagamentoFinal );
-				
-			} 
-			
-			if (opcaoPagamento != null && opcaoPagamento.equals("historico") || (opcaoPagamento
-					.equals("ambos"))){
-				i = i + fachada.pesquisarPagamentoHistoricoClienteCount(idImovel, idCliente,
-					clienteRelacaoTipo, localidadeInicial, localidadeFinal,
-					idAvisoBancario, idMovimentoArrecadador,
-					periodoArrecadacaoInicial, periodoArrecadacaoFinal,
-					periodoPagamentoInicial, periodoPagamentoFinal,
-					dataPagamentoInicial, dataPagamentoFinal,
-					idsPagamentoSituacao, idsDebitoTipo, idsArrecadacaoForma,
-					idsDocumentoTipo, valorPagamentoInicial, valorPagamentoFinal);
-				
+						idsPagamentoSituacao, idsDebitoTipo,
+						idsArrecadacaoForma, idsDocumentoTipo,
+						valorPagamentoInicial, valorPagamentoFinal);
+
+				if (opcaoPagamento != null && opcaoPagamento.equals("historico") || (opcaoPagamento.equals("ambos"))) {
+					i = i
+							+ fachada.pesquisarPagamentoHistoricoImovelCount(
+									idImovel, idCliente, clienteRelacaoTipo,
+									localidadeInicial, localidadeFinal,
+									idAvisoBancario, idMovimentoArrecadador,
+									periodoArrecadacaoInicial,
+									periodoArrecadacaoFinal,
+									periodoPagamentoInicial,
+									periodoPagamentoFinal,
+									dataPagamentoInicial, dataPagamentoFinal,
+									idsPagamentoSituacao, idsDebitoTipo,
+									idsArrecadacaoForma, idsDocumentoTipo);
+				}
 			}
-			
-			
+		} else if (idCliente != null && !idCliente.equals("")) {
+
+			if (opcaoPagamento != null && opcaoPagamento.equals("atual") || (opcaoPagamento.equals("ambos"))) {
+				i = i
+						+ fachada.pesquisarPagamentoClienteCount(idImovel,
+								idCliente, clienteRelacaoTipo,
+								localidadeInicial, localidadeFinal,
+								idAvisoBancario, idMovimentoArrecadador,
+								periodoArrecadacaoInicial,
+								periodoArrecadacaoFinal,
+								periodoPagamentoInicial, periodoPagamentoFinal,
+								dataPagamentoInicial, dataPagamentoFinal,
+								idsPagamentoSituacao, idsDebitoTipo,
+								idsArrecadacaoForma, idsDocumentoTipo,
+								valorPagamentoInicial, valorPagamentoFinal);
+
+			}
+			if (opcaoPagamento != null && opcaoPagamento.equals("historico") || (opcaoPagamento.equals("ambos"))) {
+				i = i
+						+ fachada.pesquisarPagamentoHistoricoClienteCount(
+								idImovel, idCliente, clienteRelacaoTipo,
+								localidadeInicial, localidadeFinal,
+								idAvisoBancario, idMovimentoArrecadador,
+								periodoArrecadacaoInicial,
+								periodoArrecadacaoFinal,
+								periodoPagamentoInicial, periodoPagamentoFinal,
+								dataPagamentoInicial, dataPagamentoFinal,
+								idsPagamentoSituacao, idsDebitoTipo,
+								idsArrecadacaoForma, idsDocumentoTipo,
+								valorPagamentoInicial, valorPagamentoFinal);
+			}
 		} else if (idAvisoBancario != null && !idAvisoBancario.equals("")) {
 			i = fachada.pesquisarPagamentoAvisoBancarioCount(idImovel,
 					idCliente, clienteRelacaoTipo, localidadeInicial,
@@ -1399,25 +1221,23 @@ public class RelatorioPagamento extends TarefaRelatorio {
 					periodoPagamentoInicial, periodoPagamentoFinal,
 					dataPagamentoInicial, dataPagamentoFinal,
 					idsPagamentoSituacao, idsDebitoTipo, idsArrecadacaoForma,
-					idsDocumentoTipo,
-                    valorPagamentoInicial,
-                    valorPagamentoFinal);
-			
-			if ( i == 0 ) {
-				//Pesquisa em Historico caso nao tenha nenhum pagamento atual.
-			 i = fachada.pesquisarPagamentoHistoricoAvisoBancarioCount(idImovel,
-						idCliente, clienteRelacaoTipo, localidadeInicial,
-						localidadeFinal, idAvisoBancario, idMovimentoArrecadador,
-						periodoArrecadacaoInicial, periodoArrecadacaoFinal,
-						periodoPagamentoInicial, periodoPagamentoFinal,
-						dataPagamentoInicial, dataPagamentoFinal,
-						idsPagamentoSituacao, idsDebitoTipo, idsArrecadacaoForma,
-						idsDocumentoTipo,
-	                    valorPagamentoInicial,
-	                    valorPagamentoFinal);
+					idsDocumentoTipo, valorPagamentoInicial,
+					valorPagamentoFinal);
+
+			if (i == 0) {
+				// Pesquisa em Historico caso nao tenha nenhum pagamento atual.
+				i = fachada.pesquisarPagamentoHistoricoAvisoBancarioCount(
+						idImovel, idCliente, clienteRelacaoTipo,
+						localidadeInicial, localidadeFinal, idAvisoBancario,
+						idMovimentoArrecadador, periodoArrecadacaoInicial,
+						periodoArrecadacaoFinal, periodoPagamentoInicial,
+						periodoPagamentoFinal, dataPagamentoInicial,
+						dataPagamentoFinal, idsPagamentoSituacao,
+						idsDebitoTipo, idsArrecadacaoForma, idsDocumentoTipo,
+						valorPagamentoInicial, valorPagamentoFinal);
 			}
-			
- 		} else if (idMovimentoArrecadador != null
+
+		} else if (idMovimentoArrecadador != null
 				&& !idMovimentoArrecadador.equals("")) {
 			i = fachada.pesquisarPagamentoMovimentoArrecadadorCount(idImovel,
 					idCliente, clienteRelacaoTipo, localidadeInicial,
@@ -1426,46 +1246,43 @@ public class RelatorioPagamento extends TarefaRelatorio {
 					periodoPagamentoInicial, periodoPagamentoFinal,
 					dataPagamentoInicial, dataPagamentoFinal,
 					idsPagamentoSituacao, idsDebitoTipo, idsArrecadacaoForma,
-					idsDocumentoTipo,
-                    valorPagamentoInicial,
-                    valorPagamentoFinal);
+					idsDocumentoTipo, valorPagamentoInicial,
+					valorPagamentoFinal);
 		} else {
-			
-			if (opcaoPagamento != null
-					&& ((opcaoPagamento.equals("historico")) || (opcaoPagamento
-							.equals("ambos")))) {
-			i = i + fachada.pesquisarPagamentoHistoricoLocalidadeCount(idImovel, idCliente,
-					clienteRelacaoTipo, localidadeInicial,
-					localidadeFinal, idAvisoBancario,
-					idMovimentoArrecadador, periodoArrecadacaoInicial,
-					periodoArrecadacaoFinal,
-					periodoPagamentoInicial, periodoPagamentoFinal,
-					dataPagamentoInicial, dataPagamentoFinal,
-					idsPagamentoSituacao, idsDebitoTipo,
-					idsArrecadacaoForma, idsDocumentoTipo);
-			} 
-			if (opcaoPagamento != null
-					&& ((opcaoPagamento.equals("atual")) || (opcaoPagamento
-							.equals("ambos")))) {
-			i = i + fachada.pesquisarPagamentoLocalidadeCount(idImovel, idCliente,
-					clienteRelacaoTipo, localidadeInicial, localidadeFinal,
-					idAvisoBancario, idMovimentoArrecadador,
-					periodoArrecadacaoInicial, periodoArrecadacaoFinal,
-					periodoPagamentoInicial, periodoPagamentoFinal,
-					dataPagamentoInicial, dataPagamentoFinal,
-					idsPagamentoSituacao, idsDebitoTipo, idsArrecadacaoForma,
-					idsDocumentoTipo,
-                    valorPagamentoInicial,
-                    valorPagamentoFinal);
+
+			if (opcaoPagamento != null && ((opcaoPagamento.equals("historico")) || (opcaoPagamento.equals("ambos")))) {
+				i = i
+						+ fachada.pesquisarPagamentoHistoricoLocalidadeCount(
+								idImovel, idCliente, clienteRelacaoTipo,
+								localidadeInicial, localidadeFinal,
+								idAvisoBancario, idMovimentoArrecadador,
+								periodoArrecadacaoInicial,
+								periodoArrecadacaoFinal,
+								periodoPagamentoInicial, periodoPagamentoFinal,
+								dataPagamentoInicial, dataPagamentoFinal,
+								idsPagamentoSituacao, idsDebitoTipo,
+								idsArrecadacaoForma, idsDocumentoTipo,idsCategoria, idsEsferaPoder);
+			}
+			if (opcaoPagamento != null && ((opcaoPagamento.equals("atual")) || (opcaoPagamento.equals("ambos")))) {
+				i = i
+						+ fachada.pesquisarPagamentoLocalidadeCount(idImovel,
+								idCliente, clienteRelacaoTipo,
+								localidadeInicial, localidadeFinal,
+								idAvisoBancario, idMovimentoArrecadador,
+								periodoArrecadacaoInicial,
+								periodoArrecadacaoFinal,
+								periodoPagamentoInicial, periodoPagamentoFinal,
+								dataPagamentoInicial, dataPagamentoFinal,
+								idsPagamentoSituacao, idsDebitoTipo,
+								idsArrecadacaoForma, idsDocumentoTipo,
+								valorPagamentoInicial, valorPagamentoFinal,idsCategoria,idsEsferaPoder);
 			}
 		}
 
-		if(i == 0){
+		if (i == 0) {
 			throw new ActionServletException("atencao.pesquisa.nenhumresultado", null, "Relatório");
 		}
-
 		return i;
-
 	}
 
 	public void agendarTarefaBatch() {

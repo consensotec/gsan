@@ -201,4 +201,5 @@ public interface IRepositorioAtualizacaoCadastral {
 	 */
 	public Object[] pesquisarDadosFinanceirosAtuCadastral(ResumoDadosFinanceirosAtualizacaoCadastralDM resumo, 
 			Map<Integer, Integer> cacheSitAgua, Map<Integer, Integer> cacheSitEsgoto)throws ErroRepositorioException;
+
 }

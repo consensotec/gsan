@@ -109,7 +109,8 @@ public class InserirResolucaoDiretoriaActionForm  extends ActionForm {
     private String indicadorNegociacaoSoAVista;
     private String indicadorDescontoSoEmContaAVista;
 	private String indicadorParcelamentoLojaVirtual;
-    
+	private String indicadorParcelamentoCartaoCredito;
+	
 	public String getIndicadorDescontoSoEmContaAVista() {
 		return indicadorDescontoSoEmContaAVista;
 	}
@@ -239,4 +240,14 @@ public class InserirResolucaoDiretoriaActionForm  extends ActionForm {
 			String indicadorParcelamentoLojaVirtual) {
 		this.indicadorParcelamentoLojaVirtual = indicadorParcelamentoLojaVirtual;
 	}
+	
+	public String getIndicadorParcelamentoCartaoCredito() {
+		return indicadorParcelamentoCartaoCredito;
+	}
+
+	public void setIndicadorParcelamentoCartaoCredito(
+			String indicadorParcelamentoCartaoCredito) {
+		this.indicadorParcelamentoCartaoCredito = indicadorParcelamentoCartaoCredito;
+	}
+	
 }

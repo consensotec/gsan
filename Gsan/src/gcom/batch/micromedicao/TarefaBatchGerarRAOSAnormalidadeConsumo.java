@@ -75,8 +75,9 @@
 */  
 package gcom.batch.micromedicao;
 
-import gcom.faturamento.FaturamentoAtivCronRota;
+import gcom.cadastro.sistemaparametro.SistemaParametro;
 import gcom.faturamento.FaturamentoGrupo;
+import gcom.micromedicao.Rota;
 import gcom.seguranca.acesso.usuario.Usuario;
 import gcom.tarefa.TarefaBatch;
 import gcom.tarefa.TarefaException;
@@ -85,7 +86,6 @@ import gcom.util.ConstantesSistema;
 import gcom.util.agendadortarefas.AgendadorTarefas;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 
 
@@ -114,6 +114,7 @@ public class TarefaBatchGerarRAOSAnormalidadeConsumo extends TarefaBatch {
 
 		FaturamentoGrupo faturamentoGrupo = (FaturamentoGrupo) getParametro("faturamentoGrupo");
 		Collection colecaoRotasParaExecucao = (Collection) getParametro(ConstantesSistema.COLECAO_UNIDADES_PROCESSAMENTO_BATCH);
+		SistemaParametro sistemaParametro = (SistemaParametro) getParametro("sistemaParametro");
 
 		Iterator iterator = colecaoRotasParaExecucao.iterator();
 
@@ -124,14 +125,13 @@ public class TarefaBatchGerarRAOSAnormalidadeConsumo extends TarefaBatch {
 			enviarMensagemControladorBatch(
 					ConstantesJNDI.BATCH_GERAR_RA_OS_ANORMALIDADE_CONSUMO,
 					new Object[]{
-							Collections.singletonList((FaturamentoAtivCronRota) array[0]),
-							faturamentoGrupo, this.getIdFuncionalidadeIniciada()});
+							faturamentoGrupo, 
+							sistemaParametro,
+							((Rota) array[1]),
+							this.getIdFuncionalidadeIniciada()});
 
 		}
-
 		return null;
-
-		
 	}
 
 	@Override

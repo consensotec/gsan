@@ -27,6 +27,11 @@ public class RelatorioResumoDistritoOperacional extends TarefaRelatorio {
 		super(usuario,
 				ConstantesRelatorios.RELATORIO_RESUMO_DISTRITO_OPERACIONAL);
 	}
+	
+	@Deprecated
+	public RelatorioResumoDistritoOperacional() {
+		super(null, "");
+	}
 
 	@Override
 	public Object executar() throws TarefaException {

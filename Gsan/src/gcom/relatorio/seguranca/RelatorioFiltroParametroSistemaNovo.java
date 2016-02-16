@@ -25,6 +25,11 @@ public class RelatorioFiltroParametroSistemaNovo extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_FILTRO_PARAMETRO_SISTEMA_NOVO);
 	}
 	
+	@Deprecated
+	public RelatorioFiltroParametroSistemaNovo() {
+		super(null, "");
+	}
+	
 	@Override
 	public int calcularTotalRegistrosRelatorio() {
 		return 0;

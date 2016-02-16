@@ -117,6 +117,11 @@ public class RelatorioManterBacia extends TarefaRelatorio {
 	public RelatorioManterBacia(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_BACIA_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterBacia() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

@@ -80,12 +80,14 @@ import gcom.atendimentopublico.registroatendimento.SolicitacaoTipoEspecificacao;
 import gcom.cadastro.imovel.Categoria;
 import gcom.cadastro.imovel.ImovelPerfil;
 import gcom.fachada.Fachada;
+import gcom.faturamento.conta.ContaMotivoRevisao;
 import gcom.gui.ActionServletException;
 import gcom.gui.GcomAction;
 import gcom.micromedicao.consumo.ConsumoAnormalidade;
 import gcom.micromedicao.consumo.ConsumoAnormalidadeAcao;
 import gcom.micromedicao.consumo.FiltroConsumoAnormalidadeAcao;
 import gcom.micromedicao.leitura.LeituraAnormalidadeConsumo;
+import gcom.util.Util;
 import gcom.util.filtro.ParametroNulo;
 import gcom.util.filtro.ParametroSimples;
 
@@ -146,6 +148,21 @@ public class InserirConsumoAnormalidadeAcaoAction extends GcomAction {
 		if(form.getLeituraAnormalidadeConsumoMes1() == null || form.getLeituraAnormalidadeConsumoMes1().equals("-1")){
 			
 			throw new ActionServletException("atencao.consumo_a_cobrar_mes1");
+		}
+		
+		//Fator de Consumo para cálculo do 1º Mês menor que 1
+		if (Util.formatarMoedaRealparaBigDecimal(form.getNumerofatorConsumoMes1()).compareTo(BigDecimal.ONE)  < 0){
+			throw new ActionServletException("atencao.fator_consumo_calculo_mes","1");
+		}
+		
+		//Fator de Consumo para cálculo do 2º Mês menor que 1
+		if (Util.formatarMoedaRealparaBigDecimal(form.getNumerofatorConsumoMes2()).compareTo(BigDecimal.ONE)  < 0){
+			throw new ActionServletException("atencao.fator_consumo_calculo_mes","2");
+		}
+		
+		//Fator de Consumo para cálculo do 3º Mês menor que 1
+		if (Util.formatarMoedaRealparaBigDecimal(form.getNumerofatorConsumoMes3()).compareTo(BigDecimal.ONE)  < 0){
+			throw new ActionServletException("atencao.fator_consumo_calculo_mes","3");
 		}
 		
 		//Consumo a Cobrar para o 2º Mês não informado
@@ -244,9 +261,21 @@ public class InserirConsumoAnormalidadeAcaoAction extends GcomAction {
 			throw new ActionServletException("atencao.solicitacao_tipo_especificacao_mes3");
 		}
 		
-
-
+		if (form.getIndicadorGeracaoCartaMes1() != null && form.getIndicadorGeracaoCartaMes1().equals("1")  &&
+		   (form.getMotivoRevisaoMes1() == null || form.getMotivoRevisaoMes1().equals("-1"))){
+			throw new ActionServletException("atencao.motivo_revisao_mes1");
+		}
 		
+		if (form.getIndicadorGeracaoCartaMes2() != null && form.getIndicadorGeracaoCartaMes2().equals("1")  &&
+		   (form.getMotivoRevisaoMes2() == null || form.getMotivoRevisaoMes2().equals("-1"))){
+			throw new ActionServletException("atencao.motivo_revisao_mes2");	
+		}
+		
+		if (form.getIndicadorGeracaoCartaMes3() != null && form.getIndicadorGeracaoCartaMes3().equals("1")  &&
+		   (form.getMotivoRevisaoMes3() == null || form.getMotivoRevisaoMes3().equals("-1"))){
+			throw new ActionServletException("atencao.motivo_revisao_mes3");	
+		}
+				
 		ConsumoAnormalidadeAcao consumoAnormalidadeAcao = new ConsumoAnormalidadeAcao();
 		
 		
@@ -284,13 +313,14 @@ public class InserirConsumoAnormalidadeAcaoAction extends GcomAction {
 			consumoAnormalidadeAcao.setLeituraAnormalidadeConsumoMes3(leituraAnormalidadeConsumo3);
 		}
 		
-		consumoAnormalidadeAcao.setNumerofatorConsumoMes1(new BigDecimal(form.getNumerofatorConsumoMes1()));
-		consumoAnormalidadeAcao.setNumerofatorConsumoMes2(new BigDecimal(form.getNumerofatorConsumoMes2()));
-		consumoAnormalidadeAcao.setNumerofatorConsumoMes3(new BigDecimal(form.getNumerofatorConsumoMes3()));
+		consumoAnormalidadeAcao.setNumerofatorConsumoMes1(Util.formatarMoedaRealparaBigDecimal(form.getNumerofatorConsumoMes1()));
+		consumoAnormalidadeAcao.setNumerofatorConsumoMes2(Util.formatarMoedaRealparaBigDecimal(form.getNumerofatorConsumoMes2()));
+		consumoAnormalidadeAcao.setNumerofatorConsumoMes3(Util.formatarMoedaRealparaBigDecimal(form.getNumerofatorConsumoMes3()));
+		
 		consumoAnormalidadeAcao.setIndicadorGeracaoCartaMes1(new Short(form.getIndicadorGeracaoCartaMes1()));
 		consumoAnormalidadeAcao.setIndicadorGeracaoCartaMes2(new Short(form.getIndicadorGeracaoCartaMes2()));
 		consumoAnormalidadeAcao.setIndicadorGeracaoCartaMes3(new Short(form.getIndicadorGeracaoCartaMes3()));
-
+	
 		if (form.getIdServicoTipoMes1() != null && !form.getIdServicoTipoMes1().equals("")){
 			ServicoTipo servicoTipo1 = new ServicoTipo();
 			servicoTipo1.setId(new Integer(form.getIdServicoTipoMes1()));
@@ -333,9 +363,39 @@ public class InserirConsumoAnormalidadeAcaoAction extends GcomAction {
 		consumoAnormalidadeAcao.setIndicadorUso(new Short(form.getIndicadorUso()));
 		consumoAnormalidadeAcao.setUltimaAlteracao(new Date());
 		consumoAnormalidadeAcao.setIndicadorValidarRetificacao((short) 2);
-
+		
+		if (form.getMotivoRevisaoMes1() != null && !form.getMotivoRevisaoMes1().equals("-1")){
+			ContaMotivoRevisao contaMotivoRevisaoMes1 = new ContaMotivoRevisao();
+			contaMotivoRevisaoMes1.setId(new Integer(form.getMotivoRevisaoMes1()));
+			consumoAnormalidadeAcao.setContaMotivoRevisaoMes1(contaMotivoRevisaoMes1);
+		}
+		
+		if (form.getMotivoRevisaoMes2() != null && !form.getMotivoRevisaoMes2().equals("-1")){
+			ContaMotivoRevisao contaMotivoRevisaoMes2 = new ContaMotivoRevisao();
+			contaMotivoRevisaoMes2.setId(new Integer(form.getMotivoRevisaoMes2()));
+			consumoAnormalidadeAcao.setContaMotivoRevisaoMes2(contaMotivoRevisaoMes2);
+		}
+		
+		if (form.getMotivoRevisaoMes3() != null && !form.getMotivoRevisaoMes3().equals("-1")){
+			ContaMotivoRevisao contaMotivoRevisaoMes3 = new ContaMotivoRevisao();
+			contaMotivoRevisaoMes3.setId(new Integer(form.getMotivoRevisaoMes3()));
+			consumoAnormalidadeAcao.setContaMotivoRevisaoMes3(contaMotivoRevisaoMes3);
+		}
+		
+		/**
+		 * Atributo que indica se é para cobrar consumo normal após terceira ocorrência
+		 * 1 - SIM
+		 * 2 - NÃO
+		 */
+		if (form.getIndicadorCobrancaConsumoNormal() != null){
+			consumoAnormalidadeAcao.setIndicadorCobrancaConsumoNormal(new Short(form.getIndicadorCobrancaConsumoNormal()));
+		}else{
+			//Se o valor não foi definido o valor dafault será 1 de acordo com o banco de dados 
+			consumoAnormalidadeAcao.setIndicadorCobrancaConsumoNormal(new Short("1"));
+		}
+		
 		FiltroConsumoAnormalidadeAcao filtroConsumoAnormalidadeAcao = new FiltroConsumoAnormalidadeAcao();
-
+		
 		filtroConsumoAnormalidadeAcao.adicionarParametro(new ParametroSimples(
 				FiltroConsumoAnormalidadeAcao.CONSUMO_ANORMALIDADE, consumoAnormalidadeAcao.
 				getConsumoAnormalidade()));

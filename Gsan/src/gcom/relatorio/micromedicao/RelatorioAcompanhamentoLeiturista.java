@@ -31,6 +31,11 @@ public class RelatorioAcompanhamentoLeiturista extends TarefaRelatorio {
 		super(usuario,
 				ConstantesRelatorios.RELATORIO_ACOMPANHAMENTO_LEITURISTA);
 	}
+	
+	@Deprecated
+	public RelatorioAcompanhamentoLeiturista() {
+		super(null, "");
+	}
 
 	@Override
 	public int calcularTotalRegistrosRelatorio() {

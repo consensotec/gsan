@@ -119,6 +119,11 @@ public class RelatorioManterArrecadador extends TarefaRelatorio {
 	public RelatorioManterArrecadador(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_ARRECADADOR);
 	}
+	
+	@Deprecated
+	public RelatorioManterArrecadador() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

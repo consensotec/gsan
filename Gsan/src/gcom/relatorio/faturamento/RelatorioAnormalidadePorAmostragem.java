@@ -118,6 +118,11 @@ public class RelatorioAnormalidadePorAmostragem extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_ANORMALIDADE_POR_AMOSTRAGEM);
 	}
 
+	@Deprecated
+	public RelatorioAnormalidadePorAmostragem() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

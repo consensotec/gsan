@@ -170,4 +170,15 @@ public interface ControladorGerencialArrecadacaoLocal
 	 */
 	public void gerarResumoArrecadacao(int idFuncionalidadeIniciada) throws ControladorException;
 	
+	/**
+	 * Batch criado para migrar todos os resumos analiticos 
+	 * do banco comercial para o gerencial
+	 * 
+	 * @autor Bruno Barros
+	 * 
+	 * @param idFuncionalidadeIniciada
+	 * @throws ControladorException
+	 */	
+	public void migrarResumosAnaliticos( int idFuncionalidadeIniciada ) throws ControladorException;	
+	
 }

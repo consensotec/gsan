@@ -117,6 +117,11 @@ public class RelatorioGerarRelacaoDebitos extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_GERAR_RELACAO_DEBITOS);
 	}
 
+	@Deprecated
+	public RelatorioGerarRelacaoDebitos() {
+		super(null, "");
+	}
+
 	/**
 	 * 
 	 * <Breve descrição sobre o caso de uso>

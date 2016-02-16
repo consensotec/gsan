@@ -567,7 +567,15 @@ public class Relatorio implements Serializable {
 	
 	public static final int RELATORIO_ACOMPANHAMENTO_GRANDES_CORPORATIVO = 256;
 	
+	public static final int RELATORIO_ANALITICO_PREVISAO_PAGAMENTO_CARTAO_CREDITO = 257;
+
+	public static final int RELATORIO_SINTETICO_PREVISAO_PAGAMENTO_CARTAO_CREDITO = 258;
+
+	public static final int RELATORIO_CONSULTAR_ARQUIVO_RETORNO_COBRANCA = 259;
+
+	public static final int RELATORIO_ARQUIVO_TEXTO_ORDENS_SERVICO_SMARTPHONE = 260;
 	
+	public static final int RELATORIO_CONSULTAR_ARQUIVO_TEXTO_ORDENS_SERVICO_SMARTPHONE = 260;
 	
 	
 	/*public static final int RELATORIO_CONTAS = 244;*/

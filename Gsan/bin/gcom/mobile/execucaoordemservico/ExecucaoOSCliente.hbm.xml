@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.mobile.execucaoordemservico.ExecucaoOSCliente" table="mobile.exe_os_cliente">
+		<id name="id" type="java.lang.Integer" column="eocl_id">
+			<generator class="sequence">
+				<param name="sequence">mobile.seq_exe_os_cliente</param>
+			</generator>
+		</id>
+
+		<property name="nomeCliente" type="java.lang.String" column="eocl_nmcliente" length="50"/>
+		<property name="cpf" type="java.lang.String" column="eocl_dscpf" length="11"/>
+		<property name="cnpj" type="java.lang.String" column="eocl_dscnpj" length="14"/>
+		<property name="rg" type="java.lang.String" column="eocl_dsrg" length="13"/>
+		<property name="dddTelefone" type="java.lang.String" column="eocl_dsdddtelefone" length="2"/>
+		<property name="telefone" type="java.lang.String" column="eocl_dstelefone" length="9"/>
+		<property name="ramalTelefone" type="java.lang.String" column="eocl_dsramaltelefone" length="4"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="eocl_tmultimaalteracao" length="8"/>
+		
+		<!-- Associations -->
+
+		<!-- bi-directional many-to-one association to OrgaoExpedidorRg -->
+		<many-to-one name="orgaoExpedidorRg" class="gcom.cadastro.cliente.OrgaoExpedidorRg">
+			<column name="oerg_id"/>
+		</many-to-one>
+		<!-- bi-directional many-to-one association to UnidadeFederacao -->
+		<many-to-one name="unidadeFederacao" class="gcom.cadastro.geografico.UnidadeFederacao">
+			<column name="unfe_id"/>
+		</many-to-one>
+		<many-to-one name="arquivoTextoOSCobranca" class="gcom.mobile.execucaoordemservico.ArquivoTextoOSCobranca">
+			<column name="AOSC_ID"/>
+		</many-to-one>
+		<!-- bi-directional many-to-one association to OrdemServico -->
+		<many-to-one name="ordemServico" class="gcom.atendimentopublico.ordemservico.OrdemServico">
+			<column name="orse_id"/>
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

@@ -95,6 +95,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -258,6 +259,24 @@ public class ControladorUtilSEJB implements SessionBean {
 		}
 
 	}
+	
+	/** Retorna o único registro do novo SistemaParametros.
+	 * 
+	 * @return Descrição do retorno
+	 * @throws ControladorException
+	 */
+	public ParametroSistema pesquisarParametrosDoSistemaNovo(String constante)
+			throws ControladorException {
+		try {
+			
+			return repositorioUtil.pesquisarParametrosDoSistemaNovo(constante);
+			
+		} catch (ErroRepositorioException ex) {
+			sessionContext.setRollbackOnly();
+			throw new ControladorException("erro.sistema", ex);
+		}
+
+	}
 
 	
 	
@@ -336,6 +355,24 @@ public class ControladorUtilSEJB implements SessionBean {
 	}
 
 	/**
+	 * Retorna a instância persistida da classe informada, ou null se não encontrada.
+	 * 
+	 * @author André Miranda
+	 * @date 03/12/2015
+	 * 
+	 * @param classe Classe da instância a ser pesquisada
+	 * @return id Chave primária
+	 * @throws ControladorException
+	 */
+	public <T extends Object> T pesquisar(Class<T> classe, Integer id) throws ControladorException {
+		try {
+			return repositorioUtil.pesquisar(classe, id);
+		} catch (ErroRepositorioException ex) {
+			throw new ControladorException("erro.sistema", ex);
+		}
+	}
+
+	/**
 	 * < <Descrição do método>>
 	 * 
 	 * @param filtro
@@ -345,12 +382,27 @@ public class ControladorUtilSEJB implements SessionBean {
 	 * @return Descrição do retorno
 	 * @throws ControladorException
 	 */
-	public Collection pesquisar(Filtro filtro, String pacoteNomeObjeto)
-			throws ControladorException {
+	public Collection pesquisar(Filtro filtro, String pacoteNomeObjeto) throws ControladorException {
 		try {
 			return repositorioUtil.pesquisar(filtro, pacoteNomeObjeto);
 		} catch (ErroRepositorioException ex) {
-		//	sessionContext.setRollbackOnly();
+			throw new ControladorException("erro.sistema", ex);
+		}
+	}
+
+	/**
+	 * Sobrecarga do método pesquisar(Filtro, String) para isolar os warnings de
+	 * unchecked cast.
+	 * 
+	 * @param filtro Filtro montando com os parêmetros
+	 * @param classe Classe da qual a coleção será composta
+	 * @return Coleção de acordo com os parâmetros presentes no Filtro
+	 * @throws ControladorException
+	 */
+	public <T> Collection<T> pesquisar(Filtro filtro, Class<T> classe) throws ControladorException {
+		try {
+			return (Collection<T>) repositorioUtil.pesquisar(filtro, classe.getName());
+		} catch (ErroRepositorioException ex) {
 			throw new ControladorException("erro.sistema", ex);
 		}
 	}
@@ -363,7 +415,6 @@ public class ControladorUtilSEJB implements SessionBean {
 			sessionContext.setRollbackOnly();
 			throw new ControladorException("erro.sistema", ex);
 		}
-
 	}
 
 	/**
@@ -1046,7 +1097,7 @@ public class ControladorUtilSEJB implements SessionBean {
 	 */
 	public Map<Integer, Map<Object, Object>> dividirColecao(Collection colecao) {
 
-		Map<Integer, Map<Object, Object>> mapOrdenada = new HashMap();
+		Map<Integer, Map<Object, Object>> mapOrdenada = new HashMap<Integer, Map<Object, Object>>();
 		List listColecao = new ArrayList();
 		listColecao.addAll(colecao);
 		int quantidadeContas = 0;
@@ -1060,7 +1111,7 @@ public class ControladorUtilSEJB implements SessionBean {
 			metadeColecao = (quantidadeContasColecao / 2) + 1;
 		}
 		while (quantidadeContas < metadeColecao) {
-			Map<Object, Object> map = new HashMap();
+			Map<Object, Object> map = new HashMap<Object, Object>();
 			Object object1 = (Object) listColecao.get(quantidadeContas);
 			Object object2 = null;
 			if (metadeColecao + quantidadeContas < quantidadeContasColecao) {

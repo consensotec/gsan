@@ -110,6 +110,11 @@ public class RelatorioFaixasFalsasLeitura extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_FAIXAS_FALSAS_LEITURA);
 	}
 
+	@Deprecated
+	public RelatorioFaixasFalsasLeitura() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

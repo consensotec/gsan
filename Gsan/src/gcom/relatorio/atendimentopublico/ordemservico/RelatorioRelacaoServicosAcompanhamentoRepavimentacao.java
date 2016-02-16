@@ -138,6 +138,11 @@ public class RelatorioRelacaoServicosAcompanhamentoRepavimentacao extends Tarefa
 		super(usuario, ConstantesRelatorios.RELATORIO_RELACAO_SERVICO_ACOMPANHAMENTO_REPAVIMENTACAO_NOVO);
 	}
 
+	@Deprecated
+	public RelatorioRelacaoServicosAcompanhamentoRepavimentacao() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

@@ -121,6 +121,11 @@ public class RelatorioResumoFaturamentoSituacaoEspecial extends TarefaRelatorio 
 				ConstantesRelatorios.RELATORIO_RESUMO_FATURAMENTO_SITUACAO_ESPECIAL);
 	}
 
+	@Deprecated
+	public RelatorioResumoFaturamentoSituacaoEspecial() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 
 		// ------------------------------------

@@ -105,6 +105,11 @@ public class RelatorioGerarDadosLeitura extends TarefaRelatorio {
 	public RelatorioGerarDadosLeitura(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_GERAR_DADOS_LEITURA);
 	}
+	
+	@Deprecated
+	public RelatorioGerarDadosLeitura() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

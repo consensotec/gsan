@@ -25,6 +25,11 @@ public class RelatorioOrdemFiscalizacaoOnline extends TarefaRelatorio {
 	public RelatorioOrdemFiscalizacaoOnline(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_ORDEM_FISCALIZACAO_ONLINE);
 	}
+
+	@Deprecated
+	public RelatorioOrdemFiscalizacaoOnline() {
+		super(null, "");
+	}
 	
 	@Override
 	public int calcularTotalRegistrosRelatorio() {

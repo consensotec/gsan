@@ -109,6 +109,11 @@ public class RelatorioRelacaoAnaliticaFaturas extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_RELACAO_ANALITICA_FATURAS);
 	}
 	
+	@Deprecated
+	public RelatorioRelacaoAnaliticaFaturas() {
+		super(null, "");
+	}
+	
 	private List<RelatorioRelacaoAnaliticaFaturasBean> montarRelatorioAnalitico(Collection colecaoFaturasHelper){
 		
 		List<RelatorioRelacaoAnaliticaFaturasBean> retorno = new ArrayList();

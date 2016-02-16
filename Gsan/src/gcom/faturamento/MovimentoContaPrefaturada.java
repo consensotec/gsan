@@ -140,6 +140,8 @@ public class MovimentoContaPrefaturada implements Serializable {
    	
    	/** persistent field */
    	private BigDecimal numeroCoordenadaY;
+   	
+    private Short numeroMesMotivoRevisao;
 
     public MovimentoContaPrefaturada getMovimentoContaPreFaturadaEsgoto() {
 		return movimentoContaPreFaturadaEsgoto;
@@ -515,9 +517,15 @@ public class MovimentoContaPrefaturada implements Serializable {
 		this.numeroCoordenadaY = numeroCoordenadaY;
 	}
 
-
 	public String getAnoMesReferenciaFormatado(){
 		return Util.formatarAnoMesParaMesAno(String.valueOf(this.getAnoMesReferenciaPreFaturamento()));
 	}
 
+	public Short getNumeroMesMotivoRevisao() {
+		return numeroMesMotivoRevisao;
+	}
+
+	public void setNumeroMesMotivoRevisao(Short numeroMesMotivoRevisao) {
+		this.numeroMesMotivoRevisao = numeroMesMotivoRevisao;
+	}
 }

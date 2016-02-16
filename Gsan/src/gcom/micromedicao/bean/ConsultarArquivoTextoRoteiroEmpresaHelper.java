@@ -97,6 +97,10 @@ public class ConsultarArquivoTextoRoteiroEmpresaHelper implements Serializable {
 	
 	private String numeroImei;
 	
+	private String matricula;
+	
+	private String rotaId;
+	
 	public ConsultarArquivoTextoRoteiroEmpresaHelper(){}
 
 	public String getAnoMesReferencia() {
@@ -161,6 +165,22 @@ public class ConsultarArquivoTextoRoteiroEmpresaHelper implements Serializable {
 
 	public void setNumeroImei(String numeroImei) {
 		this.numeroImei = numeroImei;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public String getRotaId() {
+		return rotaId;
+	}
+
+	public void setRotaId(String rotaId) {
+		this.rotaId = rotaId;
 	}
 	
 }

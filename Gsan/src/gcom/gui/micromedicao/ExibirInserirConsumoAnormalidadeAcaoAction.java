@@ -86,6 +86,9 @@ import gcom.cadastro.imovel.FiltroCategoria;
 import gcom.cadastro.imovel.FiltroImovelPerfil;
 import gcom.cadastro.imovel.ImovelPerfil;
 import gcom.fachada.Fachada;
+import gcom.faturamento.conta.ContaMotivoRevisao;
+import gcom.faturamento.conta.FiltroContaMotivoRevisao;
+import gcom.gui.ActionServletException;
 import gcom.gui.GcomAction;
 import gcom.micromedicao.consumo.ConsumoAnormalidade;
 import gcom.micromedicao.consumo.FiltroConsumoAnormalidade;
@@ -175,8 +178,16 @@ public class ExibirInserirConsumoAnormalidadeAcaoAction extends GcomAction {
 				filtroLeituraAnormalidadeConsumo,
 				LeituraAnormalidadeConsumo.class.getName());
 		sessao.setAttribute("colecaoLeituraAnormalidadeConsumo", colecaoLeituraAnormalidadeConsumo);
-
 		
+		//Colecação motivo revisao
+		FiltroContaMotivoRevisao filtroContaMotivoRevisao = new FiltroContaMotivoRevisao();
+		filtroContaMotivoRevisao.adicionarParametro(new ParametroSimples(FiltroContaMotivoRevisao.INDICADOR_USO,1));
+		Collection colecaoMotivoRevisao = fachada.pesquisar(filtroContaMotivoRevisao, ContaMotivoRevisao.class.getName());
+		if (!colecaoMotivoRevisao.isEmpty()){
+			sessao.setAttribute("colecaoMotivoRevisao",colecaoMotivoRevisao);
+		}else{
+			throw new ActionServletException("atencao.entidade_sem_dados_para_selecao","CONTA_MOTIVO_REVISAO");
+		}
 		
 		// Flag indicando que o usuário fez uma consulta a partir da tecla Enter
 		String objetoConsulta = httpServletRequest.getParameter("objetoConsulta");
@@ -269,6 +280,10 @@ public class ExibirInserirConsumoAnormalidadeAcaoAction extends GcomAction {
 				SolicitacaoTipoEspecificacao.class.getName());
 		sessao.setAttribute("colecaoSolicitacaoTipoEspecificacaoMes3", colecaoSolicitacaoTipoEspecificacaoMes3);
 		
+		
+		if (form.getIndicadorCobrancaConsumoNormal() == null){
+			form.setIndicadorCobrancaConsumoNormal("1");
+		}
 		
 		// devolve o mapeamento de retorno
 		return retorno;

@@ -25,6 +25,11 @@ private static final long serialVersionUID = 1L;
 		super(usuario, ConstantesRelatorios.RELATORIO_LEITURAS_TELEMETRIA);
 	}
 	
+	@Deprecated
+	public RelatorioLeiturasTelemetria() {
+		super(null, "");
+	}
+	
 	@Override
 	public Object executar() throws TarefaException {
 		Fachada fachada = Fachada.getInstancia();

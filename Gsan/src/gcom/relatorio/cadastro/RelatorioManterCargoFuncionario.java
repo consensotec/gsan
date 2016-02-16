@@ -118,6 +118,11 @@ public class RelatorioManterCargoFuncionario extends TarefaRelatorio {
 	public RelatorioManterCargoFuncionario(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_CARGO_FUNCIONARIO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterCargoFuncionario() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

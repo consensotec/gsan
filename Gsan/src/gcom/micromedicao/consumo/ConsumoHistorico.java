@@ -78,6 +78,7 @@ package gcom.micromedicao.consumo;
 import gcom.cadastro.imovel.Imovel;
 import gcom.cadastro.imovel.PocoTipo;
 import gcom.faturamento.FaturamentoSituacaoTipo;
+import gcom.faturamento.conta.ContaMotivoRevisao;
 import gcom.interceptor.ControleAlteracao;
 import gcom.interceptor.ObjetoTransacao;
 import gcom.micromedicao.RateioTipo;
@@ -151,6 +152,8 @@ public class ConsumoHistorico extends ObjetoTransacao {
 
 	
 	private Rota rota;
+	
+	private ContaMotivoRevisao contaMotivoRevisao;
 
 	/**
 	 * A constante INDICADOR_FATURAMENTO_FATURAR_ESGOTO é usada pelo caso de uso
@@ -581,6 +584,14 @@ public class ConsumoHistorico extends ObjetoTransacao {
 	public String[] retornarLabelsInformacoesOperacaoEfetuada() {
 		String []labels = {"Data"};
 		return labels;		
+	}
+
+	public ContaMotivoRevisao getContaMotivoRevisao() {
+		return contaMotivoRevisao;
+	}
+
+	public void setContaMotivoRevisao(ContaMotivoRevisao contaMotivoRevisao) {
+		this.contaMotivoRevisao = contaMotivoRevisao;
 	}
 
 }

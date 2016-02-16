@@ -122,7 +122,7 @@ public class InformarLeituraRotaActionForm extends ActionForm {
 	
 	private short indicadorObrigatoriedade;
 	
-	
+	private short indicadorOrdenacao;
 	
 	
 	public short getIndicadorObrigatoriedade() {
@@ -327,6 +327,14 @@ public class InformarLeituraRotaActionForm extends ActionForm {
 	 */
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public short getIndicadorOrdenacao() {
+		return indicadorOrdenacao;
+	}
+
+	public void setIndicadorOrdenacao(short indicadorOrdenacao) {
+		this.indicadorOrdenacao = indicadorOrdenacao;
 	}
 	
 	

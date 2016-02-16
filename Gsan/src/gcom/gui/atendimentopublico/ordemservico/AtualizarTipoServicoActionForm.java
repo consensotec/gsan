@@ -219,6 +219,8 @@ public class AtualizarTipoServicoActionForm extends ValidatorForm {
 	private String indicadorIncluirDebito;
 	
 	private String indicadorCobrarJuros;
+	
+	private String indicadorServicoCobranca;
 
 	public void addServicoTipoAtividade() {
 		Atividade atv;
@@ -822,6 +824,14 @@ public class AtualizarTipoServicoActionForm extends ValidatorForm {
 
 	public void setIndicadorCobrarJuros(String indicadorCobrarJuros) {
 		this.indicadorCobrarJuros = indicadorCobrarJuros;
+	}
+
+	public String getIndicadorServicoCobranca() {
+		return indicadorServicoCobranca;
+	}
+
+	public void setIndicadorServicoCobranca(String indicadorServicoCobranca) {
+		this.indicadorServicoCobranca = indicadorServicoCobranca;
 	}
 	
 	

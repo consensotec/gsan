@@ -104,6 +104,8 @@ public class HidrometroLocalArmazenagem extends TabelaAuxiliarAbreviada {
      */
 
     public final static Short INDICADOR_OFICINA = new Short("1");
+    
+    public final static Integer ALMOXARIFADO_CENTRAL = new Integer("99");
 
 	public Set getHidrometroLocalArmazenagemDestino() {
 		return hidrometroLocalArmazenagemDestino;

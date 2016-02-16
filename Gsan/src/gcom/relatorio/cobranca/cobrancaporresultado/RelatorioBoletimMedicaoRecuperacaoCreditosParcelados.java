@@ -26,6 +26,11 @@ public class RelatorioBoletimMedicaoRecuperacaoCreditosParcelados extends Tarefa
 		public RelatorioBoletimMedicaoRecuperacaoCreditosParcelados(Usuario usuario) {
 			super(usuario, ConstantesRelatorios.RELATORIO_BOLETIM_MEDICAO_RECUPERACAO_CREDITOS_PARCELADOS);
 		}
+
+		@Deprecated
+		public RelatorioBoletimMedicaoRecuperacaoCreditosParcelados() {
+			super(null, "");
+		}
 		
 		public Object executar() throws TarefaException {
 

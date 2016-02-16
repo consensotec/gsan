@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="ConfirmarPagamentoCartaoCreditoActionForm"	
+		           type="gcom.gui.arrecadacao.pagamento.ConfirmarPagamentoCartaoCreditoActionForm" />
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+		<action name="ConfirmarPagamentoCartaoCreditoActionForm"
+			    type="gcom.gui.arrecadacao.pagamento.ExibirConfirmarPagamentoCartaoCreditoAction"
+			    validate="false" path="/exibirConfirmarPagamentoCartaoCreditoAction">
+			                             
+			    <forward name="exibirConfirmarPagamentoCartaoCredito"
+				       path="/jsp/arrecadacao/pagamento/confirmar_pagamento_cartao_credito.jsp" />
+		</action>
+		
+		<action name="ConfirmarPagamentoCartaoCreditoActionForm"
+			type="gcom.arrecadacao.InserirPagamentoCartaoCreditoAction"
+			validate="true" 
+			path="/inserirPagamentoCartaoCreditoAction" />	
+		
+	</action-mappings>
+
+	<message-resources null="false" parameter="gcom.properties.application" />
+</struts-config>

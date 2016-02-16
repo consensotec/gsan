@@ -134,6 +134,7 @@ public class FiltroResolucaoDiretoria extends Filtro {
     public final static String INDICADOR_NEGOCIACAO_SO_A_VISTA = "indicadorNegociacaoSoAVista";
     public final static String INDICADOR_DESCONTO_SO_EM_CONTA_A_VISTA = "indicadorDescontoSoEmContaAVista";
     public final static String INDICADOR_PARCELAMENTO_LOJA_VIRTUAL = "indicadorParcelamentoLojaVirtual";
+    public final static String INDICADOR_PARCELAMENTO_CARTAO_CREDITO = "indicadorParcelamentoCartaoCredito";
     
     /**
      * Construtor da classe FiltroCategoria

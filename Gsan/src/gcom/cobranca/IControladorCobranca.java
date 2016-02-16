@@ -107,6 +107,7 @@ import gcom.cobranca.bean.ConsultarTransferenciasDebitoHelper;
 import gcom.cobranca.bean.ContaValoresHelper;
 import gcom.cobranca.bean.ContasRevisaoEntradaParcelamentoHelper;
 import gcom.cobranca.bean.DadosAmortizacaoDividaAtivaHelper;
+import gcom.cobranca.bean.DadosAmortizacaoDividaAtivaSinteticoHelper;
 import gcom.cobranca.bean.DadosConsultaNegativacaoHelper;
 import gcom.cobranca.bean.DadosParcelamentoDividaAtivaHelper;
 import gcom.cobranca.bean.DadosPesquisaCobrancaDocumentoHelper;
@@ -126,12 +127,15 @@ import gcom.cobranca.bean.ParcelamentoCartaoCreditoHelper;
 import gcom.cobranca.bean.ParcelamentoRelatorioHelper;
 import gcom.cobranca.bean.PesquisarQtdeRotasSemCriteriosParaAcoesCobranca;
 import gcom.cobranca.bean.RelatorioBoletimMedicaoAcompanhamentoHelper;
+import gcom.cobranca.bean.RetornoCartaoCreditoHelper;
 import gcom.cobranca.bean.SituacaoEspecialCobrancaHelper;
 import gcom.cobranca.bean.TransferenciasDebitoHelper;
+import gcom.cobranca.bean.VerificarCriterioCobrancaParaImovelHelper;
 import gcom.cobranca.cobrancaporresultado.ConsultarComandosContasCobrancaEmpresaHelper;
 import gcom.cobranca.contratoparcelamento.ContratoParcelamento;
 import gcom.cobranca.parcelamento.Parcelamento;
 import gcom.cobranca.parcelamento.ParcelamentoDescontoAntiguidade;
+import gcom.cobranca.parcelamento.ParcelamentoPagamentoCartaoCredito;
 import gcom.cobranca.parcelamento.ParcelamentoPerfil;
 import gcom.faturamento.FaturamentoGrupo;
 import gcom.faturamento.GuiaPagamentoGeral;
@@ -2674,7 +2678,7 @@ public interface IControladorCobranca {
 			Cliente cliente,ResolucaoDiretoria resolucaoDiretoria,
 			Collection<DebitoCreditoParcelamentoHelper> colecaoAntecipacaoDebitosDeParcelamento,
 			Collection<DebitoCreditoParcelamentoHelper> colecaoAntecipacaoCreditosDeParcelamento,
-			Parcelamento parcelamento,Date dataValidade, String tipoDataValidade) throws ControladorException;
+			Parcelamento parcelamento,Date dataValidade, String tipoDataValidade, Boolean incluirTaxaNoExtrato) throws ControladorException;
 
 	/**
 	 * [UC0349] Emitir Documento de Cobrança
@@ -6659,5 +6663,82 @@ public interface IControladorCobranca {
 	 * @throws ControladorException
 	 */
 	public boolean verificarExistenciaParcelamentosAtivosImovel(Integer idImovel) throws ControladorException;
+
+	/**
+	 * [UCXXXX] - <descrição>
+	 * 
+	 * @author Vivianne Sousa
+	 * @date 29/09/2015
+	 *
+	 * @throws ControladorException
+	 */
+	public ParcelamentoPagamentoCartaoCredito inserirParcelamentoPagamentoCartaoCredito(
+			ConcluirParcelamentoDebitosHelper helper, String email) throws ControladorException;
+
+	/**
+	 * [UC1692] Registrar Retorno do Cartão de Crédito
+	 *
+	 * @author Vivianne Sousa
+	 * @date 16/09/2015
+	 * 
+	 * @return idParcelamento
+	 *
+	 * @throws ControladorException
+	 * @throws ErroRepositorioException
+	 */
+	public Integer registrarRetornoCartaoCreditoAprovado(RetornoCartaoCreditoHelper helper) throws ControladorException;	
 	
+	public VerificarCriterioCobrancaParaImovelHelper verificarCriterioCobrancaParaImovel(
+			Imovel imovel, CobrancaAcao acaoCobranca,
+			CobrancaCriterio cobrancaCriterio,
+			Collection<CobrancaCriterioLinha> colecaoCobrancaCriterioLinha,
+			String anoMesReferenciaInicial, String anoMesReferenciaFinal,
+			Date dataVencimentoInicial, Date dataVencimentoFinal,
+			Collection<CobrancaDocumentoItem> colecaoDebitosNotificados,
+			SistemaParametro sistemaParametros,
+			CobrancaAcaoAtividadeComando cobrancaAcaoAtividadeComando,
+			ImovelNaoGerado imovelNaoGerado, Integer idDocumentoTipoCobrancaAcaoPrecedente,
+			boolean validacaoPorItemCobrado)
+			throws ControladorException;	
+	
+	public CobrancaDocumento gerarExtratoDebito( 
+			String matricula, 
+			String key, 
+			String contas, 
+			String debitos,
+			String icAcrescimosImpontualidade,
+			String icCobrarEmissao,
+			Usuario usuarioLogado) throws ControladorException;
+	
+	
+	/**
+	 * [UC????] Gerar Relatorio Arquivo Retorno Cobranca (cliente)
+	 *
+	 * @author João Pedro Medeiros
+	 * @date 26/11/2015
+	 * 
+	 * @throws ControladorException
+	 * @throws ErroRepositorioException
+	 */
+	public List<?> obterRelatorioArquivoRetornoCobranca(Date dataInicial, Date dataFinal) throws ControladorException;
+	
+	/**
+	 *[UC1498] - Consultar Arquivo Texto de Ordens de Serviço para Smartphone (Novo)
+	 *[IT0018] Exibir Lista de Grupos de Cobrança
+	 *
+	 * @author Jean Varela
+	 * @date 08/12/2015
+	 */
+	public Collection<CobrancaGrupo> pesquisaGrupoCobrancaPorEmpresa(Integer idEmpresa) throws ControladorException;
+	
+	/**
+	 * [UC1585] - Emitir Relatório Sintetico Dívida Ativa Amortizada.
+	 * 
+	 * @author Joao Pedro Medeiros
+	 * @created 04/01/2016
+	 * 
+	 */
+	public Collection<DadosAmortizacaoDividaAtivaSinteticoHelper> obterDadosAmortizacoesDividaAtivaSintetico(Date dataInscricaoInicial,
+			Date dataInscricaoFinal, Date dataAmortizacaoInicial, Date dataAmortizacaoFinal, Integer idImovel,
+			Short indicadorIntra) throws ControladorException;
 }

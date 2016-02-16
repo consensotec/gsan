@@ -31,6 +31,11 @@ public class RelatorioVolumesConsumidosNaoFaturados extends TarefaRelatorio {
 	public RelatorioVolumesConsumidosNaoFaturados(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_VOLUMES_CONSUMIDOS_NAO_FATURADOS);
 	}
+	
+	@Deprecated
+	public RelatorioVolumesConsumidosNaoFaturados() {
+		super(null, "");
+	}
 
 	@Override
 	public Object executar() throws TarefaException {

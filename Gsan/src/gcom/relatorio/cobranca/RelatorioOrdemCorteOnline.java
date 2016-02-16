@@ -117,6 +117,11 @@ public class RelatorioOrdemCorteOnline extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_ORDEM_CORTE_ONLINE);
 	}
 
+	@Deprecated
+	public RelatorioOrdemCorteOnline() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 		
 		System.out.println("********************************************");

@@ -114,6 +114,11 @@ public class RelatorioCertidaoNegativa extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_CERTIDAO_NEGATIVA);
 	}
 
+	@Deprecated
+	public RelatorioCertidaoNegativa() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 
@@ -217,9 +222,9 @@ public class RelatorioCertidaoNegativa extends TarefaRelatorio {
 			
 			parametros.put("nomeRelatorio", "CERTIDÃO NEGATIVA DE DÉBITOS");
 			
-			if(indicadorContaParcelada || indicadorContaRevisao){
-				parametros.put("nomeRelatorio", "CERTIDÃO NEGATIVA DE DÉBITOS - COM EFEITO POSITIVO");
-				mensagemRodape = "Certidão Negativa de Débitos - Com Efeito Positivo";
+			if(indicadorContaParcelada || indicadorContaRevisao){//Certidão Positiva com Efeito de Negativa
+				parametros.put("nomeRelatorio", "CERTIDÃO POSITIVA COM EFEITO DE NEGATIVA");
+				mensagemRodape = "Certidão Positiva com efeito de Negativa";
 				indicadorCertidaoRegistrada = true;
 			}
 			

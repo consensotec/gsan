@@ -108,6 +108,11 @@ public class RelatorioImoveisUltimosConsumosAgua extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_ULTIMOS_CONSUMOS_AGUA);
 	}
 
+	@Deprecated
+	public RelatorioImoveisUltimosConsumosAgua() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 
 		// valor de retorno

@@ -181,7 +181,7 @@ public class GerarRelatorioMotivoNaoGeracaoDocumentoEventualAction extends Exibi
 					&& httpServletRequest.getParameter("filtroPorComandoSintetico").equals("true")){
 				relatorio.addParametro("sintetico", 1);
 			}else{
-				relatorio.addParametro("sintetico", 2);
+				relatorio.addParametro("sintetico", 2);//
 			}
 			
 			return processarExibicaoRelatorio(relatorio, tipoRelatorio, httpServletRequest, httpServletResponse, actionMapping);

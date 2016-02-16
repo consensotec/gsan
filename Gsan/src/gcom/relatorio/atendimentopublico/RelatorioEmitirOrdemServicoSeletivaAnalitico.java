@@ -48,6 +48,11 @@ public class RelatorioEmitirOrdemServicoSeletivaAnalitico extends
 	public RelatorioEmitirOrdemServicoSeletivaAnalitico(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_EMITIR_ORDEM_SERVICO_SELETIVA);
 	}
+	
+	@Deprecated
+	public RelatorioEmitirOrdemServicoSeletivaAnalitico() {
+		super(null, "");
+	}
 
 	@Override
 	public int calcularTotalRegistrosRelatorio() {

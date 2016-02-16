@@ -76,6 +76,7 @@
 package gcom.gui.cobranca;
 
 import gcom.gui.GcomAction;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -122,7 +123,7 @@ public class ExibirFiltrarResolucaoDiretoriaAction extends GcomAction {
 			filtrarResolucaoDiretoriaActionForm.setIndicadorParcelamentoUnico((String) sessao.getAttribute("indicadorParcelamentoUnico"));
 			filtrarResolucaoDiretoriaActionForm.setIndicadorUtilizacaoLivre((String) sessao.getAttribute("indicadorUtilizacaoLivre"));
 			filtrarResolucaoDiretoriaActionForm.setIndicadorDescontoSancoes((String) sessao.getAttribute("indicadorDescontoSancoes"));
-			
+			filtrarResolucaoDiretoriaActionForm.setIndicadorParcelamentoCartaoCredito((String) sessao.getAttribute("indicadorParcelamentoCartaoCredito"));
 			filtrarResolucaoDiretoriaActionForm.setIndicadorParcelasEmAtraso((String) sessao.getAttribute("indicadorParcelasEmAtraso"));
 
 			if(sessao.getAttribute("idParcelasEmAtraso") != null){

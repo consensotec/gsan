@@ -138,6 +138,7 @@
 			masks : {
 				'phone'				: { mask : '(99) 9999-9999' },
 				'phoneCaema'		: { mask : '(99) 99999-9999' },
+				'phoneSaae'		    : { mask : '(99) 99999-9999' },
 				'phone-us'			: { mask : '(999) 999-9999' },
 				'cpf'				: { mask : '999.999.999-99' }, // cadastro nacional de pessoa fisica
 				'cnpj'				: { mask : '99.999.999/9999-99' },

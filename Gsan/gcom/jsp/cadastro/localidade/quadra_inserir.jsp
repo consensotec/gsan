@@ -558,6 +558,9 @@
 					"varName", " return this[varName];"));
 			this.ae = new Array("perfilQuadra", "Informe Perfil da Quadra.",
 					new Function("varName", " return this[varName];"));
+			this.af = new Array("bairroID", "Informe o bairro da quadra.",
+					new Function("varName", " return this[varName];"));
+			
 		}
 
 		function IntegerValidations() {
@@ -655,6 +658,8 @@
 					"varName", " return this[varName];"));
 			this.ae = new Array("perfilQuadra", "Informe Perfil da Quadra.",
 					new Function("varName", " return this[varName];"));
+			this.af = new Array("bairroID", "Informe o bairro da quadra.",
+					new Function("varName", " return this[varName];"));			
 		}
 
 		function IntegerValidations() {
@@ -978,7 +983,7 @@
 												<html:hidden property="municipioID" />
 
 												<tr>
-													<td><strong>Bairro:</strong>
+													<td><strong>Bairro:<font color="#FF0000">*</font></strong>
 													</td>
 													<td><html:text property="bairroID" maxlength="4"
 															tabindex="19" size="5"

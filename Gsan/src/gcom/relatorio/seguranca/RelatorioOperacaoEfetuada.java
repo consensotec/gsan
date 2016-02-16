@@ -119,6 +119,11 @@ public class RelatorioOperacaoEfetuada extends TarefaRelatorio {
 	public RelatorioOperacaoEfetuada(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_EMPRESA_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioOperacaoEfetuada() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

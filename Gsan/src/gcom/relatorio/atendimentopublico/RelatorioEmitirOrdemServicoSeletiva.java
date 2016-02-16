@@ -149,6 +149,11 @@ public class RelatorioEmitirOrdemServicoSeletiva extends TarefaRelatorio {
 	public RelatorioEmitirOrdemServicoSeletiva(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_EMITIR_ORDEM_SERVICO_SELETIVA);
 	}
+	
+	@Deprecated
+	public RelatorioEmitirOrdemServicoSeletiva() {
+		super(null, "");
+	}
 
 	public Object executar() throws TarefaException {
 		

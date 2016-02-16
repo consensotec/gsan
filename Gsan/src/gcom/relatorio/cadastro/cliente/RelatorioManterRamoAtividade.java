@@ -117,6 +117,11 @@ public class RelatorioManterRamoAtividade extends TarefaRelatorio {
 	public RelatorioManterRamoAtividade(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_RAMO_ATIVIDADE_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterRamoAtividade() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

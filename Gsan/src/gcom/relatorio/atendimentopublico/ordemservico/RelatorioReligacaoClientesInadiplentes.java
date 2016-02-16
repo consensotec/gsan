@@ -109,6 +109,11 @@ public class RelatorioReligacaoClientesInadiplentes extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_RELIGACAO_CLIENTES_INADIPLENTES);
 	}
 
+	@Deprecated
+	public RelatorioReligacaoClientesInadiplentes() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

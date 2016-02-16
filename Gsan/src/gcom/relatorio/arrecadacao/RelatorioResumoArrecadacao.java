@@ -105,6 +105,11 @@ public class RelatorioResumoArrecadacao extends TarefaRelatorio {
 	public RelatorioResumoArrecadacao(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_RESUMO_ARRECADACAO);
 	}
+	
+	@Deprecated
+	public RelatorioResumoArrecadacao() {
+		super(null, "");
+	}
 
 	private Collection<RelatorioResumoArrecadacaoBean> inicializarBeanRelatorio(
 			Collection listaCamposConsultaRelatorio) {

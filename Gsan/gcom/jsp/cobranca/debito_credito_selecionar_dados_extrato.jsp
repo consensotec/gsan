@@ -539,9 +539,8 @@ function pesquisarCliente() {
 function habilitaMatricula() {
 	var form = document.forms[0];
 	
-	if (form.idImovel.value != null && form.idImovel.value != null && form.idImovel.value != "" &&
+	if (form.idImovel.value != null && form.idImovel.value != "" &&
 	form.inscricaoImovel.value != "IMOVEL INEXISTENTE"){
-	
 		form.idImovel.disabled = true;
 	} else {
 		form.idImovel.disabled = false;
@@ -577,7 +576,7 @@ function hablitaDesabilitaImovelCliente(){
 
 </head>
 
-<body leftmargin="5" topmargin="5" onload="habilitaMatricula();hablitaDesabilitaImovelCliente();setarFoco('${requestScope.nomeCampo}');validaCheck();">
+<body leftmargin="5" topmargin="5" onload="hablitaDesabilitaImovelCliente();habilitaMatricula();setarFoco('${requestScope.nomeCampo}');validaCheck();">
 
 <html:form action="/exibirDebitoCreditoDadosSelecaoExtratoAction" method="post">
 

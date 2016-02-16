@@ -10310,7 +10310,7 @@ public class ControladorGerencialFaturamentoSEJB implements SessionBean {
     	
     	Integer qtEconomias = repositorioFaturamento.pesquisarQuantidadeEconomiasCreditoARealizar((Integer) linha[28]);
     	
-    	BigDecimal valorResidual = (BigDecimal) linha[27];
+    	BigDecimal valorResidual = ( (BigDecimal) linha[27] != null ? (BigDecimal) linha[27] : new BigDecimal( 0 ) );
     	
     	BigDecimal somaResidual = BigDecimal.ZERO;
 

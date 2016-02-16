@@ -106,6 +106,11 @@ public class RelatorioNumeracaoRAManual extends TarefaRelatorio {
 	public RelatorioNumeracaoRAManual(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_NUMERACAO_RA_MANUAL);
 	}
+	
+	@Deprecated
+	public RelatorioNumeracaoRAManual() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

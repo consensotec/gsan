@@ -113,6 +113,11 @@ public class RelatorioEmitirProtocoloDocumentoCobranca extends TarefaRelatorio {
 	public RelatorioEmitirProtocoloDocumentoCobranca(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_EMITIR_PROTOCOLO_DOCUMENTO_COBRANCA);
 	}
+	
+	@Deprecated
+	public RelatorioEmitirProtocoloDocumentoCobranca() {
+		super(null, "");
+	}
 
 	private Collection<RelatorioEmitirProtocoloDocumentoCobrancaBean> inicializarBeanRelatorio(
 			Collection<ProtocoloDocumentoCobrancaRelatorioHelper> dadosRelatorio) {

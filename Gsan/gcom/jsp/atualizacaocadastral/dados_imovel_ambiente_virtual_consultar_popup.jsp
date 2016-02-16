@@ -222,7 +222,6 @@
 										</logic:notPresent>
 				                    </td>
 				            	</tr>
-				            	<%/*
 				            	<logic:present name="ConsultarDadosImovelAmbienteVirtualPopupActionForm" property="coordenadaX">
 					            	<tr>
 										<td align="right" colspan="4">
@@ -231,7 +230,6 @@
 										</td>
 					            	</tr>
 				            	</logic:present>
-				            	*/%>
 			                </table>
 			        	</td>   
 	      			</tr>

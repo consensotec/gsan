@@ -116,6 +116,11 @@ public class RelatorioDevolucao extends TarefaRelatorio {
 	public RelatorioDevolucao(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_DEVOLUCAO);
 	}
+	
+	@Deprecated
+	public RelatorioDevolucao() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

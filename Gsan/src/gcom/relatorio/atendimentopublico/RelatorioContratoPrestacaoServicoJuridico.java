@@ -101,6 +101,11 @@ public class RelatorioContratoPrestacaoServicoJuridico extends TarefaRelatorio {
 	public RelatorioContratoPrestacaoServicoJuridico(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_CONTRATO_PRESTACAO_SERVICO_JURIDICO);
 	}
+	
+	@Deprecated
+	public RelatorioContratoPrestacaoServicoJuridico() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

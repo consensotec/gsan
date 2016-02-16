@@ -248,5 +248,9 @@ public class FiltroHidrometro extends Filtro implements Serializable {
 	public final static String INDICADOR_MACROMEDIDOR = "indicadorMacromedidor";
 	
 	public final static String INDICADOR_FINALIDADE = "indicadorFinalidade";
+	
+	public final static String HIDROMETRO_LOCAL_ARMAZENAGEM_LEITURISTA_ID = "hidrometroLocalArmazenagem.leiturista.id";
+	
+	public final static String HIDROMETRO_LOCAL_ARMAZENAGEM_IC_USO = "hidrometroLocalArmazenagem.indicadorUso";
 
 }

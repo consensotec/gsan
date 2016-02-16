@@ -112,6 +112,11 @@ public class RelatorioManterGuiaDevolucao extends TarefaRelatorio {
 	public RelatorioManterGuiaDevolucao(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_GUIA_DEVOLUCAO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterGuiaDevolucao() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

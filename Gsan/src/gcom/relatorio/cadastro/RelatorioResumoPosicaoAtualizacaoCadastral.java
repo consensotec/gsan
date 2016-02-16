@@ -23,6 +23,11 @@ public class RelatorioResumoPosicaoAtualizacaoCadastral extends TarefaRelatorio{
 	public RelatorioResumoPosicaoAtualizacaoCadastral(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_RESUMO_POSICAO_ATUALIZACAO_CADASTRAL);
 	}
+	
+	@Deprecated
+	public RelatorioResumoPosicaoAtualizacaoCadastral(){
+		super(null, "");
+	}
 
 	@Override
 	public Object executar() throws TarefaException {

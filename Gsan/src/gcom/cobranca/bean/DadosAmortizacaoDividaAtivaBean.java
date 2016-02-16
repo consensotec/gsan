@@ -101,6 +101,7 @@ public class DadosAmortizacaoDividaAtivaBean implements RelatorioBean {
 	private String tipoAmortizacao;
 	private BigDecimal valorDebitoAmortizado;
 	private String tipo;
+	private Integer idTipoAmortizacao;
 	
 	public Integer getIdLocalidade() {
 		return idLocalidade;
@@ -174,5 +175,13 @@ public class DadosAmortizacaoDividaAtivaBean implements RelatorioBean {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	public String getIdTipoAmortizacao() {
+		return Integer.toString(idTipoAmortizacao);
+	}
+	public void setIdTipoAmortizacao(Integer idTipoAmortizacao) {
+		this.idTipoAmortizacao = idTipoAmortizacao;
+	}
+	
+	
 	
 }

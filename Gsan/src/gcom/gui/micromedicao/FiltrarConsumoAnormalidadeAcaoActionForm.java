@@ -149,6 +149,14 @@ public class FiltrarConsumoAnormalidadeAcaoActionForm extends ValidatorActionFor
     private String tipoPesquisa;
     
     private String indicadorAtualizar;
+    
+    private String motivoRevisaoMes1;
+    
+    private String motivoRevisaoMes2;
+    
+    private String motivoRevisaoMes3;
+    
+    private String indicadorCobrancaConsumoNormal;
 
 	public String getConsumoAnormalidade() {
 		return consumoAnormalidade;
@@ -395,6 +403,36 @@ public class FiltrarConsumoAnormalidadeAcaoActionForm extends ValidatorActionFor
 	public void setIndicadorAtualizar(String indicadorAtualizar) {
 		this.indicadorAtualizar = indicadorAtualizar;
 	}
-	
-	
+
+	public String getMotivoRevisaoMes1() {
+		return motivoRevisaoMes1;
+	}
+
+	public void setMotivoRevisaoMes1(String motivoRevisaoMes1) {
+		this.motivoRevisaoMes1 = motivoRevisaoMes1;
+	}
+
+	public String getMotivoRevisaoMes2() {
+		return motivoRevisaoMes2;
+	}
+
+	public void setMotivoRevisaoMes2(String motivoRevisaoMes2) {
+		this.motivoRevisaoMes2 = motivoRevisaoMes2;
+	}
+
+	public String getMotivoRevisaoMes3() {
+		return motivoRevisaoMes3;
+	}
+
+	public void setMotivoRevisaoMes3(String motivoRevisaoMes3) {
+		this.motivoRevisaoMes3 = motivoRevisaoMes3;
+	}
+
+	public String getIndicadorCobrancaConsumoNormal() {
+		return indicadorCobrancaConsumoNormal;
+	}
+
+	public void setIndicadorCobrancaConsumoNormal(String indicadorCrobrancaConsumoNormal) {
+		this.indicadorCobrancaConsumoNormal = indicadorCrobrancaConsumoNormal;
+	}
 }

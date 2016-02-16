@@ -112,6 +112,11 @@ public class RelatorioAnalisarMetasCiclo extends TarefaRelatorio {
 	public RelatorioAnalisarMetasCiclo(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_ANALISAR_METAS_CICLO);
 	}
+
+	@Deprecated
+	public RelatorioAnalisarMetasCiclo() {
+		super(null, "");
+	}
 	
 	@Override
 	public Object executar() throws TarefaException {

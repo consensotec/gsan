@@ -1220,7 +1220,9 @@ public class RepositorioOrdemServicoHBM implements IRepositorioOrdemServico {
 					+ "hidro.indicadorFinalidade, "//228
 					+ "imovHidro.indicadorFinalidade, "//229
 					+ "hidroOS.indicadorFinalidade, "//230
-					+ "imovHidroOS.indicadorFinalidade "//231 
+					+ "imovHidroOS.indicadorFinalidade, "//231 
+					+ "os.valorOriginal, "//232
+					+ "servicoTipo.constanteFuncionalidadeTipoServico " //233
 					
 					+ "FROM OrdemServico os "
 					+ "LEFT JOIN os.registroAtendimento ra  "
@@ -1700,6 +1702,9 @@ public class RepositorioOrdemServicoHBM implements IRepositorioOrdemServico {
 				servicoTipo.setTempoMedioExecucao((Short) retornoConsulta[37]);
 				servicoTipo.setIndicadorPermiteAlterarValor((Short) retornoConsulta[192]);
 				servicoTipo.setIndicadorCobrarJuros((Short) retornoConsulta[193]);
+				if(retornoConsulta[233] != null){
+					servicoTipo.setConstanteFuncionalidadeTipoServico((Integer) retornoConsulta[233]);
+				}
 
 				if (retornoConsulta[34] != null) {
 					DebitoTipo debitoTipo = new DebitoTipo();
@@ -2154,6 +2159,11 @@ public class RepositorioOrdemServicoHBM implements IRepositorioOrdemServico {
 
 					ordemServico.setImovel(imovelOS);
 				}
+				
+					if(retornoConsulta[232] != null){
+						
+						ordemServico.setValorOriginal((BigDecimal)retornoConsulta[232]);
+					}
 					
 			}
 
@@ -23587,6 +23597,326 @@ public class RepositorioOrdemServicoHBM implements IRepositorioOrdemServico {
 				HibernateUtil.closeSession(session);		
 			}		
 		return retorno;	
+	}
+	
+	
+	/**
+	 * [UC0457] Encerrar Ordem de Serviço
+	 * 
+	 * @author Hugo Azevedo
+	 * @date 10/12/2013
+	 * 
+	 */
+	public Collection<ServicoTipo> pesquisarServicoTipo()
+			throws ErroRepositorioException {
+		Collection retorno = null;
+
+		Session session = HibernateUtil.getSession();
+		String consulta = "";
+		try {
+			consulta = "SELECT servTipo "
+					+ "FROM ServicoTipo servTipo "
+					+ "WHERE servTipo.indicadorUso = 1 " +
+					" AND servTipo.indicadorServicoCobranca = 1 " +
+//					" OR servTipo.indicadorTipoServicoMicromedicao = 1) " +
+					" AND servTipo.constanteFuncionalidadeTipoServico is not null";
+
+			retorno = session.createQuery(consulta).list();
+
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+		return retorno;
+	}
+	
+	/**
+	 * autor:Jonathan Marcos
+	 * data:31/10/2013
+	 * [UC1484] Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * @param idOrdemServico
+	 * @return
+	 * @throws ErroRepositorioException
+	 */
+	public Integer obterRegistroAtendimento(Integer idOrdemServico)
+		throws ErroRepositorioException{
+		
+		String scriptSql;
+		Session sessao = HibernateUtil.getSession();
+		Integer idRegistroAtendimento = null;
+		
+		try {
+			scriptSql="SELECT os.rgat_id AS idResgistroAtendimento" +
+					" FROM atendimentopublico.ordem_servico os" +
+					" WHERE os.orse_id = :idOrdemServico";
+			
+			idRegistroAtendimento = (Integer) sessao.createSQLQuery(scriptSql)
+					.addScalar("idResgistroAtendimento", Hibernate.INTEGER)
+					.setInteger("idOrdemServico", idOrdemServico)
+					.setMaxResults(1).uniqueResult();
+			
+		}  catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(sessao);
+		}
+		
+		return idRegistroAtendimento;
+	}
+	
+	/**
+	 * autor:Jonathan Marcos
+	 * data:31/10/2013
+	 * [UC1484] Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * @param idOrdemServico
+	 * @return
+	 * @throws ErroRepositorioException
+	 */
+	public Integer obterTipoMedicao(Integer idOrdemServico)
+			throws ErroRepositorioException{
+		
+		String scriptSql;
+		Session sessao = HibernateUtil.getSession();
+		Integer retornoTipoMedicao = null;
+		
+		try {
+			
+			scriptSql = "SELECT ste.step_icligacaoagua as tipoMedicao"+
+					" FROM atendimentopublico.ordem_servico os"+
+					" INNER JOIN atendimentopublico.registro_atendimento ra on (os.rgat_id=ra.rgat_id)"+
+					" INNER JOIN atendimentopublico.solicitacao_tipo_espec ste on (ra.step_id=ste.step_id)"+
+					" WHERE os.orse_id = :idOrdemServico";
+			
+			retornoTipoMedicao = (Integer) sessao.createSQLQuery(scriptSql)
+					.addScalar("tipoMedicao", Hibernate.INTEGER)
+					.setInteger("idOrdemServico", idOrdemServico)
+					.setMaxResults(1).uniqueResult();
+				
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(sessao);
+		}
+	
+		return retornoTipoMedicao;
+	}
+	
+	/**
+	 * autor:Jonathan Marcos
+	 * data:01/11/2013
+	 * [UC1484] Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * @param tipoMedicao,idOrdemServico
+	 * @return
+	 * @throws ErroRepositorioException
+	 */
+	public Integer obterTipoHidrometro(Integer tipoMedicao,Integer idOrdemServico)
+		throws ErroRepositorioException{
+		
+		String scriptSql;
+		Session sessao = HibernateUtil.getSession();
+		Integer retornoTipoHidrometro = null;
+		
+		try {
+			scriptSql ="SELECT h.HIDR_ICMACRO AS tipoHidrometro" +
+					   " FROM micromedicao.hidrometro h"+
+					   " INNER JOIN micromedicao.hidrometro_inst_hist hih ON (h.hidr_id=hih.hidr_id)";
+			if(tipoMedicao.equals(MedicaoTipo.POCO)){
+				scriptSql+=" INNER JOIN cadastro.imovel ci ON (hih.hidi_id=ci.hidi_id)";
+			}else if(tipoMedicao==null || tipoMedicao.equals(MedicaoTipo.LIGACAO_AGUA)){
+				scriptSql+=" INNER JOIN ATENDIMENTOPUBLICO.ligacao_agua la ON (hih.hidi_id=la.hidi_id)"+
+						   " INNER JOIN cadastro.imovel ci ON (la.lagu_id=ci.imov_id)";
+			}
+			scriptSql+=" INNER JOIN ATENDIMENTOPUBLICO.ordem_servico os ON (ci.imov_id=os.imov_id)"+
+					   " WHERE os.orse_id = :idOrdemServico";
+			
+			retornoTipoHidrometro = (Integer) sessao.createSQLQuery(scriptSql)
+					.addScalar("tipoHidrometro", Hibernate.INTEGER)
+					.setInteger("idOrdemServico", idOrdemServico)
+					.setMaxResults(1).uniqueResult();
+				
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(sessao);
+		}
+	
+		return retornoTipoHidrometro;
+	}
+	
+	/**
+	 * autor:Jonathan Marcos
+	 * data:01/11/2013
+	 * [UC1484] Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * @param idOrdemServico
+	 * @return
+	 * @throws ErroRepositorioException
+	 */
+	public Object[] obterNumeroLeitura(Integer idOrdemServico,Integer tipoMedicao)
+		throws ErroRepositorioException{
+		
+		String scriptSql;
+		Session sessao = HibernateUtil.getSession();
+		Object[] numeroLeitura = null;
+		
+		try {
+			
+			scriptSql = "SELECT mh.mdhi_nnleituraatualfaturamento AS numeroLeitura," +
+					    "mh.mdhi_amleitura AS mesAnoLeitura"+
+						" FROM micromedicao.medicao_historico mh";
+					if(tipoMedicao.equals(MedicaoTipo.POCO)){
+						scriptSql+=" INNER JOIN cadastro.imovel ci ON (mh.imov_id=ci.imov_id)";
+					}else{
+						scriptSql+=" INNER JOIN cadastro.imovel ci ON (mh.lagu_id=ci.imov_id)";
+					}
+					
+				scriptSql+=" INNER JOIN ATENDIMENTOPUBLICO.ordem_servico os  ON (ci.imov_id=os.imov_id)"+
+					       " WHERE os.orse_id = :idOrdemServico" +
+					       " ORDER BY  mh.mdhi_amleitura DESC";
+
+				numeroLeitura = (Object[]) sessao.createSQLQuery(scriptSql)
+						.addScalar("numeroLeitura", Hibernate.INTEGER)
+						.addScalar("mesAnoLeitura", Hibernate.INTEGER)
+						.setInteger("idOrdemServico", idOrdemServico)
+						.setMaxResults(1).uniqueResult();
+			
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(sessao);
+		}
+		return numeroLeitura;
+	}
+	
+	/**
+	 * autor:Jonathan Marcos
+	 * data:01/11/2013
+	 * [UC1484] Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * @param tipoHidrometro,tipoMedicao,idOrdemServico
+	 * @return
+	 * @throws ErroRepositorioException
+	 */
+	public Object[] obterDadosHidrometros(Integer tipoHidrometro,Integer tipoMedicao,Integer idOrdemServico)
+		throws ErroRepositorioException{
+		String scriptSql;
+		Session sessao = HibernateUtil.getSession();
+		Object[] colecaoRetorno = null;
+		
+		try {
+			
+			scriptSql = "SELECT";
+					if(tipoHidrometro.equals(Integer.valueOf(ConstantesSistema.SIM))){
+						scriptSql+=" h.hidr_nntombamento AS numeroHidrometro,";
+					}else if(tipoHidrometro.equals(Integer.valueOf(ConstantesSistema.NAO))){
+						scriptSql+=" h.hidr_nnhidrometro AS numeroHidrometro,";
+					}
+					
+					scriptSql+="hs.hist_id AS situacaoHidrometro,"+
+					"hli.hili_dshidmtlocalinstalacao AS localInstalacao,"+
+					"hp.hipr_dshidrometroprotecao AS protecaoHidrometro," +
+					"hih.hidi_iccavalete AS indicadorCavaleteHidrometro,"+
+					"hm.himc_dshidrometromarca AS hidrometroMarca"+
+					" FROM micromedicao.hidrometro h"+
+					" INNER JOIN MICROMEDICAO.hidrometro_inst_hist hih ON (h.hidr_id=hih.hidr_id)"+
+					" INNER JOIN micromedicao.hidrometro_situacao hs ON (h.hist_id=hs.hist_id)"+
+					" INNER JOIN micromedicao.hidrometro_local_armaz hla ON (h.hila_id=hla.hila_id)"+
+					" INNER JOIN micromedicao.hidrometro_local_inst hli ON (hih.hili_id=hli.hili_id)"+
+					" INNER JOIN micromedicao.hidrometro_protecao hp ON (hih.hipr_id=hp.hipr_id)"+
+					" INNER JOIN micromedicao.hidrometro_marca hm ON (hm.himc_id=h.himc_id)";
+		
+					if(tipoMedicao.equals(MedicaoTipo.POCO)){
+						scriptSql+=" INNER JOIN cadastro.imovel ci ON (hih.hidi_id=ci.hidi_id)";
+					}else if(tipoMedicao==null || tipoMedicao.equals(MedicaoTipo.LIGACAO_AGUA)){
+						scriptSql+=" INNER JOIN ATENDIMENTOPUBLICO.ligacao_agua la ON (hih.hidi_id=la.hidi_id)"+
+								   " INNER JOIN cadastro.imovel ci ON (la.lagu_id=ci.imov_id)";
+					}
+					scriptSql+=" INNER JOIN ATENDIMENTOPUBLICO.ordem_servico os ON (ci.imov_id=os.imov_id)"+
+							   " WHERE os.orse_id = :idOrdemServico";
+					
+					colecaoRetorno = (Object[]) sessao.createSQLQuery(scriptSql)
+							.addScalar("numeroHidrometro", Hibernate.STRING)
+							.addScalar("situacaoHidrometro", Hibernate.INTEGER)
+							.addScalar("localInstalacao", Hibernate.STRING)
+							.addScalar("protecaoHidrometro", Hibernate.STRING)
+							.addScalar("indicadorCavaleteHidrometro", Hibernate.SHORT)
+							.addScalar("hidrometroMarca", Hibernate.STRING)
+							.setInteger("idOrdemServico", idOrdemServico)
+							.setMaxResults(1).uniqueResult();
+			
+		}catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(sessao);
+		}	
+		
+		return colecaoRetorno;
+	}
+	
+	/**
+	 * [UC01484] - Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * 
+	 * @author Vivianne Sousa	
+	 * @date 20/11/2015
+	 */
+	public Collection<ServicoTipoBoletim> pesquisarServicoTipoBoletim()
+			throws ErroRepositorioException {
+		Collection retorno = null;
+
+		Session session = HibernateUtil.getSession();
+		String consulta = "";
+		try {
+			consulta = "SELECT svbo "
+					+ "FROM ServicoTipoBoletim svbo " 
+					+ "INNER JOIN svbo.servicoTipo svtp "
+					+ "WHERE svtp.indicadorUso = 1 " 
+					+ " AND svtp.indicadorServicoCobranca = 1 " 
+//					+ "      OR svtp.indicadorTipoServicoMicromedicao = 1) " 
+					+ " AND svtp.constanteFuncionalidadeTipoServico is not null";
+
+			retorno = session.createQuery(consulta).list();
+
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+		return retorno;
+	}
+	
+	/**
+	 * [UC1695] - Instalar/Substituir/Retirar Hidrômetro em Lote
+	 *
+	 * @author Rodrigo Cabral
+	 * @date 23/11/2015
+	 * 
+	 */
+	public OrdemServico pesquisarOrdemServicoHidrometro(Integer idOS) throws ErroRepositorioException {
+		String consulta = "";
+		OrdemServico retorno = null;
+		Session session = HibernateUtil.getSession();
+
+		try {
+			consulta = "select orse " 
+					+ " from OrdemServico orse "
+					+ " inner join fetch orse.servicoTipo svtp "
+					+ " where orse.id = :idOS " 
+					+ " and orse.dataEncerramento is null "
+					+ " and orse_cdsituacao = :situacao "
+					+ " and svtp.constanteFuncionalidadeTipoServico in ( :instalacaoHidrometro , :substituicaoHidrometro ) ";
+
+			retorno = (OrdemServico) session.createQuery(consulta)
+				.setInteger("idOS",idOS)
+				.setInteger("situacao", OrdemServicoSituacao.PENDENTE)
+				.setInteger("instalacaoHidrometro", ServicoTipo.TIPO_EFETUAR_INSTALACAO_HIDROMETRO)
+				.setInteger("substituicaoHidrometro", ServicoTipo.TIPO_EFETUAR_SUBSTITUICAO_HIDROMETRO)
+				.uniqueResult();
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+
+		return retorno;
 	}
 
 }

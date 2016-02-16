@@ -108,6 +108,11 @@ public class RelatorioRelacaoSinteticaFaturas extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_RELACAO_SINTETICA_FATURAS);
 	}
 	
+	@Deprecated
+	public RelatorioRelacaoSinteticaFaturas() {
+		super(null, "");
+	}
+	
 	private List<RelatorioRelacaoSinteticaFaturasBean> montarRelatorioSintetico(Collection colecaoFaturasHelper){
 		
 		List<RelatorioRelacaoSinteticaFaturasBean> retorno = new ArrayList();

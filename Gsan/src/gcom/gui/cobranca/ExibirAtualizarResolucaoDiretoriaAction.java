@@ -129,6 +129,7 @@ public class ExibirAtualizarResolucaoDiretoriaAction extends GcomAction {
 			atualizarResolucaoDiretoriaActionForm.setIndicadorDescontoSancoes(resolucaoDiretoria.getIndicadorDescontoSancoes().toString());
 			atualizarResolucaoDiretoriaActionForm.setIndicadorParcelamentoLojaVirtual(resolucaoDiretoria.getIndicadorParcelamentoLojaVirtual().toString());
 			atualizarResolucaoDiretoriaActionForm.setIndicadorParcelasEmAtraso(resolucaoDiretoria.getIndicadorParcelasEmAtraso().toString());
+			atualizarResolucaoDiretoriaActionForm.setIndicadorParcelamentoCartaoCredito(resolucaoDiretoria.getIndicadorParcelamentoCartaoCredito().toString());
 			
 			if (resolucaoDiretoria.getRdParcelasEmAtraso()!= null &&
 					!resolucaoDiretoria.getRdParcelasEmAtraso().equals("")){
@@ -173,6 +174,7 @@ public class ExibirAtualizarResolucaoDiretoriaAction extends GcomAction {
 			atualizarResolucaoDiretoriaActionForm.setIndicadorUtilizacaoLivre(resolucaoDiretoria.getIndicadorUtilizacaoLivre().toString());
 			atualizarResolucaoDiretoriaActionForm.setIndicadorDescontoSancoes(resolucaoDiretoria.getIndicadorDescontoSancoes().toString());
 			atualizarResolucaoDiretoriaActionForm.setIndicadorParcelasEmAtraso(resolucaoDiretoria.getIndicadorParcelasEmAtraso().toString());
+			atualizarResolucaoDiretoriaActionForm.setIndicadorParcelamentoCartaoCredito(resolucaoDiretoria.getIndicadorParcelamentoCartaoCredito().toString());
 			atualizarResolucaoDiretoriaActionForm.setIndicadorParcelamentoLojaVirtual(resolucaoDiretoria.getIndicadorParcelamentoLojaVirtual().toString());
 			
 			if (resolucaoDiretoria.getRdParcelasEmAtraso()!= null &&

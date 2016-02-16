@@ -117,6 +117,11 @@ public class RelatorioConsultarDebitos extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_CONSULTAR_DEBITOS);
 	}
 
+	@Deprecated
+	public RelatorioConsultarDebitos() {
+		super(null, "");
+	}
+
 	private Collection<RelatorioConsultarDebitosBean> inicializarBeanRelatorio(
 			Collection<ContaValoresHelper> colecaoContas,
 			Collection<DebitoACobrar> colecaoDebitosACobrar,

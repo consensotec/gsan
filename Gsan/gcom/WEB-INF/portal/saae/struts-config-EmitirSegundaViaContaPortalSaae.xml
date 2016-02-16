@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	
+	<form-beans>
+		<form-bean name="EmitirSegundaViaContaPortalSaaeActionForm"
+			type="gcom.gui.portal.saae.EmitirSegundaViaContaPortalSaaeActionForm" />
+	</form-beans>
+	
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+	<action-mappings>
+
+		<action name="EmitirSegundaViaContaPortalSaaeActionForm"
+			type="gcom.gui.portal.saae.EmitirSegundaViaContaPortalSaaeAction"
+			validate="false" scope="session"
+			path="/emitirSegundaViaContaPortalSaaeAction">
+			<forward name="emitirSegundaViaContaPortalSaaeAction"
+				path="/jsp/portal/saae/emitir_segunda_via_conta_portal_saae.jsp"/>
+			<forward name="servicosPortalSaaeAction"
+				path="/jsp/portal/saae/servicos.jsp"/>
+			<forward name="matriculaSemDebito"
+				path="/jsp/portal/saae/servicos.jsp"/>
+			<forward name="erroSistemaPortal"
+				path="/jsp/portal/saae/emitir_segunda_via_conta_portal_saae.jsp"/>
+		</action>
+	</action-mappings>
+
+	<message-resources null="false"
+		parameter="gcom.properties.application" />
+</struts-config>
+

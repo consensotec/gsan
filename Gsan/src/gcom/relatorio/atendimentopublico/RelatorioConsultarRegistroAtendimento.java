@@ -117,6 +117,11 @@ public class RelatorioConsultarRegistroAtendimento extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_CONSULTAR_REGISTRO_ATENDIMENTO);
 	}
 	
+	@Deprecated
+	public RelatorioConsultarRegistroAtendimento() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

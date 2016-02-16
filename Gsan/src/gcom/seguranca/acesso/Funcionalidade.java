@@ -531,6 +531,12 @@ public class Funcionalidade extends TabelaAuxiliarAbreviada {
 	public static final int BATCH_GERAR_DADOS_FINANCEIRO_ATUALIZACAO_CADASTRAL = 1905;
 	
 	public static final int BATCH_GERAR_RESUMO_DADOS_FINANCEIROS_ATUALIZACAO_CADASTRAL = 1906;
+
+	public static final int BATCH_GERAR_RESUMOS_FATURAMENTO_PENTAHO = 1909;
+	
+	public static final int BATCH_GERAR_RESUMOS_ARRECADACAO_PENTAHO = 1910;
+
+	public static final int BATCH_MIGRAR_RESUMOS_ANALITICOS = 1911;
 	
 
 	/** identifier field */

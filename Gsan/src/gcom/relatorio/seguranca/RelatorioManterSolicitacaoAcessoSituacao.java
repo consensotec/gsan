@@ -32,6 +32,11 @@ public class RelatorioManterSolicitacaoAcessoSituacao extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_MANTER_SOLICITACAO_ACESSO_SITUACAO);
 	}
 
+	@Deprecated
+	public RelatorioManterSolicitacaoAcessoSituacao() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

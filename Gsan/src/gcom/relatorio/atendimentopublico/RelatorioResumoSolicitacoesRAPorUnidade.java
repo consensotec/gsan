@@ -48,6 +48,11 @@ public class RelatorioResumoSolicitacoesRAPorUnidade extends TarefaRelatorio {
 	public RelatorioResumoSolicitacoesRAPorUnidade(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_RESUMO_SOLICITACOES_RA_POR_UNIDADE);
 	}
+	
+	@Deprecated
+	public RelatorioResumoSolicitacoesRAPorUnidade() {
+		super(null, "");
+	}
 
 	@Override
 	public Object executar() throws TarefaException {

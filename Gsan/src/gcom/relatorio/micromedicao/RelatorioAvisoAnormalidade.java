@@ -116,6 +116,11 @@ public class RelatorioAvisoAnormalidade extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_AVISO_ANORMALIDADE);
 	}
 
+	@Deprecated
+	public RelatorioAvisoAnormalidade() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

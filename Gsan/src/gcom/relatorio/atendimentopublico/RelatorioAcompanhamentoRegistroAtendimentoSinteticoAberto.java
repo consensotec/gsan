@@ -37,6 +37,11 @@ public class RelatorioAcompanhamentoRegistroAtendimentoSinteticoAberto extends T
 		super(usuario, ConstantesRelatorios.RELATORIO_ACOMPANHAMENTO_REGISTRO_ATENDIMENTO_SINTETICO_ABERTO);
 	}
 
+	@Deprecated
+	public RelatorioAcompanhamentoRegistroAtendimentoSinteticoAberto() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 		
 		// valor de retorno

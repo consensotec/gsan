@@ -34,14 +34,10 @@
 
     function caracteresespeciais () {
      this.aa = new Array("quantidadeEconomia","Quantidade de Economias deve somente conter números positivos." , new Function ("varName", " return this[varName];"));
-     this.ab = new Array("qtdUnidadePrivativa","Qtd. de Unidades Privativas deve somente conter números positivos." , new Function ("varName", " return this[varName];"));
-     this.ac = new Array("qtdUnidadeColetiva","Qtd. de Unidades Coletivas deve somente conter números positivos." , new Function ("varName", " return this[varName];"));
     }
 
     function IntegerValidations () {
      this.aa = new Array("quantidadeEconomia","Quantidade de Economias deve somente conter números positivos." , new Function ("varName", " return this[varName];"));
-     this.ab = new Array("qtdUnidadePrivativa","Qtd. de Unidades Privativas deve somente conter números positivos." , new Function ("varName", " return this[varName];"));
-     this.ac = new Array("qtdUnidadeColetiva","Qtd. de Unidades Coletivas deve somente conter números positivos." , new Function ("varName", " return this[varName];"));
     }
     
     function required () {
@@ -64,12 +60,6 @@
                 alert("Quantidade de Economias deve somente conter números positivos.");
               }else if(form.quantidadeEconomia.value < '0'){
                 alert("Quantidade de Economias deve somente conter números positivos.");
-              }else if(form.qtdUnidadePrivativa.value.length > 0 &&
-                      (form.qtdUnidadePrivativa.value < '0' || form.qtdUnidadePrivativa.value == '0')){
-                alert("Qtd. de Unidades Privativas deve somente conter números positivos.");
-              }else if(form.qtdUnidadeColetiva.value > 0 && 
-                      (form.qtdUnidadeColetiva.value < '0' || form.qtdUnidadeColetiva.value == '0')){
-                alert("Qtd. de Unidades Coletivas deve somente conter números positivos.");
               }else{
                 form.action='inserirImovelWizardAction.do?action=exibirInserirImovelSubCategoriaAction&botaoAdicionar=1';
                 form.submit();
@@ -221,7 +211,7 @@ function removerRamoAtividade(url){
 				</td>
               </tr>
               
-              <tr>
+<%--               <tr>
                 <td width="30%"><strong>Qtd. Unidades Privativas:</strong></td>
                 <td width="70%" colspan="2"> 
                 	<html:text maxlength="4" property="qtdUnidadePrivativa" size="4"/>
@@ -234,7 +224,7 @@ function removerRamoAtividade(url){
                 	<html:text maxlength="4" property="qtdUnidadeColetiva" size="4"/>
 				</td>
               </tr>
-              
+ --%>              
               <tr>
                 <td>&nbsp;</td>
 				<td colspan="2"><font color="#FF0000">*</font> Campo obrigatório</td>

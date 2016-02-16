@@ -159,6 +159,11 @@ public class RelatorioAcompanhamentoClientesNegativados extends TarefaRelatorio 
 		super(usuario, constanteRelatorio);
 	}
 
+	@Deprecated
+	public RelatorioAcompanhamentoClientesNegativados() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

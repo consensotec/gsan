@@ -93,15 +93,16 @@ public class ResumoDadosFinanceirosAtualizacaoCadastralDM implements Serializabl
 	private Integer numQuadraAntes;
 	private Integer codSetorDepois;
 	private Integer numQuadraDepois;
-	private Integer idLocalizacaoAntes;
-	private Integer idLocalizacaoDepois;
+	private Integer idLocalizacao;
 	private Integer idTempo;
 	private Integer idUsuario;
+	//indicador de comando finalizado
+	private Integer idIndicador;
+	
 	private Integer qtdeImovelParaVisita;
 	private Integer qtdeImovelAVisitar;
 	private Integer qtdeImovelComPendencia;
 	private Integer qtdeImovelNovo;
-	
 	private Integer qtdeImovelRetornarCampo;
 	private Integer qtdeImovelSemAlteracao;
 	private Integer qtdeImovelComAlterecao;
@@ -113,6 +114,7 @@ public class ResumoDadosFinanceirosAtualizacaoCadastralDM implements Serializabl
 	private Integer qtdeAlteracaoSituacaoAgua;
 	private Integer qtdeAlteracaoSituacaoEsgoto;
 	private Integer qtdeAlteracaoHidrometro;
+	private Integer qtdeAlteracaoInscricao;
 	private Integer qtdeAlteracaoRg;
 	private Integer qtdeInclusaoRg;
 	private Integer qtdeAlteracaoCpfCnpj;
@@ -152,7 +154,9 @@ public class ResumoDadosFinanceirosAtualizacaoCadastralDM implements Serializabl
 	private Integer qtdeImovelLigEsgotoDepois;
 	private Integer qtdeImovelSupEsgotoAntes;
 	private Integer qtdeImovelSupEsgotoDepois;
-		  
+	private Integer qtdeImovelCorEsgotoAntes;
+	private Integer qtdeImovelCorEsgotoDepois;
+	
 	private BigDecimal valorAguaAntes;
 	private BigDecimal valorAguaDepois;
 	private BigDecimal valorEsgotoAntes;
@@ -173,13 +177,12 @@ public class ResumoDadosFinanceirosAtualizacaoCadastralDM implements Serializabl
 		idLocalidade = (Integer) array[5];
 		codSetorAntes = (Integer) array[6];
 		numQuadraAntes = (Integer) array[7];
-		codSetorDepois =  (Integer) array[8];
-		numQuadraDepois =  (Integer) array[9];
-		qtdeImovelParaVisita = (Integer) array[10];
-		qtdeImovelAVisitar = (Integer) array[11];
-		qtdeImovelComPendencia = (Integer) array[12];
-		qtdeImovelNovo = (Integer) array[13];
-		qtdeImovelRetornarCampo = (Integer) array[14];
+		idIndicador = (Integer) array[8];
+		qtdeImovelParaVisita = (Integer) array[9];
+		qtdeImovelAVisitar = (Integer) array[10];
+		qtdeImovelComPendencia = (Integer) array[11];
+		qtdeImovelNovo = (Integer) array[12];
+		qtdeImovelRetornarCampo = (Integer) array[13];
 		ultimaAlteracao = new Date();
 	}
 
@@ -271,20 +274,12 @@ public class ResumoDadosFinanceirosAtualizacaoCadastralDM implements Serializabl
 		this.numQuadraDepois = numQuadraDepois;
 	}
 
-	public Integer getIdLocalizacaoAntes() {
-		return idLocalizacaoAntes;
+	public Integer getIdLocalizacao() {
+		return idLocalizacao;
 	}
 
-	public void setIdLocalizacaoAntes(Integer idLocalizacaoAntes) {
-		this.idLocalizacaoAntes = idLocalizacaoAntes;
-	}
-
-	public Integer getIdLocalizacaoDepois() {
-		return idLocalizacaoDepois;
-	}
-
-	public void setIdLocalizacaoDepois(Integer idLocalizacaoDepois) {
-		this.idLocalizacaoDepois = idLocalizacaoDepois;
+	public void setIdLocalizacao(Integer idLocalizacao) {
+		this.idLocalizacao = idLocalizacao;
 	}
 
 	public Integer getIdTempo() {
@@ -791,5 +786,36 @@ public class ResumoDadosFinanceirosAtualizacaoCadastralDM implements Serializabl
 		this.qtdeImovelRetornarCampo = qtdeImovelRetornarCampo;
 	}
 
-	
+	public Integer getQtdeAlteracaoInscricao() {
+		return qtdeAlteracaoInscricao;
+	}
+
+	public void setQtdeAlteracaoInscricao(Integer qtdeAlteracaoInscricao) {
+		this.qtdeAlteracaoInscricao = qtdeAlteracaoInscricao;
+	}
+
+	public Integer getIdIndicador() {
+		return idIndicador;
+	}
+
+	public void setIdIndicador(Integer idIndicador) {
+		this.idIndicador = idIndicador;
+	}
+
+	public Integer getQtdeImovelCorEsgotoAntes() {
+		return qtdeImovelCorEsgotoAntes;
+	}
+
+	public void setQtdeImovelCorEsgotoAntes(Integer qtdeImovelCorEsgotoAntes) {
+		this.qtdeImovelCorEsgotoAntes = qtdeImovelCorEsgotoAntes;
+	}
+
+	public Integer getQtdeImovelCorEsgotoDepois() {
+		return qtdeImovelCorEsgotoDepois;
+	}
+
+	public void setQtdeImovelCorEsgotoDepois(Integer qtdeImovelCorEsgotoDepois) {
+		this.qtdeImovelCorEsgotoDepois = qtdeImovelCorEsgotoDepois;
+	}
+
 }

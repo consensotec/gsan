@@ -114,6 +114,11 @@ public class RelatorioContaTipo2 extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_CONTA_TIPO_2);
 	}
 
+	@Deprecated
+	public RelatorioContaTipo2() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

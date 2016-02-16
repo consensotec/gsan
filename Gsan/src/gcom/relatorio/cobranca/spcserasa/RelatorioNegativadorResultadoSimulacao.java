@@ -132,6 +132,11 @@ public class RelatorioNegativadorResultadoSimulacao extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_NEGATIVADOR_EXCLUSAO_MOTIVO);
 	}
 
+	@Deprecated
+	public RelatorioNegativadorResultadoSimulacao() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

@@ -116,6 +116,11 @@ public class RelatorioRelacaoOrdensServicoEncerradasPendentes extends TarefaRela
 				ConstantesRelatorios.RELATORIO_RELACAO_ORDENS_SERVICO_ENCERRADAS_PENDENTES);
 	}
 
+	@Deprecated
+	public RelatorioRelacaoOrdensServicoEncerradasPendentes() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 
 		// ------------------------------------

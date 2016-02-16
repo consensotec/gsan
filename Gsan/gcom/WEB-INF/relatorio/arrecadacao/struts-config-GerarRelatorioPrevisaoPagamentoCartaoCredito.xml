@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>	
+		<form-bean name="GerarRelatorioPrevisaoPagamentoCartaoCreditoActionForm"
+			type="gcom.gui.relatorio.arrecadacao.GerarRelatorioPrevisaoPagamentoCartaoCreditoActionForm" >			
+		</form-bean>
+	</form-beans>
+
+	<!--******************* PÁGINAS GLOBAIS *******************-->
+	<global-forwards />
+
+	<action-mappings>
+		<!--******************* PÁGINA PRINCIPAL *******************-->
+		<action name="GerarRelatorioPrevisaoPagamentoCartaoCreditoActionForm"
+			type="gcom.gui.relatorio.arrecadacao.ExibirGerarRelatorioPrevisaoPagamentoCartaoCreditoAction"			
+			validate="true"	
+			path="/exibirGerarRelatorioPrevisaoPagamentoCartaoCreditoAction">			
+			<forward name="exibirGerarRelatorioPrevisaoPagamentoCartaoCreditoAction"
+				path="/jsp/relatorio/arrecadacao/relatorio_previsao_pagamento_cartao_credito.jsp" />
+		</action>
+		<action name="GerarRelatorioPrevisaoPagamentoCartaoCreditoActionForm"
+			type="gcom.gui.relatorio.arrecadacao.GerarRelatorioPrevisaoPagamentoCartaoCreditoAction"
+			validate="true"						
+			path="/gerarRelatorioPrevisaoPagamentoCartaoCreditoAction" />				
+
+	</action-mappings>
+
+</struts-config>

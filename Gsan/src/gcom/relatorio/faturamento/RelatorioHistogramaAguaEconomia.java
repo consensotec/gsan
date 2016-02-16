@@ -116,6 +116,11 @@ public class RelatorioHistogramaAguaEconomia extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_EMITIR_HISTOGRAMA_AGUA_ECONOMIA);
 	}
 
+	@Deprecated
+	public RelatorioHistogramaAguaEconomia() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

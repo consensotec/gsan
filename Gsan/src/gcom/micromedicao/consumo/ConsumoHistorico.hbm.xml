@@ -63,5 +63,10 @@
 		<many-to-one name="rota" class="gcom.micromedicao.Rota" not-null="false">
 			<column name="rota_id"/>
 		</many-to-one>
+		
+		<many-to-one name="contaMotivoRevisao" class="gcom.faturamento.conta.ContaMotivoRevisao" not-null="false">
+			<column name="cmrv_id"/>
+		</many-to-one>
+		
 	</class>
 </hibernate-mapping>

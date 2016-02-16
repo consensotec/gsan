@@ -91,18 +91,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 /** @author Hibernate CodeGenerator */
 @ControleAlteracao()
 public class ServicoTipo extends ObjetoTransacao {
-
 	private static final long serialVersionUID = 1L;
-	public static final int ATUALIZAR_IMPORTANCIA_TIPO_SERVICO = 1819;
 
-	public Filtro retornaFiltro() {
-		FiltroServicoTipo filtroServicoTipo = new FiltroServicoTipo();
-
-		filtroServicoTipo.adicionarParametro(new ParametroSimples(	FiltroServicoTipo.ID,
-																	this.getId()));
-		filtroServicoTipo.adicionarCaminhoParaCarregamentoEntidade("programaCalibragem");
-		return filtroServicoTipo;
-	}
+	public final static int ATUALIZAR_IMPORTANCIA_TIPO_SERVICO = 1819;
 
 	public final static int TIPO_LIGACAO_AGUA = 619;
 
@@ -215,6 +206,12 @@ public class ServicoTipo extends ObjetoTransacao {
 
 	// ---------------------------------------------------------------------
 
+	public final static int TIPO_DESLIGAMENTO_RAMAL_AGUA_ORDEM_CAERN = 115;
+	
+	public final static int TIPO_VISITA_DE_COBRANCA = 1011;
+	
+	public final static int FISCALIZACAO_IMOVEL = 145;
+
 	// public final static short INDICADOR_EMPRESA_COBRANCA_SIM = 1;
 
 	// public final static short INDICADOR_EMPRESA_COBRANCA_NAO = 2;
@@ -259,6 +256,9 @@ public class ServicoTipo extends ObjetoTransacao {
 
 	/** persistent field */
 	private short indicadorIncluirDebito;
+	
+	/** persistent field */
+	private short indicadorServicoCobranca;
 
 	/** persistent field */
 	private short indicadorCobrarJuros;
@@ -513,16 +513,6 @@ public class ServicoTipo extends ObjetoTransacao {
 		this.debitoTipo = debitoTipo;
 	}
 
-	public String toString() {
-		return new ToStringBuilder(this).append("id", getId()).toString();
-	}
-
-	public String[] retornaCamposChavePrimaria() {
-		String[] retorno = new String[1];
-		retorno[0] = "id";
-		return retorno;
-	}
-
 	public short getIndicadorUso() {
 		return indicadorUso;
 	}
@@ -675,15 +665,6 @@ public class ServicoTipo extends ObjetoTransacao {
 		this.indicadorEnvioPesquisaSatisfacao = indicadorEnvioPesquisaSatisfacao;
 	}
 
-	@Override
-	public Filtro retornaFiltroRegistroOperacao() {
-		Filtro filtro = retornaFiltro();
-		filtro.adicionarParametro(new ParametroSimples(	FiltroServicoTipo.ID,
-														getId()));
-		filtro.adicionarCaminhoParaCarregamentoEntidade("programaCalibragem");
-		return filtro;
-	}
-
 	public Short getIndicadorGerarOSInspecaoAnormalidade() {
 		return indicadorGerarOSInspecaoAnormalidade;
 	}
@@ -716,4 +697,39 @@ public class ServicoTipo extends ObjetoTransacao {
 		this.indicadorCorrecaoAnormalidade = indicadorCorrecaoAnormalidade;
 	}
 
+	public short getIndicadorServicoCobranca() {
+		return indicadorServicoCobranca;
+	}
+
+	public void setIndicadorServicoCobranca(short indicadorServicoCobranca) {
+		this.indicadorServicoCobranca = indicadorServicoCobranca;
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("id", getId()).toString();
+	}
+
+	public String[] retornaCamposChavePrimaria() {
+		String[] retorno = new String[1];
+		retorno[0] = "id";
+		return retorno;
+	}
+
+	@Override
+	public Filtro retornaFiltroRegistroOperacao() {
+		Filtro filtro = retornaFiltro();
+		filtro.adicionarParametro(new ParametroSimples(	FiltroServicoTipo.ID,
+														getId()));
+		filtro.adicionarCaminhoParaCarregamentoEntidade("programaCalibragem");
+		return filtro;
+	}
+
+	public Filtro retornaFiltro() {
+		FiltroServicoTipo filtroServicoTipo = new FiltroServicoTipo();
+
+		filtroServicoTipo.adicionarParametro(new ParametroSimples(	FiltroServicoTipo.ID,
+																	this.getId()));
+		filtroServicoTipo.adicionarCaminhoParaCarregamentoEntidade("programaCalibragem");
+		return filtroServicoTipo;
+	}
 }

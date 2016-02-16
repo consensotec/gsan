@@ -19,6 +19,8 @@ public class ProcessarAtualizacaoOSArquivoTextoHelper implements
 	Integer matricula;
 	
 	Integer idArquivoTexto;
+	
+	Integer anormalidadeEncontrada;
 
 	public Collection<AcoesParaCorrecaoAnormalidadesEncontradasHelper> getColecaoAcoesCorrecaoAnormalidadesEncontradasHelper() {
 		return colecaoAcoesCorrecaoAnormalidadesEncontradasHelper;
@@ -69,5 +71,12 @@ public class ProcessarAtualizacaoOSArquivoTextoHelper implements
 		this.idArquivoTexto = idArquivoTexto;
 	}
 	
+	public Integer getAnormalidadeEncontrada() {
+		return anormalidadeEncontrada;
+	}
+
+	public void setAnormalidadeEncontrada(Integer anormalidadeEncontrada) {
+		this.anormalidadeEncontrada = anormalidadeEncontrada;
+	}
 
 }

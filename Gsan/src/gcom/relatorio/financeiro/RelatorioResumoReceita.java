@@ -111,6 +111,11 @@ public class RelatorioResumoReceita extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_RESUMO_RECEITA_SINTETICO);
 	}
 
+	@Deprecated
+	public RelatorioResumoReceita() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

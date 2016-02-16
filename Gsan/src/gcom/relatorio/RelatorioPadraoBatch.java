@@ -102,6 +102,11 @@ public class RelatorioPadraoBatch extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_PADRAO_BATCH);
 	}
 	
+	@Deprecated
+	public RelatorioPadraoBatch() {
+		super(null, "");
+	}
+	
 	/**
 	 * Método que executa a tarefa
 	 * 

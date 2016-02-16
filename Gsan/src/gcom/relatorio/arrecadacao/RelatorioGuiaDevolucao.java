@@ -109,6 +109,11 @@ public class RelatorioGuiaDevolucao extends TarefaRelatorio {
 	public RelatorioGuiaDevolucao(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_GUIA_DEVOLUCAO);
 	}
+	
+	@Deprecated
+	public RelatorioGuiaDevolucao() {
+		super(null, "");
+	}
 
 	private Collection<RelatorioGuiaDevolucaoBean> inicializarBeanRelatorio(
 			Collection<GuiaPagamentoRelatorioHelper> dadosRelatorio) {

@@ -184,6 +184,9 @@ public class GerarRelatorioMotivoNaoGeracaoDocumentoCronogramaAction extends Exi
 						
 				if (colecaoCobrancaAcaoCronograma != null && !colecaoCobrancaAcaoCronograma.isEmpty()){
 					FiltroCobrancaAcaoAtividadeCronograma filtroCobrancaAcaoAtividadeCronograma = new FiltroCobrancaAcaoAtividadeCronograma();
+					
+					filtroCobrancaAcaoAtividadeCronograma.adicionarCaminhoParaCarregamentoEntidade(FiltroCobrancaAcaoAtividadeCronograma.COBRANCA_ACAO);
+					
 					filtroCobrancaAcaoAtividadeCronograma.adicionarParametro(new ParametroSimples(
 							FiltroCobrancaAcaoAtividadeCronograma.COBRANCA_ATIVIDADE, new Integer(form.getIdCobrancaAtividade())));
 					filtroCobrancaAcaoAtividadeCronograma.adicionarParametro(new ParametroSimples(

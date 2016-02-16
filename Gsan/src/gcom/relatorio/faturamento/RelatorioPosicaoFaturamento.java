@@ -108,6 +108,11 @@ public class RelatorioPosicaoFaturamento extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_POSICAO_FATURAMENTO);
 	}
 
+	@Deprecated
+	public RelatorioPosicaoFaturamento() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

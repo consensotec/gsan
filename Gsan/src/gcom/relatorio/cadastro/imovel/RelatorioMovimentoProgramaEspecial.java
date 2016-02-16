@@ -75,6 +75,10 @@
 */  
 package gcom.relatorio.cadastro.imovel;
 
+import gcom.batch.Relatorio;
+import gcom.cadastro.imovel.Imovel;
+import gcom.cadastro.imovel.bean.ImovelClientesEspeciaisRelatorioHelper;
+import gcom.cadastro.sistemaparametro.SistemaParametro;
 import gcom.fachada.Fachada;
 import gcom.gui.ActionServletException;
 import gcom.relatorio.ConstantesRelatorios;
@@ -82,14 +86,19 @@ import gcom.relatorio.RelatorioDataSource;
 import gcom.seguranca.acesso.usuario.Usuario;
 import gcom.tarefa.TarefaException;
 import gcom.tarefa.TarefaRelatorio;
+import gcom.util.ControladorException;
 import gcom.util.Util;
 import gcom.util.agendadortarefas.AgendadorTarefas;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -107,6 +116,11 @@ public class RelatorioMovimentoProgramaEspecial extends TarefaRelatorio {
 
 	public RelatorioMovimentoProgramaEspecial(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MOVIMENTO_PROGRAMA_ESPECIAL);
+	}
+
+	@Deprecated
+	public RelatorioMovimentoProgramaEspecial() {
+		super(null, "");
 	}
 
 	public Object executar() throws TarefaException {

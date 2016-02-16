@@ -115,6 +115,11 @@ public class RelatorioImoveisComAcordo extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_COM_ACORDO);
 	}
 
+	@Deprecated
+	public RelatorioImoveisComAcordo() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

@@ -113,6 +113,11 @@ public class RelatorioClientesEspeciais extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_GRANDES_CLIENTES_CORPORATIVO);
 	}
 
+	@Deprecated
+	public RelatorioClientesEspeciais() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 		
 		List<RelatorioClientesEspeciaisBean> relatorioBeans = executarConsultaECriarRelatoriosBean();

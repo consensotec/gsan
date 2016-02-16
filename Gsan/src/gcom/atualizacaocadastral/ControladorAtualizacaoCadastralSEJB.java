@@ -489,13 +489,12 @@ public class ControladorAtualizacaoCadastralSEJB implements SessionBean {
 			System.out.println("COMANDO " + comando);
 
 			repositorioAtualizacaoCadastral.excluirDadosComando(comando);
-
+			Short indicadorComandoFinalizado = atualizarComandoFinalizado(comando);
 			List<DadosFinanceirosAtualizacaoCadastralDM> dados =
 					repositorioAtualizacaoCadastral.pesquisarDadosFinanceirosAtualizacaoCadastralDM(comando);
 
 			for (DadosFinanceirosAtualizacaoCadastralDM helper : dados) {
-				Integer idLocalizacaoAntes = null;
-				Integer idLocalizacaoDepois = null;
+				Integer idLocalizacao = null;
 				Integer idSitAguaAntes = null;
 				Integer idSitAguaDepois = null;
 				Integer idSitEsgotoAntes = null;
@@ -511,11 +510,12 @@ public class ControladorAtualizacaoCadastralSEJB implements SessionBean {
 				calcularValorAguaEsgotoAntesDepois(referencia, imovel, inTarifaCategoria, helper, cacheTarifa);
 
 				if(helper.getCodSetorAntes() != null && helper.getNumQuadraAntes() != null) {
-					idLocalizacaoAntes = pesquisarIdLocalizacao(helper.getIdLocalidade(), helper.getCodSetorAntes(), helper.getNumQuadraAntes(), cacheLocalizacao);
+					idLocalizacao = pesquisarIdLocalizacao(helper.getIdLocalidade(), helper.getCodSetorAntes(), helper.getNumQuadraAntes(), cacheLocalizacao);
+				}else{
+					//imóvel novo
+					idLocalizacao = pesquisarIdLocalizacao(helper.getIdLocalidade(), helper.getCodSetorDepois(), helper.getNumQuadraDepois(), cacheLocalizacao);
 				}
-				idLocalizacaoDepois= pesquisarIdLocalizacao(helper.getIdLocalidade(), helper.getCodSetorDepois(), helper.getNumQuadraDepois(), cacheLocalizacao);
-				helper.setIdLocalizacaoAntes(idLocalizacaoAntes);
-				helper.setIdLocalizacaoDepois(idLocalizacaoDepois);
+				helper.setIdLocalizacao(idLocalizacao);
 
 				if (helper.getSitAguaAntes() != null) {
 					idSitAguaAntes = pesquisarIdSituacaoAgua(helper.getSitAguaAntes(), cacheSitAgua);
@@ -545,6 +545,8 @@ public class ControladorAtualizacaoCadastralSEJB implements SessionBean {
 				idUsuario = pesquisarIdUsuario(helper.getCadastrador(), cacheUsuario);
 				helper.setIdUsuario(idUsuario);
 
+				//indicador de comando finalizado
+				helper.setIdIndicador(indicadorComandoFinalizado.intValue());
 				helper.setComando(comando);
 
 				repositorioUtil.inserir(helper, HibernateUtil.getSessionPentaho());
@@ -788,24 +790,21 @@ public class ControladorAtualizacaoCadastralSEJB implements SessionBean {
 					idFuncionalidadeIniciada, UnidadeProcessamento.FUNCIONALIDADE, comando);
 
 			repositorioAtualizacaoCadastral.excluirResumoDadosComando(comando);
-
 			List<ResumoDadosFinanceirosAtualizacaoCadastralDM> resumos =
 					repositorioAtualizacaoCadastral.pesquisarResumoDadosFinanceirosAtualizacaoCadastralDM(comando);
-
+			
 			for (ResumoDadosFinanceirosAtualizacaoCadastralDM resumo : resumos) {
-				Integer idLocalizacaoAntes = null;
-				Integer idLocalizacaoDepois = null;
+				Integer idLocalizacao = null;
 				Integer idTempo = null;
 				Integer idUsuario = null;
 
 				if(resumo.getCodSetorAntes() != null && resumo.getNumQuadraAntes() != null) {
-					idLocalizacaoAntes = pesquisarIdLocalizacao(resumo.getIdLocalidade(), resumo.getCodSetorAntes(),
-							resumo.getNumQuadraAntes(), cacheLocalizacao);
+					idLocalizacao = pesquisarIdLocalizacao(resumo.getIdLocalidade(), resumo.getCodSetorAntes(), resumo.getNumQuadraAntes(), cacheLocalizacao);
+				}else{
+					//imóvel novo
+					idLocalizacao = pesquisarIdLocalizacao(resumo.getIdLocalidade(), resumo.getCodSetorDepois(), resumo.getNumQuadraDepois(), cacheLocalizacao);
 				}
-				idLocalizacaoDepois= pesquisarIdLocalizacao(resumo.getIdLocalidade(), resumo.getCodSetorDepois(),
-						resumo.getNumQuadraDepois(), cacheLocalizacao);
-				resumo.setIdLocalizacaoAntes(idLocalizacaoAntes);
-				resumo.setIdLocalizacaoDepois(idLocalizacaoDepois);
+				resumo.setIdLocalizacao(idLocalizacao);
 
 				idTempo = pesquisarIdTempo(resumo.getDataGeracao(), cacheTempo);
 				resumo.setIdTempo(idTempo);
@@ -814,11 +813,10 @@ public class ControladorAtualizacaoCadastralSEJB implements SessionBean {
 				resumo.setIdUsuario(idUsuario);
 				
 				pesquisarDadosFinanceirosAtuCadastral(resumo, cacheSitAgua, cacheSitEsgoto);
-				
+
 				repositorioUtil.inserir(resumo, HibernateUtil.getSessionPentaho());
 			}
 			
-			atualizarComandoFinalizado(comando);
 			getControladorBatch().encerrarUnidadeProcessamentoBatch(null, idUnidadeIniciada, false);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -966,11 +964,14 @@ public class ControladorAtualizacaoCadastralSEJB implements SessionBean {
 	 * @return
 	 * @throws ErroRepositorioException
 	 */
-	public void atualizarComandoFinalizado(Integer comando) throws ControladorException{
+	public Short atualizarComandoFinalizado(Integer comando) throws ControladorException{
 		try{
+			Short comandoFinalizado = ConstantesSistema.NAO;
 			if (repositorioAtualizacaoCadastral.verificarComandoFinalizado(comando)){
 				repositorioAtualizacaoCadastral.atualizarIndicadorComandoFinalizado(comando);
+				comandoFinalizado = ConstantesSistema.SIM;
 			}
+			return comandoFinalizado;
 		} catch (ErroRepositorioException ex) {
 			throw new ControladorException("erro.sistema", ex);
 		}
@@ -1109,6 +1110,9 @@ public class ControladorAtualizacaoCadastralSEJB implements SessionBean {
 			resumo.setQtdeExclusaoCpfCnpj(dadosFinanceiros[52] == null? 0 : (Integer)dadosFinanceiros[52]);
 			resumo.setQtdeImovelComAlterecao(dadosFinanceiros[53] == null? 0 : (Integer)dadosFinanceiros[53]);
 			resumo.setQtdeImovelSemAlteracao(dadosFinanceiros[54] == null? 0 : (Integer)dadosFinanceiros[54]);
+			resumo.setQtdeAlteracaoInscricao(dadosFinanceiros[55] == null? 0 : (Integer)dadosFinanceiros[55]);
+			resumo.setQtdeImovelCorEsgotoAntes(dadosFinanceiros[56] == null? 0 : (Integer)dadosFinanceiros[56]);
+			resumo.setQtdeImovelCorEsgotoDepois(dadosFinanceiros[57] == null? 0 : (Integer)dadosFinanceiros[57]);
 			
 			return resumo;
 		} catch (ErroRepositorioException ex) {

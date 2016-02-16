@@ -2,6 +2,8 @@
 <%@ taglib uri="/WEB-INF/struts-template.tld" prefix="template"%>
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
+<%@ taglib uri="/WEB-INF/gsanLib.tld" prefix="gsan" %>
+
 
 <%@ page import="gcom.util.Util"%>
 <%@ page import="gcom.cobranca.bean.ObterDebitoImovelOuClienteHelper"%>
@@ -37,6 +39,13 @@
 	src="<bean:message key="caminho.js"/>validacao/ManutencaoRegistro.js"></script>
 	<script language="JavaScript" src="<bean:message key="caminho.jquery"/>jquery.js"></script>
 <script language="JavaScript">
+
+	function exibirParcelamentoCartaoCredito(){ 
+		 var form = document.forms[0];
+		 form.action = '/gsan/exibirEfetuarParcelamentoDebitosPortalSaaeAction.do?gsanPortal=SIM';
+		 form.submit();
+    }
+     
 
 <!--
 function recuperarDadosPopup(codigoRegistro, descricaoRegistro, tipoConsulta) {
@@ -2249,7 +2258,6 @@ function consultarImovelAjax(){
 						<jsp:include page="/jsp/cadastro/imovel_consultar_debito_historico_cliente_debito.jsp" />
 					</td>
 				</tr>
-				
 				<!-- FIM GRID Historico de Clientes com Debito  -->				
 				<tr>
 					<td align="right">
@@ -2292,16 +2300,22 @@ function consultarImovelAjax(){
 											<input type="button" name="" value="Emitir Extrato de Débito" class="bottonRightCol" disabled="true" >
 										</td>
 									</logic:notEqual>
-								</logic:notEmpty>
+								</logic:notEmpty>								
 							</tr>
+							<% /* 
+							<tr>
+								<td align="left">
+									<logic:present name="colecaoContaValores" scope="session" >
+									<gsan:controleAcessoBotao name="botaoParcelamentoCartao" value="Parcelamento Cartão de Crédito"
+									 	onclick="exibirParcelamentoCartaoCredito();" url="exibirConsultarImovelDebitosAction.do"/>							
+									</logic:present>
+								</td>
+							</tr>
+							*/ %>
 						</table>
 					</td>			
 				</tr>
-			
-				
 			</table>
-			
-		
 			
 			<p>&nbsp;</p>
 			<table width="100%" border="0">

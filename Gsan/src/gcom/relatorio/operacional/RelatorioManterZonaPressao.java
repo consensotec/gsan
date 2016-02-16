@@ -117,6 +117,11 @@ public class RelatorioManterZonaPressao extends TarefaRelatorio {
 	public RelatorioManterZonaPressao(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_ZONA_PRESSAO);
 	}
+	
+	@Deprecated
+	public RelatorioManterZonaPressao() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

@@ -109,6 +109,11 @@ public class RelatorioImoveisFaturasAtrasoAgrupadasCliente extends TarefaRelator
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_FATURAS_ATRASO_AGRUPADAS_CLIENTE);
 	}
 
+	@Deprecated
+	public RelatorioImoveisFaturasAtrasoAgrupadasCliente() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 
 		FiltrarRelatorioImoveisFaturasAtrasoHelper filtro = 

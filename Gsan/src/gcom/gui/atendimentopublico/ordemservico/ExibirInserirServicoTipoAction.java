@@ -286,6 +286,11 @@ public class ExibirInserirServicoTipoAction extends GcomAction {
 			form.setIndicadorCorrecaoAnormalidade("2");
 		}
 		
+		if(form.getIndicadorServicoCobranca() == null || form.getIndicadorServicoCobranca().equals("")){
+			form.setIndicadorServicoCobranca("2");
+		}
+
+		
 		httpServletRequest.setAttribute("servicoTipo", servicoTipo);
 		sessao.setAttribute("colecaoServicoTipoAtividade", form.getServicoTipoAtividades());
 		sessao.setAttribute("colecaoServicoTipoMaterial", form.getServicoTipoMateriais());	

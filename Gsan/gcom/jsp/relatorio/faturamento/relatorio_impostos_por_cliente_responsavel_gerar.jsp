@@ -13,8 +13,6 @@
 
 <%@ include file="/jsp/util/titulo.jsp"%>
 
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet"
 	href="<bean:message key="caminho.css"/>EstilosCompesa.css"
@@ -22,10 +20,8 @@
 
 <script language="JavaScript" src="<bean:message key="caminho.js"/>validacao/regras_validator.js"></script>
 <html:javascript staticJavascript="false" formName="RelatorioImpostosPorClienteResponsavelActionForm" />
-<script language="JavaScript"
-	src="<bean:message key="caminho.js"/>util.js"></script>
-<script language="JavaScript"
-	src="<bean:message key="caminho.js"/>Calendario.js"></script>
+<script language="JavaScript" src="<bean:message key="caminho.js"/>util.js"></script>
+<script language="JavaScript" src="<bean:message key="caminho.js"/>Calendario.js"></script>
 <script language="JavaScript">
 
 function recuperarDadosPopup(codigoRegistro, descricaoRegistro, tipoConsulta) {
@@ -200,6 +196,12 @@ function replicaDados(campoOrigem, campoDestino){
 }
 </script>
 
+<style>
+	.style1 input[type="radio"] {
+	  margin-top: -1px;
+	  vertical-align: middle;
+	}
+</style>
 
 </head>
 
@@ -278,17 +280,21 @@ function replicaDados(campoOrigem, campoDestino){
 			<p>&nbsp;</p>
 			<table width="100%" border="0">
 				<tr>
-
-					<td colspan="2">Para gerar o Relatório, informe os dados gerais
-					abaixo: </td>
+					<td colspan="2">Para gerar o Relatório, informe os dados gerais abaixo: </td>
 				</tr>
 				<tr>
 					<td>
 						<strong>Origem:<font color="#FF0000">*</font></strong>
 					</td>
-					<td colspan="3"><strong> <span class="style1"><strong> 
-					<html:radio	property="indicadorTipoImposto" value="1" /> <strong>Faturamento
-					<html:radio property="indicadorTipoImposto" value="2" /> Arrecadação</strong></strong></span></strong></td>
+					<td colspan="2">
+						<span class="style1">
+							<html:radio	styleId="icFaturamento" property="indicadorTipoImposto" value="1" />
+							<strong><label for="icFaturamento">Faturamento</label></strong>
+		
+							<html:radio styleId="icArrecadacao" property="indicadorTipoImposto" value="2" />
+							<strong><label for="icArrecadacao">Arrecadação</label></strong>
+						</span>
+					</td>
 				</tr>
 				<tr>
 					<td><strong>Período de Referência:</strong></td>
@@ -304,7 +310,7 @@ function replicaDados(campoOrigem, campoDestino){
 					        <td>
 					        	<strong>Cliente:</strong>
 					        </td>
-					        <td>
+					        <td colspan="2">
 					        
 					        	<logic:present name="desabilitarDadosSolicitanteCliente">
 					        		<html:text property="clienteID" size="10" maxlength="9" tabindex="1" readonly="true"/>
@@ -381,18 +387,19 @@ function replicaDados(campoOrigem, campoDestino){
 						</div>
 					</td>
 				</tr>
+				<tr><td>&nbsp;</td></tr>
 				
 				<tr>
-					<td colspan="2"><input name="Button" type="button" class="bottonRightCol"
-						value="Limpar" align="left"
-						onclick="window.location.href='/gsan/exibirGerarRelatorioImpostosPorClienteResponsavelAction.do?menu=sim'" tabindex="17">
+					<td colspan="2">
+						<input name="Button" type="button" class="bottonRightCol"
+							value="Limpar" align="left"
+							onclick="window.location.href='/gsan/exibirGerarRelatorioImpostosPorClienteResponsavelAction.do?menu=sim'" tabindex="17">
 						<input name="Button" class="bottonRightCol" value="Cancelar"
-						type="button" align="left" onClick="javascript:window.location.href='/gsan/telaPrincipal.do'">	
+							type="button" align="left" onClick="javascript:window.location.href='/gsan/telaPrincipal.do'">	
 					</td>
-					<td align="right" colspan="2">
+					<td  colspan="2" align="right">
 						<input name="Button" type="button" class="bottonRightCol" value="Gerar" align="left" tabindex="16"
 						onclick="validarForm(document.forms[0]);"></td>
-					<td align="right"></td>
 				</tr>
 			</table>
 			<p>&nbsp;</p>

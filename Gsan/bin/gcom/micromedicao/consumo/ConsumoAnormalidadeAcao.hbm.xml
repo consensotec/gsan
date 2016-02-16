@@ -25,6 +25,7 @@
 		<property name="descricaoContaMensagemMes2" type="java.lang.String" column="csaa_dsmensagemcontames2" length="120" not-null="false"/>
 		<property name="descricaoContaMensagemMes3" type="java.lang.String" column="csaa_dsmensagemcontames3" length="120" not-null="false"/>
 		<property name="indicadorValidarRetificacao" type="java.lang.Short" column="csaa_icvalidarretificacao" length="2" not-null="true"/>
+		<property name="indicadorCobrancaConsumoNormal" type="java.lang.Short" column="csaa_iccobrconsumonormal" length="2" not-null="true"/>
 		<!-- associations -->
 		<many-to-one name="consumoAnormalidade" class="gcom.micromedicao.consumo.ConsumoAnormalidade" not-null="false">
 			<column name="csan_id"/>
@@ -61,6 +62,15 @@
 		</many-to-one>
 		<many-to-one name="solicitacaoTipoEspecificacaoMes3" class="gcom.atendimentopublico.registroatendimento.SolicitacaoTipoEspecificacao">
 			<column name="step_idmes3"/>
+		</many-to-one>
+	    <many-to-one name="contaMotivoRevisaoMes1" class="gcom.faturamento.conta.ContaMotivoRevisao">
+			<column name="cmrv_idmes1"/>
+		</many-to-one>
+		<many-to-one name="contaMotivoRevisaoMes2" class="gcom.faturamento.conta.ContaMotivoRevisao">
+			<column name="cmrv_idmes2"/>
+		</many-to-one>
+		<many-to-one name="contaMotivoRevisaoMes3" class="gcom.faturamento.conta.ContaMotivoRevisao">
+			<column name="cmrv_idmes3"/>
 		</many-to-one>
 	</class>
 </hibernate-mapping>

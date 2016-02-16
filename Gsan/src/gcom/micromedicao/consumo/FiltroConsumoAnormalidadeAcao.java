@@ -221,9 +221,21 @@ public class FiltroConsumoAnormalidadeAcao extends Filtro implements Serializabl
   	 * Description of the Field
   	 */
     public final static String CONSUMO_ANORMALIDADE_ID = "consumoAnormalidade.id";
-   
     
-   
- 
+    /**
+  	 * Description of the Field
+  	 */   
+    public final static String MOTIVO_REVISAO_MES1 = "contaMotivoRevisaoMes1";
+    
+    /**
+  	 * Description of the Field
+  	 */
+    public final static String MOTIVO_REVISAO_MES2 = "contaMotivoRevisaoMes2";
 
+    /**
+  	 * Description of the Field
+  	 */
+    public final static String MOTIVO_REVISAO_MES3 = "contaMotivoRevisaoMes3";
+
+    public final static String INDICADOR_COBRANCA_CONSUMO_NORMAL = "indicadorCobrancaConsumoNormal";
 }

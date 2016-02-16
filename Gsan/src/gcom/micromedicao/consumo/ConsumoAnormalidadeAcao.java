@@ -79,6 +79,7 @@ import gcom.atendimentopublico.ordemservico.ServicoTipo;
 import gcom.atendimentopublico.registroatendimento.SolicitacaoTipoEspecificacao;
 import gcom.cadastro.imovel.Categoria;
 import gcom.cadastro.imovel.ImovelPerfil;
+import gcom.faturamento.conta.ContaMotivoRevisao;
 import gcom.micromedicao.leitura.LeituraAnormalidadeConsumo;
 
 import java.io.Serializable;
@@ -138,6 +139,14 @@ public class ConsumoAnormalidadeAcao implements Serializable {
     
     private Short indicadorValidarRetificacao;
 
+    private ContaMotivoRevisao contaMotivoRevisaoMes1;
+    
+    private ContaMotivoRevisao contaMotivoRevisaoMes2;
+    
+    private ContaMotivoRevisao contaMotivoRevisaoMes3;
+    
+    private Short indicadorCobrancaConsumoNormal;
+    
 	public ConsumoAnormalidadeAcao() {
 		super();
 	}
@@ -373,4 +382,36 @@ public class ConsumoAnormalidadeAcao implements Serializable {
 		this.indicadorValidarRetificacao = indicadorValidarRetificacao;
 	}
 
+	public ContaMotivoRevisao getContaMotivoRevisaoMes1() {
+		return contaMotivoRevisaoMes1;
+	}
+
+	public void setContaMotivoRevisaoMes1(ContaMotivoRevisao contaMotivoRevisaoMes1) {
+		this.contaMotivoRevisaoMes1 = contaMotivoRevisaoMes1;
+	}
+
+	public ContaMotivoRevisao getContaMotivoRevisaoMes2() {
+		return contaMotivoRevisaoMes2;
+	}
+
+	public void setContaMotivoRevisaoMes2(ContaMotivoRevisao contaMotivoRevisaoMes2) {
+		this.contaMotivoRevisaoMes2 = contaMotivoRevisaoMes2;
+	}
+
+	public ContaMotivoRevisao getContaMotivoRevisaoMes3() {
+		return contaMotivoRevisaoMes3;
+	}
+
+	public void setContaMotivoRevisaoMes3(ContaMotivoRevisao contaMotivoRevisaoMes3) {
+		this.contaMotivoRevisaoMes3 = contaMotivoRevisaoMes3;
+	}
+
+	public Short getIndicadorCobrancaConsumoNormal() {
+		return indicadorCobrancaConsumoNormal;
+	}
+
+	public void setIndicadorCobrancaConsumoNormal(
+			Short indicadorCobrancaConsumoNormal) {
+		this.indicadorCobrancaConsumoNormal = indicadorCobrancaConsumoNormal;
+	}
 }

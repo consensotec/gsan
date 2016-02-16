@@ -180,6 +180,8 @@ public class InserirServicoTipoActionForm extends ValidatorActionForm {
 	
 	String indicadorCobrarJuros;
 	
+	String indicadorServicoCobranca;
+
 	public String getIndicadorInspecaoAnormalidade() {
 		return indicadorInspecaoAnormalidade;
 	}
@@ -797,6 +799,12 @@ public class InserirServicoTipoActionForm extends ValidatorActionForm {
 	public void setIndicadorCobrarJuros(String indicadorCobrarJuros) {
 		this.indicadorCobrarJuros = indicadorCobrarJuros;
 	}
-	
+
+	public String getIndicadorServicoCobranca() {
+		return indicadorServicoCobranca;
+	}
+	public void setIndicadorServicoCobranca(String indicadorServicoCobranca) {
+		this.indicadorServicoCobranca = indicadorServicoCobranca;
+	}
 	
 }

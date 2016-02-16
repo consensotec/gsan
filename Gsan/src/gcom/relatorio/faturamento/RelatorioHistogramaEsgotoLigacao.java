@@ -115,6 +115,11 @@ public class RelatorioHistogramaEsgotoLigacao extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_EMITIR_HISTOGRAMA_ESGOTO_LIGACAO);
 	}
 
+	@Deprecated
+	public RelatorioHistogramaEsgotoLigacao() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

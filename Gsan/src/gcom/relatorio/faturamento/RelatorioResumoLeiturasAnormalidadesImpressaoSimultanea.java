@@ -125,7 +125,11 @@ public class RelatorioResumoLeiturasAnormalidadesImpressaoSimultanea extends Tar
 	public RelatorioResumoLeiturasAnormalidadesImpressaoSimultanea(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_RESUMO_LEITURAS_ANORMALIDADE_IMPRESSAO_SIMULTANEA );
 	}
-
+	
+	@Deprecated
+	public RelatorioResumoLeiturasAnormalidadesImpressaoSimultanea() {
+		super(null, "");
+	}
 	public Object executar() throws TarefaException {
         return relatorio;
 	}

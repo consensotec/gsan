@@ -108,13 +108,15 @@ public class SituacaoTransmissaoLeitura implements Serializable {
 
     /** persistent field */
     private Date ultimaAlteracao;
+    private Short indicadorCobranca;
 
     /** full constructor */
-    public SituacaoTransmissaoLeitura(Integer id, String descricaoSituacao, Short indicadorUso, Date ultimaAlteracao) {
+    public SituacaoTransmissaoLeitura(Integer id, String descricaoSituacao, Short indicadorUso, Date ultimaAlteracao, Short indicadorCobranca) {
         this.id = id;
         this.descricaoSituacao = descricaoSituacao;
         this.indicadorUso = indicadorUso;
         this.ultimaAlteracao = ultimaAlteracao;
+        this.indicadorCobranca = indicadorCobranca;
     }
 
     public SituacaoTransmissaoLeitura(Integer id) {
@@ -168,5 +170,13 @@ public class SituacaoTransmissaoLeitura implements Serializable {
             .append("id", getId())
             .toString();
     }
+
+	public Short getIndicadorCobranca() {
+		return indicadorCobranca;
+	}
+
+	public void setIndicadorCobranca(Short indicadorCobranca) {
+		this.indicadorCobranca = indicadorCobranca;
+	}
 
 }

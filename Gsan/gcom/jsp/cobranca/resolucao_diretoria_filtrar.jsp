@@ -255,6 +255,14 @@
 				</tr>
 				
 				<tr>
+					<td><strong>Indicador de Parcelamento com Cartão de Crédito: </strong></td>
+					<td><html:radio property="indicadorParcelamentoCartaoCredito" tabindex="17" value="1" /><strong>Sim</strong>
+					<html:radio property="indicadorParcelamentoCartaoCredito" tabindex="18" value="2" /><strong>N&atilde;o</strong>
+					<html:radio property="indicadorParcelamentoCartaoCredito" tabindex="19" value="3" /><strong>Todos</strong></td>
+					<td>&nbsp;</td>
+				</tr>
+				
+				<tr>
 					<td>
 					<p>&nbsp;</p>
 					</td>

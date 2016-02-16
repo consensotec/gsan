@@ -116,6 +116,11 @@ public class RelatorioGerarIndicesAcrescimosImpontualidade extends
 				ConstantesRelatorios.RELATORIO_GERAR_INDICE_ACRESCIMOS_IMPONTUALIDADE);
 	}
 
+	@Deprecated
+	public RelatorioGerarIndicesAcrescimosImpontualidade() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

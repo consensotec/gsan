@@ -167,10 +167,12 @@ public class FiltroSessaoExpirada extends HttpServlet implements Filter {
 				!enderecoURL.contains("processarRequisicaoDispositivoMovelFiscalizacaoAnormalidadeAction") &&  
 				!enderecoURL.contains("processarRequisicaoDipositivoMovelImpressaoSimultaneaAndroidAction") &&
 				!enderecoURL.contains("processarRequisicaoDispositivoMovelAtualizacaoCadastralAction") &&
+				!enderecoURL.contains("processarRequisicaoDispositivoMovelExecucaoOSAction") &&
 				!enderecoURL.contains("contasAtrasoWebService") &&
 				verificaUrlLojaVirtualCaema(enderecoURL) ) &&
 				verificaUrlLojaVirtualCaer(enderecoURL) && 
-				verificaUrlLojaVirtualCaern(enderecoURL) ){
+				verificaUrlLojaVirtualCaern(enderecoURL)&&
+				verificaUrlLojaVirtualSaae(enderecoURL)){
 							
 				RequestDispatcher rd = filterConfig.getServletContext()
 						.getRequestDispatcher("/jsp/util/sessao_expirada.jsp");
@@ -274,7 +276,7 @@ public class FiltroSessaoExpirada extends HttpServlet implements Filter {
 	}
 	
 	/**
-	 * Verifica se a URL informada eh da loja virtual da Caernn
+	 * Verifica se a URL informada eh da loja virtual da Caern
 	 * 
 	 * @author Rafael Pinto
 	 * @date 15/07/2013
@@ -307,7 +309,28 @@ public class FiltroSessaoExpirada extends HttpServlet implements Filter {
 		}
 		
 		return naoEhUrlLoja;
-	}	
+	}
+
+	/**
+	 * Verifica se a URL informada NÃO é da loja virtual da SAAE
+	 * 
+	 * @author Cesar Medeiros
+	 * @date 29/09/2015
+	 */
+	private boolean verificaUrlLojaVirtualSaae(String enderecoURL) {
+		return (
+			!enderecoURL.contains("exibirServicosPortalSaaeAction") &&
+			!enderecoURL.contains("exibirEfetuarParcelamentoDebitosPortalSaaeAction") &&
+			!enderecoURL.contains("efetuarParcelamentoDebitosPortalSaaeAction") &&
+			!enderecoURL.contains("exibirCanaisAtendimentoSaaeAction") &&
+			!enderecoURL.contains("exibirLojasAtendimentoPresencialPortalSaaeAction") &&
+			!enderecoURL.contains("exibirInformacoesPortalSaaeAction") &&
+			!enderecoURL.contains("exibirConsultarEstruturaTarifariaPortalSaaeAction") &&
+			!enderecoURL.contains("exibirInserirSolicitacaoServicosPortalSaaeAction") &&
+			!enderecoURL.contains("inserirSolicitacaoServicosPortalSaaeAction") &&
+			!enderecoURL.contains("registrarRetornoDadosCartaoCreditoAction")
+		);
+	}
 
 	/**
 	 * <Breve descrição sobre o caso de uso>

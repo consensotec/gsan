@@ -77,6 +77,7 @@ package gcom.relatorio.faturamento;
 
 import gcom.atendimentopublico.ligacaoagua.FiltroLigacaoAgua;
 import gcom.atendimentopublico.ligacaoagua.FiltroLigacaoAguaSituacao;
+import gcom.atendimentopublico.ligacaoagua.LigacaoAgua;
 import gcom.atendimentopublico.ligacaoagua.LigacaoAguaSituacao;
 import gcom.batch.Relatorio;
 import gcom.cadastro.imovel.Categoria;
@@ -126,6 +127,11 @@ public class RelatorioAnormalidadeConsumo extends TarefaRelatorio {
 	public RelatorioAnormalidadeConsumo(Usuario usuario) {
 		super(usuario,
 				ConstantesRelatorios.RELATORIO_ANORMALIDADE_CONSUMO);
+	}
+
+	@Deprecated
+	public RelatorioAnormalidadeConsumo() {
+		super(null, "");
 	}
 
 	/**

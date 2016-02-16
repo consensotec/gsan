@@ -982,7 +982,22 @@ public class ConstantesRelatorios {
 	
 	public static final String RELATORIO_ENQUADRAMENTO_DESENQUADRAMENTO_GRANDE_CLIENTE_CORPORATIVO = "/relatorioAcompanhamentoGrandesClientes.jasper";
 	
+	public static final String RELATORIO_ANALITICO_PREVISAO_PAGAMENTO_CARTAO_CREDITO = "/relatorioAnaliticoPrevisaoPagamentoCartaoCredito.jasper";
+	
+	public static final String RELATORIO_SINTETICO_PREVISAO_PAGAMENTO_CARTAO_CREDITO = "/relatorioSinteticoPrevisaoPagamentoCartaoCredito.jasper";
+
+	public static final String RELATORIO_CONSULTAR_ARQUIVO_RETORNO_COBRANCA = "/relatorioConsultarArquivoRetornoCobranca.jasper";
+
+	public static final String RELATORIO_ARQUIVO_TEXTO_ORDENS_SERVICO_SMARTPHONE = "/relatorioArquivoTextoOrdensServicoSmartphone.jasper";
+	
+	public static final String RELATORIO_ERROS_ENCERRAMENTO_OS_COBRANCA = "/relatorioErrosEncerramentoOSCobranca.jasper";
+	
+	public static final String RELATORIO_CONSULTAR_ARQUIVO_TEXTO_ORDENS_SERVICO_SMARTPHONE = "/relatorioConsultarArquivoTextoOrdensServicoSmartphone.jasper";
+
+	public static final String RELATORIO_DIVIDA_ATIVA_AMORTIZADA_SINTETICO = "/relatorioDividaAtivaAmortizadaSintetico.jasper";
+	
 	private static Map<String, URL> relatorios = new HashMap<String, URL>();
+
 	
 	static {
 

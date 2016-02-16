@@ -30,6 +30,11 @@ public class RelatorioImovelProgramaEspecial extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEL_PROGRAMA_ESPECIAL);
 	}
 	
+	@Deprecated
+	public RelatorioImovelProgramaEspecial() {
+		super(null, "");
+	}
+	
 	@Override
 	public int calcularTotalRegistrosRelatorio() {
 		return 0;

@@ -27,6 +27,7 @@
 		<property name="indicadorDescontoSoEmContaAVista" column="rdir_icdescontosoemcontaavista" type="java.lang.Short" length="2" not-null="true"/>
 		<property name="indicadorParcelamentoLojaVirtual" column="rdir_icparcelamentolojavirtual" type="java.lang.Short" length="2" not-null="true"/>
 		<property name="percentualDoacao" type="java.math.BigDecimal" column="rdir_pcdoacao" not-null="false" length="5"/>
+		<property name="indicadorParcelamentoCartaoCredito" column="rdir_icparccartaocredito" type="java.lang.Short" length="2" not-null="true"/>
 		<!-- Associations -->
 		<many-to-one name="rdParcelasEmAtraso" class="gcom.cobranca.ResolucaoDiretoria" not-null="false">
 			<column name="rdir_idparcelasematraso"/>

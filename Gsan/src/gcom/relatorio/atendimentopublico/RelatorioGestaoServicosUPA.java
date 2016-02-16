@@ -50,6 +50,11 @@ public class RelatorioGestaoServicosUPA extends TarefaRelatorio {
 	public RelatorioGestaoServicosUPA(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_GESTAO_SERVICOS_UPA);
 	}
+	
+	@Deprecated
+	public RelatorioGestaoServicosUPA() {
+		super(null, "");
+	}
 
 	@Override
 	public Object executar() throws TarefaException {

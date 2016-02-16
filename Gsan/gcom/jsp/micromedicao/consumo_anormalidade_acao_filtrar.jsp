@@ -95,7 +95,6 @@ function desabilitaCombo(){
 		if(form.solicitacaoTipoMes3.value == '-1') {
 			form.solicitacaoTipoEspecificacaoMes3.disabled = true;
 		}
-		
 }  
 
 function reload() {
@@ -382,7 +381,6 @@ function habilitaSolicitacao(){
 						maxlength="4" 
 						onkeypress="return isCampoNumerico(event);"/> </span></td>
 				</tr>
-				
 			</table>
 			<table>
 				<tr>
@@ -528,6 +526,33 @@ function habilitaSolicitacao(){
 				</tr>
 				
 				<tr>
+					<td><strong>Motivo de Revisão do 1º Mês:</strong></td>
+					<td colspan="2" align="left"><html:select property="motivoRevisaoMes1">
+						<html:option value="-1">&nbsp;</html:option>						
+						<html:options collection="colecaoMotivoRevisao"
+							labelProperty="descricaoMotivoRevisaoConta" property="id" />
+					</html:select></td>
+				</tr>
+				
+				<tr>
+					<td><strong>Motivo de Revisão do 2º Mês:</strong></td>
+					<td colspan="2" align="left"><html:select property="motivoRevisaoMes2">
+						<html:option value="-1">&nbsp;</html:option>						
+						<html:options collection="colecaoMotivoRevisao"
+							labelProperty="descricaoMotivoRevisaoConta" property="id" />
+					</html:select></td>
+				</tr>
+				
+				<tr>
+					<td><strong>Motivo de Revisão do 3º Mês:</strong></td>
+					<td colspan="2" align="left"><html:select property="motivoRevisaoMes3">
+						<html:option value="-1">&nbsp;</html:option>						
+						<html:options collection="colecaoMotivoRevisao"
+							labelProperty="descricaoMotivoRevisaoConta" property="id" />
+					</html:select></td>
+				</tr>
+				
+				<tr>
 					<td><strong>Tipo de Solicitação para o 1º Mês:</strong></td>
 					<td colspan="2" align="left"><html:select property="solicitacaoTipoMes1" 
 						 onchange="javascript:habilitaSolicitacao();desabilitaCombo();reload();">
@@ -614,6 +639,13 @@ function habilitaSolicitacao(){
 						size="52" 
 						maxlength="120" 
 						/> </span></td>
+				</tr>
+				
+				<tr>
+					<td><strong>Cobrar consumo normal após <br/> terceira ocorrência:</strong></td>
+					<td><strong> <html:radio property="indicadorCobrancaConsumoNormal" value="1" />
+					<strong>Sim <html:radio property="indicadorCobrancaConsumoNormal" value="2" />
+					Não</strong> </strong></td>
 				</tr>
 				
 				<tr>

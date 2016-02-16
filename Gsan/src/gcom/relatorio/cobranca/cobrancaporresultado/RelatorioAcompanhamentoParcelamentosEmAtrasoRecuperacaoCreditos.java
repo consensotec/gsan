@@ -13,6 +13,7 @@ import gcom.util.Util;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,6 +28,11 @@ public class RelatorioAcompanhamentoParcelamentosEmAtrasoRecuperacaoCreditos ext
 			super(usuario, ConstantesRelatorios.RELATORIO_ACOMPANHAMENTO_PARCELAMENTOS_ATRASOS_RECUPERACAO_CREDITOS);
 		}
 
+		@Deprecated
+		public RelatorioAcompanhamentoParcelamentosEmAtrasoRecuperacaoCreditos() {
+			super(null, "");
+		}
+		
 		public Object executar() throws TarefaException {
 
 			

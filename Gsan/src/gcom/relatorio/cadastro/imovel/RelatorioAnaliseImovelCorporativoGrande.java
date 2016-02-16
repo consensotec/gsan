@@ -123,6 +123,11 @@ public class RelatorioAnaliseImovelCorporativoGrande extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_ANALISE_IMOVEL_CORPORATIVO_GRANDE);
 	}
 
+	@Deprecated
+	public RelatorioAnaliseImovelCorporativoGrande() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

@@ -114,6 +114,11 @@ public class RelatorioFaturaClienteResponsavel extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_FATURA_CLIENTE_RESPONSAVEL);
 	}
 
+	@Deprecated
+	public RelatorioFaturaClienteResponsavel() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

@@ -206,6 +206,7 @@ import gcom.cadastro.tarifasocial.TarifaSocialCarta;
 import gcom.cadastro.tarifasocial.TarifaSocialComandoCarta;
 import gcom.cadastro.tarifasocial.TarifaSocialDadoEconomia;
 import gcom.cobranca.CobrancaDocumentoItem;
+import gcom.cobranca.CobrancaGrupo;
 import gcom.cobranca.CobrancaSituacao;
 import gcom.cobranca.CobrancaSituacaoHistorico;
 import gcom.cobranca.CobrancaSituacaoMotivo;
@@ -5144,6 +5145,22 @@ public class ControladorImovelSEJB implements SessionBean {
 
 		// para cada imovel pega as conta, debitos, creditos e guias
 		if (colecaoImoveis != null && !colecaoImoveis.isEmpty()) {
+			
+			FiltroParametroSistema filtroParametro = new FiltroParametroSistema();
+			filtroParametro.adicionarParametro(new ParametroSimples(FiltroParametroSistema.CODIGO_CONSTANTE, 
+					ParametroSistema.QTD_MAX_RELATORIO_IMOVEIS));
+			
+			Collection colParametro = getControladorUtil().pesquisar(filtroParametro, ParametroSistema.class.getName());
+			String valorParametro = null;
+			if(colParametro != null && !colParametro.isEmpty()){
+				valorParametro = ((ParametroSistema)colParametro.iterator().next()).getValorParametro();
+				
+				if(colecaoImoveis != null && colecaoImoveis.size() > Integer.parseInt(valorParametro)){
+					throw new ControladorException(
+							"atencao.relatorio_imoveis_maior_que_limite", null,"");
+				}
+
+			}
 
 			Iterator iteratorColecaoImoveis = colecaoImoveis.iterator();
 			colecaoGerarRelatorioImovelOutrosCriterios = new ArrayList();
@@ -22579,6 +22596,20 @@ public class ControladorImovelSEJB implements SessionBean {
 	public ConsumoTarifa pesquisarConsumoTarifaImovel(Integer idImovel) throws ControladorException {
 		try {
 			return repositorioImovel.pesquisarConsumoTarifaImovel(idImovel);
+		} catch (ErroRepositorioException e) {
+			throw new ControladorException("erro.sistema", e);
+		}
+	}
+	
+	/**
+	 * [UC01484] - Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * 
+	 * @author Vivianne Sousa	
+	 * @date 03/12/2015
+	 */
+	public Rota pesquisarRotaImovel(Integer idImovel) throws ControladorException {
+		try {
+			return repositorioImovel.pesquisarRotaImovel(idImovel);
 		} catch (ErroRepositorioException e) {
 			throw new ControladorException("erro.sistema", e);
 		}

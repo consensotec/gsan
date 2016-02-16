@@ -100,6 +100,7 @@ import gcom.arrecadacao.bean.DebitoCarteiraMovimentoHelper;
 import gcom.arrecadacao.bean.FiltrarDadosDiariosArrecadacaoHelper;
 import gcom.arrecadacao.bean.GerarArquivoCarteira17Helper;
 import gcom.arrecadacao.bean.GerarMovimentoDebitoAutomaticoBancoHelper;
+import gcom.arrecadacao.bean.GuiaPagamentoHelper;
 import gcom.arrecadacao.bean.InformarAcertoDocumentosNaoAceitosHelper;
 import gcom.arrecadacao.bean.MovimentoArrecadadoresPorNSAHelper;
 import gcom.arrecadacao.bean.MovimentoArrecadadoresRelatorioHelper;
@@ -304,6 +305,7 @@ import gcom.relatorio.arrecadacao.GuiaDevolucaoRelatorioHelper;
 import gcom.relatorio.arrecadacao.RelatorioAnaliseArrecadacaoBean;
 import gcom.relatorio.arrecadacao.RelatorioAnaliseAvisosBancariosBean;
 import gcom.relatorio.arrecadacao.RelatorioAnalisePagamentoCartaoDebitoBean;
+import gcom.relatorio.arrecadacao.RelatorioAnaliticoPrevisaoPagamentoCartaoCreditoBean;
 import gcom.relatorio.arrecadacao.RelatorioAvisoBancarioPorContaCorrenteBean;
 import gcom.relatorio.arrecadacao.RelatorioCarneParcelamentoBean;
 import gcom.relatorio.arrecadacao.RelatorioComparativoFatArrecExpurgoBean;
@@ -312,6 +314,7 @@ import gcom.relatorio.arrecadacao.RelatorioMovimentoArrecadador;
 import gcom.relatorio.arrecadacao.RelatorioMovimentoDebitoAutomaticoBanco;
 import gcom.relatorio.arrecadacao.RelatorioPagamentoEntidadesBeneficentesAnaliticoBean;
 import gcom.relatorio.arrecadacao.RelatorioPagamentoEntidadesBeneficentesSinteticoBean;
+import gcom.relatorio.arrecadacao.RelatorioSinteticoPrevisaoPagamentoCartaoCreditoBean;
 import gcom.relatorio.arrecadacao.RelatorioTranferenciaPagamentoBean;
 import gcom.relatorio.arrecadacao.pagamento.GuiaPagamentoRelatorioHelper;
 import gcom.relatorio.arrecadacao.pagamento.PagamentosBaixadosAutomaticamenteRelatorioHelper;
@@ -327,6 +330,7 @@ import gcom.seguranca.acesso.OperacaoEfetuada;
 import gcom.seguranca.acesso.usuario.Usuario;
 import gcom.seguranca.acesso.usuario.UsuarioAcao;
 import gcom.seguranca.acesso.usuario.UsuarioAcaoUsuarioHelper;
+import gcom.seguranca.parametrosistema.ParametroSistema;
 import gcom.seguranca.transacao.ControladorTransacaoLocal;
 import gcom.seguranca.transacao.ControladorTransacaoLocalHome;
 import gcom.spcserasa.ControladorSpcSerasaLocal;
@@ -4709,8 +4713,9 @@ public class ControladorArrecadacao implements SessionBean {
                 
                 ZipUtil.adicionarArquivo(zos, leitura);
 				
-                ServicosEmail.enviarMensagemArquivoAnexado(emailReceptor,
+                ServicosEmail.enviarMensagemArquivoAnexado(
                		emailRemetente, 
+               		emailReceptor,
 	                tituloMensagem, 
 	                corpoMensagem, 
 	                leitura);
@@ -10047,7 +10052,7 @@ public class ControladorArrecadacao implements SessionBean {
 					emailRemetente, tituloMensagem, corpoMensagem, leitura);
 			leitura.delete();
 
-		} catch (SendFailedException e) {
+		} catch (ErroEmailException e) {
 			throw new ControladorException("erro.sistema", e);
 		} catch (Exception e) {
 			throw new ControladorException("erro.sistema", e);
@@ -17338,18 +17343,24 @@ public class ControladorArrecadacao implements SessionBean {
 						situacaoEmail = "Não Enviado";
 					}
 
-				} catch (SendFailedException e) {
+				} catch (ErroEmailException e) {
 					if (mandouEmailBanco) {
 						situacaoEmail = "Enviado";
 					} else {
 						situacaoEmail = "Não Enviado";
+						File leitura = new File(nomeZip + ".rem");
+						leitura.delete();
 					}
 
 				} catch (IOException e) {
 					sessionContext.setRollbackOnly();
+					File leitura = new File(nomeZip + ".rem");
+					leitura.delete();
 					throw new ControladorException("erro.sistema", e);
 				} catch (Exception e) {
 					sessionContext.setRollbackOnly();
+					File leitura = new File(nomeZip + ".rem");
+					leitura.delete();
 					throw new ControladorException("erro.sistema", e);
 				} finally{
 					IoUtil.fecharStream(out);
@@ -17416,7 +17427,7 @@ public class ControladorArrecadacao implements SessionBean {
 					leitura);
 
 				leitura.delete();
-			} catch (SendFailedException e) {
+			} catch (ErroEmailException e) {
 				throw new ControladorException("erro.sistema", e);
 			} finally{
 				IoUtil.fecharStream(out);
@@ -17460,6 +17471,14 @@ public class ControladorArrecadacao implements SessionBean {
 			
 			if(!(e instanceof SendFailedException)) {
 				sessionContext.setRollbackOnly();
+				String nomeZip = "gerar_movimento_banco_sequencial_"+arrecadadorMovimento.getNumeroSequencialArquivo();
+				File leitura = new File(nomeZip + ".zip");
+				leitura.delete();
+				
+				File relatorio = new File("gcom.PDF");
+				relatorio.delete();
+				
+				
 			}
 			
 
@@ -17723,7 +17742,7 @@ public class ControladorArrecadacao implements SessionBean {
 				out.flush();
 				ZipUtil.adicionarArquivo(zos, leitura);
 				
-				leitura.delete();
+//				leitura.delete();
 				// caso o envio do banco seja igual a 1, então envia para o
 				// banco
 				if (envioBanco.equals("1")) {
@@ -17769,7 +17788,7 @@ public class ControladorArrecadacao implements SessionBean {
 				
 				leitura.delete();
 				
-			} catch (SendFailedException e) {
+			} catch (ErroEmailException e) {
 				if (mandouEmailBanco) {
 					estadoEmail = "Enviado";
 				} else {
@@ -30300,7 +30319,7 @@ public class ControladorArrecadacao implements SessionBean {
 			Date dataPagamentoFinal, String[] idsPagamentosSituacoes,
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma,
 			String[] idsDocumentosTipos, String valorPagamentoInicial,
-            String valorPagamentoFinal) throws ControladorException {
+            String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder) throws ControladorException {
 
 		Collection colecaoDadosPagamento = null;
 		Collection colecaoPagamento = new ArrayList();
@@ -30317,7 +30336,7 @@ public class ControladorArrecadacao implements SessionBean {
 							idsPagamentosSituacoes, idsDebitosTipos,
 							idsArrecadacaoForma, idsDocumentosTipos, 
                             valorPagamentoInicial,
-                            valorPagamentoFinal);
+                            valorPagamentoFinal, idsCategoria, idsEsferaPoder);
 
 			if (colecaoDadosPagamento != null
 					&& !colecaoDadosPagamento.isEmpty()) {
@@ -31229,9 +31248,8 @@ public class ControladorArrecadacao implements SessionBean {
 			String periodoPagamentoFim, Date dataPagamentoInicial,
 			Date dataPagamentoFinal, String[] idsPagamentosSituacoes,
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma,
-			String[] idsDocumentosTipos,
-            String valorPagamentoInicial,
-            String valorPagamentoFinal) throws ControladorException {
+			String[] idsDocumentosTipos,String valorPagamentoInicial,
+            String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder) throws ControladorException {
 
 		Collection colecaoDadosPagamento = null;
 		Collection colecaoPagamento = new ArrayList();
@@ -31248,157 +31266,107 @@ public class ControladorArrecadacao implements SessionBean {
 							idsPagamentosSituacoes, idsDebitosTipos,
 							idsArrecadacaoForma, idsDocumentosTipos,
                             valorPagamentoInicial,
-                            valorPagamentoFinal);
+                            valorPagamentoFinal,idsCategoria,idsEsferaPoder);
 
-			if (colecaoDadosPagamento != null
-					&& !colecaoDadosPagamento.isEmpty()) {
+			if (colecaoDadosPagamento != null && !colecaoDadosPagamento.isEmpty()) {
 
-				Iterator colecaoDadosPagamentoIterator = colecaoDadosPagamento
-						.iterator();
+				Iterator colecaoDadosPagamentoIterator = colecaoDadosPagamento.iterator();
 
 				while (colecaoDadosPagamentoIterator.hasNext()) {
 
-					Object[] dadosPagamento = (Object[]) colecaoDadosPagamentoIterator
-							.next();
+					Object[] dadosPagamento = (Object[]) colecaoDadosPagamentoIterator.next();
 
 					PagamentoRelatorioHelper pagamentoRelatorioHelper = new PagamentoRelatorioHelper();
 
 					// Id e Descrição da Localidade
 					if (dadosPagamento[1] != null) { // 1,2
-						pagamentoRelatorioHelper
-								.setIdLocalidade((Integer) dadosPagamento[1]);
-						pagamentoRelatorioHelper
-								.setDescricaoLocalidade((String) dadosPagamento[2]);
+						pagamentoRelatorioHelper.setIdLocalidade((Integer) dadosPagamento[1]);
+						pagamentoRelatorioHelper.setDescricaoLocalidade((String) dadosPagamento[2]);
 					}
-
 					// Id e Nome da Gerência Regional
 					if (dadosPagamento[3] != null) { // 3,4
-						pagamentoRelatorioHelper
-								.setIdGerenciaRegional((Integer) dadosPagamento[3]);
-						pagamentoRelatorioHelper
-								.setNomeGerenciaRegional((String) dadosPagamento[4]);
+						pagamentoRelatorioHelper.setIdGerenciaRegional((Integer) dadosPagamento[3]);
+						pagamentoRelatorioHelper.setNomeGerenciaRegional((String) dadosPagamento[4]);
 					}
-
 					// Id do Imóvel
 					if (dadosPagamento[5] != null) { // 5
-						pagamentoRelatorioHelper
-								.setIdImovel((Integer) dadosPagamento[5]);
+						pagamentoRelatorioHelper.setIdImovel((Integer) dadosPagamento[5]);
 					}
-
 					// Id e Nome do Cliente
 					if (dadosPagamento[6] != null) { // 6,7
-						pagamentoRelatorioHelper
-								.setIdCliente((Integer) dadosPagamento[6]);
-						pagamentoRelatorioHelper
-								.setNomeCliente((String) dadosPagamento[7]);
+						pagamentoRelatorioHelper.setIdCliente((Integer) dadosPagamento[6]);
+						pagamentoRelatorioHelper.setNomeCliente((String) dadosPagamento[7]);
 					}
-
 					// Nome do Arrecador
 					if (dadosPagamento[8] != null) { // 8
-						pagamentoRelatorioHelper
-								.setNomeArrecadador((String) dadosPagamento[8]);
+						pagamentoRelatorioHelper.setNomeArrecadador((String) dadosPagamento[8]);
 					}
-
 					// Data do Pagamento
 					if (dadosPagamento[9] != null) { // 9
-						pagamentoRelatorioHelper
-								.setDataPagamento((Date) dadosPagamento[9]);
+						pagamentoRelatorioHelper.setDataPagamento((Date) dadosPagamento[9]);
 					}
-
 					// Ano Mês Referência do Pagamento
 					if (dadosPagamento[10] != null) { // 10
-						pagamentoRelatorioHelper
-								.setAnoMesReferenciaPagamento((Integer) dadosPagamento[10]);
+						pagamentoRelatorioHelper.setAnoMesReferenciaPagamento((Integer) dadosPagamento[10]);
 					}
-
 					// Descrição Tipo Débito
 					if (dadosPagamento[11] != null) { // 11
-						pagamentoRelatorioHelper
-								.setDescricaoTipoDebito((String) dadosPagamento[11]);
+						pagamentoRelatorioHelper.setDescricaoTipoDebito((String) dadosPagamento[11]);
 					}
-
 					// Valor de Água da Conta
 					if (dadosPagamento[12] != null) { // 12
-						pagamentoRelatorioHelper
-								.setValorAgua((BigDecimal) dadosPagamento[12]);
+						pagamentoRelatorioHelper.setValorAgua((BigDecimal) dadosPagamento[12]);
 					}
-
 					// Valor de Esgoto da Conta
 					if (dadosPagamento[13] != null) { // 13
-						pagamentoRelatorioHelper
-								.setValorEsgoto((BigDecimal) dadosPagamento[13]);
+						pagamentoRelatorioHelper.setValorEsgoto((BigDecimal) dadosPagamento[13]);
 					}
-
 					// Valor dos Débitos da Conta
 					if (dadosPagamento[14] != null) { // 14
-						pagamentoRelatorioHelper
-								.setDebitos((BigDecimal) dadosPagamento[14]);
+						pagamentoRelatorioHelper.setDebitos((BigDecimal) dadosPagamento[14]);
 					}
-
 					// Valor dos Créditos da Conta
 					if (dadosPagamento[15] != null) { // 15
-						pagamentoRelatorioHelper
-								.setValorCreditos((BigDecimal) dadosPagamento[15]);
+						pagamentoRelatorioHelper.setValorCreditos((BigDecimal) dadosPagamento[15]);
 					}
-
 					// Valor do Débito do Débito a Cobrar
 					if (dadosPagamento[16] != null) { // 16
-						pagamentoRelatorioHelper
-								.setValorDebito((BigDecimal) dadosPagamento[16]);
+						pagamentoRelatorioHelper.setValorDebito((BigDecimal) dadosPagamento[16]);
 					}
-
 					// Número de Prestações do Débito
 					if (dadosPagamento[17] != null) { // 17
-						pagamentoRelatorioHelper
-								.setNumeroPrestacaoDebito((Short) dadosPagamento[17]);
+						pagamentoRelatorioHelper.setNumeroPrestacaoDebito((Short) dadosPagamento[17]);
 					}
-
 					// Número de Prestações Cobradas
 					if (dadosPagamento[18] != null) { // 18
-						pagamentoRelatorioHelper
-								.setNumeroPrestacaoCobradas((Short) dadosPagamento[18]);
+						pagamentoRelatorioHelper.setNumeroPrestacaoCobradas((Short) dadosPagamento[18]);
 					}
-
 					// Valor da Guia de Pagamento
 					if (dadosPagamento[19] != null) { // 19
-						pagamentoRelatorioHelper
-								.setValorDocumento((BigDecimal) dadosPagamento[19]);
+						pagamentoRelatorioHelper.setValorDocumento((BigDecimal) dadosPagamento[19]);
 					}
-
 					// Valor do Pagamento
 					if (dadosPagamento[20] != null) { // 20
-						pagamentoRelatorioHelper
-								.setValorPagamento((BigDecimal) dadosPagamento[20]);
+						pagamentoRelatorioHelper.setValorPagamento((BigDecimal) dadosPagamento[20]);
 					}
-
 					// Id da Situação Atual do Pagamento
 					if (dadosPagamento[21] != null) { // 21
-						pagamentoRelatorioHelper
-								.setIdSituacaoPagamentoAtual((Integer) dadosPagamento[21]);
+						pagamentoRelatorioHelper.setIdSituacaoPagamentoAtual((Integer) dadosPagamento[21]);
 					}
-
 					// Descrição da Situação Atual do Pagamento
 					if (dadosPagamento[22] != null) { // 22
-						pagamentoRelatorioHelper
-								.setDescricaoSituacaoPagamentoAtual((String) dadosPagamento[22]);
+						pagamentoRelatorioHelper.setDescricaoSituacaoPagamentoAtual((String) dadosPagamento[22]);
 					}
-
 					// Id do Tipo de Documento
 					if (dadosPagamento[23] != null) { // 23
-						pagamentoRelatorioHelper
-								.setIdDocumentoTipo((Integer) dadosPagamento[23]);
+						pagamentoRelatorioHelper.setIdDocumentoTipo((Integer) dadosPagamento[23]);
 					}
-
 					// Valor dos Impostos da Conta
 					if (dadosPagamento[24] != null) { // 24
-						pagamentoRelatorioHelper
-								.setValorImpostos((BigDecimal) dadosPagamento[24]);
+						pagamentoRelatorioHelper.setValorImpostos((BigDecimal) dadosPagamento[24]);
 					}
-
 					colecaoPagamento.add(pagamentoRelatorioHelper);
-
 				}
-
 			}
 
 		} catch (ErroRepositorioException e) {
@@ -31472,7 +31440,7 @@ public class ControladorArrecadacao implements SessionBean {
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma,
 			String[] idsDocumentosTipos,
             String valorPagamentoInicial, 
-            String valorPagamentoFinal) throws ControladorException {
+            String valorPagamentoFinal, String[] idsCategoria, String[] idsEsferaPoder) throws ControladorException {
 		try {
 			return repositorioArrecadacao.pesquisarPagamentoLocalidadeCount(
 					idImovel, idCliente, idTipoRelacao, localidadeInicial,
@@ -31483,7 +31451,7 @@ public class ControladorArrecadacao implements SessionBean {
 					idsPagamentosSituacoes, idsDebitosTipos,
 					idsArrecadacaoForma, idsDocumentosTipos,
                     valorPagamentoInicial, 
-                    valorPagamentoFinal);
+                    valorPagamentoFinal, idsCategoria, idsEsferaPoder);
 		} catch (ErroRepositorioException e) {
 			sessionContext.setRollbackOnly();
 			throw new ControladorException("erro.sistema", e);
@@ -33942,7 +33910,7 @@ public class ControladorArrecadacao implements SessionBean {
 			String periodoPagamentoFim, Date dataPagamentoInicial,
 			Date dataPagamentoFinal, String[] idsPagamentosSituacoes,
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma,
-			String[] idsDocumentosTipos) throws ControladorException {
+			String[] idsDocumentosTipos,String[] idsCategoria, String[] idsEsferaPoder) throws ControladorException {
 		try {
 			return repositorioArrecadacao
 					.pesquisarPagamentoHistoricoLocalidadeCount(idImovel,
@@ -33952,7 +33920,8 @@ public class ControladorArrecadacao implements SessionBean {
 							periodoPagamentoInicio, periodoPagamentoFim,
 							dataPagamentoInicial, dataPagamentoFinal,
 							idsPagamentosSituacoes, idsDebitosTipos,
-							idsArrecadacaoForma, idsDocumentosTipos);
+							idsArrecadacaoForma, idsDocumentosTipos,
+							idsCategoria, idsEsferaPoder);
 		} catch (ErroRepositorioException e) {
 			sessionContext.setRollbackOnly();
 			throw new ControladorException("erro.sistema", e);
@@ -34199,7 +34168,7 @@ public class ControladorArrecadacao implements SessionBean {
 			String[] idsPagamentosSituacoes, String[] idsDebitosTipos,
 			String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
             String valorPagamentoInicial,
-            String valorPagamentoFinal)
+            String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder)
 			throws ControladorException {
 
 		Collection colecaoDadosPagamento = null;
@@ -34217,7 +34186,7 @@ public class ControladorArrecadacao implements SessionBean {
 							idsPagamentosSituacoes, idsDebitosTipos,
 							idsArrecadacaoForma, idsDocumentosTipos,
                             valorPagamentoInicial,
-                            valorPagamentoFinal);
+                            valorPagamentoFinal, idsCategoria, idsEsferaPoder);
 
 			if (colecaoDadosPagamento != null
 					&& !colecaoDadosPagamento.isEmpty()) {
@@ -37269,7 +37238,7 @@ public class ControladorArrecadacao implements SessionBean {
 			String[] idsPagamentosSituacoes, String[] idsDebitosTipos,
 			String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
             String valorPagamentoInicial,
-            String valorPagamentoFinal)
+            String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder)
 			throws ControladorException {
 
 		Collection colecaoDadosPagamento = null;
@@ -37287,7 +37256,7 @@ public class ControladorArrecadacao implements SessionBean {
 							idsPagamentosSituacoes, idsDebitosTipos,
 							idsArrecadacaoForma, idsDocumentosTipos,
                             valorPagamentoInicial,
-                            valorPagamentoFinal);
+                            valorPagamentoFinal,idsCategoria, idsEsferaPoder);
 
 			if (colecaoDadosPagamento != null
 					&& !colecaoDadosPagamento.isEmpty()) {
@@ -50843,6 +50812,19 @@ public class ControladorArrecadacao implements SessionBean {
 		Collection<ArquivoTextoRoteiroEmpresaFotoHelper> colecaoHelper = null;
 
 		try {
+			
+			if(helper.getMatricula()!=null && !helper.getMatricula().equals("")){
+				Integer rotaId = 
+						getControladorMicromedicao().obterRotaIdImovel
+							(Integer.parseInt(helper.getMatricula()), Integer.parseInt(helper.getAnoMesReferencia()));
+				
+				if(rotaId!=null){
+					helper.setRotaId(rotaId.toString());
+				}else{
+					throw new ControladorException("atencao.arquivo_texto_nao_encontrado_para_a_matricula_informada", 
+							null, helper.getMatricula());
+				}
+			}			
 
 			colecaoArquivoTextoRoteiroEmpresa = repositorioArrecadacao.filtrarArquivoTextoRoteiroEmpresaParaPaginacao(helper, numeroPagina);
 
@@ -53614,7 +53596,7 @@ public class ControladorArrecadacao implements SessionBean {
 						situacaoEmail = "Não Enviado";
 					}
 
-				} catch (SendFailedException e) {
+				} catch (ErroEmailException e) {
 					if (mandouEmailBanco) {
 						situacaoEmail = "Enviado";
 					} else {
@@ -53689,7 +53671,7 @@ public class ControladorArrecadacao implements SessionBean {
 					leitura);
 
 				leitura.delete();
-			} catch (SendFailedException e) {
+			} catch (ErroEmailException e) {
 				throw new ControladorException("erro.sistema", e);
 			} finally{
 				IoUtil.fecharStream(out);
@@ -53987,7 +53969,7 @@ public class ControladorArrecadacao implements SessionBean {
 					situacaoEmail = "Não Enviado";
 				}
 
-			} catch (SendFailedException e) {
+			} catch (ErroEmailException e) {
 				if (mandouEmailBanco) {
 					situacaoEmail = "Enviado";
 				} else {
@@ -56369,4 +56351,638 @@ public class ControladorArrecadacao implements SessionBean {
 			throw new ControladorException("erro.sistema", e);
 		}
 	}
+
+
+	/**
+	 * [UC1694] Relatório Previsão/Pagamento Cartão de Crédito
+	 * 
+	 * @author Joao Pedro Medeiros
+	 * @date 19/10/2015
+	 * 
+	 * @param dataVencimentoInicial
+	 * @param dataVencimentoFinal
+	 * @param idCliente
+	 * @throws ControladorException
+	 */
+	public Collection<RelatorioAnaliticoPrevisaoPagamentoCartaoCreditoBean> obterRelatorioAnaliticoPrevisaoPagamentoCartaoCredito
+	(Date dataVencimentoInicial, Date dataVencimentoFinal, String idCliente) throws ControladorException {
+
+try{
+	Collection<RelatorioAnaliticoPrevisaoPagamentoCartaoCreditoBean> colecaoRelatorioAnaliticoBean = 
+		new ArrayList<RelatorioAnaliticoPrevisaoPagamentoCartaoCreditoBean>();
+
+	Collection retorno = repositorioArrecadacao.obterRelatorioAnaliticoPrevisaoPagamentoCartaoCredito(dataVencimentoInicial, dataVencimentoFinal, idCliente);
+	
+	if(!Util.isVazioOrNulo(retorno)){
+		RelatorioAnaliticoPrevisaoPagamentoCartaoCreditoBean bean = null;
+		
+		Iterator<?> it = retorno.iterator();
+		while(it.hasNext()){
+			Object[] array = (Object []) it.next();
+			
+			
+			bean = new RelatorioAnaliticoPrevisaoPagamentoCartaoCreditoBean();
+			
+			if((String) array[0] != null){
+				bean.setNSU(String.valueOf((String) array[0]));	
+			}
+			
+			if((String) array[1] != null){
+				bean.setMatricula(String.valueOf((String) array[1]));
+			}
+			
+			if((Date) array[2] != null){
+				String data = Util.formatarData((Date) array[2]);
+				bean.setDataParcelamento(data);
+			}
+			
+			if((Date) array[3] != null){
+				bean.setDataPagamento(Util.formatarData((Date) array[3]));
+			}
+			
+			if((Date) array[4] != null){
+				bean.setDataVencimento(Util.formatarData((Date) array[4]));
+			}
+			
+			if((BigDecimal) array[5] != null){
+				bean.setValorGuia((BigDecimal) array[5]);
+			}
+			
+			if((BigDecimal) array[6] != null){
+				bean.setValorPagamento((BigDecimal) array[6]);
+			}
+			colecaoRelatorioAnaliticoBean.add(bean);
+		}
+	}
+	return colecaoRelatorioAnaliticoBean;
+	
+		}catch (ErroRepositorioException e) {
+			throw new ControladorException("erro.sistema", e);
+			}
+
+}
+	
+	
+	
+	
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Pesquisa a coleção de guia de pagamento pendentes.
+	 * 
+	 * @author Jean Varela
+	 * @date 23/09/2015
+	 * 
+	 * @throws ControladorException 
+	 * @return guias de pagamentos pendentes
+	 */
+	public Collection<GuiaPagamentoHelper> pesquisarGuiasPagamentoPendentes(Integer idClienteArrecadador,Date dataVencimentoGuiaPagamento, Integer idDebitoCreditoSituacao)
+			throws ControladorException {
+		try {			
+			Collection colecao =  repositorioArrecadacao.pesquisarGuiasPagamentoPendentes(idClienteArrecadador, dataVencimentoGuiaPagamento, idDebitoCreditoSituacao);
+			Collection<GuiaPagamentoHelper> retorno = new ArrayList<GuiaPagamentoHelper>();
+			if (!Util.isVazioOrNulo(colecao)) {
+				Iterator iterator = colecao.iterator();
+				while (iterator.hasNext()) {					
+					Object[] array = (Object[]) iterator.next();
+					GuiaPagamentoHelper guiaPagamentoHelper = new GuiaPagamentoHelper();	
+					if ((String) array[0] != null){
+						guiaPagamentoHelper.setNnIdentificadorTrancacao((String) array[0]);
+					}
+					if ((Date) array[1] != null){
+						guiaPagamentoHelper.setDataParcelamento((Date) array[1]);
+					}
+					if ((BigDecimal) array[2] != null){
+						guiaPagamentoHelper.setValorDebito((BigDecimal) array[2]);
+					}
+					if ((Integer) array[3] != null){
+						guiaPagamentoHelper.setIdGuiaPagamento((Integer) array[3]);
+					}
+					if ((Integer) array[4] != null){
+						guiaPagamentoHelper.setIdLocalidadeGuia((Integer) array[4]);
+					}
+					if ((Integer) array[5] != null){
+						guiaPagamentoHelper.setIdDebitoTipoGuia((Integer) array[5]);
+					}
+					guiaPagamentoHelper.setDataVencimentoGuia(dataVencimentoGuiaPagamento);
+					retorno.add(guiaPagamentoHelper);
+				}
+			}		
+			return retorno;
+		} catch (ErroRepositorioException ex) {
+			throw new ControladorException("erro.sistema", ex);
+		}
+
+	}
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Pesquisa o percentual de tarifa cobrado pelo cliente arrecadador (ACTF_PCTARIFA da tabela ARRECADADOR_CONTRATO_TAR).
+	 * 
+	 * @author Jean Varela
+	 * @date 23/09/2015
+	 * 
+	 * @throws ControladorException 
+	 * @return percentual de tarifa cobrado pelo cliente arrecadador
+	 */
+	public BigDecimal pesquisarPercentualTarifaArrecadador(Integer idArrecadador,Integer idArrecadacaoForma) throws ControladorException  {
+		
+		try 
+		{
+			return repositorioArrecadacao.pesquisarPercentualTarifaArrecadador(idArrecadador,idArrecadacaoForma);			
+		} catch (ErroRepositorioException ex) {
+			throw new ControladorException("erro.sistema", ex);
+		}
+	}
+	
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Inclui um aviso bancário na tabela AVISO_BANCARIO
+	 * 
+	 * @author Jean Varela
+	 * @date 28/09/2015
+	 * 
+	 * @param dataVencimento, valorCredito, valorTotalGuias, valorTarifa, idClienteArrecadado
+	 * @return identificador do aviso bancário inserido. 
+	 */
+	public Integer inserirAvisoBancario(Date dataVencimento,BigDecimal valorCredito, BigDecimal valorTotalGuias,
+			                         BigDecimal  valorTarifa, Integer idClienteArrecadador,Integer idArrecadacaoForma) throws ControladorException{
+		
+		try {
+		
+			Integer idAvisoBancario = null;
+			
+			AvisoBancario avisoBancario = new AvisoBancario();
+			avisoBancario.setDataLancamento(dataVencimento);
+			avisoBancario.setNumeroSequencial(new Short("1"));
+			avisoBancario.setDataPrevista(dataVencimento);		
+			avisoBancario.setDataRealizada(dataVencimento);
+			avisoBancario.setValorRealizado(valorCredito);		
+			avisoBancario.setValorArrecadacaoInformado(valorCredito);		
+			avisoBancario.setValorDevolucaoInformado(BigDecimal.ZERO);
+			avisoBancario.setValorArrecadacaoCalculado(valorTotalGuias);		
+			avisoBancario.setValorDevolucaoCalculado(Util.subtrairBigDecimal(valorTotalGuias, valorTarifa));
+			avisoBancario.setValorContabilizado(BigDecimal.ZERO);
+			
+			SistemaParametro sistemaParametro = getControladorUtil().pesquisarParametrosDoSistema();
+			
+			Integer anoMesDataLancamento = Util.getAnoMesComoInteger(dataVencimento);
+			if (Util.compararAnoMesReferencia(anoMesDataLancamento, sistemaParametro.getAnoMesArrecadacao(),">")){
+				avisoBancario.setAnoMesReferenciaArrecadacao(anoMesDataLancamento);
+			}else{
+				avisoBancario.setAnoMesReferenciaArrecadacao(sistemaParametro.getAnoMesArrecadacao());
+			}				
+	
+			avisoBancario.setIndicadorCreditoDebito(new Short("1"));
+			avisoBancario.setNumeroDocumento(0);
+			
+			Arrecadador arrecadador = repositorioArrecadacao.pesquisarArrecadadorCartao(idClienteArrecadador, idArrecadacaoForma);
+			avisoBancario.setArrecadador(arrecadador);
+			
+			Integer idIdentificadorDepositoArrecadacao  = repositorioArrecadacao.obterIdentificadorDepositoArrecadacao(arrecadador.getId(), ArrecadacaoForma.CARTAO_CREDITO);
+			ContaBancaria contaBancaria = new ContaBancaria();
+			contaBancaria.setId(idIdentificadorDepositoArrecadacao);
+			avisoBancario.setContaBancaria(contaBancaria);
+			
+			avisoBancario.setArrecadadorMovimento(null);
+			avisoBancario.setUltimaAlteracao(new Date());
+			
+			ArrecadacaoForma arrecadacaoForma = new ArrecadacaoForma();
+			arrecadacaoForma.setId(ArrecadacaoForma.CARTAO_CREDITO);
+			avisoBancario.setArrecadacaoForma(arrecadacaoForma);
+		
+			idAvisoBancario = (Integer) repositorioUtil.inserir(avisoBancario);
+	
+			return idAvisoBancario;
+			
+		} catch (ErroRepositorioException e) {
+			sessionContext.setRollbackOnly();
+			throw new ControladorException("erro.sistema", e);
+		}
+	}
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Inclui um pagamento para uma guia de pagamento.  
+	 * 
+	 * @author Jean Varela
+	 * @date 28/09/2015
+	 * 
+	 * @param valorDebito, dataPagamento, idGuiaPagamento, idAvisoBancario, idClienteArrecadador.
+	 * @return identificador do pagamento de uma guia de pagamento. 
+	 */
+	public Integer inserirPagamentoGuiaPagamento(GuiaPagamento guiaPagamento, Integer idAvisoBancario, Integer idClienteArrecadador) throws ControladorException{
+		
+		try{
+		
+		Integer idPagamento = null;
+		
+		Pagamento pagamento = new Pagamento();
+		pagamento.setAnoMesReferenciaPagamento(null);
+
+		SistemaParametro sistemaParametro = getControladorUtil().pesquisarParametrosDoSistema();
+		
+		Integer anoMesDataPagamento = Util.getAnoMesComoInteger(guiaPagamento.getDataVencimento());
+		if (Util.compararAnoMesReferencia(anoMesDataPagamento, sistemaParametro.getAnoMesArrecadacao(),">")){
+			pagamento.setAnoMesReferenciaArrecadacao(anoMesDataPagamento);
+		}else{
+			pagamento.setAnoMesReferenciaArrecadacao(sistemaParametro.getAnoMesArrecadacao());
+		}	
+		
+		pagamento.setValorPagamento(guiaPagamento.getValorDebito());
+		pagamento.setDataPagamento(guiaPagamento.getDataVencimento());
+		pagamento.setPagamentoSituacaoAtual(null);
+		pagamento.setPagamentoSituacaoAnterior(null);
+		
+		pagamento.setDebitoTipo(guiaPagamento.getDebitoTipo());
+		pagamento.setGuiaPagamento(guiaPagamento);
+		pagamento.setLocalidade(guiaPagamento.getLocalidade());
+		
+		FiltroAvisoBancario filtroAvisoBancario = new FiltroAvisoBancario();
+		filtroAvisoBancario.adicionarParametro(new ParametroSimples(filtroAvisoBancario.ID,idAvisoBancario));
+		Collection colecaoAvisoBancario = repositorioUtil.pesquisar(filtroAvisoBancario , AvisoBancario.class.getName());
+		AvisoBancario avisoBancario = (AvisoBancario) Util.retonarObjetoDeColecao(colecaoAvisoBancario);
+		pagamento.setAvisoBancario(avisoBancario);
+		pagamento.setArrecadacaoForma(avisoBancario.getArrecadacaoForma());			
+		
+		DocumentoTipo documentoTipo = new DocumentoTipo();
+		documentoTipo.setId(DocumentoTipo.GUIA_PAGAMENTO);
+		pagamento.setDocumentoTipo(documentoTipo);
+		pagamento.setDocumentoTipoAgregador(documentoTipo);
+				
+		pagamento.setImovel(null);
+		pagamento.setArrecadadorMovimentoItem(null);
+		pagamento.setUltimaAlteracao(new Date());
+		
+		Cliente clienteArrecador = new Cliente();
+		clienteArrecador.setId(idClienteArrecadador);
+		pagamento.setCliente(clienteArrecador);
+		
+		pagamento.setValorExcedente(null);
+		pagamento.setIndicadorExpurgado(null);
+		pagamento.setFatura(null);
+		pagamento.setCobrancaDocumento(null);
+		pagamento.setDataProcessamento(new Date());
+		pagamento.setPagamentoCartaoDebito(null);
+		pagamento.setPagamentoSituacaoAnterior(null);
+		
+		idPagamento = (Integer) repositorioUtil.inserir(pagamento);
+		return idPagamento;
+		
+		} catch (ErroRepositorioException e) {
+			sessionContext.setRollbackOnly();
+			throw new ControladorException("erro.sistema", e);
+		}
+	}
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Inclui uma guia de devolução para uma guia de pagamento.  
+	 * 
+	 * @author Jean Varela
+	 * @date 28/09/2015
+	 * 
+	 * @param idGuiaPagamento, idClienteArrecadador, valorTarifa, usuarioLogado.
+	 * @return identificador da guia de devolução de uma guia de pagamento. 
+	 */
+	public Integer inserirGuiaDevolucao(GuiaPagamento guiaPagamento,Integer idClienteArrecadador,BigDecimal valorTarifa, Usuario usuarioLogado) throws ControladorException{
+		
+		Integer idGuiaDevolucao = null;
+		
+		GuiaDevolucao guiaDevolucao = new GuiaDevolucao();		
+		
+		guiaDevolucao.setLocalidade(guiaPagamento.getLocalidade());
+		guiaDevolucao.setGuiaPagamento(guiaPagamento);
+		
+		guiaDevolucao.setImovel(null);
+		
+		Cliente cliente = new Cliente();
+		cliente.setId(idClienteArrecadador);
+		guiaDevolucao.setCliente(cliente);
+		
+		SistemaParametro sistemaParametros = getControladorUtil().pesquisarParametrosDoSistema();
+		guiaDevolucao.setAnoMesReferenciaContabil(sistemaParametros.getAnoMesArrecadacao());
+		
+		guiaDevolucao.setAnoMesReferenciaGuiaDevolucao(null);
+		guiaDevolucao.setDataEmissao(new Date());
+		guiaDevolucao.setDataValidade(new Date());
+		guiaDevolucao.setValorDevolucao(valorTarifa);
+		guiaDevolucao.setRegistroAtendimento(null);
+		guiaDevolucao.setOrdemServico(null);//verificar
+		
+		FiltroCreditoTipo filtroCreditoTipo = new FiltroCreditoTipo();
+		filtroCreditoTipo.adicionarCaminhoParaCarregamentoEntidade("lancamentoItemContabil");
+ 		filtroCreditoTipo.adicionarParametro(new ParametroSimples(FiltroCreditoTipo.ID,
+ 																  CreditoTipo.DESCONTOS_CONCEDIDOS));
+ 		Collection colecaoCreditoTipo = this.getControladorUtil()
+ 										.pesquisar(filtroCreditoTipo, CreditoTipo.class.getName());
+ 		if(colecaoCreditoTipo!=null && !colecaoCreditoTipo.isEmpty()){
+ 			CreditoTipo creditoTipo = (CreditoTipo) colecaoCreditoTipo.iterator().next();
+    		guiaDevolucao.setLancamentoItemContabil(creditoTipo.getLancamentoItemContabil());
+ 		}
+		
+		DebitoCreditoSituacao debitoCreditoSituacao = new DebitoCreditoSituacao();
+		debitoCreditoSituacao.setId(DebitoCreditoSituacao.NORMAL);
+		guiaDevolucao.setDebitoCreditoSituacaoAtual(debitoCreditoSituacao);
+		
+		DocumentoTipo documentoTipo = new DocumentoTipo();
+		documentoTipo.setId(DocumentoTipo.DEVOLUCAO_VALOR);
+		guiaDevolucao.setDocumentoTipo(documentoTipo);
+		
+		guiaDevolucao.setConta(null);
+		guiaDevolucao.setGuiaPagamento(null);
+		guiaDevolucao.setDebitoACobrarGeral(null);
+		
+		Integer idDebitoTipo  = getControladorFaturamento().pesquisarDebitoTipoPelaConstante(DebitoTipo.OUTROS);
+		DebitoTipo debitoTipo = new DebitoTipo();
+		debitoTipo.setId(idDebitoTipo);
+		guiaDevolucao.setDebitoTipo(debitoTipo);
+		
+		guiaDevolucao.setUltimaAlteracao(new Date());
+		guiaDevolucao.setFuncionarioAnalista(null);
+		guiaDevolucao.setFuncionarioAutorizador(null);
+		
+		CreditoTipo creditoTipo = new CreditoTipo();
+		creditoTipo.setId(CreditoTipo.DESCONTOS_CONCEDIDOS);
+		guiaDevolucao.setCreditoTipo(creditoTipo);
+		
+		guiaDevolucao.setUsuario(usuarioLogado);
+		
+		try
+		{
+			idGuiaDevolucao = (Integer) repositorioUtil.inserir(guiaDevolucao);
+		} catch (ErroRepositorioException e) {
+			throw new ControladorException("erro.sistema", e);
+		}
+		
+		return idGuiaDevolucao;
+	}
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Inclui na tabela DEVOLUCAO a devolução referente a guia de devolução gerada
+	 * 
+	 * @author Jean Varela
+	 * @date 28/09/2015
+	 * 
+	 * @param dataDevolucao, valorTarifa, idAvisoBancario, idGuiaDevolucao, idClienteArrecador, idGuiaPagamento.
+	 * @return identificador da devolução referente a guia de devolução. 
+	 */	
+	public Integer inserirDevolucaoParaGuiaDevolucao(Date dataDevolucao,BigDecimal valorTarifa, Integer idAvisoBancario,
+			                        Integer idGuiaDevolucao,Integer idClienteArrecador,GuiaPagamento guiaPagamento) throws ControladorException{
+		try	{
+			Integer idDevolucao = null;
+			
+			Devolucao devolucao = new Devolucao();
+			
+			devolucao.setAnoMesReferenciaDevolucao(null);
+			
+		    SistemaParametro sistemaParametro = getControladorUtil().pesquisarParametrosDoSistema();
+			
+			Integer anoMesDataDevolucao = Util.getAnoMesComoInteger(dataDevolucao);
+			if (Util.compararAnoMesReferencia(anoMesDataDevolucao, sistemaParametro.getAnoMesArrecadacao(),">")){
+				devolucao.setAnoMesReferenciaArrecadacao(anoMesDataDevolucao);
+			}else{
+				devolucao.setAnoMesReferenciaArrecadacao(sistemaParametro.getAnoMesArrecadacao());
+			}
+			
+			devolucao.setValorDevolucao(valorTarifa);
+			
+			/**
+			 * A data de devolução é a data de vencimento informada.
+			 * A data de devolução é inicializada com a data de vencimento da guia de pagamento,
+			 * pois a data de vencimento da guia de pagamento é igual a data de vencimento informada.
+			 */
+			devolucao.setDataDevolucao(guiaPagamento.getDataVencimento());
+			
+			devolucao.setDevolucaoSituacaoAtual(null);
+			devolucao.setDevolucaoSituacaoAnterior(null);
+			
+			AvisoBancario avisoBancario = new AvisoBancario();
+			avisoBancario.setId(idAvisoBancario);
+			devolucao.setAvisoBancario(avisoBancario);
+			
+			GuiaDevolucao guiaDevolucao = new GuiaDevolucao();
+			guiaDevolucao.setId(idGuiaDevolucao);
+			devolucao.setGuiaDevolucao(guiaDevolucao);
+	
+			devolucao.setLocalidade(guiaPagamento.getLocalidade());
+			devolucao.setImovel(null);
+			
+			Cliente cliente = new Cliente();
+			cliente.setId(idClienteArrecador);
+			devolucao.setCliente(cliente);
+			
+			DebitoTipo debitoTipo = new DebitoTipo();
+			debitoTipo.setId(DebitoTipo.OUTROS);
+			devolucao.setDebitoTipo(debitoTipo);
+			
+			devolucao.setUltimaAlteracao(new Date());
+			devolucao.setCreditoARealizarGeral(null);
+			devolucao.setCreditoARealizarGeral(null);
+			devolucao.setCobrancaDocumento(null);
+			devolucao.setDocumentoTipoAgregador(null);
+					
+			idDevolucao = (Integer) repositorioUtil.inserir(devolucao);
+			
+			return idDevolucao;
+			
+		} catch (ErroRepositorioException e) {
+			sessionContext.setRollbackOnly();
+			throw new ControladorException("erro.sistema", e);
+		}
+	}
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Pesquisa um aviso bancário.
+	 * 
+	 * @author Jean Varela
+	 * @date 06/10/2015
+	 * 
+	 * @param idClienteArrecadador,idArrecadacaoForma,dataLancamento
+	 * @return um aviso bancario
+	 */
+	public AvisoBancario pesquisarAvisoBancario(Integer idArrecadador, Integer idArrecadacaoForma, Date dataLancamento) throws ControladorException{
+		
+		try{
+		    AvisoBancario avisoBancario = null;	
+			
+			Object object = repositorioArrecadacao.pesquisarAvisoBancario(idArrecadador, idArrecadacaoForma, dataLancamento);
+	
+			if (object != null){
+				
+				avisoBancario = new AvisoBancario();	
+				
+				Object[] array = (Object[]) object;
+				
+				if ((Integer) array[0] != null){
+					avisoBancario.setId((Integer)  array[0]);
+				}
+				if ((Date) array[1] != null){
+					avisoBancario.setDataLancamento((Date)  array[1]);
+				}
+				if ((BigDecimal) array[2] != null){
+					avisoBancario.setValorArrecadacaoInformado((BigDecimal) array[2]);
+				}
+				if ((BigDecimal) array[3] != null) {
+					avisoBancario.setValorArrecadacaoCalculado((BigDecimal) array[3]);
+				}
+			}
+		
+			return avisoBancario;
+		} catch (ErroRepositorioException e) {
+				throw new ControladorException("erro.sistema", e);
+		}	
+	}
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Pesquisa a quantidade de guias de pagamentos que foram pagas.
+	 * 
+	 * @author Jean Varela
+	 * @date 06/10/2015
+	 * 
+	 * @param idCliente,idVencimento
+	 * @return quantidade de guia de pagamento que foram pagas
+	 */
+	public Integer pesquisarQuantidadeGuiasPagamentoPagas(Integer idCliente, Date dataVencimento) throws ControladorException {
+		try 
+		{
+			return repositorioArrecadacao.pesquisarQuantidadeGuiasPagamentoPagas(idCliente, dataVencimento);
+		} catch (ErroRepositorioException e) {
+			throw new ControladorException("erro.sistema", e);
+		}
+	}
+		
+	/**
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
+	 *
+	 * @author Vivianne Sousa
+	 * @date 07/05/2015
+	 * 
+	 * @param idCliente Id do cliente arrecadador ou null
+	 */
+	public Arrecadador pesquisarArrecadadorCartao(Integer idCliente, Integer idArrecadacaoForma) throws ControladorException{
+		try 
+		{
+			return repositorioArrecadacao.pesquisarArrecadadorCartao(idCliente, idArrecadacaoForma);
+		} catch (ErroRepositorioException e) {
+			throw new ControladorException("erro.sistema", e);
+		}
+	}
+	
+	/**
+	 * [UC1694] Relatório Previsão/Pagamento Cartão de Crédito
+	 * 
+	 * @author Joao Pedro Medeiros
+	 * @date 19/10/2015
+	 * 
+	 * @param dataVencimentoInicial
+	 * @param dataVencimentoFinal
+	 * @param idCliente
+	 * @throws ControladorException
+	 */
+	public Collection<RelatorioSinteticoPrevisaoPagamentoCartaoCreditoBean> pesquisarDadosRelatorioCartaoCreditoSintetico
+	(Date dataVencimentoInicial, Date dataVencimentoFinal, String idCliente) throws ControladorException {
+
+		try{
+			Collection<RelatorioSinteticoPrevisaoPagamentoCartaoCreditoBean> colecaoRelatorioSinteticoBean = 
+					new ArrayList<RelatorioSinteticoPrevisaoPagamentoCartaoCreditoBean>();
+
+			Collection retorno = repositorioArrecadacao.pesquisarDadosRelatorioCartaoCreditoSintetico(dataVencimentoInicial, dataVencimentoFinal, idCliente);
+	
+		if(!Util.isVazioOrNulo(retorno)){
+			RelatorioSinteticoPrevisaoPagamentoCartaoCreditoBean bean = null;
+			
+			Iterator<?> it = retorno.iterator();
+			while(it.hasNext()){
+				Object[] array = (Object []) it.next();
+				
+				bean = new RelatorioSinteticoPrevisaoPagamentoCartaoCreditoBean();
+				
+				if((BigDecimal) array[0] != null){
+					bean.setValorGuia((BigDecimal) array[0]);	
+				}
+				
+				if((BigDecimal) array[1] != null){
+					bean.setValorCreditado((BigDecimal) array[1]);
+				}
+				
+				if((Date) array[2] != null){
+					bean.setDataVencimento(Util.formatarData((Date) array[2]));
+				}
+				
+				if((BigDecimal) array[3] != null){
+					BigDecimal valorTarifa = BigDecimal.ZERO;
+					if(array[0] != null){
+					valorTarifa = ((BigDecimal)array[3]).multiply((BigDecimal)array[0]);
+					}
+					bean.setValorTarifa(valorTarifa);
+				}
+				colecaoRelatorioSinteticoBean.add(bean);
+				}
+		}return colecaoRelatorioSinteticoBean;
+		}		catch (ErroRepositorioException ex) {
+			throw new ControladorException("erro.sistema", ex);
+	} 
+	}
+	
+	/**
+	 * 
+	 * @author Rodrigo Cabral
+	 * @date 03/11/2015
+	 * 
+	 * @throws ErroRepositorioException
+	 */
+	public void gerarResumosArrecadacaoPentaho(
+			int idFuncionalidadeIniciada)	throws ControladorException {
+		
+		int idUnidadeIniciada = 0;
+
+		/*
+		 * Registrar o início do processamento da Unidade de
+		 * Processamento do Batch
+		*/		
+		idUnidadeIniciada = getControladorBatch()
+				.iniciarUnidadeProcessamentoBatch(
+						idFuncionalidadeIniciada,
+						UnidadeProcessamento.FUNCIONALIDADE,
+						0);
+		
+		try {
+				
+			String usuarioServidor = repositorioUtil.obterValorParametro(ParametroSistema.USUARIO_SERVIDOR_PENTAHO);
+			String ipServidorPentaho = repositorioUtil.obterValorParametro(ParametroSistema.IP_SERVIDOR_PENTAHO);
+			String caminhoArquivoCarga = repositorioUtil.obterValorParametro(ParametroSistema.CAMINHO_ARQUIVO_CARGA_PENTAHO);
+			
+			
+				System.out.println("Iniciou Gerar Resumos Arrecadacao Pentaho");
+			
+				Runtime.getRuntime().exec("ssh " + usuarioServidor + "@" + ipServidorPentaho + 
+						" cd " + caminhoArquivoCarga + 
+						" ./carga_arrecadacao.sh");
+				
+				System.out.println("Finalizou Gerar Resumos Arrecadacao Pentaho");
+						
+			getControladorBatch().encerrarUnidadeProcessamentoBatch(null,
+					idUnidadeIniciada, false);
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			getControladorBatch().encerrarUnidadeProcessamentoBatch(ex,	idUnidadeIniciada, true);
+			throw new EJBException(ex);
+		}
+	}
+	
 }

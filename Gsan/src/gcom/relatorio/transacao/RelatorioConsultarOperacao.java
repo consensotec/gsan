@@ -121,6 +121,11 @@ public class RelatorioConsultarOperacao extends TarefaRelatorio {
 	public RelatorioConsultarOperacao(Usuario usuario) {
 		super(usuario,ConstantesRelatorios.RELATORIO_OPERACAO_CONSULTAR);
 	}
+	
+	@Deprecated
+	public RelatorioConsultarOperacao() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

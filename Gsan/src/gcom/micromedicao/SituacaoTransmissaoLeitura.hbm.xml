@@ -19,6 +19,8 @@
 		<property name="descricaoSituacao" type="java.lang.String" column="sitl_dssituacao" length="20"/>
 		<property name="indicadorUso" type="java.lang.Short" column="sitl_icuso" length="2"/>
 		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="sitl_tmultimaalteracao" not-null="true" length="8"/>
+		<property name="indicadorCobranca" type="java.lang.Short" column="sitl_iccobranca" length="2"/>
+		
 		<!-- Associations -->
 	</class>
 </hibernate-mapping>

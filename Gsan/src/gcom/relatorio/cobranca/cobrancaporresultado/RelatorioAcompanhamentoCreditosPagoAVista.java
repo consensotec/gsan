@@ -26,6 +26,11 @@ public class RelatorioAcompanhamentoCreditosPagoAVista extends TarefaRelatorio {
 		public RelatorioAcompanhamentoCreditosPagoAVista(Usuario usuario) {
 			super(usuario, ConstantesRelatorios.RELATORIO_ACOMPANHAMENTO_CREDITOS_PAGOS_A_VISTA);
 		}
+
+		@Deprecated
+		public RelatorioAcompanhamentoCreditosPagoAVista() {
+			super(null, "");
+		}
 		
 		public Object executar() throws TarefaException {
 

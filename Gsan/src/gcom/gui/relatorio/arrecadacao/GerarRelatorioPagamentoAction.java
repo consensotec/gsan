@@ -121,17 +121,11 @@ public class GerarRelatorioPagamentoAction extends
 
 		// cria a variável de retorno
 		ActionForward retorno = null;
-
 		// Pega uma instancia da sessao
 		HttpSession sessao = httpServletRequest.getSession(false);
-
 		ConsultarPagamentoActionForm consultarPagamentoActionForm = (ConsultarPagamentoActionForm) actionForm;
 
-//		Collection colecaoPagamentos = (Collection) sessao
-//				.getAttribute("colecaoPagamentosLocalidade");
-
 		// Inicio da parte que vai mandar os parametros para o relatório
-
 		Pagamento pagamentoParametrosInicial = new Pagamento();
 		Pagamento pagamentoParametrosFinal = new Pagamento();
 
@@ -153,11 +147,10 @@ public class GerarRelatorioPagamentoAction extends
 		String[] idsDocumentoTipo = null;
 		String[] idsDebitoTipo = null;
 		String opcaoPagamento = null;
-        String valorPagamentoInicial = 
-            consultarPagamentoActionForm.getValorPagamentoInicial();
-        
-        String valorPagamentoFinal = 
-            consultarPagamentoActionForm.getValorPagamentoFinal();
+        String valorPagamentoInicial = consultarPagamentoActionForm.getValorPagamentoInicial();
+        String valorPagamentoFinal = consultarPagamentoActionForm.getValorPagamentoFinal();
+		String[] idsCategoria = null;
+		String[] idsEsferaPoder = null;
 		
 		if (sessao.getAttribute("idImovelPrincipalAba") != null && !sessao.getAttribute("idImovelPrincipalAba").equals("")) {
 			idImovel = (String) sessao.getAttribute("idImovelPrincipalAba");
@@ -165,38 +158,25 @@ public class GerarRelatorioPagamentoAction extends
 		} else {
 			idImovel = consultarPagamentoActionForm.getIdImovel();
 			idCliente = consultarPagamentoActionForm.getIdCliente();
-			clienteRelacaoTipo = consultarPagamentoActionForm
-					.getClienteRelacaoTipo();
-			idAvisoBancario = consultarPagamentoActionForm
-					.getIdAvisoBancario();
-			idMovimentoArrecadador = consultarPagamentoActionForm
-					.getIdArrecadador();
-			localidadeInicial = consultarPagamentoActionForm
-					.getLocalidadeInicial();
-			localidadeFinal = consultarPagamentoActionForm
-					.getLocalidadeFinal();
-			periodoArrecadacaoInicial = consultarPagamentoActionForm
-					.getPeriodoArrecadacaoInicio();
-			periodoArrecadacaoFinal = consultarPagamentoActionForm
-					.getPeriodoArrecadacaoFim();
-			periodoPagamentoInicial = consultarPagamentoActionForm
-					.getPeriodoPagamentoInicio();
-			periodoPagamentoFinal = consultarPagamentoActionForm
-					.getPeriodoPagamentoFim();
-			dataPagamentoInicial = consultarPagamentoActionForm
-					.getDataPagamentoInicio();
-			dataPagamentoFinal = consultarPagamentoActionForm
-					.getDataPagamentoFim();
-			idsPagamentoSituacao = consultarPagamentoActionForm
-					.getPagamentoSituacao();
-			idsArrecadacaoForma = consultarPagamentoActionForm
-					.getArrecadacaoForma();
-			idsDocumentoTipo = consultarPagamentoActionForm
-					.getDocumentoTipo();
+			clienteRelacaoTipo = consultarPagamentoActionForm.getClienteRelacaoTipo();
+			idAvisoBancario = consultarPagamentoActionForm.getIdAvisoBancario();
+			idMovimentoArrecadador = consultarPagamentoActionForm.getIdArrecadador();
+			localidadeInicial = consultarPagamentoActionForm.getLocalidadeInicial();
+			localidadeFinal = consultarPagamentoActionForm.getLocalidadeFinal();
+			periodoArrecadacaoInicial = consultarPagamentoActionForm.getPeriodoArrecadacaoInicio();
+			periodoArrecadacaoFinal = consultarPagamentoActionForm.getPeriodoArrecadacaoFim();
+			periodoPagamentoInicial = consultarPagamentoActionForm.getPeriodoPagamentoInicio();
+			periodoPagamentoFinal = consultarPagamentoActionForm.getPeriodoPagamentoFim();
+			dataPagamentoInicial = consultarPagamentoActionForm.getDataPagamentoInicio();
+			dataPagamentoFinal = consultarPagamentoActionForm.getDataPagamentoFim();
+			idsPagamentoSituacao = consultarPagamentoActionForm.getPagamentoSituacao();
+			idsArrecadacaoForma = consultarPagamentoActionForm.getArrecadacaoForma();
+			idsDocumentoTipo = consultarPagamentoActionForm.getDocumentoTipo();
 			idsDebitoTipo = consultarPagamentoActionForm.getDebitoTipoSelecionados();
 			opcaoPagamento = consultarPagamentoActionForm.getOpcaoPagamento();
+			idsCategoria = consultarPagamentoActionForm.getIdsCategoria();
+			idsEsferaPoder = consultarPagamentoActionForm.getIdsEsferaPoder();
 		}
-		
 		
 		//caso venha da tela de manter pagamento o padrão será consultar o atual
 		if(opcaoPagamento == null){
@@ -204,8 +184,7 @@ public class GerarRelatorioPagamentoAction extends
 		}
 
 		// seta os parametros que serão mostrados no relatório
-		if (periodoArrecadacaoInicial != null
-				&& !periodoArrecadacaoInicial.equals("")) {
+		if (periodoArrecadacaoInicial != null && !periodoArrecadacaoInicial.equals("")) {
 			pagamentoParametrosInicial.setAnoMesReferenciaPagamento(Util
 					.formatarMesAnoComBarraParaAnoMes(periodoArrecadacaoInicial));
 			pagamentoParametrosFinal.setAnoMesReferenciaPagamento(Util
@@ -232,40 +211,30 @@ public class GerarRelatorioPagamentoAction extends
 			relatorioPagamento.addParametro("avisoBancarioHelper", sessao.getAttribute("avisoBancarioHelper"));
 			idAvisoBancario = (String) sessao.getAttribute("idAvisoBancario"); 
 		}
-		relatorioPagamento.addParametro("pagamentoParametrosInicial",
-				pagamentoParametrosInicial);
-		relatorioPagamento.addParametro("pagamentoParametrosFinal",
-				pagamentoParametrosFinal);
+		relatorioPagamento.addParametro("pagamentoParametrosInicial",pagamentoParametrosInicial);
+		relatorioPagamento.addParametro("pagamentoParametrosFinal",pagamentoParametrosFinal);
 
 		// Parâmetros de Pesquisa
 		relatorioPagamento.addParametro("idImovel", idImovel);
 		relatorioPagamento.addParametro("idCliente", idCliente);
-		relatorioPagamento.addParametro("clienteRelacaoTipo",
-				clienteRelacaoTipo);
+		relatorioPagamento.addParametro("clienteRelacaoTipo",clienteRelacaoTipo);
 		relatorioPagamento.addParametro("idAvisoBancario", idAvisoBancario);
-		relatorioPagamento.addParametro("idMovimentoArrecadador",
-				idMovimentoArrecadador);
+		relatorioPagamento.addParametro("idMovimentoArrecadador",idMovimentoArrecadador);
 		relatorioPagamento.addParametro("localidadeInicial", localidadeInicial);
 		relatorioPagamento.addParametro("localidadeFinal", localidadeFinal);
-		relatorioPagamento.addParametro("periodoArrecadacaoInicial",
-				periodoArrecadacaoInicial);
-		relatorioPagamento.addParametro("periodoArrecadacaoFinal",
-				periodoArrecadacaoFinal);
-		relatorioPagamento.addParametro("periodoPagamentoInicial",
-				periodoPagamentoInicial);
-		relatorioPagamento.addParametro("periodoPagamentoFinal",
-				periodoPagamentoFinal);
-		relatorioPagamento.addParametro("dataPagamentoInicial",
-				Util.converteStringParaDate(dataPagamentoInicial));
-		relatorioPagamento.addParametro("dataPagamentoFinal",
-				Util.converteStringParaDate(dataPagamentoFinal));
-		relatorioPagamento.addParametro("idsPagamentoSituacao",
-				idsPagamentoSituacao);
-		relatorioPagamento.addParametro("idsArrecadacaoForma",
-				idsArrecadacaoForma);
+		relatorioPagamento.addParametro("periodoArrecadacaoInicial",periodoArrecadacaoInicial);
+		relatorioPagamento.addParametro("periodoArrecadacaoFinal",periodoArrecadacaoFinal);
+		relatorioPagamento.addParametro("periodoPagamentoInicial",periodoPagamentoInicial);
+		relatorioPagamento.addParametro("periodoPagamentoFinal",periodoPagamentoFinal);
+		relatorioPagamento.addParametro("dataPagamentoInicial",Util.converteStringParaDate(dataPagamentoInicial));
+		relatorioPagamento.addParametro("dataPagamentoFinal",Util.converteStringParaDate(dataPagamentoFinal));
+		relatorioPagamento.addParametro("idsPagamentoSituacao",idsPagamentoSituacao);
+		relatorioPagamento.addParametro("idsArrecadacaoForma",idsArrecadacaoForma);
 		relatorioPagamento.addParametro("idsDocumentoTipo", idsDocumentoTipo);
 		relatorioPagamento.addParametro("idsDebitoTipo", idsDebitoTipo);
 		relatorioPagamento.addParametro("opcaoPagamento",opcaoPagamento);
+		relatorioPagamento.addParametro("idsCategoria", idsCategoria);
+		relatorioPagamento.addParametro("idsEsferaPoder", idsEsferaPoder);
         
         relatorioPagamento.addParametro( "valorPagamentoInicial", valorPagamentoInicial );
         relatorioPagamento.addParametro( "valorPagamentoFinal", valorPagamentoFinal );

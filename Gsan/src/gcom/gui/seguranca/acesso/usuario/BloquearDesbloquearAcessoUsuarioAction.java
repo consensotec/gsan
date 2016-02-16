@@ -173,6 +173,7 @@ public class BloquearDesbloquearAcessoUsuarioAction extends GcomAction {
 			FiltroUsuario filtroUsuario = new FiltroUsuario();
 			filtroUsuario.adicionarParametro(new ComparacaoTexto(
 					FiltroUsuario.LOGIN, login));
+			filtroUsuario.adicionarCaminhoParaCarregamentoEntidade(FiltroUsuario.USUARIO_SITUACAO);
 
 			Collection colecaoUsuario = fachada.pesquisar(filtroUsuario,
 					Usuario.class.getName());

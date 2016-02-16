@@ -25,6 +25,11 @@ public class RelatorioProjetoManter extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_PROJETO_MANTER);
 	}
 
+	@Deprecated
+	public RelatorioProjetoManter() {
+		super(null, "");
+	}
+
 	/**
 	 * 
 	 */

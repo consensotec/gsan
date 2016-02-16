@@ -14,10 +14,12 @@
 <link rel="stylesheet" href="<bean:message key="caminho.css"/>EstilosCompesa.css" type="text/css">
 <script language="JavaScript" src="<bean:message key="caminho.js"/>validacao/ManutencaoRegistro.js" ></script>
 <script language="JavaScript" src="<bean:message key="caminho.js"/>util.js" ></script>
-
+<script src="<bean:message key="caminho.js"/>jquery/jquery.js"></script>
 <script language="JavaScript" src="<bean:message key="caminho.js"/>validacao/regras_validator.js"></script><html:javascript staticJavascript="false"  formName="InserirConsumoAnormalidadeAcaoActionForm" dynamicJavascript="true" />
 
 <script language="JavaScript">
+
+	var desabilitaRadioButon = true;
 
 	function validaForm(form) {
 		
@@ -68,7 +70,7 @@
 			if(form.idServicoTipoMes1.value == null || form.idServicoTipoMes1.value == '' ){
 				form.solicitacaoTipoMes1.disabled = true;
 				form.solicitacaoTipoMes1.values == '-1';
-				form.solicitacaoTipoEspecificacaoMes1.disabled = true;
+				form.solicitacaoTipoEspecificacaoMes1.disabled = true;				
 			}
 			if(form.idServicoTipoMes2.value == null || form.idServicoTipoMes2.value == '' ){
 				form.solicitacaoTipoMes2.disabled = true;
@@ -89,9 +91,17 @@
 			if(form.solicitacaoTipoMes3.value == '-1') {
 				form.solicitacaoTipoEspecificacaoMes3.disabled = true;
 			}
-			
+			if (form.indicadorGeracaoCartaMes1.value != '1'){
+				form.motivoRevisaoMes1.disabled = true;
+		   }
+		   if (	form.indicadorGeracaoCartaMes2.value != '1'){
+				form.motivoRevisaoMes2.disabled = true;
+		   }
+		   if (form.indicadorGeracaoCartaMes3.value != '1'){
+				form.motivoRevisaoMes3.disabled = true;
+		   }
 	}  
-	
+
 	function reload() {
 		var form = document.InserirConsumoAnormalidadeAcaoActionForm;
 		form.action = "/gsan/exibirInserirConsumoAnormalidadeAcaoAction.do";
@@ -206,7 +216,36 @@
 			form.solicitacaoTipoEspecificacaoMes3.disabled = false;
 		}
 	}
+	
+	function habilitaComboRevisaoMes1(){
+		   var form = document.forms[0];
+		   if (form.indicadorGeracaoCartaMes1.value == '1'){			    
+				form.motivoRevisaoMes1.disabled = false;
+		   }else{
+			    form.motivoRevisaoMes1.value = '-1';
+				form.motivoRevisaoMes1.disabled = true;
+		   }		   
+	}
 
+	function habilitaComboRevisaoMes2(){
+		   var form = document.forms[0];
+		   if (	form.indicadorGeracaoCartaMes2.value == '1'){
+				form.motivoRevisaoMes2.disabled = false;
+		   }else{
+			   form.motivoRevisaoMes2.disabled = true;
+			   form.motivoRevisaoMes2.value = '-1';
+		   }
+	}
+
+	function habilitaComboRevisaoMes3(){
+		   var form = document.forms[0];
+		   if (form.indicadorGeracaoCartaMes3.value == '1'){
+				form.motivoRevisaoMes3.disabled = false;
+		   }else{
+			   form.motivoRevisaoMes3.disabled = true;
+			   form.motivoRevisaoMes3.value = '-1';
+		   }		   
+	}
 	
 </script>
 
@@ -339,15 +378,17 @@
 					<td colspan="2"><span class="style2"> <html:text
 						property="numerofatorConsumoMes1" 
 						size="5" 
-						maxlength="4" 
-						onkeypress="return isCampoNumerico(event);"/> </span></td>
+						maxlength="5" 
+						onkeyup="formataValorQuantidade(this, 4);"  
+						 style="text-transform: none;"/> </span></td>
 				</tr>
 				<tr>
 					<td><strong>Fator de Consumo para cálculo do 2º Mês:<font color="#FF0000">*</font></strong></td>
 					<td colspan="2"><span class="style2"> <html:text
 						property="numerofatorConsumoMes2" 
 						size="5" 
-						maxlength="4" 
+						maxlength="5" 
+						onkeyup="formataValorQuantidade(this, 4);" 
 						onkeypress="return isCampoNumerico(event);"/> </span></td>
 				</tr>
 				<tr>
@@ -355,7 +396,8 @@
 					<td colspan="2"><span class="style2"> <html:text
 						property="numerofatorConsumoMes3" 
 						size="5" 
-						maxlength="4" 
+						maxlength="5"
+						onkeyup="formataValorQuantidade(this, 4);"   
 						onkeypress="return isCampoNumerico(event);"/> </span></td>
 				</tr>
 				
@@ -364,27 +406,30 @@
 				<tr>
 					<td><strong>Indicador de Geração de Carta do 1º Mês:<font
 						color="#FF0000">*</font></strong></td>
-					<td><strong> <html:radio property="indicadorGeracaoCartaMes1"
-						value="1" /> <strong>Gerar Carta <html:radio
-						property="indicadorGeracaoCartaMes1" value="2" /> Não Gerar Carta</strong>
+					<td><strong> <html:radio property="indicadorGeracaoCartaMes1" value="1"
+					                         onchange="javascript:habilitaComboRevisaoMes1();"/> <strong>Gerar Carta 
+					             <html:radio property="indicadorGeracaoCartaMes1" value="2"
+											 onchange="javascript:habilitaComboRevisaoMes1();"/> Não Gerar Carta</strong>
 					</strong></td>
 
 				</tr>
 				<tr>
 					<td><strong>Indicador de Geração de Carta do 2º Mês:<font
 						color="#FF0000">*</font></strong></td>
-					<td><strong> <html:radio property="indicadorGeracaoCartaMes2"
-						value="1" /> <strong>Gerar Carta <html:radio
-						property="indicadorGeracaoCartaMes2" value="2" /> Não Gerar Carta</strong>
+					<td><strong> <html:radio property="indicadorGeracaoCartaMes2" value="1" 
+											onchange="javascript:habilitaComboRevisaoMes2();"/> <strong>Gerar Carta
+							    <html:radio property="indicadorGeracaoCartaMes2" value="2"
+											onchange="javascript:habilitaComboRevisaoMes2();"/> Não Gerar Carta</strong>
 					</strong></td>
 
 				</tr>
 				<tr>
 					<td><strong>Indicador de Geração de Carta do 3º Mês:<font
 						color="#FF0000">*</font></strong></td>
-					<td><strong> <html:radio property="indicadorGeracaoCartaMes3"
-						value="1" /> <strong>Gerar Carta <html:radio
-						property="indicadorGeracaoCartaMes3" value="2" /> Não Gerar Carta</strong>
+					<td><strong> <html:radio property="indicadorGeracaoCartaMes3" value="1" 
+											 onchange="javascript:habilitaComboRevisaoMes3();"/> <strong>Gerar Carta 
+								 <html:radio property="indicadorGeracaoCartaMes3" value="2"
+											 onchange="javascript:habilitaComboRevisaoMes3();"/> Não Gerar Carta</strong>
 					</strong></td>
 
 				</tr>
@@ -507,6 +552,39 @@
 				</tr>
 				
 				<tr>
+					<td><strong>Motivo de Revisão do 1º Mês:</strong></td>
+					<td colspan="2" align="left">
+						<html:select property="motivoRevisaoMes1">
+							<html:option value="-1">&nbsp;</html:option>						
+							<html:options collection="colecaoMotivoRevisao"
+										  labelProperty="descricaoMotivoRevisaoConta" property="id" />
+						</html:select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td><strong>Motivo de Revisão do 2º Mês:</strong></td>
+					<td colspan="2" align="left">
+						<html:select property="motivoRevisaoMes2">
+							<html:option value="-1">&nbsp;</html:option>						
+							<html:options collection="colecaoMotivoRevisao"
+										  labelProperty="descricaoMotivoRevisaoConta" property="id" />
+						</html:select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td><strong>Motivo de Revisão do 3º Mês:</strong></td>
+					<td colspan="2" align="left">
+						<html:select property="motivoRevisaoMes3">
+							<html:option value="-1">&nbsp;</html:option>						
+							<html:options collection="colecaoMotivoRevisao"
+										  labelProperty="descricaoMotivoRevisaoConta" property="id" />
+						</html:select>
+					</td>
+				</tr>
+				
+				<tr>
 					<td><strong>Tipo de Solicitação para o 1º Mês:</strong></td>
 					<td colspan="2" align="left"><html:select property="solicitacaoTipoMes1" 
 						 onchange="javascript:habilitaSolicitacao();desabilitaCombo();reload();">
@@ -593,6 +671,16 @@
 				</tr>
 				
 				<tr>
+					<td><strong>Cobrar consumo normal após <br/> terceira ocorrência:</strong></td>
+					<td>
+						<strong>
+						   <html:radio property="indicadorCobrancaConsumoNormal"  value="1" /> <strong>Sim</strong>
+						   <html:radio property="indicadorCobrancaConsumoNormal"  value="2" /> <strong>Não</strong>
+						</strong>
+					</td>
+				</tr>
+				
+				<tr>
 					<td><strong>Indicador de Uso:<font
 						color="#FF0000">*</font></strong></td>
 					<td><strong> <html:radio property="indicadorUso" value="1" />
@@ -631,4 +719,34 @@
 	<%@ include file="/jsp/util/rodape.jsp"%>
 
 </html:form>
+
+<script>
+$(function() {
+	habiltaIndicadorCobrancaNormal();
+});
+
+$('input[type=radio][name=indicadorGeracaoCartaMes1]').change(function() {
+	habiltaIndicadorCobrancaNormal();
+});
+
+$('input[type=radio][name=indicadorGeracaoCartaMes2]').change(function() {	
+	habiltaIndicadorCobrancaNormal();
+});
+
+$('input[type=radio][name=indicadorGeracaoCartaMes3]').change(function() {
+	habiltaIndicadorCobrancaNormal();
+});
+
+function habiltaIndicadorCobrancaNormal(){
+	if ($('input:radio[name=indicadorGeracaoCartaMes1]:checked').val() == "1" ||
+		$('input:radio[name=indicadorGeracaoCartaMes2]:checked').val() == "1" ||
+		$('input:radio[name=indicadorGeracaoCartaMes3]:checked').val() == "1"){
+			$('input[name=indicadorCobrancaConsumoNormal]').attr( "disabled", false );
+	}else{
+		$('input[name=indicadorCobrancaConsumoNormal][value=1]').attr("checked", true);
+		$('input[name=indicadorCobrancaConsumoNormal]').attr( "disabled", true );
+	}
+}
+</script>
+</body>
 </html:html>

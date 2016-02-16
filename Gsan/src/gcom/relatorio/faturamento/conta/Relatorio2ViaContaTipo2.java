@@ -123,6 +123,12 @@ public class Relatorio2ViaContaTipo2 extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_2_VIA_CONTA_TIPO_2);
 	}
 	
+	@Deprecated
+	public Relatorio2ViaContaTipo2() {
+		super(null, "");
+	}
+
+	
 	private Collection<Relatorio2ViaContaTipo2Bean> inicializarBeanRelatorio(
 			Collection colecaoEmitirContaHelper) {
 		

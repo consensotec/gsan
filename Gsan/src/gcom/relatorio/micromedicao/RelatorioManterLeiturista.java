@@ -77,8 +77,8 @@ package gcom.relatorio.micromedicao;
 
 import gcom.cadastro.sistemaparametro.SistemaParametro;
 import gcom.fachada.Fachada;
-import gcom.micromedicao.FiltroLeiturista;
 import gcom.micromedicao.Leiturista;
+import gcom.micromedicao.FiltroLeiturista;
 import gcom.relatorio.ConstantesRelatorios;
 import gcom.relatorio.RelatorioDataSource;
 import gcom.relatorio.RelatorioVazioException;
@@ -110,6 +110,11 @@ public class RelatorioManterLeiturista extends TarefaRelatorio {
 	private static final long serialVersionUID = 1L;
 	public RelatorioManterLeiturista(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_LEITURISTA);
+	}
+	
+	@Deprecated
+	public RelatorioManterLeiturista() {
+		super(null, "");
 	}
 
 	/**

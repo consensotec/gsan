@@ -136,7 +136,8 @@ public class RelatorioDividaAtivaAmortizada extends TarefaRelatorio{
 					dadosAmortizacaoDividaAtivaBean.setTipoAmortizacao(helper.getTipoAmortizacao());
 					dadosAmortizacaoDividaAtivaBean.setValorDebitoAmortizado(helper.getValorDebitoAmortizado());
 					dadosAmortizacaoDividaAtivaBean.setTipo(helper.getTipo());
-					
+					dadosAmortizacaoDividaAtivaBean.setIdTipoAmortizacao(helper.getIdTipoAmortizacao());
+	
 					colecaoDadosAmortizacaoDividaAtivaBean.add(dadosAmortizacaoDividaAtivaBean);
 					
 				}
@@ -145,20 +146,32 @@ public class RelatorioDividaAtivaAmortizada extends TarefaRelatorio{
 			}
 			
 			// Parâmetros do relatório
-			Map parametro = new HashMap();
+			Map<String,String> parametro = new HashMap<String,String>();
 			
 			// adiciona os parâmetros do relatório
 			SistemaParametro sistemaParamntro = Fachada.getInstancia().pesquisarParametrosDoSistema();
 			int tipoFormatoRelatorio = (Integer) getParametro("tipoformatoRelatorio");			
 			short indicadorIntra = (Short) getParametro("intra");
+			String descricaoImovel = (String) getParametro("descricaoImovel");
+			String periodoAmortizacao = (String) getParametro("periodoAmortizacao");
+			String periodoInscricao = (String) getParametro("periodoInscricao");
 			
 			parametro.put("imagem", sistemaParamntro.getImagemRelatorio());
 			parametro.put("numeroRelatorio", "R1585");
-			
+			parametro.put("descricaoImovel",descricaoImovel);
+			parametro.put("periodoAmortizacao",periodoAmortizacao);
+			parametro.put("periodoInscricao", periodoInscricao);
+
 			if(indicadorIntra == 1){
-				parametro.put("intra", "CLIENTE INTRA");
-			}else{
-				parametro.put("intra", "");
+				parametro.put("intra", "SIM");
+			}
+			else
+			if (indicadorIntra == 2){
+				parametro.put("intra", "NÃO");
+			}
+			else
+			if (indicadorIntra == 3){
+				parametro.put("intra", "AMBOS");
 			}
 			
 			// cria uma instância do dataSource do relatório

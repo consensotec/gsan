@@ -4807,8 +4807,20 @@ public class UC0745GerarArquivoTextoFaturamentoANDROID {
                     arquivoTextoRegistroTipo12.append(Util.formatarCampoParaConcatenacao(null));
                 }
 
-                //14 - Código da meses consecutivos
+                // 14 - Código da meses consecutivos
                 arquivoTextoRegistroTipo12.append(Util.formatarCampoParaConcatenacao(null));
+
+                // 15 - Indicador da geração carta 1
+                arquivoTextoRegistroTipo12.append(Util.formatarCampoParaConcatenacao(consumoAnormalidadeAcao.getIndicadorGeracaoCartaMes1()));
+
+                // 16 - Indicador da geração carta 2
+                arquivoTextoRegistroTipo12.append(Util.formatarCampoParaConcatenacao(consumoAnormalidadeAcao.getIndicadorGeracaoCartaMes2()));
+
+                // 17 - Indicador da geração carta 3
+                arquivoTextoRegistroTipo12.append(Util.formatarCampoParaConcatenacao(consumoAnormalidadeAcao.getIndicadorGeracaoCartaMes3()));
+
+                // 18 - Indicador cobrar consumo normal 
+                arquivoTextoRegistroTipo12.append(Util.formatarCampoParaConcatenacao(consumoAnormalidadeAcao.getIndicadorCobrancaConsumoNormal()));
 
                 if (count != 0) {
                     arquivoTextoRegistroTipo12.append(System.getProperty("line.separator"));

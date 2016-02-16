@@ -87,7 +87,6 @@ import gcom.tarefa.TarefaRelatorio;
 import gcom.util.ControladorException;
 import gcom.util.Util;
 import gcom.util.agendadortarefas.AgendadorTarefas;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -107,6 +106,11 @@ public class RelatorioImoveisTipoConsumo extends TarefaRelatorio {
 	
 	public RelatorioImoveisTipoConsumo(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_TIPO_CONSUMO);
+	}
+
+	@Deprecated
+	public RelatorioImoveisTipoConsumo() {
+		super(null, "");
 	}
 
 	/**

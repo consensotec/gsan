@@ -112,6 +112,11 @@ public class RelatorioQuadroMetasExercicio extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_QUADRO_METAS_EXERCICIO);
 	}
 
+	@Deprecated
+	public RelatorioQuadroMetasExercicio() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

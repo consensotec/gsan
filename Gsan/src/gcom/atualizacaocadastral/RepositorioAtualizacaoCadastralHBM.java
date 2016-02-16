@@ -1,13 +1,5 @@
 package gcom.atualizacaocadastral;
 
-import gcom.atendimentopublico.ligacaoagua.LigacaoAguaSituacao;
-import gcom.atendimentopublico.ligacaoesgoto.LigacaoEsgotoSituacao;
-import gcom.atualizacaocadastral.bean.MapaQuadraHelper;
-import gcom.util.ConstantesSistema;
-import gcom.util.ErroRepositorioException;
-import gcom.util.HibernateUtil;
-import gcom.util.Util;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -19,6 +11,14 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import gcom.atendimentopublico.ligacaoagua.LigacaoAguaSituacao;
+import gcom.atendimentopublico.ligacaoesgoto.LigacaoEsgotoSituacao;
+import gcom.atualizacaocadastral.bean.MapaQuadraHelper;
+import gcom.util.ConstantesSistema;
+import gcom.util.ErroRepositorioException;
+import gcom.util.HibernateUtil;
+import gcom.util.Util;
 
 /**
  * @author Bruno Sá Barreto
@@ -280,7 +280,11 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					"CASE WHEN EXISTS (SELECT reat_id FROM atualizacaocadastral.retorno_atlz_cad_dm reat WHERE reat.imac_id = imacDepois.imac_id AND reat.atac_id = 7  AND matc_id != 10 AND (reat_cdopcaoalteracao = 3 OR reat_cdopcaoalteracao is null)) THEN 2 ELSE 1 END AS icAlteraInscricao, " +
 					"CASE WHEN EXISTS (SELECT reat_id FROM atualizacaocadastral.retorno_atlz_cad_dm reat WHERE reat.imac_id = imacDepois.imac_id AND reat.atac_id = 5  AND matc_id != 10 AND (reat_cdopcaoalteracao = 3 OR reat_cdopcaoalteracao is null)) THEN 2 ELSE 1 END AS icAlteraHidrometro," +
 					"CASE WHEN EXISTS (SELECT reat_id FROM atualizacaocadastral.retorno_atlz_cad_dm reat WHERE reat.imac_id = imacDepois.imac_id AND reat.atac_id = 10 AND matc_id != 10 AND (reat_cdopcaoalteracao = 3 OR reat_cdopcaoalteracao is null)) THEN 2 ELSE 1 END AS icAlteraCliente,  " +
-					"imacDepois.imac_tmultimaalteracao AS dataAtualizacaoBatch " +
+					"imacDepois.imac_tmultimaalteracao AS dataAtualizacaoBatch, " +
+					"imacAntes.imac_nnlote             AS loteAntes, " +
+					"imacAntes.imac_nnsublote          AS subloteAntes, " +
+					"imacDepois.imac_nnlote            AS loteDepois, " +
+					"imacDepois.imac_nnsublote         AS subloteDepois " +
 					"FROM        atualizacaocadastral.param_tab_atl_cad_dm ptac " +
 					"INNER JOIN  atualizacaocadastral.imovel_atlz_cadastral_dm  imacDepois ON imacDepois.ptac_id = ptac.ptac_id AND imacDepois.imac_icdadosretorno = 1 AND imacDepois.imac_icatualizado = 1 " +
 					"LEFT  JOIN  atualizacaocadastral.cliente_atlz_cadastral_dm clacDepois ON clacDepois.imac_id = imacDepois.imac_id " +
@@ -357,6 +361,10 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					.addScalar("icAlteraHidrometro", Hibernate.SHORT)
 					.addScalar("icAlteraCliente",  Hibernate.SHORT)
 					.addScalar("dataAtualizacaoBatch", Hibernate.DATE)
+					.addScalar("loteAntes", Hibernate.INTEGER)
+					.addScalar("subloteAntes", Hibernate.INTEGER)
+					.addScalar("loteDepois", Hibernate.INTEGER)
+					.addScalar("subloteDepois", Hibernate.INTEGER)
 					.setInteger("comando", comando)
 					.list();
 
@@ -436,8 +444,7 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					"idLocalidade                AS idLocalidade, " + 
 					"coalesce(codSetorAntes,0)   AS codSetorAntes, " + 
 					"coalesce(numQuadraAntes,0)  AS numQuadraAntes, " + 
-					"coalesce(codSetorDepois,0)  AS codSetorDepois, " + 
-					"coalesce(numQuadraDepois,0) AS numQuadraDepois, " + 
+					"indicadorComandoFinalizado  AS indicadorComandoFinalizado, " +
 					"sum(qtdeParaVisita)         AS qtdeParaVisita, " + 
 					"sum(qtdeAVisitar)           AS qtdeAVisitar, " + 
 					"sum(qtdeComPendencia)       AS qtdeComPendencia,  " +
@@ -452,8 +459,7 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					"loca.loca_id                    AS idLocalidade, " + 
 					"imacAntes.imac_cdsetorcomercial AS codSetorAntes, " + 
 					"imacAntes.imac_nnquadra         AS numQuadraAntes, " + 
-					"CASE WHEN EXISTS (SELECT reat_id FROM atualizacaocadastral.retorno_atlz_cad_dm reat WHERE reat.imac_id = imacDepois.imac_id AND reat.atac_id = 7  AND matc_id != 10 AND (reat_cdopcaoalteracao = 3 OR reat_cdopcaoalteracao is null)) THEN  imacAntes.imac_cdsetorcomercial ELSE  imacDepois.imac_cdsetorcomercial END AS codSetorDepois, " +
-					"CASE WHEN EXISTS (SELECT reat_id FROM atualizacaocadastral.retorno_atlz_cad_dm reat WHERE reat.imac_id = imacDepois.imac_id AND reat.atac_id = 7  AND matc_id != 10 AND (reat_cdopcaoalteracao = 3 OR reat_cdopcaoalteracao is null)) THEN  imacAntes.imac_nnquadra  ELSE imacDepois.imac_nnquadra  END AS numQuadraDepois, " +
+					"ptac.ptac_icfinalizado			 AS indicadorComandoFinalizado, " +
 					"COUNT(imacAntes.imov_id)        AS qtdeParaVisita, " + 
 					"0                               AS qtdeAVisitar,  " +
 					"0                               AS qtdeComPendencia, " + 
@@ -461,12 +467,11 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					"0                               AS qtdeRetornaCampo " +
 					"FROM atualizacaocadastral.param_tab_atl_cad_dm ptac " + 
 					"INNER JOIN atualizacaocadastral.imovel_atlz_cadastral_dm imacAntes ON imacAntes.ptac_id = ptac.ptac_id AND imacAntes.imac_icdadosretorno = 2 " + 
-					"LEFT  JOIN atualizacaocadastral.imovel_atlz_cadastral_dm imacDepois ON imacDepois.ptac_id = ptac.ptac_id AND imacDepois.imac_icdadosretorno IN (1,3) AND imacAntes.imov_id = imacDepois.imov_id " +
 					"INNER JOIN cadastro.localidade loca ON ptac.loca_id = loca.loca_id " + 
 					"INNER JOIN atualizacaocadastral.arquivo_txt_atlz_cad_dm atac ON atac.ptac_id = ptac.ptac_id " + 
 					"INNER JOIN micromedicao.leiturista leit ON leit.leit_id = atac.leit_id " + 
 					"WHERE ptac.ptac_id = :comando " + 
-					"GROUP BY 1,2,3,4,5,6,7,8,9,10 " +
+					"GROUP BY 1,2,3,4,5,6,7,8,9 " +
 
 					"  UNION  " +
 
@@ -478,8 +483,7 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					"loca.loca_id                    AS idLocalidade, " + 
 					"imacAntes.imac_cdsetorcomercial AS codSetorAntes, " + 
 					"imacAntes.imac_nnquadra         AS numQuadraAntes, " + 
-					"CASE WHEN EXISTS (SELECT reat_id FROM atualizacaocadastral.retorno_atlz_cad_dm reat WHERE reat.imac_id = imacDepois.imac_id AND reat.atac_id = 7  AND matc_id != 10 AND (reat_cdopcaoalteracao = 3 OR reat_cdopcaoalteracao is null)) THEN  imacAntes.imac_cdsetorcomercial ELSE  imacDepois.imac_cdsetorcomercial END AS codSetorDepois, " +
-					"CASE WHEN EXISTS (SELECT reat_id FROM atualizacaocadastral.retorno_atlz_cad_dm reat WHERE reat.imac_id = imacDepois.imac_id AND reat.atac_id = 7  AND matc_id != 10 AND (reat_cdopcaoalteracao = 3 OR reat_cdopcaoalteracao is null)) THEN  imacAntes.imac_nnquadra  ELSE imacDepois.imac_nnquadra  END AS numQuadraDepois, " +
+					"ptac.ptac_icfinalizado			 AS indicadorComandoFinalizado, " +
 					"0                               AS qtdeParaVisita, " + 
 					"COUNT(imacAntes.imov_id)        AS qtdeAVisitar,  " +
 					"0                               AS qtdeComPendencia,  " +
@@ -487,7 +491,6 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					"0                               AS qtdeRetornaCampo " +
 					"FROM atualizacaocadastral.param_tab_atl_cad_dm ptac " + 
 					"INNER JOIN atualizacaocadastral.imovel_atlz_cadastral_dm imacAntes ON imacAntes.ptac_id = ptac.ptac_id AND imacAntes.imac_icdadosretorno = 2 " + 
-					"LEFT  JOIN atualizacaocadastral.imovel_atlz_cadastral_dm imacDepois ON imacDepois.ptac_id = ptac.ptac_id AND imacDepois.imac_icdadosretorno IN (1,3) AND imacAntes.imov_id = imacDepois.imov_id " +
 					"INNER JOIN cadastro.localidade loca ON ptac.loca_id = loca.loca_id  " +
 					"INNER JOIN atualizacaocadastral.arquivo_txt_atlz_cad_dm atac ON atac.ptac_id = ptac.ptac_id " + 
 					"INNER JOIN micromedicao.leiturista leit ON leit.leit_id = atac.leit_id  " +
@@ -495,7 +498,7 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					"SELECT imov_id FROM atualizacaocadastral.imovel_atlz_cadastral_dm imacDepois " + 
 					"WHERE imacDepois.ptac_id = ptac.ptac_id AND imacDepois.imac_icdadosretorno IN (1,3) AND imacDepois.imac_icimovelnovo = 2 AND imacDepois.imov_id = imacAntes.imov_id) " + 
 					"AND ptac.ptac_id = :comando  " +
-					"GROUP BY 1,2,3,4,5,6,7,8,9,10 " +
+					"GROUP BY 1,2,3,4,5,6,7,8,9 " +
 
 					"UNION  " +
 
@@ -507,13 +510,12 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					"loca.loca_id                     AS idLocalidade,  " +
 					"imacAntes.imac_cdsetorcomercial  AS codSetorAntes,  " +
 					"imacAntes.imac_nnquadra          AS numQuadraAntes,  " +
-					"CASE WHEN EXISTS (SELECT reat_id FROM atualizacaocadastral.retorno_atlz_cad_dm reat WHERE reat.imac_id = imacDepois.imac_id AND reat.atac_id = 7  AND matc_id != 10 AND (reat_cdopcaoalteracao = 3 OR reat_cdopcaoalteracao is null)) THEN  imacAntes.imac_cdsetorcomercial ELSE  imacDepois.imac_cdsetorcomercial END AS codSetorDepois, " +
-					"CASE WHEN EXISTS (SELECT reat_id FROM atualizacaocadastral.retorno_atlz_cad_dm reat WHERE reat.imac_id = imacDepois.imac_id AND reat.atac_id = 7  AND matc_id != 10 AND (reat_cdopcaoalteracao = 3 OR reat_cdopcaoalteracao is null)) THEN  imacAntes.imac_nnquadra  ELSE imacDepois.imac_nnquadra  END AS numQuadraDepois, " +
+					"ptac.ptac_icfinalizado			  AS indicadorComandoFinalizado, " +
 					"0                                AS qtdeParaVisita,  " +
 					"0                                AS qtdeAVisitar,  " +
 					"COUNT(imacDepois.imov_id)        AS qtdeComPendencia,  " +
 					"0                                AS qtdeNovos, " +
-					"0                               AS qtdeRetornaCampo " +
+					"0                                AS qtdeRetornaCampo " +
 					"FROM atualizacaocadastral.param_tab_atl_cad_dm ptac " + 
 					"INNER JOIN atualizacaocadastral.imovel_atlz_cadastral_dm imacDepois ON imacDepois.ptac_id = ptac.ptac_id AND imacDepois.imac_icdadosretorno IN (1,3) " + 
 					"LEFT  JOIN atualizacaocadastral.imovel_atlz_cadastral_dm imacAntes ON imacAntes.ptac_id = ptac.ptac_id  AND imacAntes.imac_icdadosretorno = 2 AND imacDepois.imov_id = imacAntes.imov_id " + 
@@ -525,7 +527,7 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 				    "AND ((imacDepois.imac_icdadosretorno = 3) OR (imacDepois.imac_icatualizado = 2 AND imacDepois.imac_icregistroexcluido = 2 AND imacDepois.imac_cdsituacao = 1) OR " +
 				    "     (EXISTS (SELECT reat.imac_id FROM atualizacaocadastral.retorno_atlz_cad_dm reat " +
 					"	          WHERE reat.imac_id = imacDepois.imac_id and matc_id <> 10 and reat_cdopcaoalteracao is null))) " +
-					"GROUP BY 1,2,3,4,5,6,7,8,9,10 " +
+					"GROUP BY 1,2,3,4,5,6,7,8,9 " +
 
 					"  UNION  " +
 
@@ -535,10 +537,9 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					"loca.greg_id                     AS idGerenciaRegional, " + 
 					"loca.uneg_id                     AS idUnidadeNegocio,  " +
 					"loca.loca_id                     AS idLocalidade,  " +
-					"0                                AS codSetorAntes,  " +
-					"0                                AS numQuadraAntes,  " +
-					"imacDepois.imac_cdsetorcomercial AS codSetorDepois,  " +
-					"imacDepois.imac_nnquadra         AS numQuadraDepois,  " +
+					"imacDepois.imac_cdsetorcomercial AS codSetorAntes,  " +
+					"imacDepois.imac_nnquadra         AS numQuadraAntes,  " +
+					"ptac.ptac_icfinalizado			  AS indicadorComandoFinalizado, " +
 					"0                                AS qtdeParaVisita,  " +
 					"0                                AS qtdeAVisitar,  " +
 					"0                                AS qtdeComPendencia,  " +
@@ -550,7 +551,7 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					"INNER JOIN atualizacaocadastral.arquivo_txt_atlz_cad_dm atac ON atac.ptac_id = ptac.ptac_id " + 
 					"INNER JOIN micromedicao.leiturista leit ON leit.leit_id = atac.leit_id " + 
 					"WHERE ptac.ptac_id = :comando  " +
-					"GROUP BY 1,2,3,4,5,6,7,8,9,10 " +
+					"GROUP BY 1,2,3,4,5,6,7,8,9 " +
 					
 					"  UNION  " +
 
@@ -562,8 +563,7 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					"loca.loca_id                     AS idLocalidade, " +
 					"imacAntes.imac_cdsetorcomercial  AS codSetorAntes, " +
 					"imacAntes.imac_nnquadra          AS numQuadraAntes, " +
-					"imacAntes.imac_cdsetorcomercial  AS codSetorDepois, " + 
-					"imacAntes.imac_nnquadra          AS numQuadraDepois, " + 
+					"ptac.ptac_icfinalizado			  AS indicadorComandoFinalizado, " +
 					"0                                AS qtdeParaVisita, " + 
 					"0                                AS qtdeAVisitar, " + 
 					"0                                AS qtdeComPendencia, " + 
@@ -576,11 +576,11 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					"INNER JOIN atualizacaocadastral.arquivo_txt_atlz_cad_dm atac ON atac.ptac_id = ptac.ptac_id " +  
 					"INNER JOIN micromedicao.leiturista leit ON leit.leit_id = atac.leit_id  " +
 					"WHERE ptac.ptac_id = :comando " +
-					"AND  (imacDepois.imac_icatualizado = 2 AND imacDepois.imac_cdsituacao = 2) " + 
-					"GROUP BY 1,2,3,4,5,6,7,8,9,10 " +
+					"AND  imacDepois.imac_cdsituacao = 2 " + 
+					"GROUP BY 1,2,3,4,5,6,7,8,9 " +
 					
 					") temp  " +
-					"GROUP BY 1,2,3,4,5,6,7,8,9,10 ";
+					"GROUP BY 1,2,3,4,5,6,7,8,9 ";
 
 			result = session.createSQLQuery(consulta)
 					.addScalar("comando", Hibernate.INTEGER)
@@ -591,8 +591,7 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					.addScalar("idLocalidade", Hibernate.INTEGER)
 					.addScalar("codSetorAntes", Hibernate.INTEGER)
 					.addScalar("numQuadraAntes", Hibernate.INTEGER)
-					.addScalar("codSetorDepois", Hibernate.INTEGER)
-					.addScalar("numQuadraDepois", Hibernate.INTEGER)
+					.addScalar("indicadorComandoFinalizado", Hibernate.INTEGER)
 					.addScalar("qtdeParaVisita", Hibernate.INTEGER)
 					.addScalar("qtdeAVisitar", Hibernate.INTEGER)
 					.addScalar("qtdeComPendencia", Hibernate.INTEGER)
@@ -818,13 +817,12 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					" SELECT distinct(ptac.ptac_id) as id " +
 					" FROM       atualizacaocadastral.param_tab_atl_cad_dm     ptac " +
 					" INNER JOIN atualizacaocadastral.arquivo_txt_atlz_cad_dm  atac ON atac.ptac_id = ptac.ptac_id AND atac.stac_id = :situacaoTransmissao " +
-					" INNER JOIN atualizacaocadastral.imovel_atlz_cadastral_dm imac ON imac.ptac_id = ptac.ptac_id AND imac_icdadosretorno = :ambienteVirtual2 " +
-					" 																AND imac_icatualizado = :indicadorAtualizado AND imac_icregistroexcluido = :indicadorRegExcluido " +
 					" WHERE " + 
-					"     NOT EXISTS (SELECT reat.imac_id FROM atualizacaocadastral.retorno_atlz_cad_dm reat WHERE reat.imac_id = imac.imac_id AND matc_id <> 10 AND reat_cdopcaoalteracao is null) " +
+					"     NOT EXISTS (SELECT reat.imac_id FROM atualizacaocadastral.retorno_atlz_cad_dm reat WHERE reat.ptac_id = ptac.ptac_id AND matc_id <> 10 AND reat_cdopcaoalteracao is null) " +
 					" AND NOT EXISTS (SELECT imacPre.imac_id FROM atualizacaocadastral.imovel_atlz_cadastral_dm imacPre WHERE imac_icdadosretorno = :ambientePreGSAN AND imacPre.ptac_id = ptac.ptac_id) " +
 					" AND NOT EXISTS (SELECT imacVirtual.imac_id FROM atualizacaocadastral.imovel_atlz_cadastral_dm imacVirtual " +
-					"                 WHERE imac_icatualizado = 2 AND imac_cdsituacao = 1 AND imac_icregistroexcluido = 2 AND imacVirtual.ptac_id = ptac.ptac_id) " +
+					"                 WHERE  imac_icdadosretorno = :ambienteVirtual2 AND imac_icatualizado = :indicadorAtualizado AND imac_cdsituacao = :cdSituacao " +
+					"				    AND  imac_icregistroexcluido = :indicadorRegExcluido AND imacVirtual.ptac_id = ptac.ptac_id) " +
 					" AND ptac.ptac_id = :comando";
 
 			result = (Integer)session.createSQLQuery(consulta)
@@ -832,8 +830,9 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					.setInteger("situacaoTransmissao",SituacaoTransmissaoAtualizacaoCadastralDM.FINALIZADO)
 					.setInteger("ambienteVirtual2",ImovelAtualizacaoCadastralDM.AMBIENTE_VIRTUAL_2)
 					.setInteger("ambientePreGSAN",ImovelAtualizacaoCadastralDM.AMBIENTE_PRE_GSAN)
-					.setShort("indicadorAtualizado", ConstantesSistema.SIM)
+					.setShort("indicadorAtualizado", ConstantesSistema.NAO)
 					.setShort("indicadorRegExcluido", ConstantesSistema.NAO)
+					.setShort("cdSituacao", ImovelAtualizacaoCadastralDM.LIBERADO_PARA_ATUALIZACAO)
 					.setInteger("comando", comando)
 					.uniqueResult();
 			
@@ -975,17 +974,25 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
   					+ " SUM(CASE WHEN dfac_icalteracaonome = 1 OR dfac_icalteracaoendereco = 1     OR dfac_icalteracaosubcategoria = 1" 
       				+ "     OR dfac_icalteracaoeconomia = 1    OR dfac_icalteracaosituacaoagua = 1 OR dfac_icalteracaosituacaoesgoto = 1" 
       				+ "     OR dfac_icalteracaohidrometro = 1  OR dfac_icalteracaorg = 1           OR dfac_icinclusaorg = 1 "
-      				+ "     OR dfac_icalteracaocpfcnpj = 1     OR dfac_icinclusaocpfcnpj = 1       OR dfac_icexclusaocpfcnpj = 1 THEN 1 ELSE 0 END) AS qtdeImovelAlt,"
+      				+ "     OR dfac_icalteracaocpfcnpj = 1     OR dfac_icinclusaocpfcnpj = 1       OR dfac_icexclusaocpfcnpj = 1 "
+      				+ "     OR dfac_icalteracaoinscricao = 1   THEN 1 ELSE 0 END) AS qtdeImovelAlt,"
   					+ " SUM(CASE WHEN dfac_icalteracaonome = 2 AND dfac_icalteracaoendereco = 2     AND dfac_icalteracaosubcategoria = 2 "
       				+ "     AND dfac_icalteracaoeconomia = 2   AND dfac_icalteracaosituacaoagua = 2 AND dfac_icalteracaosituacaoesgoto = 2" 
       				+ "     AND dfac_icalteracaohidrometro = 2 AND dfac_icalteracaorg = 2           AND dfac_icinclusaorg = 2 "
-      				+ "     AND dfac_icalteracaocpfcnpj = 2    AND dfac_icinclusaocpfcnpj = 2       AND dfac_icexclusaocpfcnpj = 2 THEN 1 ELSE 0 END) AS qtdeImovelSemAlt"    
+      				+ "     AND dfac_icalteracaocpfcnpj = 2    AND dfac_icinclusaocpfcnpj = 2       AND dfac_icexclusaocpfcnpj = 2 "
+      				+ "     AND dfac_icalteracaoinscricao = 2  THEN 1 ELSE 0 END) AS qtdeImovelSemAlt,"
+      				+ " SUM(CASE WHEN dfac_icalteracaoinscricao      = 1 THEN 1 ELSE 0 END) AS qtdeAltInscricao,"
+      				
+  					+ " SUM(CASE WHEN dmse_idantes  = :dmCorEsgoto THEN 1 ELSE 0 END) AS qtdeImovelCorEsgotoAntes,"
+  					+ " SUM(CASE WHEN dmse_iddepois = :dmCorEsgoto THEN 1 ELSE 0 END) AS qtdeImovelCorEsgotoDepois"
+					
 					+ " FROM gerencial.fato_dados_fin_atlz_cad"
 					+ " WHERE "
-    				+ "     dmlo_idantes = :dmLocalizacaoAntes" 
-					+ " AND dmlo_iddepois = :dmLocalizacaoDepois"
+					+ "     ptac_id = :comando "
+    				+ " AND dmlo_id = :dmLocalizacao " 
 					+ " AND dmus_id = :dmUsuario "
-					+ " AND dmtp_id = :dmTempo";
+					+ " AND dmtp_id = :dmTempo " 
+					+ " AND dmind_id = :dmIndicador ";
 
 			result = (Object[])session.createSQLQuery(consulta)
 					.addScalar("qtdeImovelPotAguaAntes", Hibernate.INTEGER)
@@ -1043,6 +1050,9 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					.addScalar("qtdeExcCPFCNPJ", Hibernate.INTEGER)
 					.addScalar("qtdeImovelAlt", Hibernate.INTEGER)
 					.addScalar("qtdeImovelSemAlt", Hibernate.INTEGER)   
+					.addScalar("qtdeAltInscricao", Hibernate.INTEGER)
+					.addScalar("qtdeImovelCorEsgotoAntes", Hibernate.INTEGER)
+					.addScalar("qtdeImovelCorEsgotoDepois", Hibernate.INTEGER)
 					.setParameter("dmPotAgua", cacheSitAgua.get(LigacaoAguaSituacao.POTENCIAL))
 					.setParameter("dmFatAgua", cacheSitAgua.get(LigacaoAguaSituacao.FACTIVEL))
 					.setParameter("dmLigAgua", cacheSitAgua.get(LigacaoAguaSituacao.LIGADO))
@@ -1052,10 +1062,12 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 					.setParameter("dmFatEsgoto", cacheSitEsgoto.get(LigacaoEsgotoSituacao.FACTIVEL))
 					.setParameter("dmLigEsgoto", cacheSitEsgoto.get(LigacaoEsgotoSituacao.LIGADO))
 					.setParameter("dmSupEsgoto", cacheSitEsgoto.get(LigacaoEsgotoSituacao.SUPRIMIDO))
-					.setParameter("dmLocalizacaoAntes", resumo.getIdLocalizacaoAntes())
-					.setParameter("dmLocalizacaoDepois", resumo.getIdLocalizacaoDepois())
+					.setParameter("dmCorEsgoto", cacheSitEsgoto.get(LigacaoEsgotoSituacao.CORTADO))
+					.setParameter("dmLocalizacao", resumo.getIdLocalizacao())
 					.setParameter("dmUsuario", resumo.getIdUsuario())
 					.setParameter("dmTempo", resumo.getIdTempo())
+					.setParameter("dmIndicador", resumo.getIdIndicador())
+					.setParameter("comando", resumo.getComando())
 					.uniqueResult();
 		} catch (HibernateException e) {
 			throw new ErroRepositorioException(e, "Erro no Hibernate");
@@ -1064,4 +1076,5 @@ public class RepositorioAtualizacaoCadastralHBM implements IRepositorioAtualizac
 		}
 		return result;
 	}
+
 }

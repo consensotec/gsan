@@ -118,6 +118,11 @@ public class RelatorioResultadoPesquisaConsultaCadastroCdl extends TarefaRelator
 	public RelatorioResultadoPesquisaConsultaCadastroCdl(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_CONSULTA_CADASTRO_CDL);
 	}
+	
+	@Deprecated
+	public RelatorioResultadoPesquisaConsultaCadastroCdl() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

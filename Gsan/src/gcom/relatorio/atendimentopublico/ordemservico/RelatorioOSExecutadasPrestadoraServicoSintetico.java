@@ -111,6 +111,12 @@ public class RelatorioOSExecutadasPrestadoraServicoSintetico extends TarefaRelat
 		super(usuario, ConstantesRelatorios.RELATORIO_OS_EXECUTADAS_PRESTADORA_SERVICO_SINTETICO);
 	}
 	
+	@Deprecated
+	public RelatorioOSExecutadasPrestadoraServicoSintetico() {
+		super(null, "");
+	}
+
+	
 	private Collection<RelatorioOSExecutadasPrestadoraServicoSinteticoBean> inicializarBeanRelatorio(
 			Collection colecaoOSExecutadasRelatorioHelper,Date dataEncerramentoInicial,Date dataEncerramentoFinal,
 			Integer idGerencia, Integer idUnidade, Integer idLocalidade,

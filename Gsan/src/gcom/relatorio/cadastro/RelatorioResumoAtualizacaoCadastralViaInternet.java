@@ -114,6 +114,11 @@ public class RelatorioResumoAtualizacaoCadastralViaInternet extends TarefaRelato
 	public RelatorioResumoAtualizacaoCadastralViaInternet(Usuario usuario) {		
 		super(usuario, ConstantesRelatorios.RELATORIO_RESUMO_ATUALIZACAO_CADASTRAL_VIA_INTERNET);		
 	}
+	
+	@Deprecated
+	public RelatorioResumoAtualizacaoCadastralViaInternet() {
+		super(null, "");
+	}
 
 	/**
 	 * Método que executa a tarefa

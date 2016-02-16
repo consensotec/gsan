@@ -113,6 +113,11 @@ public class RelatorioJurosMultasDebitosCancelados extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_JUROS_MULTAS_DEBITOS_CANCELADOS);
 	}
 
+	@Deprecated
+	public RelatorioJurosMultasDebitosCancelados() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 		
 		Map<String, Object> parametros = criarParametros();

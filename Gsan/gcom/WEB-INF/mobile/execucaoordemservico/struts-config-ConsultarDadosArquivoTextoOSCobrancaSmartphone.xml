@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean 
+			name="ConsultarArquivoTextoOSCobrancaSmartphoneActionForm" 			
+			type="gcom.gui.mobile.execucaoordemservico.ConsultarArquivoTextoOSCobrancaSmartphoneActionForm" /> 
+		<form-bean 
+			name="ConsultarOrdemServicoCobrancaSmartphoneActionForm" 
+			type="gcom.gui.mobile.execucaoordemservico.ConsultarOrdemServicoCobrancaSmartphoneActionForm" /> 
+	</form-beans>
+	<global-forwards />
+	<action-mappings>
+	 	<action 
+			name="ConsultarArquivoTextoOSCobrancaSmartphoneActionForm"  
+			type="gcom.gui.mobile.execucaoordemservico.ExibirConsultarDadosArquivoTextoOSCobrancaSmartphoneAction" 
+			validate="true"
+			scope="session"
+			path="/exibirConsultarDadosArquivoTextoOSCobrancaSmartphoneAction">
+			       
+			<forward 
+				name="exibirConsultarDadosArquivoTextoOSCobrancaSmartphone"
+				path="/jsp/mobile/execucaoordemservico/ordem_servico_txt_os_cobranca_consultar.jsp" />
+		</action> 
+		
+ 		<action name="ConsultarArquivoTextoOSCobrancaSmartphoneActionForm"
+				type="gcom.gui.mobile.execucaoordemservico.ConsultarArquivoTextoOSCobrancaSmartphoneAction"
+				validate="true" scope="session"
+				path="/consultarArquivoTextoOSCobrancaSmartphoneAction">
+				<forward 
+					name="consultarArquivoTextoOSCobrancaSmartphone"
+					path="/jsp/mobile/execucaoordemservico/ordem_servico_txt_os_cobranca_consultar.jsp" />
+		</action>
+		
+		
+   		<action name="ConsultarArquivoTextoOSCobrancaSmartphoneActionForm"
+				type="gcom.gui.mobile.execucaoordemservico.ValidarArquivoTextoOSCobrancaSmartphoneAction"
+				validate="true" scope="session"
+				path="/validarArquivoTextoOSCobrancaSmartphoneAction">			
+				<forward name="consultarArquivoTextoOSCobrancaSmartphone"
+					     path="/consultarArquivoTextoOSCobrancaSmartphoneAction.do" />
+		</action>
+		
+		<action name="ConsultarArquivoTextoOSCobrancaSmartphoneActionForm"
+				type="gcom.gui.mobile.execucaoordemservico.ExcluirArquivoTextoOrdensServicoSmartphoneAction"
+				validate="true" scope="session"
+				path="/excluirArquivoTextoOSCobrancaSmartphoneAction">			
+				<forward name="consultarArquivoTextoOSCobrancaSmartphone"
+					     path="/consultarArquivoTextoOSCobrancaSmartphoneAction.do" />
+		</action>
+				
+		<action name="ConsultarArquivoTextoOSCobrancaSmartphoneActionForm"
+				type="gcom.gui.mobile.execucaoordemservico.ExibirInformarMotivoFinalizacaoAction"
+				validate="true" scope="session"
+				path="/exibirInformarMotivoFinalizacaoAction">	
+				<forward 
+					name="exibirInformarMotivoFinalizacaoAction"
+					path="/jsp/mobile/execucaoordemservico/ordem_servico_txt_os_cobranca_motivo_finalizacao.jsp" />		
+		</action>
+		
+		<action name="ConsultarOrdemServicoCobrancaSmartphoneActionForm"  
+				type="gcom.gui.mobile.execucaoordemservico.ExibirConsultarOrdemServicoCobrancaSmartphoneAction" 
+				validate="true"
+				scope="session"
+				path="/exibirConsultarOrdemServicoCobrancaSmartphoneAction">
+				<forward 
+					name="exibirConsultarOrdemServicoCobrancaSmartphone"
+					path="/jsp/mobile/execucaoordemservico/arquivo_texto_ordens_servico_cobranca_smartphone_consultar.jsp" />
+		</action>
+		
+		<action name="ConsultarOrdemServicoCobrancaSmartphoneActionForm"
+				type="gcom.gui.mobile.execucaoordemservico.EncerrarOrdemServicoCobrancaSmartphoneAction"
+				validate="true" scope="session"
+				path="/encerrarOrdemServicoCobrancaSmartphoneAction">
+				<forward name="consultarDadosOrdemServicoCobrancaSmartphone"
+					     path="/exibirConsultarOrdemServicoCobrancaSmartphoneAction.do" />
+		</action>
+
+ 		<action name="ConsultarOrdemServicoCobrancaSmartphoneActionForm"
+				type="gcom.gui.mobile.execucaoordemservico.ConsultarOrdemServicoCobrancaSmartphoneAction"
+				validate="true" scope="session"
+				path="/consultarOrdemServicoCobrancaSmartphoneAction">
+				<forward 
+					name="consultarOrdemServicoCobrancaSmartphone"
+					path="/jsp/mobile/execucaoordemservico/arquivo_texto_ordens_servico_cobranca_smartphone_consultar.jsp" />
+		</action>
+		
+		 <action name="ConsultarArquivoTextoOSCobrancaSmartphoneActionForm"
+				 type="gcom.gui.mobile.execucaoordemservico.ExibirAtualizarLeituristaOSCobrancaSmartphoneAction"
+				 validate="true" scope="session"
+				 path="/exibirAtualizarLeituristaOSCobrancaSmartphoneAction">
+				 <forward 
+					name="exibirPopUp"
+					path="/jsp/mobile/execucaoordemservico/ordem_servico_cobranca_smartphone_alterar_leiturista_popup.jsp" />
+		</action>
+		
+		<action name="ConsultarOrdemServicoCobrancaSmartphoneActionForm"  
+				type="gcom.gui.mobile.execucaoordemservico.ExibirConsultarOrdemServicoCobrancaSmartphoneAction" 
+				validate="true"
+				scope="session"
+				path="/exibirConsultarOrdemServicoCobrancaSmartphoneAction">
+				<forward 
+					name="exibirConsultarOrdemServicoCobrancaSmartphone"
+					path="/jsp/mobile/execucaoordemservico/arquivo_texto_ordens_servico_cobranca_smartphone_consultar.jsp" />
+		</action>
+		
+		<action name="ConsultarArquivoTextoOSCobrancaSmartphoneActionForm"
+				type="gcom.gui.mobile.execucaoordemservico.TransmitirArquivoTxtOSCobrancaSmartphoneOffLineAction"
+				validate="true" scope="session"
+				path="/transmitirAquivoTxtOSCobrancaSmartphoneAction">
+				<forward name="consultarArquivoTextoOSCobrancaSmartphoneAction"
+					     path="/consultarArquivoTextoOSCobrancaSmartphoneAction.do" />
+		</action>
+		
+		<action name="ConsultarArquivoTextoOSCobrancaSmartphoneActionForm"			     
+				type="gcom.gui.mobile.execucaoordemservico.GerarRelatorioConsultarArquivoTextoOrdensServicoSmartphoneAction"
+				validate="true" scope="session"
+				path="/gerarRelatorioConsultarArquivoTextoOrdensServicoSmartphoneAction" />	
+
+	</action-mappings>
+	<message-resources null="false" parameter="gcom.properties.application" />		
+</struts-config>

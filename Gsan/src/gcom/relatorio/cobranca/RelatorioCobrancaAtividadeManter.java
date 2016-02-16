@@ -76,13 +76,18 @@
 package gcom.relatorio.cobranca;
 
 import gcom.batch.Relatorio;
+import gcom.cadastro.geografico.Bairro;
+import gcom.cadastro.geografico.FiltroBairro;
 import gcom.cadastro.sistemaparametro.SistemaParametro;
 import gcom.cobranca.CobrancaAtividade;
+import gcom.cobranca.CobrancaSituacao;
 import gcom.cobranca.FiltroCobrancaAtividade;
+import gcom.cobranca.FiltroCobrancaCriterio;
 import gcom.fachada.Fachada;
 import gcom.relatorio.ConstantesRelatorios;
 import gcom.relatorio.RelatorioDataSource;
 import gcom.relatorio.RelatorioVazioException;
+import gcom.relatorio.cadastro.geografico.RelatorioManterBairroBean;
 import gcom.seguranca.acesso.usuario.Usuario;
 import gcom.tarefa.TarefaException;
 import gcom.tarefa.TarefaRelatorio;
@@ -92,6 +97,8 @@ import gcom.util.agendadortarefas.AgendadorTarefas;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -107,6 +114,11 @@ public class RelatorioCobrancaAtividadeManter extends TarefaRelatorio {
 	private static final long serialVersionUID = 1L;
 	public RelatorioCobrancaAtividadeManter(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_COBRANCA_ATIVIDADE_MANTER);
+	}
+
+	@Deprecated
+	public RelatorioCobrancaAtividadeManter() {
+		super(null, "");
 	}
 
 	/**

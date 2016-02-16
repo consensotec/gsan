@@ -508,290 +508,438 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 		repositorioImovel = RepositorioImovelHBM.getInstancia();
 	}
 	
-	
 	/**
-	 * [UC0113] Faturar Grupo de Faturamento
+	 * Este caso de uso ? respons?vel pelo pr?-faturamento das contas que ser?o emitidas no cliente
+	 * (Gera??o Simult?nea)
 	 *
-	 * [SB0002] - Determinar Valores para Faturamento de ?gua e/ou Esgoto
+	 * [UC0113] - Pr?-Faturar Grupo de Faturamento
 	 *
 	 * @author Raphael Rossiter
-	 * @date 28/03/2008
+	 * @date 26/03/2008
 	 *
+	 * @param anoMesFaturamento
+	 * @param atividade
+	 * @param sistemaParametro
+	 * @param faturamentoAtivCronRota
+	 * @param colecaoResumoFaturamento
 	 * @param imovel
-	 * @param faturamentoGrupo
-	 * @param colecaoCategoriasOUSubCategorias
-	 * @return DeterminarValoresFaturamentoAguaEsgotoHelper
 	 * @throws ControladorException
 	 */
-	public DeterminarValoresFaturamentoAguaEsgotoHelper determinarValoresFaturamentoAguaEsgoto(Imovel imovel, 
-			Integer anoMesFaturamento, Collection colecaoCategoriasOUSubCategorias, 
-			FaturamentoGrupo faturamentoGrupo, ConsumoHistorico consumoHistoricoAgua,
-			ConsumoHistorico consumoHistoricoEsgoto) throws ControladorException{
-		
-		
-		DeterminarValoresFaturamentoAguaEsgotoHelper helper = new DeterminarValoresFaturamentoAguaEsgotoHelper();
-		
-		//CONSUMO_HISTORICO_AGUA
-		if (consumoHistoricoAgua != null) {
-			
-			helper.setConsumoHistoricoAgua(consumoHistoricoAgua);
+	protected void preFaturarImovel(Integer anoMesFaturamento,
+			SistemaParametro sistemaParametro,
+			FaturamentoAtivCronRota faturamentoAtivCronRota,
+			Collection colecaoResumoFaturamento,
+			Imovel imovel, boolean faturamentoAntecipado, FaturamentoGrupo faturamentoGrupo) 
+			throws ControladorException {
 
-			if (consumoHistoricoAgua.getIndicadorFaturamento() != null) {
-				
-				//INDICADOR_FATURAMENTO_AGUA
-				helper.setIndicadorFaturamentoAgua(consumoHistoricoAgua
-				.getIndicadorFaturamento());
-			}
+		//Verifica se existe conta para o im?vel para o ano/m?s de faturamento.
+		Integer existeImovelConta = (Integer) getControladorImovel()
+		.pesquisarImovelIdComConta(imovel.getId(), anoMesFaturamento);
+
+
+		// CASO N?O EXISTA CONTA PARA O IMOVEL NO ANO/MES DE REFERENCIA
+		if (existeImovelConta == null) {
+
+			// TIPO DE ATIVIDADE
+			boolean gerarAtividadeGrupoFaturamento = true;
 			
-			if (consumoHistoricoAgua.getNumeroConsumoFaturadoMes() != null) {
-				
-				//CONSUMO_FATURADO_AGUA
-				helper.setConsumoFaturadoAgua(consumoHistoricoAgua
-				.getNumeroConsumoFaturadoMes());
-			}
-			
-			if (consumoHistoricoAgua.getConsumoRateio() != null){
-				
-				//CONSUMO_RATEIO_AGUA
-				helper.setConsumoRateioAgua(consumoHistoricoAgua.getConsumoRateio());
-			}
-			
-			if (consumoHistoricoAgua.getConsumoTipo() != null){
-				
-				//CONSUMO_TIPO_AGUA
-				helper.setConsumoTipoAgua(consumoHistoricoAgua.getConsumoTipo());
-			}
+			// [SF0001] - Determinar Faturamento para o Im?vel
+			this.preDeterminarFaturamentoImovel(imovel, gerarAtividadeGrupoFaturamento,
+					faturamentoAtivCronRota, colecaoResumoFaturamento ,sistemaParametro, faturamentoAntecipado, anoMesFaturamento, 
+					faturamentoGrupo);
 		}
+	}
 	
-		
-		//CONSUMO_HISTORICO_ESGOTO
-		if (consumoHistoricoEsgoto != null) {
-			
-			helper.setConsumoHistoricoEsgoto(consumoHistoricoEsgoto);
+    /**
+	 * Este caso de uso ? respons?vel pelo pr?-faturamento das contas que ser?o emitidas no cliente
+	 * (Gera??o Simult?nea)
+	 *
+	 * [UC0000] - Pr?-Faturar Grupo de Faturamento
+	 *
+	 * @author Raphael Rossiter
+	 * @date 09/04/2008
+	 *
+	 * @param colecaoRota
+	 * @param anoMesFaturamento
+	 * @param idFaturamentoGrupo
+	 * @param idFuncionalidadeIniciada
+	 * @throws ControladorException
+	 */
+	public void preFaturarGrupoFaturamento(Rota rota,
+			Integer anoMesFaturamento, Integer idFaturamentoGrupo,
+			int idFuncionalidadeIniciada) throws ControladorException {
 
-			if (consumoHistoricoEsgoto.getIndicadorFaturamento() != null) {
-				
-				//INDICADOR_FATURAMENTO_ESGOTO
-				helper.setIndicadorFaturamentoEsgoto(consumoHistoricoEsgoto
-				.getIndicadorFaturamento());
-			}
+		int idUnidadeIniciada = 0;
 
-			if (consumoHistoricoEsgoto.getNumeroConsumoFaturadoMes() != null) {
-				
-				//CONSUMO_FATURADO_ESGOTO
-				helper.setConsumoFaturadoEsgoto(consumoHistoricoEsgoto
-				.getNumeroConsumoFaturadoMes());
-			}
-			
-			if (consumoHistoricoEsgoto.getConsumoRateio() != null){
-				
-				//CONSUMO_RATEIO_ESGOTO
-				helper.setConsumoRateioEsgoto(consumoHistoricoEsgoto.getConsumoRateio());
-			}
-			
-			if (consumoHistoricoEsgoto.getConsumoTipo() != null){
-				
-				//CONSUMO_TIPO_ESGOTO
-				helper.setConsumoTipoEsgoto(consumoHistoricoEsgoto.getConsumoTipo());
-			}
-		}
-		
-		// [UC0105] - Obter Consumo M?nimo da Liga??o
-		int consumoMinimoLigacao = getControladorMicromedicao()
-		.obterConsumoMinimoLigacao(imovel, null);
-		
-		helper.setConsumoMinimoLigacao(consumoMinimoLigacao);
-		
-		
-		//DATA LEITURA ANTERIOR E DATA LEITURA ATUAL
-		Integer anoMesFaturamentoAnterior = Util.subtrairMesDoAnoMes(anoMesFaturamento, 1);
-		
-		Date dataLeituraAnteriorFaturamento = null;
+		// PROCESSO BATCH
+		// ------------------------------------------------------------------------------------
+		idUnidadeIniciada = getControladorBatch()
+				.iniciarUnidadeProcessamentoBatch(idFuncionalidadeIniciada,
+						UnidadeProcessamento.ROTA, rota.getId());
+		// ---------------------------------------------------------------------------------------------------
+
 		try {
-			
-			dataLeituraAnteriorFaturamento = 
-				(Date) repositorioFaturamento.pesquisarFaturamentoAtividadeCronogramaDataRealizacao(
-				faturamentoGrupo.getId(), FaturamentoAtividade.EFETUAR_LEITURA, anoMesFaturamentoAnterior);
-			
-			helper.setDataLeituraAnterior(dataLeituraAnteriorFaturamento);
 
-		} catch (ErroRepositorioException ex) {
-			sessionContext.setRollbackOnly();
-			throw new ControladorException("erro.sistema", ex);
+			SistemaParametro sistemaParametro = getControladorUtil()
+					.pesquisarParametrosDoSistema();
+
+			FaturamentoGrupo faturamentoGrupo = new FaturamentoGrupo();
+			faturamentoGrupo.setId(idFaturamentoGrupo);
+			faturamentoGrupo.setAnoMesReferencia(anoMesFaturamento);
+
+			// Objeto que armazenar? as informa??es para dele??o das contas
+			ApagarDadosFaturamentoHelper helper = new ApagarDadosFaturamentoHelper();
+
+			// SITUA??O PR? FATURADA
+			helper.setIdDebitoCreditoSituacaoAtual(DebitoCreditoSituacao.PRE_FATURADA);
+
+			// GRUPO DE FATURAMENTO
+			helper.setFaturamentoGrupo(faturamentoGrupo);
+
+			helper.setRota(rota);
+			helper.setAnoMesFaturamento(anoMesFaturamento);
+
+			/*
+			 * Pesquisando o FaturamentoAtivCronRota para ser utilizando no
+			 * momento de defini??o do vencimento da conta.
+			 */
+			FaturamentoAtivCronRota faturamentoAtivCronRota = this
+					.pesquisarFaturamentoAtivCronRotaPara(rota.getId(),
+							FaturamentoAtividade.GERAR_ARQUIVO_LEITURA,
+							idFaturamentoGrupo, anoMesFaturamento);
+
+			rota.setFaturamentoGrupo(faturamentoGrupo);
+			faturamentoAtivCronRota.setRota(rota);
+
+			// APAGAR DADOS GERADOS PARA A ROTA NO ANO/MES DE REFERENCIA DO
+			// FATURAMENTO
+			// =================================================================================================
+
+			this.apagarDadosGeradosFaturarGrupoFaturamento(helper,FaturamentoAtividade.FATURAR_GRUPO);
+
+			// =================================================================================================
+
+			// Vari?veis para a pagina??o da pesquisa de Imovel por Grupo
+			// Faturamento
+			// ========================================================================
+			boolean flagTerminou = false;
+			final int quantidadeRegistros = 3000;
+			int numeroIndice = 0;
+			// ========================================================================
+
+			while (!flagTerminou) {
+
+				Collection colecaoImovel = this
+						.pesquisarImovelGrupoFaturamento(rota, numeroIndice,
+								quantidadeRegistros, true, false);
+
+				// Resumos de faturamento para simula??o.
+				Collection colecaoResumoFaturamento = new ArrayList();
+
+				/*
+				 * Caso exista ids de im?veis para a rota atual determina o
+				 * faturamento para cada im?vel retornado.
+				 */
+				if (colecaoImovel != null && !colecaoImovel.isEmpty()) {
+
+					Iterator iteratorColecaoImoveis = colecaoImovel.iterator();
+
+					// LA?O PARA DETERMINAR O FATURAMENTO DE TODOS OS IMOVEIS DA
+					// ROTA ATUAL
+					Imovel imovel = null;
+					while (iteratorColecaoImoveis.hasNext()) {
+
+						imovel = (Imovel) iteratorColecaoImoveis.next();
+
+						// FATURAMENTO ATUAL
+						// ----------------------------------------------------------------
+						this.preFaturarImovel(anoMesFaturamento,
+								sistemaParametro, faturamentoAtivCronRota,
+								colecaoResumoFaturamento, imovel, false,
+								faturamentoGrupo);
+						// ----------------------------------------------------------------------------------
+
+					}// FIM DO LOOP DE IMOVEIS
+
+				}// FIM DO LOOP DE IMOVEIS
+
+				/**
+				 * Incrementa o n? do indice da p?gina??o
+				 */
+				numeroIndice = numeroIndice + quantidadeRegistros;
+
+				/**
+				 * Caso a cole??o de imoveis retornados for menor que a
+				 * quantidade de registros seta a flag indicando que a pagina??o
+				 * terminou.
+				 */
+				if (colecaoImovel == null
+						|| colecaoImovel.size() < quantidadeRegistros) {
+
+					flagTerminou = true;
+				}
+
+				if (colecaoImovel != null) {
+					colecaoImovel.clear();
+					colecaoImovel = null;
+				}
+
+			}// FIM DO LOOP DA PAGINA??O
+
+			// --------------------------------------------------------
+			//
+			// Registrar o fim da execu??o da Unidade de Processamento
+			//
+			// --------------------------------------------------------
+			getControladorBatch().encerrarUnidadeProcessamentoBatch(null,
+					idUnidadeIniciada, false);
+
+		} catch (Exception e) {
+
+			/*
+			 * Este catch serve para interceptar qualquer exce??o que o processo
+			 * batch venha a lan?ar e garantir que a unidade de processamento do
+			 * batch ser? atualizada com o erro ocorrido.
+			 */
+			getControladorBatch().encerrarUnidadeProcessamentoBatch(e,
+					idUnidadeIniciada, true);
+			throw new EJBException(e);
 		}
-		
-		
-		Date dataLeituraAtualFaturamento = null;
-		try {
-			dataLeituraAtualFaturamento = repositorioFaturamento
-			.pesquisarDataLeituraAtualMovimentoContaPreFaturada(anoMesFaturamento,imovel.getId());
-			if(dataLeituraAtualFaturamento == null || dataLeituraAtualFaturamento.equals("")){
-				dataLeituraAtualFaturamento = (Date) repositorioFaturamento
-				.pesquisarFaturamentoAtividadeCronogramaDataRealizacao(faturamentoGrupo.getId(),
-				FaturamentoAtividade.EFETUAR_LEITURA, anoMesFaturamento);	
-			}
-			
-			helper.setDataLeituraAtual(dataLeituraAtualFaturamento);
 
-		} catch (ErroRepositorioException ex) {
-			sessionContext.setRollbackOnly();
-			throw new ControladorException("erro.sistema", ex);
+	}	
+	
+	/**
+	 * Determina os dados do pr?-faturamento do im?vel.
+	 *
+	 * [UCXXXX] - Pr?-Faturar Grupo de Faturamento
+	 *
+	 * [SB0001 - Determinar Faturamento para o Im?vel]	
+	 *
+	 * @author Raphael Rossiter
+	 * @date 27/03/2008
+	 *
+	 * @param imovel
+	 * @param gerarAtividadeGrupoFaturamento
+	 * @param faturamentoAtivCronRota
+	 * @param colecaoResumoFaturamento
+	 * @param sistemaParametro
+	 * @param faturamentoAntecipado
+	 * @param anoMesFaturamento
+	 * @throws ControladorException
+	 */
+	protected void preDeterminarFaturamentoImovel(Imovel imovel,
+			boolean gerarAtividadeGrupoFaturamento, FaturamentoAtivCronRota faturamentoAtivCronRota,
+			Collection colecaoResumoFaturamento,
+			SistemaParametro sistemaParametro, boolean faturamentoAntecipado,
+			Integer anoMesFaturamento, FaturamentoGrupo faturamentoGrupo)
+			throws ControladorException {
+		
+		Collection colecaoCategoriaOUSubcategoria = null;
+		Collection colecaoCategorias = null;
+		
+		// [UC0108] - Obter Quantidade de Economias por Categoria
+		colecaoCategorias = this.getControladorImovel()
+		.obterQuantidadeEconomiasCategoria(imovel);
+
+		//Verificando se a empresa fatura por CATEGORIA ou SUBCATEGORIA 
+		if (sistemaParametro.getIndicadorTarifaCategoria().equals(SistemaParametro.INDICADOR_TARIFA_CATEGORIA)){
+			
+			//[UC0108] - Obter Quantidade de Economias por Categoria
+			colecaoCategoriaOUSubcategoria = colecaoCategorias;
+		}
+		else{
+			
+			//[UC0108] - Obter Quantidade de Economias por Subcategoria
+			colecaoCategoriaOUSubcategoria = this.getControladorImovel()
+			.obterQuantidadeEconomiasSubCategoria(imovel.getId());
 		}
 
+		DeterminarValoresFaturamentoAguaEsgotoHelper helperValoresAguaEsgoto = 
+		new DeterminarValoresFaturamentoAguaEsgotoHelper();
 		
-		// CASO O IM?VEL SEJA PARA FATURAR ?GUA
-		if (imovel.getLigacaoAguaSituacao().getIndicadorFaturamentoSituacao()
-				.equals(LigacaoAguaSituacao.FATURAMENTO_ATIVO)) {
-
-			// MEDICAO_HISTORICO_AGUA
-			MedicaoHistorico medicaoHistoricoAgua = this.getControladorMicromedicao()
-			.pesquisarMedicaoHistoricoTipoAgua(imovel.getId(), anoMesFaturamento);
-
-			if (medicaoHistoricoAgua != null) {
-				
-				// DATA_LEITURA_ANTERIOR
-				if (medicaoHistoricoAgua.getDataLeituraAnteriorFaturamento() != null) {
-					
-					helper.setDataLeituraAnterior(medicaoHistoricoAgua
-							.getDataLeituraAnteriorFaturamento());
-				}
-
-				// DATA_LEITURA_ATUAL
-				if (medicaoHistoricoAgua.getDataLeituraAtualFaturamento() != null) {
-					
-					helper.setDataLeituraAtual(medicaoHistoricoAgua
-							.getDataLeituraAtualFaturamento());
-				}
-			}
-		}
-
-		
-		// CASO O IM?VEL SEJA PARA FATURAR ESGOTO
-		if (imovel.getLigacaoEsgotoSituacao().getIndicadorFaturamentoSituacao()
-				.equals(LigacaoEsgotoSituacao.FATURAMENTO_ATIVO)) {
-
-			// MEDICAO_HISTORICO_POCO
-			MedicaoHistorico medicaoHistoricoPoco = this.getControladorMicromedicao()
-			.pesquisarMedicaoHistoricoTipoPoco(imovel.getId(), anoMesFaturamento);
-
-			if (medicaoHistoricoPoco != null) {
-
-				// DATA_LEITURA_ANTERIOR
-				if (medicaoHistoricoPoco.getDataLeituraAnteriorFaturamento() != null) {
-					
-					helper.setDataLeituraAnterior(medicaoHistoricoPoco
-							.getDataLeituraAnteriorFaturamento());
-				}
-
-				// DATA_LEITURA_ATUAL
-				if (medicaoHistoricoPoco.getDataLeituraAtualFaturamento() != null) {
-					
-					helper.setDataLeituraAtual(medicaoHistoricoPoco
-							.getDataLeituraAtualFaturamento());
-				}
-			}
-
-            //PERCENTUAL DE ESGOTO
-			BigDecimal percentualEsgoto = this.verificarPercentualEsgotoAlternativo(imovel, 
-			helper.getConsumoFaturadoEsgoto());
-			
-			helper.setPercentualEsgoto(percentualEsgoto);
-
-			//PERCENTUAL COLETA DE ESGOTO
-			BigDecimal percentualColetaEsgoto = this.obterPercentualColetaEsgotoImovel(imovel.getId());
-			
-			helper.setPercentualColetaEsgoto(percentualColetaEsgoto);
+		boolean temHidrometro = false;
+		if((imovel.getHidrometroInstalacaoHistorico() != null && imovel.getHidrometroInstalacaoHistorico().getId() != null) ||
+				(imovel.getLigacaoAgua() != null && imovel.getLigacaoAgua().getHidrometroInstalacaoHistorico() != null &&
+						imovel.getLigacaoAgua().getHidrometroInstalacaoHistorico().getId() != null) ){
+			temHidrometro = true;
 		}
 
 		/*
-		 * Caso N?O existe cronograma para o anoMes informado ou seja a
-		 * dataLeituraAnteriorFaturamento ou a dataLeituraAtualFaturamento
-		 * estaja nula
+		 * Alterado por Raphael Rossiter em 17/09/2007 (Analistas: Aryed Lins e Eduardo Borges)
+		 * 
+		 * OBJ: Selecionar os im?veis que far?o parte do faturamento de acordo
+		 * com o INDICADOR_FATURAMENTO_SITUACAO que se encontra na situa??o da
+		 * liga??o e ?gua e esgoto do im?vel.
 		 */
-		if (dataLeituraAnteriorFaturamento == null
-				|| dataLeituraAtualFaturamento == null) {
-
-			Date[] periodoLeitura = this.gerarPeriodoLeituraFaturamento(
-					dataLeituraAtualFaturamento,
-					dataLeituraAnteriorFaturamento,
-					faturamentoGrupo, anoMesFaturamento, anoMesFaturamentoAnterior);
-
-			// DATA_LEITURA_ANTERIOR
-			helper.setDataLeituraAnterior(periodoLeitura[0]);
+		if (imovel.getLigacaoAguaSituacao().getIndicadorFaturamentoSituacao()
+			.equals(LigacaoAguaSituacao.FATURAMENTO_ATIVO) || 
+			imovel.getLigacaoEsgotoSituacao().getIndicadorFaturamentoSituacao().equals(
+			LigacaoEsgotoSituacao.FATURAMENTO_ATIVO) || temHidrometro) {
 			
-			// DATA_LEITURA_ATUAL
-			helper.setDataLeituraAtual(periodoLeitura[1]);
-		}
-		
-		//[UC0120] - Calcular Valores de ?gua e/ou Esgoto
-		Collection colecaoCalcularValoresAguaEsgotoHelper = calcularValoresAguaEsgoto(
-				anoMesFaturamento, imovel.getLigacaoAguaSituacao().getId(),
-				imovel.getLigacaoEsgotoSituacao().getId(), helper.getIndicadorFaturamentoAgua(),
-				helper.getIndicadorFaturamentoEsgoto(), colecaoCategoriasOUSubCategorias,
-				helper.getConsumoFaturadoAgua(), helper.getConsumoFaturadoEsgoto(),
-				helper.getConsumoMinimoLigacao(), helper.getDataLeituraAnterior(),
-				helper.getDataLeituraAtual(), helper.getPercentualEsgoto(),
-				imovel.getConsumoTarifa().getId(), helper.getConsumoTipoAgua(), helper.getConsumoTipoEsgoto());
+			//Verificar se ? para faturar pela situa??o especial de faturamento
+			
+			FiltroFaturamentoSituacaoHistorico filtroFaturamentoSituacaoHistorico = 
+				new FiltroFaturamentoSituacaoHistorico();
+			filtroFaturamentoSituacaoHistorico.adicionarParametro( 
+					new ParametroSimples( 
+							FiltroFaturamentoSituacaoHistorico.ID_IMOVEL, imovel.getId() ) );
+			filtroFaturamentoSituacaoHistorico.adicionarParametro( 
+					new ParametroNulo ( 
+							FiltroFaturamentoSituacaoHistorico.ANO_MES_FATURAMENTO_RETIRADA ) );
+			Collection<FaturamentoSituacaoHistorico> 
+				colFiltroFaturamentoSituacaoHistorico = 
+					this.getControladorUtil().pesquisar( 
+							filtroFaturamentoSituacaoHistorico,
+							FaturamentoSituacaoHistorico.class.getName());
+			
+			FaturamentoSituacaoHistorico faturamentoSituacaoHistorico = 
+				( FaturamentoSituacaoHistorico ) Util.retonarObjetoDeColecao( colFiltroFaturamentoSituacaoHistorico );
 
-		helper.setColecaoCalcularValoresAguaEsgotoHelper(colecaoCalcularValoresAguaEsgotoHelper);
-		
-		//TOTALIZANDO OS VALORES DE ?GUA E ESGOTO
-		BigDecimal valorTotalAgua = ConstantesSistema.VALOR_ZERO;
-		BigDecimal valorTotalEsgoto = ConstantesSistema.VALOR_ZERO;
-		
-		if (colecaoCalcularValoresAguaEsgotoHelper != null && 
-			!colecaoCalcularValoresAguaEsgotoHelper.isEmpty()){
-		
-			Iterator iteratorColecaoCalcularValoresAguaEsgotoHelper = 
-			colecaoCalcularValoresAguaEsgotoHelper.iterator();
+			boolean faturar = true;
 
-			while (iteratorColecaoCalcularValoresAguaEsgotoHelper.hasNext()) {
+			if (imovel.getFaturamentoSituacaoTipo() != null && !imovel.getFaturamentoSituacaoTipo().equals("")) {
 
-				CalcularValoresAguaEsgotoHelper calcularValoresAguaEsgotoHelper = 
-				(CalcularValoresAguaEsgotoHelper) iteratorColecaoCalcularValoresAguaEsgotoHelper
-				.next();
-
-				/*
-				 * Caso tenha valor de ?gua faturado para categoria adiciona o valor de ?gua ao valor total 
-				 * de ?gua. Caso contr?rio soma zero.
-				 */
-				if (calcularValoresAguaEsgotoHelper.getValorFaturadoAguaCategoria() != null) {
-						
-					//VALOR_TOTAL_AGUA
-					valorTotalAgua = valorTotalAgua.add(calcularValoresAguaEsgotoHelper
-					.getValorFaturadoAguaCategoria());
-				} 
-				else {
-						
-					//VALOR_TOTAL_AGUA
-					valorTotalAgua = valorTotalAgua.add(ConstantesSistema.VALOR_ZERO);
-				}
-
-				/*
-				 * Caso tenha valor de esgoto faturado para categoria adiciona o valor de esgoto ao valor total 
-				 * de esgoto. Caso contr?rio soma zero.
-				 */
-				if (calcularValoresAguaEsgotoHelper.getValorFaturadoEsgotoCategoria() != null) {
-						
-					//VALOR_TOTAL_ESGOTO
-					valorTotalEsgoto = valorTotalEsgoto.add(calcularValoresAguaEsgotoHelper
-					.getValorFaturadoEsgotoCategoria());
-				} 
-				else {
-						
-					//VALOR_TOTAL_ESGOTO
-					valorTotalEsgoto = valorTotalEsgoto.add(ConstantesSistema.VALOR_ZERO);
-				}
+			   if (	( faturamentoSituacaoHistorico != null &&
+					  anoMesFaturamento >= faturamentoSituacaoHistorico.getAnoMesFaturamentoSituacaoInicio() &&
+					  anoMesFaturamento <= faturamentoSituacaoHistorico.getAnoMesFaturamentoSituacaoFim() ) &&	
+						( imovel.getFaturamentoSituacaoTipo() != null && 
+						  imovel.getFaturamentoSituacaoTipo().getIndicadorParalisacaoFaturamento().intValue() == 1 && 
+					      imovel.getFaturamentoSituacaoTipo().getIndicadorValidoAgua().intValue() == 1 ) ) {
+				   faturar = false;
+			   }
 			}
+			
+			//[SB0002] - Determinar Valores para Faturamento de ?gua e/ou Esgoto
+			if(faturar){
+			  helperValoresAguaEsgoto.setValorTotalAgua(BigDecimal.ONE);
+			  helperValoresAguaEsgoto.setValorTotalEsgoto(BigDecimal.ONE);
+			}else{
+				helperValoresAguaEsgoto.setValorTotalAgua(BigDecimal.ZERO);
+				helperValoresAguaEsgoto.setValorTotalEsgoto(BigDecimal.ZERO);
+			}
+			
+			//PERCENTUAL DE ESGOTO
+			helperValoresAguaEsgoto.setPercentualEsgoto(this.verificarPercentualEsgotoAlternativo(imovel, null));
+			
+			//PERCENTUAL COLETA DE ESGOTO
+			BigDecimal percentualColetaEsgoto = this.obterPercentualColetaEsgotoImovel(imovel.getId());
+			
+			helperValoresAguaEsgoto.setPercentualColetaEsgoto(percentualColetaEsgoto);
+			
 		}
+
 		
-		helper.setValorTotalAgua(valorTotalAgua);
-		helper.setValorTotalEsgoto(valorTotalEsgoto);
-		
-		
-		return helper;
-	}
-	
+		// [SB0003] - Verificar N?o Gera??o da Conta
+		boolean gerarConta = this.verificarNaoGeracaoConta(imovel,
+		helperValoresAguaEsgoto.getValorTotalAgua(), helperValoresAguaEsgoto.getValorTotalEsgoto(), 
+		anoMesFaturamento, faturamentoGrupo);
+
+		if (gerarConta) {
+			
+			//RECOLOCAR OS VALORES ZERADOS PARA ?GUA E ESGOTO
+			helperValoresAguaEsgoto.setValorTotalAgua(BigDecimal.ZERO);
+			helperValoresAguaEsgoto.setValorTotalEsgoto(BigDecimal.ZERO);
+			
+			boolean preFaturamento = true;
+			
+			//[SB0004] - Gerar os D?bitos Cobrados
+			GerarDebitoCobradoHelper gerarDebitoCobradoHelper = this.gerarDebitoCobrado(imovel, 
+			anoMesFaturamento, sistemaParametro, gerarAtividadeGrupoFaturamento);
+			
+			
+			//[SB0005] - Gerar os Cr?ditos Realizados
+			GerarCreditoRealizadoHelper gerarCreditoRealizadoHelper = this.gerarCreditoRealizado(imovel, 
+			anoMesFaturamento, helperValoresAguaEsgoto, gerarDebitoCobradoHelper.getValorTotalDebito(),
+			gerarAtividadeGrupoFaturamento, preFaturamento);
+
+			
+			
+			// ATIVIDADE FATURAR GRUPO
+			if (gerarAtividadeGrupoFaturamento) {
+
+				// [UC0351] - Gerar Impostos Deduzidos da Conta
+				GerarImpostosDeduzidosContaHelper gerarImpostosDeduzidosContaHelper = this
+				.gerarImpostosDeduzidosConta(imovel.getId(), anoMesFaturamento, 
+				helperValoresAguaEsgoto.getValorTotalAgua(), helperValoresAguaEsgoto.getValorTotalEsgoto(), 
+				gerarDebitoCobradoHelper.getValorTotalDebito(), gerarCreditoRealizadoHelper.getValorTotalCredito(),
+				preFaturamento);
+				
+				
+				// [SB0006] - Gerar Dados da Conta
+				//-----------------------------------------------------------------------------------------------------
+				Conta conta = this.gerarConta(imovel, anoMesFaturamento, sistemaParametro, faturamentoAtivCronRota, 
+				helperValoresAguaEsgoto, gerarDebitoCobradoHelper, gerarCreditoRealizadoHelper,
+				gerarImpostosDeduzidosContaHelper, faturamentoGrupo, faturamentoAntecipado, preFaturamento);
+				
+				GerarContaCategoriaHelper gerarContaCategoriaHelper = 
+				this.gerarContaCategoriaValoresZerados(conta, colecaoCategoriaOUSubcategoria, sistemaParametro);
+				
+				//INSERINDO CONTA_CATEGORIA NA BASE
+				if (gerarContaCategoriaHelper.getColecaoContaCategoria() != null && 
+					!gerarContaCategoriaHelper.getColecaoContaCategoria().isEmpty()) {
+					
+					this.getControladorBatch().inserirColecaoObjetoParaBatch(
+					gerarContaCategoriaHelper.getColecaoContaCategoria());
+				}
+
+				// INSERINDO CONTA_CATEGORIA_CONSUMO_FAIXA
+				if (gerarContaCategoriaHelper.getColecaoContaCategoriaConsumoFaixa() != null && 
+					!gerarContaCategoriaHelper.getColecaoContaCategoriaConsumoFaixa().isEmpty()) {
+					
+					this.getControladorBatch().inserirColecaoObjetoParaBatch(
+					gerarContaCategoriaHelper.getColecaoContaCategoriaConsumoFaixa());
+				}
+				
+				
+				// INSERINDO CLIENTE_CONTA
+				this.inserirClienteConta(conta, imovel);
+				
+				
+				//INSERINDO CONTA_IMPOSTOS_DEDUZIDOS
+				this.inserirContaImpostosDeduzidos(conta, gerarImpostosDeduzidosContaHelper);
+				
+				
+				//INSERINDO DEBITO_COBRADO E DEBITO_COBRADO_CATEGORIA
+				this.inserirDebitoCobrado(gerarDebitoCobradoHelper.getMapDebitosCobrados(), conta);
+				
+				//ATUALIZANDO DEBITO_A_COBRAR
+				this.atualizarDebitoACobrarFaturamento(gerarDebitoCobradoHelper.getColecaoDebitoACobrar());
+				
+				
+				//INSERINDO CREDITO_REALIZADO E CREDITO_REALIZADO_CATEGORIA
+				this.inserirCreditoRealizado(gerarCreditoRealizadoHelper.getMapCreditoRealizado(), conta);
+				
+				//ATUALIZANDO CREDITO_A_REALIZAR
+				this.atualizarCreditoARealizar(gerarCreditoRealizadoHelper.getColecaoCreditoARealizar());
+				
+				//-----------------------------------------------------------------------------------------------------
+
+			
+				// [SF0008] - Gerar Movimento De D?bito Autom?tico
+				if (imovel.getIndicadorDebitoConta().equals(ConstantesSistema.SIM) && 
+					conta.getContaMotivoRevisao() == null) {
+
+					this.gerarMovimentoDebitoAutomatico(imovel, conta, faturamentoGrupo);
+				}
+				
+				// [SB0015] - Gerar Movimento de Debitos da Carteira
+				// [SB0015] - Gerar Movimento de Debitos da Carteira
+//				this.gerarMovimentoDebitoCarteira17(sistemaParametro, conta, faturamentoGrupo);	
+				
+			}
+			
+			Integer anoMesReferenciaResumoFaturamento = null;
+			if(faturamentoAntecipado){
+				anoMesReferenciaResumoFaturamento = anoMesFaturamento;
+			}
+			
+			//[SB0009] - Gerar Resumo da Simula??o do Faturamento
+			this.gerarResumoFaturamentoSimulacao(colecaoCategorias, 
+			helperValoresAguaEsgoto.getColecaoCalcularValoresAguaEsgotoHelper(), gerarDebitoCobradoHelper,
+			gerarCreditoRealizadoHelper, colecaoResumoFaturamento, imovel, gerarAtividadeGrupoFaturamento,
+			faturamentoAtivCronRota, faturamentoGrupo,anoMesReferenciaResumoFaturamento,true);
+		}
+	}	
 	
 	/**
 	 * PE2011095860 - Retirar as contas do movimento de negativação [SB0013] e [SB0015].
@@ -3573,7 +3721,7 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 	 * @throws ControladorException
 	 */
 	protected ContaTipo obterContaTipoParaContaImpressao(Conta conta,
-			Integer idClienteResponsavel, Imovel imovel) {
+			Integer idClienteResponsavel, Imovel imovel) throws ControladorException{
 
 		ContaTipo contaTipo = new ContaTipo();
 
@@ -4120,6 +4268,82 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 						faturamentoAtivCronRota, faturamentoGrupo,
 						anoMesReferenciaResumoFaturamento, false);
 			}
+		}
+	}
+	
+	
+	/**
+	 * [UC0113] Faturar Grupo de Faturamento
+	 *
+	 * [SB0006] - Gerar Dados da Conta
+	 *
+	 * @author Raphael Rossiter
+	 * @date 31/03/2008
+	 *
+	 * @param conta
+	 * @param faturamentoGrupo
+	 * @param imovel
+	 * @param rota
+	 * @return ContaImpressao
+	 * @throws ControladorException
+	 */
+	public ContaImpressao gerarContaImpressao(Conta conta, FaturamentoGrupo faturamentoGrupo,
+			Imovel imovel, Rota rota) throws ControladorException{
+		
+		try {
+		
+			ContaImpressao contaImpressao = new ContaImpressao();
+			
+			contaImpressao.setContaGeral(conta.getContaGeral());
+			contaImpressao.setId(conta.getContaGeral().getId());
+			contaImpressao.setReferenciaConta(conta.getReferencia());
+			contaImpressao.setFaturamentoGrupo(faturamentoGrupo);
+			contaImpressao.setIndicadorImpressao(ConstantesSistema.NAO);
+			contaImpressao.setUltimaAlteracao(new Date());
+			
+			Object idClienteResponsavel = null;
+			
+			if (conta.getContaMotivoRevisao() == null && 
+				imovel.getImovelContaEnvio().getId().equals(ImovelContaEnvio.ENVIAR_CLIENTE_RESPONSAVEL) || 
+				imovel.getImovelContaEnvio().getId().equals(ImovelContaEnvio.NAO_PAGAVEL_IMOVEL_PAGAVEL_RESPONSAVEL)) {
+			
+				idClienteResponsavel = repositorioFaturamento.pesquisarClienteResponsavel(imovel.getId());
+				if (idClienteResponsavel != null) {
+					Cliente cliente = new Cliente();
+					cliente.setId((Integer) idClienteResponsavel);
+			
+					contaImpressao.setClienteResponsavel(cliente);
+				}
+			
+			}
+	
+			contaImpressao.setContaTipo(this.obterContaTipoParaContaImpressao(conta,
+			(Integer) idClienteResponsavel, imovel));
+	
+			
+			if (idClienteResponsavel == null) {
+			
+				Integer idEmpresaContaImpressao = repositorioMicromedicao
+							.obterIdEmpresaPorRota(rota);
+			
+				if (idEmpresaContaImpressao != null) {
+					Empresa empresaContaImpressao = new Empresa();
+					empresaContaImpressao.setId(idEmpresaContaImpressao);
+			
+					contaImpressao.setEmpresa(empresaContaImpressao);
+				}
+			}
+	
+	        contaImpressao.setValorConta(conta.getValorTotalContaBigDecimal());
+	
+	        //INSERINDO CONTA_IMPRESSAO NA BASE
+	        getControladorUtil().inserir(contaImpressao);
+			
+			return contaImpressao;
+			
+		} catch (ErroRepositorioException e) {
+			sessionContext.setRollbackOnly();
+			throw new ControladorException("erro.sistema", e);
 		}
 	}
 	
@@ -7271,7 +7495,7 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 
 				if (colecaoConsumoTarifaCategoria == null
 						|| colecaoConsumoTarifaCategoria.isEmpty()) {
-//					sessionContext.setRollbackOnly();
+					sessionContext.setRollbackOnly();
 					throw new ControladorException(
 							"atencao.categoria_nao_existe_para_tarifa_vigente");
 				}
@@ -15576,7 +15800,7 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 					// Analista Respons?vel: Rosana Cavalho
 					// Descri??o da altera??o: Gravar na coluna DBAC_AMREFERENCIACONTABIL o maior valor entre o ano/mes
 					// da data corrente e o ano/m?s da refer?ncia do faturamento ( PARM_AMREFERENCIAFATURAMENTO )
-					Date dataAtual = new Date();
+					/*Date dataAtual = new Date();
 					Integer anoMesReferenciaAtual = Util.recuperaAnoMesDaData( dataAtual );
 					
 					SistemaParametro sistemaParametro = this.getControladorUtil().pesquisarParametrosDoSistema(); 
@@ -15585,8 +15809,15 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 							
 							anoMesReferenciaAtual > sistemaParametro.getAnoMesFaturamento() ? anoMesReferenciaAtual : sistemaParametro.getAnoMesFaturamento()
 							
-						);				
-					// FIM ALTERA??O BRUNO BARROS				
+						);		*/		
+					// FIM ALTERA??O BRUNO BARROS	
+					
+					//Autor: Fláivo Leonardo
+					//Data: 01/02/2016
+					//Analista Responsavel: Eduardo Borges
+					//Gravar na coluna DBAC_AMREFERENCIACONTABIL sempre o ano mes de faturamento do sistema parametro
+					SistemaParametro sistemaParametro = this.getControladorUtil().pesquisarParametrosDoSistema(); 
+					debitoACobrar.setAnoMesReferenciaContabil(sistemaParametro.getAnoMesFaturamento());
 	
 					/**
 					 * alterado por pedro alexandre dia 21/11/2006 altera??o feita
@@ -18639,16 +18870,22 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 					// Analista Respons?vel: Rosana Cavalho
 					// Descri??o da altera??o: Gravar na coluna DBAC_AMREFERENCIACONTABIL o maior valor entre o ano/mes
 					// da data corrente e o ano/m?s da refer?ncia do faturamento ( PARM_AMREFERENCIAFATURAMENTO )
-					Date dataAtual = new Date();
+					/*Date dataAtual = new Date();
 					Integer anoMesReferenciaAtual = Util.recuperaAnoMesDaData( dataAtual );
 					
 					creditoARealizar.setAnoMesReferenciaContabil( 
 							
 							( anoMesReferenciaAtual > sistemaParametro.getAnoMesFaturamento() ? anoMesReferenciaAtual : sistemaParametro.getAnoMesFaturamento() )
 							
-						);				
+						);	*/	
+					
 					// FIM ALTERA??O BRUNO BARROS
 					
+					//Autor: Fláivo Leonardo
+					//Data: 01/02/2016
+					//Analista Responsavel: Eduardo Borges
+					//Gravar na coluna DBAC_AMREFERENCIACONTABIL sempre o ano mes de faturamento do sistema parametro
+					creditoARealizar.setAnoMesReferenciaContabil(sistemaParametro.getAnoMesFaturamento());
 	
 					// Esta alteracao ser? registrada como exclusao
 					Interceptador.getInstancia().registrarExclusao(creditoARealizar);
@@ -43870,7 +44107,12 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 
 					int tam = parmsConta.length;
 					
-					if (tam > 34) {
+					if (tam == 34){
+						if (parmsConta[33] != null) {
+							emitirContaHelper.setIndicadorDebitoConta((Short) parmsConta[33]);
+						}
+						
+					}else if (tam > 34){
 						// id da rota
 						if (parmsConta[33] != null) {
 							emitirContaHelper
@@ -45946,8 +46188,10 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 	 * @param
 	 * @throws ControladorException
 	 */
-	public void gerarDebitoACobrarTaxaEmissaoConta(Integer idImovel,
+	public int gerarDebitoACobrarTaxaEmissaoConta(Integer idImovel,
 			int anoMesReferencia) throws ControladorException {
+		
+		Integer id;
 
 		try {
 
@@ -46123,6 +46367,8 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 					.inserir(debitoACobrar);
 
 			debitoACobrar.setId(idDebitoACobrar);
+			
+			id = idDebitoACobrar;
 
 			// Recupera Categorias por Im?vel
 			Collection<Categoria> colecaoCategoria = this
@@ -46140,6 +46386,8 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 			sessionContext.setRollbackOnly();
 			throw new ControladorException("erro.sistema", ex);
 		}
+		
+		return id;
 	}
 
 	/*
@@ -65999,163 +66247,7 @@ public class ControladorFaturamentoFINAL implements SessionBean {
         }
     }
     
-    /**
-	 * Este caso de uso ? respons?vel pelo pr?-faturamento das contas que ser?o emitidas no cliente
-	 * (Gera??o Simult?nea)
-	 *
-	 * [UC0000] - Pr?-Faturar Grupo de Faturamento
-	 *
-	 * @author Raphael Rossiter
-	 * @date 09/04/2008
-	 *
-	 * @param colecaoRota
-	 * @param anoMesFaturamento
-	 * @param idFaturamentoGrupo
-	 * @param idFuncionalidadeIniciada
-	 * @throws ControladorException
-	 */
-	public void preFaturarGrupoFaturamento(Rota rota,
-			Integer anoMesFaturamento, Integer idFaturamentoGrupo,
-			int idFuncionalidadeIniciada) throws ControladorException {
 
-		int idUnidadeIniciada = 0;
-
-		// PROCESSO BATCH
-		// ------------------------------------------------------------------------------------
-		idUnidadeIniciada = getControladorBatch()
-				.iniciarUnidadeProcessamentoBatch(idFuncionalidadeIniciada,
-						UnidadeProcessamento.ROTA, rota.getId());
-		// ---------------------------------------------------------------------------------------------------
-
-		try {
-
-			SistemaParametro sistemaParametro = getControladorUtil()
-					.pesquisarParametrosDoSistema();
-
-			FaturamentoGrupo faturamentoGrupo = new FaturamentoGrupo();
-			faturamentoGrupo.setId(idFaturamentoGrupo);
-			faturamentoGrupo.setAnoMesReferencia(anoMesFaturamento);
-
-			// Objeto que armazenar? as informa??es para dele??o das contas
-			ApagarDadosFaturamentoHelper helper = new ApagarDadosFaturamentoHelper();
-
-			// SITUA??O PR? FATURADA
-			helper.setIdDebitoCreditoSituacaoAtual(DebitoCreditoSituacao.PRE_FATURADA);
-
-			// GRUPO DE FATURAMENTO
-			helper.setFaturamentoGrupo(faturamentoGrupo);
-
-			helper.setRota(rota);
-			helper.setAnoMesFaturamento(anoMesFaturamento);
-
-			/*
-			 * Pesquisando o FaturamentoAtivCronRota para ser utilizando no
-			 * momento de defini??o do vencimento da conta.
-			 */
-			FaturamentoAtivCronRota faturamentoAtivCronRota = this
-					.pesquisarFaturamentoAtivCronRotaPara(rota.getId(),
-							FaturamentoAtividade.GERAR_ARQUIVO_LEITURA,
-							idFaturamentoGrupo, anoMesFaturamento);
-
-			rota.setFaturamentoGrupo(faturamentoGrupo);
-			faturamentoAtivCronRota.setRota(rota);
-
-			// APAGAR DADOS GERADOS PARA A ROTA NO ANO/MES DE REFERENCIA DO
-			// FATURAMENTO
-			// =================================================================================================
-
-			this.apagarDadosGeradosFaturarGrupoFaturamento(helper,FaturamentoAtividade.FATURAR_GRUPO);
-
-			// =================================================================================================
-
-			// Vari?veis para a pagina??o da pesquisa de Imovel por Grupo
-			// Faturamento
-			// ========================================================================
-			boolean flagTerminou = false;
-			final int quantidadeRegistros = 3000;
-			int numeroIndice = 0;
-			// ========================================================================
-
-			while (!flagTerminou) {
-
-				Collection colecaoImovel = this
-						.pesquisarImovelGrupoFaturamento(rota, numeroIndice,
-								quantidadeRegistros, true, false);
-
-				// Resumos de faturamento para simula??o.
-				Collection colecaoResumoFaturamento = new ArrayList();
-
-				/*
-				 * Caso exista ids de im?veis para a rota atual determina o
-				 * faturamento para cada im?vel retornado.
-				 */
-				if (colecaoImovel != null && !colecaoImovel.isEmpty()) {
-
-					Iterator iteratorColecaoImoveis = colecaoImovel.iterator();
-
-					// LA?O PARA DETERMINAR O FATURAMENTO DE TODOS OS IMOVEIS DA
-					// ROTA ATUAL
-					Imovel imovel = null;
-					while (iteratorColecaoImoveis.hasNext()) {
-
-						imovel = (Imovel) iteratorColecaoImoveis.next();
-
-						// FATURAMENTO ATUAL
-						// ----------------------------------------------------------------
-						this.preFaturarImovel(anoMesFaturamento,
-								sistemaParametro, faturamentoAtivCronRota,
-								colecaoResumoFaturamento, imovel, false,
-								faturamentoGrupo);
-						// ----------------------------------------------------------------------------------
-
-					}// FIM DO LOOP DE IMOVEIS
-
-				}// FIM DO LOOP DE IMOVEIS
-
-				/**
-				 * Incrementa o n? do indice da p?gina??o
-				 */
-				numeroIndice = numeroIndice + quantidadeRegistros;
-
-				/**
-				 * Caso a cole??o de imoveis retornados for menor que a
-				 * quantidade de registros seta a flag indicando que a pagina??o
-				 * terminou.
-				 */
-				if (colecaoImovel == null
-						|| colecaoImovel.size() < quantidadeRegistros) {
-
-					flagTerminou = true;
-				}
-
-				if (colecaoImovel != null) {
-					colecaoImovel.clear();
-					colecaoImovel = null;
-				}
-
-			}// FIM DO LOOP DA PAGINA??O
-
-			// --------------------------------------------------------
-			//
-			// Registrar o fim da execu??o da Unidade de Processamento
-			//
-			// --------------------------------------------------------
-			getControladorBatch().encerrarUnidadeProcessamentoBatch(null,
-					idUnidadeIniciada, false);
-
-		} catch (Exception e) {
-
-			/*
-			 * Este catch serve para interceptar qualquer exce??o que o processo
-			 * batch venha a lan?ar e garantir que a unidade de processamento do
-			 * batch ser? atualizada com o erro ocorrido.
-			 */
-			getControladorBatch().encerrarUnidadeProcessamentoBatch(e,
-					idUnidadeIniciada, true);
-			throw new EJBException(e);
-		}
-
-	}
 	
 	/**
 	 * [UC0000] - Pr?-Faturar Grupo de Faturamento
@@ -66191,282 +66283,6 @@ public class ControladorFaturamentoFINAL implements SessionBean {
         
         return retorno;
     }
-	
-	/**
-	 * Este caso de uso ? respons?vel pelo pr?-faturamento das contas que ser?o emitidas no cliente
-	 * (Gera??o Simult?nea)
-	 *
-	 * [UC0113] - Pr?-Faturar Grupo de Faturamento
-	 *
-	 * @author Raphael Rossiter
-	 * @date 26/03/2008
-	 *
-	 * @param anoMesFaturamento
-	 * @param atividade
-	 * @param sistemaParametro
-	 * @param faturamentoAtivCronRota
-	 * @param colecaoResumoFaturamento
-	 * @param imovel
-	 * @throws ControladorException
-	 */
-	protected void preFaturarImovel(Integer anoMesFaturamento,
-			SistemaParametro sistemaParametro,
-			FaturamentoAtivCronRota faturamentoAtivCronRota,
-			Collection colecaoResumoFaturamento,
-			Imovel imovel, boolean faturamentoAntecipado, FaturamentoGrupo faturamentoGrupo) 
-			throws ControladorException {
-
-		//Verifica se existe conta para o im?vel para o ano/m?s de faturamento.
-		Integer existeImovelConta = (Integer) getControladorImovel()
-		.pesquisarImovelIdComConta(imovel.getId(), anoMesFaturamento);
-
-
-		// CASO N?O EXISTA CONTA PARA O IMOVEL NO ANO/MES DE REFERENCIA
-		if (existeImovelConta == null) {
-
-			// TIPO DE ATIVIDADE
-			boolean gerarAtividadeGrupoFaturamento = true;
-			
-			// [SF0001] - Determinar Faturamento para o Im?vel
-			this.preDeterminarFaturamentoImovel(imovel, gerarAtividadeGrupoFaturamento,
-					faturamentoAtivCronRota, colecaoResumoFaturamento ,sistemaParametro, faturamentoAntecipado, anoMesFaturamento, 
-					faturamentoGrupo);
-		}
-	}
-	
-	/**
-	 * Determina os dados do pr?-faturamento do im?vel.
-	 *
-	 * [UCXXXX] - Pr?-Faturar Grupo de Faturamento
-	 *
-	 * [SB0001 - Determinar Faturamento para o Im?vel]	
-	 *
-	 * @author Raphael Rossiter
-	 * @date 27/03/2008
-	 *
-	 * @param imovel
-	 * @param gerarAtividadeGrupoFaturamento
-	 * @param faturamentoAtivCronRota
-	 * @param colecaoResumoFaturamento
-	 * @param sistemaParametro
-	 * @param faturamentoAntecipado
-	 * @param anoMesFaturamento
-	 * @throws ControladorException
-	 */
-	protected void preDeterminarFaturamentoImovel(Imovel imovel,
-			boolean gerarAtividadeGrupoFaturamento, FaturamentoAtivCronRota faturamentoAtivCronRota,
-			Collection colecaoResumoFaturamento,
-			SistemaParametro sistemaParametro, boolean faturamentoAntecipado,
-			Integer anoMesFaturamento, FaturamentoGrupo faturamentoGrupo)
-			throws ControladorException {
-		
-		Collection colecaoCategoriaOUSubcategoria = null;
-		Collection colecaoCategorias = null;
-		
-		// [UC0108] - Obter Quantidade de Economias por Categoria
-		colecaoCategorias = this.getControladorImovel()
-		.obterQuantidadeEconomiasCategoria(imovel);
-
-		//Verificando se a empresa fatura por CATEGORIA ou SUBCATEGORIA 
-		if (sistemaParametro.getIndicadorTarifaCategoria().equals(SistemaParametro.INDICADOR_TARIFA_CATEGORIA)){
-			
-			//[UC0108] - Obter Quantidade de Economias por Categoria
-			colecaoCategoriaOUSubcategoria = colecaoCategorias;
-		}
-		else{
-			
-			//[UC0108] - Obter Quantidade de Economias por Subcategoria
-			colecaoCategoriaOUSubcategoria = this.getControladorImovel()
-			.obterQuantidadeEconomiasSubCategoria(imovel.getId());
-		}
-
-		DeterminarValoresFaturamentoAguaEsgotoHelper helperValoresAguaEsgoto = 
-		new DeterminarValoresFaturamentoAguaEsgotoHelper();
-		
-		boolean temHidrometro = false;
-		if((imovel.getHidrometroInstalacaoHistorico() != null && imovel.getHidrometroInstalacaoHistorico().getId() != null) ||
-				(imovel.getLigacaoAgua() != null && imovel.getLigacaoAgua().getHidrometroInstalacaoHistorico() != null &&
-						imovel.getLigacaoAgua().getHidrometroInstalacaoHistorico().getId() != null) ){
-			temHidrometro = true;
-		}
-
-		/*
-		 * Alterado por Raphael Rossiter em 17/09/2007 (Analistas: Aryed Lins e Eduardo Borges)
-		 * 
-		 * OBJ: Selecionar os im?veis que far?o parte do faturamento de acordo
-		 * com o INDICADOR_FATURAMENTO_SITUACAO que se encontra na situa??o da
-		 * liga??o e ?gua e esgoto do im?vel.
-		 */
-		if (imovel.getLigacaoAguaSituacao().getIndicadorFaturamentoSituacao()
-			.equals(LigacaoAguaSituacao.FATURAMENTO_ATIVO) || 
-			imovel.getLigacaoEsgotoSituacao().getIndicadorFaturamentoSituacao().equals(
-			LigacaoEsgotoSituacao.FATURAMENTO_ATIVO) || temHidrometro) {
-			
-			//Verificar se ? para faturar pela situa??o especial de faturamento
-			
-			FiltroFaturamentoSituacaoHistorico filtroFaturamentoSituacaoHistorico = 
-				new FiltroFaturamentoSituacaoHistorico();
-			filtroFaturamentoSituacaoHistorico.adicionarParametro( 
-					new ParametroSimples( 
-							FiltroFaturamentoSituacaoHistorico.ID_IMOVEL, imovel.getId() ) );
-			filtroFaturamentoSituacaoHistorico.adicionarParametro( 
-					new ParametroNulo ( 
-							FiltroFaturamentoSituacaoHistorico.ANO_MES_FATURAMENTO_RETIRADA ) );
-			Collection<FaturamentoSituacaoHistorico> 
-				colFiltroFaturamentoSituacaoHistorico = 
-					this.getControladorUtil().pesquisar( 
-							filtroFaturamentoSituacaoHistorico,
-							FaturamentoSituacaoHistorico.class.getName());
-			
-			FaturamentoSituacaoHistorico faturamentoSituacaoHistorico = 
-				( FaturamentoSituacaoHistorico ) Util.retonarObjetoDeColecao( colFiltroFaturamentoSituacaoHistorico );
-
-			boolean faturar = true;
-
-			if (imovel.getFaturamentoSituacaoTipo() != null && !imovel.getFaturamentoSituacaoTipo().equals("")) {
-
-			   if (	( faturamentoSituacaoHistorico != null &&
-					  anoMesFaturamento >= faturamentoSituacaoHistorico.getAnoMesFaturamentoSituacaoInicio() &&
-					  anoMesFaturamento <= faturamentoSituacaoHistorico.getAnoMesFaturamentoSituacaoFim() ) &&	
-						( imovel.getFaturamentoSituacaoTipo() != null && 
-						  imovel.getFaturamentoSituacaoTipo().getIndicadorParalisacaoFaturamento().intValue() == 1 && 
-					      imovel.getFaturamentoSituacaoTipo().getIndicadorValidoAgua().intValue() == 1 ) ) {
-				   faturar = false;
-			   }
-			}
-			
-			//[SB0002] - Determinar Valores para Faturamento de ?gua e/ou Esgoto
-			if(faturar){
-			  helperValoresAguaEsgoto.setValorTotalAgua(BigDecimal.ONE);
-			  helperValoresAguaEsgoto.setValorTotalEsgoto(BigDecimal.ONE);
-			}else{
-				helperValoresAguaEsgoto.setValorTotalAgua(BigDecimal.ZERO);
-				helperValoresAguaEsgoto.setValorTotalEsgoto(BigDecimal.ZERO);
-			}
-			
-			//PERCENTUAL DE ESGOTO
-			helperValoresAguaEsgoto.setPercentualEsgoto(this.verificarPercentualEsgotoAlternativo(imovel, null));
-			
-			//PERCENTUAL COLETA DE ESGOTO
-			BigDecimal percentualColetaEsgoto = this.obterPercentualColetaEsgotoImovel(imovel.getId());
-			
-			helperValoresAguaEsgoto.setPercentualColetaEsgoto(percentualColetaEsgoto);
-			
-		}
-
-		
-		// [SB0003] - Verificar N?o Gera??o da Conta
-		boolean gerarConta = this.verificarNaoGeracaoConta(imovel,
-		helperValoresAguaEsgoto.getValorTotalAgua(), helperValoresAguaEsgoto.getValorTotalEsgoto(), 
-		anoMesFaturamento, faturamentoGrupo);
-
-		if (gerarConta) {
-			
-			//RECOLOCAR OS VALORES ZERADOS PARA ?GUA E ESGOTO
-			helperValoresAguaEsgoto.setValorTotalAgua(BigDecimal.ZERO);
-			helperValoresAguaEsgoto.setValorTotalEsgoto(BigDecimal.ZERO);
-			
-			boolean preFaturamento = true;
-			
-			//[SB0004] - Gerar os D?bitos Cobrados
-			GerarDebitoCobradoHelper gerarDebitoCobradoHelper = this.gerarDebitoCobrado(imovel, 
-			anoMesFaturamento, sistemaParametro, gerarAtividadeGrupoFaturamento);
-			
-			
-			//[SB0005] - Gerar os Cr?ditos Realizados
-			GerarCreditoRealizadoHelper gerarCreditoRealizadoHelper = this.gerarCreditoRealizado(imovel, 
-			anoMesFaturamento, helperValoresAguaEsgoto, gerarDebitoCobradoHelper.getValorTotalDebito(),
-			gerarAtividadeGrupoFaturamento, preFaturamento);
-
-			
-			
-			// ATIVIDADE FATURAR GRUPO
-			if (gerarAtividadeGrupoFaturamento) {
-
-				// [UC0351] - Gerar Impostos Deduzidos da Conta
-				GerarImpostosDeduzidosContaHelper gerarImpostosDeduzidosContaHelper = this
-				.gerarImpostosDeduzidosConta(imovel.getId(), anoMesFaturamento, 
-				helperValoresAguaEsgoto.getValorTotalAgua(), helperValoresAguaEsgoto.getValorTotalEsgoto(), 
-				gerarDebitoCobradoHelper.getValorTotalDebito(), gerarCreditoRealizadoHelper.getValorTotalCredito(),
-				preFaturamento);
-				
-				
-				// [SB0006] - Gerar Dados da Conta
-				//-----------------------------------------------------------------------------------------------------
-				Conta conta = this.gerarConta(imovel, anoMesFaturamento, sistemaParametro, faturamentoAtivCronRota, 
-				helperValoresAguaEsgoto, gerarDebitoCobradoHelper, gerarCreditoRealizadoHelper,
-				gerarImpostosDeduzidosContaHelper, faturamentoGrupo, faturamentoAntecipado, preFaturamento);
-				
-				GerarContaCategoriaHelper gerarContaCategoriaHelper = 
-				this.gerarContaCategoriaValoresZerados(conta, colecaoCategoriaOUSubcategoria, sistemaParametro);
-				
-				//INSERINDO CONTA_CATEGORIA NA BASE
-				if (gerarContaCategoriaHelper.getColecaoContaCategoria() != null && 
-					!gerarContaCategoriaHelper.getColecaoContaCategoria().isEmpty()) {
-					
-					this.getControladorBatch().inserirColecaoObjetoParaBatch(
-					gerarContaCategoriaHelper.getColecaoContaCategoria());
-				}
-
-				// INSERINDO CONTA_CATEGORIA_CONSUMO_FAIXA
-				if (gerarContaCategoriaHelper.getColecaoContaCategoriaConsumoFaixa() != null && 
-					!gerarContaCategoriaHelper.getColecaoContaCategoriaConsumoFaixa().isEmpty()) {
-					
-					this.getControladorBatch().inserirColecaoObjetoParaBatch(
-					gerarContaCategoriaHelper.getColecaoContaCategoriaConsumoFaixa());
-				}
-				
-				
-				// INSERINDO CLIENTE_CONTA
-				this.inserirClienteConta(conta, imovel);
-				
-				
-				//INSERINDO CONTA_IMPOSTOS_DEDUZIDOS
-				this.inserirContaImpostosDeduzidos(conta, gerarImpostosDeduzidosContaHelper);
-				
-				
-				//INSERINDO DEBITO_COBRADO E DEBITO_COBRADO_CATEGORIA
-				this.inserirDebitoCobrado(gerarDebitoCobradoHelper.getMapDebitosCobrados(), conta);
-				
-				//ATUALIZANDO DEBITO_A_COBRAR
-				this.atualizarDebitoACobrarFaturamento(gerarDebitoCobradoHelper.getColecaoDebitoACobrar());
-				
-				
-				//INSERINDO CREDITO_REALIZADO E CREDITO_REALIZADO_CATEGORIA
-				this.inserirCreditoRealizado(gerarCreditoRealizadoHelper.getMapCreditoRealizado(), conta);
-				
-				//ATUALIZANDO CREDITO_A_REALIZAR
-				this.atualizarCreditoARealizar(gerarCreditoRealizadoHelper.getColecaoCreditoARealizar());
-				
-				//-----------------------------------------------------------------------------------------------------
-
-			
-				// [SF0008] - Gerar Movimento De D?bito Autom?tico
-				if (imovel.getIndicadorDebitoConta().equals(ConstantesSistema.SIM) && 
-					conta.getContaMotivoRevisao() == null) {
-
-					this.gerarMovimentoDebitoAutomatico(imovel, conta, faturamentoGrupo);
-				}
-				
-				// [SB0015] - Gerar Movimento de Debitos da Carteira
-				// [SB0015] - Gerar Movimento de Debitos da Carteira
-//				this.gerarMovimentoDebitoCarteira17(sistemaParametro, conta, faturamentoGrupo);	
-				
-			}
-			
-			Integer anoMesReferenciaResumoFaturamento = null;
-			if(faturamentoAntecipado){
-				anoMesReferenciaResumoFaturamento = anoMesFaturamento;
-			}
-			
-			//[SB0009] - Gerar Resumo da Simula??o do Faturamento
-			this.gerarResumoFaturamentoSimulacao(colecaoCategorias, 
-			helperValoresAguaEsgoto.getColecaoCalcularValoresAguaEsgotoHelper(), gerarDebitoCobradoHelper,
-			gerarCreditoRealizadoHelper, colecaoResumoFaturamento, imovel, gerarAtividadeGrupoFaturamento,
-			faturamentoAtivCronRota, faturamentoGrupo,anoMesReferenciaResumoFaturamento,true);
-		}
-	}
-       
 	
 	/**
 	 * [UC113] Faturar Grupo Faturamento
@@ -66552,6 +66368,291 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 				
 		}
 	}
+	
+	
+	/**
+	 * [UC0113] Faturar Grupo de Faturamento
+	 *
+	 * [SB0002] - Determinar Valores para Faturamento de ?gua e/ou Esgoto
+	 *
+	 * @author Raphael Rossiter
+	 * @date 28/03/2008
+	 *
+	 * @param imovel
+	 * @param faturamentoGrupo
+	 * @param colecaoCategoriasOUSubCategorias
+	 * @return DeterminarValoresFaturamentoAguaEsgotoHelper
+	 * @throws ControladorException
+	 */
+	public DeterminarValoresFaturamentoAguaEsgotoHelper determinarValoresFaturamentoAguaEsgoto(Imovel imovel, 
+			Integer anoMesFaturamento, Collection colecaoCategoriasOUSubCategorias, 
+			FaturamentoGrupo faturamentoGrupo, ConsumoHistorico consumoHistoricoAgua,
+			ConsumoHistorico consumoHistoricoEsgoto) throws ControladorException{
+		
+		
+		DeterminarValoresFaturamentoAguaEsgotoHelper helper = new DeterminarValoresFaturamentoAguaEsgotoHelper();
+		
+		//CONSUMO_HISTORICO_AGUA
+		if (consumoHistoricoAgua != null) {
+			
+			helper.setConsumoHistoricoAgua(consumoHistoricoAgua);
+
+			if (consumoHistoricoAgua.getIndicadorFaturamento() != null) {
+				
+				//INDICADOR_FATURAMENTO_AGUA
+				helper.setIndicadorFaturamentoAgua(consumoHistoricoAgua
+				.getIndicadorFaturamento());
+			}
+			
+			if (consumoHistoricoAgua.getNumeroConsumoFaturadoMes() != null) {
+				
+				//CONSUMO_FATURADO_AGUA
+				helper.setConsumoFaturadoAgua(consumoHistoricoAgua
+				.getNumeroConsumoFaturadoMes());
+			}
+			
+			if (consumoHistoricoAgua.getConsumoRateio() != null){
+				
+				//CONSUMO_RATEIO_AGUA
+				helper.setConsumoRateioAgua(consumoHistoricoAgua.getConsumoRateio());
+			}
+			
+			if (consumoHistoricoAgua.getConsumoTipo() != null){
+				
+				//CONSUMO_TIPO_AGUA
+				helper.setConsumoTipoAgua(consumoHistoricoAgua.getConsumoTipo());
+			}
+		}
+	
+		
+		//CONSUMO_HISTORICO_ESGOTO
+		if (consumoHistoricoEsgoto != null) {
+			
+			helper.setConsumoHistoricoEsgoto(consumoHistoricoEsgoto);
+
+			if (consumoHistoricoEsgoto.getIndicadorFaturamento() != null) {
+				
+				//INDICADOR_FATURAMENTO_ESGOTO
+				helper.setIndicadorFaturamentoEsgoto(consumoHistoricoEsgoto
+				.getIndicadorFaturamento());
+			}
+
+			if (consumoHistoricoEsgoto.getNumeroConsumoFaturadoMes() != null) {
+				
+				//CONSUMO_FATURADO_ESGOTO
+				helper.setConsumoFaturadoEsgoto(consumoHistoricoEsgoto
+				.getNumeroConsumoFaturadoMes());
+			}
+			
+			if (consumoHistoricoEsgoto.getConsumoRateio() != null){
+				
+				//CONSUMO_RATEIO_ESGOTO
+				helper.setConsumoRateioEsgoto(consumoHistoricoEsgoto.getConsumoRateio());
+			}
+			
+			if (consumoHistoricoEsgoto.getConsumoTipo() != null){
+				
+				//CONSUMO_TIPO_ESGOTO
+				helper.setConsumoTipoEsgoto(consumoHistoricoEsgoto.getConsumoTipo());
+			}
+		}
+		
+		// [UC0105] - Obter Consumo M?nimo da Liga??o
+		int consumoMinimoLigacao = getControladorMicromedicao()
+		.obterConsumoMinimoLigacao(imovel, null);
+		
+		helper.setConsumoMinimoLigacao(consumoMinimoLigacao);
+		
+		
+		//DATA LEITURA ANTERIOR E DATA LEITURA ATUAL
+		Integer anoMesFaturamentoAnterior = Util.subtrairMesDoAnoMes(anoMesFaturamento, 1);
+		
+		Date dataLeituraAnteriorFaturamento = null;
+		try {
+			
+			dataLeituraAnteriorFaturamento = 
+				(Date) repositorioFaturamento.pesquisarFaturamentoAtividadeCronogramaDataRealizacao(
+				faturamentoGrupo.getId(), FaturamentoAtividade.EFETUAR_LEITURA, anoMesFaturamentoAnterior);
+			
+			helper.setDataLeituraAnterior(dataLeituraAnteriorFaturamento);
+
+		} catch (ErroRepositorioException ex) {
+			sessionContext.setRollbackOnly();
+			throw new ControladorException("erro.sistema", ex);
+		}
+		
+		
+		Date dataLeituraAtualFaturamento = null;
+		try {
+			dataLeituraAtualFaturamento = repositorioFaturamento
+			.pesquisarDataLeituraAtualMovimentoContaPreFaturada(anoMesFaturamento,imovel.getId());
+			if(dataLeituraAtualFaturamento == null || dataLeituraAtualFaturamento.equals("")){
+				dataLeituraAtualFaturamento = (Date) repositorioFaturamento
+				.pesquisarFaturamentoAtividadeCronogramaDataRealizacao(faturamentoGrupo.getId(),
+				FaturamentoAtividade.EFETUAR_LEITURA, anoMesFaturamento);	
+			}
+			
+			helper.setDataLeituraAtual(dataLeituraAtualFaturamento);
+
+		} catch (ErroRepositorioException ex) {
+			sessionContext.setRollbackOnly();
+			throw new ControladorException("erro.sistema", ex);
+		}
+
+		
+		// CASO O IM?VEL SEJA PARA FATURAR ?GUA
+		if (imovel.getLigacaoAguaSituacao().getIndicadorFaturamentoSituacao()
+				.equals(LigacaoAguaSituacao.FATURAMENTO_ATIVO)) {
+
+			// MEDICAO_HISTORICO_AGUA
+			MedicaoHistorico medicaoHistoricoAgua = this.getControladorMicromedicao()
+			.pesquisarMedicaoHistoricoTipoAgua(imovel.getId(), anoMesFaturamento);
+
+			if (medicaoHistoricoAgua != null) {
+				
+				// DATA_LEITURA_ANTERIOR
+				if (medicaoHistoricoAgua.getDataLeituraAnteriorFaturamento() != null) {
+					
+					helper.setDataLeituraAnterior(medicaoHistoricoAgua
+							.getDataLeituraAnteriorFaturamento());
+				}
+
+				// DATA_LEITURA_ATUAL
+				if (medicaoHistoricoAgua.getDataLeituraAtualFaturamento() != null) {
+					
+					helper.setDataLeituraAtual(medicaoHistoricoAgua
+							.getDataLeituraAtualFaturamento());
+				}
+			}
+		}
+
+		
+		// CASO O IM?VEL SEJA PARA FATURAR ESGOTO
+		if (imovel.getLigacaoEsgotoSituacao().getIndicadorFaturamentoSituacao()
+				.equals(LigacaoEsgotoSituacao.FATURAMENTO_ATIVO)) {
+
+			// MEDICAO_HISTORICO_POCO
+			MedicaoHistorico medicaoHistoricoPoco = this.getControladorMicromedicao()
+			.pesquisarMedicaoHistoricoTipoPoco(imovel.getId(), anoMesFaturamento);
+
+			if (medicaoHistoricoPoco != null) {
+
+				// DATA_LEITURA_ANTERIOR
+				if (medicaoHistoricoPoco.getDataLeituraAnteriorFaturamento() != null) {
+					
+					helper.setDataLeituraAnterior(medicaoHistoricoPoco
+							.getDataLeituraAnteriorFaturamento());
+				}
+
+				// DATA_LEITURA_ATUAL
+				if (medicaoHistoricoPoco.getDataLeituraAtualFaturamento() != null) {
+					
+					helper.setDataLeituraAtual(medicaoHistoricoPoco
+							.getDataLeituraAtualFaturamento());
+				}
+			}
+
+            //PERCENTUAL DE ESGOTO
+			BigDecimal percentualEsgoto = this.verificarPercentualEsgotoAlternativo(imovel, 
+			helper.getConsumoFaturadoEsgoto());
+			
+			helper.setPercentualEsgoto(percentualEsgoto);
+
+			//PERCENTUAL COLETA DE ESGOTO
+			BigDecimal percentualColetaEsgoto = this.obterPercentualColetaEsgotoImovel(imovel.getId());
+			
+			helper.setPercentualColetaEsgoto(percentualColetaEsgoto);
+		}
+
+		/*
+		 * Caso N?O existe cronograma para o anoMes informado ou seja a
+		 * dataLeituraAnteriorFaturamento ou a dataLeituraAtualFaturamento
+		 * estaja nula
+		 */
+		if (dataLeituraAnteriorFaturamento == null
+				|| dataLeituraAtualFaturamento == null) {
+
+			Date[] periodoLeitura = this.gerarPeriodoLeituraFaturamento(
+					dataLeituraAtualFaturamento,
+					dataLeituraAnteriorFaturamento,
+					faturamentoGrupo, anoMesFaturamento, anoMesFaturamentoAnterior);
+
+			// DATA_LEITURA_ANTERIOR
+			helper.setDataLeituraAnterior(periodoLeitura[0]);
+			
+			// DATA_LEITURA_ATUAL
+			helper.setDataLeituraAtual(periodoLeitura[1]);
+		}
+		
+		//[UC0120] - Calcular Valores de ?gua e/ou Esgoto
+		Collection colecaoCalcularValoresAguaEsgotoHelper = calcularValoresAguaEsgoto(
+				anoMesFaturamento, imovel.getLigacaoAguaSituacao().getId(),
+				imovel.getLigacaoEsgotoSituacao().getId(), helper.getIndicadorFaturamentoAgua(),
+				helper.getIndicadorFaturamentoEsgoto(), colecaoCategoriasOUSubCategorias,
+				helper.getConsumoFaturadoAgua(), helper.getConsumoFaturadoEsgoto(),
+				helper.getConsumoMinimoLigacao(), helper.getDataLeituraAnterior(),
+				helper.getDataLeituraAtual(), helper.getPercentualEsgoto(),
+				imovel.getConsumoTarifa().getId(), helper.getConsumoTipoAgua(), helper.getConsumoTipoEsgoto());
+
+		helper.setColecaoCalcularValoresAguaEsgotoHelper(colecaoCalcularValoresAguaEsgotoHelper);
+		
+		//TOTALIZANDO OS VALORES DE ?GUA E ESGOTO
+		BigDecimal valorTotalAgua = ConstantesSistema.VALOR_ZERO;
+		BigDecimal valorTotalEsgoto = ConstantesSistema.VALOR_ZERO;
+		
+		if (colecaoCalcularValoresAguaEsgotoHelper != null && 
+			!colecaoCalcularValoresAguaEsgotoHelper.isEmpty()){
+		
+			Iterator iteratorColecaoCalcularValoresAguaEsgotoHelper = 
+			colecaoCalcularValoresAguaEsgotoHelper.iterator();
+
+			while (iteratorColecaoCalcularValoresAguaEsgotoHelper.hasNext()) {
+
+				CalcularValoresAguaEsgotoHelper calcularValoresAguaEsgotoHelper = 
+				(CalcularValoresAguaEsgotoHelper) iteratorColecaoCalcularValoresAguaEsgotoHelper
+				.next();
+
+				/*
+				 * Caso tenha valor de ?gua faturado para categoria adiciona o valor de ?gua ao valor total 
+				 * de ?gua. Caso contr?rio soma zero.
+				 */
+				if (calcularValoresAguaEsgotoHelper.getValorFaturadoAguaCategoria() != null) {
+						
+					//VALOR_TOTAL_AGUA
+					valorTotalAgua = valorTotalAgua.add(calcularValoresAguaEsgotoHelper
+					.getValorFaturadoAguaCategoria());
+				} 
+				else {
+						
+					//VALOR_TOTAL_AGUA
+					valorTotalAgua = valorTotalAgua.add(ConstantesSistema.VALOR_ZERO);
+				}
+
+				/*
+				 * Caso tenha valor de esgoto faturado para categoria adiciona o valor de esgoto ao valor total 
+				 * de esgoto. Caso contr?rio soma zero.
+				 */
+				if (calcularValoresAguaEsgotoHelper.getValorFaturadoEsgotoCategoria() != null) {
+						
+					//VALOR_TOTAL_ESGOTO
+					valorTotalEsgoto = valorTotalEsgoto.add(calcularValoresAguaEsgotoHelper
+					.getValorFaturadoEsgotoCategoria());
+				} 
+				else {
+						
+					//VALOR_TOTAL_ESGOTO
+					valorTotalEsgoto = valorTotalEsgoto.add(ConstantesSistema.VALOR_ZERO);
+				}
+			}
+		}
+		
+		helper.setValorTotalAgua(valorTotalAgua);
+		helper.setValorTotalEsgoto(valorTotalEsgoto);
+		
+		
+		return helper;
+	}
+	
 	
 	/**
 	 * Verifica se o im?vel tem um percentual de esgoto alternativo
@@ -66921,7 +67022,6 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 		Integer idContaGeral = (Integer) getControladorUtil().inserir(contaGeral);
 		contaGeral.setId(idContaGeral);
 		
-		
 		//CONTA
 		Conta conta = new Conta();
 		conta.setImovel(imovel);
@@ -66943,22 +67043,15 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 		
 		if (faturamentoAntecipado){
 			
-			/*
-			 * Caso seja faturamento antecipado, a Data de Vencimento da Conta ser? o ?ltimo dia ?til do 
-			 * ano e m?s de refer?ncia.
-			 */
+			//Caso seja faturamento antecipado, a Data de Vencimento da Conta será o último dia útil do ano e mês de referência.
 			conta.setDataVencimentoConta(this.determinarVencimentoContaAntecipado(imovel, anoMesFaturamento));
 		}
 		else{
 			
 			//[SB0007] - Determinar Vencimento da Conta.
-			conta.setDataVencimentoConta(
-				this.determinarVencimentoConta(imovel,
-					faturamentoAtivCronRota, 
-					sistemaParametro,
-					anoMesFaturamento));
+			conta.setDataVencimentoConta(this.determinarVencimentoConta(imovel,
+					faturamentoAtivCronRota, sistemaParametro, anoMesFaturamento));
 		}
-		
 		
 		conta.setDataVencimentoOriginal(conta.getDataVencimentoConta());
 		
@@ -66987,7 +67080,7 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 		/*
 		 * DATA_VALIDADE
 		 * 
-		 * ?ltimo dia do m?s correspondente ao m?s da data de vencimento da conta acrescido do n?mero de 
+		 * Último dia do mês correspondente ao mês da data de vencimento da conta acrescido do número de 
 		 * meses de validade da conta.
 		 */
 		Date dataValidadeConta = Util.adcionarOuSubtrairMesesAData(conta.getDataVencimentoConta(), sistemaParametro
@@ -67011,10 +67104,8 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 		
 		//VALOR DOS IMPOSTOS
 		if (gerarImpostosDeduzidosContaHelper.getValorTotalImposto() != null) {
-			
 			conta.setValorImposto(gerarImpostosDeduzidosContaHelper.getValorTotalImposto());
-		} 
-		else{
+		} else{
 			conta.setValorImposto(ConstantesSistema.VALOR_ZERO);
 		}
 
@@ -67052,11 +67143,10 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 			debitoCreditoSituacao.setId(DebitoCreditoSituacao.NORMAL);
 			
 			//CONTA_MOTIVO_REVISAO
-/*			contaMotivoRevisao = this.determinarContaMotivoRevisao(
-			helperValoresAguaEsgoto.getConsumoHistoricoAgua());*/
+			contaMotivoRevisao = this.determinarContaMotivoRevisao(helperValoresAguaEsgoto.getConsumoHistoricoAgua());
 		}
 		
-//		conta.setContaMotivoRevisao(contaMotivoRevisao);
+		conta.setContaMotivoRevisao(contaMotivoRevisao);
 		conta.setDebitoCreditoSituacaoAtual(debitoCreditoSituacao);
 		
 		//DATA_REVISAO
@@ -67106,91 +67196,7 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 	}
 	
 	
-	/**
-	 * [UC0113] Faturar Grupo de Faturamento
-	 *
-	 * [SB0006] - Gerar Dados da Conta
-	 *
-	 * @author Raphael Rossiter
-	 * @date 31/03/2008
-	 *
-	 * @param conta
-	 * @param faturamentoGrupo
-	 * @param imovel
-	 * @param rota
-	 * @return ContaImpressao
-	 * @throws ControladorException
-	 */
-	public ContaImpressao gerarContaImpressao(Conta conta, FaturamentoGrupo faturamentoGrupo,
-			Imovel imovel, Rota rota) throws ControladorException{
-		
-		ContaImpressao contaImpressao = new ContaImpressao();
-		
-		contaImpressao.setContaGeral(conta.getContaGeral());
-		contaImpressao.setId(conta.getContaGeral().getId());
-		contaImpressao.setReferenciaConta(conta.getReferencia());
-		contaImpressao.setFaturamentoGrupo(faturamentoGrupo);
-		contaImpressao.setIndicadorImpressao(ConstantesSistema.NAO);
-		contaImpressao.setUltimaAlteracao(new Date());
-		
-		Object idClienteResponsavel = null;
-		
-		if (conta.getContaMotivoRevisao() == null && 
-			imovel.getImovelContaEnvio().getId().equals(ImovelContaEnvio.ENVIAR_CLIENTE_RESPONSAVEL) || 
-			imovel.getImovelContaEnvio().getId().equals(ImovelContaEnvio.NAO_PAGAVEL_IMOVEL_PAGAVEL_RESPONSAVEL)) {
-
-			try {
-		
-				idClienteResponsavel = repositorioFaturamento
-				.pesquisarClienteResponsavel(imovel.getId());
-		
-			} catch (ErroRepositorioException e) {
-				sessionContext.setRollbackOnly();
-				throw new ControladorException("erro.sistema", e);
-			}
-		
-			if (idClienteResponsavel != null) {
-				Cliente cliente = new Cliente();
-				cliente.setId((Integer) idClienteResponsavel);
-		
-				contaImpressao.setClienteResponsavel(cliente);
-			}
-		
-		}
-
-		contaImpressao.setContaTipo(this.obterContaTipoParaContaImpressao(conta,
-		(Integer) idClienteResponsavel, imovel));
-
-		
-		if (idClienteResponsavel == null) {
-		
-			Integer idEmpresaContaImpressao = null;
-		
-			try {
-		
-				idEmpresaContaImpressao = repositorioMicromedicao
-						.obterIdEmpresaPorRota(rota);
-		
-			} catch (ErroRepositorioException e) {
-				sessionContext.setRollbackOnly();
-				throw new ControladorException("erro.sistema", e);
-			}
-		
-			if (idEmpresaContaImpressao != null) {
-				Empresa empresaContaImpressao = new Empresa();
-				empresaContaImpressao.setId(idEmpresaContaImpressao);
-		
-				contaImpressao.setEmpresa(empresaContaImpressao);
-			}
-		}
-
-        contaImpressao.setValorConta(conta.getValorTotalContaBigDecimal());
-
-        //INSERINDO CONTA_IMPRESSAO NA BASE
-        getControladorUtil().inserir(contaImpressao);
-		
-		return contaImpressao;
-	}
+	
 	
 	
 	/**
@@ -67208,6 +67214,12 @@ public class ControladorFaturamentoFINAL implements SessionBean {
 	public ContaMotivoRevisao determinarContaMotivoRevisao(ConsumoHistorico consumoHistoricoAgua) 
 		throws ControladorException{
 	
+		if (consumoHistoricoAgua != null) {
+			if (consumoHistoricoAgua.getContaMotivoRevisao() != null) {
+				return consumoHistoricoAgua.getContaMotivoRevisao();
+			}
+		}
+		
 		return null;
 	}
 	

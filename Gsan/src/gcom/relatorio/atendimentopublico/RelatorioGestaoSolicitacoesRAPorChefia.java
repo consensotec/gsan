@@ -48,6 +48,11 @@ public class RelatorioGestaoSolicitacoesRAPorChefia extends TarefaRelatorio {
 	public RelatorioGestaoSolicitacoesRAPorChefia(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_GESTAO_SOLICITACOES_RA_POR_CHEFIA);
 	}
+	
+	@Deprecated
+	public RelatorioGestaoSolicitacoesRAPorChefia() {
+		super(null, "");
+	}
 
 	@Override
 	public Object executar() throws TarefaException {

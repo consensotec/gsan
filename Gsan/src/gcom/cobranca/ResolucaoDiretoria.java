@@ -129,6 +129,7 @@ public class ResolucaoDiretoria extends ObjetoTransacao {
     private Short indicadorNegociacaoSoAVista;
     private Short indicadorDescontoSoEmContaAVista;
     private BigDecimal percentualDoacao;
+    private Short indicadorParcelamentoCartaoCredito;
     
 	public BigDecimal getPercentualDoacao() {
 		return percentualDoacao;
@@ -178,7 +179,7 @@ public class ResolucaoDiretoria extends ObjetoTransacao {
 	}
     
     /** full constructor */
-    public ResolucaoDiretoria(String numeroResolucaoDiretoria, String descricaoAssunto, Date dataVigenciaInicio, Date dataVigenciaFim, Date ultimaAlteracao,Short indicadorParcelamentoUnico, Short indicadorUtilizacaoLivre,Short indicadorDescontoSancoes) {
+    public ResolucaoDiretoria(String numeroResolucaoDiretoria, String descricaoAssunto, Date dataVigenciaInicio, Date dataVigenciaFim, Date ultimaAlteracao,Short indicadorParcelamentoUnico, Short indicadorUtilizacaoLivre,Short indicadorDescontoSancoes, Short indicadorParcelamentoCartaoCredito) {
         this.numeroResolucaoDiretoria = numeroResolucaoDiretoria;
         this.descricaoAssunto = descricaoAssunto;
         this.dataVigenciaInicio = dataVigenciaInicio;
@@ -187,6 +188,7 @@ public class ResolucaoDiretoria extends ObjetoTransacao {
         this.indicadorParcelamentoUnico = indicadorParcelamentoUnico;          
         this.indicadorUtilizacaoLivre = indicadorUtilizacaoLivre;
         this.indicadorDescontoSancoes = indicadorDescontoSancoes;
+        this.indicadorParcelamentoCartaoCredito = indicadorParcelamentoCartaoCredito;
     }
 
     /** default constructor */
@@ -302,5 +304,13 @@ public class ResolucaoDiretoria extends ObjetoTransacao {
 	public void setIndicadorParcelamentoLojaVirtual(
 			Short indicadorParcelamentoLojaVirtual) {
 		this.indicadorParcelamentoLojaVirtual = indicadorParcelamentoLojaVirtual;
+	}
+
+	public Short getIndicadorParcelamentoCartaoCredito() {
+		return indicadorParcelamentoCartaoCredito;
+	}
+
+	public void setIndicadorParcelamentoCartaoCredito(Short indicadorParcelamentoCartaoCredito) {
+		this.indicadorParcelamentoCartaoCredito = indicadorParcelamentoCartaoCredito;
 	}	
 }

@@ -1124,7 +1124,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 					dataPagamentoInicial, dataPagamentoFinal,
 					idsPagamentosSituacoes, idsDebitosTipos,
 					idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, 
-                    valorPagamentoFinal);
+                    valorPagamentoFinal,null,null);
 
 			hql = " select distinct pagamento "
 					+ " from gcom.arrecadacao.pagamento.Pagamento pagamento ";
@@ -7112,7 +7112,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 		Session session = HibernateUtil.getSession();
 
 		try {
-			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal,null,null);
 
 			// 3. O sistema seleciona os pagamentos de débito a cobrar do
 			// cliente informado (a partir da tabela
@@ -7178,7 +7178,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 		Session session = HibernateUtil.getSession();
 
 		try {
-			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal,null,null);
 			// 3. O sistema seleciona os pagamentos de débito a cobrar do
 			// cliente informado (a partir da tabela
 			// PAGAMENTO com DBAC_ID = DBAC_ID da tabela DEBITO_A_COBRAR com
@@ -7238,7 +7238,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 		Session session = HibernateUtil.getSession();
 
 		try {
-			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal,null,null);
 			// 3. O sistema seleciona os pagamentos de débito a cobrar do
 			// cliente informado (a partir da tabela
 			// PAGAMENTO com DBAC_ID = DBAC_ID da tabela DEBITO_A_COBRAR com
@@ -7306,7 +7306,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 		Session session = HibernateUtil.getSession();
 
 		try {
-			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal,null,null);
 
 			// 3. O sistema seleciona os pagamentos de débito a cobrar do
 			// cliente informado (a partir da tabela
@@ -7380,7 +7380,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			String periodoArrecadacaoInicial, String periodoArrecadacaoFinal, String periodoPagamentoInicio,
 			String periodoPagamentoFim, Date dataPagamentoInicial, Date dataPagamentoFinal, String[] idsPagamentosSituacoes,
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
-			String valorPagamentoInicial, String valorPagamentoFinal) {
+			String valorPagamentoInicial, String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder) {
 
 		String sql = " where ";
 		
@@ -7527,6 +7527,36 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			informouParametro = true;
 		}
 
+		if (idsCategoria != null && !idsCategoria.equals("") && !idsCategoria[0].equals("" + ConstantesSistema.NUMERO_NAO_INFORMADO)) {
+			String valoresIn = "";
+			for (int i = 0; i < idsCategoria.length; i++) {
+				if (!idsCategoria[i].equals("")) {
+					valoresIn = valoresIn + idsCategoria[i] + ",";
+				}
+			}
+			if (!valoresIn.equals("")) {
+				sql = sql + " imov.categoriaPrincipalId in (" + valoresIn;
+				sql = Util.removerUltimosCaracteres(sql, 1);
+				sql = sql + ") and ";
+			}
+		}
+		if (idsEsferaPoder != null && !idsEsferaPoder.equals("") && !idsEsferaPoder[0].equals("" + ConstantesSistema.NUMERO_NAO_INFORMADO)) {
+			String valoresIn = "";
+			for (int i = 0; i < idsEsferaPoder.length; i++) {
+				if (!idsEsferaPoder[i].equals("")) {
+					valoresIn = valoresIn + idsEsferaPoder[i] + ",";
+				}
+			}
+			if (!valoresIn.equals("")) {
+				valoresIn = Util.removerUltimosCaracteres(valoresIn, 1);
+				sql = sql 
+						+ " (CASE WHEN cltp.id is not null then cltp.esferaPoder.id "
+						+ "       ELSE (CASE WHEN cltpResp.id is not null THEN cltpResp.esferaPoder.id " 
+						+ "      			 ELSE cltpUsur.esferaPoder.id END ) END) IN (" + valoresIn + ") "
+						+ "and ";
+			}
+		}
+		
 		// retira o " and " q fica sobrando no final da query
 		if (informouParametro){
 			sql = Util.removerUltimosCaracteres(sql, 4);
@@ -7759,7 +7789,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			String periodoArrecadacaoInicial, String periodoArrecadacaoFinal, String periodoPagamentoInicio,
 			String periodoPagamentoFim, Date dataPagamentoInicial, Date dataPagamentoFinal, String[] idsPagamentosSituacoes,
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
-			String valorPagamentoInicial, String valorPagamentoFinal) {
+			String valorPagamentoInicial, String valorPagamentoFinal , String[] idsCategoria, String[] idsEsferaPoder) {
 
 		String sql = " WHERE ";
 		if (idImovel != null && !idImovel.equals("")) {
@@ -7891,7 +7921,37 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			sql += " pagto.valorPagamento between " + Util.formatarMoedaRealparaBigDecimal(valorPagamentoInicial) + " and "
 					+ Util.formatarMoedaRealparaBigDecimal(valorPagamentoFinal) + " and ";
 		}
-
+		
+		if (idsCategoria != null && !idsCategoria.equals("") && !idsCategoria[0].equals("" + ConstantesSistema.NUMERO_NAO_INFORMADO)) {
+			String valoresIn = "";
+			for (int i = 0; i < idsCategoria.length; i++) {
+				if (!idsCategoria[i].equals("")) {
+					valoresIn = valoresIn + idsCategoria[i] + ",";
+				}
+			}
+			if (!valoresIn.equals("")) {
+				sql = sql + " imov.categoriaPrincipalId in (" + valoresIn;
+				sql = Util.removerUltimosCaracteres(sql, 1);
+				sql = sql + ") and ";
+			}
+		}
+		if (idsEsferaPoder != null && !idsEsferaPoder.equals("") && !idsEsferaPoder[0].equals("" + ConstantesSistema.NUMERO_NAO_INFORMADO)) {
+			String valoresIn = "";
+			for (int i = 0; i < idsEsferaPoder.length; i++) {
+				if (!idsEsferaPoder[i].equals("")) {
+					valoresIn = valoresIn + idsEsferaPoder[i] + ",";
+				}
+			}
+			if (!valoresIn.equals("")) {
+				valoresIn = Util.removerUltimosCaracteres(valoresIn, 1);
+				sql = sql 
+						+ " (CASE WHEN cltp.id is not null then cltp.esferaPoder.id "
+						+ "       ELSE (CASE WHEN cltpResp.id is not null THEN cltpResp.esferaPoder.id " 
+						+ "      			 ELSE cltpUsur.esferaPoder.id END ) END) IN (" + valoresIn + ") "
+						+ "and ";
+			}
+		}
+		
 		// retira o " and " q fica sobrando no final da query
 		sql = Util.removerUltimosCaracteres(sql, 4);
 
@@ -8895,7 +8955,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 		Session session = HibernateUtil.getSession();
 
 		try {
-			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal,null,null);
 
 			hql = " SELECT DISTINCT pagamento " + " FROM gcom.arrecadacao.pagamento.Pagamento as pagamento "
 					+ " INNER JOIN FETCH pagamento.avisoBancario as avisoBancario "
@@ -8945,11 +9005,14 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 		Session session = HibernateUtil.getSession();
 
 		try {
-			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal, null,null);
 
-			hql = " select count (pagamento.id) " + " from gcom.arrecadacao.pagamento.Pagamento pagamento "
-					+ " inner join pagamento.avisoBancario as avisoBancario " + condicionais + " ";
+			hql = " select count (pagamento.id) " 
+					+ " from gcom.arrecadacao.pagamento.Pagamento pagamento "
+					+ " inner join pagamento.avisoBancario as avisoBancario ";
 
+			hql += condicionais + " ";
+			
 			pagamentoAvisoBancarioCount = session.createQuery(hql).setMaxResults(1).uniqueResult();
 
 			if (pagamentoAvisoBancarioCount != null) {
@@ -9000,7 +9063,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			// e CRTP_ID correspondente a um dos Tipos de Relação do Cliente com
 			// o Imóvel, caso selecionados
 			// e demais parâmetros de seleção informados)
-			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal,null,null);
 
 			hql = " SELECT distinct pagamento " + " FROM gcom.arrecadacao.pagamento.Pagamento as pagamento "
 					+ " INNER JOIN FETCH pagamento.avisoBancario avbc " + " INNER JOIN FETCH avbc.arrecadador arrec "
@@ -9061,12 +9124,12 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			// e CRTP_ID correspondente a um dos Tipos de Relação do Cliente com
 			// o Imóvel, caso selecionados
 			// e demais parâmetros de seleção informados)
-			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal,null,null);
 
 
 			if (idCliente != null && !idCliente.equals("")){
 				
-				condicionais = this.criarCondicionaisPagamento(idImovel, null, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+				condicionais = this.criarCondicionaisPagamento(idImovel, null, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal,null,null);
 
 				if (condicionais.trim().equals("")){
 					
@@ -9174,7 +9237,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			String periodoArrecadacaoInicial, String periodoArrecadacaoFinal, String periodoPagamentoInicio,
 			String periodoPagamentoFim, Date dataPagamentoInicial, Date dataPagamentoFinal, String[] idsPagamentosSituacoes,
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
-			String valorPagamentoInicial, String valorPagamentoFinal) throws ErroRepositorioException {
+			String valorPagamentoInicial, String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder) throws ErroRepositorioException {
 
 		Collection retorno = new ArrayList();
 
@@ -9190,7 +9253,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			// e CRTP_ID correspondente a um dos Tipos de Relação do Cliente com
 			// o Imóvel, caso selecionados
 			// e demais parâmetros de seleção informados)
-			String condicionais = this.criarCondicionaisPagamentoRelatorio(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamentoRelatorio(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal, idsCategoria, idsEsferaPoder);
 
 					if (idCliente != null && !idCliente.equals("")){
 						
@@ -9418,13 +9481,6 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 
 			sql = sql + condicionaisClientePagamento  + " ) tmp order by idImovel, anoMesPagamento ";
 
-			// "select distinct pagamento " + " from
-			// gcom.arrecadacao.pagamento.Pagamento as
-			// pagamento " + " inner join pagamento.cliente as cliente " +
-			// condicionais + "
-			// order by pagamento.documentoTipo.id,pagamento.dataPagamento " + "
-			// ";
-
 			retorno = session.createSQLQuery(sql).addScalar("tipo", Hibernate.STRING).addScalar("idLocalidade", Hibernate.INTEGER).addScalar("nomeLocalidade", Hibernate.STRING).addScalar("idGerencia", Hibernate.INTEGER).addScalar("nomeGerencia", Hibernate.STRING).addScalar("idImovel", Hibernate.INTEGER).addScalar("idCliente", Hibernate.INTEGER).addScalar("nomeCliente", Hibernate.STRING).addScalar("nomeArrecadador", Hibernate.STRING).addScalar("dataPagamento", Hibernate.DATE).addScalar("anoMesPagamento", Hibernate.INTEGER).addScalar("tipoDebito", Hibernate.STRING).addScalar("valorDocumento", Hibernate.BIG_DECIMAL).addScalar("valorPagamento", Hibernate.BIG_DECIMAL).addScalar("idSituacaoPagamento", Hibernate.INTEGER).addScalar("situacaoPagamento", Hibernate.STRING).addScalar("idDocumentoTipo", Hibernate.INTEGER).setInteger("canceladaRetificacao", DebitoCreditoSituacao.CANCELADA_POR_RETIFICACAO).list();
 
 		} catch (HibernateException e) {
@@ -9458,44 +9514,53 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			String[] idsPagamentosSituacoes, String[] idsDebitosTipos, String[] idsArrecadacaoForma,
 			String[] idsDocumentosTipos, String valorPagamentoInicial, String valorPagamentoFinal)
 																									throws ErroRepositorioException {
-
 		Collection retorno = new ArrayList();
-
 		String hql = "";
-
 		Session session = HibernateUtil.getSession();
 
 		try {
-			// 1. O sistema seleciona os pagamentos de conta do cliente
-			// informado (a partir da tabela
-			// PAGAMENTO com CNTA_ID = CNTA_ID da tabela CLIENTE_CONTA com
-			// CLIE_ID = Id do cliente informado
-			// e CRTP_ID correspondente a um dos Tipos de Relação do Cliente com
-			// o Imóvel, caso selecionados
+			// 1. O sistema seleciona os pagamentos de conta do cliente informado (a partir da tabela
+			// PAGAMENTO com CNTA_ID = CNTA_ID da tabela CLIENTE_CONTA com CLIE_ID = Id do cliente informado
+			// e CRTP_ID correspondente a um dos Tipos de Relação do Cliente com o Imóvel, caso selecionados
 			// e demais parâmetros de seleção informados)
-			String condicionais = this.criarCondicionaisPagamentoRelatorio(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamentoRelatorio(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal, null,null);
 
-			hql = "SELECT pagto.id, loc.id, loc.descricao, " + "gr.id, gr.nome, imov.id, cli.id, cli.nome, "
-					+ "cliArrec.nome, pagto.dataPagamento, " + "pagto.anoMesReferenciaPagamento, dbtp.descricao, "
+			hql = "SELECT pagto.id, loc.id, loc.descricao, " 
+					+ "gr.id, gr.nome, imov.id, cli.id, cli.nome, "
+					+ "cliArrec.nome, pagto.dataPagamento, " 
+					+ "pagto.anoMesReferenciaPagamento, dbtp.descricao, "
 					+ "conta.valorAgua, conta.valorEsgoto, conta.debitos, "
 					+ "conta.valorCreditos, dbcb.valorDebito, dbcb.numeroPrestacaoDebito, "
 					+ "dbcb.numeroPrestacaoCobradas, gpag.valorDebito, pagto.valorPagamento, "
-					+ "pagtoSitAtual.id, pagtoSitAtual.descricao, doctoTp.id " + "FROM Pagamento pagto "
-					+ "INNER JOIN pagto.localidade loc " + "INNER JOIN loc.gerenciaRegional gr "
-					+ "INNER JOIN pagto.avisoBancario avbc " + "INNER JOIN avbc.arrecadador arrec "
-					+ "INNER JOIN arrec.cliente cliArrec " + "INNER JOIN pagto.documentoTipo doctoTp "
-					+ "LEFT JOIN pagto.imovel imov " + "LEFT JOIN pagto.cliente cli " + "LEFT JOIN pagto.debitoTipo dbtp "
-					+ "LEFT JOIN pagto.contaGeral contaGeral " + "LEFT JOIN contaGeral.conta conta "
-					+ "LEFT JOIN pagto.guiaPagamento gpag " + "LEFT JOIN pagto.debitoACobrarGeral dbcbGeral "
-					+ "LEFT JOIN dbcbGeral.debitoACobrar dbcb " + "LEFT JOIN pagto.pagamentoSituacaoAtual pagtoSitAtual "
+					+ "pagtoSitAtual.id, pagtoSitAtual.descricao, doctoTp.id " 
+					+ "FROM Pagamento pagto "
+					+ "INNER JOIN pagto.localidade loc " 
+					+ "INNER JOIN loc.gerenciaRegional gr "
+					+ "INNER JOIN pagto.avisoBancario avbc " 
+					+ "INNER JOIN avbc.arrecadador arrec "
+					+ "INNER JOIN arrec.cliente cliArrec "
+					+ "INNER JOIN pagto.documentoTipo doctoTp "
+					+ "LEFT JOIN pagto.imovel imov " 
+					+ " LEFT JOIN imov.clienteImoveis climResp with climResp.dataFimRelacao is null AND climResp.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.RESPONSAVEL
+					+ " LEFT JOIN imov.clienteImoveis climUsur with climUsur.dataFimRelacao is null AND climUsur.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.USUARIO
+					+ " LEFT JOIN climResp.cliente clieResp "
+					+ " LEFT JOIN climUsur.cliente clieUsur "
+					+ " LEFT JOIN clieResp.clienteTipo cltpResp "
+					+ " LEFT JOIN clieUsur.clienteTipo cltpUsur "
+					+ "LEFT JOIN pagto.cliente cli " 
+					+ "LEFT JOIN cli.clienteTipo cltp "
+					+ "LEFT JOIN pagto.debitoTipo dbtp "
+					+ "LEFT JOIN pagto.contaGeral contaGeral " 
+					+ "LEFT JOIN contaGeral.conta conta "
+					+ "LEFT JOIN pagto.guiaPagamento gpag " 
+					+ "LEFT JOIN pagto.debitoACobrarGeral dbcbGeral "
+					+ "LEFT JOIN dbcbGeral.debitoACobrar dbcb " 
+					+ "LEFT JOIN pagto.pagamentoSituacaoAtual pagtoSitAtual "
 					+ "LEFT JOIN pagto.arrecadadorMovimentoItem arrecMovItem "
 					+ "LEFT JOIN arrecMovItem.arrecadadorMovimento arrecMov "
-					+ "LEFT JOIN pagto.arrecadacaoForma arrecForma " + condicionais + " ORDER BY loc.id, imov.id, "
-					+ " pagto.anoMesReferenciaPagamento, pagto.dataPagamento ";
-			// hql = " select distinct pagamento "
-			// + " from gcom.arrecadacao.pagamento.Pagamento as pagamento "
-			// + " inner join pagamento.avisoBancario as avisoBancario "
-			// + condicionais + " ";
+					+ "LEFT JOIN pagto.arrecadacaoForma arrecForma " 
+					+ condicionais 
+					+ " ORDER BY loc.id, imov.id, pagto.anoMesReferenciaPagamento, pagto.dataPagamento ";
 
 			retorno = session.createQuery(hql).list();
 
@@ -9546,35 +9611,37 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			// e CRTP_ID correspondente a um dos Tipos de Relação do Cliente com
 			// o Imóvel, caso selecionados
 			// e demais parâmetros de seleção informados)
-			String condicionais = this.criarCondicionaisPagamentoRelatorio(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamentoRelatorio(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal,null,null);
 
-			hql = "SELECT pagto.id, loc.id, loc.descricao, " + "gr.id, gr.nome, imov.id, cli.id, cli.nome, "
-					+ "cliArrec.nome, pagto.dataPagamento, " + "pagto.anoMesReferenciaPagamento, dbtp.descricao, "
+			hql = "SELECT pagto.id, loc.id, loc.descricao, " 
+					+ "gr.id, gr.nome, imov.id, cli.id, cli.nome, "
+					+ "cliArrec.nome, pagto.dataPagamento, " 
+					+ "pagto.anoMesReferenciaPagamento, dbtp.descricao, "
 					+ "conta.valorAgua, conta.valorEsgoto, conta.debitos, "
 					+ "conta.valorCreditos, dbcb.valorDebito, dbcb.numeroPrestacaoDebito, "
 					+ "dbcb.numeroPrestacaoCobradas, gpag.valorDebito, pagto.valorPagamento, "
-					+ "pagtoSitAtual.id, pagtoSitAtual.descricao, doctoTp.id " + "FROM Pagamento pagto "
-					+ "INNER JOIN pagto.localidade loc " + "INNER JOIN loc.gerenciaRegional gr "
-					+ "INNER JOIN pagto.avisoBancario avbc " + "INNER JOIN avbc.arrecadador arrec "
-					+ "INNER JOIN arrec.cliente cliArrec " + "INNER JOIN pagto.documentoTipo doctoTp "
-					+ "LEFT JOIN pagto.imovel imov " + "LEFT JOIN pagto.cliente cli " + "LEFT JOIN pagto.debitoTipo dbtp "
-					+ "LEFT JOIN pagto.contaGeral contaGeral " + "LEFT JOIN contaGeral.conta conta "
-					+ "LEFT JOIN pagto.guiaPagamento gpag " + "LEFT JOIN pagto.debitoACobrarGeral dbcbGeral "
-					+ "LEFT JOIN dbcbGeral.debitoACobrar dbcb " + "LEFT JOIN pagto.pagamentoSituacaoAtual pagtoSitAtual "
+					+ "pagtoSitAtual.id, pagtoSitAtual.descricao, doctoTp.id " 
+					+ "FROM Pagamento pagto "
+					+ "INNER JOIN pagto.localidade loc " 
+					+ "INNER JOIN loc.gerenciaRegional gr "
+					+ "INNER JOIN pagto.avisoBancario avbc " 
+					+ "INNER JOIN avbc.arrecadador arrec "
+					+ "INNER JOIN arrec.cliente cliArrec " 
+					+ "INNER JOIN pagto.documentoTipo doctoTp "
+					+ "LEFT JOIN pagto.imovel imov " 
+					+ "LEFT JOIN pagto.cliente cli " 
+					+ "LEFT JOIN pagto.debitoTipo dbtp "
+					+ "LEFT JOIN pagto.contaGeral contaGeral " 
+					+ "LEFT JOIN contaGeral.conta conta "
+					+ "LEFT JOIN pagto.guiaPagamento gpag " 
+					+ "LEFT JOIN pagto.debitoACobrarGeral dbcbGeral "
+					+ "LEFT JOIN dbcbGeral.debitoACobrar dbcb " 
+					+ "LEFT JOIN pagto.pagamentoSituacaoAtual pagtoSitAtual "
 					+ "LEFT JOIN pagto.arrecadadorMovimentoItem arrecMovItem "
 					+ "LEFT JOIN arrecMovItem.arrecadadorMovimento arrecMov "
-					+ "LEFT JOIN pagto.arrecadacaoForma arrecForma " + condicionais + " ORDER BY loc.id, imov.id, "
-					+ " dbtp.id, pagto.dataPagamento ";
-			// hql = " select distinct pagamento "
-			// + " from gcom.arrecadacao.pagamento.Pagamento as pagamento "
-			// + " inner join pagamento.arrecadadorMovimentoItem as
-			// arrecadadorMovimentoItem "
-			// + " inner join arrecadadorMovimentoItem.arrecadadorMovimento as
-			// arrecadadorMovimento "
-			// + condicionais
-			// + " order by pagamento.localidade.id, pagamento.imovel.id, "
-			// + " pagamento.debitoTipo.id, pagamento.dataPagamento "
-			// + " ";
+					+ "LEFT JOIN pagto.arrecadacaoForma arrecForma " 
+					+ condicionais 
+					+ " ORDER BY loc.id, imov.id, dbtp.id, pagto.dataPagamento ";
 
 			retorno = session.createQuery(hql).list();
 
@@ -9608,7 +9675,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			String periodoArrecadacaoInicial, String periodoArrecadacaoFinal, String periodoPagamentoInicio,
 			String periodoPagamentoFim, Date dataPagamentoInicial, Date dataPagamentoFinal, String[] idsPagamentosSituacoes,
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
-			String valorPagamentoInicial, String valorPagamentoFinal) throws ErroRepositorioException {
+			String valorPagamentoInicial, String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder) throws ErroRepositorioException {
 
 		Collection retorno = new ArrayList();
 
@@ -9624,11 +9691,10 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			// e CRTP_ID correspondente a um dos Tipos de Relação do Cliente com
 			// o Imóvel, caso selecionados
 			// e demais parâmetros de seleção informados)
-			String condicionais = this.criarCondicionaisPagamentoRelatorio(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamentoRelatorio(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal, idsCategoria, idsEsferaPoder);
 
-			hql = "SELECT pagto.id, "
-					+ // 0
-					"loc.id, " // 1
+			hql = "SELECT pagto.id, " //0
+					+ "loc.id, " // 1
 					+ "loc.descricao, "// 2
 					+ "gr.id, " // 3
 					+ "gr.nome, " // 4
@@ -9652,17 +9718,36 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 					+ "pagtoSitAtual.descricao, "// 22
 					+ "doctoTp.id, "// 23
 					+ "conta.valorImposto " // 24
-					+ "FROM Pagamento pagto " + "INNER JOIN pagto.localidade loc " + "INNER JOIN loc.gerenciaRegional gr "
-					+ "INNER JOIN pagto.avisoBancario avbc " + "INNER JOIN avbc.arrecadador arrec "
-					+ "INNER JOIN arrec.cliente cliArrec " + "INNER JOIN pagto.documentoTipo doctoTp "
-					+ "LEFT JOIN pagto.imovel imov " + "LEFT JOIN pagto.cliente cli " + "LEFT JOIN pagto.debitoTipo dbtp "
-					+ "LEFT JOIN pagto.contaGeral contaGeral " + "LEFT JOIN contaGeral.conta conta "
-					+ "LEFT JOIN pagto.guiaPagamento gpag " + "LEFT JOIN pagto.debitoACobrarGeral dbcbGeral "
-					+ "LEFT JOIN dbcbGeral.debitoACobrar dbcb " + "LEFT JOIN pagto.pagamentoSituacaoAtual pagtoSitAtual "
+					+ "FROM Pagamento pagto " 
+					+ "INNER JOIN pagto.localidade loc " 
+					+ "INNER JOIN loc.gerenciaRegional gr "
+					+ "INNER JOIN pagto.avisoBancario avbc " 
+					+ "INNER JOIN avbc.arrecadador arrec "
+					+ "INNER JOIN arrec.cliente cliArrec " 
+					+ "INNER JOIN pagto.documentoTipo doctoTp "
+					+ "LEFT JOIN pagto.imovel imov " 
+
+					+ " LEFT JOIN imov.clienteImoveis climResp with climResp.dataFimRelacao is null AND climResp.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.RESPONSAVEL
+					+ " LEFT JOIN imov.clienteImoveis climUsur with climUsur.dataFimRelacao is null AND climUsur.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.USUARIO
+					+ " LEFT JOIN climResp.cliente clieResp "
+					+ " LEFT JOIN climUsur.cliente clieUsur "
+					+ " LEFT JOIN clieResp.clienteTipo cltpResp "
+					+ " LEFT JOIN clieUsur.clienteTipo cltpUsur "
+					
+					+ "LEFT JOIN pagto.cliente cli " 
+					+ "LEFT JOIN cli.clienteTipo cltp "
+					+ "LEFT JOIN pagto.debitoTipo dbtp "
+					+ "LEFT JOIN pagto.contaGeral contaGeral " 
+					+ "LEFT JOIN contaGeral.conta conta "
+					+ "LEFT JOIN pagto.guiaPagamento gpag " 
+					+ "LEFT JOIN pagto.debitoACobrarGeral dbcbGeral "
+					+ "LEFT JOIN dbcbGeral.debitoACobrar dbcb "
+					+ "LEFT JOIN pagto.pagamentoSituacaoAtual pagtoSitAtual "
 					+ "LEFT JOIN pagto.arrecadadorMovimentoItem arrecMovItem "
 					+ "LEFT JOIN arrecMovItem.arrecadadorMovimento arrecMov "
-					+ "LEFT JOIN pagto.arrecadacaoForma arrecForma " + condicionais + " ORDER BY loc.id, imov.id, "
-					+ " dbtp.id, pagto.dataPagamento ";
+					+ "LEFT JOIN pagto.arrecadacaoForma arrecForma " 
+					+ condicionais 
+					+ " ORDER BY loc.id, imov.id, dbtp.id, pagto.dataPagamento ";
 
 			retorno = session.createQuery(hql).list();
 
@@ -9710,7 +9795,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			// e CRTP_ID correspondente a um dos Tipos de Relação do Cliente com
 			// o Imóvel, caso selecionados
 			// e demais parâmetros de seleção informados)
-			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal,null,null);
 
 			hql = " select count(pagamento.id) " + " from gcom.arrecadacao.pagamento.Pagamento pagamento " + condicionais
 					+ " ";
@@ -9748,7 +9833,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			String periodoArrecadacaoInicial, String periodoArrecadacaoFinal, String periodoPagamentoInicio,
 			String periodoPagamentoFim, Date dataPagamentoInicial, Date dataPagamentoFinal, String[] idsPagamentosSituacoes,
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
-			String valorPagamentoInicial, String valorPagamentoFinal) throws ErroRepositorioException {
+			String valorPagamentoInicial, String valorPagamentoFinal, String[] idsCategoria, String[] idsEsferaPoder) throws ErroRepositorioException {
 
 		int retorno = 0;
 		Object pagamentoLocalidadeCount;
@@ -9765,10 +9850,24 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			// e CRTP_ID correspondente a um dos Tipos de Relação do Cliente com
 			// o Imóvel, caso selecionados
 			// e demais parâmetros de seleção informados)
-			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal, idsCategoria, idsEsferaPoder);
 
-			hql = " select count(pagamento.id) " + " from gcom.arrecadacao.pagamento.Pagamento pagamento " + condicionais
-					+ " ";
+			hql = " select count(pagamento.id) "
+					+ " from gcom.arrecadacao.pagamento.Pagamento pagamento " ;
+			
+			if ((idsCategoria != null && !idsCategoria.equals("") && !idsCategoria[0].equals("" + ConstantesSistema.NUMERO_NAO_INFORMADO)) ||
+				(idsEsferaPoder != null && !idsEsferaPoder.equals("") && !idsEsferaPoder[0].equals("" + ConstantesSistema.NUMERO_NAO_INFORMADO))) {
+				hql += 	  " LEFT JOIN pagamento.imovel imov " 
+						+ " LEFT JOIN imov.clienteImoveis climResp with climResp.dataFimRelacao is null AND climResp.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.RESPONSAVEL
+						+ " LEFT JOIN imov.clienteImoveis climUsur with climUsur.dataFimRelacao is null AND climUsur.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.USUARIO
+						+ " LEFT JOIN climResp.cliente clieResp "
+						+ " LEFT JOIN climUsur.cliente clieUsur "
+						+ " LEFT JOIN clieResp.clienteTipo cltpResp "
+						+ " LEFT JOIN clieUsur.clienteTipo cltpUsur "
+						+ " LEFT JOIN pagamento.cliente cli " 
+						+ " LEFT JOIN cli.clienteTipo cltp ";
+			}
+			hql += condicionais + " ";
 
 			pagamentoLocalidadeCount = session.createQuery(hql).setMaxResults(1).uniqueResult();
 
@@ -10896,7 +10995,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			}
 		}
 
-		// Situação Ligação Água
+		// Situação Ligação Agua
 		if (idsLigacaoAgua != null && idsLigacaoAgua.length > 0) {
 			if (!idsLigacaoAgua[0].equals(ConstantesSistema.NUMERO_NAO_INFORMADO + "")) {
 				int i = 0;
@@ -11107,7 +11206,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			}
 		}
 
-		// Situação Ligação Água
+		// Situação Ligação �?gua
 		if (idsLigacaoAgua != null && idsLigacaoAgua.length > 0) {
 			if (!idsLigacaoAgua[0].equals(ConstantesSistema.NUMERO_NAO_INFORMADO + "")) {
 				int i = 0;
@@ -12383,7 +12482,8 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			String localidadeInicial, String localidadeFinal, String idAvisoBancario, String idArrecadador,
 			String periodoArrecadacaoInicial, String periodoArrecadacaoFinal, String periodoPagamentoInicio,
 			String periodoPagamentoFim, Date dataPagamentoInicial, Date dataPagamentoFinal, String[] idsPagamentosSituacoes,
-			String[] idsDebitosTipos, String[] idsArrecadacaoForma, String[] idsDocumentosTipos)
+			String[] idsDebitosTipos, String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
+			String[] idsCategoria, String[] idsEsferaPoder)
 																								throws ErroRepositorioException {
 		int retorno = 0;
 		Object pagamentoHistoricoLocalidadeCount;
@@ -12403,8 +12503,49 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			String condicionais = this.criarCondicionaisPagamentoHistorico(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos);
 
 			hql = " select count(pagamentoHistorico.id) "
-					+ " from gcom.arrecadacao.pagamento.PagamentoHistorico pagamentoHistorico " + condicionais + " ";
-
+					+ " from gcom.arrecadacao.pagamento.PagamentoHistorico pagamentoHistorico ";
+			
+			if ((idsCategoria != null && !idsCategoria.equals("") && !idsCategoria[0].equals("" + ConstantesSistema.NUMERO_NAO_INFORMADO)) ||
+				(idsEsferaPoder != null && !idsEsferaPoder.equals("") && !idsEsferaPoder[0].equals("" + ConstantesSistema.NUMERO_NAO_INFORMADO))) {
+					hql += 	  " LEFT JOIN pagamentoHistorico.imovel imov " 
+							+ " LEFT JOIN imov.clienteImoveis climResp with climResp.dataFimRelacao is null AND climResp.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.RESPONSAVEL
+							+ " LEFT JOIN imov.clienteImoveis climUsur with climUsur.dataFimRelacao is null AND climUsur.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.USUARIO
+							+ " LEFT JOIN climResp.cliente clieResp "
+							+ " LEFT JOIN climUsur.cliente clieUsur "
+							+ " LEFT JOIN clieResp.clienteTipo cltpResp "
+							+ " LEFT JOIN clieUsur.clienteTipo cltpUsur "
+							+ " LEFT JOIN pagamentoHistorico.cliente cli " 
+							+ " LEFT JOIN cli.clienteTipo cltp ";
+				}
+			
+			if (idsCategoria != null && !idsCategoria.equals("") && !idsCategoria[0].equals("" + ConstantesSistema.NUMERO_NAO_INFORMADO)) {
+				String valoresIn = "";
+				for (int i = 0; i < idsCategoria.length; i++) {
+					if (!idsCategoria[i].equals("")) {
+						valoresIn = valoresIn + idsCategoria[i] + ",";
+					}
+				}
+				if (!valoresIn.equals("")) {
+					condicionais += " and imov.categoriaPrincipalId in (" + valoresIn;
+					condicionais = Util.removerUltimosCaracteres(condicionais, 1);
+					condicionais += ") ";
+				}
+			}
+			if (idsEsferaPoder != null && !idsEsferaPoder.equals("") && !idsEsferaPoder[0].equals("" + ConstantesSistema.NUMERO_NAO_INFORMADO)) {
+				String valoresIn = "";
+				for (int i = 0; i < idsEsferaPoder.length; i++) {
+					if (!idsEsferaPoder[i].equals("")) {
+						valoresIn = valoresIn + idsEsferaPoder[i] + ",";
+					}
+				}
+				if (!valoresIn.equals("")) {
+					valoresIn = Util.removerUltimosCaracteres(valoresIn, 1);
+					condicionais += " and (CASE WHEN cltp.id is not null then cltp.esferaPoder.id "
+							+ "       ELSE (CASE WHEN cltpResp.id is not null THEN cltpResp.esferaPoder.id " 
+							+ "      			 ELSE cltpUsur.esferaPoder.id END ) END) IN (" + valoresIn + ") ";
+				}
+			}
+			hql += condicionais;
 			pagamentoHistoricoLocalidadeCount = session.createQuery(hql).setMaxResults(1).uniqueResult();
 
 			if (pagamentoHistoricoLocalidadeCount != null) {
@@ -12965,7 +13106,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			String idArrecadador, String periodoArrecadacaoInicial, String periodoArrecadacaoFinal,
 			String periodoPagamentoInicio, String periodoPagamentoFim, Date dataPagamentoInicial, Date dataPagamentoFinal,
 			String[] idsPagamentosSituacoes, String[] idsDebitosTipos, String[] idsArrecadacaoForma,
-			String[] idsDocumentosTipos, String valorPagamentoInicial, String valorPagamentoFinal)
+			String[] idsDocumentosTipos, String valorPagamentoInicial, String valorPagamentoFinal, String[] idsCategoria, String[] idsEsferaPoder)
 																									throws ErroRepositorioException {
 
 		Collection retorno = new ArrayList();
@@ -12982,30 +13123,57 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			// e CRTP_ID correspondente a um dos Tipos de Relação do Cliente com
 			// o Imóvel, caso selecionados
 			// e demais parâmetros de seleção informados)
-			String condicionais = this.criarCondicionaisPagamentoRelatorio(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamentoRelatorio(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal, idsCategoria, idsEsferaPoder);
 
-			hql = "SELECT pagto.id, loc.id, loc.descricao, " + "gr.id, gr.nome, imov.id, cli.id, cli.nome, "
-					+ "cliArrec.nome, pagto.dataPagamento, " + "pagto.anoMesReferenciaPagamento, dbtp.descricao, "
-					+ "conta.valorAgua, conta.valorEsgoto, conta.valorDebitos, " + "conta.valorCreditos, "
-					+ "CASE WHEN dbcb is not null " + "THEN dbcb.valorDebito " + "ELSE dbcbHist.valorDebito "
-					+ "END as valorDebito, " + "CASE WHEN dbcb is not null " + "THEN dbcb.numeroPrestacaoDebito "
-					+ "ELSE dbcbHist.prestacaoDebito " + "END as numeroPrestacaoDebito, " + "CASE WHEN dbcb is not null "
-					+ "THEN dbcb.numeroPrestacaoCobradas " + "ELSE dbcbHist.prestacaoCobradas "
-					+ "END as numeroPrestacaoCobradas, " + "gpag.valorDebito, pagto.valorPagamento, "
+			hql = "SELECT pagto.id, loc.id, loc.descricao, " 
+					+ "gr.id, gr.nome, imov.id, cli.id, cli.nome, "
+					+ "cliArrec.nome, pagto.dataPagamento, " 
+					+ "pagto.anoMesReferenciaPagamento, dbtp.descricao, "
+					+ "conta.valorAgua, conta.valorEsgoto, conta.valorDebitos, " 
+					+ "conta.valorCreditos, "
+					+ "CASE WHEN dbcb is not null " 
+					+ "THEN dbcb.valorDebito "
+					+ "ELSE dbcbHist.valorDebito "
+					+ "END as valorDebito, " 
+					+ "CASE WHEN dbcb is not null "
+					+ "THEN dbcb.numeroPrestacaoDebito "
+					+ "ELSE dbcbHist.prestacaoDebito " 
+					+ "END as numeroPrestacaoDebito, " 
+					+ "CASE WHEN dbcb is not null "
+					+ "THEN dbcb.numeroPrestacaoCobradas " 
+					+ "ELSE dbcbHist.prestacaoCobradas "
+					+ "END as numeroPrestacaoCobradas, "
+					+ "gpag.valorDebito, pagto.valorPagamento, "
 					+ "pagtoSitAtual.id, pagtoSitAtual.descricao, doctoTp.id, conta.valorImposto "
-					+ "FROM PagamentoHistorico pagto " + "INNER JOIN pagto.localidade loc "
-					+ "INNER JOIN loc.gerenciaRegional gr " + "INNER JOIN pagto.avisoBancario avbc "
-					+ "INNER JOIN avbc.arrecadador arrec " + "INNER JOIN arrec.cliente cliArrec "
-					+ "INNER JOIN pagto.documentoTipo doctoTp " + "LEFT JOIN pagto.imovel imov "
-					+ "LEFT JOIN pagto.cliente cli " + "LEFT JOIN pagto.debitoTipo dbtp "
-					+ "LEFT JOIN pagto.contaGeral contaGeral " + "LEFT JOIN contaGeral.contaHistorico conta "
-					+ "LEFT JOIN pagto.guiaPagamento gpag " + "LEFT JOIN pagto.debitoACobrarGeral dbcbGeral "
-					+ "LEFT JOIN dbcbGeral.debitoACobrar dbcb " + "LEFT JOIN dbcbGeral.debitoACobrarHistorico dbcbHist "
+					+ "FROM PagamentoHistorico pagto " 
+					+ "INNER JOIN pagto.localidade loc "
+					+ "INNER JOIN loc.gerenciaRegional gr " 
+					+ "INNER JOIN pagto.avisoBancario avbc "
+					+ "INNER JOIN avbc.arrecadador arrec "
+					+ "INNER JOIN arrec.cliente cliArrec "
+					+ "INNER JOIN pagto.documentoTipo doctoTp "
+					+ "LEFT JOIN pagto.imovel imov "
+					+ " LEFT JOIN imov.clienteImoveis climResp with climResp.dataFimRelacao is null AND climResp.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.RESPONSAVEL
+					+ " LEFT JOIN imov.clienteImoveis climUsur with climUsur.dataFimRelacao is null AND climUsur.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.USUARIO
+					+ " LEFT JOIN climResp.cliente clieResp "
+					+ " LEFT JOIN climUsur.cliente clieUsur "
+					+ " LEFT JOIN clieResp.clienteTipo cltpResp "
+					+ " LEFT JOIN clieUsur.clienteTipo cltpUsur "
+					+ "LEFT JOIN pagto.cliente cli " 
+					+ "LEFT JOIN cli.clienteTipo cltp "
+					+ "LEFT JOIN pagto.debitoTipo dbtp "
+					+ "LEFT JOIN pagto.contaGeral contaGeral " 
+					+ "LEFT JOIN contaGeral.contaHistorico conta "
+					+ "LEFT JOIN pagto.guiaPagamento gpag " 
+					+ "LEFT JOIN pagto.debitoACobrarGeral dbcbGeral "
+					+ "LEFT JOIN dbcbGeral.debitoACobrar dbcb " 
+					+ "LEFT JOIN dbcbGeral.debitoACobrarHistorico dbcbHist "
 					+ "LEFT JOIN pagto.pagamentoSituacaoAtual pagtoSitAtual "
 					+ "LEFT JOIN pagto.arrecadadorMovimentoItem arrecMovItem "
 					+ "LEFT JOIN arrecMovItem.arrecadadorMovimento arrecMov "
-					+ "LEFT JOIN pagto.arrecadacaoForma arrecForma " + condicionais + " ORDER BY loc.id, imov.id, "
-					+ " dbtp.id, pagto.dataPagamento ";
+					+ "LEFT JOIN pagto.arrecadacaoForma arrecForma "
+					+ condicionais 
+					+ " ORDER BY loc.id, imov.id, dbtp.id, pagto.dataPagamento ";
 
 			// hql = " select distinct pagamentoHistorico "
 			// + " from gcom.arrecadacao.pagamento.PagamentoHistorico as
@@ -14920,12 +15088,10 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			String periodoArrecadacaoInicial, String periodoArrecadacaoFinal, String periodoPagamentoInicio,
 			String periodoPagamentoFim, Date dataPagamentoInicial, Date dataPagamentoFinal, String[] idsPagamentosSituacoes,
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
-			String valorPagamentoInicial, String valorPagamentoFinal) throws ErroRepositorioException {
+			String valorPagamentoInicial, String valorPagamentoFinal, String[] idsCategoria, String[] idsEsferaPoder) throws ErroRepositorioException {
 
 		Collection retorno = new ArrayList();
-
 		String hql = "";
-
 		Session session = HibernateUtil.getSession();
 
 		try {
@@ -14936,21 +15102,39 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			// e CRTP_ID correspondente a um dos Tipos de Relação do Cliente com
 			// o Imóvel, caso selecionados
 			// e demais parâmetros de seleção informados)
-			String condicionais = this.criarCondicionaisPagamentoRelatorio(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamentoRelatorio(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal, idsCategoria, idsEsferaPoder);
 
-			hql = "SELECT pagto.id, loc.id, loc.descricao, " + "gr.id, gr.nome, imov.id, cli.id, cli.nome, "
-					+ "cliArrec.nome, pagto.dataPagamento, " + "pagto.anoMesReferenciaPagamento, dbtp.descricao, "
+			hql = "SELECT pagto.id, loc.id, loc.descricao, " 
+					+ "gr.id, gr.nome, imov.id, cli.id, cli.nome, "
+					+ "cliArrec.nome, pagto.dataPagamento, " 
+					+ "pagto.anoMesReferenciaPagamento, dbtp.descricao, "
 					+ "conta.valorAgua, conta.valorEsgoto, conta.debitos, "
 					+ "conta.valorCreditos, dbcb.valorDebito, dbcb.numeroPrestacaoDebito, "
 					+ "dbcb.numeroPrestacaoCobradas, gpag.valorDebito, pagto.valorPagamento, "
-					+ "pagtoSitAtual.id, pagtoSitAtual.descricao, doctoTp.id, conta.valorImposto " + "FROM Pagamento pagto "
-					+ "INNER JOIN pagto.localidade loc " + "INNER JOIN loc.gerenciaRegional gr "
-					+ "INNER JOIN pagto.avisoBancario avbc " + "INNER JOIN avbc.arrecadador arrec "
-					+ "INNER JOIN arrec.cliente cliArrec " + "INNER JOIN pagto.documentoTipo doctoTp "
-					+ "LEFT JOIN pagto.imovel imov " + "LEFT JOIN pagto.cliente cli " + "LEFT JOIN pagto.debitoTipo dbtp "
-					+ "LEFT JOIN pagto.contaGeral contaGeral " + "LEFT JOIN contaGeral.conta conta "
-					+ "LEFT JOIN pagto.guiaPagamento gpag " + "LEFT JOIN pagto.debitoACobrarGeral dbcbGeral "
-					+ "LEFT JOIN dbcbGeral.debitoACobrar dbcb " + "LEFT JOIN pagto.pagamentoSituacaoAtual pagtoSitAtual "
+					+ "pagtoSitAtual.id, pagtoSitAtual.descricao, doctoTp.id, conta.valorImposto " 
+					+ "FROM Pagamento pagto "
+					+ "INNER JOIN pagto.localidade loc " 
+					+ "INNER JOIN loc.gerenciaRegional gr "
+					+ "INNER JOIN pagto.avisoBancario avbc " 
+					+ "INNER JOIN avbc.arrecadador arrec "
+					+ "INNER JOIN arrec.cliente cliArrec " 
+					+ "INNER JOIN pagto.documentoTipo doctoTp "
+					+ "LEFT JOIN pagto.imovel imov " 
+					+ " LEFT JOIN imov.clienteImoveis climResp with climResp.dataFimRelacao is null AND climResp.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.RESPONSAVEL
+					+ " LEFT JOIN imov.clienteImoveis climUsur with climUsur.dataFimRelacao is null AND climUsur.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.USUARIO
+					+ " LEFT JOIN climResp.cliente clieResp "
+					+ " LEFT JOIN climUsur.cliente clieUsur "
+					+ " LEFT JOIN clieResp.clienteTipo cltpResp "
+					+ " LEFT JOIN clieUsur.clienteTipo cltpUsur "
+					+ "LEFT JOIN pagto.cliente cli " 
+					+ "LEFT JOIN cli.clienteTipo cltp "
+					+ "LEFT JOIN pagto.debitoTipo dbtp "
+					+ "LEFT JOIN pagto.contaGeral contaGeral " 
+					+ "LEFT JOIN contaGeral.conta conta "
+					+ "LEFT JOIN pagto.guiaPagamento gpag " 
+					+ "LEFT JOIN pagto.debitoACobrarGeral dbcbGeral "
+					+ "LEFT JOIN dbcbGeral.debitoACobrar dbcb " 
+					+ "LEFT JOIN pagto.pagamentoSituacaoAtual pagtoSitAtual "
 					+ "LEFT JOIN pagto.arrecadadorMovimentoItem arrecMovItem "
 					+ "LEFT JOIN arrecMovItem.arrecadadorMovimento arrecMov "
 					+ "LEFT JOIN pagto.arrecadacaoForma arrecForma "
@@ -14972,7 +15156,14 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 					+ "INNER JOIN arrec.cliente cliArrec "
 					+ "INNER JOIN pagto.documentoTipo doctoTp "
 					+ "LEFT JOIN pagto.imovel imov "
-					+ "LEFT JOIN pagto.cliente cli "
+					+ " LEFT JOIN imov.clienteImoveis climResp with climResp.dataFimRelacao is null AND climResp.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.RESPONSAVEL
+					+ " LEFT JOIN imov.clienteImoveis climUsur with climUsur.dataFimRelacao is null AND climUsur.clienteRelacaoTipo.id = " + ClienteRelacaoTipo.USUARIO
+					+ " LEFT JOIN climResp.cliente clieResp "
+					+ " LEFT JOIN climUsur.cliente clieUsur "
+					+ " LEFT JOIN clieResp.clienteTipo cltpResp "
+					+ " LEFT JOIN clieUsur.clienteTipo cltpUsur "
+					+ "LEFT JOIN pagto.cliente cli " 
+					+ "LEFT JOIN cli.clienteTipo cltp "
 					+ "LEFT JOIN pagto.debitoTipo dbtp "
 					+ "LEFT JOIN pagto.contaGeral contaGeral "
 					+ "LEFT JOIN contaGeral.contaHistorico conta "
@@ -14984,14 +15175,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 					+ "LEFT JOIN arrecMovItem.arrecadadorMovimento arrecMov "
 					+ "LEFT JOIN pagto.arrecadacaoForma arrecForma "
 					+ condicionais
-					+ " ORDER BY loc.id, imov.id, "
-					+ " dbtp.id, pagto.dataPagamento ";
-			// hql = " select distinct pagamento "
-			// + " from gcom.arrecadacao.pagamento.Pagamento as pagamento "
-			// + condicionais
-			// + " order by pagamento.localidade.id, pagamento.imovel.id, "
-			// + " pagamento.debitoTipo.id, pagamento.dataPagamento "
-			// + " ";
+					+ " ORDER BY loc.id, imov.id, dbtp.id, pagto.dataPagamento ";
 
 			retorno = session.createQuery(hql).list();
 
@@ -22235,9 +22419,11 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			// e CRTP_ID correspondente a um dos Tipos de Relação do Cliente com
 			// o Imóvel, caso selecionados
 			// e demais parâmetros de seleção informados)
-			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal);
+			String condicionais = this.criarCondicionaisPagamento(idImovel, idCliente, idTipoRelacao, localidadeInicial, localidadeFinal, idAvisoBancario, idArrecadador, periodoArrecadacaoInicial, periodoArrecadacaoFinal, periodoPagamentoInicio, periodoPagamentoFim, dataPagamentoInicial, dataPagamentoFinal, idsPagamentosSituacoes, idsDebitosTipos, idsArrecadacaoForma, idsDocumentosTipos, valorPagamentoInicial, valorPagamentoFinal,null,null);
 
-			hql = " select count(pagamento.id) " + " from gcom.arrecadacao.pagamento.Pagamento as pagamento " + condicionais
+			hql = " select count(pagamento.id) " 
+					+ " from gcom.arrecadacao.pagamento.Pagamento as pagamento "
+					+ condicionais
 					+ " ";
 
 			pagamentoImovelCount = session.createQuery(hql).setMaxResults(1).uniqueResult();
@@ -23175,7 +23361,8 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			hql = " select count (pagamentoHistorico.id) "
 					+ " from gcom.arrecadacao.pagamento.PagamentoHistorico pagamentoHistorico "
 					+ " inner join pagamentoHistorico.avisoBancario as avisoBancario " + condicionais + " ";
-
+			
+			hql += condicionais;
 			pagamentoHistoricoAvisoBancarioCount = session.createQuery(hql).setMaxResults(1).uniqueResult();
 
 			if (pagamentoHistoricoAvisoBancarioCount != null) {
@@ -23775,6 +23962,13 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 			filtroInformado = true;
 			where = where + " arquivoTexto.leit_id = " + helper.getIdLeiturista() + " and ";
 		}
+		
+		//ROTA ID
+		if (helper.getRotaId() != null && !helper.getRotaId().equals("")) {
+			filtroInformado = true;
+			where = where + " arquivoTexto.rota_id = "
+					+ helper.getRotaId() + " and ";
+		}		
 
 		// LOCALIDADE
 		if (helper.getIdLocalidade() != null && !helper.getIdLocalidade().equals("")) {
@@ -25497,7 +25691,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 					+ DebitoCreditoSituacao.CANCELADA_POR_RETIFICACAO // :canceladaRetificacao
 																		// "
 					+ "\n union "
-					+ "\n select 'D�BITO A COBRAR' as tipo, d.loca_id as idLocalidade, d.loca_nmlocalidade as nomeLocalidade, e.greg_id as idGerencia, e.greg_nmregional as nomeGerencia, c.imov_id as idImovel, c.clie_id as idCliente, a.clie_nmcliente as nomeCliente, h.clie_nmcliente as nomeArrecadador, "
+					+ "\n select 'D�BITO A COBRAR' as tipo, d.loca_id as idLocalidade, d.loca_nmlocalidade as nomeLocalidade, e.greg_id as idGerencia, e.greg_nmregional as nomeGerencia, c.imov_id as idImovel, c.clie_id as idCliente, a.clie_nmcliente as nomeCliente, h.clie_nmcliente as nomeArrecadador, "
 					+ "\n c.pghi_dtpagamento as dataPagamento,  c.pghi_amreferenciapagamento as anoMesPagamento, dbtp_dsdebitotipo as tipoDebito, "
 					+ "\n ((dbac_nnprestacaodebito - dbac_nnprestacaocobradas) * (dbac_vldebito/ dbac_nnprestacaodebito)) as valorDocumento, "
 					+ "\n c.pghi_vlpagamento as valorPagamento, j.pgst_id as idSituacaoPagamento, j.pgst_dspagamentosituacao as situacaoPagamento, c.dotp_id as idDocumentoTipo "
@@ -26235,7 +26429,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 
 	/**
 	 * [ UC0932 ] - UC0932MonitorarLeiturasTransmitidas Buscar Imagens Leitura
-	 * Anormalidades do Im�vel
+	 * Anormalidades do Im�vel
 	 * 
 	 * @author Carlos Chaves
 	 * @date 24/10/2012
@@ -26974,11 +27168,11 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 	}	
 	
 	/**
-	 * [UC XXXX] - Processar amortiza��o de d�vida ativa
+	 * [UC XXXX] - Processar amortização de dívida ativa
 	 * 
 	 * Pesquisa a data do pagamento referente a guia de pagamento
 	 * 
-	 * @author Rafael Corr�a
+	 * @author Rafael Corrêa
 	 * @date 16/02/2014
 	 */
 	public Date pesquisarDataPagamentoDeGuiaPagamento(Integer idGuiaPagamento) throws ErroRepositorioException {
@@ -27007,11 +27201,11 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortiza��o de d�vida ativa
+	 * [UC XXXX] - Processar amortização de dívida ativa
 	 * 
-	 * Pesquisa o pagamento referente ao d�bito a cobrar
+	 * Pesquisa o pagamento referente ao débito a cobrar
 	 * 
-	 * @author Rafael Corr�a
+	 * @author Rafael Corrêa
 	 * @date 16/02/2014
 	 */
 	public Pagamento pesquisarPagamentoDoDebitoACobrar(Integer idDebitoACobrar) throws ErroRepositorioException {
@@ -27039,11 +27233,11 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortiza��o de d�vida ativa
+	 * [UC XXXX] - Processar amortização de dívida ativa
 	 * 
 	 * Pesquisa os pagamentos referentes a conta
 	 * 
-	 * @author Rafael Corr�a
+	 * @author Rafael Corr�a
 	 * @date 17/02/2014
 	 */
 	public Collection<Pagamento> pesquisarPagamentosClassificadosConta(Integer idConta) throws ErroRepositorioException {
@@ -27266,7 +27460,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 	/**
 	 * [UC0113] - Faturar Grupo de Faturamento
 	 * 
-	 * @author Rafael Corr�a
+	 * @author Rafael Corrêa
 	 * @date 27/06/2014
 	 * 
 	 * @param idCreditoARealizar
@@ -27300,11 +27494,11 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 	}
 	
 	/**
-	 * [UC0818] Gerar Hist�rico do Encerramento da Arrecada��o
+	 * [UC0818] Gerar Histórico do Encerramento da Arrecadação
 	 * 
-	 * Pesquisa a cole��o de itens de guias de pagamento para o id da guia informada.
+	 * Pesquisa a coleção de itens de guias de pagamento para o id da guia informada.
 	 * 
-	 * @author Rafael Corr�a
+	 * @author Rafael Corrêa
 	 * @date 29/10/2014
 	 * 
 	 * @param idGuiaPagamento
@@ -27339,7 +27533,7 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 	
 	/**
 	 * 
-	 * @author F�bio Aguiar
+	 * @author Fábio Aguiar
 	 * @date 29/01/2015
 	 * 
 	 * @throws ErroRepositorioException
@@ -27366,11 +27560,11 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 	}
 	
 	/**
-	 * [UC0818] Gerar Hist�rico do Encerramento da Arrecada��o
+	 * [UC0818] Gerar Histórico do Encerramento da Arrecadação
 	 * 
-	 * Pesquisa a cole��o de categoria para os item de guia de pagamento informado.
+	 * Pesquisa a coleção de categoria para os item de guia de pagamento informado.
 	 * 
-	 * @author Rafael Corr�a
+	 * @author Rafael Corrêa
 	 * @date 29/10/2014
 	 * 
 	 * @param idGuiaPagamentoItem
@@ -27475,33 +27669,40 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cart�o de Cr�dito/D�bito
+	 * [UC0927] - Confirmar Cartão de Crédito/Débito
 	 *
 	 * @author Vivianne Sousa
 	 * @date 07/05/2015
+	 * 
+	 * @param idCliente Id do cliente arrecadador ou null
 	 */
 	public Arrecadador pesquisarArrecadadorCartao(Integer idCliente, Integer idArrecadacaoForma) throws ErroRepositorioException {
 		Arrecadador retorno = null;
 		Session session = HibernateUtil.getSession();
 		String consulta;
+
 		try {
-			
 			consulta = "SELECT arrc " 
 					+ "FROM ArrecadadorContratoTarifa actf "
 					+ "INNER JOIN actf.arrecadadorContrato arct " 
 					+ "INNER JOIN actf.arrecadacaoForma arfm "
 					+ "INNER JOIN arct.arrecadador arrc " 
 					+ "INNER JOIN FETCH arrc.cliente clie "
-					+ "WHERE clie.id = :idCliente " 
-					+ "AND arfm.id = :idFormaArrecadacao " 
+					+ "WHERE arfm.id = :idFormaArrecadacao " 
 					+ "AND arrc.indicadorUso = :indicadorUso  ";
 
-			retorno = (Arrecadador) session.createQuery(consulta)
-					.setInteger("idCliente", idCliente)
-					.setInteger("idFormaArrecadacao", idArrecadacaoForma)
-					.setInteger("indicadorUso", ConstantesSistema.SIM)
-					.uniqueResult();
+			if (idCliente != null) {
+				consulta += " AND clie.id = :idCliente "; 
+			}
 
+			Query query = session.createQuery(consulta);
+			query.setInteger("idFormaArrecadacao", idArrecadacaoForma);
+			query.setInteger("indicadorUso", ConstantesSistema.SIM);
+			if(idCliente != null) {
+				query.setInteger("idCliente", idCliente);
+			}
+
+			retorno = (Arrecadador) query.setMaxResults(1).uniqueResult();
 		} catch (HibernateException e) {
 			throw new ErroRepositorioException(	e, "Erro no Hibernate");
 		} finally {
@@ -27509,4 +27710,358 @@ public class RepositorioArrecadacaoHBM implements IRepositorioArrecadacao {
 		}
 		return retorno;
 	}
-}
+
+	public Collection<Object[]> obterRelatorioAnaliticoPrevisaoPagamentoCartaoCredito(Date dataVencimentoInicial,
+		Date dataVencimentoFinal, String idCliente) throws ErroRepositorioException {
+		Collection<Object[]> retorno = null;
+		Session session = HibernateUtil.getSession();
+		String sql = "";
+
+		sql = "SELECT" + 
+				" pacc.pacc_nnidentificadortransacao AS nsu," +
+				" parc.imov_id AS matricula," +
+				" CASE WHEN (gpge_ichistorico = 2) THEN gpag.gpag_dtvencimento ELSE gphi.gphi_dtvencimento END AS dtVencimento," +
+				" parc.parc_tmparcelamento AS dtParcelamento," +
+				" CASE WHEN gpge_ichistorico = 2 THEN pgmt.pgmt_dtpagamento  ELSE pghi.pghi_dtpagamento  END AS dtPagamento," +
+				" CASE WHEN gpge_ichistorico = 2 THEN gpag.gpag_vldebito     ELSE gphi.gphi_vldebito     END AS vlGuia," +
+				" COALESCE(CASE WHEN gpge_ichistorico = 2 THEN pgmt.pgmt_vlpagamento  ELSE pghi.pghi_vlpagamento  END,0) AS vlPagamento" +
+				" FROM cobranca.parcel_pagto_cartao_cred pacc" +
+				" INNER JOIN cobranca.pagto_cartao_cred_item pcci      ON pcci.pacc_id = pacc.pacc_id" +
+				" INNER JOIN cobranca.parcelamento parc                ON parc.parc_id = pacc.parc_id" +
+				" INNER JOIN faturamento.guia_pagamento_geral gpge     ON gpge.gpag_id = pcci.gpag_id" +
+				" LEFT JOIN  faturamento.guia_pagamento gpag           ON gpag.gpag_id = gpge.gpag_id AND gpag.clie_id = 3178 AND gpag.dcst_idatual = 0" +
+				"                                                      AND gpag.gpag_dtvencimento BETWEEN (:dataVencimentoInicial) AND (:dataVencimentoFinal) " +
+				" LEFT JOIN  arrecadacao.pagamento	pgmt	     ON pgmt.gpag_id = gpag.gpag_id" +
+				" LEFT JOIN  faturamento.guia_pagamento_historico gphi ON gphi.gpag_id = gpge.gpag_id AND gphi.clie_id = :idCliente AND gphi.dcst_idatual = 0" +
+				"                                                      AND gphi.gphi_dtvencimento BETWEEN (:dataVencimentoInicial) AND (:dataVencimentoFinal) " +
+				" LEFT JOIN  arrecadacao.pagamento_historico pghi	     ON pghi.gpag_id = gphi.gpag_id" +
+				" where gpag.gpag_id is not null OR gphi.gpag_id is not null" +
+				" ORDER BY dtVencimento";
+		try {
+			retorno = (Collection<Object[]>) session.createSQLQuery(sql)
+			.addScalar("nsu", Hibernate.STRING) // 1
+			.addScalar("matricula", Hibernate.STRING) //2
+			.addScalar("dtParcelamento", Hibernate.DATE) // 3
+			.addScalar("dtPagamento", Hibernate.DATE) // 4
+			.addScalar("dtVencimento", Hibernate.DATE)// 5
+			.addScalar("vlGuia", Hibernate.BIG_DECIMAL) // 6
+			.addScalar("vlPagamento", Hibernate.BIG_DECIMAL) // 7
+			.setDate("dataVencimentoInicial", dataVencimentoInicial) //8
+			.setDate("dataVencimentoFinal", dataVencimentoFinal) //9
+			.setString("idCliente", idCliente) //9
+			.list();
+
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(	e,
+												"Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+
+		return retorno;
+	}
+		
+	
+	/**
+	 * [UC1694] Relat�rio Previsão/Pagamento Cartão de Crédito
+	 *
+	 * @author Vivianne Sousa
+	 * @date 07/10/2015
+	 */
+	public Collection<Object[]> pesquisarDadosRelatorioCartaoCreditoSintetico(Date dataVecimentoInicial,
+			Date dataVecimentoFinal, String idCliente) throws ErroRepositorioException{
+		
+		Collection<Object[]> retorno = null;
+		Session session = HibernateUtil.getSession();
+		String sql = "";
+		
+		try{
+			sql = 
+				  " SELECT " 
+				+ " sum(         CASE WHEN gpge_ichistorico = 2 THEN gpag.gpag_vldebito    ELSE gphi.gphi_vldebito    END)    AS vlGuia, " 
+				+ " sum(COALESCE(avbc.avbc_vlarrecadacaoinformado,0)) AS vlCreditado, "
+				+ " CASE WHEN (gpge_ichistorico = 2) THEN gpag.gpag_dtvencimento ELSE gphi.gphi_dtvencimento END AS dtVencimento, "
+				+ " COALESCE(actf.actf_pctarifa,0) AS pcTarifa "
+				+ " FROM cobranca.parcel_pagto_cartao_cred pacc "
+				+ " INNER JOIN cobranca.pagto_cartao_cred_item pcci      ON pcci.pacc_id = pacc.pacc_id "
+				+ " INNER JOIN cobranca.parcelamento parc                ON parc.parc_id = pacc.parc_id "
+				+ " INNER JOIN faturamento.guia_pagamento_geral gpge     ON gpge.gpag_id = pcci.gpag_id "
+				+ " LEFT JOIN  faturamento.guia_pagamento gpag           ON gpag.gpag_id = gpge.gpag_id AND gpag.clie_id = :idCliente AND gpag.dcst_idatual = :idDebitoCreditoSituacao "
+				+ " 													    AND gpag.gpag_dtvencimento BETWEEN (:dataVecimentoInicial) AND (:dataVecimentoFinal) " 
+				+ " LEFT JOIN  arrecadacao.pagamento	pgmt	         ON pgmt.gpag_id = gpag.gpag_id "
+				+ " LEFT JOIN  faturamento.guia_pagamento_historico gphi ON gphi.gpag_id = gpge.gpag_id AND gphi.clie_id = :idCliente AND gphi.dcst_idatual = :idDebitoCreditoSituacao "
+				+ "                                                         AND gphi.gphi_dtvencimento BETWEEN (:dataVecimentoInicial) AND (:dataVecimentoFinal) " 
+				+ " LEFT JOIN  arrecadacao.pagamento_historico pghi	     ON pghi.gpag_id = gphi.gpag_id "
+				+ " INNER JOIN arrecadacao.arrecadador arrc		         ON arrc.clie_id = :idCliente "
+				+ " INNER JOIN arrecadacao.arrecadador_contrato arct     ON arct.arrc_id = arrc.arrc_id "
+				+ " INNER JOIN arrecadacao.arrecadador_contrato_tar actf ON actf.arct_id = arct.arct_id AND actf.arfm_id = :idArrecadacaoForma " 
+				+ " LEFT JOIN  arrecadacao.aviso_bancario avbc	         ON avbc.arrc_id = arrc.arrc_id AND avbc.arfm_id = :idArrecadacaoForma " 
+				+ " 							                            AND (avbc.avbc_dtlancamento = gpag.gpag_dtvencimento OR avbc.avbc_dtlancamento = gphi.gphi_dtvencimento) " 
+				+ " where gpag.gpag_id is not null OR gphi.gpag_id is not null "
+				+ " GROUP BY dtVencimento,pcTarifa "
+				+ " ORDER BY dtVencimento";
+
+			retorno = (Collection<Object[]>)session.createSQLQuery(sql)
+				   .addScalar("vlGuia", Hibernate.BIG_DECIMAL)	//0
+				   .addScalar("vlCreditado", Hibernate.BIG_DECIMAL) //1
+				   .addScalar("dtVencimento", Hibernate.DATE)		//2
+				   .addScalar("pcTarifa", Hibernate.BIG_DECIMAL)	//3
+				   .setDate("dataVecimentoInicial", dataVecimentoInicial)
+				   .setDate("dataVecimentoFinal", dataVecimentoFinal)
+				   .setString("idCliente", idCliente)
+				   .setInteger("idDebitoCreditoSituacao", DebitoCreditoSituacao.NORMAL)
+				   .setInteger("idArrecadacaoForma", ArrecadacaoForma.CARTAO_CREDITO)
+				   .list();
+
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(	e,"Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+		return retorno;
+	}
+	
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Pesquisa a cole��o de guia de pagamentos de um cliente arrecadador que 
+	 * est�o pendentes.
+	 * 
+	 * @author Jean Varela
+	 * @date 23/09/2015
+	 * 
+	 * @param idGuiaPagamentoItem, dataVencimentoGuiaPagamento
+	 * @return guia de pagamento pendentes
+	 */
+	public Collection<Object[]> pesquisarGuiasPagamentoPendentes(Integer idClienteArrecadador,Date dataVencimentoGuiaPagamento,Integer idDebitoCreditoSituacao)
+			throws ErroRepositorioException {
+
+		Collection<Object[]> retorno = new ArrayList();
+		Session session = HibernateUtil.getSession();
+		String consulta;
+		
+		try {		
+
+            consulta = "SELECT "
+					+ " pacc.pacc_nnidentificadortransacao AS nsu,"
+					+ " parc.parc_tmparcelamento           AS dtParcelamento,"
+					+ " gpag.gpag_vldebito                 AS vlGuia,"
+					+ " gpag.gpag_id			           AS idGuia,"
+					+ " gpag.loca_id			           AS idLocalidade,"
+					+ " gpag.dbtp_id			           AS idDebitoTipo, "
+					+ " gpag_dtvencimento				   AS dtVencimento "
+					+ " FROM cobranca.parcel_pagto_cartao_cred pacc"
+					+ " INNER JOIN cobranca.pagto_cartao_cred_item pcci  ON pcci.pacc_id = pacc.pacc_id"
+					+ " INNER JOIN cobranca.parcelamento parc            ON parc.parc_id = pacc.parc_id"
+					+ " INNER JOIN  faturamento.guia_pagamento gpag      ON gpag.gpag_id = pcci.gpag_id" 
+					+ " WHERE" 
+					+ "     gpag.clie_id = :idArrecadador " 
+					+ " AND gpag.dcst_idatual = :idDebitoCreditoSituacao "
+					+ " AND gpag.gpag_dtvencimento = :dataVencimento "
+					+ " AND NOT EXISTS (SELECT pgmt_id FROM arrecadacao.pagamento pgmt WHERE gpag.gpag_id = pgmt.gpag_id)"; 
+            		
+			 retorno = ((SQLQuery) session.createSQLQuery(consulta))
+					    .addScalar("nsu",Hibernate.STRING)
+					    .addScalar("dtParcelamento", Hibernate.DATE)
+					 	.addScalar("vlGuia", Hibernate.BIG_DECIMAL)
+					 	.addScalar("idGuia", Hibernate.INTEGER)
+					 	.addScalar("idLocalidade", Hibernate.INTEGER)
+					 	.addScalar("idDebitoTipo", Hibernate.INTEGER)
+  					    .setInteger("idArrecadador", idClienteArrecadador)
+					    .setDate("dataVencimento", dataVencimentoGuiaPagamento)
+					    .setInteger("idDebitoCreditoSituacao",idDebitoCreditoSituacao)
+					    .list();
+
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+
+		return retorno;
+	}
+	
+	/**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Pesquisa  o percentual de tarifa cobrado por um cliente arrecadador
+	 * 
+	 * @author Jean Varela
+	 * @date 28/09/2015
+	 * 
+	 * @param idClienteArrecadador,idArrecadacaoForma
+	 * @return percetual de tarifa cobrado pelo arrecadador
+	 */
+    public BigDecimal pesquisarPercentualTarifaArrecadador(Integer idArrecadador,Integer idArrecadacaoForma) throws ErroRepositorioException{
+    	BigDecimal retorno = null;
+
+		Session session = HibernateUtil.getSession();
+		String consulta;
+		
+		try {
+			
+			  consulta = "select arct.actf_pctarifa "
+					    + "FROM       arrecadacao.arrecadador arrc " 
+						+ "INNER JOIN arrecadacao.arrecadador_contrato arc on arc.arrc_id = arrc.arrc_id " 
+						+ "INNER JOIN arrecadacao.arrecadador_contrato_tar arct on arct.arct_id = arc.arct_id " 
+						+ "WHERE arrc.arrc_id = :idArrecadador " 
+						+ "AND arfm_id = :idArrecadadorForma ";
+
+			  retorno = (BigDecimal) ((SQLQuery) session.createSQLQuery(consulta))
+					    .addScalar("actf_pctarifa", Hibernate.BIG_DECIMAL)
+					    .setInteger("idArrecadador", idArrecadador)
+					    .setInteger("idArrecadadorForma",idArrecadacaoForma)
+					    .setMaxResults(1).uniqueResult();
+			  
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+
+		return retorno;
+    }
+    
+    /**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Recupera o identificado de um deposito arrecadação
+	 * 
+	 * @author Jean Varela
+	 * @date 28/09/2015
+	 * 
+	 * @param idClienteArrecadador,idArrecadacaoForma
+	 * @return identificado do deposito arrecadacao  
+	 */    
+    public Integer obterIdentificadorDepositoArrecadacao(Integer idArrecadador,Integer idArrecadacaoForma) throws ErroRepositorioException{
+    	Integer retorno = null;
+
+		Session session = HibernateUtil.getSession();
+		String consulta;
+		
+		try {
+			
+			  consulta = "select ctbc_iddepositoarrecadacao "
+				       + "FROM       arrecadacao.arrecadador ar  "
+				       + "INNER JOIN arrecadacao.arrecadador_contrato arc on arc.arrc_id = ar.arrc_id "
+				       + "INNER JOIN arrecadacao.arrecadador_contrato_tar arct on arct.arct_id = arc.arct_id "
+				       + "WHERE ar.arrc_id= :idArrecadador "
+				       + "AND arfm_id = :idArrecadadorForma";
+
+			  retorno = (Integer) ((SQLQuery) session.createSQLQuery(consulta))
+					    .addScalar("ctbc_iddepositoarrecadacao", Hibernate.INTEGER)
+					    .setInteger("idArrecadador", idArrecadador)
+					    .setInteger("idArrecadadorForma",idArrecadacaoForma)
+					    .setMaxResults(1).uniqueResult();
+			  
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+		
+		return retorno;
+    }   
+    
+    /**
+	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+	 * 
+	 * Recupera um aviso bancario
+	 *  
+	 * @author Jean Varela
+	 * @date 28/09/2015
+	 * 
+	 * @param idArrecadador, idArrecadacaoForma, dataLancamento 
+	 * @return aviso banc�rio
+	*/  
+    public Object pesquisarAvisoBancario(Integer idArrecadador, Integer idArrecadacaoForma, Date dataLancamento) throws ErroRepositorioException{
+    	
+    	Object retorno = null;
+    	
+    	Session  session = HibernateUtil.getSession();
+    	String consulta; 
+    	
+		try {
+			
+			 consulta = "select avbc_id, avbc_dtlancamento, avbc_vlarrecadacaoinformado, avbc_vlarrecadacaocalculado " 
+			 		  + "FROM  arrecadacao.aviso_bancario avb "
+			          + "INNER JOIN arrecadacao.arrecadador_contrato arc      on arc.arrc_id = avb.arrc_id "
+				      + "INNER JOIN arrecadacao.arrecadador_contrato_tar arct on arct.arct_id = arc.arct_id " 
+				      + "where  " 
+				      + "    arct.arfm_id = :idArrecadacaoForma " 
+				      + "and arc.arrc_id = :idArrecadador " 
+				      + "and avbc_dtlancamento = :dataLancamento " 
+				      + "and avb.arfm_id = :idArrecadacaoForma";
+			 
+			 retorno = ((SQLQuery) session.createSQLQuery(consulta))
+					   .addScalar("avbc_id", Hibernate.INTEGER)
+					   .addScalar("avbc_dtlancamento", Hibernate.DATE)
+					   .addScalar("avbc_vlarrecadacaoinformado", Hibernate.BIG_DECIMAL)
+					   .addScalar("avbc_vlarrecadacaocalculado", Hibernate.BIG_DECIMAL)
+					   .setInteger("idArrecadador", idArrecadador)
+					   .setInteger("idArrecadacaoForma",idArrecadacaoForma)
+					   .setDate("dataLancamento", dataLancamento)
+					   .setMaxResults(1).uniqueResult();
+			  
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+		
+		return retorno;
+    }
+    
+    /**
+ 	 * [UC1691] Confirmar Pagamento Cartão de Crédito
+ 	 * 
+ 	 * Pesquisa a quantidade de guias de pagamento de um cliente
+ 	 * que possuem vencimento em uma determinada data e que já foram pagas.
+ 	 *  
+ 	 * @author Jean Varela
+ 	 * @date 28/09/2015
+ 	 * 
+ 	 * @param idCliente, datavencimento
+ 	 * @return quantidade de guia de pagamento que foram pagas
+ 	 */ 
+	public Integer pesquisarQuantidadeGuiasPagamentoPagas(Integer idCliente, Date dataVencimento) throws ErroRepositorioException{
+				
+		Integer retorno = null;
+	
+		Session session = HibernateUtil.getSession();
+		String consulta = null;
+	
+		try {
+			
+			consulta = "SELECT "
+					+ " count(gpge.gpag_id) AS quantidade"
+					+ " FROM cobranca.parcel_pagto_cartao_cred pacc"
+					+ " INNER JOIN cobranca.pagto_cartao_cred_item pcci      ON pcci.pacc_id = pacc.pacc_id"
+					+ " INNER JOIN cobranca.parcelamento parc                ON parc.parc_id = pacc.parc_id"
+					+ " INNER JOIN faturamento.guia_pagamento_geral gpge     ON gpge.gpag_id = pcci.gpag_id"
+					+ " LEFT JOIN  faturamento.guia_pagamento gpag           ON gpag.gpag_id = gpge.gpag_id AND gpag.clie_id = :idCliente AND gpag.dcst_idatual = 0 AND gpag.gpag_dtvencimento = :dataVencimento " 
+					+ " LEFT JOIN  arrecadacao.pagamento	pgmt	         ON pgmt.gpag_id = gpag.gpag_id"
+					+ " LEFT JOIN  faturamento.guia_pagamento_historico gphi ON gphi.gpag_id = gpge.gpag_id AND gphi.clie_id = :idCliente AND gphi.dcst_idatual = 0 AND gphi.gphi_dtvencimento = :dataVencimento " 
+					+ " LEFT JOIN  arrecadacao.pagamento_historico pghi	     ON pghi.gpag_id = gphi.gpag_id"
+					+ " where" 
+					+ "     (gpag.gpag_id is not null OR gphi.gpag_id is not null)"
+					+ " AND (pgmt.pgmt_id is not null OR pghi.pghi_id is not null)"; 
+	
+			retorno = (Integer) session.createSQLQuery(consulta)
+					            .addScalar("quantidade",Hibernate.INTEGER)
+								.setInteger("idCliente", idCliente)
+					            .setDate("dataVencimento", dataVencimento)
+					            .setMaxResults(1).uniqueResult();
+	
+		} catch (HibernateException e) {
+			throw new ErroRepositorioException(	e,"Erro no Hibernate");
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+	
+		return retorno;
+	}
+
+	}
+    

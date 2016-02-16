@@ -287,7 +287,7 @@
 	                        <img src="imagens/portal/caer/general/seta-info-servicos.gif" alt="Seta" />
 		                </div>
 	                </li>
-	               	<logic:notPresent name="imovelCadastroVirtual" scope="session">
+ 	               	<logic:notPresent name="imovelCadastroVirtual" scope="session">
 		                <li id="serv-6">
 		                	<a href="exibirEfetuarParcelamentoDebitosPortalCaerAction.do?paginaServicos=SIM">
 		                		<span>Negociação de débitos</span>

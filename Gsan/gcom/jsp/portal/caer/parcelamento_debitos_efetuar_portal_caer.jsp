@@ -576,7 +576,7 @@
 								
 								<!-- Início Forma de pagamento parcelado -->
 								<div id="pagto">
-									<h5>Pagamento parcelado</h5>
+									<h5>Simulador parcelado</h5>
 			                		<span class="cmp-text-2" style="width: 190px; font-weight: 700">
 			                            <label for="vlr-entrada" style="color: #008FD6; font-size: 12px;">Valor total a ser parcelado:</label> 
 			                            R$<bean:write name="EfetuarParcelamentoDebitosPortalCaerActionForm" property="valorDesconto"/>
@@ -711,7 +711,7 @@
 											<% } %>
 					                    </logic:notEmpty>
 					                </table>
-					                <input type="button" value="" class="btn-confirmar" id="botaoConfirmar"/>
+					                <!-- <input type="button" value="" class="btn-confirmar" id="botaoConfirmar"/> -->
 									<!-- Fim da forma de pagamento parcelado -->	
 								</div>	
 							</logic:present>

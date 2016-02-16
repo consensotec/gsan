@@ -127,6 +127,11 @@ public class RelatorioComparativoLeiturasEAnormalidades extends TarefaRelatorio 
 		super(usuario, ConstantesRelatorios.RELATORIO_COMPARATIVOS_LEITURAS_E_ANORMALIDADES);
 	}
 
+	@Deprecated
+	public RelatorioComparativoLeiturasEAnormalidades() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

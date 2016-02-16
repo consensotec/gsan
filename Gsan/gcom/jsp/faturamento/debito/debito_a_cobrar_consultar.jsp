@@ -278,11 +278,19 @@ function fechar(){
 								<td colspan="2">
 									
 									<logic:present name="debitoACobrar" property="debitoACobrarGeralOrigem">
-										<html:text name="debitoACobrar" property="debitoACobrarGeralOrigem.debitoACobrar.imovel.id"
-										size="12" maxlength="10" readonly="true"
-										style="background-color:#EFEFEF; border:0" />
+										<logic:notEmpty name="debitoACobrar" property="debitoACobrarGeralOrigem.debitoACobrar">
+											<html:text name="debitoACobrar" property="debitoACobrarGeralOrigem.debitoACobrar.imovel.id"
+											size="12" maxlength="10" readonly="true"
+											style="background-color:#EFEFEF; border:0" />
+										</logic:notEmpty>	
+										</logic:present>
+									<logic:present name="debitoACobrar" property="debitoACobrarGeralOrigem">
+										<logic:notEmpty name="debitoACobrar" property="debitoACobrarGeralOrigem.debitoACobrarHistorico">
+											<html:text name="debitoACobrar" property="debitoACobrarGeralOrigem.debitoACobrarHistorico.imovel.id"
+											size="12" maxlength="10" readonly="true"
+											style="background-color:#EFEFEF; border:0" />
+										</logic:notEmpty>	
 									</logic:present>
-									
 									<logic:notPresent name="debitoACobrar" property="debitoACobrarGeralOrigem">
 										<input type="text" name="imovelOrigem" size="12" maxlength="10"
 										readonly="true" style="background-color:#EFEFEF; border:0" />

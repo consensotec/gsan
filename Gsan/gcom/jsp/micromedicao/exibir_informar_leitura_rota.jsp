@@ -85,13 +85,21 @@ function limparLocalidade(form) {
     
   }
 
+	function setarValorDefault(){
+
+		var form = document.forms[0];
+
+		form.indicadorOrdenacao[0].checked = true;
+
+		}
+
 
 </script>
 
 
 </head>
 
-<body leftmargin="5" topmargin="5" onload="setarFoco('${requestScope.nomeCampo}');">
+<body leftmargin="5" topmargin="5" onload="setarFoco('${requestScope.nomeCampo}');setarValorDefault();">
 <html:form action="/exibirInformarLeituraRotaAction"
 	name="InformarLeituraRotaActionForm"
 	type="gcom.gui.micromedicao.InformarLeituraRotaActionForm"
@@ -295,6 +303,16 @@ function limparLocalidade(form) {
 						color="#FF0000">*</font></strong></td>
 				<td><html:text property="rota" size="6" maxlength="6" tabindex="3"/></td>
 			</tr>
+			
+			<tr>
+				<td><strong>Ordenação:</strong><font color="#FF0000">*</font></td>
+				<td colspan="5">
+					<html:radio property="indicadorOrdenacao"
+						value="1" /> <strong>Rota</strong>
+					<html:radio property="indicadorOrdenacao"
+						value="2" /> <strong>Inscrição</strong>
+				</td>
+			</tr>
 				
 			<tr>
 				<td>
@@ -302,8 +320,7 @@ function limparLocalidade(form) {
 					<html:radio property="tipo" value="2" >Inserir</html:radio>  
 				</td>
 			</tr>
-				
-								
+			
 			<tr class="rigthcoltext">
 						
 								

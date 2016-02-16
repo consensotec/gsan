@@ -116,6 +116,11 @@ public class RelatorioManterArrecadacaoForma extends TarefaRelatorio {
 	public RelatorioManterArrecadacaoForma(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_MOTIVO_CORTE);
 	}
+	
+	@Deprecated
+	public RelatorioManterArrecadacaoForma() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

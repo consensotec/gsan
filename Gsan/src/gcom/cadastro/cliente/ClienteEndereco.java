@@ -555,7 +555,7 @@ public class ClienteEndereco extends ObjetoTransacao {
 				endereco = endereco + " "
 						+ this.getLogradouroCep().getLogradouro().getNome().trim();
 			
-/*			if (this.getEnderecoReferencia() != null
+			if (this.getEnderecoReferencia() != null
 					&& !this.getEnderecoReferencia().equals("")) {
 				if (this.getEnderecoReferencia().getDescricaoAbreviada() != null
 						&& !this.getEnderecoReferencia().getDescricao().equals(
@@ -563,7 +563,7 @@ public class ClienteEndereco extends ObjetoTransacao {
 					endereco = endereco + ", "
 							+ this.getEnderecoReferencia().getDescricao().trim();
 				}
-			}*/
+			}
 
 		}
 

@@ -86,8 +86,11 @@ import gcom.atendimentopublico.ligacaoagua.RepositorioLigacaoAguaHBM;
 import gcom.atendimentopublico.ligacaoesgoto.LigacaoEsgoto;
 import gcom.atendimentopublico.ligacaoesgoto.LigacaoEsgotoSituacao;
 import gcom.atendimentopublico.ordemservico.FotoSituacaoOrdemServico;
+import gcom.atendimentopublico.registroatendimento.ControladorRegistroAtendimentoLocal;
+import gcom.atendimentopublico.registroatendimento.ControladorRegistroAtendimentoLocalHome;
 import gcom.atendimentopublico.registroatendimento.FiltroRegistroAtendimento;
 import gcom.atendimentopublico.registroatendimento.FiltroSolicitacaoTipoEspecificacao;
+import gcom.atendimentopublico.registroatendimento.MeioSolicitacao;
 import gcom.atendimentopublico.registroatendimento.RegistroAtendimento;
 import gcom.atendimentopublico.registroatendimento.SolicitacaoTipoEspecificacao;
 import gcom.atualizacaocadastral.ArquivoTextoAtualizacaoCadastralDM;
@@ -145,6 +148,7 @@ import gcom.cadastro.localidade.SetorComercial;
 import gcom.cadastro.sistemaparametro.FiltroSistemaParametro;
 import gcom.cadastro.sistemaparametro.NacionalFeriado;
 import gcom.cadastro.sistemaparametro.SistemaParametro;
+import gcom.cadastro.unidade.FiltroUnidadeOrganizacional;
 import gcom.cadastro.unidade.UnidadeOrganizacional;
 import gcom.cobranca.CobrancaAcao;
 import gcom.cobranca.CobrancaGrupo;
@@ -180,12 +184,14 @@ import gcom.faturamento.conta.ContaCategoriaConsumoFaixa;
 import gcom.faturamento.conta.ContaComunicado;
 import gcom.faturamento.conta.ContaHistorico;
 import gcom.faturamento.conta.ContaImpressao;
+import gcom.faturamento.conta.ContaMotivoRevisao;
 import gcom.faturamento.conta.FiltroContaCategoria;
 import gcom.faturamento.conta.FiltroContaCategoriaConsumoFaixa;
 import gcom.faturamento.conta.FiltroContaImpressao;
 import gcom.faturamento.debito.DebitoCreditoSituacao;
 import gcom.gui.faturamento.bean.AnalisarImoveisReleituraHelper;
 import gcom.gui.micromedicao.ColetaMedidorEnergiaHelper;
+import gcom.gui.micromedicao.DadosLeiturista;
 import gcom.gui.micromedicao.DadosMovimentacao;
 import gcom.gui.micromedicao.HistoricoMedicaoIndividualizadaHelper;
 import gcom.gui.relatorio.micromedicao.FiltroRelatorioLeituraConsultarArquivosTextoHelper;
@@ -286,6 +292,7 @@ import gcom.seguranca.acesso.Funcionalidade;
 import gcom.seguranca.acesso.Operacao;
 import gcom.seguranca.acesso.OperacaoEfetuada;
 import gcom.seguranca.acesso.PermissaoEspecial;
+import gcom.seguranca.acesso.usuario.FiltroUsuario;
 import gcom.seguranca.acesso.usuario.Usuario;
 import gcom.seguranca.acesso.usuario.UsuarioAcao;
 import gcom.seguranca.acesso.usuario.UsuarioAcaoUsuarioHelper;
@@ -358,7 +365,6 @@ import javax.ejb.CreateException;
 import javax.ejb.EJBException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
-import javax.mail.SendFailedException;
 
 import org.apache.commons.fileupload.FileItem;
  
@@ -689,6 +695,30 @@ public class ControladorMicromedicao implements SessionBean {
 			throw new SistemaException(e);
 		}
 
+	}
+	
+	private ControladorRegistroAtendimentoLocal getControladorRegistroAtendimento() {
+		ControladorRegistroAtendimentoLocalHome localHome = null;
+		ControladorRegistroAtendimentoLocal local = null;
+
+		// pega a instância do ServiceLocator.
+
+		ServiceLocator locator = null;
+
+		try {
+			locator = ServiceLocator.getInstancia();
+			localHome = (ControladorRegistroAtendimentoLocalHome) locator
+					.getLocalHome(ConstantesJNDI.CONTROLADOR_REGISTRO_ATENDIMENTO_SEJB);
+			// guarda a referencia de um objeto capaz de fazer chamadas à
+			// objetos remotamente
+			local = localHome.create();
+
+			return local;
+		} catch (CreateException e) {
+			throw new SistemaException(e);
+		} catch (ServiceLocatorException e) {
+			throw new SistemaException(e);
+		}
 	}
 
 	/**
@@ -3159,10 +3189,10 @@ public class ControladorMicromedicao implements SessionBean {
 			consumoHistorico.setNumeroConsumoFaturadoMes(0);
 		}
         
-        //System.out.println( "*****************************" );
-        //System.out.println( "Imovel: " + imovel.getId() );
-        //System.out.println( "Consumo Agua:  " + consumoHistorico.getNumeroConsumoFaturadoMes() );
-        //System.out.println( "*****************************" );        
+        System.out.println( "*****************************" );
+        System.out.println( "Imovel: " + imovel.getId() );
+        System.out.println( "Consumo Agua:  " + consumoHistorico.getNumeroConsumoFaturadoMes() );
+        System.out.println( "*****************************" );        
 	}
 	
 	/**
@@ -13593,6 +13623,12 @@ public class ControladorMicromedicao implements SessionBean {
 				imov.setIndicadorImovelAreaComum((Short) colecaoConsumoHistoricoArray[7]);
 				consumoHistorico.setImovel(imov);
 			}
+			
+			if (colecaoConsumoHistoricoArray[8] != null) {
+				ContaMotivoRevisao contaMotivoRevisao = new ContaMotivoRevisao();
+				contaMotivoRevisao.setId((Integer) colecaoConsumoHistoricoArray[8]);
+				consumoHistorico.setContaMotivoRevisao(contaMotivoRevisao);
+			}
 		}
 
 		return consumoHistorico;
@@ -23459,7 +23495,7 @@ public class ControladorMicromedicao implements SessionBean {
 	 * @param arquivo
 	 * @throws ControladorException
 	 */
-	public void enviarEmailProblemasRegistrarConsistir(String nomeArquivo, byte[] arquivo) throws SendFailedException,ControladorException{
+	public void enviarEmailProblemasRegistrarConsistir(String nomeArquivo, byte[] arquivo) throws ErroEmailException,ControladorException{
 		
 		EnvioEmail envioEmail = getControladorCadastro()
 		.pesquisarEnvioEmail(
@@ -23483,7 +23519,7 @@ public class ControladorMicromedicao implements SessionBean {
 		
 			leitura.delete();
 			
-		} catch (SendFailedException e) {
+		} catch (ErroEmailException e) {
 			throw e;
 		} catch (IOException e) {
 			throw new ControladorException("erro.sistema", e);
@@ -23512,7 +23548,7 @@ public class ControladorMicromedicao implements SessionBean {
 	 * @param dados
 	 * @throws ControladorException
 	 */
-	public void atualizarLeituraAnormalidadeCelularCasoSistema(Vector<DadosMovimentacao> dados) throws SendFailedException,ControladorException{
+	public void atualizarLeituraAnormalidadeCelularCasoSistema(Vector<DadosMovimentacao> dados) throws ErroEmailException,ControladorException{
 		
 		Iterator<DadosMovimentacao> it = dados.iterator();
 		StringBuffer log = new StringBuffer("");
@@ -24931,7 +24967,7 @@ public class ControladorMicromedicao implements SessionBean {
      * @return
      * @throws ControladorException
      */
-    public Collection<DadosMovimentacao> buscarImoveisPorRota(Rota rota, Integer anoMesReferencia, boolean manter)
+    public Collection<DadosMovimentacao> buscarImoveisPorRota(Rota rota, Integer anoMesReferencia, boolean manter, Short indicadorOrdenacao )
                                                                                                                   throws ControladorException {
         Collection<DadosMovimentacao> colecao = new ArrayList<DadosMovimentacao>();
 
@@ -24949,7 +24985,8 @@ public class ControladorMicromedicao implements SessionBean {
         
         try {
             imoveisPorRota = repositorioMicromedicao.buscarImoveisPorRota(rota.getId(), sistemaParametro.getNomeAbreviadoEmpresa(), rota.getFaturamentoGrupo()
-                                                                                                                                        .getAnoMesReferencia());
+                                                                                                                                        .getAnoMesReferencia(), 
+                                                                                                                                        indicadorOrdenacao);
 
         } catch (ErroRepositorioException e) {
             throw new ControladorException("erro.sistema",
@@ -36562,37 +36599,26 @@ public class ControladorMicromedicao implements SessionBean {
 	 * @throws ControladorException
 	 */			
 	private void definirDataPrevista( GerarRAOSAnormalidadeConsumoHelper helper ) throws ControladorException{
-		
-		/*
-		 * Caso o sistema deva considerar apenas os dias ï¿½teis no 
-		 * cï¿½lculo da data prevista (PARM_ICCALCULOPREVISAORADIASUTEIS 
-		 * com o valor um na tabela cadastro.SISTEMA_PARAMETROS)
-		 * 
-		 */
+
+		//Caso o sistema deva considerar apenas os dias úteis no cálculo da data prevista 
+		//(PARM_ICCALCULOPREVISAORADIASUTEIS com o valor um na tabela cadastro.SISTEMA_PARAMETROS)
 		SistemaParametro sp = this.getControladorUtil().pesquisarParametrosDoSistema();
-		
 		if ( sp.getIndicadorCalculoPrevisaoRADiasUteis().intValue() == ConstantesSistema.SIM ){			
-			/*
-			 * 
-			 * 1.1.1. Data Prevista = Data vï¿½lida obtida a partir da Data Atual + 
-			 * o nï¿½mero de dias previstos para a especificaï¿½ï¿½o do tipo de solicitaï¿½ï¿½o 
-			 * (STEP_NNDIAPRAZO da tabela atendimentopublico.SOLICITACAO_TIPO_ESPEC com 
-			 * STEP_ID=Especificaï¿½ï¿½o do Tipo de Solicitaï¿½ï¿½o), 
-			 * considerando o nï¿½mero de dias previstos para a especificaï¿½ï¿½o do tipo de 
-			 * solicitaï¿½ï¿½o como dias ï¿½teis (SEGUNDA a SEXTA, desde que nï¿½o seja feriado).
-			 * 
-			 */			
+
 			//FERIADO NACIONAL
-			Collection<NacionalFeriado> colecaoFeriadosNacionais = 
-				getControladorUtil().pesquisarFeriadosNacionais();
+			Collection<NacionalFeriado> colecaoFeriadosNacionais = getControladorUtil().pesquisarFeriadosNacionais();
 			
-			helper.setDataPrevistaRA( 
-					Util.formatarData(
-					Util.adicionarNumeroDiasUteisDeUmaData(
-							Util.formatarDataSemHora( new Date() ), 
-							helper.getNumeroDiasPrazoAtendimentoRA(), 
-							colecaoFeriadosNacionais,
-							null) ) );
+			//Data Prevista = Data válida obtida a partir da Data Atual + 
+			//o número de dias previstos para a especificação do tipo de solicitação, 
+			//considerando o número de dias previstos para a especificação do tipo de solicitação como dias úteis 
+			//(SEGUNDA a SEXTA, desde que não seja feriado).
+			helper.setDataPrevistaRA(Util.formatarData(Util.adicionarNumeroDiasUteisDeUmaData(Util.formatarDataSemHora(new Date()), 
+							helper.getNumeroDiasPrazoAtendimentoRA(), colecaoFeriadosNacionais, null) ) );
+		}else{
+			//Data Prevista = Data válida obtida a partir da Data Atual + 
+			//o número de dias previstos para a especificação do tipo de solicitação
+			helper.setDataPrevistaRA(Util.formatarData(Util.adicionarNumeroDiasDeUmaData(Util.formatarDataSemHora(new Date()), 
+					helper.getNumeroDiasPrazoAtendimentoRA())));
 		}
 	}
 
@@ -36771,7 +36797,7 @@ public class ControladorMicromedicao implements SessionBean {
 	/**
 	 * [UC-1127] - Gerar RA e OS para Anormalidade Consumo
 	 * 
-	 * [FS0005] - Verificar existï¿½ncia de RA para o imï¿½vel com a mesma especificaï¿½ï¿½o
+	 * [FS0005] - Verificar existência de RA para o imóvel com a mesma especificação
 	 * 
 	 * @author Bruno Barros
 	 * @date 16/02/2011
@@ -36796,7 +36822,7 @@ public class ControladorMicromedicao implements SessionBean {
 	/**
 	 * [UC-1127] - Gerar RA e OS para Anormalidade Consumo
 	 * 
-	 * [FS0006] - Verificar existï¿½ncia de unidade de destino para o registro de atendimento
+	 * [FS0006] - Verificar existência de unidade de destino para o registro de atendimento
 	 * 
 	 * @author Bruno Barros
 	 * @date 16/02/2011
@@ -36814,11 +36840,8 @@ public class ControladorMicromedicao implements SessionBean {
 		UnidadeOrganizacional uo = null;
 		
 		try{		
-			FiltroSolicitacaoTipoEspecificacao filtroSolicitacaoTipoEspecificacao =
-				new FiltroSolicitacaoTipoEspecificacao();
-			
+			FiltroSolicitacaoTipoEspecificacao filtroSolicitacaoTipoEspecificacao = new FiltroSolicitacaoTipoEspecificacao();
 			filtroSolicitacaoTipoEspecificacao.adicionarParametro( new ParametroSimples( FiltroSolicitacaoTipoEspecificacao.ID, helper.getIdSolicitacaoTipoEspecificacao() ) );
-			//filtroSolicitacaoTipoEspecificacao.adicionarParametro( new ParametroNaoNulo( FiltroSolicitacaoTipoEspecificacao.UNIDADE_ORGANIZACIONAL ) );		
 			filtroSolicitacaoTipoEspecificacao.adicionarCaminhoParaCarregamentoEntidade( "solicitacaoTipo.solicitacaoTipoGrupo" );
 			filtroSolicitacaoTipoEspecificacao.adicionarCaminhoParaCarregamentoEntidade( "unidadeOrganizacional.unidadeCentralizadora" );
 			
@@ -36828,19 +36851,19 @@ public class ControladorMicromedicao implements SessionBean {
 			helper.setNumeroDiasPrazoAtendimentoRA( ste.getDiasPrazo() );
 			helper.setIdSolicitacaoTipo( ste.getSolicitacaoTipo().getId() );
 			helper.setIdServicoTipo( ste.getServicoTipo().getId() );
-			
+
 			uo = ste.getUnidadeOrganizacional();
 			
 			/*
-			 * Caso a especificaï¿½ï¿½o esteja associada a uma unidade 
+			 * Caso a especificação esteja associada a uma unidade 
 			 * (UNID_ID com o valor diferente de nulo na tabela atendimentopublico.SOLICITACAO_TIPO_ESPEC 
-			 * para STEP_ID=Especificaï¿½ï¿½o do Tipo de Solicitaï¿½ï¿½o)
+			 * para STEP_ID=Especificação do Tipo de Solicitação)
 			 * 
 			 */		
 			if ( uo != null ){
 				/*
-				 * Caso a unidade de destino da especificaï¿½ï¿½o nï¿½o possa receber 
-				 * trï¿½mite de registro de atendimento (UNID_ICTRAMITE=2 na tabela 
+				 * Caso a unidade de destino da especificação não possa receber 
+				 * tramite de registro de atendimento (UNID_ICTRAMITE=2 na tabela 
 				 * cadastro.UNIDADE_ORGANIZACIONAL para UNID_ID=UNID_ID da tabela 
 				 * atendimentopublico.SOLICITACAO_TIPO_ESPEC)
 				 */
@@ -36848,48 +36871,47 @@ public class ControladorMicromedicao implements SessionBean {
 					retorno = false;
 				} else {
 					/*
-					 * Caso contrï¿½rio, atribuir a unidade de destino da especificaï¿½ï¿½o 
+					 * Caso contrário, atribuir a unidade de destino da especificação 
 					 * (UNID_ID da tabela atendimentopublico.SOLICITACAO_TIPO_ESPEC) 
 					 * ï¿½ Unidade Destino do RA
 					 */
 					helper.setUnidadeOrganizacional( uo );
 					retorno = true;
 				}
-			// Caso contrï¿½rio, ou seja, a especificaï¿½ï¿½o nï¿½o estï¿½ associada a uma unidade:
+			// Caso contrário, ou seja, a especificação não está associada a uma unidade:
 			} else {
 				/*
-				 * Caso nï¿½o exista unidade de destino associada ï¿½ localidade do imï¿½vel e 
-				 * ao grupo do tipo de solicitaï¿½ï¿½o da especificaï¿½ï¿½o (nï¿½o existe ocorrï¿½ncia na 
+				 * Caso não exista unidade de destino associada à localidade do imável e 
+				 * ao grupo do tipo de solicitação da especificação (não existe ocorrência na 
 				 * tabela atendimentopublico.LOCALID_SOLIC_TIPO_GRUPO para LOCA_ID=LOCA_ID da 
 				 * tabela cadastro.IMOVEL para IMOV_ID=IMOV_ID da tabela 
 				 * micromedicao.CONSUMO_HISTORICO e SOTG_ID=SOTG_ID da tabela atendimentopublico.SOLICITACAO_TIPO 
 				 * para SOTP_ID=SOTP_ID da tabela atendimentopublico.SOLICITACAO_TIPO_ESPEC para 
-				 * STEP_ID=Especificaï¿½ï¿½o do Tipo de Solicitaï¿½ï¿½o), passar para o prï¿½ximo imï¿½vel.
+				 * STEP_ID=Especificação do Tipo de Solicitação), passar para o próximo imóvel.
 				 */			
 				uo = repositorioMicromedicao.unidadeDestinoAssociadaLocalidadeImovelGrupoTipoSolicitacaoEspecificacao( 
-						helper.getIdLocalidadeImovel(), 
-						helper.getIdSolicitacaoTipoGrupo() );
+						helper.getIdLocalidadeImovel(), helper.getIdSolicitacaoTipoGrupo() );
 				
 				if ( uo == null ){
 					retorno = false;
 				/*
-				 * Caso contrï¿½rio, ou seja, existe unidade de destino associada ï¿½ localidade 
-				 * do imï¿½vel e ao grupo do tipo de solicitaï¿½ï¿½o da especificaï¿½ï¿½o
+				 * Caso contrário, ou seja, existe unidade de destino associada à localidade 
+				 * do imóvel e ao grupo do tipo de solicitação da especificação
 				 * 
 				 */					
 				} else {
 					/*
-					 * Caso a unidade de destino associada ï¿½ localidade do imï¿½vel e ao grupo do tipo de solicitaï¿½ï¿½o da 
-					 * especificaï¿½ï¿½o nï¿½o possa receber trï¿½mite de registro de atendimento (UNID_ICTRAMITE=2 na tabela 
+					 * Caso a unidade de destino associada à localidade do imóvel e ao grupo do tipo de solicitação da 
+					 * especificação não possa receber tramite de registro de atendimento (UNID_ICTRAMITE=2 na tabela 
 					 * cadastro.UNIDADE_ORGANIZACIONAL para UNID_ID=UNID_ID da tabela atendimentopublico.LOCALID_SOLIC_TIPO_GRUPO), 
-					 * passar para o prï¿½ximo imï¿½vel
+					 * passar para o próximo imóvel
 					 */
 					if ( uo.getIndicadorTramite() == ConstantesSistema.NAO ){
 						retorno = false;
 					} else {
 					/*
-					 * Caso contrï¿½rio, atribuir a unidade de destino associada ï¿½ localidade do imï¿½vel e ao grupo do tipo de 
-					 * solicitaï¿½ï¿½o da especificaï¿½ï¿½o (UNID_ID da tabela atendimentopublico.LOCALID_SOLIC_TIPO_GRUPO) ï¿½ 
+					 * Caso contrário, atribuir a unidade de destino associada à localidade do imóvel e ao grupo do tipo de 
+					 * solicitação da especificação (UNID_ID da tabela atendimentopublico.LOCALID_SOLIC_TIPO_GRUPO) à 
 					 * Unidade Destino do RA
 					 */
 						helper.setUnidadeOrganizacional( uo );
@@ -36910,18 +36932,18 @@ public class ControladorMicromedicao implements SessionBean {
 				if ( uo.getUnidadeCentralizadora() != null ){
 					/*
 					 * 
-					 * Caso a unidade centralizadora nï¿½o possa receber trï¿½mite de registro de atendimento 
+					 * Caso a unidade centralizadora não possa receber tramite de registro de atendimento 
 					 * (UNID_ICTRAMITE=2 na tabela cadastro.UNIDADE_ORGANIZACIONAL para UNID_ID=UNID_IDCENTRALIZADORA da 
 					 * tabela cadastro.UNIDADE_ORGANIZACIONAL para UNID_ID=Unidade Destino do RA), 
-					 * passar para o prï¿½ximo imï¿½vel
+					 * passar para o próximo imóvel
 					 * 
 					 */
 					if ( uo.getUnidadeCentralizadora().getIndicadorTramite() == ConstantesSistema.NAO ){
 						retorno = false;
 					} else {
 						/*
-						 * Caso contrï¿½rio, atribuir a unidade centralizadora (UNID_IDCENTRALIZADORA da tabela 
-						 * cadastro.UNIDADE_ORGANIZACIONAL para UNID_ID=Unidade Destino do RA) ï¿½ Unidade 
+						 * Caso contrário, atribuir a unidade centralizadora (UNID_IDCENTRALIZADORA da tabela 
+						 * cadastro.UNIDADE_ORGANIZACIONAL para UNID_ID=Unidade Destino do RA) à Unidade 
 						 * Destino do RA
 						 * 
 						 */
@@ -36935,10 +36957,10 @@ public class ControladorMicromedicao implements SessionBean {
 			 * 
 			 * Caso a Unidade Destino do RA nï¿½o esteja ativa (UNID_ICUSO=2 na tabela 
 			 * cadastro.UNIDADE_ORGANIZACIONAL para UNID_ID=Unidade Destino do RA), 
-			 * passar para o prï¿½ximo imï¿½vel
+			 * passar para o próximo imóvel
 			 * 
 			 */
-			if ( helper.getUnidadeOrganizacional().getIndicadorUso() == ConstantesSistema.NAO ){
+			if (retorno && helper.getUnidadeOrganizacional().getIndicadorUso() == ConstantesSistema.NAO ){
 				retorno = false;
 			}
 			
@@ -36950,7 +36972,6 @@ public class ControladorMicromedicao implements SessionBean {
 		return retorno;
 		
 	}
-	
 	
 	/**
 	 * [UC0800] - Obter Consumo Nï¿½o Medido
@@ -38292,6 +38313,7 @@ public class ControladorMicromedicao implements SessionBean {
 				
 				Integer idLeituraAnormalidadeConsumo = null;
 				BigDecimal numerofatorConsumo = new BigDecimal("0.00");
+				ContaMotivoRevisao contaMotivoRevisao = null; 
 				
 				// Obtêm o ano e mês de referência de faturamento
 				int anoMesReferenciaAnterior = Util.subtrairData(faturamentoGrupo.getAnoMesReferencia());
@@ -38302,6 +38324,7 @@ public class ControladorMicromedicao implements SessionBean {
 					ligacaoTipo, anoMesReferenciaAnterior, consumoAnormalidadeTipo);
 				
 				Collection consumoHistoricoSegundoMesAnterior = null;
+				Collection consumoHistoricoTerceiroMesAnterior = null;
 				
 				//1.1.1. Caso não tenha ocorrido estouro de consumo no mês anterior 
 				//(CSAN_ID da tabela CONSUMO_HISTORICO com o valor diferente de estouro de consumo 
@@ -38311,10 +38334,11 @@ public class ControladorMicromedicao implements SessionBean {
 				//então verifica a ação a ser tomada no primeiro mês (LACS_IDMES1): 
 				if(consumoHistoricoMesAnterior == null || consumoHistoricoMesAnterior.isEmpty()){
 					
-					idLeituraAnormalidadeConsumo = consumoAnormalidadeAcao.
-						getLeituraAnormalidadeConsumoMes1().getId();
-					
+					idLeituraAnormalidadeConsumo = consumoAnormalidadeAcao.getLeituraAnormalidadeConsumoMes1().getId();
 					numerofatorConsumo = consumoAnormalidadeAcao.getNumerofatorConsumoMes1();
+					if(consumoAnormalidadeAcao.getIndicadorGeracaoCartaMes1().equals(ConstantesSistema.SIM)){
+						contaMotivoRevisao = consumoAnormalidadeAcao.getContaMotivoRevisaoMes1();
+					}
 					
 				}else{
 	
@@ -38333,18 +38357,44 @@ public class ControladorMicromedicao implements SessionBean {
 						
 						//caso não tenha ocorrido, então o sistema verifica 
 						//a ação a ser tomada no segundo mês (LACS_IDMES2):
-						idLeituraAnormalidadeConsumo = consumoAnormalidadeAcao.
-						getLeituraAnormalidadeConsumoMes2().getId();
-						
+						idLeituraAnormalidadeConsumo = consumoAnormalidadeAcao.getLeituraAnormalidadeConsumoMes2().getId();
 						numerofatorConsumo = consumoAnormalidadeAcao.getNumerofatorConsumoMes2();
-					
+						if(consumoAnormalidadeAcao.getIndicadorGeracaoCartaMes2().equals(ConstantesSistema.SIM)){
+							contaMotivoRevisao = consumoAnormalidadeAcao.getContaMotivoRevisaoMes2();
+						}	
 					}else{
-						//Caso tenha ocorrido no segundo mês anterior, 
-						//então o sistema verifica a ação a ser tomada no terceiro mês (LACS_IDMES3): 
-						idLeituraAnormalidadeConsumo = consumoAnormalidadeAcao.
-						getLeituraAnormalidadeConsumoMes3().getId();
+						//RM14869 - CAERN - 14/10/2015
+						//Caso tenha ocorrido no segundo mês anterior o sistema verifica se ocorreu anormalidade 
+						//de consumo do consumo histórico no terceiro mês anterior; 
+						//caso não tenha ocorrido, então o sistema verifica a ação a ser tomada no terceiro mês (LACS_IDMES3)
+						consumoHistoricoTerceiroMesAnterior = repositorioMicromedicao
+								.pesquisarConsumoHistoricoConsumoAnormalidade(imovel,
+								ligacaoTipo, Util.subtrairMesDoAnoMes(anoMesReferenciaAnterior,2),consumoAnormalidadeTipo);
 						
-						numerofatorConsumo = consumoAnormalidadeAcao.getNumerofatorConsumoMes3();
+						if(consumoHistoricoTerceiroMesAnterior == null || consumoHistoricoTerceiroMesAnterior.isEmpty()){
+							//Caso tenha ocorrido no segundo mês anterior, 
+							//então o sistema verifica a ação a ser tomada no terceiro mês (LACS_IDMES3): 
+							idLeituraAnormalidadeConsumo = consumoAnormalidadeAcao.getLeituraAnormalidadeConsumoMes3().getId();
+							numerofatorConsumo = consumoAnormalidadeAcao.getNumerofatorConsumoMes3();
+							if(consumoAnormalidadeAcao.getIndicadorGeracaoCartaMes3().equals(ConstantesSistema.SIM)){
+								contaMotivoRevisao = consumoAnormalidadeAcao.getContaMotivoRevisaoMes3();
+							}
+						}else{
+							//Caso tenha ocorrido no terceiro mês anterior, o sistema verifica se o indicador de cobrar consumo normal = 1 
+							if(consumoAnormalidadeAcao.getIndicadorCobrancaConsumoNormal().equals(ConstantesSistema.SIM)){
+								//Caso seja igua a 1, o sistema toma como consumo a ser cobrado LACS_ID 
+								//(para LACS_DSCONSUMOACOBRAR da tabela LEITURA_ANORM_CONSUMO com o valor correspondente a NORMAL)
+								idLeituraAnormalidadeConsumo = LeituraAnormalidadeConsumo.NORMAL; 
+								numerofatorConsumo = null;
+							}else{
+								//Caso contrário, o sistema verifica a ação a ser tomada no terceiro mês (LACS_IDMES3)
+								idLeituraAnormalidadeConsumo = consumoAnormalidadeAcao.getLeituraAnormalidadeConsumoMes3().getId();
+								numerofatorConsumo = consumoAnormalidadeAcao.getNumerofatorConsumoMes3();
+								if(consumoAnormalidadeAcao.getIndicadorGeracaoCartaMes3().equals(ConstantesSistema.SIM)){
+									contaMotivoRevisao = consumoAnormalidadeAcao.getContaMotivoRevisaoMes3();
+								}	
+							}
+						}
 					}
 				}
 				
@@ -38352,6 +38402,7 @@ public class ControladorMicromedicao implements SessionBean {
 				// correspondente da tabela CONSUMO_ANORMALIDADE
 				consumoAnormalidade.setId(consumoAnormalidadeTipo);
 				consumoHistorico.setConsumoAnormalidade(consumoAnormalidade);
+				consumoHistorico.setContaMotivoRevisao(contaMotivoRevisao);
 				
 				if (idLeituraAnormalidadeConsumo.equals(LeituraAnormalidadeConsumo.NAO_OCORRE)) {
 					
@@ -38737,20 +38788,10 @@ public class ControladorMicromedicao implements SessionBean {
 			
 			Imovel imovel = new Imovel(numeroImovel);
 			
-
-			if(idFotoTipoLeituraConsumoAnormalidade==0 || idFotoTipoLeituraConsumoAnormalidade==ConstantesSistema.FOTO_TIPO_LEITURA_ANORMALIDADE.intValue())
-			{
-				
-				FiltroMovimentoContaPrefaturada filtroMovimentoContaPrefaturada = new FiltroMovimentoContaPrefaturada();
-				
-				filtroMovimentoContaPrefaturada.adicionarParametro(new ParametroSimples(FiltroMovimentoContaPrefaturada.IMOVEL_ID, numeroImovel));
-				filtroMovimentoContaPrefaturada.adicionarParametro(new ParametroSimples(FiltroMovimentoContaPrefaturada.ANO_MES_REFERENCIA_PRE_FATURAMENTO, anoMesReferencia));
-				
-				MovimentoContaPrefaturada movimentoContaPrefaturada = ((MovimentoContaPrefaturada)Util.retonarObjetoDeColecao(getControladorUtil().
-						pesquisar(filtroMovimentoContaPrefaturada, MovimentoContaPrefaturada.class.getName())));
-				
+			if( ( idFotoTipoLeituraConsumoAnormalidade==0 || 
+				  idFotoTipoLeituraConsumoAnormalidade==ConstantesSistema.FOTO_TIPO_LEITURA_ANORMALIDADE.intValue() ) ){
 				LeituraAnormalidade leituraAnormalidade = new LeituraAnormalidade();
-				leituraAnormalidade.setId(movimentoContaPrefaturada.getLeituraAnormalidadeFaturamento().getId());
+				leituraAnormalidade.setId( idAnormalidade );
 				
 				fotoMovimentoRoteiroEmpresa.setLeituraAnormalidade(leituraAnormalidade);
 			}
@@ -39884,5 +39925,297 @@ public class ControladorMicromedicao implements SessionBean {
 		} catch (ErroRepositorioException ex) {
 			throw new ControladorException("erro.sistema", ex);
 		}
+	}
+	
+	/**
+	 * [UC0840] Atualizar Conta Pré-faturada
+	 * [SB0006] - Pesquisa motivo de revisão
+	 * Autor Vivianne Sousa
+	 * Data: 28/10/2015
+	 */
+	public Integer obterAnormalidadeConsumoAnoMes(Integer idImovel,
+			Integer anoMes, Integer idLigacaoTipo) throws ControladorException {
+		try {
+			return repositorioMicromedicao.obterAnormalidadeConsumoAnoMes(idImovel, anoMes, idLigacaoTipo);
+		} catch (ErroRepositorioException ex) {
+			throw new ControladorException("erro.sistema", ex);
+		}
+	}
+	
+	/**
+	 * [UC1127] Gerar RA e OS para Anormalidade Consumo
+	 * Autor Vivianne Sousa
+	 * Data: 28/10/2015
+	 */
+	public void gerarRAOSAnormalidadeConsumo(FaturamentoGrupo faturamentoGrupo,
+		SistemaParametro sistemaParametro, Rota rota, int idFuncionalidadeIniciada) throws ControladorException {
+
+		int idUnidadeIniciada = 0;
+		idUnidadeIniciada = getControladorBatch().iniciarUnidadeProcessamentoBatch(
+				idFuncionalidadeIniciada,UnidadeProcessamento.ROTA, rota.getId());
+		try {
+			//[FS0002] - Verificar existência da unidade do administrador
+			Usuario usuarioLogado = Usuario.USUARIO_BATCH;
+			//Unidade Organizacional do usuário logado
+			FiltroUsuario filtroUsuario = new FiltroUsuario();
+			filtroUsuario.adicionarParametro(new ParametroSimples(FiltroUsuario.ID, usuarioLogado.getId()));
+			filtroUsuario.adicionarCaminhoParaCarregamentoEntidade(FiltroUsuario.UNIDADE_ORGANIZACIONAL);	
+			Collection colecaoUsuario = Fachada.getInstancia().pesquisar(filtroUsuario, Usuario.class.getName());
+			usuarioLogado = (Usuario) Util.retonarObjetoDeColecao(colecaoUsuario);
+			
+			if(usuarioLogado.getUnidadeOrganizacional().getIndicadorAberturaRa().equals(ConstantesSistema.SIM)){
+				
+				//O sistema seleciona os imóveis com anormalidade de consumo geradora de registro de atendimento 
+				Collection<Object[]> colecaoImoveis = repositorioMicromedicao.
+						selecionarImoveisAnormalidadeConsumoGeradoraRA(sistemaParametro.getAnoMesFaturamento(), rota);
+				if(!Util.isVazioOrNulo(colecaoImoveis)){
+					for (Object[] object : colecaoImoveis) {
+						GerarRAOSAnormalidadeConsumoHelper helper = new GerarRAOSAnormalidadeConsumoHelper(object);
+						helper.setAdmin(usuarioLogado);
+						Imovel imovel = new Imovel(helper.getIdImovel());
+						// 3.1.	Obter a quantidade de economias do imóvel por categoria
+						Collection colecaoCategoria = getControladorImovel().obterQuantidadeEconomiasCategoria(imovel);
+						obterCategoriaMaiorNumeroEconomia(helper, colecaoCategoria);
+						
+						// 3.2.	O sistema verifica se há indicação de geração de registro de atendimento 											
+						Object[] dadosConsumoAnormAcao = verificarExistenciaConsumoAnormalidadeAcaoImovel(helper);
+						if(!Util.isVazioOrNulo(dadosConsumoAnormAcao)){
+							helper.setDescricaoAnormalidade((String)dadosConsumoAnormAcao[0]); 
+							helper.setIdSolicitacaoTipoEspecificacaoMes1((Integer)dadosConsumoAnormAcao[1]);
+							helper.setIdSolicitacaoTipoEspecificacaoMes2((Integer)dadosConsumoAnormAcao[2]);
+							helper.setIdSolicitacaoTipoEspecificacaoMes3((Integer)dadosConsumoAnormAcao[3]);
+							boolean gerarRA = false;
+							
+							// Obtêm o ano e mês de referência do grupo de faturamento
+							int anoMesReferenciaAnterior = Util.subtrairData(faturamentoGrupo.getAnoMesReferencia());
+							LigacaoTipo ligacaoTipo = new LigacaoTipo();
+							ligacaoTipo.setId(LigacaoTipo.LIGACAO_AGUA);
+							Collection consumoHistoricoMesAnterior = repositorioMicromedicao.pesquisarConsumoHistoricoConsumoAnormalidade(
+									imovel,	ligacaoTipo, anoMesReferenciaAnterior, helper.getIdConsumoAnormalidade());
+							if(consumoHistoricoMesAnterior == null || consumoHistoricoMesAnterior.isEmpty()){
+								//3.2.1. Caso não tenha ocorrido a anormalidade de consumo atual do imóvel no mês anterior 
+								if(helper.getIdSolicitacaoTipoEspecificacaoMes1() != null){
+									//3.2.1.1. Caso haja indicação de geração de registro de atendimento para a 
+									//anormalidade de consumo do imóvel no primeiro mês 
+									helper.setObservacaoRA("IMÓVEL COM " + helper.getDescricaoAnormalidade() + " NO PRIMEIRO MÊS");
+									helper.setIdSolicitacaoTipoEspecificacao(helper.getIdSolicitacaoTipoEspecificacaoMes1());
+									gerarRA = true;
+								}
+							}else{
+								//3.2.2. Caso contrário (ocorreu a anormalidade de consumo atual do imóvel no mês anterior):
+								Collection consumoHistoricoSegundoMesAnterior = repositorioMicromedicao.pesquisarConsumoHistoricoConsumoAnormalidade(
+										imovel, ligacaoTipo, Util.subtrairData(anoMesReferenciaAnterior),helper.getIdConsumoAnormalidade());
+								if(consumoHistoricoSegundoMesAnterior == null || consumoHistoricoSegundoMesAnterior.isEmpty()){
+									//3.2.2.1. Caso não tenha ocorrido a anormalidade de consumo atual do imóvel no mês anterior no segundo mês anterior 
+									if(helper.getIdSolicitacaoTipoEspecificacaoMes2() != null){
+										//3.2.2.1.1. Caso haja indicação de geração de registro de atendimento para a 
+										//anormalidade de consumo do imóvel no segundo mês 
+										helper.setObservacaoRA("IMÓVEL COM " + helper.getDescricaoAnormalidade() + " NO SEGUNDO MÊS");
+										helper.setIdSolicitacaoTipoEspecificacao(helper.getIdSolicitacaoTipoEspecificacaoMes2());
+										gerarRA = true;
+									}
+								}else{
+									//3.2.3. Caso contrário (ocorreu a anormalidade de consumo atual do imóvel no mês anterior no segundo mês anterior):
+									if(helper.getIdSolicitacaoTipoEspecificacaoMes3() != null){
+										//3.2.2.1.1. Caso haja indicação de geração de registro de atendimento para a 
+										//anormalidade de consumo do imóvel no terceiro mês 
+										helper.setObservacaoRA("IMÓVEL COM " + helper.getDescricaoAnormalidade() + " NO TERCEIRO MÊS");
+										helper.setIdSolicitacaoTipoEspecificacao(helper.getIdSolicitacaoTipoEspecificacaoMes3());
+										gerarRA = true;
+									}
+								}
+							}
+							if(gerarRA = true){
+								gerarRegistroAtendimentoAnormalidadeConsumo(helper, sistemaParametro);
+							}
+						}
+					}
+				}
+			}
+			getControladorBatch().encerrarUnidadeProcessamentoBatch(null,idUnidadeIniciada, false);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// sessionContext.setRollbackOnly();
+			getControladorBatch().encerrarUnidadeProcessamentoBatch(e,idUnidadeIniciada, true);
+			throw new EJBException(e);
+		}
+	}
+
+	/**
+	 * [UC1127] Gerar RA e OS para Anormalidade Consumo
+	 * Passo3.2 do fluxo principal
+	 * Autor Vivianne Sousa
+	 * Data: 28/10/2015
+	 */
+	private void obterCategoriaMaiorNumeroEconomia(GerarRAOSAnormalidadeConsumoHelper helper,
+			Collection colecaoCategoria) {
+		Integer idCategoriaComMaisEconomias = null;
+		Iterator colecaoCategoriaIterator = colecaoCategoria.iterator();
+		int maiorQuantidadeEconomia = 0;
+		while (colecaoCategoriaIterator.hasNext()) {
+			Categoria categoria = (Categoria) colecaoCategoriaIterator.next();
+			int qtdEconomias = categoria.getQuantidadeEconomiasCategoria().intValue();
+			// Obtém a maior quantidade de economias 
+			if (maiorQuantidadeEconomia < qtdEconomias) {
+				maiorQuantidadeEconomia = qtdEconomias;
+				idCategoriaComMaisEconomias = categoria.getId();
+			}
+		}
+		helper.setIdPrincipalCategoria(idCategoriaComMaisEconomias);
+	}
+	
+	/**
+	 * [UC1127] Gerar RA e OS para Anormalidade Consumo
+	 * Passo3.2 do fluxo principal
+	 * Autor Vivianne Sousa
+	 * Data: 28/10/2015
+	 */
+	public Object[] verificarExistenciaConsumoAnormalidadeAcaoImovel(
+			GerarRAOSAnormalidadeConsumoHelper helper) throws ControladorException {
+		try {
+			Object[] dadosConsumoAnormAcao = null;
+			//O sistema verifica se há indicação de geração de registro de atendimento para 
+			//a anormalidade de consumo, a categoria e o perfil do imóvel  
+			dadosConsumoAnormAcao = repositorioMicromedicao.verificarExistenciaConsumoAnormalidadeAcaoImovel(
+					helper.getIdConsumoAnormalidade(), helper.getIdPrincipalCategoria(), helper.getIdImovelPerfil());
+			//Caso não retorne nenhuma ocorrência da tabela micromedicao.CONSUMO_ANORM_ACAO, 
+			//então verifica se há indicação de geração de registro de atendimento para 
+			//a anormalidade de consumo e a categoria do imóvel
+			if(dadosConsumoAnormAcao == null){
+				dadosConsumoAnormAcao = repositorioMicromedicao.verificarExistenciaConsumoAnormalidadeAcaoImovel(
+					helper.getIdConsumoAnormalidade(), helper.getIdPrincipalCategoria(), null);
+			}
+			//Caso não retorne nenhuma ocorrência da tabela micromedicao.CONSUMO_ANORM_ACAO,
+			//então verifica se há indicação de geração de registro de atendimento para 
+			//a anormalidade de consumo do imóvel 
+			if(dadosConsumoAnormAcao == null){
+				dadosConsumoAnormAcao = repositorioMicromedicao.verificarExistenciaConsumoAnormalidadeAcaoImovel(
+					helper.getIdConsumoAnormalidade(), null, null);
+			}
+			return dadosConsumoAnormAcao;
+		} catch (ErroRepositorioException ex) {
+			throw new ControladorException("erro.sistema", ex);
+		}
+	}
+	
+	/**
+	 * [UC1127] Gerar RA e OS para Anormalidade Consumo
+	 * [SB0001] - Gerar Registro de Atendimento
+	 * Autor Vivianne Sousa
+	 * Data: 28/10/2015
+	 */
+	public void gerarRegistroAtendimentoAnormalidadeConsumo(GerarRAOSAnormalidadeConsumoHelper helper, 
+			SistemaParametro sistemaParametro) throws ControladorException {
+		
+		//[FS0005] - Verificar existência de RA para o imóvel com a mesma especificação
+		if(!existeRAImovelMesmaEspecificacao(helper.getIdImovel(), helper.getIdSolicitacaoTipoEspecificacao())){
+			
+			obterDadosGerarRAAnormalidadeConsumo(helper);
+			
+			Imovel imovelEndereco = this.getControladorEndereco().pesquisarImovelParaEndereco(helper.getIdImovel());
+			Collection colecaoEnderecos = new ArrayList();
+			colecaoEnderecos.add(imovelEndereco);
+			
+			//[FS0006] - Verificar existência de unidade de destino para o registro de atendimento
+			//[FS0007] - Verificar existência de serviço associado à especificação
+//			if(unidadeDestinoPermiteAberturaRA(helper) && helper.getIdServicoTipo() != null){
+			if(helper.getIdServicoTipo() != null){
+				
+				definirDataPrevista(helper);
+				// [UC0366] - Inserir Registro de Atendimento
+				getControladorRegistroAtendimento().inserirRegistroAtendimento(
+						RegistroAtendimento.INDICADOR_ATENDIMENTO_ON_LINE, 
+						Util.formatarData(new Date()), 
+						Util.formatarHoraSemData(new Date()), 
+						null, 
+						null, 
+						MeioSolicitacao.INTERNO, 
+						helper.getIdSolicitacaoTipoEspecificacao(), 
+						helper.getDataPrevistaRA(),
+						helper.getObservacaoRA(), 
+						helper.getIdImovel(), 
+						null, 
+						helper.getIdSolicitacaoTipo(), 
+						colecaoEnderecos, 
+						null, 
+						null, 
+						helper.getIdLocalidadeImovel(),
+						helper.getIdSetorComercial(), 
+						helper.getIdQuadra(), 
+						null, 
+						null, 
+						null, 
+						null, 
+						helper.getAdmin().getUnidadeOrganizacional().getId(), 
+						helper.getAdmin().getId(), 
+						null, 
+						null, 
+						sistemaParametro.getNomeEmpresa(), 
+						false, 
+						helper.getAdmin().getUnidadeOrganizacional().getId(), 
+						null, 
+						null, 
+						null, 
+						helper.getUnidadeOrganizacional().getId(), 
+						helper.getObservacaoRA(), 
+						helper.getIdServicoTipo(), 
+						null, 
+						null, 
+						helper.getCoordenadaY(), 
+						helper.getCoordenadaX(), 
+						ConstantesSistema.NAO, 
+						null, 
+						null, 
+						null, 
+						null, 
+						null, 
+						null, 
+						null, 
+						null, 
+						null);
+			}
+		}
+	}
+
+	/**
+	 * [UCXXXX] - <descrição>
+	
+	 * @author Bruno Sá Barreto
+	 * @date 16/11/2015
+	 *
+	 * @param helper
+	 * @throws ControladorException
+	 */
+	private void obterDadosGerarRAAnormalidadeConsumo(GerarRAOSAnormalidadeConsumoHelper helper)
+			throws ControladorException {
+		FiltroSolicitacaoTipoEspecificacao filtroSolicitacaoTipoEspecificacao = new FiltroSolicitacaoTipoEspecificacao();
+		filtroSolicitacaoTipoEspecificacao.adicionarParametro( new ParametroSimples( FiltroSolicitacaoTipoEspecificacao.ID, helper.getIdSolicitacaoTipoEspecificacao() ) );
+		filtroSolicitacaoTipoEspecificacao.adicionarCaminhoParaCarregamentoEntidade( "solicitacaoTipo.solicitacaoTipoGrupo" );
+		filtroSolicitacaoTipoEspecificacao.adicionarCaminhoParaCarregamentoEntidade( "unidadeOrganizacional.unidadeCentralizadora" );
+		
+		Collection<SolicitacaoTipoEspecificacao> colSolicitacaoTipoEspecificacao = this.getControladorUtil().pesquisar( filtroSolicitacaoTipoEspecificacao, SolicitacaoTipoEspecificacao.class.getName() );
+		SolicitacaoTipoEspecificacao ste = ( SolicitacaoTipoEspecificacao ) Util.retonarObjetoDeColecao( colSolicitacaoTipoEspecificacao );
+		helper.setIdSolicitacaoTipoGrupo( ste.getSolicitacaoTipo().getSolicitacaoTipoGrupo().getId() );
+		helper.setNumeroDiasPrazoAtendimentoRA( ste.getDiasPrazo() );
+		helper.setIdSolicitacaoTipo( ste.getSolicitacaoTipo().getId() );
+		helper.setIdServicoTipo( ste.getServicoTipo().getId() );
+		
+		FiltroUnidadeOrganizacional filtroUnidadeOrganizacional = new FiltroUnidadeOrganizacional();
+		filtroUnidadeOrganizacional.adicionarParametro(new ParametroSimples(FiltroUnidadeOrganizacional.ID_LOCALIDADE, helper.getIdLocalidadeImovel()));
+		filtroUnidadeOrganizacional.adicionarParametro(new ParametroSimples(FiltroUnidadeOrganizacional.INDICADOR_USO, ConstantesSistema.INDICADOR_USO_ATIVO));
+		Collection<UnidadeOrganizacional> colecaoUnidadeOrganizacional = getControladorUtil().pesquisar(filtroUnidadeOrganizacional, UnidadeOrganizacional.class.getName());
+		UnidadeOrganizacional uo = (UnidadeOrganizacional) Util.retonarObjetoDeColecao(colecaoUnidadeOrganizacional);
+		helper.setUnidadeOrganizacional(uo);
+	}
+	
+	public Integer obterRotaIdImovel(Integer matricula, Integer anoMes) throws ControladorException{
+
+		try {
+			return this.repositorioMicromedicao.obterRotaIdImovel(matricula, anoMes);
+			
+		} catch (ErroRepositorioException ex) {
+			throw new ControladorException("erro.sistema", ex);
+		}
+		
 	}
 }

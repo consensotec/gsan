@@ -2379,4 +2379,16 @@ public interface ControladorAtendimentoPublicoLocal extends
 	 * @throws ControladorException
 	 */
 	public void gerarResumoAtendimentoPublicoAtualizaDados(Integer matriculaImovel) throws ControladorException;
+
+
+	 /**
+	  *  [UC0412] Manter Tipo de Serviço
+	  *  @author João Pedro Medeiros
+	 * @since 15/12/2015
+	 * 
+	 * @param servicoTipoId
+	 * @return constanteFuncionalidadeTipoServico
+	 * @throws ControladorException
+	 */
+	public Integer pesquisarConstanteFuncionalidadeTipoServico(Integer servicoTipoId) throws ControladorException;
 }

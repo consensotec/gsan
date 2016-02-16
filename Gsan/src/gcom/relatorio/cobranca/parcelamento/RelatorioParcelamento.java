@@ -83,6 +83,7 @@ import gcom.cadastro.funcionario.FiltroFuncionario;
 import gcom.cadastro.funcionario.Funcionario;
 import gcom.cadastro.sistemaparametro.SistemaParametro;
 import gcom.cadastro.unidade.UnidadeOrganizacional;
+import gcom.cobranca.CobrancaForma;
 import gcom.cobranca.bean.ParcelamentoRelatorioHelper;
 import gcom.cobranca.parcelamento.ParcelamentoItem;
 import gcom.fachada.Fachada;
@@ -120,8 +121,14 @@ import java.util.Map;
  */
 public class RelatorioParcelamento extends TarefaRelatorio {
 	private static final long serialVersionUID = 1L;
+	
 	public RelatorioParcelamento(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_PARCELAMENTO);
+	}
+	
+	@Deprecated
+	public RelatorioParcelamento() {
+		super(null, "");
 	}
 
 	/**
@@ -140,13 +147,13 @@ public class RelatorioParcelamento extends TarefaRelatorio {
 		// ------------------------------------
 		Integer idFuncionalidadeIniciada = this.getIdFuncionalidadeIniciada();
 		// ------------------------------------
-
+		
 		String idParcelamento = (String) getParametro("idParcelamento");
 		SistemaParametro sistemaParametro = (SistemaParametro) getParametro("sistemaParametro");
 		UnidadeOrganizacional unidadeUsuario = (UnidadeOrganizacional) getParametro("unidadeUsuario");
 		Usuario usuarioLogado = (Usuario) getParametro("usuario");
 		int tipoFormatoRelatorio = (Integer) getParametro("tipoFormatoRelatorio");
-		
+		String indicadorFormaCobranca = (String)getParametro("indicadorFormaCobranca");
 		
 		String descricaoUnidadeUsuario = "";
 		if(unidadeUsuario != null && unidadeUsuario.getDescricao() != null){
@@ -164,7 +171,7 @@ public class RelatorioParcelamento extends TarefaRelatorio {
 		RelatorioParcelamentoBean relatorioParcelamentoBean = null;
 
 		ParcelamentoRelatorioHelper parcelamentoRelatorioHelper = fachada
-				.pesquisarParcelamentoRelatorio(Integer.parseInt( idParcelamento ) );
+				.pesquisarParcelamentoRelatorio(Integer.parseInt( idParcelamento ));
 		
 		String idFuncionario = "";
 		if (parcelamentoRelatorioHelper.getIdFuncionario() != null){
@@ -1825,6 +1832,18 @@ public class RelatorioParcelamento extends TarefaRelatorio {
         	} else {
         		parametros.put("dividaAtiva", "");
         	}
+        	
+        	String termoDescricao = "";
+        	
+        	if(indicadorFormaCobranca != null && indicadorFormaCobranca.equals(CobrancaForma.COBRANCA_EM_CARTAO_CREDITO.toString())){ 
+        		termoDescricao = "sendo quitado esse débito através do cartão de crédito.";
+        	}else{
+        		termoDescricao = "com vencimentos mensais, cujas parcelas serão incluídas nas contas seguintes. " +
+        				"Ficando o mesmo ciente que o não cumprimento do pagamento das parcelas implica na interrupção " +
+        				"imediata do fornecimento de água e a cobrança do débito através dos instrumentos legais.";
+        	}
+        	
+        	parametros.put("termoDescricao", termoDescricao);
         	
         	retorno = gerarRelatorio(ConstantesRelatorios.RELATORIO_PARCELAMENTO_JUAZEIRO,
                     parametros, ds, tipoFormatoRelatorio);

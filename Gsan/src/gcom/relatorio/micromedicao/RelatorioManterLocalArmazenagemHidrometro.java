@@ -118,6 +118,11 @@ public class RelatorioManterLocalArmazenagemHidrometro extends TarefaRelatorio {
 	public RelatorioManterLocalArmazenagemHidrometro(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_LOCAL_ARMAZENAGEM_HIDROMETRO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterLocalArmazenagemHidrometro() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

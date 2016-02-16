@@ -830,6 +830,7 @@ public class ExibirAtualizarContratoParcelamentoPorClienteAction extends GcomAct
 
 				BigDecimal valorContaSelecao = (BigDecimal) sessao.getAttribute("valorContaSelecao");
 				BigDecimal valorContaComAcrescimo = (BigDecimal) sessao.getAttribute("valorContaAcrescimoSelecao");
+				BigDecimal valorDebitosACobrarSelecao = (BigDecimal) sessao.getAttribute("valorDebitosACobrarSelecao");
 				
 				Collection<QuantidadePrestacoesRDHelper> colecaoQuantidadePrestacoesRDHelper = 
 					new ArrayList<QuantidadePrestacoesRDHelper>();
@@ -839,7 +840,7 @@ public class ExibirAtualizarContratoParcelamentoPorClienteAction extends GcomAct
 					QuantidadePrestacoesRDHelper quantidadePrestacoesRDHelper = new QuantidadePrestacoesRDHelper();
 					
 					InserirContratoParcelamentoValoresParcelasHelper helper = fachada
-						.calcularValoresParcelasContratoParcelamentoRD(valorContaSelecao, valorContaComAcrescimo, 
+						.calcularValoresParcelasContratoParcelamentoRD(valorContaSelecao, valorContaComAcrescimo, valorDebitosACobrarSelecao,
 								form.getIndicadorDebitoAcresc(), form.getIndicadorParcelJuros(), contratoAtualizar, 
 								quantidadePrestacoes);
 					
@@ -865,7 +866,7 @@ public class ExibirAtualizarContratoParcelamentoPorClienteAction extends GcomAct
 				sessao.setAttribute("colecaoQuantidadePrestacoesRDHelper", colecaoQuantidadePrestacoesRDHelper);
 
 				fachada
-					.calcularValoresParcelasContratoParcelamentoRD(valorContaSelecao, valorContaComAcrescimo, 
+					.calcularValoresParcelasContratoParcelamentoRD(valorContaSelecao, valorContaComAcrescimo, valorDebitosACobrarSelecao,
 							form.getIndicadorDebitoAcresc(), form.getIndicadorParcelJuros(), contratoAtualizar, 
 							quantidadePrestacoesRD);
 			}
@@ -1974,10 +1975,11 @@ public class ExibirAtualizarContratoParcelamentoPorClienteAction extends GcomAct
 			BigDecimal valorParcelado = null;
 			BigDecimal valorContaSelecao = (BigDecimal) sessao.getAttribute("valorContaSelecao");
 			BigDecimal acrescimo = (BigDecimal) sessao.getAttribute("valorContaAcrescimoSelecao");
+			BigDecimal valorDebitosACobrarSelecao = (BigDecimal) sessao.getAttribute("valorDebitosACobrarSelecao");
 			
 			if (!popup) {
 				InserirContratoParcelamentoValoresParcelasHelper helper = Fachada.getInstancia()
-					.calcularValoresParcelasContratoParcelamento(valorContaSelecao, acrescimo, 
+					.calcularValoresParcelasContratoParcelamento(valorContaSelecao, acrescimo, valorDebitosACobrarSelecao,
 						indicadorDebitoAcresc, indicadorParcelJuros, jurosBigDec, 
 						numeroParcelInicial, numeroParcelFinal);
 				
@@ -2625,6 +2627,7 @@ public class ExibirAtualizarContratoParcelamentoPorClienteAction extends GcomAct
 			
 			BigDecimal valorContaSelecao = (BigDecimal) sessao.getAttribute("valorContaSelecao");
 			BigDecimal acrescimo = (BigDecimal) sessao.getAttribute("valorContaAcrescimoSelecao");
+			BigDecimal valorDebitosACobrarSelecao = (BigDecimal) sessao.getAttribute("valorDebitosACobrarSelecao");
 			
 			Integer numeroParcelas = null;
 			if (form.getPacerlaAdd() != null
@@ -2641,7 +2644,7 @@ public class ExibirAtualizarContratoParcelamentoPorClienteAction extends GcomAct
 				}
 				
 				InserirContratoParcelamentoValoresParcelasHelper helper = Fachada.getInstancia()
-					.calcularValoresParcelasContratoParcelamento(valorContaSelecao, acrescimo, 
+					.calcularValoresParcelasContratoParcelamento(valorContaSelecao, acrescimo, valorDebitosACobrarSelecao,
 						contratoAtualizar.getIndicadorDebitosAcrescimos().toString(), 
 						contratoAtualizar.getIndicadorParcelamentoJuros().toString(), 
 						juros, 1, numeroParcelas);

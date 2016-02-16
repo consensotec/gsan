@@ -150,6 +150,9 @@ public class DocumentoTipo extends ObjetoTransacao {
 	public final static Integer EXTRATO_CONTRATO_PARCELAMENTO = 34;
 	public final static Integer EXTRATO_ENTRADA_PARCELAMENTO = 37;
 	
+	public final static Integer AUTO_DE_INFRACAO = 38;
+	public final static Integer SOLICITACAO_DE_COMPARECIMENTO = 39;
+	
 	public final static int[] DOCUMENTO_TIPO_AGREGADOR = {
 		GUIA_PAGAMENTO, FATURA_CLIENTE, EXTRATO_DE_DEBITO, CARTA_COBRANCA_SUPRIMIDO,
 		CARTA_COBRANCA_CORTADO, CARTA_COBRANCA_LIGADO, DOCUMENTO_COBRANCA,

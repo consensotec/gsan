@@ -116,6 +116,11 @@ public class RelatorioBoletimOrdensServicoConcluidas extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_BOLETIM_ORDENS_SERVICO_CONCLUIDAS);
 	}
 
+	@Deprecated
+	public RelatorioBoletimOrdensServicoConcluidas() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 
 		// ------------------------------------

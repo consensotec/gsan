@@ -117,6 +117,11 @@ public class RelatorioManterSistemaAbastecimento extends TarefaRelatorio {
 	public RelatorioManterSistemaAbastecimento(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_SISTEMA_ABASTECIMENTO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterSistemaAbastecimento() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2007-2007 the GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
+* Copyright (C) 2007-2007 the GSAN - Sistema Integrado de GestÃ£o de ServiÃ§os de Saneamento
 *
 * This file is part of GSAN, an integrated service management system for Sanitation
 *
@@ -18,7 +18,7 @@
 */
 
 /*
-* GSAN - Sistema Integrado de Gestão de Serviços de Saneamento
+* GSAN - Sistema Integrado de GestÃ£o de ServiÃ§os de Saneamento
 * Copyright (C) <2007> 
 * Adriano Britto Siqueira
 * Alexandre Santos Cabral
@@ -27,12 +27,12 @@
 * Aryed Lins de Araújo
 * Bruno Leonardo Rodrigues Barros
 * Carlos Elmano Rodrigues Ferreira
-* Cláudio de Andrade Lira
+* Cládio de Andrade Lira
 * Denys Guimarães Guenes Tavares
 * Eduardo Breckenfeld da Rosa Borges
-* Fabíola Gomes de Araújo
+* Fabíla Gomes de Araújo
 * Flávio Leonardo Cavalcanti Cordeiro
-* Francisco do Nascimento Júnior
+* Francisco do Nascimento JÃºnior
 * Homero Sampaio Cavalcanti
 * Ivan Sérgio da Silva Júnior
 * José Edmar de Siqueira
@@ -173,7 +173,7 @@ public interface IControladorArrecadacao {
 			ArrecadadorContrato arrecadadorContrato, 
 			Collection<Integer> colecaoLinhas, Integer idFuncionalidade)
 			throws ControladorException;
-
+	 
 	/**
 	 * Coisa de Rafael Corrêa tem que comentar
 	 * 
@@ -217,7 +217,7 @@ public interface IControladorArrecadacao {
 	 * @param movimentoOcorrencia
 	 * @param movimentoAceito
 	 * @param movimentoAbertoFechado
-	 * @return Uma coleçao com os movimentos selecionados
+	 * @return Uma coleção com os movimentos selecionados
 	 * @throws ControladorException
 	 */
 	public FiltroArrecadadorMovimento filtrarMovimentoArrecadadores(
@@ -304,7 +304,7 @@ public interface IControladorArrecadacao {
 	 * 
 	 * @param arrecadadorMovimento
 	 * @return Uma Collection<AvisoBancarioHelper> que representa a os avisos
-	 *         bancários selecionados
+	 *         bancÃ¡rios selecionados
 	 * @throws ControladorException
 	 */
 	public Collection<AvisoBancarioHelper> obterColecaoAvisosBancariosPorArrecadadorMovimento(
@@ -314,7 +314,7 @@ public interface IControladorArrecadacao {
 	/**
 	 * Caso o valor total dos pagamentos seja igual ao valor da arrecadação
 	 * (AVBC_VLARRECADACAO) e o valor total das devoluções seja igual ao valor
-	 * da devolução (AVBC_VLDEVOLUCAO) a situação será "FECHADO"; Caso contrário
+	 * da devolução (AVBC_VLDEVOLUCAO) a situção será "FECHADO"; Caso contrário
 	 * será "ABERTO"
 	 * 
 	 * @author Raphael Rossiter
@@ -642,7 +642,7 @@ public interface IControladorArrecadacao {
 	 * 
 	 * Pesquisa o débito a cobrar do imóvel informado pelo usuário
 	 * 
-	 * [FS0024] - Verificar existência do débito a cobrar
+	 * [FS0024] - Verificar existéncia do débito a cobrar
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 16/02/2006
@@ -678,14 +678,14 @@ public interface IControladorArrecadacao {
 			throws ControladorException;
 
 	/**
-	 * Inseri uma coleção de pagamentos no sistema
+	 * Inseri uma coleçâo de pagamentos no sistema
 	 * 
 	 * [UC0265] Inserir Pagamentos
 	 * 
 	 * Verifica se o usuário informou o código da guia de pagamento e o tipo de
 	 * débito, só pode ser informado um dos dois
 	 * 
-	 * [FS0021] Verificar preenchimento da guia de pagamento e do tipo de débito
+	 * [FS0021] Verificar preenchimento da guia de pagamento e do tipo de Débito
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 16/02/2006
@@ -724,7 +724,7 @@ public interface IControladorArrecadacao {
 	 * 
 	 * [UC0265] Inserir Pagamentos
 	 * 
-	 * Verifica se a localidade informada é a mesma da guia de pagamento
+	 * Verifica se a localidade informada Ã© a mesma da guia de pagamento
 	 * 
 	 * [FS0014] Verificar localidade da guia de pagamento
 	 * 
@@ -743,7 +743,7 @@ public interface IControladorArrecadacao {
 	 * 
 	 * [UC0265] Inserir Pagamentos
 	 * 
-	 * Verifica se a localidade informada é a mesma do débito a cobrar
+	 * Verifica se a localidade informada Ã© a mesma do débito a cobrar
 	 * 
 	 * [FS0017] Verificar localidade do débito a cobrar
 	 * 
@@ -762,7 +762,7 @@ public interface IControladorArrecadacao {
 	 * 
 	 * [UC0265] Inserir Pagamentos
 	 * 
-	 * Verifica a existência de débito a cobrar com o tipo de débito e o imóvel
+	 * Verifica a existéncia de débito a cobrar com o tipo de débito e o imóvel
 	 * informados
 	 * 
 	 * [FS0016] Verificar existência de débito a cobrar com tipo de débito
@@ -804,7 +804,7 @@ public interface IControladorArrecadacao {
 			throws ControladorException;
 
 	/**
-	 * Responsável pela manutenção das informações de pagamento
+	 * ResponsÃ¡vel pela manutenção das informações de pagamento
 	 * 
 	 * [UC0266] Manter Pagamentos
 	 * 
@@ -823,7 +823,7 @@ public interface IControladorArrecadacao {
 			throws ControladorException;
 
 	/**
-	 * Insere os aviso deduções no aviso bancário
+	 * Insere os aviso deduçõµes no aviso bancário
 	 * 
 	 * [UC0000] Inserir Aviso Bancário
 	 * 
@@ -839,7 +839,7 @@ public interface IControladorArrecadacao {
 	 * Gera os dados diários da arrecadação acumulando a quantidade e o valor
 	 * dos pagamentos
 	 * 
-	 * [UC0301] Gerar Dados Diários da Arrecadação
+	 * [UC0301] Gerar Dados DiÃ¡rios da ArrecadaÃ§Ã£o
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 11/04/2006
@@ -853,7 +853,7 @@ public interface IControladorArrecadacao {
 	 * [UC0319] Gerar Movimento de Débito Automático para o banco
 	 * 
 	 * pesquisa todos os bancos que tenham contrato vigente para arrecadador
-	 * contas com forma de arrecadação correspondente a debito automático
+	 * contas com forma de arrecadação correspondente a debito Automático
 	 * 
 	 * [SB0002] - Carregar Lista de Bancos
 	 * 
@@ -881,7 +881,7 @@ public interface IControladorArrecadacao {
 	 * @date 18/04/2006
 	 * 
 	 * @param idFaturamentoGrupo,anoMesReferenciaFaturamento,idBanco
-	 * @return Coleção de DebitoAutomaticoMovimento
+	 * @return coleção de DebitoAutomaticoMovimento
 	 * @throws ControladorException
 	 */
 
@@ -897,7 +897,7 @@ public interface IControladorArrecadacao {
 	 * @date 20/04/2006
 	 * 
 	 * @param avisoBancarioHelper
-	 * @return Coleção de DebitoAutomaticoMovimento
+	 * @return coleção de DebitoAutomaticoMovimento
 	 * @throws ErroRepositorioException
 	 */
 
@@ -924,7 +924,7 @@ public interface IControladorArrecadacao {
 	/**
 	 * [UC0319] Gerar Movimento de Débito Automático para o banco
 	 * 
-	 * Movimento de débito automático em arquivo TXT gerado e enviado ao banco.
+	 * Movimento de débito Automático em arquivo TXT gerado e enviado ao banco.
 	 * 
 	 * 
 	 * @author Sávio Luiz
@@ -1112,7 +1112,7 @@ public interface IControladorArrecadacao {
 	 * @param localidade
 	 * @param municipio
 	 * 
-	 * @return Quantidade de registros do relatório
+	 * @return Quantidade de registros do relatário
 	 * @throws ControladorException
 	 */
 	public Integer consultarQtdeRegistrosResumoArrecadacaoRelatorio(
@@ -1121,7 +1121,7 @@ public interface IControladorArrecadacao {
 			throws ControladorException;
 
 	/**
-	 * Encerra a arrecadação do ano/mês atual
+	 * Encerra a arrecadaçã do ano/mês atual
 	 * 
 	 * [UC0276] Encerrar Arrecadação do Mês
 	 * 
@@ -1139,7 +1139,7 @@ public interface IControladorArrecadacao {
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
-	 * Pesquisa os pagamentos do Imóvel pesquisarPagamentoImovel
+	 * Pesquisa os pagamentos do imóvel pesquisarPagamentoImovel
 	 * 
 	 * @author Roberta Costa
 	 * @date 12/06/06
@@ -1189,7 +1189,7 @@ public interface IControladorArrecadacao {
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
-	 * Pesquisa os pagamentos do Imóvel pesquisarPagamentoImovel
+	 * Pesquisa os pagamentos do imóvel pesquisarPagamentoImovel
 	 * 
 	 * @author Roberta Costa
 	 * @date 12/06/06
@@ -1239,7 +1239,7 @@ public interface IControladorArrecadacao {
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
-	 * Pesquisa os pagamentos do Imóvel pesquisarPagamentoImovel
+	 * Pesquisa os pagamentos do imóvel pesquisarPagamentoImovel
 	 * 
 	 * @author Roberta Costa
 	 * @date 12/06/06
@@ -1289,7 +1289,7 @@ public interface IControladorArrecadacao {
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
-	 * Pesquisa os pagamentos do Imóvel pesquisarPagamentoImovel
+	 * Pesquisa os pagamentos do imóvel pesquisarPagamentoImovel
 	 * 
 	 * @author Roberta Costa
 	 * @date 12/06/06
@@ -1339,7 +1339,7 @@ public interface IControladorArrecadacao {
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
-	 * Pesquisa os pagamentos do Imóvel pesquisarPagamentoImovel
+	 * Pesquisa os pagamentos do imóvel pesquisarPagamentoImovel
 	 * 
 	 * @author Roberta Costa
 	 * @date 12/06/06
@@ -1389,7 +1389,7 @@ public interface IControladorArrecadacao {
 	 * 
 	 * [UC0255] Filtrar Pagamentos
 	 * 
-	 * Pesquisa os pagamentos do Imóvel pesquisarPagamentoImovel
+	 * Pesquisa os pagamentos do imóvel pesquisarPagamentoImovel
 	 * 
 	 * @author Roberta Costa
 	 * @date 12/06/06
@@ -1456,7 +1456,7 @@ public interface IControladorArrecadacao {
 	 * @date 16/08/2006
 	 * 
 	 * @param avisoBancarioHelper
-	 * @return Coleção de DebitoAutomaticoMovimento
+	 * @return coleção de DebitoAutomaticoMovimento
 	 * @throws ErroRepositorioException
 	 */
 
@@ -1473,7 +1473,7 @@ public interface IControladorArrecadacao {
 	 * @date 16/08/2006
 	 * 
 	 * @param avisoBancarioHelper
-	 * @return Coleção de DebitoAutomaticoMovimento
+	 * @return coleção de DebitoAutomaticoMovimento
 	 * @throws ErroRepositorioException
 	 */
 	public Collection filtrarAvisoBancarioAbertoFechadoParaPaginacao(
@@ -1643,7 +1643,7 @@ public interface IControladorArrecadacao {
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma,
 			String[] idsDocumentosTipos,
             String valorPagamentoInicial, 
-            String valorPagamentoFinal ) throws ControladorException;
+            String valorPagamentoFinal) throws ControladorException;
 
 	/**
 	 * Filtra a quantidade de pagamento historicos do avio bancario
@@ -1783,7 +1783,7 @@ public interface IControladorArrecadacao {
 			String[] idsPagamentosSituacoes, String[] idsDebitosTipos,
 			String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
             String valorPagamentoInicial,
-            String valorPagamentoFinal)
+            String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder)
 			throws ControladorException;
 
 	/**
@@ -1886,7 +1886,7 @@ public interface IControladorArrecadacao {
 			String[] idsPagamentosSituacoes, String[] idsDebitosTipos,
 			String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
             String valorPagamentoInicial,
-            String valorPagamentoFinal)
+            String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder)
 			throws ControladorException;
 
 	/**
@@ -1935,7 +1935,7 @@ public interface IControladorArrecadacao {
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma,
 			String[] idsDocumentosTipos,
             String valorPagamentoInicial, 
-            String valorPagamentoFinal) throws ControladorException;
+            String valorPagamentoFinal, String[] idsCategoria, String[] idsEsferaPoder) throws ControladorException;
 
 	/**
 	 * Filtra a quantiadade dos Pagamento Historicos da Localidade
@@ -1959,14 +1959,14 @@ public interface IControladorArrecadacao {
 			String periodoPagamentoFim, Date dataPagamentoInicial,
 			Date dataPagamentoFinal, String[] idsPagamentosSituacoes,
 			String[] idsDebitosTipos, String[] idsArrecadacaoForma,
-			String[] idsDocumentosTipos) throws ControladorException;
+			String[] idsDocumentosTipos,String[] idsCategoria, String[] idsEsferaPoder) throws ControladorException;
 
 	public Integer verificarExistenciaGuiaDevolucao(Integer idGuiaDevolucao)
 			throws ControladorException;
 
 	/**
-	 * Pesquisa os avisos bancários para o relatório através das opções
-	 * selecionadas no Filtrar Aviso Bancário
+	 * Pesquisa os avisos bancÃ¡rios para o Relatório através das opções
+	 * selecionadas no Filtrar Aviso BancÃ¡rio
 	 * 
 	 * @author Rafael Corrêa
 	 * @date 04/09/06
@@ -1980,7 +1980,7 @@ public interface IControladorArrecadacao {
 			throws ControladorException;
 
 	/**
-	 * Pesquisa os avisos deduções de um aviso bancário para o relatório através
+	 * Pesquisa os avisos deduções de um aviso bancário para o Relatório através
 	 * do id do aviso bancário
 	 * 
 	 * @author Rafael Corrêa
@@ -1994,8 +1994,8 @@ public interface IControladorArrecadacao {
 			Integer idAvisoBancario) throws ControladorException;
 
 	/**
-	 * Pesquisa os avisos acertos de um aviso bancário para o relatório através
-	 * do id do aviso bancário
+	 * Pesquisa os avisos acertos de um aviso bancário para o Relatório através
+	 * do id do aviso bancério
 	 * 
 	 * @author Rafael Corrêa
 	 * @date 05/09/06
@@ -2011,7 +2011,7 @@ public interface IControladorArrecadacao {
 	 * 
 	 * Pesquisa dos dados diários da arrecadação
 	 * 
-	 * [UC0333] Filtrar Dados Diários da Arrecadação
+	 * [UC0333] Filtrar Dados Diários da Arrecadaçção
 	 * 
 	 * @author Rafael Santos
 	 * @date 05/09/2006
@@ -2050,7 +2050,7 @@ public interface IControladorArrecadacao {
 	 * @param filtroArrecadadorMovimento
 	 * @param numero
 	 *            de páginas para paginação
-	 * @return Uma coleçao com os movimentos selecionados
+	 * @return Uma coleção com os movimentos selecionados
 	 * @throws ControladorException
 	 */
 	public Collection<ArrecadadorMovimento> retornarColecaoMovimentoArrecadadores(
@@ -2059,8 +2059,8 @@ public interface IControladorArrecadacao {
 			String movimentoAbertoFechado) throws ControladorException;
 
 	/**
-	 * Pesquisa os dados da Guia de Pagamento necessários para o relatório
-	 * através do id da Guia de Pagamento
+	 * Pesquisa os dados da Guia de Pagamento necessários para o Relatório
+	 * atravÃ©s do id da Guia de Pagamento
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 03/10/06
@@ -2073,8 +2073,8 @@ public interface IControladorArrecadacao {
 			String[] ids) throws ControladorException;
 
 	/**
-	 * Pesquisa os dados da Guia de Devolução necessários para o relatório
-	 * através do id da Guia de Devolução
+	 * Pesquisa os dados da Guia de devolução necessários para o Relatório
+	 * através do id da Guia de devolução
 	 * 
 	 * @author Ana Maria
 	 * @date 05/10/06
@@ -2126,7 +2126,7 @@ public interface IControladorArrecadacao {
 			String[] idsPagamentosSituacoes, String[] idsDebitosTipos,
 			String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
             String valorPagamentoInicial,
-            String valorPagamentoFinal)
+            String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder)
 			throws ControladorException;
 
 	/**
@@ -2274,7 +2274,7 @@ public interface IControladorArrecadacao {
 			String[] idsPagamentosSituacoes, String[] idsDebitosTipos,
 			String[] idsArrecadacaoForma, String[] idsDocumentosTipos,
             String valorPagamentoInicial,
-            String valorPagamentoFinal)
+            String valorPagamentoFinal,String[] idsCategoria, String[] idsEsferaPoder)
 			throws ControladorException;
 
 	/**
@@ -2306,7 +2306,7 @@ public interface IControladorArrecadacao {
 			throws ControladorException;
 
 	/**
-	 * Pesquisa o endereço de correspondência do cliente pelo seu id fazendo os
+	 * Pesquisa o endereço de correspondância do cliente pelo seu id fazendo os
 	 * carregamentos necessários
 	 * 
 	 * [UC0255] Filtrar Pagamentos
@@ -2469,7 +2469,7 @@ public interface IControladorArrecadacao {
 	 * [UC0276] Encerrar Arrecadação do Mês
 	 * 
 	 * Para cada guia de pagamento transferida para o histórico atualiza o
-	 * indicador de que a guia de pagamento está no histórico.
+	 * indicador de que a guia de pagamento estão no histórico.
 	 * 
 	 * @author Pedro Alexandre
 	 * @date 09/01/2007
@@ -2606,7 +2606,7 @@ public interface IControladorArrecadacao {
 	/**
 	 * [UC0276] Encerrar Arrecadação do Mês
 	 * 
-	 * Metodo responsável pela transferência das contas, guias de pagamento,
+	 * Metodo responsâvel pela transferência das contas, guias de pagamento,
 	 * pagamentos e devoluções para o histórico.
 	 * 
 	 * @author Pedro Alexandre
@@ -2763,7 +2763,7 @@ public interface IControladorArrecadacao {
 			Integer idDebitoACobrar) throws ControladorException;
 
 	/**
-	 * Pesquisa os movimentos dos arrecadores para a geração do relatório
+	 * Pesquisa os movimentos dos arrecadores para a geração do Relatório
 	 * 
 	 * [UCXXXX] Acompanhar Movimento dos Arrecadadores
 	 * 
@@ -2847,7 +2847,7 @@ public interface IControladorArrecadacao {
 
 	/**
 	 * [UC0259] - Processar Pagamento com código de Barras [SB0008] - Alterar
-	 * Vencimento dos Itens do documento de cobrança Autor: Sávio Luiz
+	 * Vencimento dos Itens do documento de cobranÃ§a Autor: Sávio Luiz
 	 * Data:15/02/2006
 	 */
 
@@ -2935,7 +2935,7 @@ public interface IControladorArrecadacao {
 	public Collection<Integer> pesquisarIdsCategoria()	throws ControladorException ;
 
 	/**
-	 * Pesquisar pagamentos pelo aviso bancário
+	 * Pesquisar pagamentos pelo aviso bancÃ¡rio
 	 * 
 	 * @author Ana Maria
 	 * @date 11/06/2007
@@ -2948,7 +2948,7 @@ public interface IControladorArrecadacao {
 			FiltroPagamento filtroPagamento) throws ControladorException;
 	
 	/**
-	 * Pesquisar devoluções pelo aviso bancário
+	 * Pesquisar devoluÃ§Ãµes pelo aviso bancário
 	 * 
 	 * @author Ana Maria
 	 * @date 11/06/2007
@@ -3040,10 +3040,10 @@ public interface IControladorArrecadacao {
 
 	
 	/**
-	 * Obtém a representação númerica do código de barras de um pagamento de
+	 * ObtÃ©m a representação númerica do código de barras de um pagamento de
 	 * acordo com os parâmetros informados
 	 * 
-	 * [UC0229] Obter Representação Numérica do Código de Barras
+	 * [UC0229] Obter Representação Numérica do código de Barras
 	 * 
 	 * Formata a identificação do pagamento de acordo com o tipo de pagamento
 	 * informado
@@ -3079,7 +3079,7 @@ public interface IControladorArrecadacao {
 	 * Obtém a representação númerica do código de barras de um pagamento de
 	 * acordo com os parâmetros informados
 	 * 
-	 * [UC0229] Obter Representação Numérica do Código de Barras
+	 * [UC0229] Obter Representação Numérica do código de Barras
 	 * 
 	 * @author Pedro Alexandre,Hugo Amorim,Hugo Amorim
 	 * @date 20/04/2006,12/01/2010,10/03/2010
@@ -3156,7 +3156,7 @@ public interface IControladorArrecadacao {
     /**
      * Obtém a representação númerica do código de barras da Ficha de Compensação
      * 
-     * [UC0716] Obter Representação Numérica do Código de Barras da Ficha de Compensação
+     * [UC0716] Obter Representação Numérica do código de Barras da Ficha de Compensação
      * 
      * @author Vivianne Sousa
      * @date 12/11/2007
@@ -3174,9 +3174,9 @@ public interface IControladorArrecadacao {
                  throws ControladorException;
     
     /**
-     * Obtém a representação númerica do código de barras da Ficha de Compensação
+     * ObtÃ©m a representação númerica do código de barras da Ficha de Compensação
      * 
-     * [UC0716] Obter Representação Numérica do Código de Barras da Ficha de Compensação
+     * [UC0716] Obter Representação Numérica do código de Barras da Ficha de Compensação
      * 
      * @author Vivianne Sousa
      * @date 12/11/2007
@@ -3278,9 +3278,9 @@ public interface IControladorArrecadacao {
             throws ControladorException;
     
     /**
-	 * [UC0322] Inserir Guia de Devolução
+	 * [UC0322] Inserir Guia de devolução
 	 *
-	 * Quando for verificar a existência da conta, pesquisar também  no respectivo histórico no fluxo secundário
+	 * Quando for verificar a existência da conta, pesquisar tambÃ©m  no respectivo histórico no fluxo secundÃ¡rio
 	 *  [FS0008 - Verificar existência da conta]
 	 *
 	 * @author Raphael Rossiter
@@ -3293,7 +3293,7 @@ public interface IControladorArrecadacao {
 		throws ControladorException ;
 	
 	/**
-	 * [UC0322] Inserir Guia de Devolução
+	 * [UC0322] Inserir Guia de devolução
 	 *
 	 * @author Raphael Rossiter
 	 * @date 14/04/2008
@@ -3306,11 +3306,11 @@ public interface IControladorArrecadacao {
 		throws ControladorException;
 	
 	/**
-	 * [UC0322] Inserir Guia de Devolução
+	 * [UC0322] Inserir Guia de devolução
 	 * 
-	 * [FS0014] - Verificar imóvel do débito a cobrar
+	 * [FS0014] - Verificar imóvel do Débito a cobrar
 	 * 
-	 * [FS0015] - Verificar localidade do débito a cobrar
+	 * [FS0015] - Verificar localidade do Débito a cobrar
 	 *
 	 * @author Raphael Rossiter
 	 * @date 14/04/2008
@@ -3324,7 +3324,7 @@ public interface IControladorArrecadacao {
 		Integer idLocalidade, OrdemServico ordemServico) throws ControladorException ;
 	
 	/**
-	 * [UC0322] Inserir Guia de Devolução
+	 * [UC0322] Inserir Guia de devolução
 	 *
 	 * @author Raphael Rossiter
 	 * @date 14/04/2008
@@ -3337,7 +3337,7 @@ public interface IControladorArrecadacao {
 		throws ControladorException;
 	
 	/**
-	 * [UC0322] Inserir Guia de Devolução
+	 * [UC0322] Inserir Guia de devolução
 	 *
 	 * @author Raphael Rossiter
 	 * @date 15/04/2008
@@ -3352,7 +3352,7 @@ public interface IControladorArrecadacao {
 			Integer idGuiaPagamento) throws ControladorException ;
 	
 	/**
-	 * [UC0322] Inserir Guia de Devolução
+	 * [UC0322] Inserir Guia de devolução
 	 *
 	 * @author Raphael Rossiter
 	 * @date 15/04/2008
@@ -3389,7 +3389,7 @@ public interface IControladorArrecadacao {
 	 /**
      * [UC0823] Atualiza Ligação de Água de Ligado em Análise para Ligado
      * 
-     * Seleciona a lista de imóveis que esteja com a situação de água ligado em análise.
+     * Seleciona a lista de imóveis que esteja com a situação de Água ligado em Análise.
      * @author Yara Taciane
      * @date 23/05/2008
      */
@@ -3399,7 +3399,7 @@ public interface IControladorArrecadacao {
 	/**
 	 * [UC0823] Atualiza Ligação de Água de Ligado em Análise para Ligado.
 	 * 
-	 *  Este caso de uso permite atualizar a situação de água de ligado em análise para ligado.
+	 *  Este caso de uso permite atualizar a situação de Água de ligado em Análise para ligado.
 	 * 	Este caso de uso deve ser processado após o encerramento da arrecadação.
 	 * 
 	 * @author Yara Taciane
@@ -3529,7 +3529,7 @@ public interface IControladorArrecadacao {
     		Integer numeroSequecialArquivoRetornoFichaComp, Integer idArrecadador) throws ControladorException ;
     
 	/**
-	 * [UC0333] Consultar Dados Diários da Arrecadação
+	 * [UC0333] Consultar Dados Diá¡rios da Arrecadação
 	 * 
 	 * Metodo para filtrar os dados diarios para qualquer aba da funcionalidade
 	 * 
@@ -3546,7 +3546,7 @@ public interface IControladorArrecadacao {
 	
 	/**
 	 * 
-	 * [UC0333] Consultar Dados Diários da Arrecadação
+	 * [UC0333] Consultar Dados DiÃ¡rios da Arrecadação
 	 *
 	 * Verificar se existe dados diarios da arrecadacao de acordo com o filtro 
 	 * passado
@@ -3569,11 +3569,11 @@ public interface IControladorArrecadacao {
 	 * 
 	 * [UC0265] Inserir Pagamentos
 	 * 
-	 * Pesquisa o débito a cobrar do imóvel informado pelo usuário
+	 * Pesquisa o Débito a cobrar do imóvel informado pelo usuário
 	 * 
-	 * [FS0024] - Verificar existência do débito a cobrar
+	 * [FS0024] - Verificar existência do Débito a cobrar
 	 * 
-	 * @author Rômulo Aurélio
+	 * @author Rómulo Aurélio
 	 * @date 30/01/2009
 	 * 
 	 * @param idImovel
@@ -3588,11 +3588,11 @@ public interface IControladorArrecadacao {
 		 * 
 		 * [UC0265] Inserir Pagamentos
 		 * 
-		 * Pesquisa o débito a cobrar do imóvel informado pelo usuário
+		 * Pesquisa o Débito a cobrar do imóvel informado pelo usuário
 		 * 
-		 * [FS0024] - Verificar existência do débito a cobrar
+		 * [FS0024] - Verificar existência do Débito a cobrar
 		 * 
-		 * @author Rômulo Aurélio
+		 * @author Rómulo Aurélio
 		 * @date 30/01/2009
 		 * 
 		 * @param idImovel
@@ -3609,13 +3609,13 @@ public interface IControladorArrecadacao {
 		 * 
 		 * [UC0265] Inserir Pagamentos
 		 * 
-		 * Verifica a existência de débito a cobrar com o tipo de débito e o imóvel
+		 * Verifica a existência de Débito a cobrar com o tipo de Débito e o imóvel
 		 * informados
 		 * 
-		 * [FS0016] Verificar existência de débito a cobrar com tipo de débito
+		 * [FS0016] Verificar existência de Débito a cobrar com tipo de Débito
 		 * informado
 		 * 
-		 * @author Rômulo Aurélio
+		 * @author Rómulo Aurélio
 		 * @date 30/01/2009
 		 * 
 		 * @param tipoDebito
@@ -3638,7 +3638,7 @@ public interface IControladorArrecadacao {
 		/**
 		  * [UC0146] Manter Conta
 		  * 
-		  * FS0028 - Verificar parâmetro consulta e débito automático
+		  * FS0028 - Verificar parÃ¢metro consulta e Débito Automático
 		  * @return
 		  * @throws ErroRepositorioException
 		  */
@@ -3720,7 +3720,7 @@ public interface IControladorArrecadacao {
 				throws ControladorException;
 		
 		/**
-		 * [UC0978] Pesquisa Relatório de Pagamento para Entidades Beneficentes Analítico
+		 * [UC0978] Pesquisa Relatório de Pagamento para Entidades Beneficentes AnalÃ­tico
 		 * 
 		 * @author Daniel Alves
 		 * @data   26/01/2010
@@ -3738,7 +3738,7 @@ public interface IControladorArrecadacao {
 				throws ControladorException;
 		
 		/**
-		 * [UC0978] Pesquisa Relatório de Pagamento para Entidades Beneficentes Sintético
+		 * [UC0978] Pesquisa Relatório de Pagamento para Entidades BeneficentesSintético
 		 * 
 		 * @author Daniel Alves
 		 * @data   26/01/2010
@@ -3777,7 +3777,7 @@ public interface IControladorArrecadacao {
 		
 		
 		/**
-		 * [UC0927]  Confirmar Cartão de Crédito/Débito
+		 * [UC0927] Â– Confirmar Cartão de crédito/Débito
 		 *
 		 * @author Raphael Rossiter
 		 * @date 18/01/2010
@@ -3789,10 +3789,10 @@ public interface IControladorArrecadacao {
 		public Integer pesquisarContaBancaria(Short codigoAgente) throws ControladorException ;
 		
 		/**
-		 * [UC0977] - Registrar Movimento Cartão de Crédito
+		 * [UC0977] - Registrar Movimento Cartão de crédito
 		 * 
-		 * [FS0001  Verificar existência do arrecadador]
-		 * [FS0002  Verificar arrecadação forma cartão crédito]
+		 * [FS0001 Â– Verificar existência do arrecadador]
+		 * [FS0002 Â– Verificar arrecadação forma cartão crédito]
 		 *
 		 * @author Raphael Rossiter
 		 * @date 26/01/2010
@@ -3805,7 +3805,7 @@ public interface IControladorArrecadacao {
 			throws ControladorException ;
 		
 		/**
-		 * [UC0977] - Registrar Movimento Cartão de Crédito
+		 * [UC0977] - Registrar Movimento cartão de crédito
 		 *
 		 * @author Raphael Rossiter
 		 * @date 29/01/2010
@@ -3839,7 +3839,7 @@ public interface IControladorArrecadacao {
 		 * Autor: Sávio Luiz Data: 30/01/2006
 		 * 
 		 * Caso a descrição de Ocorrencia venha nula então recupera o código
-		 * registro da linha senão então seta o valor de código registro para 'C'
+		 * registro da linha seNão entÃ£o seta o valor de código registro para 'C'
 		 */
 		public Object distribuirdadosRegistroMovimentoArrecadador(String linha,
 				String descricaoOcorrencia) throws ControladorException;
@@ -3847,7 +3847,7 @@ public interface IControladorArrecadacao {
 		/**
 		 * [UC0259] - Processar Pagamento com código de Barras
 		 * 
-		 * [SB0019]  Gerar Débitos/Créditos Parcelas Antecipadas 
+		 * [SB0019] Â– Gerar Débitos/Créditos Parcelas Antecipadas 
 		 *
 		 * @author Raphael Rossiter
 		 * @date 12/04/2010
@@ -3860,9 +3860,9 @@ public interface IControladorArrecadacao {
 				Usuario usuarioLogado) throws ControladorException ;
 		
 		/**
-		 * [UC0259]  Processar Pagamento com Código de Barras
+		 * [UC0259] Â– Processar Pagamento com código de Barras
 		 * 
-		 * [SB0019]  Gerar Débitos/Créditos Parcelas Antecipadas.
+		 * [SB0019] Â– Gerar Débitos/Créditos Parcelas Antecipadas.
 		 *
 		 * @author Raphael Rossiter
 		 * @date 19/04/2010
@@ -3875,9 +3875,9 @@ public interface IControladorArrecadacao {
 		throws ControladorException ;
 		
 		/**
-		 * [UC0259]  Processar Pagamento com Código de Barras
+		 * [UC0259] Â– Processar Pagamento com código de Barras
 		 * 
-		 * [SB0019]  Gerar Débitos/Créditos Parcelas Antecipadas. 
+		 * [SB0019] Â– Gerar Débitos/Créditos Parcelas Antecipadas. 
 		 *
 		 * @author Raphael Rossiter
 		 * @date 19/04/2010
@@ -3910,13 +3910,13 @@ public interface IControladorArrecadacao {
 				String[] idsDebitosTipos, String[] idsArrecadacaoForma,
 				String[] idsDocumentosTipos,
 	            String valorPagamentoInicial, 
-	            String valorPagamentoFinal ) throws ControladorException;
+	            String valorPagamentoFinal) throws ControladorException;
 		
 		/**
 		 * [UC0322] Inserir Guia Devolucao.
-		 * 		[FS0023] Verificar crédito a realizar. Verificarasds 
+		 * 		[FS0023] Verificar crédito a realizar. Â–Verificarasds 
 		 *
-		 * [UC0194] Inserir Crédito a realizar.
+		 * [UC0194] Inserir crédito a realizar.
 		 * 		[FS0013] Verificar crédito a realizar. 
 		 *
 		 * @author Hugo Leonardo
@@ -3930,9 +3930,9 @@ public interface IControladorArrecadacao {
 		
 		/**
 		 * [UC0322] Inserir Guia Devolucao.
-		 * 		[FS0023] Verificar crédito a realizar histórico.Verificara
+		 * 		[FS0023] Verificar crédito a realizar histórico.Â–Verificara
 		 *
-		 *	[UC0194] Inserir Crédito a realizar.
+		 *	[UC0194] Inserir crédito a realizar.
 		 * 		[FS0013] Verificar crédito a realizar histórico.
 		 *
 		 * @author Hugo Leonardo
@@ -3945,8 +3945,8 @@ public interface IControladorArrecadacao {
 			throws ControladorException;
 		
 		/**
-		 * [UC0194] Inserir Crédito a realizar.
-		 * 		[FS0013] Verificar Guia devolução. Verificarasds 
+		 * [UC0194] Inserir crédito a realizar.
+		 * 		[FS0013] Verificar Guia devolução. Â–Verificarasds 
 		 *
 		 * @author Hugo Leonardo
 		 * @date 27/05/2010
@@ -3985,7 +3985,7 @@ public interface IControladorArrecadacao {
 				Integer numeroPagina) throws ControladorException ;
 		
 		/**
-		 * [UC0339] Consultar Dados Diários da Arrecadação
+		 * [UC0339] Consultar Dados DiÃ¡rios da Arrecadação
 		 *
 		 * @author Hugo Amorim
 		 * @date 29/06/2010
@@ -3995,7 +3995,7 @@ public interface IControladorArrecadacao {
 		public Date pesquisarDataProcessamentoMes(Integer anoMes) throws ControladorException;
 		
 		/**
-		 * [UC0322] Inserir Guia de Devolução
+		 * [UC0322] Inserir Guia de devolução
 		 *
 		 *
 		 * @author Fernando Fontelles
@@ -4010,7 +4010,7 @@ public interface IControladorArrecadacao {
 		 * 
 		 * [UC1043] Gerar Relatório Análise Pagamento Cartão Débito
 		 * 
-		 * 			-Validações
+		 * 			-ValidaÃ§Ãµes
 		 * 
 		 * @author Hugo Amorim
 		 * @since 21/07/2010
@@ -4071,7 +4071,7 @@ public interface IControladorArrecadacao {
 		public RegistroHelperFichaCompensacao distribuirDadosFichaCompensacao(String codigoBarras) throws ControladorException;
 
 		/**
-		 * [UC0339] Consultar Dados Diários da Arrecadação
+		 * [UC0339] Consultar Dados DiÃ¡rios da Arrecadação
 		 *
 		 * @author Mariana Victor
 		 * @date 01/02/2011
@@ -4094,7 +4094,7 @@ public interface IControladorArrecadacao {
 		/**
 		 * [UC0188] Manter Guia de Pagamento
 		 *
-		 * [FS0019]  Verificar bloqueio de guia de pagamento
+		 * [FS0019] Â– Verificar bloqueio de guia de pagamento
 		 * 
 		 * @author Mariana Victor
 		 * @date 27/04/2011
@@ -4105,7 +4105,7 @@ public interface IControladorArrecadacao {
 			throws ControladorException;
 		
 		/**
-		 * [UC 1215]  Gerar Relatório de Documentos não Aceitos
+		 * [UC 1215] Â– Gerar Relatório de Documentos Não Aceitos
 		 * 
 		 * @author Raimundo Martins
 		 *
@@ -4116,7 +4116,7 @@ public interface IControladorArrecadacao {
 				AvisoBancario avisoBancario, ArrecadacaoForma arrecadacaoForma) throws ControladorException;
 		
 		/**
-		 * [UC 1217]  Gerar Relatório de Transferencia de Pagamento
+		 * [UC 1217] Â– Gerar Relatório de Transferencia de Pagamento
 		 * 
 		 * @author Raimundo Martins
 		 *
@@ -4130,7 +4130,7 @@ public interface IControladorArrecadacao {
 		/**
 	     * [UC1214] Informar Acerto Documentos Não Aceitos
 		 * 
-		 * 3. O sistema identifica os pagamentos com documentos não aceitos 
+		 * 3. O sistema identifica os pagamentos com documentos Não aceitos 
 		 * 	 que foram gerados para um cliente fictício e
 		 *   junto com o filtro selecionado pelo usuário.
 		 * 
@@ -4148,7 +4148,7 @@ public interface IControladorArrecadacao {
 		/**
 	     * [UC1214] Informar Acerto Documentos Não Aceitos
 		 * 
-		 *  7.2.1. Total do Pagamento (PGMT _VLPAGAMENTO do pagamento doc. não aceito).
+		 *  7.2.1. Total do Pagamento (PGMT _VLPAGAMENTO do pagamento doc. Não aceito).
 		 * 
 		 * @author Mariana Victor
 		 * @date 22/08/2011
@@ -4183,9 +4183,9 @@ public interface IControladorArrecadacao {
 		/**
 		 * [UC1214] Informar Acerto Documentos Não Aceitos
 		 * 
-		 * Pesquisa o débito a cobrar do imóvel informado pelo usuário
+		 * Pesquisa o Débito a cobrar do imóvel informado pelo usuário
 		 * 
-		 * [FS0012] - Verificar existência do débito.
+		 * [FS0012] - Verificar existência do Débito.
 		 * 
 		 * @author Mariana Victor
 		 * @date 23/08/2011
@@ -4201,7 +4201,7 @@ public interface IControladorArrecadacao {
 		/**
 		 * [UC1214] Informar Acerto Documentos Não Aceitos
 		 * 
-		 * 10.	O usuário conclui o acerto dos pagamentos 
+		 * 10.	O usuÃ¡rio conclui o acerto dos pagamentos 
 		 * 
 		 * @author Mariana Victor
 		 * @date 24/08/2011
@@ -4305,7 +4305,7 @@ public interface IControladorArrecadacao {
 	            String valorPagamentoFinal) throws ControladorException;
 		
 		/**
-		 * [UC1253] Gerar Débito a Cobrar Contrato de Demanda Imóvel Residencial
+		 * [UC1253] Gerar Débito a Cobrar Contrato de Demanda imóvel Residencial
 		 * 
 		 * @author Rafael Pinto
 		 * @date 22/11/2011
@@ -4365,9 +4365,9 @@ public interface IControladorArrecadacao {
 	
 		/**
 		 * [UC0629] Consultar Arquivo Texto Leitura
-		 * [FS0018] Verificar não possibilidade de mudar a situação do arquivo
+		 * [FS0018] Verificar Não possibilidade de mudar a situação do arquivo
 		 * 
-		 * Verifica se existe rota subdividida com  situação  diferente de finalizada
+		 * Verifica se existe rota subdividida com  situção  diferente de finalizada
 		 * 
 		 * @author Nathalia Santos  
 		 * @date 21/03/2012
@@ -4377,7 +4377,7 @@ public interface IControladorArrecadacao {
 		
 		/**
 		 * [UC0629] Consultar Arquivo Texto Leitura
-		 * [FS0018] Verificar não possibilidade de mudar a situação do arquivo
+		 * [FS0018] Verificar Não possibilidade de mudar a situação do arquivo
 		 * 
 		 * Verifica se existe rota subdividida utilizada no gerar zip
 		 * 
@@ -4412,7 +4412,7 @@ public interface IControladorArrecadacao {
 		/**
 		 * 
 		 * [UC1349] Gerar Movimento de Débito Automático de Parcelamento por Cliente
-		 * [SB0003] Regerar arquivo TXT para um movimento de débito automático gerado anteriormente
+		 * [SB0003] Regerar arquivo TXT para um movimento de Débito Automático gerado anteriormente
 		 * 
 		 * @author Hugo Azevedo
 		 * @date 13/07/2012
@@ -4436,7 +4436,7 @@ public interface IControladorArrecadacao {
 		
 		/**
 		 * [ UC0932 ] - UC0932MonitorarLeiturasTransmitidas
-		 * Buscar Imagens Leitura Anormalidades do Imóvel
+		 * Buscar Imagens Leitura Anormalidades do imóvel
 		 * 
 		 * @author Carlos Chaves
 		 * @date 24/10/2012
@@ -4466,7 +4466,7 @@ public interface IControladorArrecadacao {
 		
 		/**
 		 * [ UC 1518 ] - Gerar Relatório dos Pagamentos Baixados Automaticamente
-		 * [ SB 0003 ] - Relatório Sintético
+		 * [ SB 0003 ] - RelatórioSintético
 		 * 
 		 * @author Davi Menezes
 		 * @date 12/07/2013
@@ -4524,31 +4524,31 @@ public interface IControladorArrecadacao {
 				Integer anoMesReferencia, Integer idBanco) throws ControladorException;
 
 		/**
-		 * [UC XXXX] - Processar amortiza��o de d�vida ativa
+		 * [UC XXXX] - Processar amortização de dívida ativa
 		 * 
 		 * Pesquisa a data do pagamento referente a guia de pagamento
 		 * 
-		 * @author Rafael Corr�a
+		 * @author Rafael Corrêa
 		 * @date 16/02/2014
 		 */
 		public Date pesquisarDataPagamentoDeGuiaPagamento(Integer idGuiaPagamento) throws ControladorException;
 		
 		/**
-		 * [UC XXXX] - Processar amortiza��o de d�vida ativa
+		 * [UC XXXX] - Processar amortização de dívida ativa
 		 * 
-		 * Pesquisa o pagamento referente ao d�bito a cobrar
+		 * Pesquisa o pagamento referente ao débito a cobrar
 		 * 
-		 * @author Rafael Corr�a
+		 * @author Rafael Corrêa
 		 * @date 16/02/2014
 		 */
 		public Pagamento pesquisarPagamentoDoDebitoACobrar(Integer idDebitoACobrar) throws ControladorException;
 		
 		/**
-		 * [UC XXXX] - Processar amortiza��o de d�vida ativa
+		 * [UC XXXX] - Processar amortização de dívida ativa
 		 * 
 		 * Pesquisa os pagamentos referentes a conta
 		 * 
-		 * @author Rafael Corr�a
+		 * @author Rafael Corrêa
 		 * @date 17/02/2014
 		 */
 		public Collection<Pagamento> pesquisarPagamentosClassificadosConta(Integer idConta) throws ControladorException;
@@ -4567,7 +4567,7 @@ public interface IControladorArrecadacao {
 		/**
 		 * [UC0113] - Faturar Grupo de Faturamento
 		 * 
-		 * @author Rafael Corr�a
+		 * @author Rafael Corrêa
 		 * @date 27/06/2014
 		 * 
 		 * @param idCreditoARealizar
@@ -4578,9 +4578,9 @@ public interface IControladorArrecadacao {
 				Integer idCreditoARealizar) throws ControladorException;
 		
 		/**
-		 * [UC1668] Atualizar Dados nas Tabelas Resumos Gerenciais Arrecada��o
+		 * [UC1668] Atualizar Dados nas Tabelas Resumos Gerenciais Arrecadação
 		 * 
-		 * @author F�bio Aguiar
+		 * @author Fábio Aguiar
 		 * 
 		 * @date 29/01/2014
 		 * 
@@ -4592,9 +4592,9 @@ public interface IControladorArrecadacao {
 		public List<?> obterCarnesParcelamento(String idParcelamento)  throws ControladorException;
 
 		/**
-		 * [UC1678] Registrar Movimento Cart�o Cr�dito D�bito EEVD
+		 * [UC1678] Registrar Movimento Cartão Crédito Débito EEVD
 		 * 
-		 * @author Andr� Miranda
+		 * @author André Miranda
 		 * @date 10/04/2015
 		 * 
 		 * @param idArrecadador
@@ -4604,4 +4604,158 @@ public interface IControladorArrecadacao {
 		 */
 		public void registrarMovimentoCartaoCreditoDebitoRede(Integer idArrecadador, Usuario usuario, BufferedReader buffer)
 				throws ControladorException;
+		
+		
+		/**
+		 * [UC1694] Relat�rio Previs�o/Pagamento Cart�o de Cr�dito
+		 * 
+		 * @author Joao Pedro Medeiros
+		 * @date 10/10/2015
+		 * 
+		 * @param dataVencimentoInicial
+		 * @param dataVencimentoFinal
+		 * @param idCliente
+		 * @throws ControladorException
+		 */
+		public List<?> obterRelatorioAnaliticoPrevisaoPagamentoCartaoCredito(Date dataVencimentoInicial, Date dataVencimentoFinal,
+			String idCliente) throws ControladorException;
+		
+		/**
+		 * [UC1691] Confirmar Pagamento Cartão de Crédito
+		 * 
+		 * Pesquisa a coleção de guia de pagamento que pendentes.
+		 * 
+		 * @author Jean Varela
+		 * @date 23/09/2015
+		 * 
+		 * @throws ControladorException 
+		 * @return guias de pagamentos pendentes
+		 */
+		public Collection pesquisarGuiasPagamentoPendentes(Integer idClienteArrecadador,Date dataVencimentoGuiaPagamento, Integer idDebitoCreditoSituacao)
+				throws ControladorException;
+		
+		/**
+		 * [UC1691] Confirmar Pagamento Cartão de Crédito
+		 * 
+		 * Pesquisa o percentual de tarifa cobrado pelo cliente arrecadador (ACTF_PCTARIFA da tabela ARRECADADOR_CONTRATO_TAR).
+		 * 
+		 * @author Jean Varela
+		 * @date 23/09/2015
+		 * 
+		 * @throws ControladorException 
+		 * @return percentual de tarifa cobrado pelo cliente arrecadador
+		 */
+		public BigDecimal pesquisarPercentualTarifaArrecadador(Integer idClienteArrecadador, Integer idArrecadacaoForma) throws ControladorException;
+		
+		/**
+		 * [UC1691] Confirmar Pagamento Cartão de Crédito
+		 * 
+		 * Inclui um aviso bancário na tabela AVISO_BANCARIO.
+		 * 
+		 * [SB0001] - Incluir Aviso Bancário
+		 * 
+		 * @author Jean Varela
+		 * @date 28/09/2015
+		 * 
+		 * @param dataVencimento, valorCredito, valorTotalGuias, valorTarifa, idClienteArrecadado
+		 * @return identificador do aviso bancário inserido. 
+		 */
+		public Integer inserirAvisoBancario(Date dataVencimento,BigDecimal valorCredito, BigDecimal valorTotalGuias,
+                BigDecimal  valorTarifa, Integer idClienteArrecadador,Integer idArrecadacaoForma) throws ControladorException;
+		
+		/**
+		 * [UC1691] Confirmar Pagamento Cartão de Crédito
+		 * 
+		 * @author Jean Varela
+		 * @date 28/09/2015
+		 */	
+		public Integer inserirDevolucaoParaGuiaDevolucao(Date dataDevolucao,BigDecimal valorTarifa, Integer idAvisoBancario,
+                Integer idGuiaDevolucao,Integer idClienteArrecador,GuiaPagamento guiaPagamento) throws ControladorException;
+		
+		/**
+		 * [UC1691] Confirmar Pagamento Cartão de Crédito
+		 * 
+		 * Inclui uma guia de devolução para uma guia de pagamento.  
+		 * 
+		 * @author Jean Varela
+		 * @date 28/09/2015
+		 * 
+		 * @param idGuiaPagamento, idClienteArrecadador, valorTarifa, usuarioLogado.
+		 * @return identificador da guia de devolução de uma guia de pagamento. 
+		 */
+		public Integer inserirGuiaDevolucao(GuiaPagamento guiaPagamento,Integer idClienteArrecadador,BigDecimal valorTarifa, Usuario usuarioLogado) throws ControladorException;
+
+		/**
+		 * [UC1691] Confirmar Pagamento Cartão de Crédito
+		 * 
+		 * Inclui um pagamento para uma guia de pagamento.  
+		 * 
+		 * @author Jean Varela
+		 * @date 28/09/2015
+		 * 
+		 * @param valorDebito, dataPagamento, idGuiaPagamento, idAvisoBancario, idClienteArrecadador.
+		 * @return identificador do pagamento de uma guia de pagamento. 
+		 */
+		public Integer inserirPagamentoGuiaPagamento(GuiaPagamento guiaPagamento, Integer idAvisoBancario, Integer idArrecadador) throws ControladorException;
+		
+		/**
+		 * [UC1691] Confirmar Pagamento Cartão de Crédito
+		 * 
+		 * Pesquisa um aviso bancário.
+		 * 
+		 * @author Jean Varela
+		 * @date 06/10/2015
+		 * 
+		 * @param idClienteArrecadador,idArrecadacaoForma,dataLancamento
+		 * @return um aviso bancario
+		 */
+		public AvisoBancario pesquisarAvisoBancario(Integer idClienteArrecadador, Integer idArrecadacaoForma, Date dataLancamento) throws ControladorException;
+		
+		/**
+		 * [UC1691] Confirmar Pagamento Cartão de Crédito
+		 * 
+		 * Pesquisa a quantidade de guias de pagamentos que foram pagas.
+		 * 
+		 * @author Jean Varela
+		 * @date 06/10/2015
+		 * 
+		 * @param idCliente,idVencimento
+		 * @return quantidade de guia de pagamento que foram pagas
+		 */
+		public Integer pesquisarQuantidadeGuiasPagamentoPagas(Integer idCliente, Date dataVencimento) throws ControladorException;
+		
+		/**
+		 * [UC0927] - Confirmar Cart�o de Cr�dito/D�bito
+		 *
+		 * @author Vivianne Sousa
+		 * @date 07/05/2015
+		 * 
+		 * @param idCliente Id do cliente arrecadador ou null
+		 */
+		public Arrecadador pesquisarArrecadadorCartao(Integer idCliente, Integer idArrecadacaoForma) throws ControladorException;
+		
+		/**
+		 * [UC1694] Relat�rio Previs�o/Pagamento Cart�o de Cr�dito
+		 * 
+		 * @author Joao Pedro Medeiros
+		 * @date 21/10/2015
+		 * 
+		 * @param dataVencimentoInicial
+		 * @param dataVencimentoFinal
+		 * @param idCliente
+		 * @throws ControladorException
+		 */
+		public List<?> pesquisarDadosRelatorioCartaoCreditoSintetico(Date dataVencimentoInicial, Date dataVencimentoFinal,
+			String idCliente) throws ControladorException;
+		
+		
+		/**
+		 * 
+		 * @author Rodrigo Cabral
+		 * 
+		 * @date 03/11/2015
+		 * 
+		 * @throws ControladorException
+		 */
+		public void gerarResumosArrecadacaoPentaho(int idFuncionalidadeIniciada) throws ControladorException;
 }

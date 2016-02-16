@@ -12,6 +12,8 @@
 
     <script language="JavaScript" src="<bean:message key="caminho.js"/>util.js" ></script>
       <%--Este script exibe várias imagens na página--%>
+      
+    
 
       <script language="JavaScript">
      
@@ -177,10 +179,37 @@
           function mensagemVisualizacaoRA(form){              
               alert('ok1');	
               alert(form);
-        	  alert('ok2'); 
-              	          
+        	  alert('ok2');               	          
           }
-    </script>
+          
+          (function() {
+        	  var chaveAnalytics;
+
+	      	  <%if("CAER".equals(getServletContext().getAttribute("nomeEmpresa"))){ %>
+	      	  chaveAnalytics = 'UA-60594060-8';
+	      	  <% } else if ("SAAE".equals(getServletContext().getAttribute("nomeEmpresa"))){ %>
+	      	  chaveAnalytics = 'UA-60594060-10';
+	      	  <% } else if ("CAEMA".equals(getServletContext().getAttribute("nomeEmpresa"))){ %>
+	      	  chaveAnalytics = 'UA-60594060-7';
+	      	  <% } else if ("COSAMA".equals(getServletContext().getAttribute("nomeEmpresa"))){ %>
+	      	  chaveAnalytics = 'UA-60594060-9';
+	      	  <% } %>
+
+	      	  if (chaveAnalytics) {
+	      	    (function(i,s,o,g,r,a,m){
+	      	    	i['GoogleAnalyticsObject']=r;
+	      	    	i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();
+	      	    	a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+	      	    	a.async=1;
+	      	    	a.src=g;
+	      	    	m.parentNode.insertBefore(a,m)
+	      	    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	      	    ga('create', chaveAnalytics, 'auto');
+	      	    ga('send', 'pageview');
+	      	  }    	  
+           })();
+   </script>
 
 
 <%@ include file="/jsp/util/titulo.jsp"%>
@@ -202,7 +231,7 @@
         <body leftmargin="5" topmargin="5">
 <%    }    %>
 
-    <%@ include file="/jsp/util/cabecalho.jsp" %>
+    <%@ include file="/jsp/util/cabecalho.jsp" %> 
     <%@ include file="/jsp/util/menu.jsp" %>
 
     <table width="770" border="0" cellspacing="5" cellpadding="0">

@@ -122,6 +122,11 @@ public class RelatorioComparativoFatArrecExpurgado extends TarefaRelatorio {
 	
 	int quantidadeRegistros;
 
+	@Deprecated
+	public RelatorioComparativoFatArrecExpurgado() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

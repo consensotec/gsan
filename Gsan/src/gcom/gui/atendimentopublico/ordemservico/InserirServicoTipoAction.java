@@ -88,7 +88,6 @@ import gcom.seguranca.acesso.usuario.Usuario;
 import gcom.util.Util;
 import gcom.util.filtro.ParametroSimples;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -211,6 +210,8 @@ public class InserirServicoTipoAction extends GcomAction {
 		servicoTipo.setIndicadorIncluirDebito(Short.parseShort(form.getIndicadorIncluirDebito()));
 
 		servicoTipo.setIndicadorCobrarJuros(Short.parseShort(form.getIndicadorCobrarJuros()));
+		
+		servicoTipo.setIndicadorServicoCobranca(Short.parseShort(form.getIndicadorServicoCobranca()));
 		
 		//Erivan - indicadorCorrecaoAnormalidade
 		if(form.getIndicadorCorrecaoAnormalidade() == null || form.getIndicadorCorrecaoAnormalidade().equals("")){

@@ -92,6 +92,8 @@ import gcom.seguranca.acesso.GrupoPermissaoEspecial;
 import gcom.seguranca.acesso.GrupoPermissaoEspecialPK;
 import gcom.seguranca.acesso.Operacao;
 import gcom.seguranca.acesso.PermissaoEspecial;
+import gcom.seguranca.parametrosistema.FiltroParametroSistema;
+import gcom.seguranca.parametrosistema.ParametroSistema;
 import gcom.tarefa.TarefaRelatorio;
 import gcom.util.ConstantesJNDI;
 import gcom.util.ConstantesSistema;
@@ -111,6 +113,7 @@ import gcom.util.email.ErroEmailException;
 import gcom.util.email.ServicosEmail;
 import gcom.util.filtro.ParametroSimples;
 import gcom.util.filtro.ParametroSimplesDiferenteDe;
+import gcom.util.filtro.ParametroSimplesIn;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -203,7 +206,7 @@ public class ControladorUsuarioSEJB implements SessionBean {
 	 * 
 	 * @return O valor de controladorUtil
 	 */
-	private ControladorUtilLocal getControladorUtil() {
+	public ControladorUtilLocal getControladorUtil() {
 
 		ControladorUtilLocalHome localHome = null;
 		ControladorUtilLocal local = null;
@@ -1493,10 +1496,15 @@ public class ControladorUsuarioSEJB implements SessionBean {
 			// Gera senha aleatoria
 
 //			String senha = Util.geradorSenha(10);
+			ParametroSistema parSistema = getControladorUtil().pesquisarParametrosDoSistemaNovo(ParametroSistema.SENHA_PADRAO);
 
 			String senha = "gcom";
+			if(parSistema != null && parSistema.getValorParametro() != null && !parSistema.getValorParametro().equals("")){
+				senha = parSistema.getValorParametro();
+			}
 			
 			try {
+				
 				senha = Criptografia.encriptarSenha(senha);
 			} catch (ErroCriptografiaException e) {
 				sessionContext.setRollbackOnly();

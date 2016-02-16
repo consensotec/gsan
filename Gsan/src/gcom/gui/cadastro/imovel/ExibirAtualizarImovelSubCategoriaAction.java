@@ -212,7 +212,7 @@ public class ExibirAtualizarImovelSubCategoriaAction extends GcomAction {
 			Short qtdUniadePrivativa = null;
 			Short qtdUniadeColetiva = null;
 			
-			//QUANTIDADE DE UNIDADES COM INSTALAÇÕES PRIVATIVAS
+/*			//QUANTIDADE DE UNIDADES COM INSTALAÇÕES PRIVATIVAS
 			if (inserirImovelActionForm.get("qtdUnidadePrivativa") != null &&
 				!(inserirImovelActionForm.get("qtdUnidadePrivativa").toString()).equals("")){
 				
@@ -227,7 +227,7 @@ public class ExibirAtualizarImovelSubCategoriaAction extends GcomAction {
 				qtdUniadeColetiva = new Short(inserirImovelActionForm.get(
 				"qtdUnidadeColetiva").toString()).shortValue();
 			}
-
+*/
 			FiltroCategoria filtroCategoria = new FiltroCategoria();
 			
 			filtroCategoria.adicionarParametro(new ParametroSimples(
@@ -670,9 +670,9 @@ public class ExibirAtualizarImovelSubCategoriaAction extends GcomAction {
 		}
 
 		inserirImovelActionForm.set("quantidadeEconomia", null);
-		inserirImovelActionForm.set("qtdUnidadePrivativa", null);
+/*		inserirImovelActionForm.set("qtdUnidadePrivativa", null);
 		inserirImovelActionForm.set("qtdUnidadeColetiva", null);
-		inserirImovelActionForm.set("idCategoria", "0");
+*/		inserirImovelActionForm.set("idCategoria", "0");
 		inserirImovelActionForm.set("idSubCategoria", "-1");
 		
 	}

@@ -3004,61 +3004,64 @@ public class ControladorAtendimentoPublicoSEJB implements SessionBean {
 		
 		try {
 			
-			Integer idPerfilHidrometro = repositorioAtendimentoPublico.pesquisarPerfilAssociadoHidrometroCapacidade(imovel, 
-				hidrometroInstalacaoHistorico.getHidrometro().getHidrometroCapacidade());
-			
-			if(idPerfilHidrometro != null){
-			
-				ImovelPerfil imovelPerfil = imovel.getImovelPerfil();			
+			if ( hidrometroInstalacaoHistorico != null && hidrometroInstalacaoHistorico.getHidrometro() != null ){
 				
-				PerfilAlteracaoTipo perfilAlteracaoTipoGrandeCliente = new PerfilAlteracaoTipo();
-				perfilAlteracaoTipoGrandeCliente.setId(PerfilAlteracaoTipo.ENQUADRAMENTO_GRANDE_CLIENTE);
+				Integer idPerfilHidrometro = repositorioAtendimentoPublico.pesquisarPerfilAssociadoHidrometroCapacidade(imovel, 
+					hidrometroInstalacaoHistorico.getHidrometro().getHidrometroCapacidade());
 				
-				PerfilAlteracaoTipo perfilAlteracaoTipoCorporativo = new PerfilAlteracaoTipo();
-				perfilAlteracaoTipoCorporativo.setId(PerfilAlteracaoTipo.ENQUADRAMENTO_CORPORATIVO);
+				if(idPerfilHidrometro != null){
 				
-				FiltroImovelPerfil filtro = new FiltroImovelPerfil();
-				filtro.adicionarParametro(new ParametroSimples(FiltroImovelPerfil.ID, idPerfilHidrometro));
-				Collection colecaoPerfil = getControladorUtil().pesquisar(filtro, ImovelPerfil.class.getName());
-				
-				if(!Util.isVazioOrNulo(colecaoPerfil)){
-				
-					ImovelPerfil imovelPerfilHidrometro = (ImovelPerfil) colecaoPerfil.iterator().next();				
+					ImovelPerfil imovelPerfil = imovel.getImovelPerfil();			
 					
-					if((imovelPerfil.getIndicadorGrandeConsumidor().equals(ConstantesSistema.NAO)
-					 && imovelPerfil.getIndicadorCorporativo().equals(ConstantesSistema.NAO))
-					 && imovelPerfilHidrometro.getIndicadorCorporativo().equals(ConstantesSistema.SIM)){					
-										
-						this.inserirImovelHistoricoPerfil(imovel, usuario, perfilAlteracaoTipoCorporativo, imovelPerfil, imovelPerfilHidrometro, 
-							idPerfilAlteracaoMotivo);					
-						
-						this.atualizarNovaSituacaoImovelPerfil(imovel, imovelPerfilHidrometro);
-						
-					}else if((imovelPerfil.getIndicadorGrandeConsumidor().equals(ConstantesSistema.NAO)
-						   && imovelPerfil.getIndicadorCorporativo().equals(ConstantesSistema.NAO))
-					       && imovelPerfilHidrometro.getIndicadorGrandeConsumidor().equals(ConstantesSistema.SIM)){
-										
-						this.inserirImovelHistoricoPerfil(imovel, usuario, perfilAlteracaoTipoGrandeCliente, imovelPerfil, imovelPerfilHidrometro, 
-							idPerfilAlteracaoMotivo);					
-						
-						this.atualizarNovaSituacaoImovelPerfil(imovel, imovelPerfilHidrometro);						
-						
-					}else if(imovelPerfil.getIndicadorCorporativo().equals(ConstantesSistema.SIM)
-						  && imovelPerfilHidrometro.getIndicadorGrandeConsumidor().equals(ConstantesSistema.SIM)){
-						
-						this.inserirImovelHistoricoPerfil(imovel, usuario, perfilAlteracaoTipoGrandeCliente, imovelPerfil, imovelPerfilHidrometro, 
-							idPerfilAlteracaoMotivo);					
-						
-						this.atualizarNovaSituacaoImovelPerfil(imovel, imovelPerfilHidrometro);
+					PerfilAlteracaoTipo perfilAlteracaoTipoGrandeCliente = new PerfilAlteracaoTipo();
+					perfilAlteracaoTipoGrandeCliente.setId(PerfilAlteracaoTipo.ENQUADRAMENTO_GRANDE_CLIENTE);
 					
-					}else if(imovelPerfil.getIndicadorGrandeConsumidor().equals(ConstantesSistema.SIM)
-						  && imovelPerfilHidrometro.getIndicadorCorporativo().equals(ConstantesSistema.SIM)){
+					PerfilAlteracaoTipo perfilAlteracaoTipoCorporativo = new PerfilAlteracaoTipo();
+					perfilAlteracaoTipoCorporativo.setId(PerfilAlteracaoTipo.ENQUADRAMENTO_CORPORATIVO);
+					
+					FiltroImovelPerfil filtro = new FiltroImovelPerfil();
+					filtro.adicionarParametro(new ParametroSimples(FiltroImovelPerfil.ID, idPerfilHidrometro));
+					Collection colecaoPerfil = getControladorUtil().pesquisar(filtro, ImovelPerfil.class.getName());
+					
+					if(!Util.isVazioOrNulo(colecaoPerfil)){
+					
+						ImovelPerfil imovelPerfilHidrometro = (ImovelPerfil) colecaoPerfil.iterator().next();				
 						
-						this.inserirImovelHistoricoPerfil(imovel, usuario, perfilAlteracaoTipoCorporativo, imovelPerfil, imovelPerfilHidrometro, 
-							idPerfilAlteracaoMotivo);					
+						if((imovelPerfil.getIndicadorGrandeConsumidor().equals(ConstantesSistema.NAO)
+						 && imovelPerfil.getIndicadorCorporativo().equals(ConstantesSistema.NAO))
+						 && imovelPerfilHidrometro.getIndicadorCorporativo().equals(ConstantesSistema.SIM)){					
+											
+							this.inserirImovelHistoricoPerfil(imovel, usuario, perfilAlteracaoTipoCorporativo, imovelPerfil, imovelPerfilHidrometro, 
+								idPerfilAlteracaoMotivo);					
+							
+							this.atualizarNovaSituacaoImovelPerfil(imovel, imovelPerfilHidrometro);
+							
+						}else if((imovelPerfil.getIndicadorGrandeConsumidor().equals(ConstantesSistema.NAO)
+							   && imovelPerfil.getIndicadorCorporativo().equals(ConstantesSistema.NAO))
+						       && imovelPerfilHidrometro.getIndicadorGrandeConsumidor().equals(ConstantesSistema.SIM)){
+											
+							this.inserirImovelHistoricoPerfil(imovel, usuario, perfilAlteracaoTipoGrandeCliente, imovelPerfil, imovelPerfilHidrometro, 
+								idPerfilAlteracaoMotivo);					
+							
+							this.atualizarNovaSituacaoImovelPerfil(imovel, imovelPerfilHidrometro);						
+							
+						}else if(imovelPerfil.getIndicadorCorporativo().equals(ConstantesSistema.SIM)
+							  && imovelPerfilHidrometro.getIndicadorGrandeConsumidor().equals(ConstantesSistema.SIM)){
+							
+							this.inserirImovelHistoricoPerfil(imovel, usuario, perfilAlteracaoTipoGrandeCliente, imovelPerfil, imovelPerfilHidrometro, 
+								idPerfilAlteracaoMotivo);					
+							
+							this.atualizarNovaSituacaoImovelPerfil(imovel, imovelPerfilHidrometro);
 						
-						this.atualizarNovaSituacaoImovelPerfil(imovel, imovelPerfilHidrometro);
-					}				
+						}else if(imovelPerfil.getIndicadorGrandeConsumidor().equals(ConstantesSistema.SIM)
+							  && imovelPerfilHidrometro.getIndicadorCorporativo().equals(ConstantesSistema.SIM)){
+							
+							this.inserirImovelHistoricoPerfil(imovel, usuario, perfilAlteracaoTipoCorporativo, imovelPerfil, imovelPerfilHidrometro, 
+								idPerfilAlteracaoMotivo);					
+							
+							this.atualizarNovaSituacaoImovelPerfil(imovel, imovelPerfilHidrometro);
+						}				
+					}
 				}
 			}
 			
@@ -13454,9 +13457,12 @@ public class ControladorAtendimentoPublicoSEJB implements SessionBean {
 					linhaAcumulado = null;
 					if(iteBoletinsMedicaoAcumulado.hasNext()){
 						linhaAcumulado = (Object[]) iteBoletinsMedicaoAcumulado.next();
+						
+						quantidadeItemAcumulada = 0;
 						if(linhaAcumulado[2] != null){
 							quantidadeItemAcumulada = (Integer) linhaAcumulado[2]; 
 						}
+						valorAcumuladoPeriodo =  new BigDecimal("0.00");
 						if(linhaAcumulado[3] != null){
 							valorAcumuladoPeriodo = (BigDecimal) linhaAcumulado[3];
 						}
@@ -13503,6 +13509,7 @@ public class ControladorAtendimentoPublicoSEJB implements SessionBean {
 						valorOrcado = (BigDecimal) linha[7];
 					}
 
+					valorMedidoPeriodo = new BigDecimal("0.00");
 					if(linha[8] != null){
 						valorMedidoPeriodo = (BigDecimal) linha[8];
 					}
@@ -16178,5 +16185,23 @@ public class ControladorAtendimentoPublicoSEJB implements SessionBean {
 			throw new EJBException(ex);
 		}
 	}
+	
+	/**
+     * Método responsável por<br>
+     * pesquisar constante que relaciona funcionalidades ao tipo de serviço<br>
+     * @author Joao Pedro Medeiros
+     * @since 15/12/2015
+     * @param servicoTipoId
+     * @return Integer
+     * @throws ControladorException
+     */
+    public Integer pesquisarConstanteFuncionalidadeTipoServico(Integer servicoTipoId)
+    		throws ControladorException {
+    	try{
+    		return repositorioAtendimentoPublico.pesquisarConstanteFuncionalidadeTipoServico(servicoTipoId);
+    	}catch(ErroRepositorioException ex){
+			throw new ControladorException("erro.sistema", ex);
+		}
+    }
 	
 }

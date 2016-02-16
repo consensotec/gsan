@@ -10,7 +10,9 @@ import gcom.relatorio.atendimentopublico.RelatorioFiltroContratoAdesaoBean;
 import gcom.seguranca.acesso.usuario.Usuario;
 import gcom.tarefa.TarefaException;
 import gcom.tarefa.TarefaRelatorio;
+import gcom.util.ConstantesSistema;
 import gcom.util.agendadortarefas.AgendadorTarefas;
+import gcom.util.filtro.ParametroSimples;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +26,11 @@ public class RelatorioFiltroContratoAdesao extends TarefaRelatorio {
 	private static final long serialVersionUID = 1L;
 	public RelatorioFiltroContratoAdesao(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_FILTRO_CONTRATO_ADESAO);
+	}
+	
+	@Deprecated
+	public RelatorioFiltroContratoAdesao() {
+		super(null, "");
 	}
 	
 	@Override

@@ -6484,4 +6484,42 @@ public interface IControladorFaturamento {
 	 */
 	public String obterMensagemContaBraille(EmitirContaHelper emitirContaHelper,
 			SistemaParametro sistemaParametro) throws ControladorException;
+	
+	/**
+	 * 
+	 * @author Rodrigo Cabral
+	 * 
+	 * @date 03/11/2015
+	 * 
+	 * @throws ControladorException
+	 */
+	public void gerarResumosFaturamentoPentaho(int idFuncionalidadeIniciada) throws ControladorException;
+	
+	/**
+	 * [UC0482] Emitir Segunda Via de Conta
+	 * 
+	 * @author Vivianne Sousa
+	 * @date 21/02/2007
+	 * 
+	 * @param
+	 * @throws ControladorException
+	 */
+	public int gerarDebitoACobrarTaxaEmissaoConta(Integer idImovel,
+			int anoMesReferencia) throws ControladorException;
+	
+	/**
+	 * [UC0482] Emitir 2 Via de Contas
+	 * 
+	 * [SB00010] Gerar Linhas da Descri??o dos Servi?os e Tarifas
+	 * 
+	 * @author Vivianne Sousa
+	 * @date 21/11/2006
+	 * 
+	 * @param colecaoConta
+	 * @throws ControladorException
+	 */
+	public Collection gerarLinhasDescricaoServicoTarifasRelatorio(
+			EmitirContaHelper emitirContaHelper, String consumoRateio,
+			Object[] parmsMedicaoHistorico, Integer tipoMedicao,
+			boolean contaHistorico) throws ControladorException;	
 }

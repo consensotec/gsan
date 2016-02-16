@@ -96,6 +96,7 @@ import gcom.cadastro.sistemaparametro.SistemaParametro;
 import gcom.cadastro.tarifasocial.TarifaSocialCarta;
 import gcom.cadastro.tarifasocial.TarifaSocialComandoCarta;
 import gcom.cadastro.tarifasocial.TarifaSocialDadoEconomia;
+import gcom.cobranca.CobrancaGrupo;
 import gcom.cobranca.CobrancaSituacao;
 import gcom.cobranca.CobrancaSituacaoTipo;
 import gcom.cobranca.bean.EmitirDocumentoCobrancaBoletimCadastroHelper;
@@ -4276,4 +4277,12 @@ public interface IRepositorioImovel {
 	 * @throws ErroRepositorioException
 	 */
 	public ConsumoTarifa pesquisarConsumoTarifaImovel(Integer idImovel) throws ErroRepositorioException;
+	
+	/**
+	 * [UC01484] - Gerar Arquivo de Ida para Execucao de OS de Cobranca Android
+	 * 
+	 * @author Vivianne Sousa	
+	 * @date 03/12/2015
+	 */
+	public Rota pesquisarRotaImovel(Integer idImovel) throws ErroRepositorioException;
 }

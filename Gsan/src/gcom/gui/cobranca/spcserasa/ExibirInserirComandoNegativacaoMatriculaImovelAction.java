@@ -188,7 +188,7 @@ public class ExibirInserirComandoNegativacaoMatriculaImovelAction extends GcomAc
 				dadosNegativacaoPorImovelHelper.setIdImovel(negativacaoComandoImovel.getImovel().getId());
 				dadosNegativacaoPorImovelHelper.setIdCliente(negativacaoComandoImovel.getCliente().getId());
 				
-				if (negativacaoComandoImovel.getCliente().getCnpj() != null){
+				if (negativacaoComandoImovel.getCliente().getCnpj() != null && !negativacaoComandoImovel.getCliente().getCnpj().equals("")){
 					
 					dadosNegativacaoPorImovelHelper.setCnpjCliente(negativacaoComandoImovel.getCliente().getCnpjFormatado());
 				} else {

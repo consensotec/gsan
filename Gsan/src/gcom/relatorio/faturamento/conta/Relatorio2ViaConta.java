@@ -140,6 +140,12 @@ public class Relatorio2ViaConta extends TarefaRelatorio {
 		super(usuario, nomeRelatorio);
 	}
 	
+	@Deprecated
+	public Relatorio2ViaConta() {
+		super(null, "");
+	}
+	
+	
 	protected Collection<Relatorio2ViaContaBean> inicializarBeanRelatorio(
 			Collection colecaoEmitirContaHelper, SistemaParametro sistemaParametro, String empresa, Fachada fachada,
 			Integer idCliente) {

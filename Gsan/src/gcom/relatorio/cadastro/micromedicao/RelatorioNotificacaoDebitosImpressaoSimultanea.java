@@ -29,6 +29,11 @@ public class RelatorioNotificacaoDebitosImpressaoSimultanea extends TarefaRelato
 		super(usuario, ConstantesRelatorios.RELATORIO_NOTIFICACAO_DEBITOS_IMPRESSAO_SIMULTANEA);
 	}
 
+	@Deprecated
+	public RelatorioNotificacaoDebitosImpressaoSimultanea() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 
 		// valor de retorno

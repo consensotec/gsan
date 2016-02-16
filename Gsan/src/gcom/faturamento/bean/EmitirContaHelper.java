@@ -198,6 +198,8 @@ public class EmitirContaHelper implements Serializable {
 	private Integer numeroQuadraEntrega;
 	private Integer idRotaEntrega;
 	private Integer numeroSequencialRotaEntrega;
+	
+	private Short indicadorDebitoConta;
 
 	
 	//---------------------------------------------------------
@@ -2066,4 +2068,13 @@ public class EmitirContaHelper implements Serializable {
 
 		return baseCalculo;
 	}
+
+	public Short getIndicadorDebitoConta() {
+		return indicadorDebitoConta;
+	}
+
+	public void setIndicadorDebitoConta(Short indicadorDebitoConta) {
+		this.indicadorDebitoConta = indicadorDebitoConta;
+	}
+	
 }

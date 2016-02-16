@@ -2327,7 +2327,7 @@ public interface IRepositorioMicromedicao {
 	 * @return
 	 * @throws ErroRepositorioException
 	 */
-	public Collection buscarImoveisPorRota(Integer idRota, String empresa, Integer anoMesFaturamento) throws ErroRepositorioException;
+	public Collection buscarImoveisPorRota(Integer idRota, String empresa, Integer anoMesFaturamento, Short indicadorOrdenacao ) throws ErroRepositorioException;
 	
 
 	/**
@@ -4062,9 +4062,9 @@ public interface IRepositorioMicromedicao {
 	 * @return
 	 * @throws ControladorException
 	 */	
-	public Collection 
+	public Object[] 
 		verificarExistenciaConsumoAnormalidadeAcaoImovel(
-				Integer idConsumoAnormalidadeAcao,
+				Integer idConsumoAnormalidade,
 				Integer idCategoria,
 				Integer idPerfilImovel ) 
 			throws ErroRepositorioException;
@@ -4823,4 +4823,15 @@ public interface IRepositorioMicromedicao {
 	 * @throws ErroRepositorioException
 	 */
 	public Integer obterUltimoConsumoImovel(Integer idImovel, Integer tipoLigacao) throws ErroRepositorioException;
+	
+	
+	/**
+	 * [UC0840] Atualizar Conta Pré-faturada
+	 * [SB0006] - Pesquisa motivo de revisão
+	 * Autor Vivianne Sousa
+	 * Data: 28/10/2015
+	 */
+	public Integer obterAnormalidadeConsumoAnoMes(Integer idImovel, Integer anoMes, Integer idLigacaoTipo) throws ErroRepositorioException;
+	
+	public Integer obterRotaIdImovel(Integer matricula, Integer anoMes) throws ErroRepositorioException;
 }

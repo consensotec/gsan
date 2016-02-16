@@ -111,6 +111,12 @@ public class RelatorioOSExecutadasPrestadoraServico extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_OS_EXECUTADAS_PRESTADORA_SERVICO);
 	}
 	
+	@Deprecated
+	public RelatorioOSExecutadasPrestadoraServico() {
+		super(null, "");
+	}
+
+	
 	private Collection<RelatorioOSExecutadasPrestadoraServicoBean> inicializarBeanRelatorio(
 			Collection colecaoOSExecutadasRelatorioHelper,Date dataEncerramentoInicial,Date dataEncerramentoFinal) {
 		

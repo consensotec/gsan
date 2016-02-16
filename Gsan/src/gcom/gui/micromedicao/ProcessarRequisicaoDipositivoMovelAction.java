@@ -81,6 +81,7 @@ import gcom.gui.GcomAction;
 import gcom.micromedicao.FiltroArquivoTextoRoteiroEmpresa;
 import gcom.micromedicao.ServicoTipoCelular;
 import gcom.micromedicao.SituacaoTransmissaoLeitura;
+import gcom.util.email.ErroEmailException;
 import gcom.util.filtro.ParametroSimples;
 
 import java.io.DataInputStream;
@@ -92,7 +93,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Vector;
 
-import javax.mail.SendFailedException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -311,7 +311,7 @@ public class ProcessarRequisicaoDipositivoMovelAction extends GcomAction {
 			out.flush();
 
 			System.out.println("Fim: atualizar faturamento movimento celular");
-		}catch (SendFailedException e) {
+		}catch (ErroEmailException e) {
 			e.printStackTrace();
 			System.out.println("Erro ao finalizar movimento celular");
 			// Resposta para o celular de OK
@@ -414,7 +414,7 @@ public class ProcessarRequisicaoDipositivoMovelAction extends GcomAction {
 			out.flush();
 			
 			System.out.println("Fim: finalizar movimento celular");
-		}catch (SendFailedException e) {
+		}catch (ErroEmailException e) {
 			e.printStackTrace();
 			System.out.println("Erro ao finalizar movimento celular");
 			// Resposta para o celular de OK

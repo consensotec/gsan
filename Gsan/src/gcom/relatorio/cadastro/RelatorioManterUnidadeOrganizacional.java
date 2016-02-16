@@ -118,6 +118,11 @@ public class RelatorioManterUnidadeOrganizacional extends TarefaRelatorio {
 	public RelatorioManterUnidadeOrganizacional(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_UNIDADE_ORGANIZACIONAL_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterUnidadeOrganizacional() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

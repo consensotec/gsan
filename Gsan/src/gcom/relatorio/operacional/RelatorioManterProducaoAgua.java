@@ -99,6 +99,11 @@ public class RelatorioManterProducaoAgua extends TarefaRelatorio {
 	public RelatorioManterProducaoAgua(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MANTER_PRODUCAO_AGUA);
 	}
+	
+	@Deprecated
+	public RelatorioManterProducaoAgua() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

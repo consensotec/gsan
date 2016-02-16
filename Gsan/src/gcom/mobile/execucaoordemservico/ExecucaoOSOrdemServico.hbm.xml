@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+	<class name="gcom.mobile.execucaoordemservico.ExecucaoOSOrdemServico" table="mobile.exe_os_ordem_servico">
+		<id name="id" type="java.lang.Integer" column="eoos_id">
+			<generator class="sequence">
+				<param name="sequence">mobile.seq_exe_os_ordem_servico</param>
+			</generator>
+		</id>
+		<property name="situacao" type="short" column="eoos_cdsituacao" not-null="true" length="2"/>
+		<property name="parecerEncerramento" type="java.lang.String" column="eoos_dsparecerencerramento" length="400"/>
+		<property name="indicadorConferida" type="short" column="eoos_icconferida" not-null="true" length="2"/>
+		<property name="dataRecebimento" type="java.sql.Timestamp" column="eoos_tmrecebimento" length="8"/>
+		<property name="dataExecucao" type="java.sql.Timestamp" column="eoos_tmexecucao" length="8"/>
+		<property name="ultimaAlteracao" type="java.sql.Timestamp" column="EOOS_TMULTIMAALTERACAO" length="8"/>
+		                                                                   
+		<!-- Associations -->
+
+		<!-- bi-directional many-to-one association to ServicoTipo -->
+		<many-to-one name="arquivoTextoOSCobranca" class="gcom.mobile.execucaoordemservico.ArquivoTextoOSCobranca">
+			<column name="AOSC_ID"/>
+		</many-to-one>
+		<many-to-one name="ordemServico" class="gcom.atendimentopublico.ordemservico.OrdemServico">
+			<column name="orse_id"/>
+		</many-to-one>
+		<many-to-one name="servicoTipo" class="gcom.atendimentopublico.ordemservico.ServicoTipo" not-null="true">
+			<column name="svtp_id"/>
+		</many-to-one>
+		<!-- bi-directional many-to-one association to AtendimentoMotivoEncerramento -->
+		<many-to-one name="atendimentoMotivoEncerramento" class="gcom.atendimentopublico.registroatendimento.AtendimentoMotivoEncerramento" not-null="true">
+			<column name="amen_id"/>
+		</many-to-one>
+		<!-- bi-directional many-to-one association to Usuario -->
+		<many-to-one name="usuario" class="gcom.seguranca.acesso.usuario.Usuario" not-null="true">
+			<column name="usur_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -107,6 +107,9 @@ public class CorteTipo extends ObjetoTransacao {
     private Short indicadorExibirFormulario;
     
     public final static Integer RAMAL_ID = 4;
+    public final static Integer CORTE_NICHO = 10;
+    public final static Integer CORTE_COM_PAVIMENTACAO = 11;
+    public final static Integer CORTE_SEM_PAVIMENTACAO = 12;
 
     /** full constructor */
     public CorteTipo(String descricao, Short indicadorUso, Date ultimaAlteracao) {

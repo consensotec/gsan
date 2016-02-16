@@ -114,6 +114,11 @@ public class RelatorioOrdemServico extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_ORDEM_SERVICO);
 	}
 	
+	@Deprecated
+	public RelatorioOrdemServico() {
+		super(null, "");
+	}
+	
 	/**
 	 * < <Descrição do método>>
 	 * 

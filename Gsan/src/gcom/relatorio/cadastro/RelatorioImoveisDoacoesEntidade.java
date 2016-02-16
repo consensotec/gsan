@@ -111,6 +111,11 @@ public class RelatorioImoveisDoacoesEntidade extends TarefaRelatorio {
 	public RelatorioImoveisDoacoesEntidade(Usuario usuario) {		
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_DOACOES_ENTIDADE);		
 	}
+	
+	@Deprecated
+	public RelatorioImoveisDoacoesEntidade() {
+		super(null, "");
+	}
 
 	/**
 	 * Método que executa a tarefa

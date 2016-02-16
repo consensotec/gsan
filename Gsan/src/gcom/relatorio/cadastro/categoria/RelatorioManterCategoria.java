@@ -108,6 +108,11 @@ public class RelatorioManterCategoria extends TarefaRelatorio {
 	public RelatorioManterCategoria(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_CATEGORIA_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterCategoria() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

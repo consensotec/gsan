@@ -124,6 +124,8 @@ public class ConsultarArquivoTextoLeituraActionForm extends ActionForm {
 	
 	private String contaImpressa;	
 	
+	private String matricula;
+	
 	public String getContaImpressa() {
 		return contaImpressa;
 	}
@@ -274,6 +276,14 @@ public class ConsultarArquivoTextoLeituraActionForm extends ActionForm {
 
 	public void setIndicadorAgenteComercial(String indicadorAgenteComercial) {
 		this.indicadorAgenteComercial = indicadorAgenteComercial;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
 	}
 	
 	

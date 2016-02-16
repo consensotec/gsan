@@ -75,6 +75,19 @@
 */  
 package gcom.cadastro.cliente;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.ejb.CreateException;
+import javax.ejb.SessionBean;
+import javax.ejb.SessionContext;
+
 import gcom.arrecadacao.ControladorArrecadacaoLocal;
 import gcom.arrecadacao.ControladorArrecadacaoLocalHome;
 import gcom.atendimentopublico.registroatendimento.AtendimentoMotivoEncerramento;
@@ -164,19 +177,6 @@ import gcom.util.Util;
 import gcom.util.filtro.ParametroNulo;
 import gcom.util.filtro.ParametroSimples;
 import gcom.util.filtro.ParametroSimplesDiferenteDe;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
 
 /**
  * Definição da lógica de negócio do Session Bean de ControladorCliente
@@ -4245,7 +4245,6 @@ public class ControladorClienteSEJB implements SessionBean {
 					
 				} else if (cliente == null || cliente.getId() == null) {
 					// 4.1.4. Caso não encontre um cliente com o novo CPF/CNPJ informado
-					// 4.1.1. Pesquisa um cliente com o novo CPF/CNPJ informado
 					// 4.1.4.1. Insere um novo cliente com o CPF/CNPJ e o novo nome informados
 					
 					// [SB0002 - Inserir Novo Cliente]
@@ -4369,6 +4368,9 @@ public class ControladorClienteSEJB implements SessionBean {
 					helper.setAtualizarMovimentoClienteFone(true);
 				}
 			}
+
+			// Atualizar dados opcionais (Nome Mae, Cliente Tipo e Sexo)
+			atualizarDadosOpcionaisClienteDispositivoMovel(helper, idCliente);
 			
 			Short indicadorNomeConta = clienteImovel != null
 					? clienteImovel.getIndicadorNomeConta()
@@ -4423,18 +4425,26 @@ public class ControladorClienteSEJB implements SessionBean {
 	 */
 	public void substituirClienteProprietarioImovel(Integer idImovel,
 			Integer idCliente, Short icNomeConta) throws ControladorException{
+		
+		ClienteImovel clienteImovelProprietario = null;
 		Cliente proprietarioGsan = null;
 		boolean inserirClienteImovel = false;
+		icNomeConta = 2;
 		
 		try {
-			proprietarioGsan = this.repositorioClienteImovel.retornaClienteProprietario(idImovel);
+			clienteImovelProprietario = this.repositorioClienteImovel.retornaClienteImovelProprietario(idImovel);
+			
+			if(clienteImovelProprietario != null && clienteImovelProprietario.getCliente() != null){
+				proprietarioGsan = clienteImovelProprietario.getCliente();
+				icNomeConta = clienteImovelProprietario.getIndicadorNomeConta();
+			}
 			
 			//verificar se o cliente proprietario do imovel é diferente do idcliente fornecido
 			if(proprietarioGsan != null && proprietarioGsan.getId() != null && !proprietarioGsan.getId().equals(idCliente)){
 				//caso seja diferente associar o novo cliente como proprietario
-				this.repositorioClienteImovel.desvincularClienteProprietarioImovel(idImovel, idCliente);
+				this.repositorioClienteImovel.desvincularClienteProprietarioImovel(idImovel, proprietarioGsan.getId());
 				inserirClienteImovel = true;
-			} else if (proprietarioGsan == null){
+			} else if (proprietarioGsan == null || proprietarioGsan.getId() == null){
 				inserirClienteImovel = true;
 			}
 			
@@ -4456,7 +4466,8 @@ public class ControladorClienteSEJB implements SessionBean {
 			}
 			
 		} catch (ErroRepositorioException e) {
-			throw new ControladorException(e.getMessage());
+			e.printStackTrace();
+			throw new ControladorException("erro.sistema", e);
 		}
 	}
 	
@@ -4464,25 +4475,32 @@ public class ControladorClienteSEJB implements SessionBean {
 	 * [UC1222] Atualizar Cliente a Partir do Dispositivo Móvel
 	 * [SB0013] - Substituir Cliente Responsável do Imóvel;
 	 * 
-	 * @author Bruno Sá Barreto
-	 * @date 10/10/2014
+	 * @author Bruno Sá Barreto, Flávio Leonardo
+	 * @date 10/10/2014, 03/11,2015
 	 * 
 	 * @throws ErroRepositorioException
 	 */
 	public void substituirClienteResponsavelImovel(Integer idImovel,
 			Integer idCliente, Short icNomeConta) throws ControladorException{
 		
-		Integer idResponsavelGsan = null;
+		ClienteImovel clienteImovelResponsavel = null;
+		Cliente responsavelGsan = null;
 		boolean inserirClienteImovel = false;
+		icNomeConta = 2;
 		
 		try {
-			idResponsavelGsan = this.repositorioClienteImovel.retornaIdClienteResponsavel(idImovel);
+			clienteImovelResponsavel = this.repositorioClienteImovel.retornaClienteImovelResponsavel(idImovel);
+			
+			if(clienteImovelResponsavel != null && clienteImovelResponsavel.getCliente() != null){
+				responsavelGsan = clienteImovelResponsavel.getCliente();
+				icNomeConta = clienteImovelResponsavel.getIndicadorNomeConta();
+			}
 			//verificar se o cliente responsavel do imovel é diferente do idcliente fornecido
-			if(idResponsavelGsan != null && idResponsavelGsan != idCliente){
+			if(responsavelGsan != null && !responsavelGsan.getId().equals(idCliente)){
 				//caso seja diferente associar o novo cliente como responsavel
-				this.repositorioClienteImovel.desvincularClienteResponsavelImovel(idImovel, idCliente);
+				this.repositorioClienteImovel.desvincularClienteResponsavelImovel(idImovel, responsavelGsan.getId());
 				inserirClienteImovel = true;
-			}else if(idResponsavelGsan == null){
+			}else if(responsavelGsan == null || responsavelGsan.getId() == null){
 				inserirClienteImovel = true;
 			}
 			
@@ -4504,7 +4522,8 @@ public class ControladorClienteSEJB implements SessionBean {
 			}
 			
 		} catch (ErroRepositorioException e) {
-			throw new ControladorException(e.getMessage());
+			e.printStackTrace();
+			throw new ControladorException("erro.sistema", e);
 		}
 
 	}
@@ -4523,7 +4542,8 @@ public class ControladorClienteSEJB implements SessionBean {
 		try {
 			result = this.repositorioCliente.pesquisarExistenciaNegativacaoParaClienteImovel(idClienteAnterior,idImovel);
 		} catch (ErroRepositorioException e) {
-			throw new ControladorException(e.getMessage());
+			e.printStackTrace();
+			throw new ControladorException("erro.sistema", e);
 		}
 		return result;
 	}
@@ -5011,16 +5031,17 @@ public class ControladorClienteSEJB implements SessionBean {
 		}
 
 		// Pessoa sexo
-		if (helper.getIdPessoaSexo() != null && !helper.getIdPessoaSexo().equals("")) {
+		if (helper.getIdPessoaSexo() != null) {
 			PessoaSexo pessoaSexo = new PessoaSexo();
-			pessoaSexo.setId(Integer.valueOf(helper.getIdPessoaSexo()));
+			pessoaSexo.setId(helper.getIdPessoaSexo());
 			cliente.setPessoaSexo(pessoaSexo);
 		}
 
-		if (clienteAnterior != null) {
+		ClienteTipo clienteTipo = new ClienteTipo();
+		clienteTipo.setId(Integer.valueOf(helper.getIdClienteTipo()));
+		cliente.setClienteTipo(clienteTipo);
 
-			// CLTP_ID anterior ou do arquivo
-			cliente.setClienteTipo(clienteAnterior.getClienteTipo());
+		if (clienteAnterior != null) {
 			// CLIE_ICCOBRANCAACRESCIMOS anterior
 			cliente.setIndicadorAcrescimos(clienteAnterior.getIndicadorAcrescimos());
 			// CLIE_ICGERAARQUIVOTEXTO anterior
@@ -5035,18 +5056,7 @@ public class ControladorClienteSEJB implements SessionBean {
 			cliente.setIndicadorPermiteNegativacao(clienteAnterior.getIndicadorPermiteNegativacao());
 
 			cliente.setIndicadorNegativacaoPeriodo(clienteAnterior.getIndicadorNegativacaoPeriodo());
-			
 		} else {
-			if (helper.getIdClienteTipo() != null) {
-				ClienteTipo clienteTipo = new ClienteTipo();
-				clienteTipo.setId(Integer.valueOf(helper.getIdClienteTipo()));
-				cliente.setClienteTipo(clienteTipo);
-			} else {
-				ClienteTipo clienteTipo = new ClienteTipo();
-				clienteTipo.setId(Integer.valueOf(helper.getIdClienteTipo()));
-				cliente.setClienteTipo(clienteTipo);
-			}
-
 			cliente.setIndicadorAcrescimos(ConstantesSistema.SIM);
 			cliente.setIndicadorGeraArquivoTexto(ConstantesSistema.NAO);
 			cliente.setIndicadorVencimentoMesSeguinte(ConstantesSistema.NAO);
@@ -5054,7 +5064,6 @@ public class ControladorClienteSEJB implements SessionBean {
 			cliente.setIndicadorUsoNomeFantasiaConta(ConstantesSistema.NAO);
 			cliente.setIndicadorPermiteNegativacao(ConstantesSistema.SIM);
 			cliente.setIndicadorNegativacaoPeriodo(ConstantesSistema.NAO);
-			
 		}
 
 		cliente.setUltimaAlteracao(new Date());
@@ -5596,8 +5605,9 @@ public class ControladorClienteSEJB implements SessionBean {
 			// MATRICULA
 			helper.setMatricula(String.valueOf(idImovel));
 
+			// Cliente Tipo
 			if (clienteAtualizacaoCadastral.getClienteTipo().getId() != null) {
-				helper.setIdClienteTipo(String.valueOf(clienteAtualizacaoCadastral.getClienteTipo().getId()));
+				helper.setIdClienteTipo(clienteAtualizacaoCadastral.getClienteTipo().getId());
 			}
 
 			// Nome
@@ -5640,8 +5650,11 @@ public class ControladorClienteSEJB implements SessionBean {
 
 			// Pessoa sexo
 			if (clienteAtualizacaoCadastral.getSexo() != null) {
-				helper.setIdPessoaSexo(String.valueOf(clienteAtualizacaoCadastral.getSexo().getId()));
+				helper.setIdPessoaSexo(clienteAtualizacaoCadastral.getSexo().getId());
 			}
+
+			// Nome Mae
+			helper.setNomeMae(clienteAtualizacaoCadastral.getNomeMae());
 
 			//indicadores retornados de campo
 			if(clienteAtualizacaoCadastral.getIndicadorDocumentacao() != null){
@@ -5685,7 +5698,6 @@ public class ControladorClienteSEJB implements SessionBean {
 
 				// ID CLIENTE ANTERIOR
 				helper.setIdClienteAnterior(clienteImovel.getCliente().getId().toString());
-
 			}
 
 			// Responsável por atualizar somente o telefone com o indicador
@@ -6208,8 +6220,58 @@ public class ControladorClienteSEJB implements SessionBean {
 		}
 
 	}
-	
-	
-	
-	
+
+	private void atualizarDadosOpcionaisClienteDispositivoMovel(AtualizarClienteAPartirDispositivoMovelHelper helper,
+			Integer idCliente) throws ControladorException {
+		boolean atualizar = false;
+
+		FiltroCliente filtro = new FiltroCliente();
+		filtro.adicionarParametro(new ParametroSimples(FiltroCliente.ID, idCliente));
+		Collection<Cliente> colecaoCLiente = this.getControladorUtil().pesquisar(filtro, Cliente.class.getName());
+		Cliente cliente = (Cliente) Util.retonarObjetoDeColecao(colecaoCLiente);
+
+		// Verificar Cliente Tipo
+		Integer tipoCliente = helper.getIdClienteTipo();
+		Integer tipoClienteAnterior = cliente.getClienteTipo().getId();
+		if (tipoCliente != null && !tipoCliente.equals(tipoClienteAnterior)) {
+			ClienteTipo tipo = new ClienteTipo();
+			tipo.setId(tipoCliente);
+			cliente.setClienteTipo(tipo);
+			atualizar = true;
+		}
+
+		// Verificar Nome Mae
+		if (!Util.stringsIguais(helper.getNomeMae(), cliente.getNomeMae())) {
+			cliente.setNomeMae(helper.getNomeMae());
+			atualizar = true;
+		}
+
+		// Verificar Data Nascimento
+		Date dtNascimento = null;
+		Date dtNascimentoAnterior = cliente.getDataNascimento();
+		try {
+			dtNascimento = Util.converteStringParaDate(helper.getDataNascimento());
+		} catch (Exception e) {
+			// ignorar
+		}
+
+		if (dtNascimento != null && !dtNascimento.equals(dtNascimentoAnterior)) {
+			cliente.setDataNascimento(dtNascimento);
+			atualizar = true;
+		}
+
+		// Verificar Pessoa Sexo
+		Integer idPessoaSexoCliente = cliente.getPessoaSexo() == null ?
+				null : cliente.getPessoaSexo().getId();
+		if (helper.getIdPessoaSexo() != null && !helper.getIdPessoaSexo().equals(idPessoaSexoCliente)) {
+			PessoaSexo sexo = new PessoaSexo();
+			sexo.setId(helper.getIdPessoaSexo());
+			cliente.setPessoaSexo(sexo);
+			atualizar = true;
+		}
+
+		if(atualizar) {
+			getControladorUtil().atualizar(cliente);
+		}
+	}
 }

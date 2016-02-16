@@ -1,11 +1,10 @@
 package gcom.atualizacaocadastral.bean;
 
-import gcom.atualizacaocadastral.ImovelAtualizacaoCadastralDM;
-import gcom.cadastro.imovel.ImovelAtualizacaoCadastral;
-import gcom.seguranca.acesso.usuario.Usuario;
-
 import java.io.Serializable;
 import java.util.Collection;
+
+import gcom.atualizacaocadastral.ImovelAtualizacaoCadastralDM;
+import gcom.seguranca.acesso.usuario.Usuario;
 
 /**
  * 
@@ -44,16 +43,17 @@ public class AtualizarClienteAPartirDispositivoMovelHelper implements Serializab
     private Collection<AtualizarClienteFoneAPartirDispositivoMovelHelper> clienteFoneAnteriorHelper;
     private Usuario usuario;
     
-    //atualizacao cadastral
+    // atualizacao cadastral
     private String dataNascimento;
-    private String idPessoaSexo;
+    private Integer idPessoaSexo;
     private String dataEmissaoRG;
+    private String nomeMae;
     private ImovelAtualizacaoCadastralDM imovelAtualizacaoCadastral;
     private Integer idClienteAtualizacaoCadastral;
     private boolean clienteAtualizar;
     private boolean clienteValidar;
     
-    private String idClienteTipo;
+    private Integer idClienteTipo;
     
     private Short indicadorResponsavel;
     private Short indicadorDocumentacao;
@@ -219,10 +219,10 @@ public class AtualizarClienteAPartirDispositivoMovelHelper implements Serializab
 	public void setIndicadorRegistrarTransacao(boolean indicadorRegistrarTransacao) {
 		this.indicadorRegistrarTransacao = indicadorRegistrarTransacao;
 	}
-	public String getIdClienteTipo() {
+	public Integer getIdClienteTipo() {
 		return idClienteTipo;
 	}
-	public void setIdClienteTipo(String idClienteTipo) {
+	public void setIdClienteTipo(Integer idClienteTipo) {
 		this.idClienteTipo = idClienteTipo;
 	}
 	public String getDataNascimento() {
@@ -231,10 +231,10 @@ public class AtualizarClienteAPartirDispositivoMovelHelper implements Serializab
 	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	public String getIdPessoaSexo() {
+	public Integer getIdPessoaSexo() {
 		return idPessoaSexo;
 	}
-	public void setIdPessoaSexo(String idPessoaSexo) {
+	public void setIdPessoaSexo(Integer idPessoaSexo) {
 		this.idPessoaSexo = idPessoaSexo;
 	}
 	public String getDataEmissaoRG() {
@@ -242,6 +242,12 @@ public class AtualizarClienteAPartirDispositivoMovelHelper implements Serializab
 	}
 	public void setDataEmissaoRG(String dataEmissaoRG) {
 		this.dataEmissaoRG = dataEmissaoRG;
+	}
+	public String getNomeMae() {
+		return nomeMae;
+	}
+	public void setNomeMae(String nomeMae) {
+		this.nomeMae = nomeMae;
 	}
 	public Integer getTipoOperacao() {
 		return tipoOperacao;

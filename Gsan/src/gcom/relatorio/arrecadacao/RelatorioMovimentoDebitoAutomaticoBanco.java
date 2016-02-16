@@ -111,6 +111,11 @@ public class RelatorioMovimentoDebitoAutomaticoBanco extends TarefaRelatorio {
 	public RelatorioMovimentoDebitoAutomaticoBanco(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_MOVIMENTO_DEBITO_AUTOMATICO_BANCO);
 	}
+	
+	@Deprecated
+	public RelatorioMovimentoDebitoAutomaticoBanco() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

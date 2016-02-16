@@ -111,6 +111,11 @@ public class RelatorioOrdemFiscalizacao extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_ORDEM_FISCALIZACAO);
 	}
 
+	@Deprecated
+	public RelatorioOrdemFiscalizacao() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 		
 		System.out.println("********************************************");

@@ -118,6 +118,11 @@ public class RelatorioManterPerfilLigacaoEsgoto extends TarefaRelatorio {
 	public RelatorioManterPerfilLigacaoEsgoto(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_PERFIL_LIGACAO_ESGOTO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterPerfilLigacaoEsgoto() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

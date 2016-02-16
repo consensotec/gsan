@@ -887,6 +887,7 @@ public class ExibirInserirContratoParcelamentoPorClienteAction extends GcomActio
 
 				BigDecimal valorContaSelecao = (BigDecimal) sessao.getAttribute("valorContaSelecaoTotal");
 				BigDecimal valorContaComAcrescimo = (BigDecimal) sessao.getAttribute("valorContaAcrescimoSelecaoTotal");
+				BigDecimal valorDebitosACobrarSelecao = (BigDecimal) sessao.getAttribute("valorDebitosACobrarSelecao");
 				
 				Collection<QuantidadePrestacoesRDHelper> colecaoQuantidadePrestacoesRDHelper = 
 					new ArrayList<QuantidadePrestacoesRDHelper>();
@@ -895,8 +896,9 @@ public class ExibirInserirContratoParcelamentoPorClienteAction extends GcomActio
 					QuantidadePrestacoes quantidadePrestacoes = (QuantidadePrestacoes) iterator.next();
 					QuantidadePrestacoesRDHelper quantidadePrestacoesRDHelper = new QuantidadePrestacoesRDHelper();
 					
+					
 					InserirContratoParcelamentoValoresParcelasHelper helper = fachada
-						.calcularValoresParcelasContratoParcelamentoRD(valorContaSelecao, valorContaComAcrescimo, 
+						.calcularValoresParcelasContratoParcelamentoRD(valorContaSelecao, valorContaComAcrescimo, valorDebitosACobrarSelecao,
 								form.getIndicadorDebitoAcresc(), form.getIndicadorParcelJuros(), contratoCadastrar, 
 								quantidadePrestacoes);
 					
@@ -1783,10 +1785,11 @@ public class ExibirInserirContratoParcelamentoPorClienteAction extends GcomActio
 			
 			BigDecimal valorContaSelecaoTotal = (BigDecimal) sessao.getAttribute("valorContaSelecaoTotal");
 			BigDecimal acrescimo = (BigDecimal) sessao.getAttribute("valorContaAcrescimoSelecaoTotal");
+			BigDecimal valorDebitosACobrarSelecao = (BigDecimal) sessao.getAttribute("valorDebitosACobrarSelecao");
 			BigDecimal valorParcelado = BigDecimal.ZERO;
 			
 			InserirContratoParcelamentoValoresParcelasHelper helper = Fachada.getInstancia()
-				.calcularValoresParcelasContratoParcelamento(valorContaSelecaoTotal, acrescimo, 
+				.calcularValoresParcelasContratoParcelamento(valorContaSelecaoTotal, acrescimo,valorDebitosACobrarSelecao, 
 					indicadorDebitoAcresc, indicadorParcelJuros, jurosBigDec, numeroParcelInicial, numeroParcelFinal);
 			
 			valorParcelado = helper.getValorParcelado();

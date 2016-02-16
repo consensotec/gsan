@@ -107,6 +107,11 @@ public class RelatorioParametrosContabeisFaturamento extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_PARAMETROS_CONTABEIS_FATURAMENTO);
 	}
 	
+	@Deprecated
+	public RelatorioParametrosContabeisFaturamento() {
+		super(null, "");
+	}
+	
 	/**
 	 * Método que executa a tarefa
 	 * 

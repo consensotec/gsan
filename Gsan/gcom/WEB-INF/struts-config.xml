@@ -356,9 +356,9 @@
 			<form-property name="idCategoria" type="java.lang.String" />
 			<form-property name="idSubCategoria" type="java.lang.String" />
 			<form-property name="quantidadeEconomia" type="java.lang.String" />
-			<form-property name="qtdUnidadePrivativa" type="java.lang.String" />
+<!--		<form-property name="qtdUnidadePrivativa" type="java.lang.String" />
 			<form-property name="qtdUnidadeColetiva" type="java.lang.String" />
-			<form-property name="complementoEndereco" type="java.lang.String" />
+ -->		<form-property name="complementoEndereco" type="java.lang.String" />
 			<form-property name="numeroPontoUtilizacao" type="java.lang.String" />
 			<form-property name="numeroContratoEnergia" type="java.lang.String" />
 			<form-property name="idAreaConstruidaFaixa" type="java.lang.String" />

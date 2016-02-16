@@ -254,12 +254,19 @@ public class RelatorioMotivoNaoGeracaoDocumentoCobranca extends TarefaRelatorio 
 			}
 			parametros.put("imoveisNaoGeraramDocumento", colecaoImovelNaoGerado.size());
 			
-			if(cobrancaAcaoAtividadeComando.getCobrancaAcao() != null 
+			if(cobrancaAcaoAtividadeComando != null && cobrancaAcaoAtividadeComando.getCobrancaAcao() != null 
 					&& cobrancaAcaoAtividadeComando.getCobrancaAcao().getDescricaoCobrancaAcao() != null){
 				parametros.put("cobrancaAcao", cobrancaAcaoAtividadeComando.getCobrancaAcao().getDescricaoCobrancaAcao());
+				parametros.put("dataRealizacao", Util.formatarDataComHora(cobrancaAcaoAtividadeComando.getRealizacao()));
+				parametros.put("dataComando", Util.formatarDataComHora(cobrancaAcaoAtividadeComando.getComando()));
+				
+			}else if (cobrancaAcaoAtividadeCronograma != null && cobrancaAcaoAtividadeCronograma.getCobrancaAcaoCronograma().getCobrancaAcao() != null 
+					&& cobrancaAcaoAtividadeCronograma.getCobrancaAcaoCronograma().getCobrancaAcao().getDescricaoCobrancaAcao() != null){
+				
+				parametros.put("dataRealizacao", Util.formatarDataComHora(cobrancaAcaoAtividadeCronograma.getRealizacao()));
+				parametros.put("dataComando", Util.formatarDataComHora(cobrancaAcaoAtividadeCronograma.getComando()));
+				parametros.put("cobrancaAcao", cobrancaAcaoAtividadeCronograma.getCobrancaAcaoCronograma().getCobrancaAcao().getDescricaoCobrancaAcao());
 			}
-			parametros.put("dataRealizacao", Util.formatarDataComHora(cobrancaAcaoAtividadeComando.getRealizacao()));
-			parametros.put("dataComando", Util.formatarDataComHora(cobrancaAcaoAtividadeComando.getComando()));			
 			
 			
 			List<RelatorioMotivoNaoGeracaoDocumentoCobrancaSinteticoBean> beans = new ArrayList<RelatorioMotivoNaoGeracaoDocumentoCobrancaSinteticoBean>();
@@ -356,6 +363,7 @@ public class RelatorioMotivoNaoGeracaoDocumentoCobranca extends TarefaRelatorio 
 			filtroImovelNaoGerado.adicionarCaminhoParaCarregamentoEntidade(FiltroImovelNaoGerado.SETOR_COMERCIAL);
 			filtroImovelNaoGerado.adicionarCaminhoParaCarregamentoEntidade(FiltroImovelNaoGerado.QUADRA);
 			filtroImovelNaoGerado.adicionarCaminhoParaCarregamentoEntidade(FiltroImovelNaoGerado.MOTIVO_NAO_GERACAO_DOCUMENTO_COBRANCA);
+			//filtroImovelNaoGerado.adicionarCaminhoParaCarregamentoEntidade("cobrancaAtividade");
 			
 			if(form.getGerenciaRegional() != null && !"-1".equals(form.getGerenciaRegional()))
 				filtroImovelNaoGerado.adicionarParametro(new ParametroSimples(FiltroImovelNaoGerado.GERENCIA_REGIONAL_ID,new Integer(form.getGerenciaRegional())));
@@ -371,6 +379,20 @@ public class RelatorioMotivoNaoGeracaoDocumentoCobranca extends TarefaRelatorio 
 			filtroImovelNaoGerado.setCampoOrderBy(FiltroImovelNaoGerado.ID_MOTIVO_NAO_GERACAO_DOCUMENTO_COBRANCA);
 			
 			Collection colecaoImovelNaoGerado = fachada.pesquisar(filtroImovelNaoGerado, ImovelNaoGerado.class.getName());
+			
+			if(cobrancaAcaoAtividadeComando != null && cobrancaAcaoAtividadeComando.getCobrancaAcao() != null 
+					&& cobrancaAcaoAtividadeComando.getCobrancaAcao().getDescricaoCobrancaAcao() != null){
+				parametros.put("cobrancaAcao", cobrancaAcaoAtividadeComando.getCobrancaAcao().getDescricaoCobrancaAcao());
+				parametros.put("dataRealizacao", Util.formatarDataComHora(cobrancaAcaoAtividadeComando.getRealizacao()));
+				parametros.put("dataComando", Util.formatarDataComHora(cobrancaAcaoAtividadeComando.getComando()));
+				
+			}else if(cobrancaAcaoAtividadeCronograma != null && cobrancaAcaoAtividadeCronograma.getCobrancaAcaoCronograma() != null && cobrancaAcaoAtividadeCronograma.getCobrancaAcaoCronograma().getCobrancaAcao() != null 
+					&& cobrancaAcaoAtividadeCronograma.getCobrancaAcaoCronograma().getCobrancaAcao().getDescricaoCobrancaAcao() != null){
+				
+				parametros.put("dataRealizacao", Util.formatarDataComHora(cobrancaAcaoAtividadeCronograma.getRealizacao()));
+				parametros.put("dataComando", Util.formatarDataComHora(cobrancaAcaoAtividadeCronograma.getComando()));
+				parametros.put("cobrancaAcao", cobrancaAcaoAtividadeCronograma.getCobrancaAcaoCronograma().getCobrancaAcao().getDescricaoCobrancaAcao());
+			}	
 			
 			//seta os pametros
 //			parametros.put("imoveisComando", totalImoveisComando);

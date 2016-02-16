@@ -177,6 +177,18 @@ public interface ControladorUtilLocal extends javax.ejb.EJBLocalObject {
 	public Object inserir(Object objeto) throws ControladorException;
 
 	/**
+	 * Retorna a instância persistida da classe informada, ou null se não encontrada.
+	 * 
+	 * @author André Miranda
+	 * @date 03/12/2015
+	 * 
+	 * @param classe Classe da instância a ser pesquisada
+	 * @return id Chave primária
+	 * @throws ControladorException
+	 */
+	public <T extends Object> T pesquisar(Class<T> classe, Integer id) throws ControladorException;
+
+	/**
 	 * < <Descrição do método>>
 	 * 
 	 * @param filtro
@@ -189,6 +201,17 @@ public interface ControladorUtilLocal extends javax.ejb.EJBLocalObject {
 	 */
 	public Collection pesquisar(Filtro filtro, String pacoteNomeObjeto)
 			throws ControladorException;
+
+	/**
+	 * Sobrecarga do método pesquisar(Filtro, String) para isolar os warnings de
+	 * unchecked cast.
+	 * 
+	 * @param filtro Filtro montando com os parêmetros
+	 * @param classe Classe da qual a coleção será composta
+	 * @return Coleção de acordo com os parâmetros presentes no Filtro
+	 * @throws ControladorException
+	 */
+	public <T> Collection<T> pesquisar(Filtro filtro, Class<T> classe) throws ControladorException;
 
 	public Collection pesquisar(Collection ids, Filtro filtro,
 			String pacoteNomeObjeto) throws ControladorException;
@@ -552,5 +575,8 @@ public interface ControladorUtilLocal extends javax.ejb.EJBLocalObject {
 	 * @date 17/04/2015
 	 */
 	public String obterValorParametro(String codigoConstante)
+			throws ControladorException;
+	
+	public ParametroSistema pesquisarParametrosDoSistemaNovo(String constante)
 			throws ControladorException;
 }

@@ -113,6 +113,7 @@ public class FiltrarResolucaoDiretoriaActionForm  extends ActionForm {
     private String indicadorNegociacaoSoAVista = ConstantesSistema.TODOS.toString();
     private String indicadorDescontoSoEmContaAVista = ConstantesSistema.TODOS.toString();
 	private String indicadorParcelamentoLojaVirtual = ConstantesSistema.TODOS.toString();
+	private String IndicadorParcelamentoCartaoCredito = ConstantesSistema.TODOS.toString();
     
 	public String getIndicadorDescontoSoEmContaAVista() {
 		return indicadorDescontoSoEmContaAVista;
@@ -252,4 +253,13 @@ public class FiltrarResolucaoDiretoriaActionForm  extends ActionForm {
 			String indicadorParcelamentoLojaVirtual) {
 		this.indicadorParcelamentoLojaVirtual = indicadorParcelamentoLojaVirtual;
 	}
+
+	public String getIndicadorParcelamentoCartaoCredito() {
+		return IndicadorParcelamentoCartaoCredito;
+	}
+
+	public void setIndicadorParcelamentoCartaoCredito(String indicadorParcelamentoCartaoCredito) {
+		IndicadorParcelamentoCartaoCredito = indicadorParcelamentoCartaoCredito;
+	}
+
 }

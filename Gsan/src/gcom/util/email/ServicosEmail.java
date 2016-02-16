@@ -158,66 +158,41 @@ public final class ServicosEmail implements Serializable {
 	/**
 	 * Método que envia mensagens pelo protocolo SMTP
 	 * 
-	 * @param remetente
-	 *            Descrição do parâmetro
-	 * @param destinatario
-	 *            Descrição do parâmetro
-	 * @param nomeDestinatario
-	 *            Descrição do parâmetro
-	 * @param assunto
-	 *            Descrição do parâmetro
-	 * @param body
-	 *            Descrição do parâmetro
+	 * @param remetente Endereço do remetente
+	 * @param destinatario Endereço do destinatário
+	 * @param assunto Assunto da mensagem
+	 * @param body Corpo da mensagem
 	 * @exception ErroEmailException
-	 *                Descrição da exceção
 	 */
 	public static void enviarMensagem(String remetente, String destinatario,
-			String assunto, String body)
-			throws ErroEmailException {
+			String assunto, String body) throws ErroEmailException {
+		if(servidorSMTP == null || servidorSMTP.equals(ConstantesSistema.SMTP_INVALIDO) ){
+			return;
+		}
 
 		try {
-			
-			if(servidorSMTP != null && !servidorSMTP.equals(ConstantesSistema.SMTP_INVALIDO) ){
-				
-				Fachada fachada = Fachada.getInstancia();
-				
-				//seta o nome do abreviado da empresa no nome do remetente
-				SistemaParametro sistemaParametro = fachada.pesquisarParametrosDoSistema();
-				String nomeDestinatario = sistemaParametro.getNomeAbreviadoEmpresa();
-				Properties props = System.getProperties();
+			// Criar uma nova mensagem
+			Properties props = System.getProperties();
+			props.put("mail.smtp.host", servidorSMTP);
+			Session session = Session.getDefaultInstance(props, null);
+			Message msg = new MimeMessage(session);
 
-				props.put("mail.smtp.host", servidorSMTP);
+			// Define o nome do abreviado da empresa como nome do remetente
+			SistemaParametro sistemaParametro = Fachada.getInstancia().pesquisarParametrosDoSistema();
+			String nomeRemetente = sistemaParametro.getNomeAbreviadoEmpresa();
 
-				Session session = Session.getDefaultInstance(props, null);
+			// Define os parâmetros da mensagem
+			msg.setFrom(new InternetAddress(remetente, nomeRemetente));
+			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario, false));
+			msg.setSubject(assunto);
+			msg.setText(body);
+			msg.setSentDate(new Date());
 
-				// -- Create a new message --
-				Message msg = new MimeMessage(session);
-
-				// -- Set the FROM and TO fields --
-				msg.setFrom(new InternetAddress(remetente, nomeDestinatario));
-				msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(
-						destinatario, false));
-
-				// -- We could include CC recipients too --
-				// if (cc != null)
-				// msg.setRecipients(Message.RecipientType.CC
-				// ,InternetAddress.parse(cc, false));
-
-				// -- Set the subject and body text --
-				msg.setSubject(assunto);
-				msg.setText(body);
-
-				// -- Set some other header information --
-				msg.setSentDate(new Date());
-
-				// -- Send the message --
-				Transport.send(msg);
-			}
-
+			// Envia a mensagem
+			Transport.send(msg);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new ErroEmailException("Erro no envio de mensagem");
-			
 		}
 	}
 
@@ -311,78 +286,80 @@ public final class ServicosEmail implements Serializable {
 		}
 	}
 
-	public static void enviarMensagemArquivoAnexado(String destinatario,
-		String from, 
-		String subject, 
-		String body,
-		File arquivo) throws Exception {
-		
-		if(servidorSMTP != null && !servidorSMTP.equals(ConstantesSistema.SMTP_INVALIDO) ){
-			
-			Properties props = System.getProperties();
-			
-			Fachada fachada = Fachada.getInstancia();
-			
-			//seta o nome do abreviado da empresa no nome do remetente
-			SistemaParametro sistemaParametro = fachada.pesquisarParametrosDoSistema();
-			String nameFrom = sistemaParametro.getNomeAbreviadoEmpresa();
+	/**
+	 * Método que envia mensagens com anexo pelo protocolo SMTP
+	 * 
+	 * @param remetente Endereço do remetente
+	 * @param destinatario Endereço do destinatário
+	 * @param assunto Assunto da mensagem
+	 * @param body Corpo da mensagem
+	 * @param arquivo Anexo da mensagem
+	 * @param nomeArquivo Nome do anexo da mensagem
+	 * 
+	 * @exception ErroEmailException
+	 */
+	public static void enviarMensagemArquivoAnexado(String remetente, String destinatario,
+			String assunto, String body, File arquivo) throws ErroEmailException {
+		enviarMensagemArquivoAnexado(remetente, destinatario, assunto, body, arquivo, null);
+	}
 
-			// -- Attaching to default Session, or we could start a new one --
-
-			props.put("mail.smtp.host", servidorSMTP);
-
-			Session session = Session.getDefaultInstance(props, null);
-
-			// -- Create a new message --
-			Message msg = new MimeMessage(session);
-
-			// -- Set the FROM and TO fields --
-			msg.setFrom(new InternetAddress(from, nameFrom));
-			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(
-					destinatario, false));
-
-			// -- We could include CC recipients too --
-			// if (cc != null)
-			// msg.setRecipients(Message.RecipientType.CC
-			// ,InternetAddress.parse(cc, false));
-
-			// -- Set the subject and body text --
-			msg.setSubject(subject);
-
-			// msg.setText(body);
-
-			// Cria uma parte referente a mensagem
-			BodyPart messageBodyPart = new MimeBodyPart();
-
-			// Preenche a mensagem
-
-			messageBodyPart.setText(body);
-
-			Multipart multipart = new MimeMultipart();
-
-			multipart.addBodyPart(messageBodyPart);
-
-			// Parte com attachment
-
-			messageBodyPart = new MimeBodyPart();
-
-			DataSource source = new FileDataSource(arquivo);
-
-			messageBodyPart.setDataHandler(new DataHandler(source));
-			messageBodyPart.setFileName(source.getName());
-			multipart.addBodyPart(messageBodyPart);
-
-			// Insere as partes na mensagem
-			msg.setContent(multipart);
-
-			// -- Set some other header information --
-			msg.setSentDate(new Date());
-
-			// -- Send the message --
-			Transport.send(msg);
-
+	/**
+	 * Método que envia mensagens com anexo pelo protocolo SMTP
+	 * 
+	 * @param remetente Endereço do remetente
+	 * @param destinatario Endereço do destinatário
+	 * @param assunto Assunto da mensagem
+	 * @param body Corpo da mensagem
+	 * @param arquivo Anexo da mensagem
+	 * 
+	 * @exception ErroEmailException
+	 */
+	public static void enviarMensagemArquivoAnexado(String remetente, String destinatario,
+			String assunto, String body, File arquivo, String nomeArquivo) throws ErroEmailException {
+		if(servidorSMTP == null || servidorSMTP.equals(ConstantesSistema.SMTP_INVALIDO) ){
+			return;
 		}
 
+		try {
+			// Criar uma nova mensagem
+			Properties props = System.getProperties();
+			props.put("mail.smtp.host", servidorSMTP);
+			Session session = Session.getDefaultInstance(props, null);
+			Message msg = new MimeMessage(session);
+
+			// Define o nome do abreviado da empresa como nome do remetente
+			SistemaParametro sistemaParametro = Fachada.getInstancia().pesquisarParametrosDoSistema();
+			String nomeRemetente = sistemaParametro.getNomeAbreviadoEmpresa();
+
+			// Define os parâmetros da mensagem
+			msg.setFrom(new InternetAddress(remetente, nomeRemetente));
+			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario, false));
+			msg.setSubject(assunto);
+			msg.setSentDate(new Date());
+
+			// Define corpo da mensagem com anexo
+			Multipart multipart = new MimeMultipart();
+
+			// Parte com o texto
+			BodyPart bodyPart = new MimeBodyPart();
+			bodyPart.setText(body);
+			multipart.addBodyPart(bodyPart);
+
+			// Parte com o anexo
+			bodyPart = new MimeBodyPart();
+			DataSource source = new FileDataSource(arquivo);
+			bodyPart.setDataHandler(new DataHandler(source));
+			bodyPart.setFileName(nomeArquivo == null ? source.getName() : nomeArquivo);
+			multipart.addBodyPart(bodyPart);
+
+			msg.setContent(multipart);
+
+			// Envia a mensagem
+			Transport.send(msg);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new ErroEmailException("Erro no envio de mensagem");
+		}
 	}
 
 	/**

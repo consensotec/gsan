@@ -75,37 +75,13 @@
 */  
 package gcom.batch;
 
-import gcom.atendimentopublico.ordemservico.Atividade;
-import gcom.cadastro.imovel.ControladorImovelLocal;
-import gcom.cadastro.imovel.ControladorImovelLocalHome;
-import gcom.cadastro.sistemaparametro.SistemaParametro;
-import gcom.faturamento.ControladorFaturamentoLocal;
-import gcom.faturamento.ControladorFaturamentoLocalHome;
-import gcom.faturamento.FaturamentoAtivCronRota;
-import gcom.faturamento.FaturamentoAtividade;
-import gcom.faturamento.FaturamentoGrupo;
-import gcom.faturamento.FiltroFaturamentoAtivCronRota;
-import gcom.faturamento.FiltroFaturamentoGrupo;
-import gcom.faturamento.IRepositorioFaturamento;
-import gcom.faturamento.RepositorioFaturamentoHBM;
 import gcom.gui.GcomAction;
-import gcom.micromedicao.ControladorMicromedicaoLocal;
-import gcom.micromedicao.ControladorMicromedicaoLocalHome;
-import gcom.micromedicao.FiltroRota;
-import gcom.micromedicao.Rota;
 import gcom.util.ConstantesJNDI;
-import gcom.util.ControladorUtilLocal;
-import gcom.util.ControladorUtilLocalHome;
 import gcom.util.ServiceLocator;
-import gcom.util.ServiceLocatorException;
 import gcom.util.SistemaException;
-import gcom.util.Util;
-import gcom.util.filtro.ParametroSimples;
+import gcom.webservice.totem.ControladorTotemLocal;
+import gcom.webservice.totem.ControladorTotemLocalHome;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import javax.ejb.CreateException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -113,129 +89,29 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-
 public class ExecutarBatch extends GcomAction {
-	
-	
-	protected IRepositorioFaturamento repositorioFaturamento;
 
-	public ActionForward execute(ActionMapping actionMapping,
-			ActionForm actionForm, HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) {
-		
-		try{
-		
-			SistemaParametro sistemaParametro = this.getControladorUtil().pesquisarParametrosDoSistema();
-			
-			repositorioFaturamento = RepositorioFaturamentoHBM.getInstancia();
-			
-			FiltroFaturamentoGrupo filtro = new FiltroFaturamentoGrupo();
-			filtro.adicionarParametro( new ParametroSimples( FiltroFaturamentoGrupo.ID, 22 ) );
-			FaturamentoGrupo faturamentoGrupo = ( FaturamentoGrupo ) Util.retonarObjetoDeColecao( this.getControladorUtil().pesquisar( filtro , FaturamentoGrupo.class.getName() ) );
-			
-			faturamentoGrupo.setAnoMesReferencia( 201509 );
-			
-			Collection<Integer> colImovel = new ArrayList<Integer>();
-			colImovel.add( 3368810 );
-			
-			FiltroFaturamentoAtivCronRota filtroFaturamentoAtivCronRota = new FiltroFaturamentoAtivCronRota();
-			filtroFaturamentoAtivCronRota.adicionarParametro( new ParametroSimples( FiltroFaturamentoAtivCronRota.COMP_ID_ROTA_ID, 2665 ) );
-			filtroFaturamentoAtivCronRota.adicionarParametro( new ParametroSimples( FiltroFaturamentoAtivCronRota.COMP_ID_FATURAMENTO_ATIVIDADE_CRONOGRAMA_DATA_REALIZACAO, "2015-09-03 00:42:04.309" ) );
-			filtroFaturamentoAtivCronRota.adicionarCaminhoParaCarregamentoEntidade( "rota" );
-			Collection<FaturamentoAtivCronRota> colFaturamentoAtivCronRota = ( Collection<FaturamentoAtivCronRota> ) this.getControladorUtil().pesquisar( filtroFaturamentoAtivCronRota , FaturamentoAtivCronRota.class.getName() );
-			
-			this.getControladorMicromedicao().consistirLeiturasCalcularConsumosImoveis(faturamentoGrupo, colImovel);				
-			this.getControladorFaturamento().faturarGrupoFaturamento( colFaturamentoAtivCronRota, faturamentoGrupo, FaturamentoAtividade.FATURAR_GRUPO, -1 );
-			
-
-		} catch ( Exception e ){
-			e.printStackTrace();
-			
-		}
-		
+	public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response) {
+		//getControladorTotem().teste();
 		return null;
 	}
 
-	
-	
-	private ControladorUtilLocal getControladorUtil() {
-		ControladorUtilLocalHome localHome = null;
-		ControladorUtilLocal local = null;
-
+	private ControladorTotemLocal getControladorTotem() {
+		ControladorTotemLocalHome localHome = null;
+		ControladorTotemLocal local = null;
 		ServiceLocator locator = null;
+
 		try {
 			locator = ServiceLocator.getInstancia();
-			localHome = (ControladorUtilLocalHome) locator
-					.getLocalHome(ConstantesJNDI.CONTROLADOR_UTIL_SEJB);
+//			localHome = (ControladorTotemLocalHome) locator
+//					.getLocalHomePorEmpresa(ConstantesJNDI.CONTROLADOR_ATUALIZACAO_CADASTRAL_SEJB);
+			localHome = (ControladorTotemLocalHome) locator
+					.getLocalHome(ConstantesJNDI.CONTROLADOR_TOTEM_SEJB);
 
 			local = localHome.create();
-
 			return local;
-		} catch (CreateException e) {
-			throw new SistemaException(e);
-		} catch (ServiceLocatorException e) {
-			throw new SistemaException(e);
-		}
-	}
-
-
-	
-	private ControladorMicromedicaoLocal getControladorMicromedicao() {
-		ControladorMicromedicaoLocalHome localHome = null;
-		ControladorMicromedicaoLocal local = null;
-
-		ServiceLocator locator = null;
-		try {
-			locator = ServiceLocator.getInstancia();
-			localHome = (ControladorMicromedicaoLocalHome) locator
-					.getLocalHomePorEmpresa(ConstantesJNDI.CONTROLADOR_MICROMEDICAO_SEJB);
-
-			local = localHome.create();
-
-			return local;
-		} catch (CreateException e) {
-			throw new SistemaException(e);
-		} catch (ServiceLocatorException e) {
-			throw new SistemaException(e);
-		}
-	}
-	
-	private ControladorImovelLocal getControladorImovel() {
-		ControladorImovelLocalHome localHome = null;
-		ControladorImovelLocal local = null;
-
-		ServiceLocator locator = null;
-		try {
-			locator = ServiceLocator.getInstancia();
-			localHome = (ControladorImovelLocalHome) locator
-					.getLocalHome(ConstantesJNDI.CONTROLADOR_IMOVEL_SEJB);
-
-			local = localHome.create();
-
-			return local;
-		} catch (CreateException e) {
-			throw new SistemaException(e);
-		} catch (ServiceLocatorException e) {
-			throw new SistemaException(e);
-		}
-	}
-	
-	private ControladorFaturamentoLocal getControladorFaturamento() {
-		ControladorFaturamentoLocalHome localHome = null;
-		ControladorFaturamentoLocal local = null;
-
-		ServiceLocator locator = null;
-		try {
-			locator = ServiceLocator.getInstancia();
-			localHome = (ControladorFaturamentoLocalHome) locator
-					.getLocalHomePorEmpresa(ConstantesJNDI.CONTROLADOR_FATURAMENTO_SEJB);
-
-			local = localHome.create();
-
-			return local;
-		} catch (CreateException e) {
-			throw new SistemaException(e);
-		} catch (ServiceLocatorException e) {
+		} catch (Exception e) {
 			throw new SistemaException(e);
 		}
 	}

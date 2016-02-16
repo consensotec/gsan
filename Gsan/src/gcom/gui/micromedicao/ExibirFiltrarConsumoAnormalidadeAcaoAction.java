@@ -86,6 +86,8 @@ import gcom.cadastro.imovel.FiltroCategoria;
 import gcom.cadastro.imovel.FiltroImovelPerfil;
 import gcom.cadastro.imovel.ImovelPerfil;
 import gcom.fachada.Fachada;
+import gcom.faturamento.conta.ContaMotivoRevisao;
+import gcom.faturamento.conta.FiltroContaMotivoRevisao;
 import gcom.gui.GcomAction;
 import gcom.micromedicao.consumo.ConsumoAnormalidade;
 import gcom.micromedicao.consumo.FiltroConsumoAnormalidade;
@@ -200,6 +202,11 @@ public class ExibirFiltrarConsumoAnormalidadeAcaoAction extends GcomAction {
 			this.pesquisarServicoTipo(form,objetoConsulta, httpServletRequest);
 			
 		}
+		
+		//Colecação motivo revisao
+		FiltroContaMotivoRevisao filtroContaMotivoRevisao = new FiltroContaMotivoRevisao();
+		Collection colecaoMotivoRevisao = fachada.pesquisar(filtroContaMotivoRevisao, ContaMotivoRevisao.class.getName());
+		sessao.setAttribute("colecaoMotivoRevisao",colecaoMotivoRevisao);
 		
 		//coleção tipo de solicitação
 		   

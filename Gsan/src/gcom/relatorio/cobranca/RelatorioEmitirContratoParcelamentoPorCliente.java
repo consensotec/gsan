@@ -31,6 +31,11 @@ public class RelatorioEmitirContratoParcelamentoPorCliente extends TarefaRelator
 		super(usuario, ConstantesRelatorios.RELATORIO_EMITIR_CONTRATO_PARCELAMENTO_POR_CLIENTE);
 	}
 
+	@Deprecated
+	public RelatorioEmitirContratoParcelamentoPorCliente() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

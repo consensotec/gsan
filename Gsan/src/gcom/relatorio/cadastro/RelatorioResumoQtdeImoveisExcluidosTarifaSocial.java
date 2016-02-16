@@ -109,6 +109,12 @@ public class RelatorioResumoQtdeImoveisExcluidosTarifaSocial extends TarefaRelat
 		super(usuario, ConstantesRelatorios.RELATORIO_RESUMO_QTDE_IMOVEIS_EXCLUIDOS_TARIFA_SOCIAL);
 	}
 	
+	@Deprecated
+	public RelatorioResumoQtdeImoveisExcluidosTarifaSocial() {
+		super(null, "");
+	}
+
+	
 	private Collection<RelatorioResumoQtdeImoveisExcluidosTarifaSocialBean> inicializarBeanRelatorio(
 			Collection colecaoQtdeImoveisExcluidostarifaSocialHelper) {
 		

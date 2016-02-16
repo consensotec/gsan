@@ -110,6 +110,11 @@ public class RelatorioImoveisProgramasEspeciaisSintetico extends TarefaRelatorio
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_PROGRAMAS_ESPECIAIS_SINTETICO);
 	}
 
+	@Deprecated
+	public RelatorioImoveisProgramasEspeciaisSintetico() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

@@ -123,6 +123,12 @@ public class RelatorioManterPerfilParcelamento extends TarefaRelatorio {
 	public RelatorioManterPerfilParcelamento(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_PERFIL_PARCELAMENTO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterPerfilParcelamento() {
+		super(null, "");
+	}
+
 
 	/**
 	 * < <Descrição do método>>

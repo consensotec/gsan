@@ -2058,5 +2058,151 @@ public class RepositorioClienteImovelHBM implements IRepositorioClienteImovel {
 		return colecaoCliente;
 	}
 	
+	/**
+	 * 
+	 *Retorna o cliente_Imovel proprietario a partir do id do imovel
+	 *
+	 * @author Flávio Leonardo
+	 * @date 03/11/2015
+	 *
+	 * @param idImovel
+	 * @return
+	 * @throws ErroRepositorioException 
+	 */
+	public ClienteImovel retornaClienteImovelProprietario(Integer idImovel) throws ErroRepositorioException{
+		Cliente cliente = null;
+		ClienteImovel clienteImovel = null;
+		
+		Session session = HibernateUtil.getSession();
+		String consulta = null;
+		Object[] objetoCliente = null;
+		Collection colecaoClienteImovel = null;
+
+		try {
+
+			consulta = "select "
+				+ "cliente.clie_id as idCliente,"
+				+ " cliente.clie_nmcliente as nomeCliente, "
+				+ " clienteImovel.clim_id as idClienteImovel,"
+				+ " clienteImovel.clim_icnomeconta as icNomeConta "
+				+ " from cadastro.cliente_imovel clienteImovel"
+				+ " inner join cadastro.cliente cliente on cliente.clie_id = clienteImovel.clie_id"
+				+ " where clienteImovel.imov_id ="
+				+ idImovel
+				+ " and clienteImovel.crtp_id = "
+				+ ClienteRelacaoTipo.PROPRIETARIO
+				+ " and clienteImovel.clim_dtrelacaofim is null";
+
+			colecaoClienteImovel = session.createSQLQuery(consulta)
+					.addScalar("idCliente", Hibernate.INTEGER)
+					.addScalar("nomeCliente", Hibernate.STRING)
+					.addScalar("idClienteImovel", Hibernate.INTEGER)
+					.addScalar("icNomeConta", Hibernate.SHORT)
+					.list();
+			
+			if(colecaoClienteImovel != null && !colecaoClienteImovel.isEmpty()) {
+				cliente = new Cliente();
+				clienteImovel = new ClienteImovel();
+				
+				objetoCliente = (Object[])colecaoClienteImovel.iterator().next();
+				
+				if(objetoCliente[0] != null){
+					cliente.setId((Integer)objetoCliente[0]);
+				}
+				if(objetoCliente[1] != null){
+					cliente.setNome((String)objetoCliente[1]);
+				}
+				if(objetoCliente[2] != null){
+					clienteImovel.setId((Integer) objetoCliente[2]);
+				}
+				if(objetoCliente[3] != null){
+					clienteImovel.setIndicadorNomeConta((Short) objetoCliente[3]);
+				}
+				clienteImovel.setCliente(cliente);
+			}
+		} catch (HibernateException e) {
+			// levanta a exceção para a próxima camada
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			// fecha a sessão
+			HibernateUtil.closeSession(session);
+		}
+		
+		return clienteImovel;
+	}
+	
+	/**
+	 * 
+	 * Retorna o cliente usuário
+	 *
+	 * @author Flávio Leonardo
+	 * @date 03/11/2015
+	 *
+	 * @param idImovel
+	 * @return
+	 * @throws ErroRepositorioException 
+	 */
+	public ClienteImovel retornaClienteImovelResponsavel(Integer idImovel) throws ErroRepositorioException{
+		
+		Session session = HibernateUtil.getSession();
+		String consulta = null;
+		Cliente cliente = null;
+		ClienteImovel clienteImovel = null;
+		Object[] objetoCliente = null;
+		Collection colecaoClienteImovel = null;
+		
+		try {
+
+			consulta = "select "
+				+ "cliente.clie_id as idCliente,"
+				+ " cliente.clie_nmcliente as nomeCliente, "
+				+ " clienteImovel.clim_id as idClienteImovel,"
+				+ " clienteImovel.clim_icnomeconta as icNomeConta "
+				+ " from cadastro.cliente_imovel clienteImovel "
+				+ " inner join cadastro.cliente cliente on cliente.clie_id = clienteImovel.clie_id"
+				+ " where clienteImovel.imov_id ="
+				+ idImovel
+				+ " and clienteImovel.crtp_id = "
+				+ ClienteRelacaoTipo.RESPONSAVEL
+				+ " and clienteImovel.clim_dtrelacaofim is null";
+
+			colecaoClienteImovel = session.createSQLQuery(consulta)
+					.addScalar("idCliente", Hibernate.INTEGER)
+					.addScalar("nomeCliente", Hibernate.STRING)
+					.addScalar("idClienteImovel", Hibernate.INTEGER)
+					.addScalar("icNomeConta", Hibernate.SHORT)
+					.list();
+
+			if(colecaoClienteImovel != null && !colecaoClienteImovel.isEmpty()) {
+				cliente = new Cliente();
+				clienteImovel = new ClienteImovel();
+				
+				objetoCliente = (Object[])colecaoClienteImovel.iterator().next();
+				
+				if(objetoCliente[0] != null){
+					cliente.setId((Integer)objetoCliente[0]);
+				}
+				if(objetoCliente[1] != null){
+					cliente.setNome((String)objetoCliente[1]);
+				}
+				if(objetoCliente[2] != null){
+					clienteImovel.setId((Integer) objetoCliente[2]);
+				}
+				if(objetoCliente[3] != null){
+					clienteImovel.setIndicadorNomeConta((Short) objetoCliente[3]);
+				}
+				clienteImovel.setCliente(cliente);
+			}
+		} catch (HibernateException e) {
+			// levanta a exceção para a próxima camada
+			throw new ErroRepositorioException(e, "Erro no Hibernate");
+		} finally {
+			// fecha a sessão
+			HibernateUtil.closeSession(session);
+		}
+		
+		return clienteImovel;
+	}
+	
 }
 

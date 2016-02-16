@@ -122,6 +122,11 @@ public class RelatorioManterCustoPavimentoPorRepavimentadora extends TarefaRelat
 	public RelatorioManterCustoPavimentoPorRepavimentadora(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_CUSTO_PAVIMENTO_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterCustoPavimentoPorRepavimentadora() {
+		super(null, "");
+	}
 
 	public Object executar() throws TarefaException {
 

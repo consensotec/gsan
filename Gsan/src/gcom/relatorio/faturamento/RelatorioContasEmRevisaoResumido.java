@@ -36,6 +36,11 @@ public class RelatorioContasEmRevisaoResumido extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_CONTAS_EM_REVISAO_RESUMIDO);
 	}
 
+	@Deprecated
+	public RelatorioContasEmRevisaoResumido() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

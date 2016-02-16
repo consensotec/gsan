@@ -571,7 +571,7 @@ public interface ControladorContratoParcelamentoLocal extends javax.ejb.EJBLocal
 	 * @data 29/08/2011
 	 */
 	public InserirContratoParcelamentoValoresParcelasHelper calcularValoresParcelasContratoParcelamento(
-			BigDecimal valorContaSelecaoTotal, BigDecimal acrescimo, String indicadorDebitoAcresc,
+			BigDecimal valorContaSelecaoTotal, BigDecimal acrescimo, BigDecimal valorDebitoACobrar, String indicadorDebitoAcresc,
 			String indicadorParcelJuros, BigDecimal jurosBigDec, int numeroParcelInicial, int numeroParcelFinal) 
 		throws ControladorException;
 
@@ -585,7 +585,7 @@ public interface ControladorContratoParcelamentoLocal extends javax.ejb.EJBLocal
 	 * @data 29/08/2011
 	 */
 	public InserirContratoParcelamentoValoresParcelasHelper calcularValoresParcelasContratoParcelamentoRD(
-			BigDecimal valorContaSelecaoTotal, BigDecimal valorContaComAcrescimo, String indicadorDebitoAcresc,
+			BigDecimal valorContaSelecaoTotal, BigDecimal valorContaComAcrescimo, BigDecimal valorDebitoACobrar, String indicadorDebitoAcresc,
 			String indicadorParcelJuros, ContratoParcelamento contratoParcelamento, 
 			QuantidadePrestacoes quantidadePrestacoes) 
 		throws ControladorException;

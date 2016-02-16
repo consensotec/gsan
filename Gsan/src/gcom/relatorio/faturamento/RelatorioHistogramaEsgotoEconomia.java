@@ -116,6 +116,11 @@ public class RelatorioHistogramaEsgotoEconomia extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_EMITIR_HISTOGRAMA_ESGOTO_ECONOMIA);
 	}
 
+	@Deprecated
+	public RelatorioHistogramaEsgotoEconomia() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

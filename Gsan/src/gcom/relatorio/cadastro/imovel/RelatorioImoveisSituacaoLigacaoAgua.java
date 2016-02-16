@@ -108,6 +108,11 @@ public class RelatorioImoveisSituacaoLigacaoAgua extends TarefaRelatorio {
 		super(usuario, ConstantesRelatorios.RELATORIO_IMOVEIS_SITUACAO_LIGACAO_AGUA);
 	}
 
+	@Deprecated
+	public RelatorioImoveisSituacaoLigacaoAgua() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

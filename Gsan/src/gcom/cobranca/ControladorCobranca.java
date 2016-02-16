@@ -232,6 +232,7 @@ import gcom.cobranca.bean.ConsultarTransferenciasDebitoHelper;
 import gcom.cobranca.bean.ContaValoresHelper;
 import gcom.cobranca.bean.ContasRevisaoEntradaParcelamentoHelper;
 import gcom.cobranca.bean.DadosAmortizacaoDividaAtivaHelper;
+import gcom.cobranca.bean.DadosAmortizacaoDividaAtivaSinteticoHelper;
 import gcom.cobranca.bean.DadosCobrancaDocumentoHelper;
 import gcom.cobranca.bean.DadosConsultaNegativacaoHelper;
 import gcom.cobranca.bean.DadosParcelamentoDividaAtivaHelper;
@@ -261,6 +262,8 @@ import gcom.cobranca.bean.ParcelamentoCartaoCreditoHelper;
 import gcom.cobranca.bean.ParcelamentoRelatorioHelper;
 import gcom.cobranca.bean.PesquisarQtdeRotasSemCriteriosParaAcoesCobranca;
 import gcom.cobranca.bean.RelatorioBoletimMedicaoAcompanhamentoHelper;
+import gcom.cobranca.bean.RelatorioConsultarArquivoRetornoCobrancaBean;
+import gcom.cobranca.bean.RetornoCartaoCreditoHelper;
 import gcom.cobranca.bean.SituacaoEspecialCobrancaHelper;
 import gcom.cobranca.bean.TransferenciasDebitoHelper;
 import gcom.cobranca.bean.VerificarCriterioCobrancaParaImovelHelper;
@@ -280,6 +283,7 @@ import gcom.cobranca.parcelamento.FiltroParcelamentoPerfil;
 import gcom.cobranca.parcelamento.FiltroParcelamentoQuantidadePrestacao;
 import gcom.cobranca.parcelamento.FiltroParcelamentoQuantidadePrestacaoSituacaoLigacaoAgua;
 import gcom.cobranca.parcelamento.FiltroParcelamentoQuantidadeReparcelamento;
+import gcom.cobranca.parcelamento.PagamentoCartaoCreditoItem;
 import gcom.cobranca.parcelamento.ParcDesctoInativVista;
 import gcom.cobranca.parcelamento.Parcelamento;
 import gcom.cobranca.parcelamento.ParcelamentoDescontoAntiguidade;
@@ -365,6 +369,9 @@ import gcom.gui.cobranca.cobrancaporresultado.MovimentarOrdemServicoGerarOSHelpe
 import gcom.gui.cobranca.cobrancaporresultado.RetirarImoveisContasEmpresaCobrancaHelper;
 import gcom.gui.portal.caema.RelatorioDocumentosParcelamentoPortalCaema;
 import gcom.gui.portal.caer.RelatorioDocumentosParcelamentoPortalCaer;
+import gcom.gui.portal.comum.gateway.BraspagService;
+import gcom.gui.portal.comum.gateway.BraspagServiceWrapper;
+import gcom.gui.portal.comum.gateway.pojo.BraspagCancelamento;
 import gcom.gui.relatorio.atendimentopublico.FiltrarRelatorioAcompanhamentoBoletimMedicaoHelper;
 import gcom.gui.relatorio.cobranca.FaixaHelper;
 import gcom.gui.relatorio.cobranca.FiltroRelatorioDocumentosAReceberHelper;
@@ -446,6 +453,7 @@ import gcom.spcserasa.ControladorSpcSerasaLocal;
 import gcom.spcserasa.ControladorSpcSerasaLocalHome;
 import gcom.spcserasa.IRepositorioSpcSerasa;
 import gcom.spcserasa.RepositorioSpcSerasaHBM;
+import gcom.tarefa.TarefaRelatorio;
 import gcom.util.ConstantesJNDI;
 import gcom.util.ConstantesSistema;
 import gcom.util.ControladorException;
@@ -460,6 +468,7 @@ import gcom.util.ServiceLocatorException;
 import gcom.util.SistemaException;
 import gcom.util.Util;
 import gcom.util.ZipUtil;
+import gcom.util.email.ErroEmailException;
 import gcom.util.email.ServicosEmail;
 import gcom.util.filtro.ComparacaoTexto;
 import gcom.util.filtro.ConectorOr;
@@ -508,9 +517,10 @@ import javax.ejb.CreateException;
 import javax.ejb.EJBException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
-import javax.mail.SendFailedException;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.SerializationUtils;
 import org.hibernate.cache.HashtableCache;
 
 import br.com.danhil.BarCode.Interleaved2of5;
@@ -609,8 +619,268 @@ public class ControladorCobranca implements SessionBean {
 		this.sessionContext = sessionContext;
 	}
 	
+	public CobrancaDocumento gerarExtratoDebito( 
+			String matricula, 
+			String key, 
+			String contas, 
+			String debitos,
+			String icAcrescimosImpontualidade,
+			String icCobrarEmissao,
+			Usuario usuarioLogado) throws ControladorException{
+		
+		SistemaParametro sistemaParametro = getControladorUtil().pesquisarParametrosDoSistema();
+		
+    	CobrancaDocumento documentoCobranca = null;
+    	    		
+    	Imovel imovel = getControladorImovel().pesquisarImovel(Integer.parseInt( matricula ) );
+    	
+    	SistemaParametro sp = this.getControladorUtil().pesquisarParametrosDoSistema();
+    	Integer indicadorAcrescimoImpontualidade = Integer.parseInt( icAcrescimosImpontualidade );
+    	
+    	FiltroConta filtroConta = new FiltroConta();    	
+    	List<String> lContas = Arrays.asList( contas.split( "," ) );    	
+    	filtroConta.adicionarParametro( new ParametroSimplesIn( FiltroConta.ID , lContas ) );
+    	Collection<Conta> colContas = this.getControladorUtil().pesquisar( filtroConta , Conta.class.getName() );    	
+    	Collection<ContaValoresHelper> colecaoContaValores = new ArrayList<ContaValoresHelper>();
+    	
+    	for (Conta conta : colContas) {		
+    		ContaValoresHelper helper = new ContaValoresHelper();
+    		helper.setConta( conta );
+    		colecaoContaValores.add( helper );
+		}
+
+    	ContaValoresHelper dadosConta = null;
+	
+		BigDecimal valorConta = new BigDecimal("0.00");
+		BigDecimal valorAcrescimo = new BigDecimal("0.00");
+		BigDecimal valorAgua = new BigDecimal("0.00");
+		BigDecimal valorEsgoto = new BigDecimal("0.00");
+		BigDecimal valorDebito = new BigDecimal("0.00");
+		BigDecimal valorCredito = new BigDecimal("0.00");
+		BigDecimal valorImposto = new BigDecimal("0.00");
+		BigDecimal valorAtualizacaoMonetaria = new BigDecimal("0.00");
+		BigDecimal valorJurosMora = new BigDecimal("0.00");
+		BigDecimal valorMulta = new BigDecimal("0.00");
+	
+		// percorre a colecao de conta somando o valor para obter um valor total		
+		if (colecaoContaValores != null && !colecaoContaValores.isEmpty()) {
+			java.util.Iterator<ContaValoresHelper> colecaoContaValoresIterator = colecaoContaValores.iterator();
+			// percorre a colecao de conta somando o valor para obter um valor total
+			while (colecaoContaValoresIterator.hasNext()) {	
+				dadosConta = (ContaValoresHelper) colecaoContaValoresIterator.next();
+				
+				if ( indicadorAcrescimoImpontualidade != null && indicadorAcrescimoImpontualidade.intValue() == ConstantesSistema.SIM ){
+					
+					// Calcula o valor das multas cobradas para a conta
+					BigDecimal valorMultasCobradas = null;
+					valorMultasCobradas = getControladorFaturamento()
+							.pesquisarValorMultasCobradas(dadosConta.getConta().getId());
+	
+					CalcularAcrescimoPorImpontualidadeHelper calcularAcrescimoPorImpontualidade = null;
+					
+			    	FiltroPagamento filtroPagamento = new FiltroPagamento();    	
+			    	filtroPagamento.adicionarParametro( new ParametroSimples( FiltroPagamento.CONTA_ID, dadosConta.getConta().getId()  ) );
+			    	Collection<Pagamento> colPagamentos = this.getControladorUtil().pesquisar( filtroPagamento , Pagamento.class.getName() );
+			    	
+			    	Date dataPagamento = null;
+			    	
+			    	if ( colPagamentos != null && !colPagamentos.isEmpty() ){
+			    		Pagamento pagamento = ( Pagamento ) Util.retonarObjetoDeColecao( colPagamentos );
+			    				
+			    		dataPagamento = pagamento.getDataPagamento();			    				
+			    	}
+					
+					calcularAcrescimoPorImpontualidade = 
+							this.calcularAcrescimoPorImpontualidade(
+									dadosConta.getConta().getReferencia(), 
+									dadosConta.getConta().getDataVencimentoConta(), 
+									dataPagamento,
+									dadosConta.getValorTotalConta(), 
+									valorMultasCobradas, 
+									dadosConta.getConta().getIndicadorCobrancaMulta(),
+									sp.getAnoMesArrecadacao()+"", 
+									dadosConta.getConta().getId(), 
+									ConstantesSistema.INDICADOR_ARRECADACAO_DESATIVO,
+									null);
+	
+					// set os Valores
+					if (calcularAcrescimoPorImpontualidade != null) {
+	
+						// seta valor de multa
+						dadosConta
+								.setValorMulta(calcularAcrescimoPorImpontualidade
+										.getValorMulta());
+	
+						// seta valor de juros mora
+						dadosConta
+								.setValorJurosMora(calcularAcrescimoPorImpontualidade
+										.getValorJurosMora());
+	
+						// seta valor de atualizacao monetaria
+						dadosConta
+								.setValorAtualizacaoMonetaria(calcularAcrescimoPorImpontualidade
+										.getValorAtualizacaoMonetaria());
+	
+					}
+				}
+				
+				valorConta = valorConta.add(dadosConta.getConta().getValorTotal());
+				valorAcrescimo = valorAcrescimo.add(dadosConta.getValorTotalContaValores());
+				valorAgua = valorAgua.add(dadosConta.getConta().getValorAgua());
+				valorEsgoto = valorEsgoto.add(dadosConta.getConta().getValorEsgoto());
+				valorDebito = valorDebito.add(dadosConta.getConta().getDebitos());
+				valorCredito = valorCredito.add(dadosConta.getConta().getValorCreditos());
+				valorImposto = valorImposto.add(dadosConta.getConta().getValorImposto());
+				
+				if (dadosConta.getValorAtualizacaoMonetaria() != null && !dadosConta.getValorAtualizacaoMonetaria().equals("")) {
+					valorAtualizacaoMonetaria.setScale(Parcelamento.CASAS_DECIMAIS,Parcelamento.TIPO_ARREDONDAMENTO);
+					valorAtualizacaoMonetaria = valorAtualizacaoMonetaria.add(dadosConta.getValorAtualizacaoMonetaria().setScale(Parcelamento.CASAS_DECIMAIS,Parcelamento.TIPO_ARREDONDAMENTO));
+				}
+				if (dadosConta.getValorJurosMora() != null	&& !dadosConta.getValorJurosMora().equals("")) {
+					valorJurosMora.setScale(Parcelamento.CASAS_DECIMAIS,Parcelamento.TIPO_ARREDONDAMENTO);
+					valorJurosMora = valorJurosMora.add(dadosConta.getValorJurosMora().setScale(Parcelamento.CASAS_DECIMAIS,Parcelamento.TIPO_ARREDONDAMENTO));
+				}
+				if (dadosConta.getValorMulta() != null && !dadosConta.getValorMulta().equals("")) {
+					valorMulta.setScale(Parcelamento.CASAS_DECIMAIS,Parcelamento.TIPO_ARREDONDAMENTO);
+					valorMulta = valorMulta.add(dadosConta.getValorMulta().setScale(Parcelamento.CASAS_DECIMAIS,Parcelamento.TIPO_ARREDONDAMENTO));
+				}
+			}
+		}
+		
+    	FiltroDebitoACobrar filtroDebitoACobrar = new FiltroDebitoACobrar();    	
+    	List<String> lDebitoACobrars = Arrays.asList( debitos.split( "," ) );    	
+    	filtroDebitoACobrar.adicionarParametro( new ParametroSimplesIn( FiltroDebitoACobrar.ID , lDebitoACobrars ) );
+    	Collection<DebitoACobrar> colecaoDebitoACobrar = this.getControladorUtil().pesquisar( filtroDebitoACobrar , DebitoACobrar.class.getName() ); 		
+		
+
+		//Collection<DebitoACobrar> colecaoDebitoACobrar = colecaoDebitoImovel.getColecaoDebitoACobrar();
+
+		BigDecimal valorDebitoACobrar = new BigDecimal("0.00");
+		DebitoACobrar dadosDebito = null;
+		BigDecimal valorRestanteACobrar = new BigDecimal("0.00");
+		BigDecimal valorTotalRestanteParcelamentosACobrarCurtoPrazo = new BigDecimal("0.00");
+		BigDecimal valorTotalRestanteParcelamentosACobrarLongoPrazo = new BigDecimal("0.00");
+		BigDecimal valorTotalRestanteParcelamentosACobrar = new BigDecimal("0.00");
+		int indiceCurtoPrazo = 0;
+		int indiceLongoPrazo = 1;
+		
+		if (colecaoDebitoACobrar != null && !colecaoDebitoACobrar.isEmpty()) {
+			java.util.Iterator<DebitoACobrar> colecaoDebitoACobrarIterator = colecaoDebitoACobrar.iterator();
+			// percorre a colecao de debito a cobrar somando o valor para obter um valor total
+			while (colecaoDebitoACobrarIterator.hasNext()) {
+
+				dadosDebito = (DebitoACobrar) colecaoDebitoACobrarIterator.next();
+				valorDebitoACobrar = valorDebitoACobrar.add(dadosDebito.getValorTotalComBonus());
+				
+				//Debitos A Cobrar - Parcelamento
+				if (dadosDebito.getFinanciamentoTipo().getId().equals(FinanciamentoTipo.PARCELAMENTO_AGUA)
+						|| dadosDebito.getFinanciamentoTipo().getId().equals(FinanciamentoTipo.PARCELAMENTO_ESGOTO)
+						|| dadosDebito.getFinanciamentoTipo().getId().equals(FinanciamentoTipo.PARCELAMENTO_SERVICO)) {
+					// [SB0001] Obter Valores de Curto e Longo Prazo
+					valorRestanteACobrar = dadosDebito.getValorTotalComBonus();
+
+					BigDecimal[] valoresDeCurtoELongoPrazo = getControladorFaturamento().obterValorACobrarDeCurtoELongoPrazo(
+							dadosDebito.getNumeroPrestacaoDebito(),	
+							dadosDebito.getNumeroPrestacaoCobradasMaisBonus(),
+							valorRestanteACobrar);
+					valorTotalRestanteParcelamentosACobrarCurtoPrazo.setScale(Parcelamento.CASAS_DECIMAIS,Parcelamento.TIPO_ARREDONDAMENTO);
+					valorTotalRestanteParcelamentosACobrarCurtoPrazo = valorTotalRestanteParcelamentosACobrarCurtoPrazo.add(valoresDeCurtoELongoPrazo[indiceCurtoPrazo]);
+					valorTotalRestanteParcelamentosACobrarLongoPrazo.setScale(Parcelamento.CASAS_DECIMAIS,Parcelamento.TIPO_ARREDONDAMENTO);
+					valorTotalRestanteParcelamentosACobrarLongoPrazo = valorTotalRestanteParcelamentosACobrarLongoPrazo.add(valoresDeCurtoELongoPrazo[indiceLongoPrazo]);
+				}
+			}
+			valorTotalRestanteParcelamentosACobrar = valorTotalRestanteParcelamentosACobrarCurtoPrazo.add(valorTotalRestanteParcelamentosACobrarLongoPrazo);
+		}
+		
+		// Soma o valor total dos debitos e subtrai dos creditos
+		BigDecimal valorTotalSemAcrescimo = valorConta.add(valorDebitoACobrar);
+/*		valorTotalSemAcrescimo = valorTotalSemAcrescimo.add(valorGuiaPagamento);
+		valorTotalSemAcrescimo = valorTotalSemAcrescimo.subtract(valorCreditoARealizar);
+*/
+		BigDecimal valorTotalComAcrescimo = valorTotalSemAcrescimo.add(valorAcrescimo);
+		
+	
+		
+		IndicadoresParcelamentoHelper indicadoresParcelamentoHelper = 
+			new IndicadoresParcelamentoHelper();
+		
+		indicadoresParcelamentoHelper.setIndicadorDebitosACobrar(new Integer("1"));
+		indicadoresParcelamentoHelper.setIndicadorCreditoARealizar(new Integer("1"));
+		indicadoresParcelamentoHelper.setIndicadorGuiasPagamento(new Integer("1"));
+		indicadoresParcelamentoHelper.setIndicadorAcrescimosImpotualidade(new Integer("1"));
+		indicadoresParcelamentoHelper.setIndicadorContasRevisao(new Integer("1"));
+		indicadoresParcelamentoHelper.setIndicadorDividaAtiva(new Integer("3"));
+		
+		BigDecimal valorTotalDescontoPagamentoAVista = new BigDecimal( 0.00 );
+		BigDecimal valorPagamentoAVista = new BigDecimal( 0.00 );
+		if(sistemaParametro.getResolucaoDiretoria() != null){
+			try {
+				ImovelPerfil imovelPerfil = this.repositorioImovel.obterImovelPerfil(new Integer(imovel.getId()));				
+	
+				Short numeroReparcelamentoConsecutivos = this.repositorioImovel.consultarNumeroReparcelamentoConsecutivosImovel(imovel.getId());
+				if(numeroReparcelamentoConsecutivos == null){
+					numeroReparcelamentoConsecutivos = new Short("0");
+				}
+				
+				//CARREGANDO O HELPER COM AS INFORMAï¿½ï¿½ES DO PARCELAMENTO
+				ObterOpcoesDeParcelamentoHelper helper = new ObterOpcoesDeParcelamentoHelper(
+						sistemaParametro.getResolucaoDiretoria().getId(), 
+						imovel.getId(), 
+						new BigDecimal("0.00"), 
+						new Integer("3"),// TODO new Integer(consultarDebitoImovelActionForm.getLigacaoAguaId()), 
+						new Integer("1"),// TODO new Integer(consultarDebitoImovelActionForm.getLigacaoEsgotoId()), 
+						imovelPerfil.getId(), 
+						"01/0001", 
+						new Integer("2"),//indicador de restabelecimento 
+						colecaoContaValores, 
+						valorTotalComAcrescimo, 
+						valorMulta, 
+						valorJurosMora, 
+						valorAtualizacaoMonetaria, 
+						new Integer(numeroReparcelamentoConsecutivos.toString()), 
+						null, 
+						usuarioLogado, 
+						valorTotalRestanteParcelamentosACobrar, 
+						Util.formatarMesAnoComBarraParaAnoMes("01/0001"),
+						Util.formatarMesAnoComBarraParaAnoMes("12/9999"), 
+						indicadoresParcelamentoHelper,
+						new BigDecimal("0.00"),false);
+				
+				NegociacaoOpcoesParcelamentoHelper negociacaoOpcoesParcelamentoHelper = 
+					this.calcularValorDosDescontosPagamentoAVista(helper);
+				
+				valorTotalDescontoPagamentoAVista = negociacaoOpcoesParcelamentoHelper.getValorTotalDescontoPagamentoAVista();
+				valorPagamentoAVista = valorTotalComAcrescimo.subtract(valorTotalDescontoPagamentoAVista);
+				
+			} catch (ErroRepositorioException e) {
+				throw new ControladorException("erro.sistema", e);
+			} 
+			
+		} else {
+			valorPagamentoAVista = valorTotalSemAcrescimo;
+		}
+		
+		Short indicadorGeracaoTaxaCobranca = 3;//new Short( icCobrarEmissao ) ;  // no caso do parcelamento sempre 2
+
+		ResolucaoDiretoria resolucaoDiretoria = null;
+		Collection<DebitoCreditoParcelamentoHelper> colecaoAntecipacaoDebitosDeParcelamento = null;
+		Collection<DebitoCreditoParcelamentoHelper> colecaoAntecipacaoCreditosDeParcelamento = null;
+		
+		Boolean incluirTaxaNoExtrato = ( icCobrarEmissao != null && icCobrarEmissao.equals( ConstantesSistema.SIM+"" ) ? true : false );
+		
+    	ExtratoDebitoRelatorioHelper extratoDebitoRelatorioHelper = this.gerarEmitirExtratoDebito(
+				imovel,indicadorGeracaoTaxaCobranca,colecaoContaValores,null,colecaoDebitoACobrar,
+				valorAcrescimo,valorTotalDescontoPagamentoAVista,valorTotalComAcrescimo, 
+				null, null, resolucaoDiretoria, colecaoAntecipacaoDebitosDeParcelamento,
+				colecaoAntecipacaoCreditosDeParcelamento,null,null, null, incluirTaxaNoExtrato );
+
+		documentoCobranca = extratoDebitoRelatorioHelper.getDocumentoCobranca();
+		
+		return documentoCobranca;
+	}	
+	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * [SB0004] ? Incluir Dados da Confirma??o dos Pagamentos
 	 *
@@ -984,7 +1254,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 *
 	 * @author Raphael Rossiter
 	 * @date 18/01/2010
@@ -1030,7 +1300,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * [SB0004] ? Incluir Dados da Confirma??o dos Pagamentos
 	 *
@@ -1169,7 +1439,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * [SB0004] ? Incluir Dados da Confirma??o dos Pagamentos 
 	 *
@@ -1213,7 +1483,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * [SB0004] ? Incluir Dados da Confirma??o dos Pagamentos 
 	 *
@@ -1293,7 +1563,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * [SB0004] ? Incluir Dados da Confirma??o dos Pagamentos 
 	 *
@@ -1362,7 +1632,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * [SB0004] ? Incluir Dados da Confirma??o dos Pagamentos
 	 *
@@ -1436,7 +1706,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * @author Raphael Rossiter
 	 * @date 19/01/2010
@@ -1487,7 +1757,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * [SB0005  ? Calcular Valor da  Dedu??o]
 	 *
@@ -1520,7 +1790,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * [SB0005  ? Calcular Valor da  Dedu??o] 
 	 *
@@ -1580,7 +1850,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 *
 	 * @author Raphael Rossiter,Vivianne Sousa
 	 * @date 12/01/2010, 06/05/2015
@@ -1591,13 +1861,13 @@ public class ControladorCobranca implements SessionBean {
 	 * @throws ControladorException
 	 */
 	public void confirmarCartaoCredito(Integer idParcelamentoSelecionado, 
-			Collection<ParcelamentoCartaoCreditoHelper> colecaoTransacao, Usuario usuarioLogado,BigDecimal valorParcelamento) throws ControladorException{
+			Collection<ParcelamentoCartaoCreditoHelper> colecaoTransacao, Usuario usuarioLogado, BigDecimal valorParcelamento) throws ControladorException{
 		try{
-			//[SB0001?- Incluir Dados da Confirmação do Parcelamento]
+			//[SB0001?- Incluir Dados da Confirmaï¿½ï¿½o do Parcelamento]
 			IncluirConfirmacaoParcelamentoHelper incluirConfirmacaoParcelamentoHelper = 
 					this.incluirDadosConfirmacaoParcelamento(idParcelamentoSelecionado, colecaoTransacao, usuarioLogado);
 				
-			//O sistema deverá atualizar a tabela de PARCELAMENTO_PAGAMENTO_CARTAO_CREDITO
+			//O sistema deverï¿½ atualizar a tabela de PARCELAMENTO_PAGAMENTO_CARTAO_CREDITO
 			Collection<ParcelamentoPagamentoCartaoCredito> colecaoParcelamentoPagamentoCartaoCredito = 
 					incluirConfirmacaoParcelamentoHelper.getColecaoParcelamentoPagamentoCartaoCredito();
 			if(!Util.isVazioOrNulo(colecaoParcelamentoPagamentoCartaoCredito)){
@@ -1606,15 +1876,15 @@ public class ControladorCobranca implements SessionBean {
 				}
 			}
 			
-			//Cria a variável que vai armazenar a forma de cobrança
+			//Cria a variï¿½vel que vai armazenar a forma de cobranï¿½a
 			CobrancaForma cobrancaForma = new CobrancaForma();
 			cobrancaForma.setId(CobrancaForma.COBRANCA_EM_CARTAO_CREDITO);
 			Parcelamento parcelamento = incluirConfirmacaoParcelamentoHelper.getParcelamento();
 			parcelamento.setCobrancaForma(cobrancaForma);
-			//O sistema deverá atualizar a tabela de parcelamento para confirmar o parcelamento:
+			//O sistema deverï¿½ atualizar a tabela de parcelamento para confirmar o parcelamento:
 			this.getControladorUtil().atualizar(parcelamento);
 				
-			//[SB0002] - Gerar/Atualizar Guia de Pagamento Cartão de Crédito
+			//[SB0002] - Gerar/Atualizar Guia de Pagamento Cartï¿½o de Crï¿½dito
 			this.gerarGuiaPagamentoCartaoCredito(incluirConfirmacaoParcelamentoHelper, usuarioLogado, valorParcelamento);
 			
 		} catch (Exception e) {
@@ -1627,8 +1897,8 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
-	 * [SB0001] - Incluir Dados da Confirmação do Parcelamento
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
+	 * [SB0001] - Incluir Dados da Confirmaï¿½ï¿½o do Parcelamento
 	 *
 	 * @author Raphael Rossiter,Vivianne Sousa
 	 * @date 08/01/2010,06/05/2015
@@ -1648,12 +1918,12 @@ public class ControladorCobranca implements SessionBean {
 			
 			//CARREGANDO O PARCELAMENTO SELECIONADO
 			Parcelamento parcelamento = this.repositorioCobranca.pesquisarParcelamento(idParcelamentoSelecionado);
-			//PREPARANDO O PARCELAMENTO PARA CONFIRMAR SEU PAGAMENTO VIA CARTÃO DE CRÉDITO 
+			//PREPARANDO O PARCELAMENTO PARA CONFIRMAR SEU PAGAMENTO VIA CARTï¿½O DE CRï¿½DITO 
 			parcelamento.setIndicadorConfirmacaoParcelamento(ConstantesSistema.SIM);
 			parcelamento.setUltimaAlteracao(new Date());
 			retorno.setParcelamento(parcelamento);
 			
-			//GERANDO A CONFIRMAÇÃO DO PARCELAMENTO POR CARTÃO DE CRÉDITO
+			//GERANDO A CONFIRMAï¿½ï¿½O DO PARCELAMENTO POR CARTï¿½O DE CRï¿½DITO
 			Collection<ParcelamentoPagamentoCartaoCredito> colecaoParcelamentoPagamentoCartaoCredito = new ArrayList<ParcelamentoPagamentoCartaoCredito>();
 			if(!Util.isVazioOrNulo(colecaoTransacao)){
 				for (ParcelamentoCartaoCreditoHelper cartaoCreditoHelper : colecaoTransacao) {
@@ -1664,15 +1934,12 @@ public class ControladorCobranca implements SessionBean {
 			}
 	        retorno.setColecaoParcelamentoPagamentoCartaoCredito(colecaoParcelamentoPagamentoCartaoCredito);
 	        
-			DebitoCreditoSituacao debitoCreditoSituacao = new DebitoCreditoSituacao();
-			debitoCreditoSituacao.setId(DebitoCreditoSituacao.CARTAO_CREDITO);
-			
-			Collection<DebitoACobrar> colecaoDebitoAtualizar = atualizarDebitoACobrarParcelamentoCartao(
-					usuarioLogado, parcelamento, debitoCreditoSituacao);
+			Collection<DebitoACobrar> colecaoDebitoAtualizar = atualizarDebitoACobrarParcelamentoCartao(usuarioLogado, 
+					parcelamento, DebitoCreditoSituacao.CARTAO_CREDITO, DebitoCreditoSituacao.NORMAL, CobrancaForma.COBRANCA_EM_CARTAO_CREDITO);
 			retorno.setColecaoDebitoACobrar(colecaoDebitoAtualizar);
 			
 			Collection<CreditoARealizar> colecaoCreditoAtualizar = atualizarCreditoARealizarParcelamentoCartao(
-					usuarioLogado, parcelamento, debitoCreditoSituacao);
+					usuarioLogado, parcelamento, DebitoCreditoSituacao.CARTAO_CREDITO, DebitoCreditoSituacao.NORMAL);
 			retorno.setColecaoCreditoARealizar(colecaoCreditoAtualizar);
 	        
 			return retorno;
@@ -1682,8 +1949,237 @@ public class ControladorCobranca implements SessionBean {
 	}
 
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
-	 * [SB0001] - Incluir Dados da Confirmação do Parcelamento
+	 * [UC1693] - Efetuar Transaï¿½ï¿½o do Cartï¿½o de Crï¿½dito
+	 * 
+	 * @author Vivianne Sousa
+	 * @date 29/09/2015
+	 *
+	 * @throws ControladorException
+	 */
+	public ParcelamentoPagamentoCartaoCredito inserirParcelamentoPagamentoCartaoCredito(
+			ConcluirParcelamentoDebitosHelper helper,String email)throws ControladorException{
+		try{
+			ParcelamentoPagamentoCartaoCredito parcelamentoPagamentoCartaoCredito = new ParcelamentoPagamentoCartaoCredito();
+			parcelamentoPagamentoCartaoCredito.setCliente(helper.getCliente());
+			parcelamentoPagamentoCartaoCredito.setUsuarioConfirmacao(helper.getUsuarioLogado());
+			parcelamentoPagamentoCartaoCredito.setValorParcelado(helper.getValorASerParcelado());
+			parcelamentoPagamentoCartaoCredito.setQuantidadeParcelas(helper.getNumeroPrestacoes().intValue());
+			parcelamentoPagamentoCartaoCredito.setIndicadorConfirmadoOperadora(ConstantesSistema.NAO);
+			parcelamentoPagamentoCartaoCredito.setDataConfirmacao(new Date());
+			parcelamentoPagamentoCartaoCredito.setUltimaAlteracao(new Date());
+			parcelamentoPagamentoCartaoCredito.setEmail(email);
+
+			// Serializar o helper
+			byte[] dados = SerializationUtils.serialize(helper);
+			parcelamentoPagamentoCartaoCredito.setConteudoConcluirParcelamento(dados);
+
+			Integer id = (Integer)getControladorUtil().inserir(parcelamentoPagamentoCartaoCredito);
+			parcelamentoPagamentoCartaoCredito.setId(id);
+
+			return parcelamentoPagamentoCartaoCredito;
+		} catch (Exception e) {
+			sessionContext.setRollbackOnly();
+			e.printStackTrace();
+			throw new ControladorException("erro.sistema", e);
+		}
+	}
+
+	/**
+	 * [UC1692] - Registrar Retorno do Cartï¿½o de Crï¿½dito
+	 *
+	 * @author Vivianne Sousa
+	 * @date 16/09/2015
+	 * 
+	 * @return idParcelamento
+	 *
+	 * @throws ControladorException
+	 * @throws ErroRepositorioException
+	 */
+	public Integer registrarRetornoCartaoCreditoAprovado(RetornoCartaoCreditoHelper helper) throws ControladorException {
+		try {
+			// Identificador de Parcelamento Pagamento Cartao Credito = VENDA ID recebido da Braspag
+			FiltroParcelamentoPagamentoCartaoCredito filtro = new FiltroParcelamentoPagamentoCartaoCredito();
+			filtro.adicionarParametro(new ParametroSimples(FiltroParcelamentoPagamentoCartaoCredito.ID, helper.getIdVenda()));
+			Collection<ParcelamentoPagamentoCartaoCredito> colecaoParcelamentoPagamentoCartaoCredito = this.getControladorUtil().
+					pesquisar(filtro, ParcelamentoPagamentoCartaoCredito.class.getName());
+			ParcelamentoPagamentoCartaoCredito parcPagCartaoCredito = (ParcelamentoPagamentoCartaoCredito)
+					Util.retonarObjetoDeColecao(colecaoParcelamentoPagamentoCartaoCredito);
+
+			Cliente cliente = getControladorCliente().pesquisarDadosCliente(parcPagCartaoCredito.getCliente().getId());
+			BigDecimal valorTransacaoRetorno = new BigDecimal(helper.getValorTransacao());
+			valorTransacaoRetorno = valorTransacaoRetorno.divide(new BigDecimal(100));
+
+			if(!Util.ehIgual(cliente.getNome(), helper.getNomeCliente()) ||
+			   !Util.ehIgual(cliente.getCpf(), helper.getCpfCliente()) ||
+			   !Util.ehIgual(parcPagCartaoCredito.getQuantidadeParcelas().toString(), helper.getQtdParcelas()) ||
+			   !(parcPagCartaoCredito.getValorParcelado().compareTo(valorTransacaoRetorno) == 0)){
+
+				//Dados do retorno diferentes dos dados do GSAN
+				return null;
+			}
+
+			//Concluir parcelamento de dï¿½bitos
+			byte[] bytes = parcPagCartaoCredito.getConteudoConcluirParcelamento();
+			ConcluirParcelamentoDebitosHelper helperConcluir = (ConcluirParcelamentoDebitosHelper)
+					SerializationUtils.deserialize(bytes);
+
+			Usuario usuarioLogado = helperConcluir.getUsuarioLogado();
+			Integer idParcelamento = this.concluirParcelamentoDebitos(helperConcluir, usuarioLogado);
+
+			Parcelamento parcelamento = this.repositorioCobranca.pesquisarParcelamento(idParcelamento);
+
+			//ATUALIZAR PARCELAMENTO PAGAMENTO POR CARTï¿½O DE CRï¿½DITO
+			atualizarParcelamentoPagamentoCartaoCredito(helper, parcelamento, parcPagCartaoCredito);
+
+	        //Atualizar situaï¿½ï¿½o do dï¿½bito a cobrar para cartï¿½o de crï¿½dito
+			Collection<DebitoACobrar> colecaoDebitoACobrar = this.atualizarDebitoACobrarParcelamentoCartao(usuarioLogado, 
+					parcelamento, DebitoCreditoSituacao.CARTAO_CREDITO, DebitoCreditoSituacao.NORMAL, CobrancaForma.COBRANCA_EM_CONTA);
+			//Atualizar situaï¿½ï¿½o do crï¿½dito a realizar para cartï¿½o de crï¿½dito
+			Collection<CreditoARealizar> colecaoCreditoARealizar = this.atualizarCreditoARealizarParcelamentoCartao(usuarioLogado, 
+					parcelamento, DebitoCreditoSituacao.CARTAO_CREDITO, DebitoCreditoSituacao.NORMAL);
+			
+			//PREPARANDO O PARCELAMENTO PARA CONFIRMAR SEU PAGAMENTO VIA CARTï¿½O DE CRï¿½DITO 
+			parcelamento.setIndicadorConfirmacaoParcelamento(ConstantesSistema.SIM);
+			CobrancaForma cobrancaForma = new CobrancaForma();
+			cobrancaForma.setId(CobrancaForma.COBRANCA_EM_CARTAO_CREDITO);
+			parcelamento.setCobrancaForma(cobrancaForma);
+			parcelamento.setUltimaAlteracao(new Date());
+			this.getControladorUtil().atualizar(parcelamento);
+
+			IncluirConfirmacaoParcelamentoHelper incluirConfirmacaoParcelamentoHelper = new IncluirConfirmacaoParcelamentoHelper(
+					parcelamento, colecaoParcelamentoPagamentoCartaoCredito, colecaoDebitoACobrar, colecaoCreditoARealizar);
+			
+			//[SB0002] - Gerar/Atualizar Guia de Pagamento Cartï¿½o de Crï¿½dito
+			this.gerarGuiaPagamentoCartaoCredito(incluirConfirmacaoParcelamentoHelper, usuarioLogado, parcelamento.getValorTotalParcelado());
+			// TODO: ValorTotalParcelado considera jurosParc !!!!!!!!!!!!!!!!!
+
+			enviarEmailTermoParcelamentoPagamentoCartaoCredito(idParcelamento, parcPagCartaoCredito, usuarioLogado, helperConcluir);
+
+			return idParcelamento;
+		} catch (Exception e) {
+			sessionContext.setRollbackOnly();
+			e.printStackTrace();
+			throw new ControladorException("erro.sistema", e);
+		}
+	}
+
+	/**
+	 * [UC1692] - Registrar Retorno do Cartï¿½o de Crï¿½dito
+	 *
+	 * @author Andrï¿½ Miranda
+	 * @date 09/10/2015
+	 *
+	 * @param idParcelamento
+	 * @param parcPagCartaoCredito
+	 * @param usuario
+	 * @throws IOException
+	 * @throws ControladorException
+	 * @throws ErroEmailException
+	 */
+	private void enviarEmailTermoParcelamentoPagamentoCartaoCredito(Integer idParcelamento,
+			ParcelamentoPagamentoCartaoCredito parcPagCartaoCredito, Usuario usuario,
+			ConcluirParcelamentoDebitosHelper helperConcluir) throws IOException, ControladorException,
+			ErroEmailException {
+		String emailDestinatario = parcPagCartaoCredito.getEmail();
+
+		if(Util.verificarVazio(emailDestinatario)) {
+			return;
+		}
+
+		UnidadeOrganizacional unidadeUsuario = getControladorUnidade().pesquisarUnidadeUsuario(usuario.getId());
+
+		TarefaRelatorio relatorio = (TarefaRelatorio) gerarRelatorioParcelamentoCobranca(usuario,
+				idParcelamento.toString(), unidadeUsuario, helperConcluir.getColecaoContaValores(),
+				helperConcluir.getColecaoGuiaPagamentoValores(), helperConcluir.getColecaoDebitoACobrar(),
+				helperConcluir.getColecaoCreditoARealizar(), "SAAE");
+
+		relatorio.addParametro("tipoFormatoRelatorio", TarefaRelatorio.TIPO_PDF);
+		relatorio.addParametro("indicadorFormaCobranca", CobrancaForma.COBRANCA_EM_CARTAO_CREDITO.toString());
+		byte[] dados = (byte[]) relatorio.executar();
+		File arquivo = new File(System.currentTimeMillis() + ".pdf");
+
+		FileUtils.writeByteArrayToFile(arquivo, dados);
+
+		String emailRemetente = getControladorUtil().pesquisarParametrosDoSistema().getDescricaoEmail();
+		String tituloMensagem = "Termo de Parcelamento de dï¿½bitos";
+		String corpoMensagem = "Em anexo."; // TODO: Alterar
+
+		ServicosEmail.enviarMensagemArquivoAnexado(emailRemetente, emailDestinatario, tituloMensagem, corpoMensagem, arquivo, "termo.pdf");
+
+		FileUtils.deleteQuietly(arquivo);
+	}
+
+	/**
+	 * [UC1692] - Registrar Retorno do Cartï¿½o de Crï¿½dito
+	 *
+	 * @author Vivianne Sousa
+	 * @date 29/09/2015
+	 *
+	 * @param idParcelamentoPagamentoCartaoCredito
+	 * @param cartaoCreditoHelper
+	 * @param parcelamento
+	 * @param parcelamentoPagamentoCartaoCredito 
+	 * @return
+	 * @throws ControladorException
+	 * @throws ErroRepositorioException
+	 */
+	private void atualizarParcelamentoPagamentoCartaoCredito(
+			RetornoCartaoCreditoHelper helper, Parcelamento parcelamento,
+			ParcelamentoPagamentoCartaoCredito parcelamentoPagamentoCartaoCredito)
+					throws ControladorException, ErroRepositorioException {
+		// PARCELAMENTO
+		parcelamentoPagamentoCartaoCredito.setParcelamento(parcelamento);
+
+		// PESQUISA DO ARRECADADOR
+		Arrecadador arrecadador = this.repositorioArrecadacao.pesquisarArrecadadorCartao(null, ArrecadacaoForma.CARTAO_CREDITO);
+		parcelamentoPagamentoCartaoCredito.setArrecadador(arrecadador);
+
+		// IDENTIFICADOR DA TRANSAï¿½ï¿½O
+		parcelamentoPagamentoCartaoCredito.setIdentificacaoTransacao(helper.getNumeroIdentificacaoTransacao());
+
+		// DATA DE CONFIRMAï¿½ï¿½O NA OPERADORA
+		parcelamentoPagamentoCartaoCredito.setDataConfirmacao(new Date());
+
+		// INDICADOR CONFIRMAï¿½ï¿½O OPERADORA
+		parcelamentoPagamentoCartaoCredito.setIndicadorConfirmadoOperadora(ConstantesSistema.SIM);
+
+		// Nï¿½MERO DO PEDIDO BRASPAG
+		parcelamentoPagamentoCartaoCredito.setNumeroPedido(helper.getNumeroPedido());
+
+		// Limpar o conteï¿½do do helper concluir parcelamento 
+		parcelamentoPagamentoCartaoCredito.setConteudoConcluirParcelamento(null);
+
+		parcelamentoPagamentoCartaoCredito.setIdentificacaoRequisicao(helper.getIdentificacaoRequisicao());
+		parcelamentoPagamentoCartaoCredito.setCodigoComprovanteVenda(helper.getCodigoComprovanteVenda());
+		parcelamentoPagamentoCartaoCredito.setIdentificacaoPagamento(helper.getIdentificacaoPagamento());
+
+		getControladorUtil().atualizar(parcelamentoPagamentoCartaoCredito);
+	}
+
+	/**
+	 * [UCXXXX] - <descriï¿½ï¿½o>
+	 *
+	 * @author Vivianne Sousa
+	 * @date 17/09/2015
+	 *
+	 * @param parcelamentoPagamentoCartaoCredito
+	 * @param guiaPagamento
+	 * @throws ControladorException
+	 */
+	public void inserirPagamentoCartaoCreditoItem(ParcelamentoPagamentoCartaoCredito parcelamentoPagamentoCartaoCredito,
+			GuiaPagamento guiaPagamento) throws ControladorException{
+		PagamentoCartaoCreditoItem pagamentoCartaoCreditoItem = new PagamentoCartaoCreditoItem();
+		pagamentoCartaoCreditoItem.setParcelamentoPagamentoCartaoCredito(parcelamentoPagamentoCartaoCredito);
+		GuiaPagamentoGeral guiaPagamentoGeral = new GuiaPagamentoGeral();
+		guiaPagamentoGeral.setId(guiaPagamento.getId());
+		pagamentoCartaoCreditoItem.setGuiaPagamentoGeral(guiaPagamentoGeral);
+		pagamentoCartaoCreditoItem.setUltimaAlteracao(new Date());
+		getControladorUtil().inserir(pagamentoCartaoCreditoItem);
+	}
+	
+	/**
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
+	 * [SB0001] - Incluir Dados da Confirmaï¿½ï¿½o do Parcelamento
 	 *
 	 * @param idParcelamentoSelecionado
 	 * @param usuarioLogado
@@ -1694,22 +2190,26 @@ public class ControladorCobranca implements SessionBean {
 	 * @throws ControladorException
 	 */
 	private Collection<CreditoARealizar> atualizarCreditoARealizarParcelamentoCartao(Usuario usuarioLogado,
-			Parcelamento parcelamento, DebitoCreditoSituacao debitoCreditoSituacao) throws ControladorException {
+			Parcelamento parcelamento, Integer idDebitoCreditoSituacaoNova, Integer idDebitoCreditoSituacaoPesquisa) throws ControladorException {
 		try{
-			//GERANDO A COLEÇÃO DE CREDITOS A REALIZAR QUE SERÃO ATUALIZADOS
+			DebitoCreditoSituacao debitoCreditoSituacaoNova = new DebitoCreditoSituacao();
+			debitoCreditoSituacaoNova.setId(idDebitoCreditoSituacaoNova);
+			
+			//GERANDO A COLEï¿½ï¿½O DE CREDITOS A REALIZAR QUE SERï¿½O ATUALIZADOS
 			Collection<CreditoARealizar> colecaoCreditoAtualizar = new ArrayList<CreditoARealizar>();
-			Collection<CreditoARealizar> colecaoCredito = this.repositorioCobranca.pesquisarCreditoARealizarDoParcelamento(parcelamento.getId());
+			Collection<CreditoARealizar> colecaoCredito = this.repositorioCobranca.pesquisarCreditoARealizarParcelamento(parcelamento.getId(), idDebitoCreditoSituacaoPesquisa);
 			if(!Util.isVazioOrNulo(colecaoCredito)){
 				for (CreditoARealizar creditoARealizar : colecaoCredito) {
 					creditoARealizar.setUltimaAlteracao(new Date());
-					creditoARealizar.setParcelamento(parcelamento);
-					creditoARealizar.setDebitoCreditoSituacaoAtual(debitoCreditoSituacao);
-					//------------ REGISTRAR TRANSAÇÃO ----------------
+//					creditoARealizar.setParcelamento(parcelamento);
+					creditoARealizar.setDebitoCreditoSituacaoAnterior(creditoARealizar.getDebitoCreditoSituacaoAtual());
+					creditoARealizar.setDebitoCreditoSituacaoAtual(debitoCreditoSituacaoNova);
+					//------------ REGISTRAR TRANSAï¿½ï¿½O ----------------
 					RegistradorOperacao registradorOperacao = new RegistradorOperacao(
 					    Operacao.OPERACAO_CONFIRMAR_PARCELAMENTO_CARTAO_CREDITO, creditoARealizar.getId(),creditoARealizar.getId(),
 					    new UsuarioAcaoUsuarioHelper(usuarioLogado, UsuarioAcao.USUARIO_ACAO_EFETUOU_OPERACAO));
 					registradorOperacao.registrarOperacao(creditoARealizar);
-					// ------------ REGISTRAR TRANSAÇÃO ----------------
+					// ------------ REGISTRAR TRANSAï¿½ï¿½O ----------------
 					getControladorUtil().atualizar(creditoARealizar);
 					colecaoCreditoAtualizar.add(creditoARealizar);	
 				}
@@ -1721,8 +2221,8 @@ public class ControladorCobranca implements SessionBean {
 	}
 
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
-	 * [SB0001] - Incluir Dados da Confirmação do Parcelamento
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
+	 * [SB0001] - Incluir Dados da Confirmaï¿½ï¿½o do Parcelamento
 	 *
 	 * @param idParcelamentoSelecionado
 	 * @param usuarioLogado
@@ -1734,28 +2234,33 @@ public class ControladorCobranca implements SessionBean {
 	 * @throws ControladorException
 	 */
 	private Collection<DebitoACobrar> atualizarDebitoACobrarParcelamentoCartao(Usuario usuarioLogado, 
-			Parcelamento parcelamento, DebitoCreditoSituacao debitoCreditoSituacao)
-			throws ControladorException {
+			Parcelamento parcelamento, Integer idDebitoCreditoSituacaoNova, Integer idDebitoCreditoSituacaoPesquisa,
+			Integer idCobrancaForma) throws ControladorException {
 		try{
 			CobrancaForma cobrancaForma = new CobrancaForma();
-			cobrancaForma.setId(CobrancaForma.COBRANCA_EM_CARTAO_CREDITO);
-			// O sistema deverá atualizar todos os débitos do parcelamento que estejam na situação normal 
+			cobrancaForma.setId(idCobrancaForma);
+			
+			DebitoCreditoSituacao debitoCreditoSituacaoNova = new DebitoCreditoSituacao();
+			debitoCreditoSituacaoNova.setId(idDebitoCreditoSituacaoNova);
+			
+			// O sistema deverï¿½ atualizar todos os dï¿½bitos do parcelamento que estejam na situaï¿½ï¿½o normal 
 			// (DCST_IDATUAL = 0 e PARC_ID = PARC_ID confirmado na tabela de DEBITO_A_COBRAR). 
 			Collection<DebitoACobrar> colecaoDebitoAtualizar = new ArrayList<DebitoACobrar>();
-			Collection<DebitoACobrar> colecaoDebito = this.repositorioCobranca.pesquisarDebitoACobrarDoParcelamento(parcelamento.getId());
+			Collection<DebitoACobrar> colecaoDebito = this.repositorioCobranca.
+					pesquisarDebitoACobrarParcelamento(parcelamento.getId(), idDebitoCreditoSituacaoPesquisa);
 			if(!Util.isVazioOrNulo(colecaoDebito)){
 				for (DebitoACobrar debitoACobrar : colecaoDebito) {
 					debitoACobrar.setUltimaAlteracao(new Date());
 					debitoACobrar.setParcelamento(parcelamento);
 					debitoACobrar.setDebitoCreditoSituacaoAnterior(debitoACobrar.getDebitoCreditoSituacaoAtual());
 					debitoACobrar.setCobrancaForma(cobrancaForma);
-					debitoACobrar.setDebitoCreditoSituacaoAtual(debitoCreditoSituacao);
-					//------------ REGISTRAR TRANSAÇÃO ----------------
+					debitoACobrar.setDebitoCreditoSituacaoAtual(debitoCreditoSituacaoNova);
+					//------------ REGISTRAR TRANSAï¿½ï¿½O ----------------
 					RegistradorOperacao registradorOperacao = new RegistradorOperacao(
 						    Operacao.OPERACAO_CONFIRMAR_PARCELAMENTO_CARTAO_CREDITO, debitoACobrar.getId(),debitoACobrar.getId(),
 						    new UsuarioAcaoUsuarioHelper(usuarioLogado, UsuarioAcao.USUARIO_ACAO_EFETUOU_OPERACAO));
 					registradorOperacao.registrarOperacao(debitoACobrar);
-					// ------------ REGISTRAR TRANSAÇÃO ----------------
+					// ------------ REGISTRAR TRANSAï¿½ï¿½O ----------------
 					getControladorUtil().atualizar(debitoACobrar);
 					colecaoDebitoAtualizar.add(debitoACobrar);	
 				}
@@ -1767,8 +2272,8 @@ public class ControladorCobranca implements SessionBean {
 	}
 
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
-	 * [SB0001] - Incluir Dados da Confirmação do Parcelamento
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
+	 * [SB0001] - Incluir Dados da Confirmaï¿½ï¿½o do Parcelamento
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 07/05/2015
@@ -1803,12 +2308,19 @@ public class ControladorCobranca implements SessionBean {
 					new BigDecimal(cartaoCreditoHelper.getValorTransacao().replace(".","").replace(",",".")));
 			parcelamentoPagamentoCartaoCredito.setIdentificacaoTransacao(cartaoCreditoHelper.getNumeroIdentificacaoTransacao());
 			parcelamentoPagamentoCartaoCredito.setQuantidadeParcelas(new Integer(cartaoCreditoHelper.getQtdParcelas()));
-			//DATA DE CONFIRMAÇÃO NA OPERADORA
+			//DATA DE CONFIRMAï¿½ï¿½O NA OPERADORA
 			parcelamentoPagamentoCartaoCredito.setDataConfirmacao(cartaoCreditoHelper.getDataConfirmacaoOperadora());
-			//INDICADOR CONFIRMAÇÃO OPERADORA
+			//INDICADOR CONFIRMAï¿½ï¿½O OPERADORA
 			parcelamentoPagamentoCartaoCredito.setIndicadorConfirmadoOperadora(ConstantesSistema.NAO);
 			//IMAGEM COMPROVANTE DE PAGAMENTO
 			parcelamentoPagamentoCartaoCredito.setComprovantePagamento(cartaoCreditoHelper.getImagemArquivoComprovante());
+//			//Nï¿½MERO DO PEDIDO
+//			parcelamentoPagamentoCartaoCredito.setNumeroPedido(cartaoCreditoHelper.getNumeroPedido());
+//			//Nï¿½MERO DO PEDIDO BRASPAG
+//			parcelamentoPagamentoCartaoCredito.setNumeroPedidoBraspag(cartaoCreditoHelper.getNumeroPedidoBraspag());
+			
+			parcelamentoPagamentoCartaoCredito.setNumeroPedido(cartaoCreditoHelper.getNumeroPedido());
+			
 			return parcelamentoPagamentoCartaoCredito;
 			
 		} catch (ErroRepositorioException ex) {
@@ -1817,8 +2329,8 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
-	 * [SB0002] - Gerar Guia de Pagamento Cartão de Crédito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
+	 * [SB0002] - Gerar Guia de Pagamento Cartï¿½o de Crï¿½dito
 	 *
 	 * @author Raphael Rossiter / Cesar Medeiros
 	 * @date 13/01/2010 / 08/04/2015
@@ -1833,25 +2345,25 @@ public class ControladorCobranca implements SessionBean {
 		try {
 			Collection<ParcelamentoPagamentoCartaoCredito> colecaoParcelamentoPagamentoCartaoCredito = 
 					helper.getColecaoParcelamentoPagamentoCartaoCredito();
-			// Para cada transação de cartão de crédito informada na quitação do parcelamento, o sistema deverá 
+			// Para cada transaï¿½ï¿½o de cartï¿½o de crï¿½dito informada na quitaï¿½ï¿½o do parcelamento, o sistema deverï¿½ 
 			// gerar/atualizar a guia de pagamento de acordo com a quantidade de parcelas informada
 			if (colecaoParcelamentoPagamentoCartaoCredito != null && !colecaoParcelamentoPagamentoCartaoCredito.isEmpty()){
 	
-				//[FS0009 - Verificar dia útil]
-				//FERIADO NACIONAL - Para verificar a existência de formataçãoo de vencimento para um dia que não seja útil.
+				//[FS0009 - Verificar dia ï¿½til]
+				//FERIADO NACIONAL - Para verificar a existï¿½ncia de formataï¿½ï¿½o de vencimento para um dia que nï¿½o seja ï¿½til.
 				Collection<NacionalFeriado> colecaoFeriadosNacionais = repositorioUtil.pesquisarFeriadosNacionais();
 				
 				if(!Util.isVazioOrNulo(colecaoParcelamentoPagamentoCartaoCredito)){
 					for (ParcelamentoPagamentoCartaoCredito transacaoCartaoCredito : colecaoParcelamentoPagamentoCartaoCredito) {
 						
-						//QUANTIDADE DE PARCELAS GERADAS NA TRANSAÇÃO
+						//QUANTIDADE DE PARCELAS GERADAS NA TRANSAï¿½ï¿½O
 						Integer qtdParcela = transacaoCartaoCredito.getQuantidadeParcelas();
 		
-						//VALOR DA PARCELA DO PARCELAMENTO FEITO PELA TRANSAÇÃO
+						//VALOR DA PARCELA DO PARCELAMENTO FEITO PELA TRANSAï¿½ï¿½O
 						BigDecimal valorParcelaTransacao = transacaoCartaoCredito.getValorParcelado()
 							.divide(new BigDecimal(qtdParcela.intValue()), Parcelamento.CASAS_DECIMAIS, Parcelamento.TIPO_ARREDONDAMENTO);
 						
-						//Percentual do valor da transação do cartão sobre o debito total parcelado.
+						//Percentual do valor da transaï¿½ï¿½o do cartï¿½o sobre o debito total parcelado.
 						BigDecimal percentualCartao = valorParcelamento.divide(
 								transacaoCartaoCredito.getValorParcelado(), 5, Parcelamento.TIPO_ARREDONDAMENTO);
 						
@@ -1860,13 +2372,13 @@ public class ControladorCobranca implements SessionBean {
 							transacaoCartaoCredito, transacaoCartaoCredito.getArrecadador().getCliente().getId(), colecaoFeriadosNacionais, null);
 		
 						// [SB0003] - Inserir Guia de Pagamento Cliente
-//						for(int parcelaAtual = qtdParcela; parcelaAtual > 0; parcelaAtual--){
 						for(int parcelaAtual = 1; parcelaAtual <= qtdParcela; parcelaAtual++){
 							GuiaPagamento guiaPagamento = this.inserirGuiaPagamentoClienteCartaoCredito(
 									transacaoCartaoCredito.getArrecadador().getCliente().getId(), dataVencimentoGuiaPagamento, 
 									valorParcelaTransacao, usuarioLogado, helper, parcelaAtual , qtdParcela, percentualCartao);		
-							// Para cada guia incluída o sistema deverá inserir uma guia associação do parcelamento com as guias de pagamento gerada
-							this.inserirGuiaPagamentoParcelamentoCartao(helper.getParcelamento(), guiaPagamento);
+							// Para cada guia incluï¿½da o sistema deverï¿½ inserir uma guia associaï¿½ï¿½o do parcelamento com as guias de pagamento gerada
+//							this.inserirGuiaPagamentoParcelamentoCartao(helper.getParcelamento(), guiaPagamento);
+							this.inserirPagamentoCartaoCreditoItem(transacaoCartaoCredito, guiaPagamento);
 							dataVencimentoGuiaPagamento = obterProximoVencimentoGuiaCartaoCredito(
 									colecaoFeriadosNacionais, dataVencimentoGuiaPagamento);
 						}
@@ -1879,7 +2391,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * [SB0003] - Inserir Guia de Pagamento Cliente
 	 * 
 	 * @param colecaoFeriadosNacionais
@@ -1889,13 +2401,13 @@ public class ControladorCobranca implements SessionBean {
 			Collection<NacionalFeriado> colecaoFeriadosNacionais,
 			Date dataPrimeiroVencimentoGuiaPagamento) {
 		
-		// AJUSTANDO A DATA DE VENCIMENTO PARA A PRÓXIMA GUIA DE PAGAMENTO
-		// A partir do 1 vencimento adicionar 30 dias até a última parcela informada
+		// AJUSTANDO A DATA DE VENCIMENTO PARA A PRï¿½XIMA GUIA DE PAGAMENTO
+		// A partir do 1 vencimento adicionar 30 dias atï¿½ a ï¿½ltima parcela informada
 		Date dataVencimentoGuiaPagamento = Util.adicionarNumeroDiasDeUmaData(dataPrimeiroVencimentoGuiaPagamento, 30);
 
-		//[FS0009 - Verificar dia útil]
-		// Caso a data calculada não seja um dia útil e esteja na tabela de feriados nacionais 
-		//(NFER_DTFERIADO da tabela NACIONAL_FERIADO), adicionar 1 dia a data até a obtenção de um dia útil.
+		//[FS0009 - Verificar dia ï¿½til]
+		// Caso a data calculada nï¿½o seja um dia ï¿½til e esteja na tabela de feriados nacionais 
+		//(NFER_DTFERIADO da tabela NACIONAL_FERIADO), adicionar 1 dia a data atï¿½ a obtenï¿½ï¿½o de um dia ï¿½til.
 		while (!Util.ehDiaUtil(dataVencimentoGuiaPagamento, colecaoFeriadosNacionais, null)){
 			dataVencimentoGuiaPagamento = Util.adicionarNumeroDiasDeUmaData(dataVencimentoGuiaPagamento, 1);
 		}
@@ -1903,7 +2415,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * [SB0003] - Inserir Guia de Pagamento Cliente
 	 *
 	 * @author Cesar Medeiros/Vivianne Sousa
@@ -1922,7 +2434,7 @@ public class ControladorCobranca implements SessionBean {
 		Localidade localidadeSede = this.pesquisarLocalidadeSede();
 		guiaPagamento.setLocalidade(localidadeSede);
 		
-		//CLIE_ID = CLIE_ID da tabela ARRECADADOR com ARRC_ID = ARRC_ID do Cartão de Crédito selecionado
+		//CLIE_ID = CLIE_ID da tabela ARRECADADOR com ARRC_ID = ARRC_ID do Cartï¿½o de Crï¿½dito selecionado
 		Cliente cliente = new Cliente();
 		cliente.setId(idCliente);
 		guiaPagamento.setCliente(cliente);
@@ -1934,18 +2446,18 @@ public class ControladorCobranca implements SessionBean {
 		guiaPagamento.setParcelamento(helper.getParcelamento());
 		guiaPagamento.setObservacao("GUIA DE PAGAMENTO PARA BAIXA CARTAO DE CREDITO");
 		guiaPagamento.setIndicadorEmitirObservacao(ConstantesSistema.SIM);
-		//Id débito cartão de crédito (DBTP_ID da tabela DEBITO_TIPO com DBTP_ICCARTAOCREDITO =1)
+		//Id dï¿½bito cartï¿½o de crï¿½dito (DBTP_ID da tabela DEBITO_TIPO com DBTP_ICCARTAOCREDITO =1)
 		DebitoTipo debitoTipoGuia = this.pesquisarDebitoTipoCartaoCredito();
 		guiaPagamento.setDebitoTipo(debitoTipoGuia);
 		//FNTP_ID da tabela DEBITO_TIPO
 		guiaPagamento.setFinanciamentoTipo(debitoTipoGuia.getFinanciamentoTipo());
 		//LICT_ID da tabela DEBITO_TIPO
 		guiaPagamento.setLancamentoItemContabil(debitoTipoGuia.getLancamentoItemContabil());
-		//CARREGANDO OS PARÂMETROS DO SISTEMA
+		//CARREGANDO OS PARï¿½METROS DO SISTEMA
 		SistemaParametro sistemaParametro = getControladorUtil().pesquisarParametrosDoSistema();
         int anoMesReferenciaContabil = sistemaParametro.getAnoMesFaturamento();
         int anoMesCorrente = Util.getAnoMesComoInt(new Date());
-        // Maior valor entre o ano/mês da data corrente e o ano/mê de referencia do faturamento 
+        // Maior valor entre o ano/mï¿½s da data corrente e o ano/mï¿½ de referencia do faturamento 
         if(sistemaParametro.getAnoMesFaturamento() < anoMesCorrente){
             anoMesReferenciaContabil = anoMesCorrente;
         }
@@ -1959,7 +2471,7 @@ public class ControladorCobranca implements SessionBean {
 		debitoCreditoSituacao.setId(DebitoCreditoSituacao.NORMAL);
 		guiaPagamento.setDebitoCreditoSituacaoAtual(debitoCreditoSituacao);
 		guiaPagamento.setIndicadoCobrancaMulta(ConstantesSistema.NAO);
-		//Id do usuário que efetuou a confirmação do cartão
+		//Id do usuï¿½rio que efetuou a confirmaï¿½ï¿½o do cartï¿½o
 		guiaPagamento.setUsuario(usuarioLogado);
 		guiaPagamento.setDataEmissao(new Date());
 		guiaPagamento.setUltimaAlteracao(new Date());
@@ -1968,7 +2480,7 @@ public class ControladorCobranca implements SessionBean {
 		Collection<GuiaPagamentoItem> colecaoGuiaPagamentoItem = this.
 				gerarGuiaPagamentoItemCartaoCredito(helper, parcelaAtual, qtdeParcelas, percentualCartao);
 		
-		//O valor da guia é o somatorio de todos os valores das guias de pagamento itens.
+		//O valor da guia ï¿½ o somatorio de todos os valores das guias de pagamento itens.
 		BigDecimal valorTotalItens = BigDecimal.ZERO;
 		for (GuiaPagamentoItem guiaPagamentoItem : colecaoGuiaPagamentoItem) {
 			if(guiaPagamentoItem.getCreditoTipo() != null){
@@ -1987,7 +2499,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * [SB0003] - Inserir Guia de Pagamento Cliente
 	 * 
 	 * Insere as guias de pagamento referentes as parcelas e suas tabelas dependentes
@@ -2047,7 +2559,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * [SB0003] - Inserir Guia de Pagamento Cliente 
 	 *
 	 * @author Vivianne Sousa
@@ -2189,7 +2701,7 @@ public class ControladorCobranca implements SessionBean {
 		
 		try{	
 			
-			//Início do Batch
+			//Inï¿½cio do Batch
 			//-----------------------------------------------------------------
 			idUnidadeIniciada = getControladorBatch()
 					.iniciarUnidadeProcessamentoBatch(idFuncionalidadeIniciada,
@@ -2197,8 +2709,8 @@ public class ControladorCobranca implements SessionBean {
 			//-----------------------------------------------------------------
 			
 			
-			//2. O sistema verifica se o tipo de ação de cobrança recebido têm indicação para envio de sms/email
-			//	 [FE0001] Verifica Indicação de Envio SMS/EMAIL
+			//2. O sistema verifica se o tipo de aï¿½ï¿½o de cobranï¿½a recebido tï¿½m indicaï¿½ï¿½o para envio de sms/email
+			//	 [FE0001] Verifica Indicaï¿½ï¿½o de Envio SMS/EMAIL
 			FiltroCobrancaAcao filtroCobrancaAcao = new FiltroCobrancaAcao();
 			filtroCobrancaAcao.adicionarParametro(new ParametroSimples(FiltroCobrancaAcao.ID,idAcaoCobranca));
 			CobrancaAcao acaoCobranca = (CobrancaAcao)Util.retonarObjetoDeColecao(this.repositorioUtil.pesquisar(filtroCobrancaAcao, CobrancaAcao.class.getName()));
@@ -2207,14 +2719,14 @@ public class ControladorCobranca implements SessionBean {
 			if(acaoCobranca.getIndicadorEnviarSMS().compareTo(ConstantesSistema.SIM) == 0
 					|| acaoCobranca.getIndicadorEnviarEmail().compareTo(ConstantesSistema.SIM) == 0){
 				
-				//3. O sistema faz a seleção dos documentos de cobrança para formatação dos SMS/EMAIL
-				//   [SB0001] Selecionar Documentos de Cobrança
+				//3. O sistema faz a seleï¿½ï¿½o dos documentos de cobranï¿½a para formataï¿½ï¿½o dos SMS/EMAIL
+				//   [SB0001] Selecionar Documentos de Cobranï¿½a
 				Collection<Object[]> objsCobranca = this.repositorioCobranca.selecionarDocumentosCobrancaSMSEmail(idAcaoCobranca,idCobrancaAcaoAtividadeComando);
 				
 				
 				if(objsCobranca != null && !objsCobranca.isEmpty()){
 					//4. O sistema formata as mensagens de SMS/EMAIL
-					//   [SB0002] Excluir Mensagens Documento de Cobrança
+					//   [SB0002] Excluir Mensagens Documento de Cobranï¿½a
 					this.repositorioCobranca.excluirMensagensReferencia(idCobrancaAcaoAtividadeComando);
 					
 					
@@ -2228,30 +2740,30 @@ public class ControladorCobranca implements SessionBean {
 										5,
 										(BigDecimal)obj[5],			//Valor documento
 										(Integer)obj[11],			//Localidade
-										(Integer)obj[0],			//Imóvel
+										(Integer)obj[0],			//Imï¿½vel
 										null,null,null,null,
 										(String)obj[12],			//Sequencial Doc
 										(Integer)obj[13],			//Documento tipo
 										null,null,null
 										);
 						
-						//Caso a ação tenha indicação para envio de SMS
+						//Caso a aï¿½ï¿½o tenha indicaï¿½ï¿½o para envio de SMS
 						//[SB0003] Formatar Mensagem SMS
 						if(((Short)obj[7]).compareTo(ConstantesSistema.SIM) == 0){
 							
 							MensagemSMSFaturamentoCobranca msg = new MensagemSMSFaturamentoCobranca();
 							
-							//Atribuir o ID da ação de cobrança recebido
+							//Atribuir o ID da aï¿½ï¿½o de cobranï¿½a recebido
 							CobrancaAcao cobac = new CobrancaAcao();
 							cobac.setId(idAcaoCobranca);
 							msg.setAcaoCobranca(cobac);
 							
-							//cbdo_id da tabela cobrança.cobranca_documento
+							//cbdo_id da tabela cobranï¿½a.cobranca_documento
 							CobrancaDocumento cobDoc = new CobrancaDocumento();
 							cobDoc.setId((Integer)obj[14]);
 							msg.setCobrancaDocumento(cobDoc);
 							
-							//CLIE_ID da tabela cadastro.cliente.imovel com imov_id =(imov_id da tabela cobrança.cobranca_documento),
+							//CLIE_ID da tabela cadastro.cliente.imovel com imov_id =(imov_id da tabela cobranï¿½a.cobranca_documento),
 							//crtp_id = 2 e clim_dtrelacaofim = nulo
 							Cliente clie = new Cliente();
 							clie.setId((Integer)obj[1]);
@@ -2263,7 +2775,7 @@ public class ControladorCobranca implements SessionBean {
 							
 							//Atribuir o texto de mensagem de SMS formatado para o cliente
 							//[IT0001] Formatar Texto SMS
-							String sms = this.formatarTextoSMSEmail((Integer)obj[0], 	//Matrícula imóvel
+							String sms = this.formatarTextoSMSEmail((Integer)obj[0], 	//Matrï¿½cula imï¿½vel
 																	(String)obj[2],		//Nome cliente
 																	(Date)obj[6],		//Data vencimento
 																	(BigDecimal)obj[5],	//Valor documento
@@ -2288,23 +2800,23 @@ public class ControladorCobranca implements SessionBean {
 							
 						}
 						
-						//Caso a ação tenha indicação para envio de EMAIL(cbac_icenviaemail=1)
+						//Caso a aï¿½ï¿½o tenha indicaï¿½ï¿½o para envio de EMAIL(cbac_icenviaemail=1)
 						//[SB0004] Formatar Mensagem EMAIL
 						if(((Short)obj[8]).compareTo(ConstantesSistema.SIM) == 0){
 							
 							MensagemEmailFaturamentoCobranca msg = new MensagemEmailFaturamentoCobranca();
 							
-							//Atribuir o ID da ação de cobrança recebido
+							//Atribuir o ID da aï¿½ï¿½o de cobranï¿½a recebido
 							CobrancaAcao cobac = new CobrancaAcao();
 							cobac.setId(idAcaoCobranca);
 							msg.setAcaoCobranca(cobac);
 							
-							//cbdo_id da tabela cobrança.cobranca_documento
+							//cbdo_id da tabela cobranï¿½a.cobranca_documento
 							CobrancaDocumento cobDoc = new CobrancaDocumento();
 							cobDoc.setId((Integer)obj[14]);
 							msg.setCobrancaDocumento(cobDoc);
 							
-							//CLIE_ID da tabela cadastro.cliente.imovel com imov_id =(imov_id da tabela cobrança.cobranca_documento),
+							//CLIE_ID da tabela cadastro.cliente.imovel com imov_id =(imov_id da tabela cobranï¿½a.cobranca_documento),
 							//crtp_id = 2 e clim_dtrelacaofim = nulo
 							Cliente clie = new Cliente();
 							clie.setId((Integer)obj[1]);
@@ -2316,7 +2828,7 @@ public class ControladorCobranca implements SessionBean {
 							
 							//Atribuir o texto de mensagem de SMS formatado para o cliente
 							//[IT0001] Formatar Texto SMS
-							String sms = this.formatarTextoSMSEmail((Integer)obj[0], 	//Matrícula imóvel
+							String sms = this.formatarTextoSMSEmail((Integer)obj[0], 	//Matrï¿½cula imï¿½vel
 																	(String)obj[2],		//Nome cliente
 																	(Date)obj[6],		//Data vencimento
 																	(BigDecimal)obj[5],	//Valor documento
@@ -2342,8 +2854,8 @@ public class ControladorCobranca implements SessionBean {
 						
 					}
 					
-					//2. Após formação de todas as mensagens de SMS e EMAIL o sistema atualiza 
-					//   a quantidade de SMS e EMAILS gerados na tabela do comando da ação de cobrança
+					//2. Apï¿½s formaï¿½ï¿½o de todas as mensagens de SMS e EMAIL o sistema atualiza 
+					//   a quantidade de SMS e EMAILS gerados na tabela do comando da aï¿½ï¿½o de cobranï¿½a
 					FiltroCobrancaAcaoAtividadeComando filtro = new FiltroCobrancaAcaoAtividadeComando();
 					filtro.adicionarParametro(new ParametroSimples(FiltroCobrancaAcaoAtividadeComando.ID, idCobrancaAcaoAtividadeComando));
 					
@@ -2477,7 +2989,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC1615] Prepara dados SMS/EMAIL cobrança de conta
+	 * [UC1615] Prepara dados SMS/EMAIL cobranï¿½a de conta
 	 * [IT0001] Formatar Mensagem SMS
 	 * 
 	 * @author Hugo Azevedo
@@ -2534,9 +3046,9 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 14/02/2014
 	 */
 	public void processarAmortizacaoDividaAtivaArrecadacao(
@@ -2547,7 +3059,7 @@ public class ControladorCobranca implements SessionBean {
 
 		// -------------------------
 		//
-		// Registrar o início do processamento da Unidade de
+		// Registrar o inï¿½cio do processamento da Unidade de
 		// Processamento
 		// do Batch
 		//
@@ -2579,11 +3091,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 		
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Processa a amortização das contas que sejam de dívida ativa
+	 * Processa a amortizaï¿½ï¿½o das contas que sejam de dï¿½vida ativa
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 14/02/2014
 	 */
 	public void processarAmortizacaoDividaAtivaContaArrecadacao(Integer anoMesReferenciaArrecadacao, Integer idLocalidade) throws ControladorException {
@@ -2633,11 +3145,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Efetua a amortização das contas que sejam de dívida ativa
+	 * Efetua a amortizaï¿½ï¿½o das contas que sejam de dï¿½vida ativa
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 14/02/2014
 	 */
 	public void efetuarAmortizacaoDividaAtivaConta(Conta conta, Integer idAmortizacaoTipo, Date dataAmortizacao, BigDecimal valorAmortizado) throws ControladorException {
@@ -2661,11 +3173,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Efetua a amortização dos valores dos debitos cobrados referentes a parcelamentos que sejam de dívida ativa
+	 * Efetua a amortizaï¿½ï¿½o dos valores dos debitos cobrados referentes a parcelamentos que sejam de dï¿½vida ativa
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 14/02/2014
 	 */
 	public void efetuarAmortizacaoDividaAtivaParcelamentoConta(Conta conta, Integer idAmortizacaoTipo, Date dataAmortizacao, Collection<DebitoCobrado> colecaoDebitoCobrado) throws ControladorException {
@@ -2702,8 +3214,8 @@ public class ControladorCobranca implements SessionBean {
 						BigDecimal valorAmortizado = valorPrestacao.subtract(diferencaAmortizacao);
 						BigDecimal valorAmortizadoCredito = new BigDecimal(0);
 					
-						// Caso a conta tenha créditos que baixarão da dívida ativa, 
-						// deverá amortizar esse valor como crédito e o restante com o tipo de amortização recebido por parâmetro
+						// Caso a conta tenha crï¿½ditos que baixarï¿½o da dï¿½vida ativa, 
+						// deverï¿½ amortizar esse valor como crï¿½dito e o restante com o tipo de amortizaï¿½ï¿½o recebido por parï¿½metro
 						if (valorCreditosDividaAtiva.compareTo(BigDecimal.ZERO) > 0) {
 							
 							if (valorAmortizado.compareTo(valorCreditosDividaAtiva) > 0) {
@@ -2736,11 +3248,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Processa as amortizações de guia de pagamento no encerramento da arrecadação
+	 * Processa as amortizaï¿½ï¿½es de guia de pagamento no encerramento da arrecadaï¿½ï¿½o
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 16/02/2014
 	 */
 	public BigDecimal obterValorDebitosCobradoSemDividaAtiva(Collection<DebitoCobrado> colecaoDebitoCobrado) throws ControladorException {
@@ -2756,11 +3268,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Processa as amortizações de guia de pagamento no encerramento da arrecadação
+	 * Processa as amortizaï¿½ï¿½es de guia de pagamento no encerramento da arrecadaï¿½ï¿½o
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 16/02/2014
 	 */
 	public void processarAmortizacaoDividaAtivaGuiaPagamentoArrecadacao(Integer anoMesReferenciaArrecadacao, Integer idLocalidade) throws ControladorException {
@@ -2781,11 +3293,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Efetua a amortização dos valores dos itens da guia de pagamento que sejam de dívida ativa
+	 * Efetua a amortizaï¿½ï¿½o dos valores dos itens da guia de pagamento que sejam de dï¿½vida ativa
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 16/02/2014
 	 */
 	public void efetuarAmortizacaoDividaAtivaGuiaPagamento(GuiaPagamento guiaPagamento, Integer idAmortizacaoTipo, Date dataAmortizacao) throws ControladorException {
@@ -2819,11 +3331,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Processa as amortizações de débitos a cobrar no encerramento da arrecadação
+	 * Processa as amortizaï¿½ï¿½es de dï¿½bitos a cobrar no encerramento da arrecadaï¿½ï¿½o
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 16/02/2014
 	 */
 	public void processarAmortizacaoDividaAtivaDebitoACobrarArrecadacao(Integer anoMesReferenciaArrecadacao, Integer idLocalidade) throws ControladorException {
@@ -2846,11 +3358,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Efetua a amortização dos valores dos débitos a cobrar que sejam de dívida ativa
+	 * Efetua a amortizaï¿½ï¿½o dos valores dos dï¿½bitos a cobrar que sejam de dï¿½vida ativa
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 16/02/2014
 	 */
 	public void efetuarAmortizacaoDividaAtivaDebitoACobrar(DebitoACobrar debitoACobrar, Integer idAmortizacaoTipo, Date dataAmortizacao, BigDecimal valorAmortizado) throws ControladorException {
@@ -2876,11 +3388,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Atualiza o débito da dívida ativa
+	 * Atualiza o dï¿½bito da dï¿½vida ativa
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 16/02/2014
 	 */
 	public BigDecimal atualizarDividaAtivaDebito(DividaAtivaDebito dividaAtivaDebito, BigDecimal totalAmortizado, Date dataAmortizacao) throws ControladorException {
@@ -2905,11 +3417,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Atualiza o débito da dívida ativa
+	 * Atualiza o dï¿½bito da dï¿½vida ativa
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 16/02/2014
 	 */
 	public void inserirDividaAtivaAmortizacao(DividaAtivaDebito dividaAtivaDebito, Integer idAmortizacaoTipo, Date dataAmortizacao, BigDecimal valorAmortizado) throws ControladorException {
@@ -2939,16 +3451,16 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Insere o débito da dívida ativa
+	 * Insere o dï¿½bito da dï¿½vida ativa
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 17/02/2014
 	 */
 	public void inserirDividaAtivaDebitoParcelamento(Parcelamento parcelamento, DividaAtivaImovel dividaAtivaImovel) throws ControladorException {
 		
-		// Verifica se já exista o débito para o parcelamento recebido. Caso não exista insere na tabela
+		// Verifica se jï¿½ exista o dï¿½bito para o parcelamento recebido. Caso nï¿½o exista insere na tabela
 		FiltroDividaAtivaDebito filtroDividaAtivaDebito = new FiltroDividaAtivaDebito();
 		filtroDividaAtivaDebito.adicionarParametro(new ParametroSimples(FiltroDividaAtivaDebito.ID_PARCELAMENTO, parcelamento.getId()));
 		filtroDividaAtivaDebito.adicionarParametro(new ParametroNulo(FiltroDividaAtivaDebito.DATA_RETIRADA));
@@ -3005,9 +3517,9 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 14/02/2014
 	 */
 	public void processarAmortizacaoDividaAtivaFaturamento(
@@ -3018,7 +3530,7 @@ public class ControladorCobranca implements SessionBean {
 
 		// -------------------------
 		//
-		// Registrar o início do processamento da Unidade de
+		// Registrar o inï¿½cio do processamento da Unidade de
 		// Processamento
 		// do Batch
 		//
@@ -3051,11 +3563,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Processa a amortização das contas que sejam de dívida ativa
+	 * Processa a amortizaï¿½ï¿½o das contas que sejam de dï¿½vida ativa
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 17/02/2014
 	 */
 	public void processarAmortizacaoDividaAtivaContaFaturamento(Integer anoMesReferenciaFaturamento, Integer idLocalidade) throws ControladorException {
@@ -3099,16 +3611,21 @@ public class ControladorCobranca implements SessionBean {
 						
 						dataAmortizacao = contaRetificada.getDataRetificacao();
 						
-						// Verifica se a retificação zerou a conta, caso tenha zerado, amortiza todos os débitos
+						// Verifica se a retificaï¿½ï¿½o zerou a conta, caso tenha zerado, amortiza todos os dï¿½bitos
 						if (contaRetificada.getValorTotal().compareTo(BigDecimal.ZERO) == 0) {
 							colecaoDebitoCobradoAmortizacao.addAll(colecaoDebitoCobradoConta);	
 						} else {
-							// Valida os débitos cobrados que foram excluídos na retificação para amortizar os débitos
+							// Valida os dï¿½bitos cobrados que foram excluï¿½dos na retificaï¿½ï¿½o para amortizar os dï¿½bitos
 							colecaoDebitoCobradoAmortizacao = recuperarDebitosCobradosRetificados(contaRetificada, colecaoDebitoCobradoConta);
 						}
 						
 					} else if (conta.getDebitoCreditoSituacaoAtual().getId().equals(DebitoCreditoSituacao.PARCELADA)) {
 						idAmortizacaoTipo = DividaAtivaAmortizacaoTipo.PARCELAMENTO;
+						
+						Parcelamento parcelamento = repositorioCobranca.pesquisarParcelamentoConta(conta.getId());
+						dataAmortizacao = parcelamento.getParcelamento();
+						
+						colecaoDebitoCobradoAmortizacao.addAll(colecaoDebitoCobradoConta);
 						
 						FiltroDividaAtivaDebito filtroDividaAtivaDebito = new FiltroDividaAtivaDebito();
 						filtroDividaAtivaDebito.adicionarParametro(new ParametroSimples(FiltroDividaAtivaDebito.ID_CONTA, conta.getId()));
@@ -3119,11 +3636,6 @@ public class ControladorCobranca implements SessionBean {
 						
 						if (colecaoDividaAtivaDebito != null && !colecaoDividaAtivaDebito.isEmpty()) {
 							DividaAtivaDebito dividaAtivaDebito = colecaoDividaAtivaDebito.iterator().next();
-						
-							Parcelamento parcelamento = repositorioCobranca.pesquisarParcelamentoConta(conta.getId());
-						
-							dataAmortizacao = parcelamento.getParcelamento();
-							colecaoDebitoCobradoAmortizacao.addAll(colecaoDebitoCobradoConta);
 							
 							this.inserirDividaAtivaDebitoParcelamento(parcelamento, dividaAtivaDebito.getDividaAtivaImovel());
 						}
@@ -3152,11 +3664,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Processa a amortização das contas que tiveram o vencimento alterado para o ano seguinte
+	 * Processa a amortizaï¿½ï¿½o das contas que tiveram o vencimento alterado para o ano seguinte
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 09/04/2014
 	 */
 	public void processarAmortizacaoDividaAtivaContaAlteracaoVencimento(Integer anoMesReferenciaFaturamento, Integer idLocalidade) throws ControladorException {
@@ -3194,11 +3706,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Verifica os débitos cobrados que foram retificados 
+	 * Verifica os dï¿½bitos cobrados que foram retificados 
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 17/02/2014
 	 */
 	public Collection<DebitoCobrado> recuperarDebitosCobradosRetificados(Conta contaRetificada, Collection<DebitoCobrado> colecaoDebitoCobradoConta) throws ControladorException {
@@ -3226,11 +3738,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Processa a amortização das guias de pagamento que sejam de dívida ativa
+	 * Processa a amortizaï¿½ï¿½o das guias de pagamento que sejam de dï¿½vida ativa
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 17/02/2014
 	 */
 	public void processarAmortizacaoDividaAtivaGuiaPagamentoFaturamento(Integer anoMesReferenciaFaturamento, Integer idLocalidade) throws ControladorException {
@@ -3284,11 +3796,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Processa a amortização dos débitos a cobrar que sejam de dívida ativa
+	 * Processa a amortizaï¿½ï¿½o dos dï¿½bitos a cobrar que sejam de dï¿½vida ativa
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 17/02/2014
 	 */
 	public void processarAmortizacaoDividaAtivaDebitoACobrarFaturamento(Integer anoMesReferenciaFaturamento, Integer idLocalidade) throws ControladorException {
@@ -3343,7 +3855,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC1586] - Emitir Relatório Dívida Ativa Parcelada.
+	 * [UC1586] - Emitir Relatï¿½rio Dï¿½vida Ativa Parcelada.
 	 * 
 	 * @author Anderson Cabral
 	 * @created 19/02/2014
@@ -5461,11 +5973,11 @@ public class ControladorCobranca implements SessionBean {
 							}
 						}
 						
-						//1.8 Caso, o código da constante do item seja 18
+						//1.8 Caso, o cï¿½digo da constante do item seja 18
 						if(codigoConstanteCalculo != null && codigoConstanteCalculo.equals(ItemServico.CODIGO_CONSTANTE_18)){
-							//1.8.1.	O sistema deverá selecionar as ordens de serviço encerradas e com indicativo de permissão de 
-							//execução dos imóveis relacionados ao grupo de cobrança que ainda não tenham sido incluídas em boletim, que 
-							//tenham o tipo de serviço relacionado ao item do contrato e tenha sido executada com pavimento asfáltico  
+							//1.8.1.	O sistema deverï¿½ selecionar as ordens de serviï¿½o encerradas e com indicativo de permissï¿½o de 
+							//execuï¿½ï¿½o dos imï¿½veis relacionados ao grupo de cobranï¿½a que ainda nï¿½o tenham sido incluï¿½das em boletim, que 
+							//tenham o tipo de serviï¿½o relacionado ao item do contrato e tenha sido executada com pavimento asfï¿½ltico  
 							Collection<Object[]> dadosOS = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorPavimentoAsfaltico(idGrupoCobranca,idItemServicoContrato,new Short("1"),referencia,idContrato);
 							//dados OS de rotas alternativas
 							Collection<Object[]> dadosOSRotasAlternativas = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorPavimentoAsfalticoRotaAlternativa(idGrupoCobranca,idItemServicoContrato,new Short("1"),referencia,idContrato);
@@ -5497,10 +6009,10 @@ public class ControladorCobranca implements SessionBean {
 							}
 						}
 						
-						//1.9 Caso, o código da constante do item seja 19
+						//1.9 Caso, o cï¿½digo da constante do item seja 19
 						if(codigoConstanteCalculo != null && codigoConstanteCalculo.equals(ItemServico.CODIGO_CONSTANTE_19)){
-							//1.9.1.	O sistema deverá selecionar as ordens de serviço encerradas e com indicativo de permissão de execução dos imóveis 
-							//relacionados ao grupo de cobrança que ainda não tenham sido incluídas em boletim, que tenham o tipo de serviço relacionado 
+							//1.9.1.	O sistema deverï¿½ selecionar as ordens de serviï¿½o encerradas e com indicativo de permissï¿½o de execuï¿½ï¿½o dos imï¿½veis 
+							//relacionados ao grupo de cobranï¿½a que ainda nï¿½o tenham sido incluï¿½das em boletim, que tenham o tipo de serviï¿½o relacionado 
 							//ao item do contrato e tenha sido executada com pavimento pedra tosca/paralelo  
 							Collection<Object[]> dadosOS = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorPavimentoParalelo(idGrupoCobranca,idItemServicoContrato,new Short("1"),referencia,idContrato);
 							//dados OS de rotas alternativas
@@ -5533,11 +6045,11 @@ public class ControladorCobranca implements SessionBean {
 							}
 						}
 						
-						//1.10 Caso, o código da constante do item seja 20
+						//1.10 Caso, o cï¿½digo da constante do item seja 20
 						if(codigoConstanteCalculo != null && codigoConstanteCalculo.equals(ItemServico.CODIGO_CONSTANTE_20)){
-							//1.10.1.	O sistema deverá selecionar as ordens de serviço encerradas e com indicativo de permissão de execução dos imóveis 
-							//relacionados ao grupo de cobrança que ainda não tenham sido incluídas em boletim, que tenham o tipo de serviço relacionado 
-							//ao item do contrato e tenha sido executada sem pavimento e sem calçada   
+							//1.10.1.	O sistema deverï¿½ selecionar as ordens de serviï¿½o encerradas e com indicativo de permissï¿½o de execuï¿½ï¿½o dos imï¿½veis 
+							//relacionados ao grupo de cobranï¿½a que ainda nï¿½o tenham sido incluï¿½das em boletim, que tenham o tipo de serviï¿½o relacionado 
+							//ao item do contrato e tenha sido executada sem pavimento e sem calï¿½ada   
 							Collection<Object[]> dadosOS = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorSemPavimentoSemCalcada(idGrupoCobranca,idItemServicoContrato,new Short("2"),referencia,idContrato);
 							//dados OS de rotas alternativas
 							Collection<Object[]> dadosOSRotasAlternativas = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorSemPavimentoSemCalcadaRotaAlternativa(idGrupoCobranca,idItemServicoContrato,new Short("2"),referencia,idContrato);
@@ -5569,11 +6081,11 @@ public class ControladorCobranca implements SessionBean {
 							}
 						}
 						
-						//1.11 Caso, o código da constante do item seja 21
+						//1.11 Caso, o cï¿½digo da constante do item seja 21
 						if(codigoConstanteCalculo != null && codigoConstanteCalculo.equals(ItemServico.CODIGO_CONSTANTE_21)){
-							//1.11.1.	O sistema deverá selecionar as ordens de serviço encerradas e com indicativo de permissão de execução dos imóveis 
-							//relacionados ao grupo de cobrança que ainda não tenham sido incluídas em boletim, que tenham o tipo de serviço 
-							//relacionado ao item do contrato e tenha sido executada com pavimento paralelo e sem calçada 
+							//1.11.1.	O sistema deverï¿½ selecionar as ordens de serviï¿½o encerradas e com indicativo de permissï¿½o de execuï¿½ï¿½o dos imï¿½veis 
+							//relacionados ao grupo de cobranï¿½a que ainda nï¿½o tenham sido incluï¿½das em boletim, que tenham o tipo de serviï¿½o 
+							//relacionado ao item do contrato e tenha sido executada com pavimento paralelo e sem calï¿½ada 
 							Collection<Object[]> dadosOS = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorPavimentoParaleloSemCalcada(idGrupoCobranca,idItemServicoContrato,new Short("1"),referencia,idContrato);
 							//dados OS de rotas alternativas
 							Collection<Object[]> dadosOSRotasAlternativas = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorPavimentoParaleloSemCalcadaRotaAlternativa(idGrupoCobranca,idItemServicoContrato,new Short("1"),referencia,idContrato);
@@ -5605,11 +6117,11 @@ public class ControladorCobranca implements SessionBean {
 							}
 						}
 						
-						//1.12 Caso, o código da constante do item seja 22
+						//1.12 Caso, o cï¿½digo da constante do item seja 22
 						if(codigoConstanteCalculo != null && codigoConstanteCalculo.equals(ItemServico.CODIGO_CONSTANTE_22)){
-							//1.11.1.	O sistema deverá selecionar as ordens de serviço encerradas e com indicativo de permissão de execução dos imóveis 
-							//relacionados ao grupo de cobrança que ainda não tenham sido incluídas em boletim, que tenham o tipo de serviço 
-							//relacionado ao item do contrato e tenha sido executada com pavimento paralelo e com calçada 
+							//1.11.1.	O sistema deverï¿½ selecionar as ordens de serviï¿½o encerradas e com indicativo de permissï¿½o de execuï¿½ï¿½o dos imï¿½veis 
+							//relacionados ao grupo de cobranï¿½a que ainda nï¿½o tenham sido incluï¿½das em boletim, que tenham o tipo de serviï¿½o 
+							//relacionado ao item do contrato e tenha sido executada com pavimento paralelo e com calï¿½ada 
 							Collection<Object[]> dadosOS = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorPavimentoParaleloComCalcada(idGrupoCobranca,idItemServicoContrato,new Short("1"),referencia,idContrato);
 							//dados OS de rotas alternativas
 							Collection<Object[]> dadosOSRotasAlternativas = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorPavimentoParaleloComCalcadaRotaAlternativa(idGrupoCobranca,idItemServicoContrato,new Short("1"),referencia,idContrato);
@@ -5641,11 +6153,11 @@ public class ControladorCobranca implements SessionBean {
 							}
 						}
 						
-						//1.13 Caso, o código da constante do item seja 23
+						//1.13 Caso, o cï¿½digo da constante do item seja 23
 						if(codigoConstanteCalculo != null && codigoConstanteCalculo.equals(ItemServico.CODIGO_CONSTANTE_23)){
-							//1.8.1.	O sistema deverá selecionar as ordens de serviço encerradas e com indicativo de permissão de 
-							//execução dos imóveis relacionados ao grupo de cobrança que ainda não tenham sido incluídas em boletim, que 
-							//tenham o tipo de serviço relacionado ao item do contrato e tenha sido executada com pavimento asfáltico sem calçada 
+							//1.8.1.	O sistema deverï¿½ selecionar as ordens de serviï¿½o encerradas e com indicativo de permissï¿½o de 
+							//execuï¿½ï¿½o dos imï¿½veis relacionados ao grupo de cobranï¿½a que ainda nï¿½o tenham sido incluï¿½das em boletim, que 
+							//tenham o tipo de serviï¿½o relacionado ao item do contrato e tenha sido executada com pavimento asfï¿½ltico sem calï¿½ada 
 							Collection<Object[]> dadosOS = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorPavimentoAsfalticoSemCalcada(idGrupoCobranca,idItemServicoContrato,new Short("1"),referencia,idContrato);
 							//dados OS de rotas alternativas
 							Collection<Object[]> dadosOSRotasAlternativas = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorPavimentoAsfalticoSemCalcadaRotaAlternativa(idGrupoCobranca,idItemServicoContrato,new Short("1"),referencia,idContrato);
@@ -5677,11 +6189,11 @@ public class ControladorCobranca implements SessionBean {
 							}
 						}
 						
-						//1.14 Caso, o código da constante do item seja 24
+						//1.14 Caso, o cï¿½digo da constante do item seja 24
 						if(codigoConstanteCalculo != null && codigoConstanteCalculo.equals(ItemServico.CODIGO_CONSTANTE_24)){
-							//1.8.1.	O sistema deverá selecionar as ordens de serviço encerradas e com indicativo de permissão de 
-							//execução dos imóveis relacionados ao grupo de cobrança que ainda não tenham sido incluídas em boletim, que 
-							//tenham o tipo de serviço relacionado ao item do contrato e tenha sido executada com pavimento asfáltico com calcada  
+							//1.8.1.	O sistema deverï¿½ selecionar as ordens de serviï¿½o encerradas e com indicativo de permissï¿½o de 
+							//execuï¿½ï¿½o dos imï¿½veis relacionados ao grupo de cobranï¿½a que ainda nï¿½o tenham sido incluï¿½das em boletim, que 
+							//tenham o tipo de serviï¿½o relacionado ao item do contrato e tenha sido executada com pavimento asfï¿½ltico com calcada  
 							Collection<Object[]> dadosOS = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorPavimentoAsfalticoComCalcada(idGrupoCobranca,idItemServicoContrato,new Short("1"),referencia,idContrato);
 							//dados OS de rotas alternativas
 							Collection<Object[]> dadosOSRotasAlternativas = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorPavimentoAsfalticoComCalcadaRotaAlternativa(idGrupoCobranca,idItemServicoContrato,new Short("1"),referencia,idContrato);
@@ -5713,11 +6225,11 @@ public class ControladorCobranca implements SessionBean {
 							}
 						}
 						
-						//1.15 Caso, o código da constante do item seja 25
+						//1.15 Caso, o cï¿½digo da constante do item seja 25
 						if(codigoConstanteCalculo != null && codigoConstanteCalculo.equals(ItemServico.CODIGO_CONSTANTE_25)){
-							//1.15.1.	O sistema deverá selecionar as ordens de serviço encerradas e com indicativo de permissão de execução 
-							//dos imóveis relacionados ao grupo de cobrança que ainda não tenham sido incluídas em boletim, que tenham o tipo 
-							//de serviço relacionado ao item do contrato e não tenha sido executada  
+							//1.15.1.	O sistema deverï¿½ selecionar as ordens de serviï¿½o encerradas e com indicativo de permissï¿½o de execuï¿½ï¿½o 
+							//dos imï¿½veis relacionados ao grupo de cobranï¿½a que ainda nï¿½o tenham sido incluï¿½das em boletim, que tenham o tipo 
+							//de serviï¿½o relacionado ao item do contrato e nï¿½o tenha sido executada  
 							Collection<Object[]> dadosOS = this.repositorioCobranca.pesquisarOSEncerradasNaoExecutadasPorBoletim(idGrupoCobranca,idItemServicoContrato,referencia,idContrato);
 							//dados OS de rotas alternativas
 							Collection<Object[]> dadosOSRotasAlternativas = this.repositorioCobranca.pesquisarOSEncerradasNaoExecutadasPorBoletimRotaAlternativa(idGrupoCobranca,idItemServicoContrato,referencia,idContrato);
@@ -5748,11 +6260,11 @@ public class ControladorCobranca implements SessionBean {
 							}
 						}
 						
-						//1.16 Caso, o código da constante do item seja 26
+						//1.16 Caso, o cï¿½digo da constante do item seja 26
 						if(codigoConstanteCalculo != null && codigoConstanteCalculo.equals(ItemServico.CODIGO_CONSTANTE_26)){
-							//1.8.1.	O sistema deverá selecionar as ordens de serviço encerradas e com indicativo de permissão de 
-							//execução dos imóveis relacionados ao grupo de cobrança que ainda não tenham sido incluídas em boletim, que 
-							//tenham o tipo de serviço relacionado ao item do contrato e tenha sido executada sem pavimento asfáltico e com calçada   
+							//1.8.1.	O sistema deverï¿½ selecionar as ordens de serviï¿½o encerradas e com indicativo de permissï¿½o de 
+							//execuï¿½ï¿½o dos imï¿½veis relacionados ao grupo de cobranï¿½a que ainda nï¿½o tenham sido incluï¿½das em boletim, que 
+							//tenham o tipo de serviï¿½o relacionado ao item do contrato e tenha sido executada sem pavimento asfï¿½ltico e com calï¿½ada   
 							Collection<Object[]> dadosOS = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorPavimentoAsfalticoComCalcada(idGrupoCobranca,idItemServicoContrato,new Short("2"),referencia,idContrato);
 							//dados OS de rotas alternativas
 							Collection<Object[]> dadosOSRotasAlternativas = this.repositorioCobranca.pesquisarOSEncerradasPorBoletimComIndicadorPavimentoAsfalticoComCalcadaRotaAlternativa(idGrupoCobranca,idItemServicoContrato,new Short("2"),referencia,idContrato);
@@ -6473,13 +6985,13 @@ public class ControladorCobranca implements SessionBean {
 	 * Envia email com as informa??es de erro da valida??o do arquivo Txt
 	 * 
 	 * @author Mariana Victor
-	 * @throws SendFailedException 
+	 * @throws ErroEmailException 
 	 * @date 21/06/2011
 	 */
 	private void enviarEmailErroEncerramentoOSCobranca(String nomeArquivo, 
 			Collection<String> collRetornoRegistro,
 			String emailDestinatario)
-			throws ControladorException, SendFailedException {
+			throws ControladorException, ErroEmailException {
 		
 
 		StringBuilder log = new StringBuilder("");
@@ -6526,7 +7038,7 @@ public class ControladorCobranca implements SessionBean {
 			ServicosEmail.enviarMensagemArquivoAnexado(emailDestinatario,
 					emailRemetente, tituloMensagem, corpoMensagem, leitura);
 		
-		} catch (SendFailedException e) {
+		} catch (ErroEmailException e) {
 			throw e;
 		} catch (IOException e) {
 			throw new ControladorException("erro.sistema", e);
@@ -6603,19 +7115,19 @@ public class ControladorCobranca implements SessionBean {
 		return log;
 		
 	}
-	
+
 	/**
 	 * [UC1182] Recepcionar Arquivo TXT Encerramento OS Cobran?a
 	 * 
 	 * Envia email com confirma??o ap?s processamento do arquivo Txt
 	 * 
 	 * @author Mariana Victor
-	 * @throws SendFailedException 
+	 * @throws ErroEmailException 
 	 * @date 21/06/2011
 	 */
 	private void enviarEmailConfirmacaoEncerramentoOSCobranca(String nomeArquivo, 
 			StringBuilder log, String emailDestinatario)
-			throws ControladorException, SendFailedException {
+			throws ControladorException, ErroEmailException {
 		
 		EnvioEmail envioEmail = getControladorCadastro()
 		.pesquisarEnvioEmail(
@@ -6648,7 +7160,7 @@ public class ControladorCobranca implements SessionBean {
 			ServicosEmail.enviarMensagemArquivoAnexado(emailDestinatario,
 					emailRemetente, tituloMensagem, corpoMensagem, leitura);
 			
-		} catch (SendFailedException e) {
+		} catch (ErroEmailException e) {
 			throw e;
 		} catch (IOException e) {
 			throw new ControladorException("erro.sistema", e);
@@ -6855,6 +7367,91 @@ public class ControladorCobranca implements SessionBean {
 			throw new ControladorException("erro.sistema", e);
 		}
 
+	}
+	
+	
+	/**
+	 * Atualiza o documento de cobranca apos a OS ser encerrada. Este metodo sera usado nos metodos de 
+	 * encerrar OS 
+	 * 
+	 * @param OS
+	 * @throws ControladorException
+	 * 
+	 * @author Francisco do Nascimento
+	 * @date 16/05/2008
+	 * 
+	 */
+	public void atualizarCobrancaDocumentoAposEncerrarOS(OrdemServico OS) throws ControladorException{
+//		 posi??es do array com os dados que ser?o atualizados
+		DadosPesquisaCobrancaDocumentoHelper cobrancaDocumentoParaAtualizar = new DadosPesquisaCobrancaDocumentoHelper();
+		Collection colecaoCobrancaDocumentoParaAtualizar = new ArrayList();
+		
+		CobrancaDocumento cobrancaDocumento = OS.getCobrancaDocumento();
+		if (cobrancaDocumento != null){
+			cobrancaDocumentoParaAtualizar.setIdDocumento(cobrancaDocumento.getId());
+			// recebe a data de encerramento da ordem de
+			// serivo(ORSE_TMENCERRAMENTO)
+			
+			if(OS.getDataEncerramento()!= null){
+				cobrancaDocumento.setDataSituacaoAcao(OS.getDataEncerramento());
+				cobrancaDocumentoParaAtualizar.setDataSituacaoAcao(OS.getDataEncerramento());
+			}
+
+			// indicador de Execu??o
+			// caso o motivo de encerramento
+			// corresponda
+			// ?
+			// execu??o
+			if (OS.getAtendimentoMotivoEncerramento() != null){
+				
+				FiltroAtendimentoMotivoEncerramento filtroAtendimento = new FiltroAtendimentoMotivoEncerramento();
+				filtroAtendimento.adicionarParametro(new ParametroSimples("id", OS.getAtendimentoMotivoEncerramento().getId()));
+				
+				Collection motivos = getControladorUtil().pesquisar(filtroAtendimento, 
+						AtendimentoMotivoEncerramento.class.getName());
+				
+				AtendimentoMotivoEncerramento ame = (AtendimentoMotivoEncerramento) Util.retonarObjetoDeColecao(motivos);
+								
+				determinarSituacaoAcaoAPartirMotivoEncerramentoOS(cobrancaDocumentoParaAtualizar, ame);	
+				
+				cobrancaDocumentoParaAtualizar.setIdMotivoEncerramento(ame.getId());
+			}
+		
+			if (OS.getImovel() != null){
+				try {
+					// [UC0306] - Obter Principal CAtegoria do Imovel
+					// De acordo com o metodo ControladorImovel.obterPrincipalCategoriaImovel
+					// caso seja a empresa FEBRABAN, a categoria principal sera a que tiver o maior codigo,
+					// caso contrario, a principal ser? a que tiver menor codigo						
+					SistemaParametro sistemaParametro = getControladorUtil().pesquisarParametrosDoSistema();
+					boolean ehFEBRABAN = sistemaParametro.getCodigoEmpresaFebraban().equals(
+							SistemaParametro.CODIGO_EMPRESA_FEBRABAN_CAERN); 
+					Integer idCategoria = repositorioImovel.obterIdCategoriaPrincipal(
+							OS.getImovel().getId(), ehFEBRABAN);
+					
+					cobrancaDocumentoParaAtualizar.setIdCategoria(idCategoria);
+					
+					// pesquisa os imovel para ser usado para gravar o
+					// Resumo Cobran?a A??o						
+					Integer idEsferaPoder = repositorioImovel.obterIdEsferaPoder(OS.getImovel().getId());
+					
+					cobrancaDocumentoParaAtualizar.setIdEsferaPoder(idEsferaPoder);
+				} catch (ErroRepositorioException e) {
+					e.printStackTrace();
+					throw new ControladorException("erro.sistema", e);
+				}				
+			}			
+			
+			colecaoCobrancaDocumentoParaAtualizar.add(cobrancaDocumentoParaAtualizar);
+			try {
+				this.repositorioCobranca.atualizarCobrancaDocumento(colecaoCobrancaDocumentoParaAtualizar);
+			} catch (ErroRepositorioException e) {
+				e.printStackTrace();
+				throw new ControladorException("erro.sistema", e);
+			}
+			colecaoCobrancaDocumentoParaAtualizar.clear();
+		} 
+		
 	}
 	
 	
@@ -7377,9 +7974,6 @@ public class ControladorCobranca implements SessionBean {
 		
 		return retorno;
 	}
-	
-	
-	
 	
 	/**
 	 * [UC0630] Solicitar Emiss?o do Extrato de D?bitos
@@ -9205,62 +9799,11 @@ public class ControladorCobranca implements SessionBean {
 				}
 				
 			}
-	
-			// Indicador de Credito a Realizar
-			if (indicadorCreditoARealizar == 1) {
-				Collection creditosARealizar = this.pesquisarCreditosARealizarDebito(idImovel, idImoveis, indicadorDebito);
-				obterDebitoImovelOuClienteHelper.setColecaoCreditoARealizar(creditosARealizar);
-			}
-	
-			// Indicador de Notas Promissorias
-			if (indicadorNotasPromissorias == 1) {
-	
-				if (indicadorDebito == 1) { // caso imovel
-				} else if (indicadorDebito == 2) { // caso cliente
-				}
-	
-			}
-	
-			// Indicador de Guias de Pagamentos
-			if (indicadorGuiasPagamento == 1) {
-	
-				Collection<GuiaPagamentoValoresHelper> colecaoGuiasPagamentoValores = this
-				.pesquisarGuiasPagamentoDebito(idCliente, clienteRelacaoTipo,
-						idImovelFormatado, idImoveis, idImoveisAtuais,
-						indicadorDebito, indicadorPagamento, 
-						indicadorCalcularAcrescimoImpontualidade,
-						anoMesInicialVencimentoDebito,
-						anoMesFinalVencimentoDebito, anoMesArrecadacao, indicadorCalcularAcrescimosParaGuiaExtratoDebito);
-		
-				// adcionando a colecao de guias de pagamento de valores
-				if (colecaoGuiasPagamentoValores != null) {
-					
-					Collection<GuiaPagamentoValoresHelper> colecaoGuiasPagamentoValoresFinal = new ArrayList<GuiaPagamentoValoresHelper>();
-					//Retira as contas em revis?o vinculadas a um contrato parcelamento por cliente
-					if(sistemaParametro.getIndicadorBloqueioGuiasOuAcresContratoParcelDebito().intValue() == 1){
-						for (GuiaPagamentoValoresHelper guiaPagamentoValoresHelper : colecaoGuiasPagamentoValores) {
-							try {
-								if(repositorioCobranca.verificaGuiaVinculadaAContratoParcelAtivo(guiaPagamentoValoresHelper.getGuiaPagamento().getId().intValue()) == false){
-									colecaoGuiasPagamentoValoresFinal.add(guiaPagamentoValoresHelper);
-								}
-							} catch (ErroRepositorioException e) {
-								sessionContext.setRollbackOnly();
-								throw new ControladorException("erro.sistema", e);
-							}
-						}
-					} else {
-						colecaoGuiasPagamentoValoresFinal = colecaoGuiasPagamentoValores;
-					}
-					
-					obterDebitoImovelOuClienteHelper
-							.setColecaoGuiasPagamentoValores(colecaoGuiasPagamentoValoresFinal);
-				}
-			}
 		}
-
-		return obterDebitoImovelOuClienteHelper;
-
+	
+		return obterDebitoImovelOuClienteHelper;	
 	}
+			
 	
 	/**
 	 * Permite a obten??o dos d?bitos de um im?vel ou de um cliente
@@ -11348,7 +11891,7 @@ public class ControladorCobranca implements SessionBean {
 				cobrancaBoletimContrato.setAnoMesReferencia(Util.recuperaAnoMesDaData(new Date()));
 			}
 			
-			cobrancaBoletimContrato.setDescricaoBoletimContrato(quantidadeBoletimContrato + "º Boletim de Contrato");
+			cobrancaBoletimContrato.setDescricaoBoletimContrato(quantidadeBoletimContrato + "ï¿½ Boletim de Contrato");
 			cobrancaBoletimContrato.setContratoEmpresaServico(contratoEmpresaServico);
 			cobrancaBoletimContrato.setUltimaAlteracao(new Date());
 			
@@ -11919,7 +12462,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	/**
 	 * [UC0213] Desfazer Parcelamento Debito 
-	 * remover informações do pagamento de cartão de crédito
+	 * remover informaï¿½ï¿½es do pagamento de cartï¿½o de crï¿½dito
 	 * 
 	 * @author Vivianne Sousa
 	 * @created 11/05/2015
@@ -11928,16 +12471,21 @@ public class ControladorCobranca implements SessionBean {
 	 * @exception controladorException
 	 *                controlador Exception
 	 */
-	public void desfazerPagamentoCartaoCredito (Integer idParcelamento) throws ControladorException {
+	private ParcelamentoPagamentoCartaoCredito desfazerPagamentoCartaoCredito (Integer idParcelamento) throws ControladorException {
 		try {
-			Collection<Integer> colecaoIdGuia = this.repositorioCobranca.pesquisarIdGuiaPagamentoParcelamentoCartao(idParcelamento);
-			if(!Util.isVazioOrNulo(colecaoIdGuia)){
-				this.repositorioCobranca.deletarGuiaPagamentoParcelamentoCartao(idParcelamento);
+			ParcelamentoPagamentoCartaoCredito parcelamentoPagamentoCartaoCredito = 
+					this.repositorioCobranca.pesquisarParcelamentoPagamentoCartaoCredito(idParcelamento);
+			
+			if(parcelamentoPagamentoCartaoCredito != null){
+				this.repositorioCobranca.deletarPagamentoCartaoCreditoItem(parcelamentoPagamentoCartaoCredito.getId());
 				this.repositorioCobranca.deletarParcelamentoPagamentoCartaoCredito(idParcelamento);
+				Collection<Integer> colecaoIdGuia = this.repositorioCobranca.pesquisarIdGuiaPagamentoParcelamentoCartao(parcelamentoPagamentoCartaoCredito.getId());
 				for (Integer idGuia : colecaoIdGuia) {
 					this.repositorioCobranca.removerGuiaPagamento(idGuia);
 				}
 			}
+
+			return parcelamentoPagamentoCartaoCredito;
 		} catch (ErroRepositorioException ex) {
 			sessionContext.setRollbackOnly();
 			throw new ControladorException("erro.sistema", ex);
@@ -13945,7 +14493,7 @@ public class ControladorCobranca implements SessionBean {
 			
 			
 			
-			//2. Caso a ação de cobrança tenha indicação de enviar SMS ou EMAIL
+			//2. Caso a aï¿½ï¿½o de cobranï¿½a tenha indicaï¿½ï¿½o de enviar SMS ou EMAIL
 			if(acaoCobranca.getIndicadorEnviarSMS().compareTo(ConstantesSistema.SIM) == 0 
 					|| acaoCobranca.getIndicadorEnviarEmail().compareTo(ConstantesSistema.SIM) == 0){
 				
@@ -13960,7 +14508,7 @@ public class ControladorCobranca implements SessionBean {
 				}
 				
 				
-				//2.3.	Caso o cliente não tenha sido validado para envio de EMAIL E SMS passar para o próximo imóvel
+				//2.3.	Caso o cliente nï¿½o tenha sido validado para envio de EMAIL E SMS passar para o prï¿½ximo imï¿½vel
 				if(!validadoEnvioSMS && !validadoEnvioEmail){
 					
 					MotivoNaoGeracaoDocCobranca motivoNaoGeracao = 
@@ -14509,7 +15057,7 @@ public class ControladorCobranca implements SessionBean {
 									criterioCobranca, // CobrancaCriterio
 									acaoCobranca, // CobrancaAcao
 									verificarCriterioCobrancaParaImovelHelper.getValorDebitoImovel(), 
-									dataAtual,null, null,null, dataEmissaoPredecessor, null, null,null,null,null); // valorDocumento
+									dataAtual,null, null,null, dataEmissaoPredecessor, null, null,null,null,null, false); // valorDocumento
 	
 					if (extratoDebitoRelatorioHelper != null) {
 						gerarAtividadeAcaoCobrancaHelper.getColecaoDocumentosCobranca().add(
@@ -14555,7 +15103,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	/**
 	 * 
-	 * [UC0251] Gerar Atividade de Ação de Cobrança
+	 * [UC0251] Gerar Atividade de Aï¿½ï¿½o de Cobranï¿½a
 	 * [FS0003] Verificar  Envio EMAIL.
 	 * 
 	 * @author Hugo Azevedo
@@ -14585,7 +15133,7 @@ public class ControladorCobranca implements SessionBean {
 
 	/**
 	 * 
-	 * [UC0251] Gerar Atividade de Ação de Cobrança
+	 * [UC0251] Gerar Atividade de Aï¿½ï¿½o de Cobranï¿½a
 	 * [FS0002] Verificar  Envio SMS.
 	 * 
 	 * @author Hugo Azevedo
@@ -14604,11 +15152,11 @@ public class ControladorCobranca implements SessionBean {
 		ClienteImovel clieIm = (ClienteImovel)Util.retonarObjetoDeColecao(this.repositorioUtil.pesquisar(filtro, ClienteImovel.class.getName()));
 		
 		
-		//2.	Caso clie_icenviasms = 2 o sistema não valida o imóvel para envio de SMS
+		//2.	Caso clie_icenviasms = 2 o sistema nï¿½o valida o imï¿½vel para envio de SMS
 		if(clieIm.getCliente().getIndicadorEnviarSms().compareTo(ConstantesSistema.NAO) == 0)
 			return false;
 		
-		//Caso Contrário, pesquisar existência de telefone celular com indicação de enviar SMS
+		//Caso Contrï¿½rio, pesquisar existï¿½ncia de telefone celular com indicaï¿½ï¿½o de enviar SMS
 		else{
 			
 			FiltroClienteFone filtroClieFone = new FiltroClienteFone();
@@ -14617,8 +15165,8 @@ public class ControladorCobranca implements SessionBean {
 			
 			Collection<ClienteFone> col = this.repositorioUtil.pesquisar(filtroClieFone, ClienteFone.class.getName());
 			
-			//Caso a pesquisa não tenha encontrado telefone para envio de SMS  
-			// o sistema não valida o imóvel para envio de SMS
+			//Caso a pesquisa nï¿½o tenha encontrado telefone para envio de SMS  
+			// o sistema nï¿½o valida o imï¿½vel para envio de SMS
 			if(col == null || col.isEmpty())
 				return false;
 		}
@@ -15005,7 +15553,7 @@ public class ControladorCobranca implements SessionBean {
 
 			}
 			
-			//Validação da nova sistematica de cobrança da CAERN para pegar todos os débitos do imóvel caso encontre pelo menos um aviso válido
+			//Validaï¿½ï¿½o da nova sistematica de cobranï¿½a da CAERN para pegar todos os dï¿½bitos do imï¿½vel caso encontre pelo menos um aviso vï¿½lido
 			if (sistemaParametros.getNomeAbreviadoEmpresa().equals("CAERN") 
 					&& colecaoContasValoresParaRemocaoAuxiliar != null && achouContaEmUmAviso){
 				
@@ -16913,18 +17461,24 @@ public class ControladorCobranca implements SessionBean {
 		Object[] retornoDadosParaCalculoDescontoPagAVista = null;
 		if(parcelamentoPerfil.getAnoMesReferenciaLimiteContaPagamentoAVista() != null &&
 				!parcelamentoPerfil.getAnoMesReferenciaLimiteContaPagamentoAVista().equals(new BigDecimal("0.00"))){
-				//caso referencia limite para conta a parcelar seja informado,
-				//retira tamb?m as contas com refer?ncia maior que o limite informado
-				retornoDadosParaCalculoDescontoPagAVista = this.obterColecaoContasParaCalculoDesconto(
-						parcelamentoPerfil.getAnoMesReferenciaLimiteContaPagamentoAVista(),
-						negociacaoOpcoesParcelamentoHelper.getColecaoContasParaParcelamento(),
-						true);
-				
-				colecaoContasParaDescontoPagAVista = (Collection<ContaValoresHelper>)retornoDadosParaCalculoDescontoPagAVista[0];
-				valorTotalMultaParaDescontoPagAVista = (BigDecimal)retornoDadosParaCalculoDescontoPagAVista[1];
-				valorTotalJurosParaDescontoPagAVista = (BigDecimal)retornoDadosParaCalculoDescontoPagAVista[2];
-				valorTotalAtualizacaoMonetariaParaDescontoPagAVista =(BigDecimal)retornoDadosParaCalculoDescontoPagAVista[3];
-				valorTotalAcrescimosImpontualidadeParaDescontoPagAVista =(BigDecimal)retornoDadosParaCalculoDescontoPagAVista[4];
+			//caso referencia limite para conta a parcelar seja informado,
+			//retira tamb?m as contas com refer?ncia maior que o limite informado
+			retornoDadosParaCalculoDescontoPagAVista = this.obterColecaoContasParaCalculoDesconto(
+					parcelamentoPerfil.getAnoMesReferenciaLimiteContaPagamentoAVista(),
+					negociacaoOpcoesParcelamentoHelper.getColecaoContasParaParcelamento(),
+					true);
+			
+			colecaoContasParaDescontoPagAVista = (Collection<ContaValoresHelper>)retornoDadosParaCalculoDescontoPagAVista[0];
+			valorTotalMultaParaDescontoPagAVista = (BigDecimal)retornoDadosParaCalculoDescontoPagAVista[1];
+			valorTotalJurosParaDescontoPagAVista = (BigDecimal)retornoDadosParaCalculoDescontoPagAVista[2];
+			valorTotalAtualizacaoMonetariaParaDescontoPagAVista =(BigDecimal)retornoDadosParaCalculoDescontoPagAVista[3];
+			valorTotalAcrescimosImpontualidadeParaDescontoPagAVista =(BigDecimal)retornoDadosParaCalculoDescontoPagAVista[4];
+		}else{
+			colecaoContasParaDescontoPagAVista = negociacaoOpcoesParcelamentoHelper.getColecaoContasParaParcelamento();
+			valorTotalMultaParaDescontoPagAVista = valorTotalMultaPorAntiguidade;
+			valorTotalJurosParaDescontoPagAVista = valorTotalJurosPorAntiguidade;
+			valorTotalAtualizacaoMonetariaParaDescontoPagAVista = valorTotalAtualizacaoMonetariaPorAntiguidade;
+			valorTotalAcrescimosImpontualidadeParaDescontoPagAVista = valorTotalAcrescimosImpontualidadePorAntiguidade;
 			}
 		
 		//========================================================================================
@@ -19830,7 +20384,7 @@ public class ControladorCobranca implements SessionBean {
 	 * 
 	 * criarGuiaPagamentoItemParcelamento
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 05/04/2006
 	 * 
 	 * @param debitoTipo
@@ -20637,7 +21191,7 @@ public class ControladorCobranca implements SessionBean {
 			}
 		}
 
-		// 7. Desconto sobre Débito Total
+		// 7. Desconto sobre Dï¿½bito Total
 		if(valorDescontoSobreDebitoTotal != null
                 && !valorDescontoSobreDebitoTotal.equals(new BigDecimal("0.00"))) {
 		        
@@ -20652,7 +21206,7 @@ public class ControladorCobranca implements SessionBean {
 			}
 		}
 		
-		// 8. Desconto sobre Tipo do Débito
+		// 8. Desconto sobre Tipo do Dï¿½bito
 		if(valorDescontoDebitoTipo != null
                 && !valorDescontoDebitoTipo.equals(new BigDecimal("0.00"))) {
 		        
@@ -20671,11 +21225,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * Verifica se o parcelamento irá gerar carnê ou créditos a realizar
+	 * Verifica se o parcelamento irï¿½ gerar carnï¿½ ou crï¿½ditos a realizar
 	 * 
 	 * [UC0214] Efetuar Parcelamento de D?bitos
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 10/10/2014
 	 */
 	private GuiaPagamentoItem verificarCriacaoGuiaItemOuGeracaoCreditoParcelamento(CreditoTipo creditoTipo, Imovel imovel, 
@@ -20685,8 +21239,8 @@ public class ControladorCobranca implements SessionBean {
 		GuiaPagamentoItem guiaPagamentoItemParcelamento = null;
 		
 		if (indicadorParcelamentoCarne != null && indicadorParcelamentoCarne.equals("" + ConstantesSistema.SIM)) {
-			// Cria o item da guia de pagamento com o valor total do crédito. 
-			// Este valor será dividido pela quantidade de parcelas posteriormente para inserção de cada parcela
+			// Cria o item da guia de pagamento com o valor total do crï¿½dito. 
+			// Este valor serï¿½ dividido pela quantidade de parcelas posteriormente para inserï¿½ï¿½o de cada parcela
 			guiaPagamentoItemParcelamento = criarGuiaPagamentoItemParcelamento(null, creditoTipo, valorCredito);
 		} else {
 			// 2. Inclui o cr?dito a realizar para Desconto por Antiguidade do
@@ -21120,7 +21674,7 @@ public class ControladorCobranca implements SessionBean {
 					}
 				}
 				
-				//RM5310 - Implantação da divida ativa - Vivianne Sousa - 21/02/2014
+				//RM5310 - Implantaï¿½ï¿½o da divida ativa - Vivianne Sousa - 21/02/2014
 				if (colecaoGuiaPagamentoItemEntrada != null && !colecaoGuiaPagamentoItemEntrada.isEmpty()) {
 					
 					Iterator iterGuiaItemEntrada = colecaoGuiaPagamentoItemEntrada.iterator();
@@ -23458,7 +24012,7 @@ public class ControladorCobranca implements SessionBean {
 		if (Util.isVazioOrNulo(colecaoCobrancaAcao)) {
 			throw new ControladorException(
 					"atencao.pesquisa.nenhum_registro_tabela", null,
-					"Tabela Cobrança Ação");
+					"Tabela Cobranï¿½a Aï¿½ï¿½o");
 		}
 
 		return colecaoCobrancaAcao;
@@ -23474,7 +24028,7 @@ public class ControladorCobranca implements SessionBean {
 		if (Util.isVazioOrNulo(colecaoCobrancaAcao)) {
 			throw new ControladorException(
 					"atencao.pesquisa.nenhum_registro_tabela", null,
-					"Tabela Cobrança Ação");
+					"Tabela Cobranï¿½a Aï¿½ï¿½o");
 		}
 
 		return colecaoCobrancaAcao;
@@ -27054,7 +27608,7 @@ public class ControladorCobranca implements SessionBean {
 			Collection<Categoria> colecaoCategoria = getControladorImovel()
 			.obterQuantidadeEconomiasCategoria(helper.getImovel());
 		
-			// 6.1.6 [SB0004] Gerar Débitos a Cobrar dos Acréscimos por Impontualidade
+			// 6.1.6 [SB0004] Gerar Dï¿½bitos a Cobrar dos Acrï¿½scimos por Impontualidade
 			gerarDebitosACobrarAcrescimosImpontualidade(helper.getImovel(),
 			helper.getValorAtualizacaoMonetaria(), helper.getValorJurosMora(), helper.getValorMulta(),
 			helper.getTaxaJuros(), parcelamentoId, colecaoCategoria, usuarioLogado, existeEntradaParcelamento, anoMesVencimentoGuia, maiorAnoMesContas);
@@ -27106,12 +27660,12 @@ public class ControladorCobranca implements SessionBean {
 				helper.getImovel(),	helper.getNumeroPrestacoes(), helper.getTaxaJuros(), parcelamentoId, colecaoCategoria, valorEntradaTotal,
 				sistemaParametros.getIndicadorDividaAtiva(), usuarioLogado, gerarGuia, anoMesVencimentoGuia,	maiorAnoMesContas,gerarExtrato);
 			
-			// 6.1.9 [SB0005] Gerar Débitos a Cobrar
+			// 6.1.9 [SB0005] Gerar Dï¿½bitos a Cobrar
 			Map<Integer, Collection<GuiaPagamentoItem>> mapColecaoGuiaPagamentoItem = gerarDebitosACobrarParcelamento(inserirDebitoACobrarDebitoTipoHelper, mapValoresPorTipoDebito, helper.getIndicadorParcelamentoCarne());
 			Collection<GuiaPagamentoItem> colecaoGuiaPagamentoItemEntrada = mapColecaoGuiaPagamentoItem.get(1);
 			Collection<GuiaPagamentoItem> colecaoGuiaPagamentoItemParcelamento = mapColecaoGuiaPagamentoItem.get(2);
 			
-//			// 6.1.9 [SB0005] Gerar Débitos a Cobrar
+//			// 6.1.9 [SB0005] Gerar Dï¿½bitos a Cobrar
 //			gerarDebitosACobrarParcelamento(helper.getImovel(),helper.getNumeroPrestacoes(),helper.getValorTotalContaValores(),helper.getValorGuiasPagamento(),
 //				helper.getValorAcrescimosImpontualidade(),helper.getValorDebitoACobrarServicoCurtoPrazo(),helper.getValorDebitoACobrarServicoLongoPrazo(),
 //				helper.getValorDebitoACobrarParcelamentoCurtoPrazo(),helper.getValorDebitoACobrarParcelamentoLongoPrazo(),valorJurosParcelamento, 
@@ -27119,7 +27673,7 @@ public class ControladorCobranca implements SessionBean {
 //				existeEntradaParcelamento, anoMesVencimentoGuia,maiorAnoMesContas);
 			//--------------------------------------------------------------------------------------------
 		
-			// 6.1.10 [SB0006] Gera os crédito a realizar
+			// 6.1.10 [SB0006] Gera os crï¿½dito a realizar
 			Collection<GuiaPagamentoItem> colecaoGuiaPagamentoItemCredito = gerarCreditoARealizarParcelamento(helper.getImovel(), helper.getNumeroPrestacoes(),
 			valorJurosParcelamento, parcelamentoId,
 			helper.getDescontoAcrescimosImpontualidade(), helper.getDescontoAntiguidadeDebito(),
@@ -27247,11 +27801,11 @@ public class ControladorCobranca implements SessionBean {
 
 	//-------------------------------------------------------------------------------
 		/**
-		 * Permite efetuar o parcelamento dos débitos de um imóvel
-		 * [UC0214] Efetuar Parcelamento de Débitos
+		 * Permite efetuar o parcelamento dos dï¿½bitos de um imï¿½vel
+		 * [UC0214] Efetuar Parcelamento de Dï¿½bitos
 		 * 
-		 * Calcula os valores dos débitos separando divida ativa
-		 * [SB0005] - Gerar Débitos a Cobrar do Parcelamento
+		 * Calcula os valores dos dï¿½bitos separando divida ativa
+		 * [SB0005] - Gerar Dï¿½bitos a Cobrar do Parcelamento
 		 * 
 		 * @author Vivianne Sousa
 		 * @date 19/02/2014
@@ -27328,7 +27882,7 @@ public class ControladorCobranca implements SessionBean {
 					while (debitoACobrarValores.hasNext()) {
 						DebitoACobrar debitoACobrar = (DebitoACobrar) debitoACobrarValores.next();
 						
-						//[FS0022]-Verificar existência de juros sobre imóvel
+						//[FS0022]-Verificar existï¿½ncia de juros sobre imï¿½vel
 						if(debitoACobrar.getDebitoTipo().getId() != null && !debitoACobrar.getDebitoTipo().getId().equals(DebitoTipo.JUROS_SOBRE_PARCELAMENTO)){
 							
 							// Debitos A Cobrar - Parcelamento
@@ -27415,13 +27969,13 @@ public class ControladorCobranca implements SessionBean {
 		}
 		
 		/**
-		 * Permite efetuar o parcelamento dos débitos de um imóvel
+		 * Permite efetuar o parcelamento dos dï¿½bitos de um imï¿½vel
 		 * 
-		 * [UC0214] Efetuar Parcelamento de Débitos
+		 * [UC0214] Efetuar Parcelamento de Dï¿½bitos
 		 * 
-		 * Gera os Débitos a Cobrar do Parcelamento
+		 * Gera os Dï¿½bitos a Cobrar do Parcelamento
 		 * 
-		 * [SB0005] - Gerar Débitos a Cobrar do Parcelamento
+		 * [SB0005] - Gerar Dï¿½bitos a Cobrar do Parcelamento
 		 * 
 		 * @author Vivianne Sousa
 		 * @date 19/02/2014
@@ -27453,7 +28007,7 @@ public class ControladorCobranca implements SessionBean {
 				BigDecimal valorTotalJurosParcelamento = (BigDecimal) mapValoresPorTipoDebito.get(DebitoTipo.JUROS_SOBRE_PARCELAMENTO);
 				
 				// Removido por Bruno Barros, em acordo com Eduardo Borges.
-				// SEMPRE gerar o guia de pagamento item, independentemente do tipo de débito
+				// SEMPRE gerar o guia de pagamento item, independentemente do tipo de dï¿½bito
 /*				if (gerarGuia &&
 					(valorTotalContasDividaAtiva != null && !valorTotalContasDividaAtiva.equals(valorZero) ||
 					valorTotalGuiasPagamentoDividaAtiva != null && !valorTotalGuiasPagamentoDividaAtiva.equals(valorZero) ||
@@ -27712,8 +28266,8 @@ public class ControladorCobranca implements SessionBean {
 		}
 
 		/**
-		 * [UC0214] Efetuar Parcelamento de Débitos
-		 * [SB0005] - Gerar Débitos a Cobrar do Parcelamento
+		 * [UC0214] Efetuar Parcelamento de Dï¿½bitos
+		 * [SB0005] - Gerar Dï¿½bitos a Cobrar do Parcelamento
 		 * 
 		 * @author Vivianne Sousa
 		 * @date 19/02/2014
@@ -27724,7 +28278,7 @@ public class ControladorCobranca implements SessionBean {
 			BigDecimal valorItemGuiaPagamento = null;
 			
 			if (valorEntrada.compareTo(valorZero) != 0 && valorEntrada.compareTo(valorDebito) < 0) {
-				// valor entrada diferente de Zero e menor q o valor do débito
+				// valor entrada diferente de Zero e menor q o valor do dï¿½bito
 
 				//gerar debito entrada tipo de debito = valorEntrada;
 				valorItemGuiaPagamento = valorEntrada;
@@ -27733,7 +28287,7 @@ public class ControladorCobranca implements SessionBean {
 				valorEntrada = valorZero;
 
 			} else if (valorEntrada.compareTo(valorZero) != 0 && valorEntrada.compareTo(valorDebito) == 0) {
-				// valor entrada diferente de Zero e valor entrada igual a valor do débito
+				// valor entrada diferente de Zero e valor entrada igual a valor do dï¿½bito
 
 				//gerar debito entrada tipo de debito = valorEntrada;
 				valorItemGuiaPagamento = valorEntrada;
@@ -27742,7 +28296,7 @@ public class ControladorCobranca implements SessionBean {
 				valorDebito = valorZero;
 
 			} else if (valorEntrada.compareTo(valorZero) != 0 && valorEntrada.compareTo(valorDebito) > 0) {
-				// valor entrada diferente de Zero e valor entrada maior q o valor do débito
+				// valor entrada diferente de Zero e valor entrada maior q o valor do dï¿½bito
 				
 				//gerar debito entrada tipo de debito = valorDebito;
 				valorItemGuiaPagamento = valorDebito;
@@ -27762,8 +28316,8 @@ public class ControladorCobranca implements SessionBean {
 		}
 		
 		/**
-		 * [UC0214] Efetuar Parcelamento de Débitos
-		 * [SB0005] - Gerar Débitos a Cobrar do Parcelamento
+		 * [UC0214] Efetuar Parcelamento de Dï¿½bitos
+		 * [SB0005] - Gerar Dï¿½bitos a Cobrar do Parcelamento
 		 * 
 		 * @author Vivianne Sousa
 		 * @date 19/02/2014
@@ -27796,11 +28350,11 @@ public class ControladorCobranca implements SessionBean {
 				if (!valorDebito.equals(valorZero)) {
 					
 					if (indicadorParcelamentoCarne != null && indicadorParcelamentoCarne.equals("" + ConstantesSistema.SIM)) {
-						// Cria o item da guia de pagamento com o valor total do débito. 
-						// Este valor será dividido pela quantidade de parcelas posteriormente para inserção de cada parcela
+						// Cria o item da guia de pagamento com o valor total do dï¿½bito. 
+						// Este valor serï¿½ dividido pela quantidade de parcelas posteriormente para inserï¿½ï¿½o de cada parcela
 						guiaPagamentoItemParcelamento = criarGuiaPagamentoItemParcelamento(debitoTipo, null, valorDebito);
 					} else {
-						//Inclui o débito a cobrar 
+						//Inclui o dï¿½bito a cobrar 
 						inserirDebitoACobrarDebitoTipo(debitoTipo,helper.getImovel(), helper.getNumeroPrestacao(), 
 							valorDebito, helper.getTaxaJuros(), helper.getParcelamentoId(), helper.getColecaoCategoria(),
 							parcelamentoGrupoId,DebitoCreditoSituacao.NORMAL,null, helper.getUsuarioLogado(),
@@ -27825,12 +28379,12 @@ public class ControladorCobranca implements SessionBean {
 	//------------------------------------------------------------------
 		
 	/**
-	 * [UC0214] Efetuar Parcelamento de Débitos
+	 * [UC0214] Efetuar Parcelamento de Dï¿½bitos
 	 * [SB0020] Gerar Guias de Pagamento do Parcelamento
 	 * 
-	 * Insere as guias de pagamento referentes as parcelas do carnê e suas tabelas dependentes
+	 * Insere as guias de pagamento referentes as parcelas do carnï¿½ e suas tabelas dependentes
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 08/10/2014
 	 */
 	public void inserirGuiaPagamentoParcelamento(Collection<GuiaPagamentoItem> colecaoGuiaPagamentoItemParcelamento, 
@@ -27846,7 +28400,7 @@ public class ControladorCobranca implements SessionBean {
 			BigDecimal totalItens = new BigDecimal(0);
 			BigDecimal valorParcela = new BigDecimal(0);
 			
-			// Calcula o valor da parcela que será cobrada e o valor total que será parcelado
+			// Calcula o valor da parcela que serï¿½ cobrada e o valor total que serï¿½ parcelado
 			for (GuiaPagamentoItem guiaPagamentoItem : colecaoGuiaPagamentoItemParcelamento) {
 				BigDecimal valorItem = new BigDecimal(0);
 				
@@ -27876,7 +28430,7 @@ public class ControladorCobranca implements SessionBean {
 						parcelamento, numeroPrestacoes, totalItens, valorParcela, indicadorCarneImovelCliente, existeEntradaParcelamento, 
 						anoMesGuiaEntrada, maiorAnoMesConta, parcela);
 				
-				// Caso tenha gerado o carnê para o imóvel, insere os clientes associados a guia de pagamento
+				// Caso tenha gerado o carnï¿½ para o imï¿½vel, insere os clientes associados a guia de pagamento
 				if (indicadorCarneImovelCliente == null || indicadorCarneImovelCliente.equals("1")) {
 					inserirClientesGuiaPagamento(guiaPagamento, parcelamento.getImovel());
 				}
@@ -27896,12 +28450,12 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0214] Efetuar Parcelamento de Débitos
+	 * [UC0214] Efetuar Parcelamento de Dï¿½bitos
 	 * [SB0020] Gerar Guias de Pagamento do Parcelamento
 	 * 
-	 * Insere a guia de pagamento referente a uma parcela do carnê
+	 * Insere a guia de pagamento referente a uma parcela do carnï¿½
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 09/10/2014
 	 */
 	private GuiaPagamento inserirGuiaPagamento(GuiaPagamentoGeral guiaPagamentoGeral, DebitoTipo debitoTipo,
@@ -27930,7 +28484,7 @@ public class ControladorCobranca implements SessionBean {
 		dataVencimento.add(Calendar.DAY_OF_MONTH, sistemaParametro.getNumeroDiasVencimentoEntradaParcelamento());
 		
 		// Caso o dia de vencimento seja maior que dia 28, 
-		// deverá utilizar o dia 1 como vencimento
+		// deverï¿½ utilizar o dia 1 como vencimento
 		if (dataVencimento.get(Calendar.DAY_OF_MONTH) > 28) {
 			dataVencimento.set(Calendar.DAY_OF_MONTH, 1);
 			dataVencimento.add(Calendar.MONTH, 1);
@@ -27981,12 +28535,12 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0214] Efetuar Parcelamento de Débitos
+	 * [UC0214] Efetuar Parcelamento de Dï¿½bitos
 	 * [SB0020] Gerar Guias de Pagamento do Parcelamento
 	 * 
-	 * Insere os clientes associados a guia de pagamento referente a uma parcela do carnê
+	 * Insere os clientes associados a guia de pagamento referente a uma parcela do carnï¿½
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 17/10/2014
 	 */
 	private void inserirClientesGuiaPagamento(GuiaPagamento guiaPagamento, Imovel imovel) throws ControladorException {
@@ -28020,12 +28574,12 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0214] Efetuar Parcelamento de Débitos
+	 * [UC0214] Efetuar Parcelamento de Dï¿½bitos
 	 * [SB0020] Gerar Guias de Pagamento do Parcelamento
 	 * 
-	 * Insere as categorias da guia de pagamento referentes a uma parcela do carnê
+	 * Insere as categorias da guia de pagamento referentes a uma parcela do carnï¿½
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 09/10/2014
 	 */
 	private void inserirGuiasPagamentoCategoria(GuiaPagamento guiaPagamento, Collection<Categoria> colecaoCategoria) throws ControladorException {
@@ -28065,12 +28619,12 @@ public class ControladorCobranca implements SessionBean {
 	}
 		
 	/**
-	 * [UC0214] Efetuar Parcelamento de Débitos
+	 * [UC0214] Efetuar Parcelamento de Dï¿½bitos
 	 * [SB0020] Gerar Guias de Pagamento do Parcelamento
 	 * 
-	 * Insere os itens da guia de pagamento referentes a uma parcela do carnê
+	 * Insere os itens da guia de pagamento referentes a uma parcela do carnï¿½
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 09/10/2014
 	 */
 	private void inserirGuiasPagamentoItem(GuiaPagamentoGeral guiaPagamentoGeral, Collection<GuiaPagamentoItem> colecaoGuiaPagamentoItem, 
@@ -28388,7 +28942,7 @@ public class ControladorCobranca implements SessionBean {
 							//[SB0001 - Obter Contrato do Grupo]
 							ContratoEmpresaServico contratoEmpresaServicoGrupo = repositorioCobranca.obterContratoGrupo(idGrupoCobranca);
 							
-							//[SB0002 - Obter Contrato da Ação de Cobrança]
+							//[SB0002 - Obter Contrato da Aï¿½ï¿½o de Cobranï¿½a]
 							ContratoEmpresaServico contratoEmpresaServicoAcao = repositorioCobranca.obterContratoAcaoCobranca(idGrupoCobranca, cobrancaAcaoCronograma.getCobrancaAcao().getId());
 							if(contratoEmpresaServicoGrupo != null){
 									cobrancaAcaoCronograma.setContratoEmpresaServico(contratoEmpresaServicoGrupo);	
@@ -28887,9 +29441,9 @@ public class ControladorCobranca implements SessionBean {
 
 	
 	/**
-	 * Desfazer Parcelamentos Débito
+	 * Desfazer Parcelamentos Dï¿½bito
 	 * 
-	 * Este caso de uso permite desfazer os parcelamentos de débitos
+	 * Este caso de uso permite desfazer os parcelamentos de dï¿½bitos
 	 * 
 	 * @author Fernanda Paiva,Vivianne Sousa, Raphael Rossiter
 	 * @created 02/05/2006,19/10/2006, 30/09/2008
@@ -28941,18 +29495,18 @@ public class ControladorCobranca implements SessionBean {
 						int anoMesReferenciaContabil = 0;
 						Collection colecaoContaCanceladaRetificacao = repositorioCobranca
 								.pesquisarContaCanceladaRetificacao(codigoImovel, conta.getReferencia());
-						// Mês/ano de referência contábil
-						// Caso exista conta com situação atual correspondete a cancelada por retificação
-						// CNTA_AMREFERENCIACONTABIL = CNTA_AMREFERENCIACONTABIL da conta cancelada por retificação
+						// Mï¿½s/ano de referï¿½ncia contï¿½bil
+						// Caso exista conta com situaï¿½ï¿½o atual correspondete a cancelada por retificaï¿½ï¿½o
+						// CNTA_AMREFERENCIACONTABIL = CNTA_AMREFERENCIACONTABIL da conta cancelada por retificaï¿½ï¿½o
 						if (colecaoContaCanceladaRetificacao != null && !colecaoContaCanceladaRetificacao.isEmpty()) {
 							anoMesReferenciaContabil = ((Integer) colecaoContaCanceladaRetificacao.iterator().next()).intValue();
 						} else {
-							// caso contrário CNTA_AMREFERENCIACONTABIL = CNTA_AMREFERENCIACONTA da conta parcelada
+							// caso contrï¿½rio CNTA_AMREFERENCIACONTABIL = CNTA_AMREFERENCIACONTA da conta parcelada
 							anoMesReferenciaContabil = conta.getReferencia();
 						}
 						this.atualizarSituacaoConta(conta.getId().toString(), situacaoAtual, anoMesReferenciaContabil);
-						//CRC2725 - alterado por Vivianne Sousa - 24/09/2009 analista:Fátima
-						//1.1.4. Verificar se há relação do desfazer parcelamento com itens de negativação:
+						//CRC2725 - alterado por Vivianne Sousa - 24/09/2009 analista:Fï¿½tima
+						//1.1.4. Verificar se hï¿½ relaï¿½ï¿½o do desfazer parcelamento com itens de negativaï¿½ï¿½o:
 						getControladorSpcSerasa().verificarRelacaoDoParcelamentoComItensNegativacao(null, conta, null);
 						// Alterado por Francisco - 27/05/08, por conta do Resumo de A??es de cobran?a
 						// Analista: Ana Breda
@@ -29012,8 +29566,8 @@ public class ControladorCobranca implements SessionBean {
 				}
 			}
 			
-			//Desfazer pagamento por cartão de crédito
-			this.desfazerPagamentoCartaoCredito(codigo);
+			//Desfazer pagamento por cartï¿½o de crï¿½dito
+			ParcelamentoPagamentoCartaoCredito parcelamentoPagamentoCartaoCredito = this.desfazerPagamentoCartaoCredito(codigo);
 			
 			if (codigoImovel != null) {
 				FiltroConta filtroConta = new FiltroConta();
@@ -29085,12 +29639,12 @@ public class ControladorCobranca implements SessionBean {
 					}
 				}
 	
-				// 1.8.1 Caso a entrada do parcelamento tenha sido através de contas marcadas como EP,
-				// ou seja,existem contas do ímovel associados ao parcelamento(a partir da tabela
-				// CONTA com IMOV_ID = IMOV_ID da tabela IMOVEL) e situação atual DCST_IDATUAL com o
-				// valor correspondente a normal ,retificada ou concluída e PARC_ID=PARC_ID do parcelamento
+				// 1.8.1 Caso a entrada do parcelamento tenha sido atravï¿½s de contas marcadas como EP,
+				// ou seja,existem contas do ï¿½movel associados ao parcelamento(a partir da tabela
+				// CONTA com IMOV_ID = IMOV_ID da tabela IMOVEL) e situaï¿½ï¿½o atual DCST_IDATUAL com o
+				// valor correspondente a normal ,retificada ou concluï¿½da e PARC_ID=PARC_ID do parcelamento
 				if (colecaoContasEP != null && !colecaoContasEP.isEmpty()) {
-					// 1.8.1.1 Retirar as contas de revisão
+					// 1.8.1.1 Retirar as contas de revisï¿½o
 					getControladorFaturamento().retirarRevisaoConta(colecaoContasEPRetirarRevisao, null, usuario, false, null);
 					// 1.8.1.3 desassociar a conta do parcelamento, atualiza PARC_ID da tabela CONTA com valor nulo
 					Iterator iteratorContaEP = colecaoContasEP.iterator();
@@ -29137,14 +29691,27 @@ public class ControladorCobranca implements SessionBean {
 						ParcelamentoSituacao.DESFEITO, motivo,usuario.getId());
 				this.atualizarDadosParcelamentoParaImovel(codigoImovel);
 			}
+
+			// Se possui parcelamentoPagamentoCartaoCredito, cancelar/estornar o pagamento junto ï¿½ Braspag
+			if (parcelamentoPagamentoCartaoCredito != null) {
+				String id = parcelamentoPagamentoCartaoCredito.getIdentificacaoPagamento();
+				BraspagCancelamento cancelamento = BraspagServiceWrapper.cancelar(id);
+
+				if (!BraspagService.RETORNO_SUCESSO.equals(cancelamento.getReasonCode())
+						|| !BraspagService.STATUS_CANCELADO.equals(cancelamento.getStatus())) {
+					throw new ControladorException("atencao.erro_comunicacao_gateway_braspag", null,
+							"Cï¿½digo de cancelamento invï¿½lido");
+				}
+			}
+
 			return retorno;
 		} catch (ErroRepositorioException e) {
 			sessionContext.setRollbackOnly();
 			throw new ControladorException("erro.sistema", e);
-		}catch (ControladorException e) {
+		} catch (ControladorException e) {
 			sessionContext.setRollbackOnly();
 			throw e;
-		}catch (Exception e) {
+		} catch (Exception e) {
 			sessionContext.setRollbackOnly();
 			throw new ControladorException("erro.sistema", e);
 		}
@@ -30092,7 +30659,7 @@ public class ControladorCobranca implements SessionBean {
 								//[SB0001 - Obter Contrato do Grupo]
 								ContratoEmpresaServico contratoEmpresaServicoGrupo = repositorioCobranca.obterContratoGrupo(idGrupoCobranca);
 								
-								//[SB0002 - Obter Contrato da Ação de Cobrança]
+								//[SB0002 - Obter Contrato da Aï¿½ï¿½o de Cobranï¿½a]
 								ContratoEmpresaServico contratoEmpresaServicoAcao = repositorioCobranca.obterContratoAcaoCobranca(idGrupoCobranca, cobrancaAcaoCronograma.getCobrancaAcao().getId());
 								if(contratoEmpresaServicoGrupo != null){
 										cobrancaAcaoCronograma.setContratoEmpresaServico(contratoEmpresaServicoGrupo);	
@@ -37568,7 +38135,7 @@ public class ControladorCobranca implements SessionBean {
 			Cliente cliente,ResolucaoDiretoria resolucaoDiretoria, Date dataEmissaoPredecessor,
 			Collection<DebitoCreditoParcelamentoHelper> colecaoAntecipacaoDebitosDeParcelamento,
 			Collection<DebitoCreditoParcelamentoHelper> colecaoAntecipacaoCreditosDeParcelamento,
-			Parcelamento parcelamento, Date dataValidade, String tipoDataValidade) 
+			Parcelamento parcelamento, Date dataValidade, String tipoDataValidade, Boolean incluirTaxaNoExtrato ) 
 			throws ControladorException {
 
 		ExtratoDebitoRelatorioHelper extratoDebitoRelatorioHelper = new ExtratoDebitoRelatorioHelper(
@@ -37697,6 +38264,11 @@ public class ControladorCobranca implements SessionBean {
 				// Inserindo o DEBITO_A_COBRAR_CATEGORIA no banco de dados
 				getControladorUtil().inserir(debitoACobrarCategoria);
 			}
+			
+			if ( incluirTaxaNoExtrato ){
+				valorDocumento = valorDocumento.add(debitoACobrar.getValorDebito() );
+				colecaoDebitosACobrar.add( debitoACobrar );
+			}
 		}
 		// Fim item 1
 
@@ -37749,7 +38321,13 @@ public class ControladorCobranca implements SessionBean {
 		}
 
 		documentoCobranca.setEmissao(dataAtual);
-		documentoCobranca.setValorTaxa(new BigDecimal("0.00"));
+		
+/*		if ( incluirTaxaNoExtrato ){
+			documentoCobranca.setValorTaxa(valorTaxa);
+		} else{ 
+*/			documentoCobranca.setValorTaxa(new BigDecimal( 0.00 ));
+//		}
+		
 	    documentoCobranca.setValorDocumento(valorDocumento);
 			
 		
@@ -38344,7 +38922,7 @@ public class ControladorCobranca implements SessionBean {
 			Cliente cliente,ResolucaoDiretoria resolucaoDiretoria,
 			Collection<DebitoCreditoParcelamentoHelper> colecaoAntecipacaoDebitosDeParcelamento,
 			Collection<DebitoCreditoParcelamentoHelper> colecaoAntecipacaoCreditosDeParcelamento,
-			Parcelamento parcelamento,Date dataValidade, String tipoDataValidade) throws ControladorException {
+			Parcelamento parcelamento,Date dataValidade, String tipoDataValidade, Boolean incluirTaxaNoExtrato ) throws ControladorException {
 
 		// [SB0001] - Gerar Documento de Cobran?a
 		DocumentoEmissaoForma documentoEmissaoForma = new DocumentoEmissaoForma();
@@ -38373,7 +38951,7 @@ public class ControladorCobranca implements SessionBean {
 						valorDocumento, new Date(), colecaoCreditoARealizar,
 						cliente, resolucaoDiretoria, null, colecaoAntecipacaoDebitosDeParcelamento, 
 						colecaoAntecipacaoCreditosDeParcelamento,
-						parcelamento,dataValidade, tipoDataValidade);
+						parcelamento,dataValidade, tipoDataValidade, incluirTaxaNoExtrato);
 
 		return extratoDebitoRelatorioHelper;
 	}
@@ -39932,7 +40510,7 @@ public class ControladorCobranca implements SessionBean {
 					cobrancaDocumento.setIndicadorClienteImovel((Short) array[7]);
 				}
 				
-				//10 - Descrição de Cobrança Ação da Atividade de Comando
+				//10 - Descriï¿½ï¿½o de Cobranï¿½a Aï¿½ï¿½o da Atividade de Comando
 				if(array[10] != null) {
 					cobrancaAcao = new CobrancaAcao();
 					cobrancaAcao.setDescricaoCobrancaAcao((String) array[10]);
@@ -39941,7 +40519,7 @@ public class ControladorCobranca implements SessionBean {
 					cobrancaDocumento.setCobrancaAcaoAtividadeComando(cobrancaAcaoAtividadeComando);
 				}
 				
-				//11 - Descrição de Cobrança Ação do Cronograma
+				//11 - Descriï¿½ï¿½o de Cobranï¿½a Aï¿½ï¿½o do Cronograma
 				if(array[11] != null) {
 					cobrancaAcao = new CobrancaAcao();
 					cobrancaAcao.setDescricaoCobrancaAcao((String) array[11]);
@@ -41384,7 +41962,7 @@ public class ControladorCobranca implements SessionBean {
 										// LINHA 15
 										// ==================================
 
-										/*
+										/*o
 										 * Canal ("1") Fonte ("1")
 										 */
 										cobrancaDocumentoTxt.append("1");
@@ -42157,12 +42735,12 @@ public class ControladorCobranca implements SessionBean {
                 	
                 	if(valorTipoParcelamentoCarne == 2)
                 	{                		
-                		parcelamentoRelatorioHelper.setTextoClausula2(", que serão incluídas nas cobranças das tarifas mensais, a partir do faturamento do mês subseqüente.");
+                		parcelamentoRelatorioHelper.setTextoClausula2(", que serï¿½o incluï¿½das nas cobranï¿½as das tarifas mensais, a partir do faturamento do mï¿½s subseqï¿½ente.");
                 		
-                		parcelamentoRelatorioHelper.setParagrafoSegundo("<style isBold=\"true\" pdfFontName=\"Courier-Bold\"> PARÁGRAFO SEGUNDO: </style> \n"
-                				+"Na hipótese do não cumprimento do estipulado no caput desta cláusula, fica desde já convencionado que o pagamento da entrada" +
-                				" de parcelamento ou o valor da opção do pagamento à vista será cobrado na próxima fatura do mês subseqüente a esta negociação," +
-                				" ficando as demais parcelas a serem incluídas nas faturas vincendas. \n \n");
+                		parcelamentoRelatorioHelper.setParagrafoSegundo("<style isBold=\"true\" pdfFontName=\"Courier-Bold\"> PARï¿½GRAFO SEGUNDO: </style> \n"
+                				+"Na hipï¿½tese do nï¿½o cumprimento do estipulado no caput desta clï¿½usula, fica desde jï¿½ convencionado que o pagamento da entrada" +
+                				" de parcelamento ou o valor da opï¿½ï¿½o do pagamento ï¿½ vista serï¿½ cobrado na prï¿½xima fatura do mï¿½s subseqï¿½ente a esta negociaï¿½ï¿½o," +
+                				" ficando as demais parcelas a serem incluï¿½das nas faturas vincendas. \n \n");
                 	}
                 	
                 	if(valorTipoParcelamentoCarne == 1)
@@ -42178,13 +42756,13 @@ public class ControladorCobranca implements SessionBean {
 							dataVencimento.add(Calendar.DAY_OF_MONTH, sistemaParametro.getNumeroDiasVencimentoEntradaParcelamento());
 							
 							// Caso o dia de vencimento seja maior que dia 28, 
-							// deverá utilizar o dia 1 como vencimento
+							// deverï¿½ utilizar o dia 1 como vencimento
 							if (dataVencimento.get(Calendar.DAY_OF_MONTH) > 28) {
 								dataVencimento.set(Calendar.DAY_OF_MONTH, 1);
 							}
 						
                 	      
-							parcelamentoRelatorioHelper.setTextoClausula2(", que serão emitidas no presente ato, para pagamento mensal com vencimento no dia "+ dataVencimento.get(Calendar.DAY_OF_MONTH) +" de cada mês.");
+							parcelamentoRelatorioHelper.setTextoClausula2(", que serï¿½o emitidas no presente ato, para pagamento mensal com vencimento no dia "+ dataVencimento.get(Calendar.DAY_OF_MONTH) +" de cada mï¿½s.");
 	                		
 	                		parcelamentoRelatorioHelper.setParagrafoSegundo("");
                 		
@@ -42195,7 +42773,7 @@ public class ControladorCobranca implements SessionBean {
                 }
                 
                 
-                // Endereço Responsavel
+                // Endereï¿½o Responsavel
 					
 				String enderecoResponsavel = getControladorEndereco().pesquisarEnderecoClienteAbreviado(
 					parcelamentoRelatorioHelper.getIdClienteParcelamento());
@@ -50409,7 +50987,7 @@ public class ControladorCobranca implements SessionBean {
 				imovel,indicadorGeracaoTaxaCobranca,colecaoContaValores,colecaoGuiaPagamentoValores,colecaoDebitoACobrar,
 				valorAcrescimo,valorTotalDescontoPagamentoAVista,valorPagamentoAVista, 
 				colecaoCreditoARealizar, null, resolucaoDiretoria, colecaoAntecipacaoDebitosDeParcelamento,
-				colecaoAntecipacaoCreditosDeParcelamento,null,null, "RelatorioDocumentoVisitaCobranca");
+				colecaoAntecipacaoCreditosDeParcelamento,null,null, "RelatorioDocumentoVisitaCobranca", false);
 
 		documentoCobranca = extratoDebitoRelatorioHelper.getDocumentoCobranca();
 		
@@ -57182,12 +57760,11 @@ public class ControladorCobranca implements SessionBean {
 					CreditoARealizar creditoARealizar = (CreditoARealizar) itColecaoCreditoARealizar
 							.next();
 
-//					if (!creditoARealizar.getCreditoOrigem().getId().equals(
-//						 CreditoOrigem.DESCONTOS_CONCEDIDOS_NO_PARCELAMENTO)) {
+					if (creditoARealizar.getParcelamento() == null) {
 
 						colecaoCreditoARealizarNaoParcelamento
 								.add(creditoARealizar);
-//					}
+					}
 				}
 
 				imovelDebitoCredito
@@ -57602,7 +58179,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 
 	/**
-	 * [UC0214] Inserir Ação de Cobrança
+	 * [UC0214] Inserir Aï¿½ï¿½o de Cobranï¿½a
 	 * 
 	 * @author S?vio Luiz
 	 * @created 14/09/2007
@@ -57625,7 +58202,7 @@ public class ControladorCobranca implements SessionBean {
 		} else {
 			// levanta a exce??o para a pr?xima camada
 			throw new ControladorException("atencao.required", null,
-					"Descrição da Ação de Cobrança");
+					"Descriï¿½ï¿½o da Aï¿½ï¿½o de Cobranï¿½a");
 		}
 
 		// verifica a existencia do numero de dias de validade da a??o
@@ -57634,10 +58211,10 @@ public class ControladorCobranca implements SessionBean {
 		} else {
 			// levanta a exce??o para a pr?xima camada
 			throw new ControladorException("atencao.required", null,
-					"Numero de Dias de Validade da Ação");
+					"Numero de Dias de Validade da Aï¿½ï¿½o");
 		}
 		
-		//Caso haja uma ação predecessora informada e o indicador de cronograma esteja marcado como NÃO
+		//Caso haja uma aï¿½ï¿½o predecessora informada e o indicador de cronograma esteja marcado como Nï¿½O
 		if(Util.verificarIdNaoVazio(cobrancaAcaoHelper.getIndicadorCronograma()) 
 				&& cobrancaAcaoHelper.getIndicadorCronograma().equals(ConstantesSistema.NAO.toString())
 				&& Util.verificarIdNaoVazio(cobrancaAcaoHelper.getIdCobrancaAcaoPredecessora())){
@@ -57649,7 +58226,7 @@ public class ControladorCobranca implements SessionBean {
 		if (cobrancaAcaoHelper.getIndicadorCronograma() != null && !cobrancaAcaoHelper.getIndicadorCronograma().equals("")) {
 			cobrancaAcao.setIndicadorCronograma(new Short(cobrancaAcaoHelper.getIndicadorCronograma()));
 			
-			// INÍCIO [UC0643]
+			// INï¿½CIO [UC0643]
 			if (cobrancaAcaoHelper.getIndicadorCronograma().equals("1")) {
 				// verifica a existencia da ordem do cronograma
 				if (cobrancaAcaoHelper.getOrdemRealizacao() != null && !cobrancaAcaoHelper.getOrdemRealizacao().equals("")) {
@@ -57713,7 +58290,7 @@ public class ControladorCobranca implements SessionBean {
 		} else {
 			// levanta a exce??o para a pr?xima camada
 			throw new ControladorException("atencao.required", null,
-					"Compõe Cronograma");
+					"Compï¿½e Cronograma");
 		}
 		
 		// verifica a existencia do numero de dias entre a a??o e sua
@@ -57724,7 +58301,7 @@ public class ControladorCobranca implements SessionBean {
 		}
 		
 		
-		//Verificar a existencia de Ação predecessora Alternativa
+		//Verificar a existencia de Aï¿½ï¿½o predecessora Alternativa
 		if(cobrancaAcaoHelper.getIdCobrancaAcaoPredecessoraAlternativa() != null && 
 				!cobrancaAcaoHelper.getIdCobrancaAcaoPredecessoraAlternativa().equals("")){
 			
@@ -57737,7 +58314,7 @@ public class ControladorCobranca implements SessionBean {
 			if(!Util.isVazioOrNulo(colecaoAlternativa)){
 				CobrancaAcao cobrancaPredecessorAlternativo = (CobrancaAcao) Util.retonarObjetoDeColecao(colecaoAlternativa);
 				
-				//verificar se a ordem de realização é maior que a ordem informada
+				//verificar se a ordem de realizaï¿½ï¿½o ï¿½ maior que a ordem informada
 				if(((cobrancaPredecessorAlternativo.getOrdemRealizacao() != null && !cobrancaPredecessorAlternativo.getOrdemRealizacao().equals(""))
 						&& (cobrancaAcaoHelper.getOrdemRealizacao() != null && !cobrancaAcaoHelper.getOrdemRealizacao().equals("")))
 						&& cobrancaPredecessorAlternativo.getOrdemRealizacao() >= new Short(cobrancaAcaoHelper.getOrdemRealizacao())){
@@ -57798,7 +58375,7 @@ public class ControladorCobranca implements SessionBean {
 					// levanta a exce??o para a pr?xima camada
 					throw new ControladorException(
 							"atencao.pesquisa_inexistente", null,
-							"Critério de Cobrança");
+							"Critï¿½rio de Cobranï¿½a");
 				}
 			} else {
 				CobrancaCriterio cobrancaCriterio = new CobrancaCriterio();
@@ -57809,7 +58386,7 @@ public class ControladorCobranca implements SessionBean {
 		} else {
 			// levanta a exce??o para a pr?xima camada
 			throw new ControladorException("atencao.required", null,
-					"Critério de Cobrança");
+					"Critï¿½rio de Cobranï¿½a");
 		}
 
 		// pesquisa enter de crit?rio de cobran?a
@@ -57831,7 +58408,7 @@ public class ControladorCobranca implements SessionBean {
 					// levanta a exce??o para a pr?xima camada
 					throw new ControladorException(
 							"atencao.pesquisa_inexistente", null,
-							"Tipo de serviço");
+							"Tipo de serviï¿½o");
 				}
 			} else {
 				ServicoTipo servicoTipo = new ServicoTipo();
@@ -57856,7 +58433,7 @@ public class ControladorCobranca implements SessionBean {
 		} else {
 			// levanta a exce??o para a pr?xima camada
 			throw new ControladorException("atencao.required", null,
-					"Ação Obrigatória");
+					"Aï¿½ï¿½o Obrigatï¿½ria");
 		}
 
 		// verifica a existencia do indicador de repeti??o
@@ -57876,7 +58453,7 @@ public class ControladorCobranca implements SessionBean {
 		} else {
 			// levanta a exce??o para a pr?xima camada
 			throw new ControladorException("atencao.required", null,
-					"Provoca Suspensão no Abastecimento");
+					"Provoca Suspensï¿½o no Abastecimento");
 		}
 
 		// verifica a existencia do indicador de cobran?a deb a cobrar
@@ -57886,7 +58463,7 @@ public class ControladorCobranca implements SessionBean {
 		} else {
 			// levanta a exce??o para a pr?xima camada
 			throw new ControladorException("atencao.required", null,
-					"Considera Débitos a Cobrar");
+					"Considera Dï¿½bitos a Cobrar");
 		}
 
 		// verifica a existencia do indicador de acrescimos por impontualidade
@@ -57897,7 +58474,7 @@ public class ControladorCobranca implements SessionBean {
 		} else {
 			// levanta a exce??o para a pr?xima camada
 			throw new ControladorException("atencao.required", null,
-					"Considera Acréscimos por Impontualidade");
+					"Considera Acrï¿½scimos por Impontualidade");
 		}
 
 		// verifica a existencia do indicador de gera??o de taxa
@@ -57926,7 +58503,7 @@ public class ControladorCobranca implements SessionBean {
 		} else {
 			// levanta a exce??o para a pr?xima camada
 			throw new ControladorException("atencao.required", null,
-					"Pode ser Executada para Imóveis sem Débito");
+					"Pode ser Executada para Imï¿½veis sem Dï¿½bito");
 		}
 		
 		// verifica a existencia dnumero de dias de vencimento
@@ -57972,7 +58549,7 @@ public class ControladorCobranca implements SessionBean {
 		} else {
 			// levanta a exce??o para a pr?xima camada
 			throw new ControladorException("atencao.required", null,
-					"Situação do Débito Interfere na Situação da Ação");
+					"Situaï¿½ï¿½o do Dï¿½bito Interfere na Situaï¿½ï¿½o da Aï¿½ï¿½o");
 		}
 		
 		//verifica a existencia numero de diasRemuneracaoTerceiro
@@ -58008,14 +58585,14 @@ public class ControladorCobranca implements SessionBean {
 					cobrancaAcao.setNumeroDiasMinimoCobranca(new Integer (cobrancaAcaoHelper.getNumeroDiasMinimoCobranca()));
 				} else {
 					throw new ControladorException("atencao.required", null,
-							"Quantidade de Dias Mínimo de Cobrança");
+							"Quantidade de Dias Mï¿½nimo de Cobranï¿½a");
 				}
 				
 				if (cobrancaAcaoHelper.getNumeroDiasMaximoCobranca() != null){
 					cobrancaAcao.setNumeroDiasMaximoCobranca(new Integer (cobrancaAcaoHelper.getNumeroDiasMaximoCobranca()));
 				} else {
 					throw new ControladorException("atencao.required", null,
-							"Quantidade de Dias Máximo de Cobrança");
+							"Quantidade de Dias Mï¿½ximo de Cobranï¿½a");
 				}
 			}
 		}
@@ -58025,29 +58602,29 @@ public class ControladorCobranca implements SessionBean {
 			cobrancaAcao.setIndicadorEfetuarAcaoCpfCnpjValido(new Short(cobrancaAcaoHelper.getIndicadorEfetuarAcaoCpfCnpjValido()));
 		}
 		
-		//[FS0017] - Verificar seleção de enviar Mensagem e Serviço associado
-		//Caso o indicador de "Por SMS" ou "Por E-MAIL" esteja selecionado com "Sim" e tenha sido informado o tipo de serviço
+		//[FS0017] - Verificar seleï¿½ï¿½o de enviar Mensagem e Serviï¿½o associado
+		//Caso o indicador de "Por SMS" ou "Por E-MAIL" esteja selecionado com "Sim" e tenha sido informado o tipo de serviï¿½o
 		if((cobrancaAcaoHelper.getIndicadorEnviarEmail().equals("1") || cobrancaAcaoHelper.getIndicadorEnviarSMS().equals("1"))
 				&& Util.verificarNaoVazio(cobrancaAcaoHelper.getIdServicoTipo())){
 			throw new ControladorException("atencao.acao_cobranca_email_sms_servico_associado");
 		}
 		
-		//[FS0018] - Verificar seleção de enviar Mensagem e Ação predecessora
-		//Caso o indicador de "Por SMS" ou "Por E-MAIL" esteja selecionado com "Sim" e tenha sido informado Ação Predecessora
+		//[FS0018] - Verificar seleï¿½ï¿½o de enviar Mensagem e Aï¿½ï¿½o predecessora
+		//Caso o indicador de "Por SMS" ou "Por E-MAIL" esteja selecionado com "Sim" e tenha sido informado Aï¿½ï¿½o Predecessora
 		if((cobrancaAcaoHelper.getIndicadorEnviarEmail().equals("1") || cobrancaAcaoHelper.getIndicadorEnviarSMS().equals("1"))
 				&& Util.verificarNaoVazio(cobrancaAcaoHelper.getIdCobrancaAcaoPredecessora())){
 			throw new ControladorException("atencao.acao_cobranca_email_sms_acao_predecessora");
 		}
 		
-		//[FS0019] - Verificar seleção de enviar Mensagem e Compõe o Cronograma
+		//[FS0019] - Verificar seleï¿½ï¿½o de enviar Mensagem e Compï¿½e o Cronograma
 		//Caso o indicador de "Por SMS" ou "Por E-MAIL" esteja selecionado com "Sim" e 
-		//o campo indicador de "Compõe o cronograma" seja "Sim"
+		//o campo indicador de "Compï¿½e o cronograma" seja "Sim"
 		if((cobrancaAcaoHelper.getIndicadorEnviarEmail().equals("1") || cobrancaAcaoHelper.getIndicadorEnviarSMS().equals("1"))
 				&& cobrancaAcaoHelper.getIndicadorCronograma().equals("1")){
 			throw new ControladorException("atencao.acao_cobranca_email_sms_compor_cronograma");
 		}
 		
-		//[FS0020] - Verificar se Ação Predecessora possui mensagem (SMS/E-MAIL)
+		//[FS0020] - Verificar se Aï¿½ï¿½o Predecessora possui mensagem (SMS/E-MAIL)
 		if(cobrancaAcaoPredecessora != null && (
 				cobrancaAcaoPredecessora.getIndicadorEnviarEmail().compareTo(ConstantesSistema.SIM) == 0 ||
 				cobrancaAcaoPredecessora.getIndicadorEnviarSMS().compareTo(ConstantesSistema.SIM) == 0
@@ -59035,7 +59612,7 @@ public class ControladorCobranca implements SessionBean {
 					"Numero de Dias de Validade da A??o");
 		}
 		
-		//Caso haja uma ação predecessora informada e o indicador de cronograma esteja marcado como NÃO
+		//Caso haja uma aï¿½ï¿½o predecessora informada e o indicador de cronograma esteja marcado como Nï¿½O
 		if(Util.verificarIdNaoVazio(cobrancaAcaoHelper.getIndicadorCronograma()) 
 				&& cobrancaAcaoHelper.getIndicadorCronograma().equals(ConstantesSistema.NAO.toString())
 				&& Util.verificarIdNaoVazio(cobrancaAcaoHelper.getIdCobrancaAcaoPredecessora())){
@@ -59047,7 +59624,7 @@ public class ControladorCobranca implements SessionBean {
 		if (cobrancaAcaoHelper.getIndicadorCronograma() != null && !cobrancaAcaoHelper.getIndicadorCronograma().equals("")) {
 			cobrancaAcao.setIndicadorCronograma(new Short(cobrancaAcaoHelper.getIndicadorCronograma()));
 			
-			// INÍCIO [UC0643]
+			// INï¿½CIO [UC0643]
 			if (cobrancaAcaoHelper.getIndicadorCronograma().equals("1")) {
 				// verifica a existencia da ordem do cronograma
 				if (cobrancaAcaoHelper.getOrdemRealizacao() != null && !cobrancaAcaoHelper.getOrdemRealizacao().equals("")) {
@@ -59120,7 +59697,7 @@ public class ControladorCobranca implements SessionBean {
 		}
 		
 		
-		//verificar Ação de Cobranca Predecessor Alternativo
+		//verificar Aï¿½ï¿½o de Cobranca Predecessor Alternativo
 		//Author: Diogo Luiz
 		//Data: 12/12/2014
 		cobrancaAcao.setCobrancaAcaoPredecessoraAlternativa(null);
@@ -59435,14 +60012,14 @@ public class ControladorCobranca implements SessionBean {
 					cobrancaAcao.setNumeroDiasMinimoCobranca(new Integer (cobrancaAcaoHelper.getNumeroDiasMinimoCobranca()));
 				} else {
 					throw new ControladorException("atencao.required", null,
-							"Quantidade de Dias Mínimo de Cobrança");
+							"Quantidade de Dias Mï¿½nimo de Cobranï¿½a");
 				}
 				
 				if (cobrancaAcaoHelper.getNumeroDiasMaximoCobranca() != null){
 					cobrancaAcao.setNumeroDiasMaximoCobranca(new Integer (cobrancaAcaoHelper.getNumeroDiasMaximoCobranca()));
 				} else {
 					throw new ControladorException("atencao.required", null,
-							"Quantidade de Dias Máximo de Cobrança");
+							"Quantidade de Dias Mï¿½ximo de Cobranï¿½a");
 				}
 			} else {				
 				cobrancaAcao.setNumeroDiasMinimoCobranca(null);
@@ -59457,29 +60034,29 @@ public class ControladorCobranca implements SessionBean {
 					new Short(cobrancaAcaoHelper.getIndicadorEfetuarAcaoCpfCnpjValido()));
 		}
 		
-		//[FS0017] - Verificar seleção de enviar Mensagem e Serviço associado
-		//Caso o indicador de "Por SMS" ou "Por E-MAIL" esteja selecionado com "Sim" e tenha sido informado o tipo de serviço
+		//[FS0017] - Verificar seleï¿½ï¿½o de enviar Mensagem e Serviï¿½o associado
+		//Caso o indicador de "Por SMS" ou "Por E-MAIL" esteja selecionado com "Sim" e tenha sido informado o tipo de serviï¿½o
 		if((cobrancaAcaoHelper.getIndicadorEnviarEmail().equals("1") || cobrancaAcaoHelper.getIndicadorEnviarSMS().equals("1"))
 				&& Util.verificarNaoVazio(cobrancaAcaoHelper.getIdServicoTipo())){
 			throw new ControladorException("atencao.acao_cobranca_email_sms_servico_associado");
 		}
 		
-		//[FS0018] - Verificar seleção de enviar Mensagem e Ação predecessora
-		//Caso o indicador de "Por SMS" ou "Por E-MAIL" esteja selecionado com "Sim" e tenha sido informado Ação Predecessora
+		//[FS0018] - Verificar seleï¿½ï¿½o de enviar Mensagem e Aï¿½ï¿½o predecessora
+		//Caso o indicador de "Por SMS" ou "Por E-MAIL" esteja selecionado com "Sim" e tenha sido informado Aï¿½ï¿½o Predecessora
 		if((cobrancaAcaoHelper.getIndicadorEnviarEmail().equals("1") || cobrancaAcaoHelper.getIndicadorEnviarSMS().equals("1"))
 				&& Util.verificarNaoVazio(cobrancaAcaoHelper.getIdCobrancaAcaoPredecessora())){
 			throw new ControladorException("atencao.acao_cobranca_email_sms_acao_predecessora");
 		}
 		
-		//[FS0019] - Verificar seleção de enviar Mensagem e Compõe o Cronograma
+		//[FS0019] - Verificar seleï¿½ï¿½o de enviar Mensagem e Compï¿½e o Cronograma
 		//Caso o indicador de "Por SMS" ou "Por E-MAIL" esteja selecionado com "Sim" e 
-		//o campo indicador de "Compõe o cronograma" seja "Sim"
+		//o campo indicador de "Compï¿½e o cronograma" seja "Sim"
 		if((cobrancaAcaoHelper.getIndicadorEnviarEmail().equals("1") || cobrancaAcaoHelper.getIndicadorEnviarSMS().equals("1"))
 				&& cobrancaAcaoHelper.getIndicadorCronograma().equals("1")){
 			throw new ControladorException("atencao.acao_cobranca_email_sms_compor_cronograma");
 		}
 		
-		//[FS0020] - Verificar se Ação Predecessora possui mensagem (SMS/E-MAIL)
+		//[FS0020] - Verificar se Aï¿½ï¿½o Predecessora possui mensagem (SMS/E-MAIL)
 		if(cobrancaAcaoPredecessora != null && (
 				cobrancaAcaoPredecessora.getIndicadorEnviarEmail().compareTo(ConstantesSistema.SIM) == 0 ||
 				cobrancaAcaoPredecessora.getIndicadorEnviarSMS().compareTo(ConstantesSistema.SIM) == 0
@@ -59972,89 +60549,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	
-	/**
-	 * Atualiza o documento de cobranca apos a OS ser encerrada. Este metodo sera usado nos metodos de 
-	 * encerrar OS 
-	 * 
-	 * @param OS
-	 * @throws ControladorException
-	 * 
-	 * @author Francisco do Nascimento
-	 * @date 16/05/2008
-	 * 
-	 */
-	public void atualizarCobrancaDocumentoAposEncerrarOS(OrdemServico OS) throws ControladorException{
-//		 posi??es do array com os dados que ser?o atualizados
-		DadosPesquisaCobrancaDocumentoHelper cobrancaDocumentoParaAtualizar = new DadosPesquisaCobrancaDocumentoHelper();
-		Collection colecaoCobrancaDocumentoParaAtualizar = new ArrayList();
-		
-		CobrancaDocumento cobrancaDocumento = OS.getCobrancaDocumento();
-		if (cobrancaDocumento != null){
-			cobrancaDocumentoParaAtualizar.setIdDocumento(cobrancaDocumento.getId());
-			// recebe a data de encerramento da ordem de
-			// serivo(ORSE_TMENCERRAMENTO)
-			
-			if(OS.getDataEncerramento()!= null){
-				cobrancaDocumento.setDataSituacaoAcao(OS.getDataEncerramento());
-				cobrancaDocumentoParaAtualizar.setDataSituacaoAcao(OS.getDataEncerramento());
-			}
 
-			// indicador de Execu??o
-			// caso o motivo de encerramento
-			// corresponda
-			// ?
-			// execu??o
-			if (OS.getAtendimentoMotivoEncerramento() != null){
-				
-				FiltroAtendimentoMotivoEncerramento filtroAtendimento = new FiltroAtendimentoMotivoEncerramento();
-				filtroAtendimento.adicionarParametro(new ParametroSimples("id", OS.getAtendimentoMotivoEncerramento().getId()));
-				
-				Collection motivos = getControladorUtil().pesquisar(filtroAtendimento, 
-						AtendimentoMotivoEncerramento.class.getName());
-				
-				AtendimentoMotivoEncerramento ame = (AtendimentoMotivoEncerramento) Util.retonarObjetoDeColecao(motivos);
-								
-				determinarSituacaoAcaoAPartirMotivoEncerramentoOS(cobrancaDocumentoParaAtualizar, ame);	
-				
-				cobrancaDocumentoParaAtualizar.setIdMotivoEncerramento(ame.getId());
-			}
-		
-			if (OS.getImovel() != null){
-				try {
-					// [UC0306] - Obter Principal CAtegoria do Imovel
-					// De acordo com o metodo ControladorImovel.obterPrincipalCategoriaImovel
-					// caso seja a empresa FEBRABAN, a categoria principal sera a que tiver o maior codigo,
-					// caso contrario, a principal ser? a que tiver menor codigo						
-					SistemaParametro sistemaParametro = getControladorUtil().pesquisarParametrosDoSistema();
-					boolean ehFEBRABAN = sistemaParametro.getCodigoEmpresaFebraban().equals(
-							SistemaParametro.CODIGO_EMPRESA_FEBRABAN_CAERN); 
-					Integer idCategoria = repositorioImovel.obterIdCategoriaPrincipal(
-							OS.getImovel().getId(), ehFEBRABAN);
-					
-					cobrancaDocumentoParaAtualizar.setIdCategoria(idCategoria);
-					
-					// pesquisa os imovel para ser usado para gravar o
-					// Resumo Cobran?a A??o						
-					Integer idEsferaPoder = repositorioImovel.obterIdEsferaPoder(OS.getImovel().getId());
-					
-					cobrancaDocumentoParaAtualizar.setIdEsferaPoder(idEsferaPoder);
-				} catch (ErroRepositorioException e) {
-					e.printStackTrace();
-					throw new ControladorException("erro.sistema", e);
-				}				
-			}			
-			
-			colecaoCobrancaDocumentoParaAtualizar.add(cobrancaDocumentoParaAtualizar);
-			try {
-				this.repositorioCobranca.atualizarCobrancaDocumento(colecaoCobrancaDocumentoParaAtualizar);
-			} catch (ErroRepositorioException e) {
-				e.printStackTrace();
-				throw new ControladorException("erro.sistema", e);
-			}
-			colecaoCobrancaDocumentoParaAtualizar.clear();
-		} 
-		
-	}
 
 	private void determinarSituacaoAcaoAPartirMotivoEncerramentoOS(DadosPesquisaCobrancaDocumentoHelper cobrancaDocumentoParaAtualizar, AtendimentoMotivoEncerramento ame) {
 		Short indicadorExecucaoMotivoEncerramento = ame.getIndicadorExecucao();
@@ -62513,7 +63008,7 @@ public class ControladorCobranca implements SessionBean {
 				}
 				
 				/*
-				 * Alterado por Flávio cordeiro 21/01/2015 RM 13153 - Só dar o desconto que estiver na RD */
+				 * Alterado por Flï¿½vio cordeiro 21/01/2015 RM 13153 - Sï¿½ dar o desconto que estiver na RD */
 				if(valorTotalDescontos.compareTo(valorTotalAcrescimosImpontualidade) == 1){
 					retorno = valorTotalDescontos;
 				}
@@ -68394,7 +68889,7 @@ public class ControladorCobranca implements SessionBean {
 												resolucaoDiretoria,
 												null,
 												null,
-												null,null,null, "1");
+												null,null,null, "1", false);
 									}
 									
 								}
@@ -69806,7 +70301,7 @@ public class ControladorCobranca implements SessionBean {
 		}
 		
 	}
-	
+
 	/**
 	 * 
 	 * Esse metodo est? de acordo com o UC0919 - Gerar Relatorio de Impostos Por Cliente Responsavel. Dessa forma,
@@ -69826,174 +70321,119 @@ public class ControladorCobranca implements SessionBean {
 	 */
 	public Collection<ImpostoDeduzidoHelper> pesquisarImpostosPorClienteResponsavelFederal(
 			Integer anoMesInicial, Integer anoMesFinal,
-			Integer clienteID, 
-			String tipoRelatorio) throws ControladorException{
-		
-
+			Integer clienteID, String tipoRelatorio) throws ControladorException{
 		Collection<ImpostoDeduzidoHelper> colecaoImpostosDeduzidosHelper = new ArrayList();
-				
-				if(tipoRelatorio != null){
-					
-					if(tipoRelatorio.equalsIgnoreCase("sintetico") ){
 
-						//cria uma colecao de impostos
-						Collection colecaoImpostos = new ArrayList();
-							
-						try {				
-							
-							//faz a pesquisa por impostos que estao associados ? fatura passando o ano mes
-							colecaoImpostos = 
-								this.repositorioCobranca.pesquisaImpostoFaturaClienteResponsavelFederal(anoMesInicial,anoMesFinal, clienteID);
-							
-						} catch (ErroRepositorioException e) {
-							e.printStackTrace();
-							throw new ControladorException("erro.sistema", e);
-						}		
-						
-						//valida a colecao de impostos pesquisada
-						if(colecaoImpostos != null && !colecaoImpostos.isEmpty()){
-							Iterator iteraImposto = colecaoImpostos.iterator();
-							
-							//varre a colecao de impostos
-							while (iteraImposto.hasNext()) {
-								
-								Object[] imposto = (Object[]) iteraImposto.next();
-								
-								//cria uma instancia do helper de impostos
-								ImpostoDeduzidoHelper impostoDeduzidoHelper = new ImpostoDeduzidoHelper();
-								
-								//seta os valores do imposto pequisado no helper do imposto para se usar no relatorio
-								impostoDeduzidoHelper.setIdImpostoTipo((Integer) imposto[0]);
-								impostoDeduzidoHelper.setDescricaoImposto((String) imposto[1]);						
-								impostoDeduzidoHelper.setPercentualAliquota((BigDecimal) imposto[2]);
-								impostoDeduzidoHelper.setValor((BigDecimal) imposto[3]);
-								impostoDeduzidoHelper.setIdCliente((Integer) imposto[4] );
-								impostoDeduzidoHelper.setNomeCliente((String) imposto[5] );
-								impostoDeduzidoHelper.setValorFatura((BigDecimal) imposto[6]);
-								impostoDeduzidoHelper.setCnpjCliente((String) imposto[7]);
-								impostoDeduzidoHelper.setBaseCalculo((BigDecimal) imposto[8]);
-								
-								//adiciona o helper ? colecao dos helpers de imposto
-								colecaoImpostosDeduzidosHelper.add(impostoDeduzidoHelper);
-								
-							}
-						
-						}
-						
-					}else if(tipoRelatorio.equalsIgnoreCase("analitico")){		
-									
-								//Cria lista QUEBRA para realizar a soma dos valores da fatura
-								List<ImpostoDeduzidoHelper> quebra = 
-										new ArrayList<ImpostoDeduzidoHelper>();
-						
-//								Collection colecaoImpostosCliente = new ArrayList();
-								List colecaoImpostosCliente = new ArrayList();
-								
-								try{								
-									
-									//faz a pesquisa por impostos que estao associados ? fatura passando o id da fatura
-									colecaoImpostosCliente = 
-										(List)this.repositorioCobranca.pesquisaImpostoFaturaClienteResponsavelFederalAnalitico(anoMesInicial,anoMesFinal, clienteID);
-									
-								}catch (ErroRepositorioException e) {
-									e.printStackTrace();
-									throw new ControladorException("erro.sistema", e);
-								}
-								
-								//inicio dase??o da cole??o de impostos do Cliente
-								if(colecaoImpostosCliente != null && !colecaoImpostosCliente.isEmpty()){
-									
-									for (int i = 0; i<colecaoImpostosCliente.size(); i++ ) {
-										
-										Object obj = (Object) colecaoImpostosCliente.get(i);
-										
-										if (obj instanceof Object[]) {
-							                Object[] imposto = (Object[]) obj;
-										
-							                //cria uma instancia do helper de impostos
-											ImpostoDeduzidoHelper helper = new ImpostoDeduzidoHelper();
-											
-											//seta os valores do imposto pequisado no helper do imposto para se usar no relatorio
-											helper.setIdImpostoTipo((Integer) imposto[0]);
-											helper.setDescricaoImposto((String) imposto[1]);						
-											helper.setPercentualAliquota((BigDecimal) imposto[2]);
-											helper.setValor((BigDecimal) imposto[3]);
-											helper.setIdCliente((Integer)imposto[4]);
-											helper.setNomeCliente((String) imposto[5] );
-											helper.setValorFatura((BigDecimal) imposto[6]);
-											helper.setIdImovel((Integer) imposto[7]);
-											helper.setCnpjCliente((String) imposto[8]);
-											helper.setBaseCalculo((BigDecimal) imposto[9]);
-											
-											
-											
-											// Verificamos se o objeto ja possue uma quebra cadastrada
-							                if (quebra.contains(helper)) {
-							                	
-							                	int posicao = quebra.indexOf(helper);
-							                	
-							                	ImpostoDeduzidoHelper jaCadastrado = (ImpostoDeduzidoHelper) quebra.get(posicao);
-							                	
-							                	//jaCadastrado.setValorFatura(jaCadastrado.getValorFatura().add(helper.getValorFatura()));
-							                	
-							                	//seta os valores do imposto pequisado no helper do imposto para se usar no relatorio
-												helper.setIdImpostoTipo((Integer) imposto[0]);
-												helper.setDescricaoImposto((String) imposto[1]);						
-												helper.setPercentualAliquota((BigDecimal) imposto[2]);
-												helper.setValor((BigDecimal) imposto[3]);
-												helper.setIdCliente((Integer)imposto[4]);
-												helper.setNomeCliente((String) imposto[5] );
-//												helper.setValorFatura((BigDecimal) imposto[6]);
-												helper.setIdImovel((Integer) imposto[7]);
-												helper.setCnpjCliente((String) imposto[8]);
-											//	helper.setBaseCalculo((BigDecimal) imposto[6]);
-									
-												
-												quebra.add(helper);
-							                	
-							                }else{
-							                	
-							                	quebra.add(helper);
-							                	
-							                }
-										
-										}
-										
-									}
-									
-									colecaoImpostosDeduzidosHelper = (Collection) quebra;
-									
-									/*Iterator iterator = colecaoImpostosCliente.iterator();
-								    
-									//inicio do la?o da cole??o de impostos do imovel
-									while (iterator.hasNext()) {
-										
-										Object[] imposto = (Object[]) iterator.next();
-										
-										//cria uma instancia do helper de impostos
-										ImpostoDeduzidoHelper impostoDeduzidoHelper = new ImpostoDeduzidoHelper();
-										
-										//seta os valores do imposto pequisado no helper do imposto para se usar no relatorio
-										impostoDeduzidoHelper.setIdImpostoTipo((Integer) imposto[0]);
-										impostoDeduzidoHelper.setDescricaoImposto((String) imposto[1]);						
-										impostoDeduzidoHelper.setPercentualAliquota((BigDecimal) imposto[2]);
-										impostoDeduzidoHelper.setValor((BigDecimal) imposto[3]);
-										impostoDeduzidoHelper.setIdCliente((Integer)imposto[4]);
-										impostoDeduzidoHelper.setNomeCliente((String) imposto[5] );
-										impostoDeduzidoHelper.setValorFatura((BigDecimal) imposto[6]);
-										impostoDeduzidoHelper.setIdImovel((Integer) imposto[7]);
-										
-										//adiciona o helper ? colecao dos helpers de imposto
-										colecaoImpostosDeduzidosHelper.add(impostoDeduzidoHelper);									
-									}//fim do la?o da cole??o de impostos do imovel	
-									 */									
-								}//fim se??o da cole??o dos imposto do imovel								
-							}//fim do la?o da cole??o de imoveis
-						}
-				
+		if (tipoRelatorio == null) {
+			return colecaoImpostosDeduzidosHelper;
+		}
+
+		if (tipoRelatorio.equalsIgnoreCase("sintetico")) {
+			// cria uma colecao de impostos
+			Collection colecaoImpostos = new ArrayList();
+
+			try {
+				//faz a pesquisa por impostos que estao associados ï¿½ fatura passando o ano mes
+				colecaoImpostos = this.repositorioCobranca.pesquisaImpostoFaturaClienteResponsavelFederal(
+						anoMesInicial, anoMesFinal, clienteID);
+			} catch (ErroRepositorioException e) {
+				e.printStackTrace();
+				throw new ControladorException("erro.sistema", e);
+			}
+
+			// valida a colecao de impostos pesquisada
+			if (colecaoImpostos != null && !colecaoImpostos.isEmpty()) {
+				Iterator iteraImposto = colecaoImpostos.iterator();
+
+				// varre a colecao de impostos
+				while (iteraImposto.hasNext()) {
+					Object[] imposto = (Object[]) iteraImposto.next();
+
+					// cria uma instancia do helper de impostos
+					ImpostoDeduzidoHelper helper = new ImpostoDeduzidoHelper();
+
+					// seta os valores do imposto pequisado no helper do imposto para se usar no relatorio
+					helper.setIdImpostoTipo((Integer) imposto[0]);
+					helper.setDescricaoImposto((String) imposto[1]);
+					helper.setPercentualAliquota((BigDecimal) imposto[2]);
+					helper.setValor((BigDecimal) imposto[3]);
+					helper.setIdCliente((Integer) imposto[4]);
+					helper.setNomeCliente((String) imposto[5]);
+					helper.setValorFatura((BigDecimal) imposto[6]);
+					helper.setCnpjCliente((String) imposto[7]);
+					helper.setBaseCalculo((BigDecimal) imposto[8]);
+					helper.setIdFatura((Integer) imposto[9]);
+
+					// adiciona o helper ï¿½ colecao dos helpers de imposto
+					colecaoImpostosDeduzidosHelper.add(helper);
+				}
+			}
+		} else if(tipoRelatorio.equalsIgnoreCase("analitico")) {
+			// Cria lista QUEBRA para realizar a soma dos valores da fatura
+			List<ImpostoDeduzidoHelper> quebra = new ArrayList<ImpostoDeduzidoHelper>();
+			List colecaoImpostosCliente = new ArrayList();
+
+			try {								
+				// faz a pesquisa por impostos que estao associados ï¿½ fatura passando o id da fatura
+				colecaoImpostosCliente = (List) this.repositorioCobranca
+						.pesquisaImpostoFaturaClienteResponsavelFederalAnalitico(anoMesInicial, anoMesFinal, clienteID);
+			} catch (ErroRepositorioException e) {
+				e.printStackTrace();
+				throw new ControladorException("erro.sistema", e);
+			}
+
+			// inicio da seï¿½ï¿½o da coleï¿½ï¿½o de impostos do Cliente
+			if(colecaoImpostosCliente != null && !colecaoImpostosCliente.isEmpty()){
+				for (int i = 0; i < colecaoImpostosCliente.size(); i++) {
+					Object obj = (Object) colecaoImpostosCliente.get(i);
+
+					if (obj instanceof Object[]) {
+		                Object[] imposto = (Object[]) obj;
+
+						// cria uma instancia do helper de impostos
+						ImpostoDeduzidoHelper helper = new ImpostoDeduzidoHelper();
+
+						// seta os valores do imposto pequisado no helper do imposto para se usar no relatorio
+						helper.setIdImpostoTipo((Integer) imposto[0]);
+						helper.setDescricaoImposto((String) imposto[1]);
+						helper.setPercentualAliquota((BigDecimal) imposto[2]);
+						helper.setValor((BigDecimal) imposto[3]);
+						helper.setIdCliente((Integer) imposto[4]);
+						helper.setNomeCliente((String) imposto[5]);
+						helper.setValorFatura((BigDecimal) imposto[6]);
+						helper.setIdImovel((Integer) imposto[7]);
+						helper.setCnpjCliente((String) imposto[8]);
+						helper.setBaseCalculo((BigDecimal) imposto[9]);
+						helper.setIdFatura((Integer) imposto[10]);
+
+						// Verificamos se o objeto ja possue uma quebra cadastrada
+						if (quebra.contains(helper)) {
+		                	int posicao = quebra.indexOf(helper);
+
+		                	ImpostoDeduzidoHelper jaCadastrado = (ImpostoDeduzidoHelper) quebra.get(posicao);
+
+		                	// seta os valores do imposto pequisado no helper do imposto para se usar no relatorio
+							helper.setIdImpostoTipo((Integer) imposto[0]);
+							helper.setDescricaoImposto((String) imposto[1]);						
+							helper.setPercentualAliquota((BigDecimal) imposto[2]);
+							helper.setValor((BigDecimal) imposto[3]);
+							helper.setIdCliente((Integer)imposto[4]);
+							helper.setNomeCliente((String) imposto[5]);
+							helper.setIdImovel((Integer) imposto[7]);
+							helper.setCnpjCliente((String) imposto[8]);
+		                }
+
+						quebra.add(helper);
+					}
+				}
+
+				colecaoImpostosDeduzidosHelper = (Collection) quebra;
+			}
+		}
+
 		return colecaoImpostosDeduzidosHelper;
 	}
-	
+
 	/**
 	 * [UC0251] Gerar Atividade de A??o de Cobran?a
 	 *
@@ -72355,7 +72795,7 @@ public class ControladorCobranca implements SessionBean {
 										null,
 										null,
 										null,
-										null,null, "1");
+										null,null, "1", false);
 								
 								
 								//inicio arquivo!!!
@@ -73448,7 +73888,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * Identifica e obt?m as informa??es necess?rias para confirmar pagamento(s) por cart?o de cr?dito
 	 * ou d?bito 
@@ -73557,7 +73997,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * [FS0008] ? Verificar validade da data
 	 *
@@ -73614,7 +74054,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * [FS0007] ? Somat?rio Inv?lido
      * [FS00010] ? Somat?rio Inv?lido
@@ -73670,7 +74110,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito 
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 12/01/2010
@@ -73727,7 +74167,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 *
 	 * @author Raphael Rossiter
 	 * @date 11/01/2010
@@ -73754,7 +74194,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 *
 	 * @author Raphael Rossiter
 	 * @date 12/01/2010
@@ -73775,7 +74215,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * [SB0003] ? Inserir Guia de Pagamento Cliente
 	 *
@@ -73888,7 +74328,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 *
 	 * @author Raphael Rossiter
 	 * @date 12/01/2010
@@ -73908,7 +74348,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 *
 	 * @author Raphael Rossiter
 	 * @date 12/01/2010
@@ -73928,7 +74368,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito 
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito 
 	 *
 	 * @author Raphael Rossiter
 	 * @date 12/01/2010
@@ -73944,12 +74384,12 @@ public class ControladorCobranca implements SessionBean {
 		GuiaPagamentoParcelamentoCartao guiaPagamentoParcelamentoCartao = new GuiaPagamentoParcelamentoCartao();
 		guiaPagamentoParcelamentoCartao.setComp_id(guiaPagamentoParcelamentoCartaoPK);
 		guiaPagamentoParcelamentoCartao.setUltimaAlteracao(new Date());
-		//INSERINDO GUIA DE PAGAMENTO PARCELAMENTO CARTÃO
+		//INSERINDO GUIA DE PAGAMENTO PARCELAMENTO CARTï¿½O
 		getControladorUtil().inserir(guiaPagamentoParcelamentoCartao);
 	}
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 *  [FS0005 ? Alerta Parcelamento Com Parcela Paga]
 	 *  [FS0006 ? Parcelamento Sem D?bito a Cobrar]
@@ -77780,7 +78220,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 	/**
-	 * [UC0927] - Confirmar Cartão de Crédito/Débito
+	 * [UC0927] - Confirmar Cartï¿½o de Crï¿½dito/Dï¿½bito
 	 * 
 	 * [SB0004] ? Incluir Dados da Confirma??o dos Pagamentos
 	 *
@@ -82837,19 +83277,19 @@ public class ControladorCobranca implements SessionBean {
 	 * @created 24/03/2011
 	**/
 	public Object[] pesquisarDadosBoletimMedicaoCobranca(Integer anoMesReferencia, Integer idCobrancaGrupo, Integer idContratoEmpresaServico)
-			 throws ControladorException {
+		 throws ControladorException {
 
-			try {
+		try {
 
-				return 
-					this.repositorioCobranca.pesquisarDadosBoletimMedicaoCobranca(anoMesReferencia, idCobrancaGrupo, idContratoEmpresaServico);
+			return 
+				this.repositorioCobranca.pesquisarDadosBoletimMedicaoCobranca(anoMesReferencia, idCobrancaGrupo, idContratoEmpresaServico);
 
-			} catch (ErroRepositorioException ex) {
-				ex.printStackTrace();
-				throw new ControladorException("erro.sistema", ex);
-			}
-		
+		} catch (ErroRepositorioException ex) {
+			ex.printStackTrace();
+			throw new ControladorException("erro.sistema", ex);
 		}
+	
+	}
 
 	/**
 	 * 
@@ -82873,171 +83313,124 @@ public class ControladorCobranca implements SessionBean {
 			Integer anoMesInicial,Integer anoMesFinal, Integer clienteID, String tipoRelatorio) throws ControladorException{
 		
 		Collection<ImpostoDeduzidoHelper> colecaoImpostosDeduzidosHelper = new ArrayList();
-		
-		if(tipoRelatorio != null){
-			
-			if(tipoRelatorio.equalsIgnoreCase("sintetico") ){
 
-				//cria uma colecao de impostos
-				Collection colecaoImpostos = new ArrayList();
-					
-				try {				
-					
-					//faz a pesquisa por impostos que estao associados ? fatura passando o ano mes
-					colecaoImpostos = 
-						this.repositorioCobranca.pesquisarImpostosArrecadacaoClienteResponsavelFederal(anoMesInicial,anoMesFinal, clienteID);
-					
-				} catch (ErroRepositorioException e) {
-					e.printStackTrace();
-					throw new ControladorException("erro.sistema", e);
-				}		
-				
-				//valida a colecao de impostos pesquisada
-				if(colecaoImpostos != null && !colecaoImpostos.isEmpty()){
-					Iterator iteraImposto = colecaoImpostos.iterator();
-					
-					//varre a colecao de impostos
-					while (iteraImposto.hasNext()) {
-						
-						Object[] imposto = (Object[]) iteraImposto.next();
-						
-						//cria uma instancia do helper de impostos
-						ImpostoDeduzidoHelper impostoDeduzidoHelper = new ImpostoDeduzidoHelper();
-						
-						//seta os valores do imposto pequisado no helper do imposto para se usar no relatorio
-						impostoDeduzidoHelper.setIdImpostoTipo((Integer) imposto[0]);
-						impostoDeduzidoHelper.setDescricaoImposto((String) imposto[1]);						
-						impostoDeduzidoHelper.setPercentualAliquota((BigDecimal) imposto[2]);
-						impostoDeduzidoHelper.setValor((BigDecimal) imposto[3]);
-						impostoDeduzidoHelper.setIdCliente((Integer) imposto[4] );
-						impostoDeduzidoHelper.setNomeCliente((String) imposto[5] );
-						impostoDeduzidoHelper.setValorFatura((BigDecimal) imposto[6]);
-						impostoDeduzidoHelper.setCnpjCliente((String) imposto[7]);
-						impostoDeduzidoHelper.setBaseCalculo((BigDecimal) imposto[8]);
-						
-						
-						//adiciona o helper ? colecao dos helpers de imposto
-						colecaoImpostosDeduzidosHelper.add(impostoDeduzidoHelper);
-						
-					}
-				
-				}
-				
-			}else if(tipoRelatorio.equalsIgnoreCase("analitico")){		
-							
-						//Cria lista QUEBRA para realizar a soma dos valores da fatura
-						List<ImpostoDeduzidoHelper> quebra = 
-								new ArrayList<ImpostoDeduzidoHelper>();
-				
-//						Collection colecaoImpostosCliente = new ArrayList();
-						List colecaoImpostosCliente = new ArrayList();
-						
-						try{								
-							
-							//faz a pesquisa por impostos que estao associados a fatura passando o id da fatura
-							colecaoImpostosCliente = 
-								(List)this.repositorioCobranca.pesquisarImpostosArrecadacaoClienteResponsavelFederalAnalitico(anoMesInicial,anoMesFinal, clienteID);
-							
-						}catch (ErroRepositorioException e) {
-							e.printStackTrace();
-							throw new ControladorException("erro.sistema", e);
-						}
-						
-						//inicio dase??o da colecao de impostos do Cliente
-						if(colecaoImpostosCliente != null && !colecaoImpostosCliente.isEmpty()){
-							
-							for (int i = 0; i<colecaoImpostosCliente.size(); i++ ) {
-								
-								Object obj = (Object) colecaoImpostosCliente.get(i);
-								
-								if (obj instanceof Object[]) {
-					                Object[] imposto = (Object[]) obj;
-								
-					                //cria uma instancia do helper de impostos
-									ImpostoDeduzidoHelper helper = new ImpostoDeduzidoHelper();
-									
-									//seta os valores do imposto pequisado no helper do imposto para se usar no relatorio
-									helper.setIdImpostoTipo((Integer) imposto[0]);
-									helper.setDescricaoImposto((String) imposto[1]);						
-									helper.setPercentualAliquota((BigDecimal) imposto[2]);
-									helper.setValor((BigDecimal) imposto[3]);
-									helper.setIdCliente((Integer)imposto[4]);
-									helper.setNomeCliente((String) imposto[5] );
-									helper.setValorFatura((BigDecimal) imposto[6]);
-									helper.setIdImovel((Integer) imposto[7]);
-									helper.setCnpjCliente((String) imposto[8]);
-									helper.setBaseCalculo((BigDecimal) imposto[9]);
-									helper.setIdConta((Integer) imposto[10]);
-									helper.setAnoMesReferencia((String) imposto[11]);
-									// Verificamos se o objeto ja possue uma quebra cadastrada
-					                if (quebra.contains(helper)) {
-					                	
-					                	int posicao = quebra.indexOf(helper);
-					                	
-					                	ImpostoDeduzidoHelper jaCadastrado = (ImpostoDeduzidoHelper) quebra.get(posicao);
-					                	
-					          //      	jaCadastrado.setValorFatura(jaCadastrado.getValorFatura().add(helper.getValorFatura()));
-					                	
-					                	//seta os valores do imposto pesquisado no helper do imposto para se usar no relatorio
-										helper.setIdImpostoTipo((Integer) imposto[0]);
-										helper.setDescricaoImposto((String) imposto[1]);						
-										helper.setPercentualAliquota((BigDecimal) imposto[2]);
-										helper.setValor((BigDecimal) imposto[3]);
-										helper.setIdCliente((Integer)imposto[4]);
-										helper.setNomeCliente((String) imposto[5] );
-//										helper.setValorFatura((BigDecimal) imposto[6]);
-										helper.setIdImovel((Integer) imposto[7]);
-										helper.setCnpjCliente((String) imposto[8]);
-										helper.setBaseCalculo((BigDecimal) imposto[9]);
-										helper.setIdConta((Integer) imposto[10]);
-										helper.setAnoMesReferencia((String) imposto[11]);
-										
-										quebra.add(helper);
-					                	
-					                }else{
-					                	
-					                	quebra.add(helper);
-					                	
-					                }
-								
-								}
-								
-							}
-							
-							colecaoImpostosDeduzidosHelper = (Collection) quebra;
-							
-							/*Iterator iterator = colecaoImpostosCliente.iterator();
-						    
-							//inicio do la?o da cole??o de impostos do imovel
-							while (iterator.hasNext()) {
-								
-								Object[] imposto = (Object[]) iterator.next();
-								
-								//cria uma instancia do helper de impostos
-								ImpostoDeduzidoHelper impostoDeduzidoHelper = new ImpostoDeduzidoHelper();
-								
-								//seta os valores do imposto pequisado no helper do imposto para se usar no relatorio
-								impostoDeduzidoHelper.setIdImpostoTipo((Integer) imposto[0]);
-								impostoDeduzidoHelper.setDescricaoImposto((String) imposto[1]);						
-								impostoDeduzidoHelper.setPercentualAliquota((BigDecimal) imposto[2]);
-								impostoDeduzidoHelper.setValor((BigDecimal) imposto[3]);
-								impostoDeduzidoHelper.setIdCliente((Integer)imposto[4]);
-								impostoDeduzidoHelper.setNomeCliente((String) imposto[5] );
-								impostoDeduzidoHelper.setValorFatura((BigDecimal) imposto[6]);
-								impostoDeduzidoHelper.setIdImovel((Integer) imposto[7]);
-								
-								//adiciona o helper ? colecao dos helpers de imposto
-								colecaoImpostosDeduzidosHelper.add(impostoDeduzidoHelper);									
-							}//fim do la?o da cole??o de impostos do imovel	
-							 */									
-						}//fim se??o da cole??o dos imposto do imovel								
-					}//fim do la?o da cole??o de imoveis
-				}
-		
+		if (tipoRelatorio == null) {
 			return colecaoImpostosDeduzidosHelper;
+		}
+
+		if (tipoRelatorio.equalsIgnoreCase("sintetico")) {
+			Collection colecaoImpostos = new ArrayList();
+
+			try {
+				// faz a pesquisa por impostos que estao associados ? fatura passando o ano mes
+				colecaoImpostos = this.repositorioCobranca.pesquisarImpostosArrecadacaoClienteResponsavelFederal(
+						anoMesInicial, anoMesFinal, clienteID);
+			} catch (ErroRepositorioException e) {
+				e.printStackTrace();
+				throw new ControladorException("erro.sistema", e);
+			}	
+
+			// valida a colecao de impostos pesquisada
+			if (colecaoImpostos != null && !colecaoImpostos.isEmpty()) {
+				Iterator iteraImposto = colecaoImpostos.iterator();
+
+				// varre a colecao de impostos
+				while (iteraImposto.hasNext()) {
+					Object[] imposto = (Object[]) iteraImposto.next();
+
+					// cria uma instancia do helper de impostos
+					ImpostoDeduzidoHelper impostoDeduzidoHelper = new ImpostoDeduzidoHelper();
+
+					// seta os valores do imposto pequisado no helper do imposto
+					// para se usar no relatorio
+					impostoDeduzidoHelper.setIdImpostoTipo((Integer) imposto[0]);
+					impostoDeduzidoHelper.setDescricaoImposto((String) imposto[1]);
+					impostoDeduzidoHelper.setPercentualAliquota((BigDecimal) imposto[2]);
+					impostoDeduzidoHelper.setValor((BigDecimal) imposto[3]);
+					impostoDeduzidoHelper.setIdCliente((Integer) imposto[4]);
+					impostoDeduzidoHelper.setNomeCliente((String) imposto[5]);
+					impostoDeduzidoHelper.setValorFatura((BigDecimal) imposto[6]);
+					impostoDeduzidoHelper.setCnpjCliente((String) imposto[7]);
+					impostoDeduzidoHelper.setBaseCalculo((BigDecimal) imposto[8]);
+					impostoDeduzidoHelper.setIdFatura((Integer) imposto[9]);
+					impostoDeduzidoHelper.setReferenciaFatura((Integer) imposto[10]);
+
+					// adiciona o helper ? colecao dos helpers de imposto
+					colecaoImpostosDeduzidosHelper.add(impostoDeduzidoHelper);
+				}
+			}
+		} else if (tipoRelatorio.equalsIgnoreCase("analitico")) {
+			// Cria lista QUEBRA para realizar a soma dos valores da fatura
+			List<ImpostoDeduzidoHelper> quebra = new ArrayList<ImpostoDeduzidoHelper>();
+
+			List colecaoImpostosCliente = new ArrayList();
+
+			try {
+				//faz a pesquisa por impostos que estao associados a fatura passando o id da fatura
+				colecaoImpostosCliente = (List) this.repositorioCobranca
+						.pesquisarImpostosArrecadacaoClienteResponsavelFederalAnalitico(anoMesInicial, anoMesFinal, clienteID);
+			} catch (ErroRepositorioException e) {
+				e.printStackTrace();
+				throw new ControladorException("erro.sistema", e);
+			}
+
+			// inicio dase??o da colecao de impostos do Cliente
+			if (colecaoImpostosCliente != null && !colecaoImpostosCliente.isEmpty()) {
+				for (int i = 0; i < colecaoImpostosCliente.size(); i++) {
+					Object obj = (Object) colecaoImpostosCliente.get(i);
+
+					if (obj instanceof Object[]) {
+						Object[] imposto = (Object[]) obj;
+
+						// cria uma instancia do helper de impostos
+						ImpostoDeduzidoHelper helper = new ImpostoDeduzidoHelper();
+
+						// seta os valores do imposto pequisado no helper do imposto para se usar no relatorio
+						helper.setIdImpostoTipo((Integer) imposto[0]);
+						helper.setDescricaoImposto((String) imposto[1]);
+						helper.setPercentualAliquota((BigDecimal) imposto[2]);
+						helper.setValor((BigDecimal) imposto[3]);
+						helper.setIdCliente((Integer) imposto[4]);
+						helper.setNomeCliente((String) imposto[5]);
+						helper.setValorFatura((BigDecimal) imposto[6]);
+						helper.setIdImovel((Integer) imposto[7]);
+						helper.setCnpjCliente((String) imposto[8]);
+						helper.setBaseCalculo((BigDecimal) imposto[9]);
+						helper.setIdConta((Integer) imposto[10]);
+						helper.setAnoMesReferencia((String) imposto[11]);
+						helper.setIdFatura((Integer) imposto[12]);
+
+						// Verificamos se o objeto ja possue uma quebra cadastrada
+		                if (quebra.contains(helper)) {
+		                	int posicao = quebra.indexOf(helper);
+		                	
+		                	ImpostoDeduzidoHelper jaCadastrado = (ImpostoDeduzidoHelper) quebra.get(posicao);
+
+		                	//seta os valores do imposto pesquisado no helper do imposto para se usar no relatorio
+							helper.setIdImpostoTipo((Integer) imposto[0]);
+							helper.setDescricaoImposto((String) imposto[1]);						
+							helper.setPercentualAliquota((BigDecimal) imposto[2]);
+							helper.setValor((BigDecimal) imposto[3]);
+							helper.setIdCliente((Integer)imposto[4]);
+							helper.setNomeCliente((String) imposto[5] );
+							helper.setIdImovel((Integer) imposto[7]);
+							helper.setCnpjCliente((String) imposto[8]);
+							helper.setBaseCalculo((BigDecimal) imposto[9]);
+							helper.setIdConta((Integer) imposto[10]);
+							helper.setAnoMesReferencia((String) imposto[11]);
+		                }
+
+		                quebra.add(helper);
+					}
+				}
+
+				colecaoImpostosDeduzidosHelper = (Collection) quebra;
+			}							
+		}
+
+		return colecaoImpostosDeduzidosHelper;
 	}
-	
-	
+
 	/**
 	 * Gerar Relat?rio de An?lise de Perdas com Cr?dito
 	 * 
@@ -87032,7 +87425,7 @@ public class ControladorCobranca implements SessionBean {
 						colecaoAntecipacaoCreditosDeParcelamento,
 						parcelamento,
 						dataValidade,
-						"1");
+						"1", false);
 
 		return extratoDebitoRelatorioHelper;
 	}
@@ -88233,7 +88626,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC1585] - Emitir Relatório Dívida Ativa Amortizada.
+	 * [UC1585] - Emitir Relatï¿½rio Dï¿½vida Ativa Amortizada.
 	 * 
 	 * @author Anderson Cabral
 	 * @created 17/02/2014
@@ -88293,6 +88686,10 @@ public class ControladorCobranca implements SessionBean {
 						dadosAmortizacaoDividaAtivaHelper.setTipo((String) dado[9]);
 					}
 					
+					if(dado[10] != null){
+						dadosAmortizacaoDividaAtivaHelper.setIdTipoAmortizacao((Integer) dado[10]);
+					}
+					
 					colecaoDadosAmortizacaoDividaAtivaHelper.add(dadosAmortizacaoDividaAtivaHelper);
 					
 				}
@@ -88306,7 +88703,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC1588] - Gerar Divida Atitiva dos Imóveis
+	 * [UC1588] - Gerar Divida Atitiva dos Imï¿½veis
 	 * 
 	 * @author Ana Maria Andrade
 	 * @date 14/02/2014
@@ -88317,7 +88714,7 @@ public class ControladorCobranca implements SessionBean {
 		
 		try{
 			/*
-			 * Registrar o início do processamento da Unidade de Processamento
+			 * Registrar o inï¿½cio do processamento da Unidade de Processamento
 			 * do Batch
 			 */
 			idUnidadeIniciada = getControladorBatch()
@@ -88328,13 +88725,13 @@ public class ControladorCobranca implements SessionBean {
 			System.out.println("GERAR DIVIDA ATIVA"); 
 			System.out.println("***************************************");
 			
-			// Verificar se a empresa tem inscrição de Divida Ativa
+			// Verificar se a empresa tem inscriï¿½ï¿½o de Divida Ativa
 			SistemaParametro sistemaParametro = getControladorUtil().pesquisarParametrosDoSistema();
 			if (sistemaParametro.getIndicadorDividaAtiva() == ConstantesSistema.SIM) {
 							
-				/* IT0001 - Obter Comandos Dívida Ativa 
+				/* IT0001 - Obter Comandos Dï¿½vida Ativa 
 				 * 
-				 * Pesquisar os comandos de divida ativa que não foram processados 
+				 * Pesquisar os comandos de divida ativa que nï¿½o foram processados 
 				 * 
 				 */
 				Collection<DividaAtivaCriterio> colecaoDividaAtivaCriterio = 
@@ -88357,7 +88754,7 @@ public class ControladorCobranca implements SessionBean {
 								this.repositorioCobranca.pesquisarDividaAtivaClienteTipoComando(dividaAtivaCriterio.getId());
 						
 						
-						// Variáveis para a paginação da pesquisa de contas
+						// Variï¿½veis para a paginaï¿½ï¿½o da pesquisa de contas
 						// ========================================================================
 						boolean flagTerminou = false;
 						final int quantidadeRegistros = 4000;
@@ -88365,9 +88762,9 @@ public class ControladorCobranca implements SessionBean {
 						// ========================================================================
 						
 						while(!flagTerminou){
-						/* IT0002 - Selecionar Contas dos Imóveis para Divida Ativa 
+						/* IT0002 - Selecionar Contas dos Imï¿½veis para Divida Ativa 
 						 * 
-						 * Pesquisar as contas dos imóveis que atendam os criterios do comando com divida ativa 
+						 * Pesquisar as contas dos imï¿½veis que atendam os criterios do comando com divida ativa 
 						 * 
 						 */
 							Collection<Object[]> contasImoveisDividaAtiva = this.repositorioCobranca.
@@ -88380,7 +88777,7 @@ public class ControladorCobranca implements SessionBean {
 		
 								Map<Integer,ImoveisDividaAtivaHelper> hashPorImovel = new HashMap<Integer, ImoveisDividaAtivaHelper>();
 								Collection<DividaAtivaDebito> dividasAtivaDebito = null;
-								// Agrupar as contas por imóvel para inserir os dados de divida ativa do imóvel e as contas associadas
+								// Agrupar as contas por imï¿½vel para inserir os dados de divida ativa do imï¿½vel e as contas associadas
 								while (icolecaoContasImoveisDividaAtiva.hasNext()) {
 									
 									Object[] dadosContasImoveisDividaAtiva = (Object[]) icolecaoContasImoveisDividaAtiva.next();
@@ -88395,7 +88792,7 @@ public class ControladorCobranca implements SessionBean {
 									
 									short indicadorIntra = 0; 
 									
-									// Atribuir o indicador de intra para os imóveis com tipo de cliente com indicação da própria prefeitura.
+									// Atribuir o indicador de intra para os imï¿½veis com tipo de cliente com indicaï¿½ï¿½o da prï¿½pria prefeitura.
 									if(idClienteTipo != null && idClienteTipo.equals(ClienteTipo.RECEITA_INTRA)){
 										indicadorIntra = ConstantesSistema.SIM;
 									}else{
@@ -88423,10 +88820,10 @@ public class ControladorCobranca implements SessionBean {
 															
 									BigDecimal valorTotalDebitoSemCorrecao = (BigDecimal) dadosContasImoveisDividaAtiva[3];
 									
-									//IT0006 - Buscar valor total de debitos já cobrados em divida ativa de uma conta
+									//IT0006 - Buscar valor total de debitos jï¿½ cobrados em divida ativa de uma conta
 									BigDecimal vlContaDivaAtiva = getControladorFaturamento().buscarValorDebitosCobradosDividaAtivaConta(idConta);
 									
-									//Remover do valor da conta o valor de debitos já cobrado em divida ativa
+									//Remover do valor da conta o valor de debitos jï¿½ cobrado em divida ativa
 									if (vlContaDivaAtiva != null && !vlContaDivaAtiva.equals("")) {
 										//FE0003 - Verificar Valor Conta Maior ou igual que Valor da Divida Ativa
 										if(vlContaDivaAtiva.compareTo(valorTotalDebitoSemCorrecao) >= 0){
@@ -88455,7 +88852,7 @@ public class ControladorCobranca implements SessionBean {
 								if (idsImovel != null && !idsImovel.isEmpty()) {
 								Iterator iteratorImoveis = idsImovel.iterator(); 
 		
-									//IT0003 - Gerar Dívida Ativa do Imóvel
+									//IT0003 - Gerar Dï¿½vida Ativa do Imï¿½vel
 									while (iteratorImoveis.hasNext()) {
 										Integer idImovel = (Integer) iteratorImoveis.next();
 										ImoveisDividaAtivaHelper imoveisDividaAtivaHelper = hashPorImovel.get(idImovel);
@@ -88480,9 +88877,9 @@ public class ControladorCobranca implements SessionBean {
 										
 										dividaAtivaImovel.setId(idDividaAtivaImovel);
 		
-										/* IT0004 - Gerar Dívida Ativa da Conta
+										/* IT0004 - Gerar Dï¿½vida Ativa da Conta
 										 * 
-										 * Inserir os dados das contas, com divida ativa, associado ao imóvel.
+										 * Inserir os dados das contas, com divida ativa, associado ao imï¿½vel.
 										 * 
 										 */						
 										Collection<DividaAtivaDebito> idsDividaAtivaDebito = imoveisDividaAtivaHelper.getDividaAtivaDebito();
@@ -88503,14 +88900,14 @@ public class ControladorCobranca implements SessionBean {
 							}
 														
 							/**
-							 * Incrementa o nº do indice da páginação
+							 * Incrementa o nï¿½ do indice da pï¿½ginaï¿½ï¿½o
 							 */
 							numeroIndice = numeroIndice + quantidadeRegistros;
 
 							/**
-							 * Caso a coleção de imoveis retornados for menor que a
+							 * Caso a coleï¿½ï¿½o de imoveis retornados for menor que a
 							 * quantidade de registros seta a flag indicando que a
-							 * paginação terminou.
+							 * paginaï¿½ï¿½o terminou.
 							 */
 							if (contasImoveisDividaAtiva == null || contasImoveisDividaAtiva.size() < quantidadeRegistros) {
 
@@ -88525,7 +88922,7 @@ public class ControladorCobranca implements SessionBean {
 							}
 						}
 						
-						//IT0005  - Atualizar o critério com dados do processamento
+						//IT0005  - Atualizar o critï¿½rio com dados do processamento
 						dividaAtivaCriterio.setAnoMesArrecadacao(Util.subtraiAteSeisMesesAnoMesReferencia(sistemaParametro.getAnoMesArrecadacao(), 1));
 						dividaAtivaCriterio.setDataInscricao(new Date());
 						dividaAtivaCriterio.setIndicadorProcessado(ConstantesSistema.SIM);
@@ -88539,7 +88936,7 @@ public class ControladorCobranca implements SessionBean {
 			getControladorBatch().encerrarUnidadeProcessamentoBatch(null,
 					idUnidadeIniciada, false);
 			
-			System.out.println("******* FIM GERAÇÃO DIVIDA ATIVA**********");
+			System.out.println("******* FIM GERAï¿½ï¿½O DIVIDA ATIVA**********");
 		
 		
 		}catch (Exception ex) {
@@ -88571,7 +88968,7 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC1590] - Gerar Relatório Demonstrativo Dívida Ativa 
+	 * [UC1590] - Gerar Relatï¿½rio Demonstrativo Dï¿½vida Ativa 
 	 * 
 	 * @author Anderson Cabral
 	 * @throws ControladorException
@@ -88612,8 +89009,8 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC1590] - Gerar Relatório Demonstrativo Dívida Ativa 
-	 * [IT0002] Obter Município da Empresa
+	 * [UC1590] - Gerar Relatï¿½rio Demonstrativo Dï¿½vida Ativa 
+	 * [IT0002] Obter Municï¿½pio da Empresa
 	 * 
 	 * @author Anderson Cabral
 	 * @throws ErroRepositorioException
@@ -88630,11 +89027,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Atualiza os débitos de dívida ativa para voltar a situação antes da execução do batch
+	 * Atualiza os dï¿½bitos de dï¿½vida ativa para voltar a situaï¿½ï¿½o antes da execuï¿½ï¿½o do batch
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 04/04/2014
 	 */
 	public void atualizarAmortizacoesDebitosDividaAtivaArrecadacao(Integer anoMesReferenciaArrecadacao)
@@ -88648,11 +89045,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Deleta as amortizações dos débitos de dívida ativa para voltar a situação antes da execução do batch
+	 * Deleta as amortizaï¿½ï¿½es dos dï¿½bitos de dï¿½vida ativa para voltar a situaï¿½ï¿½o antes da execuï¿½ï¿½o do batch
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 04/04/2014
 	 */
 	public void deletarAmortizacoesDebitosDividaAtivaArrecadacao(Integer anoMesReferenciaArrecadacao)
@@ -88666,11 +89063,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Atualiza os débitos de dívida ativa para voltar a situação antes da execução do batch
+	 * Atualiza os dï¿½bitos de dï¿½vida ativa para voltar a situaï¿½ï¿½o antes da execuï¿½ï¿½o do batch
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 04/04/2014
 	 */
 	public void atualizarAmortizacoesDebitosDividaAtivaFaturamento(Integer anoMesReferenciaFaturamento)
@@ -88684,11 +89081,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC XXXX] - Processar amortização de dívida ativa
+	 * [UC XXXX] - Processar amortizaï¿½ï¿½o de dï¿½vida ativa
 	 * 
-	 * Deleta as amortizações dos débitos de dívida ativa para voltar a situação antes da execução do batch
+	 * Deleta as amortizaï¿½ï¿½es dos dï¿½bitos de dï¿½vida ativa para voltar a situaï¿½ï¿½o antes da execuï¿½ï¿½o do batch
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 04/04/2014
 	 */
 	public void deletarAmortizacoesDebitosDividaAtivaFaturamento(Integer anoMesReferenciaFaturamento)
@@ -88713,7 +89110,7 @@ public class ControladorCobranca implements SessionBean {
 		
 		try{
 			/*
-			 * Registrar o início do processamento da Unidade de Processamento
+			 * Registrar o inï¿½cio do processamento da Unidade de Processamento
 			 * do Batch
 			 */
 			idUnidadeIniciada = getControladorBatch()
@@ -88724,11 +89121,11 @@ public class ControladorCobranca implements SessionBean {
 			System.out.println("GERAR RESUMO DIVIDA ATIVA ANUAL"); 
 			System.out.println("***************************************");
 			
-			// Verificar se a empresa tem inscrição de Divida Ativa
+			// Verificar se a empresa tem inscriï¿½ï¿½o de Divida Ativa
 			SistemaParametro sistemaParametro = getControladorUtil().pesquisarParametrosDoSistema();
 			if (sistemaParametro.getIndicadorDividaAtiva() == ConstantesSistema.SIM) {
 			
-				//[IT0003] Selecionar Data da Referência
+				//[IT0003] Selecionar Data da Referï¿½ncia
 				Date dataReferencia = Util.obterUltimaDataMes(Util.subtraiAteSeisMesesAnoMesReferencia(sistemaParametro.getAnoMesArrecadacao(), 1));
 				
 				//[FE0003] Verificar Registros na Tabela para Resumo Anual
@@ -88827,7 +89224,7 @@ public class ControladorCobranca implements SessionBean {
 			System.out.println("******* FIM GERAR RESUMO DIVIDA ATIVA ANUAL**********");
 		
 		/*
-		 * Caso ocorra algum erro, o sistema faz o rollback das transações
+		 * Caso ocorra algum erro, o sistema faz o rollback das transaï¿½ï¿½es
 		 * do batch e encerrar o processamento
 		 */
 		}catch (Exception ex) {
@@ -88901,8 +89298,8 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC0251] Gerar Atividade de Ação de Cobrança
-	 * [SB0005] Gerar Documento de Cobrança
+	 * [UC0251] Gerar Atividade de Aï¿½ï¿½o de Cobranï¿½a
+	 * [SB0005] Gerar Documento de Cobranï¿½a
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 13/06/2014
@@ -88910,7 +89307,7 @@ public class ControladorCobranca implements SessionBean {
 	public Empresa obterEmpresa(Empresa empresa, CobrancaAcaoAtividadeCronograma cobrancaAcaoAtividadeCronograma)throws ControladorException {
 		try {
 			
-			//Caso o Id do cronograma da atividade da ação de cobrança esteja preenchido 
+			//Caso o Id do cronograma da atividade da aï¿½ï¿½o de cobranï¿½a esteja preenchido 
 			//e exista contrato associado a atividade 
 			if(cobrancaAcaoAtividadeCronograma != null){
 				
@@ -88940,9 +89337,9 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC1668] Atualizar Dados nas Tabelas Resumos Gerenciais Arrecadação
+	 * [UC1668] Atualizar Dados nas Tabelas Resumos Gerenciais Arrecadaï¿½ï¿½o
 	 * 
-	 * @author Fábio Aguiar
+	 * @author Fï¿½bio Aguiar
 	 * @date 29/01/2015
 	 * 
 	 * @throws ErroRepositorioException
@@ -88984,7 +89381,7 @@ public class ControladorCobranca implements SessionBean {
 	/**
 	 * [UC1669] Atualizar Dados nas Tabelas Resumos Gerenciais Faturamento
 	 * 
-	 * @author Fábio Aguiar
+	 * @author Fï¿½bio Aguiar
 	 * @date 04/02/2015
 	 * 
 	 * @throws ErroRepositorioException
@@ -89045,11 +89442,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * Método responsável por retornar
-	 * o helper que contem os débitos
+	 * Mï¿½todo responsï¿½vel por retornar
+	 * o helper que contem os dï¿½bitos
 	 * do imovel
 	 * 
-	 * @author Fábio Aguiar
+	 * @author Fï¿½bio Aguiar
 	 * @since 21/11/2014
 	 * 
 	 * @param matriculaImovel
@@ -89067,7 +89464,7 @@ public class ControladorCobranca implements SessionBean {
 	
 	/**
 	 * [UC0214] [SB0021] Exibir de Tela de Sucesso
-	 * @author Fábio Aguiar
+	 * @author Fï¿½bio Aguiar
 	 * @since 31/03/2015
 	 * 
 	 * @param idUsuario
@@ -89090,9 +89487,9 @@ public class ControladorCobranca implements SessionBean {
 	
 	
 		/**
-	 * [UC1675] - Gerar relatório consultar Débitos
+	 * [UC1675] - Gerar relatï¿½rio consultar Dï¿½bitos
 	 * 
-	 * @author Fábio Aguiar
+	 * @author Fï¿½bio Aguiar
 	 * @date 14/04/2015
 	 * 
 	 * @throws ControladorException
@@ -89112,8 +89509,8 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * [UC1680] - Retornar Dados Imóvel Telemetria Via WebService
-	 * [IT0003] - Obter Débitos
+	 * [UC1680] - Retornar Dados Imï¿½vel Telemetria Via WebService
+	 * [IT0003] - Obter Dï¿½bitos
 	 * 
 	 * @author Vivianne Sousa
 	 * @date 29/04/2015
@@ -89127,7 +89524,7 @@ public class ControladorCobranca implements SessionBean {
 		Date dataVencimentoInicial = Util.criarData(1, 1, 0001);
 		Date dataVencimentoFinal = Util.criarData(31, 12, 9999);
 
-		// [UC0067] Obter Débito do Imóvel ou Cliente
+		// [UC0067] Obter Dï¿½bito do Imï¿½vel ou Cliente
 		ObterDebitoImovelOuClienteHelper debitoImovelHelper = this.obterDebitoImovelOuCliente(
 				1, idImovel.toString(), null, null, "000101", "999912", dataVencimentoInicial,
 				dataVencimentoFinal, 1, 1, 1, 1, 2, 1, 1, true, 1);
@@ -89171,7 +89568,7 @@ public class ControladorCobranca implements SessionBean {
 				}
 			}
 
-			// Débito Total Atualizado
+			// Dï¿½bito Total Atualizado
 			valorDebitoTotalAtualizado = valorConta
 					.add(valorAcrescimoContas)
 				    .add(valorDebitoACobrar)
@@ -89189,11 +89586,11 @@ public class ControladorCobranca implements SessionBean {
 	}
 	
 	/**
-	 * Verifica se o imóvel tem parcelamentos ativos
+	 * Verifica se o imï¿½vel tem parcelamentos ativos
 	 * 
-	 * [UC0214] - Efetuar Parcelamento de Débitos
+	 * [UC0214] - Efetuar Parcelamento de Dï¿½bitos
 	 * 
-	 * @author Rafael Corrêa
+	 * @author Rafael Corrï¿½a
 	 * @date 01/06/2015
 	 * 
 	 * @throws ControladorException
@@ -89217,4 +89614,161 @@ public class ControladorCobranca implements SessionBean {
 		return retorno;
 		
 	}
+	/**
+	 * Coloca os dados do relatório em uma coleção
+	 * 
+	 * [UC????] - Consultar Arquivo Retorno Cobranca
+	 * 
+	 * @author João Pedro Medeiros
+	 * @date 24/11/2015
+	 * 
+	 * @throws ControladorException
+	 */
+	public Collection<RelatorioConsultarArquivoRetornoCobrancaBean> obterRelatorioArquivoRetornoCobranca
+	(Date dataVencimentoInicial, Date dataVencimentoFinal) throws ControladorException {
+
+		try{
+			Collection<RelatorioConsultarArquivoRetornoCobrancaBean> colecaoRelatorioBean = 
+				new ArrayList<RelatorioConsultarArquivoRetornoCobrancaBean>();
+		
+			Collection retorno = repositorioCobranca.obterRelatorioConsultarArquivoRetornoCobranca(dataVencimentoInicial, dataVencimentoFinal);
+			
+			if(Util.isVazioOrNulo(retorno)){
+				return colecaoRelatorioBean;
+			}
+			RelatorioConsultarArquivoRetornoCobrancaBean bean = null;
+
+			Iterator<?> it = retorno.iterator();
+			while (it.hasNext()) {
+				Object[] array = (Object[]) it.next();
+
+				bean = new RelatorioConsultarArquivoRetornoCobrancaBean();
+
+				if ((String) array[0] != null) {
+					bean.setImovel(String.valueOf((String) array[0]));
+				}
+				if ((String) array[1] != null) {
+					String cpfFormatado = Util.formatarCpf((String) array[1]);
+					bean.setCpf(String.valueOf(cpfFormatado));
+				}
+
+				if ((String) array[2] != null) {
+					String cnpjFormatado = Util.formatarCnpj((String) array[2]);
+					bean.setCnpj(String.valueOf(cnpjFormatado));
+				}
+
+				if ((String) array[3] != null) {
+					bean.setNome(String.valueOf((String) array[3]));
+				}
+
+				if ((String) array[4] != null) {
+					bean.setNumIdentidade(String.valueOf((String) array[4]));
+				}
+				if ((String) array[5] != null) {
+					String orgaoExpFormatada = "/" + array[5].toString();
+					bean.setOrgaoExp(String.valueOf(orgaoExpFormatada));
+				}
+
+				if ((String) array[6] != null) {
+					bean.setUnidadeFed(String.valueOf((String) array[6]));
+				}
+
+				if ((String) array[7] != null) {
+					String dddFormatado = "(" + array[7].toString() + ")";
+					bean.setNumDdd(String.valueOf(dddFormatado));
+				}
+
+				if ((String) array[8] != null) {
+					bean.setNumFone(String.valueOf((String) array[8]));
+				}
+
+				if ((String) array[9] != null) {
+					bean.setNumRamal(String.valueOf((String) array[9]));
+				}
+
+				if ((String) array[10] != null) {
+					bean.setIdCliente(String.valueOf((String) array[10]));
+				}
+				colecaoRelatorioBean.add(bean);
+			}
+
+			return colecaoRelatorioBean;
+			
+		}catch (ErroRepositorioException e) {
+			throw new ControladorException("erro.sistema", e);
+			}
+
+}
+	
+	/**
+	 *[UC1498] - Consultar Arquivo Texto de Ordens de Serviço para Smartphone (Novo)
+	 *[IT0018] Exibir Lista de Grupos de Cobrança
+	 *
+	 * @author Jean Varela
+	 * @date 08/12/2015
+	 */
+	public Collection<CobrancaGrupo> pesquisaGrupoCobrancaPorEmpresa(Integer idEmpresa) throws ControladorException{
+		
+		try {
+			Collection<Object[]> colecao = repositorioCobranca.pesquisaGrupoCobrancaPorEmpresa(idEmpresa);
+			Collection<CobrancaGrupo> colecaoCobrancaGrupo = new ArrayList<CobrancaGrupo>();
+			
+			for(Object[] cobrancaGrupo : colecao){
+				CobrancaGrupo grupo = new CobrancaGrupo();
+				grupo.setId((Integer) cobrancaGrupo[0]);
+				grupo.setDescricao((String) cobrancaGrupo[1]);
+				colecaoCobrancaGrupo.add(grupo);
+			}
+			
+			return colecaoCobrancaGrupo;
+		} catch (ErroRepositorioException e) {
+			throw new ControladorException("erro.sistema", e);
+		}		
+	}
+	
+	/**
+	 * [UC1585] - Emitir Relatório Sintetico Dívida Ativa Amortizada.
+	 * 
+	 * @author Joao Pedro Medeiros
+	 * @created 04/01/2016
+	 * 
+	 */
+	public Collection<DadosAmortizacaoDividaAtivaSinteticoHelper> obterDadosAmortizacoesDividaAtivaSintetico(Date dataInscricaoInicial, Date dataInscricaoFinal, Date dataAmortizacaoInicial, Date dataAmortizacaoFinal, 
+																	Integer idImovel, Short indicadorIntra)throws ControladorException {
+		try{
+			
+			Collection<DadosAmortizacaoDividaAtivaSinteticoHelper> colecaoDadosAmortizacaoDividaAtivaSinteticoHelper = new ArrayList<DadosAmortizacaoDividaAtivaSinteticoHelper>();
+			DadosAmortizacaoDividaAtivaSinteticoHelper dadosAmortizacaoDividaAtivaSinteticoHelper = null;
+			
+			Collection<Object[]> dados = repositorioCobranca.obterDadosAmortizacoesDividaAtivaSintetico(dataInscricaoInicial, dataInscricaoFinal, dataAmortizacaoInicial, 
+																					dataAmortizacaoFinal, idImovel, indicadorIntra);
+			
+			if(dados != null  && !dados.isEmpty()){
+				for(Object[] dado : dados){
+					dadosAmortizacaoDividaAtivaSinteticoHelper = new DadosAmortizacaoDividaAtivaSinteticoHelper();
+					
+					if(dado[0] != null){
+						dadosAmortizacaoDividaAtivaSinteticoHelper.setTipoAmortizacao((String) dado[0]);
+					}
+					
+					if(dado[1] != null){
+						dadosAmortizacaoDividaAtivaSinteticoHelper.setTotalTipoAmortizacao((BigDecimal) dado[1]);
+					}
+					
+					if(dado[2] != null){
+						dadosAmortizacaoDividaAtivaSinteticoHelper.setTotalValorDebitoAmortizado((BigDecimal) dado[2]);
+					}
+					
+					colecaoDadosAmortizacaoDividaAtivaSinteticoHelper.add(dadosAmortizacaoDividaAtivaSinteticoHelper);
+					
+				}
+			}
+			
+			return 	colecaoDadosAmortizacaoDividaAtivaSinteticoHelper;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new ControladorException(	"erro.sistema",	ex);
+		}
+	}
+	
 }

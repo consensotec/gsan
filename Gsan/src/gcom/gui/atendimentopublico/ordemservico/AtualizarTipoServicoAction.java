@@ -86,8 +86,8 @@ import gcom.fachada.Fachada;
 import gcom.faturamento.credito.CreditoTipo;
 import gcom.faturamento.debito.DebitoTipo;
 import gcom.gui.GcomAction;
+import gcom.util.Util;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -163,6 +163,8 @@ public class AtualizarTipoServicoAction extends GcomAction{
 		String indicadorCorrecaoAnormalidade = atualizarTipoServicoActionForm.getIndicadorCorrecaoAnormalidade();
 		String indicadorIncluirDebito = atualizarTipoServicoActionForm.getIndicadorIncluirDebito();
 		String indicadorCobrarJuros = atualizarTipoServicoActionForm.getIndicadorCobrarJuros();
+		String indicadorServicoCobranca = atualizarTipoServicoActionForm.getIndicadorServicoCobranca();
+		Integer constanteFuncionalidadeTipoServico = fachada.pesquisarConstanteFuncionalidadeTipoServico(Integer.parseInt(idTipoServico));
 		
 		ServicoTipo servicoTipo = new ServicoTipo();
 		
@@ -176,9 +178,11 @@ public class AtualizarTipoServicoAction extends GcomAction{
 		ServicoTipoSubgrupo servicoTipoSubgrupo = new ServicoTipoSubgrupo();
 		servicoTipoSubgrupo.setId(new Integer(subgrupo));
 		servicoTipo.setServicoTipoSubgrupo(servicoTipoSubgrupo);
+		servicoTipo.setIndicadorServicoCobranca(Short.parseShort(indicadorServicoCobranca));
+		servicoTipo.setConstanteFuncionalidadeTipoServico(constanteFuncionalidadeTipoServico);
 		
 		if(valor != null && !valor.trim().equals("")){
-			servicoTipo.setValor(new BigDecimal(valor.replace(",", ".")));
+			servicoTipo.setValor(Util.formatarMoedaRealparaBigDecimal(valor));
 		}
 		
 		servicoTipo.setIndicadorPavimentoRua(new Short(indicadorPavimentoRua));

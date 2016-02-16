@@ -115,6 +115,11 @@ public class RelatorioRelacaoOrdensServicoConcluidas extends TarefaRelatorio {
 		super(usuario, nomeRelatorio);
 	}
 
+	@Deprecated
+	public RelatorioRelacaoOrdensServicoConcluidas() {
+		super(null, "");
+	}
+
 	public Object executar() throws TarefaException {
 
 		// ------------------------------------

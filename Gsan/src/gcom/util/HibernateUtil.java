@@ -83,6 +83,7 @@ import gcom.arrecadacao.ArrecadadorContrato;
 import gcom.arrecadacao.ArrecadadorContratoTarifa;
 import gcom.arrecadacao.ArrecadadorMovimento;
 import gcom.arrecadacao.ArrecadadorMovimentoItem;
+import gcom.arrecadacao.BandeiraCartao;
 import gcom.arrecadacao.ContratoDemanda;
 import gcom.arrecadacao.ContratoMotivoCancelamento;
 import gcom.arrecadacao.DebitoCarteiraMovimento;
@@ -462,6 +463,7 @@ import gcom.cobranca.contratoparcelamento.PrestacaoContratoParcelamento;
 import gcom.cobranca.contratoparcelamento.PrestacaoItemContratoParcelamento;
 import gcom.cobranca.contratoparcelamento.QuantidadePrestacoes;
 import gcom.cobranca.contratoparcelamento.TipoRelacao;
+import gcom.cobranca.parcelamento.PagamentoCartaoCreditoItem;
 import gcom.cobranca.parcelamento.ParcDesctoInativVista;
 import gcom.cobranca.parcelamento.Parcelamento;
 import gcom.cobranca.parcelamento.ParcelamentoDescontoAntiguidade;
@@ -762,6 +764,18 @@ import gcom.micromedicao.leitura.LeituraTipo;
 import gcom.micromedicao.medicao.MedicaoHistorico;
 import gcom.micromedicao.medicao.MedicaoHistoricoAnterior;
 import gcom.micromedicao.medicao.MedicaoTipo;
+import gcom.mobile.execucaoordemservico.ArquivoTextoOSCobranca;
+import gcom.mobile.execucaoordemservico.ArquivoTextoOSCobrancaCliente;
+import gcom.mobile.execucaoordemservico.ArquivoTextoOSCobrancaItem;
+import gcom.mobile.execucaoordemservico.ExecucaoOSCliente;
+import gcom.mobile.execucaoordemservico.ExecucaoOSCorte;
+import gcom.mobile.execucaoordemservico.ExecucaoOSFiscalizacao;
+import gcom.mobile.execucaoordemservico.ExecucaoOSFoto;
+import gcom.mobile.execucaoordemservico.ExecucaoOSOrdemServico;
+import gcom.mobile.execucaoordemservico.ExecucaoOSSituacoesEncontradas;
+import gcom.mobile.execucaoordemservico.ExecucaoOSVisita;
+import gcom.mobile.execucaoordemservico.ParametrosArquivoTextoOSCobranca;
+import gcom.mobile.execucaoordemservico.ParametrosArquivoTextoOSLocalidade;
 import gcom.operacional.Bacia;
 import gcom.operacional.DistritoOperacional;
 import gcom.operacional.DivisaoEsgoto;
@@ -1342,6 +1356,7 @@ public class HibernateUtil {
 							.addClass(CobrancaSituacaoComando.class)
 							.addClass(NegativadorMovimentoRegParcelamento.class)
 							.addClass(ParcelamentoPagamentoCartaoCredito.class)
+							.addClass(PagamentoCartaoCreditoItem.class)
 							.addClass(DocumentosReceberFaixaDiasVencidos.class)
 							.addClass(NegativCritNegRetMot.class)
 							.addClass(ParcDesctoInativVista.class)
@@ -1645,6 +1660,7 @@ public class HibernateUtil {
 					.addClass(DevolucaoHistorico.class)
 					.addClass(DevolucaoDadosDiarios.class)
 					.addClass(DebitoCarteiraMovimento.class)
+					.addClass(BandeiraCartao.class)
 					// *************************************//
 					// CLASSES DO PACOTE gcom.operacional //
 					// *************************************//
@@ -1835,6 +1851,21 @@ public class HibernateUtil {
 					.addClass(ContratoDemandaSituacao.class)
 					.addClass(ContratoDemandaFaixaConsumo.class)
 					
+					// ***************************************************//
+					// CLASSES DO PACOTE gcom.mobile.execucaoordemservico //
+					// ***************************************************//
+					.addClass(ArquivoTextoOSCobranca.class)
+					.addClass(ArquivoTextoOSCobrancaCliente.class)
+					.addClass(ArquivoTextoOSCobrancaItem.class)
+					.addClass(ExecucaoOSCliente.class)
+					.addClass(ExecucaoOSCorte.class)
+					.addClass(ExecucaoOSFiscalizacao.class)
+					.addClass(ExecucaoOSFoto.class)
+					.addClass(ExecucaoOSOrdemServico.class)
+					.addClass(ExecucaoOSSituacoesEncontradas.class)
+					.addClass(ExecucaoOSVisita.class)
+					.addClass(ParametrosArquivoTextoOSCobranca.class)
+					.addClass(ParametrosArquivoTextoOSLocalidade.class)
 					;
 							
 							

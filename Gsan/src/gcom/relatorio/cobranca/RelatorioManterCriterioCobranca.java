@@ -122,6 +122,11 @@ public class RelatorioManterCriterioCobranca extends TarefaRelatorio {
 	public RelatorioManterCriterioCobranca(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_CRITERIO_COBRANCA_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterCriterioCobranca() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

@@ -107,6 +107,11 @@ public class RelatorioConsultarRegistroAtendimentoViaCliente extends TarefaRelat
 		super(usuario,
 				ConstantesRelatorios.RELATORIO_CONSULTAR_REGISTRO_ATENDIMENTO);
 	}
+	
+	@Deprecated
+	public RelatorioConsultarRegistroAtendimentoViaCliente() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

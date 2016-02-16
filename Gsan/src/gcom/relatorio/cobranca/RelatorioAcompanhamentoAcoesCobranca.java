@@ -106,6 +106,11 @@ public class RelatorioAcompanhamentoAcoesCobranca extends TarefaRelatorio {
 	public RelatorioAcompanhamentoAcoesCobranca(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_ACOMPANHAMENTO_ACOES_COBRANCA);
 	}
+
+	@Deprecated
+	public RelatorioAcompanhamentoAcoesCobranca() {
+		super(null, "");
+	}
 	
 	@Override
 	public Object executar() throws TarefaException {
@@ -376,37 +381,37 @@ public class RelatorioAcompanhamentoAcoesCobranca extends TarefaRelatorio {
 						bean.setNomeCobrancaAcaoSituacao6(nomeCobrancaAcaoSituacaoBean);
 						bean.setQuantidadeSituacao6(quantidadeSituacaoBean);
 						bean.setValorSituacao6(valorSituacaoBean);
-					}else if (count == 1 && ordemSituacoes[count-1] == null){						
+					}else if (idCobrancaAcaoSituacaoBean.equals("1") && ordemSituacoes[count-1] == null){						
 						bean.setIdCobrancaAcaoSituacao1(idCobrancaAcaoSituacaoBean);
 						bean.setNomeCobrancaAcaoSituacao1(nomeCobrancaAcaoSituacaoBean);
 						bean.setQuantidadeSituacao1(quantidadeSituacaoBean);
 						bean.setValorSituacao1(valorSituacaoBean);
 						ordemSituacoes[count-1]= idCobrancaAcaoSituacaoBean; 
-					} else if (count == 2 && ordemSituacoes[count-1] == null){
+					} else if (idCobrancaAcaoSituacaoBean.equals("2") && ordemSituacoes[count-1] == null){
 						bean.setIdCobrancaAcaoSituacao2(idCobrancaAcaoSituacaoBean);
 						bean.setNomeCobrancaAcaoSituacao2(nomeCobrancaAcaoSituacaoBean);
 						bean.setQuantidadeSituacao2(quantidadeSituacaoBean);
 						bean.setValorSituacao2(valorSituacaoBean);
 						ordemSituacoes[count-1]= idCobrancaAcaoSituacaoBean;
-					} else if (count == 3 && ordemSituacoes[count-1] == null){
+					} else if (idCobrancaAcaoSituacaoBean.equals("3") && ordemSituacoes[count-1] == null){
 						bean.setIdCobrancaAcaoSituacao3(idCobrancaAcaoSituacaoBean);
 						bean.setNomeCobrancaAcaoSituacao3(nomeCobrancaAcaoSituacaoBean);
 						bean.setQuantidadeSituacao3(quantidadeSituacaoBean);
 						bean.setValorSituacao3(valorSituacaoBean);
 						ordemSituacoes[count-1]= idCobrancaAcaoSituacaoBean;
-					} else if (count == 4 && ordemSituacoes[count-1] == null){
+					} else if (idCobrancaAcaoSituacaoBean.equals("4") && ordemSituacoes[count-1] == null){
 						bean.setIdCobrancaAcaoSituacao4(idCobrancaAcaoSituacaoBean);
 						bean.setNomeCobrancaAcaoSituacao4(nomeCobrancaAcaoSituacaoBean);
 						bean.setQuantidadeSituacao4(quantidadeSituacaoBean);
 						bean.setValorSituacao4(valorSituacaoBean);
 						ordemSituacoes[count-1]= idCobrancaAcaoSituacaoBean;
-					} else if (count == 5 && ordemSituacoes[count-1] == null){
+					} else if (idCobrancaAcaoSituacaoBean.equals("5") && ordemSituacoes[count-1] == null){
 						bean.setIdCobrancaAcaoSituacao5(idCobrancaAcaoSituacaoBean);
 						bean.setNomeCobrancaAcaoSituacao5(nomeCobrancaAcaoSituacaoBean);
 						bean.setQuantidadeSituacao5(quantidadeSituacaoBean);
 						bean.setValorSituacao5(valorSituacaoBean);
 						ordemSituacoes[count-1]= idCobrancaAcaoSituacaoBean;
-					} else if ((count == 6 && ordemSituacoes[count-1] == null)){
+					} else if ((idCobrancaAcaoSituacaoBean.equals("6") && ordemSituacoes[count-1] == null)){
 						bean.setIdCobrancaAcaoSituacao6(idCobrancaAcaoSituacaoBean);
 						bean.setNomeCobrancaAcaoSituacao6(nomeCobrancaAcaoSituacaoBean);
 						bean.setQuantidadeSituacao6(quantidadeSituacaoBean);

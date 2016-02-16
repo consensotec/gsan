@@ -113,6 +113,11 @@ public class RelatorioAcompanhamentoMovimentoArrecadadoresPorNSA extends TarefaR
 	public RelatorioAcompanhamentoMovimentoArrecadadoresPorNSA(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_ACOMPANHAMENTO_MOVIMENTO_ARRECADADORES_POR_NSA);
 	}
+	
+	@Deprecated
+	public RelatorioAcompanhamentoMovimentoArrecadadoresPorNSA() {
+		super(null, "");
+	}
 
 	private Collection<RelatorioAcompanhamentoMovimentoArrecadadoresPorNSABean> inicializarBeanRelatorio(
 			Collection<MovimentoArrecadadoresPorNSAHelper> dadosRelatorio) {

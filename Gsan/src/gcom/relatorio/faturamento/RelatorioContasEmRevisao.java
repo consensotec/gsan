@@ -114,6 +114,11 @@ public class RelatorioContasEmRevisao extends TarefaRelatorio {
 				ConstantesRelatorios.RELATORIO_CONTAS_EM_REVISAO);
 	}
 
+	@Deprecated
+	public RelatorioContasEmRevisao() {
+		super(null, "");
+	}
+
 	/**
 	 * < <Descrição do método>>
 	 * 

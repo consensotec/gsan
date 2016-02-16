@@ -291,6 +291,19 @@
 					</td>
 				</tr>
 				
+			<tr>
+					<td><strong>Indicador de Parcelamento com Cartão de Crédito: <font color="#FF0000">*</font></strong></td>
+					<td>
+						<strong>
+							<html:radio property="indicadorParcelamentoCartaoCredito" value="1" /> 
+						<strong>Sim 
+							<html:radio property="indicadorParcelamentoCartaoCredito" value="2" /> Não
+						</strong> 
+						</strong>
+					</td>
+				</tr>
+
+				
 				<tr>
 					<td><strong> <font color="#FF0000"></font></strong></td>
 					<td align="right">

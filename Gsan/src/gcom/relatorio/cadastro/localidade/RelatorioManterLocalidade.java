@@ -121,6 +121,11 @@ public class RelatorioManterLocalidade extends TarefaRelatorio {
 	public RelatorioManterLocalidade(Usuario usuario) {
 		super(usuario, ConstantesRelatorios.RELATORIO_LOCALIDADE_MANTER);
 	}
+	
+	@Deprecated
+	public RelatorioManterLocalidade() {
+		super(null, "");
+	}
 
 	/**
 	 * < <Descrição do método>>

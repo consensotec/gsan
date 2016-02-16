@@ -200,6 +200,7 @@ public class AtualizarContaPreFaturadaHelper {
     private String valorImpostos;
     private String numeroCoordenadaX;
     private String numeroCoordenadaY;
+    private String numeroMesMotivoRevisao;
     
     // Tipo de registro 2
     private String codigoCategoria;
@@ -606,6 +607,11 @@ public class AtualizarContaPreFaturadaHelper {
        // 33 - Numero Coordenada Y
        retorno.numeroCoordenadaY = dados.get(32);
        
+	   // TODO tirar if quando próxima versão evolutiva entrar
+       if(dados.size() == 34){
+           // 34 - Numero do Mês do Motivo de Revisão
+           retorno.numeroMesMotivoRevisao = dados.get(33);  
+       }
        return retorno;              
    }
    
@@ -1352,6 +1358,13 @@ public class AtualizarContaPreFaturadaHelper {
 	public void setAnoMesFaturamentoGrupo(String anoMesFaturamentoGrupo) {
 		this.anoMesFaturamentoGrupo = anoMesFaturamentoGrupo;
 	}
+
+	public String getNumeroMesMotivoRevisao() {
+		return numeroMesMotivoRevisao;
+	}
+
+	public void setNumeroMesMotivoRevisao(String numeroMesMotivoRevisao) {
+		this.numeroMesMotivoRevisao = numeroMesMotivoRevisao;
+	}
     
-	
 }
